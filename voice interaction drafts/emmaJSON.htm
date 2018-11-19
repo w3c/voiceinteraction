@@ -1,0 +1,294 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML+RDFa 1.1//EN' 'http://www.w3.org/MarkUp/DTD/xhtml-rdfa-2.dtd'>
+<html dir="ltr" about="" property="dcterms:language" content="en" xmlns="http://www.w3.org/1999/xhtml" prefix='bibo: http://purl.org/ontology/bibo/' typeof="bibo:Document">
+    <head>
+        <title>JSON Representation of Semantic Information</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+        <link href="cg-draft.css" rel="stylesheet" type="text/css" charset="utf-8" />
+				<style type="text/css">
+span.term {
+  color: rgb(0,0,192);
+  font-style: italic
+  }
+blockquote { margin-left: 4% }
+.toc { list-style-type: none; marker-offset: 1em }
+.tocline { list-style-type: none }
+ul.toc a { text-decoration: none }
+.fig { text-align: center }
+pre { font-family: monospace }
+pre.example {
+  margin-left: 0;
+  padding: 0.5em;
+  width: 98%;
+  font-family: monospace;
+  white-space: pre;
+  border: none;
+  font-size: 95%;
+  background-color: rgb(230,230,255);
+  }
+.note { color: red }
+.new { color: green;} 
+/*.new { color: black;} */
+.old { text-decoration: line-through }
+/*.old { display: none }*/
+.newer { text-decoration: underline }
+.change { color: red }
+.changeTable { color: orange }
+.remove { text-decoration: line-through }
+div.issues {
+  border-width: thin;
+  border-style: solid;
+  border-color: maroon;
+  background-color: #FFEECC;
+  color: maroon;
+  width: 95%; padding: 0.5em; }
+div.issues h4 { margin-top: 0 }
+code {
+  font-weight:bold;
+  color: green;
+  font-family: monospace;
+  font-size: 110%;
+  }
+.good {
+  border: green 2px solid;
+  font-weight: bold;
+  color: green;
+  margin: 1em 5% 1em 0px;
+  }
+.bad {
+  border: red 2px solid;
+  font-weight: bold;
+  color: rgb(192,101,101);
+  margin: 1em 5% 1em 0px;
+  }
+div.navbar { text-align: center }
+div.contents {
+  border: medium none;
+  padding: 0.5em;
+  margin-right: 5%;
+  background-color: rgb(230,230,255);
+  }
+table.exceptions {
+  background-color: rgb(255,255,153)
+  }
+table.modes { font-size: 90% }
+table.defn {
+  border-width: thin;
+  border-style: solid;
+  border-color: black;
+  color: black
+  }
+table.defn th { background-color: rgb(220,220,255);
+  border-style: solid; border-color: black; border-width: thin }
+table.defn td { background-color: rgb(230,230,255);
+  border-style: solid; border-color: black; border-width: thin }
+.diff { color: rgb(128,0,0) }
+.reqs {  color: blue; font-style: italic  }
+.editorial { color: maroon; font-style: italic }
+</style>
+    </head>
+    <body><div class="head">
+            <p><a href="http://www.w3.org/">
+                    <img width="72" height="48" src="http://www.w3.org/Icons/w3c_home" alt="W3C" /></a></p>
+            <h1 property="dcterms:title" class="title" id="title">JSON Representation of Semantic Information </h1>
+            <h2 property="bibo:subtitle" id="subtitle">Representing multimodal information in JSON: Editor's Draft, November, 2018</h2>
+            <dl>
+                <dt>Latest version</dt>
+                <dd><a href="https://github.com/w3c/voiceinteraction">https://github.com/w3c/voiceinteraction/emmaJSON.htm</a> (link to this document) </dd>
+                <dt>Editor</dt>
+                <dd>Deborah A. Dahl, Conversational Technologies</dd>
+            </dl>
+            <p class="copyright">Copyright &copy; 2018 the Contributors to the Voice Interaction Community Group, 
+                published by the  <a href="http://www.w3.org/community/voiceinteraction/">Voice Interaction Community Group</a> 
+                under the <a href="https://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a>. A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/">summary</a> is available.</p>
+            <hr /></div>
+
+        <h2 id="abstract">Abstract</h2>
+
+        <p>This document describes a JSON format for representing the results of semantic processing. This format is derived from concepts in the <a href="https://w3c.github.io/emma/emma2_0/emma_2_0_editor_draft.html">Extensible Multimodal Annotation (EMMA) </a>specification for representing multimodal processing results, including results from natural language understanding. Since the original EMMA specification was written, <a href="https://www.json.org/">JSON</a> has become very popular for representing data and is used in a number of current natural language understanding toolkits. However, the JSON formats used in the different commercial toolkits vary significantly. For this reason, a common JSON representation that is capable of including all of the rich metadata that can be represented in EMMA is worth investigating. This would provide a common data interchange format across natural language understanding and other cognitive toolkits while taking advantage of the extensive existing JSON ecosystem. </p>
+
+        <h2>Status of This Document</h2>
+
+        <p><em>This specification is a draft by the 
+                <a href="http://www.w3.org/community/voiceinteraction/">Voice Interaction Community Group</a>. 
+                It is not a W3C Standard nor is it on the W3C Standards Track. 
+                Please note that under the 
+                <a href="http://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a> there is a limited opt-out and other conditions apply. Learn more about <a href="http://www.w3.org/community/">W3C Community and Business Groups</a>.</em></p>
+								<p>Comments should be sent to the Voice Interaction Community Group public mailing list (public-voiceinteraction@w3.org), archived at <a href="https://lists.w3.org/Archives/Public/public-voiceinteraction/">https://lists.w3.org/Archives/Public/public-voiceinteraction</a></p>
+
+        <h2 class="introductory">Table of Contents</h2>
+        <ul>
+            <li><a href="#discussion">Discussion</a></li>
+            <li><a href="#example">Example</a></li>
+            <li><a href="#issues">Issues</a></li>
+						<li><a href="#references">References</a></li>
+        </ul>
+
+        <!-- OddPage -->
+        <h2 id="discussion"><span class="secno">1. </span>Discussion</h2><p>
+				The XML EMMA specification contains features for representing extremely rich semantic information about utterances and other multimodal inputs. For example, information that can be represented in EMMA includes timing, alternatives, confidences, multimodal inputs, system outputs, human annotations, failures (no-input and uninterpreted inputs), language of input,and streaming results, among many other types of information. It would be extremely useful to be able to represent some of this information in JSON natural language results, especially if it was represented in a standard form that could be used across platforms.</p>
+				<p>In addition, while the original EMMA specification placed few constraints on the format of application-specific semantic data, current natural language toolkits have been more or less converging on common terminology such as "intents" and "entities". For this reason it seems to be useful to include these concepts in a JSON-based natural language results format. This document proposes a format that includes both EMMA metadata as well as application-specific semantic information. The format presented here is simply a strawperson proposal that is intended to spark discussion.
+				 </p>
+						
+        <h2 id="example"><span class="secno">2. </span>Example</h2>
+				<h3><span class="secno">2.1 </span>Original EMMA XML</h3>
+				This document will illustrate the semantic relationship between XML EMMA and the current proposal by using the following example, from the original specification. The example shows the results of natural language processing for the utterance "flights from boston to denver". In this case the result is an nbest list (indicated by <code>one-of</code>) with two alternative speech recognition results, one for "flights from boston to denver" and the other for another possible recognition result, "flights from austin to denver", as  interpretations. Metadata in the example includes the recognition result ("tokens"), confidences, the start and end times of the utterance, and the medium ("acoustic") and mode ("voice") of the input. The last two attributes are included so that the format can also be used for representing multimodal inputs.
+				<p>Example:</p>
+<pre class="example">&lt;emma:emma version="2.0"
+    xmlns:emma="http://www.w3.org/2003/04/emma"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.w3.org/2003/04/emma
+     http://www.w3.org/TR/2009/REC-emma-20090210/emma.xsd"
+    xmlns="http://www.example.com/example"&gt;
+  &lt;emma:one-of id="r1" emma:start="1087995961542" emma:end="1087995963542"
+<span>     emma:medium="acoustic" emma:mode="voice"</span>&gt;
+    &lt;emma:interpretation id="int1" emma:confidence="0.75"
+    emma:tokens="flights from boston to denver"&gt;
+      &lt;origin&gt;Boston&lt;/origin&gt;
+      &lt;destination&gt;Denver&lt;/destination&gt;
+    &lt;/emma:interpretation&gt;
+
+    &lt;emma:interpretation id="int2" emma:confidence="0.68"
+    emma:tokens="flights from austin to denver"&gt;
+      &lt;origin&gt;Austin&lt;/origin&gt;
+      &lt;destination&gt;Denver&lt;/destination&gt;
+    &lt;/emma:interpretation&gt;
+  &lt;/emma:one-of&gt;
+&lt;/emma:emma&gt;
+</pre>
+				<h3><span class="secno">2.2 </span>JSON for this example</h3>
+				The JSON in this example was prepared based on the following heuristics, which could be extended to cover other features that are not included in the example.
+				<ul>
+						<li>XML attributes are mapped to key-value pairs.</li>
+						<li>Namespaces have been removed for simplicity.</li>
+						<li>Arrays are used for the children of container elements (<code>one-of</code>, <code>group</code>, <code>sequence</code> ).</li>
+						<li>New concepts are used for representing application-specific semantics, specifically:  <code>intent</code>, <code>intents</code>, <code>entities</code>, <code>entity</code>, <code>name</code>, <code>intentName</code>, <code>value</code>, and <code>type</code>.</li>
+						<li> <code>confidence</code> and <code>tokens</code> are extended for use in representing application-specific semantics.</li>
+						<li>Note that the <code>intents</code> array provides for multiple intents per utterance, even though this utterance includes only one <code>intent</code>.</li>
+						</ul>
+				<pre class="example">
+{
+	"emma": {
+		"version": 2.0,
+		"one-of": {
+			"id": "r1",
+			"start": 1087995961542,
+			"end": 1087995963542,
+			"medium": "acoustic",
+			"mode": "voice",
+			"interpretations": [{
+					"interpretation": {
+						"id": "int1",
+						"confidence": 0.90,
+						"tokens": "flights from boston to denver",
+						"intents": [{
+							"intent": {
+								"intentName": "flightSearch",
+								"confidence": 0.99,
+
+								"entities": [{
+										"entity": {
+											"id": "e1",
+											"confidence": 0.75,
+											"tokens": "boston",
+
+											"name": "origin",
+
+											"value": "Boston",
+
+											"type": "city"
+
+										}
+									},
+									{
+										"entity": {
+											"id": "e2",
+											"confidence": 0.75,
+											"tokens": "denver",
+
+											"name": "destination",
+
+											"value": "Denver",
+
+											"type": "city"
+
+										}
+									}
+								]
+							}
+						}]
+					}
+				},
+				{
+					"interpretation": {
+						"id": "int2",
+						"confidence": 0.75,
+						"tokens": "flights from austin to denver",
+						"intents": [{
+							"intent": {
+								"intentName": "flightSearch",
+								"confidence": 0.99,
+
+								"entities": [{
+										"entity": {
+											"id": "e1",
+											"confidence": 0.75,
+											"tokens": "austin",
+
+											"name": "origin",
+
+											"value": "Austin",
+
+											"type": "city"
+
+										}
+									},
+									{
+										"entity": {
+											"id": "e2",
+											"confidence": 0.75,
+											"tokens": "Denver",
+
+											"name": "destination",
+
+											"value": "Denver",
+
+											"type": "city"
+
+										}
+									}
+								]
+							}
+						}]
+					}
+					}
+				]
+			}
+		}
+	}
+</pre>
+				<h3 id="visualization"><span class="secno">2.3 </span>Visualization</h3>
+				The image below illustrates the proposed JSON structure for the example. The light blue nodes are original EMMA elements, and the dark blue nodes are original EMMA attributes. The green nodes are introduced in the JSON version. The light green nodes are JSON arrays for grouping concepts and the dark green nodes are new concepts introduced in this document for representing application-specific semantics. The edges show parent-child relationships.
+				<object type="image/svg+xml" data="emma.svg"></object>
+        
+        <h2 id="issues"><span class="secno">3. </span>Issues</h2>
+				<ul>
+				<li>
+				XML EMMA can currently embed other XML languages (EmotionML, SSML, InkML), how would we handle this in a JSON version? Do we need to handle it? 
+				</li>
+				<li>Do nested entities cause any issues? Would it be sufficient to just allow entities to be children of other entities?</li>
+				<li>Some toolkits also have JSON or XML model formats for annotated training data. Is the JSON result agnostic to the model format?</li>
+				<li>The character span in the input that was matched to an entity could be included.</li>
+				<li>It would be good to work through more examples.</li></ul>
+        
+<h2 id="references"><span class="secno">4. </span>References</h2>
+<p>(to be added)</p>
+<ul><li>EMMA: <a href="https://w3c.github.io/emma/emma2_0/emma_2_0_editor_draft.html">Extensible Multimodal Annotation</a></li>
+<li><a href="https://www.json.org/">JSON</a></li>
+<li>EmotionML</li>
+<li>SSML</li>
+<li>InkML</li></ul>
+    </body>
+</html>
+
