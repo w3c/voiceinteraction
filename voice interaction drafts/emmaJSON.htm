@@ -95,7 +95,8 @@ table.defn td { background-color: rgb(230,230,255);
             <h2 property="bibo:subtitle" id="subtitle">Representing multimodal information in JSON: Editor's Draft, November, 2018</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd><a href="https://github.com/w3c/voiceinteraction">https://github.com/w3c/voiceinteraction/emmaJSON.htm</a> (link to this document) </dd>
+                <dd><a href="https://github.com/w3c/voiceinteraction/tree/master/voice%20interaction%20drafts">https://github.com/w3c/voiceinteraction/tree/master/voice%20interaction%20drafts</a> (GitHub repository) </dd>
+								<dd><a href ="https://w3c.github.io/voiceinteraction">HTML rendered version</a></dd>
                 <dt>Editor</dt>
                 <dd>Deborah A. Dahl, Conversational Technologies</dd>
             </dl>
@@ -106,7 +107,7 @@ table.defn td { background-color: rgb(230,230,255);
 
         <h2 id="abstract">Abstract</h2>
 
-        <p>This document describes a JSON format for representing the results of semantic processing. This format is derived from concepts in the <a href="https://w3c.github.io/emma/emma2_0/emma_2_0_editor_draft.html">Extensible Multimodal Annotation (EMMA) </a>specification for representing multimodal processing results, including results from natural language understanding. Since the original EMMA specification was written, <a href="https://www.json.org/">JSON</a> has become very popular for representing data and is used in a number of current natural language understanding toolkits. However, the JSON formats used in the different commercial toolkits vary significantly. For this reason, a common JSON representation that is capable of including all of the rich metadata that can be represented in EMMA is worth investigating. This would provide a common data interchange format across natural language understanding and other cognitive toolkits while taking advantage of the extensive existing JSON ecosystem. </p>
+        <p>This document describes a JSON format for representing the results of semantic processing. This format is derived from concepts in the <a href="https://w3c.github.io/emma/emma2_0/emma_2_0_editor_draft.html">Extensible Multimodal Annotation (EMMA) </a> specification for representing multimodal processing results, including results from natural language understanding. Since the original EMMA specification was written, <a href="https://www.json.org/">JSON</a> has become very popular for representing data and is used in a number of current natural language understanding toolkits. However, the JSON formats used in the different commercial toolkits vary significantly. For this reason, a common JSON representation that is capable of including all of the rich metadata that can be represented in EMMA is worth investigating. This would provide a common data interchange format across natural language understanding and other cognitive toolkits while taking advantage of the extensive existing JSON ecosystem. </p>
 
         <h2>Status of This Document</h2>
 
@@ -128,12 +129,12 @@ table.defn td { background-color: rgb(230,230,255);
         <!-- OddPage -->
         <h2 id="discussion"><span class="secno">1. </span>Discussion</h2><p>
 				The XML EMMA specification contains features for representing extremely rich semantic information about utterances and other multimodal inputs. For example, information that can be represented in EMMA includes timing, alternatives, confidences, multimodal inputs, system outputs, human annotations, failures (no-input and uninterpreted inputs), language of input,and streaming results, among many other types of information. It would be extremely useful to be able to represent some of this information in JSON natural language results, especially if it was represented in a standard form that could be used across platforms.</p>
-				<p>In addition, while the original EMMA specification placed few constraints on the format of application-specific semantic data, current natural language toolkits have been more or less converging on common terminology such as "intents" and "entities". For this reason it seems to be useful to include these concepts in a JSON-based natural language results format. This document proposes a format that includes both EMMA metadata as well as application-specific semantic information. The format presented here is simply a strawperson proposal that is intended to spark discussion.
+				<p>In addition, while the original EMMA specification placed few constraints on the format of application-specific semantic data, current natural language toolkits have been more or less converging on common terminology such as "intents" and "entities". For this reason it seems to be useful to include these concepts in a JSON-based natural language results format. This document proposes a format that includes both EMMA metadata as well as application-specific semantic information in the form of "intents" and "entities". The format presented here is simply a strawperson proposal that is intended to spark discussion.
 				 </p>
 						
         <h2 id="example"><span class="secno">2. </span>Example</h2>
-				<h3><span class="secno">2.1 </span>Original EMMA XML</h3>
-				This document will illustrate the semantic relationship between XML EMMA and the current proposal by using the following example, from the original specification. The example shows the results of natural language processing for the utterance "flights from boston to denver". In this case the result is an nbest list (indicated by <code>one-of</code>) with two alternative speech recognition results, one for "flights from boston to denver" and the other for another possible recognition result, "flights from austin to denver", as  interpretations. Metadata in the example includes the recognition result ("tokens"), confidences, the start and end times of the utterance, and the medium ("acoustic") and mode ("voice") of the input. The last two attributes are included so that the format can also be used for representing multimodal inputs.
+				<h3><span class="secno">2.1 </span>EMMA XML</h3>
+				This document will illustrate the semantic relationship between XML EMMA and the current proposal by using the following example, from the EMMA specification. The example shows the results of natural language processing for the utterance "flights from boston to denver". In this case the result is an nbest list (indicated by <code>one-of</code>) with two alternative speech recognition results, one for "flights from boston to denver" and the other for another possible recognition result, "flights from austin to denver", as  interpretations. Metadata in the example includes the recognition result ("tokens"), confidences, the start and end times of the utterance, and the medium ("acoustic") and mode ("voice") of the input. The last two attributes enable the format to be usable for representing multimodal inputs.
 				<p>Example:</p>
 <pre class="example">&lt;emma:emma version="2.0"
     xmlns:emma="http://www.w3.org/2003/04/emma"
@@ -143,6 +144,7 @@ table.defn td { background-color: rgb(230,230,255);
     xmlns="http://www.example.com/example"&gt;
   &lt;emma:one-of id="r1" emma:start="1087995961542" emma:end="1087995963542"
 <span>     emma:medium="acoustic" emma:mode="voice"</span>&gt;
+
     &lt;emma:interpretation id="int1" emma:confidence="0.75"
     emma:tokens="flights from boston to denver"&gt;
       &lt;origin&gt;Boston&lt;/origin&gt;
@@ -162,10 +164,10 @@ table.defn td { background-color: rgb(230,230,255);
 				<ul>
 						<li>XML attributes are mapped to key-value pairs.</li>
 						<li>Namespaces have been removed for simplicity.</li>
-						<li>Arrays are used for the children of container elements (<code>one-of</code>, <code>group</code>, <code>sequence</code> ).</li>
-						<li>New concepts are used for representing application-specific semantics, specifically:  <code>intent</code>, <code>intents</code>, <code>entities</code>, <code>entity</code>, <code>name</code>, <code>intentName</code>, <code>value</code>, and <code>type</code>.</li>
+						<li>Arrays are used for the children of container elements (<code>one-of</code>, <code>group</code>, <code>sequence</code>).</li>
+						<li>There are concepts for representing application-specific semantics, specifically:  <code>intent</code>, <code>intents</code>, <code>entities</code>, <code>entity</code>, <code>name</code>, <code>intentName</code>, <code>value</code>, and <code>type</code>.</li>
 						<li> <code>confidence</code> and <code>tokens</code> are extended for use in representing application-specific semantics.</li>
-						<li>Note that the <code>intents</code> array provides for multiple intents per utterance, even though this utterance includes only one <code>intent</code>.</li>
+						<li>Note that the <code>intents</code> array provides for multiple intents per utterance, even though this example utterance includes only one <code>intent</code>.</li>
 						</ul>
 				<pre class="example">
 {
@@ -270,25 +272,31 @@ table.defn td { background-color: rgb(230,230,255);
 </pre>
 				<h3 id="visualization"><span class="secno">2.3 </span>Visualization</h3>
 				The image below illustrates the proposed JSON structure for the example. The light blue nodes are original EMMA elements, and the dark blue nodes are original EMMA attributes. The green nodes are introduced in the JSON version. The light green nodes are JSON arrays for grouping concepts and the dark green nodes are new concepts introduced in this document for representing application-specific semantics. The edges show parent-child relationships.
-				<object type="image/svg+xml" data="emma.svg"></object>
+				<img src="emma.svg" alt="intents and entities" style="width: 100%; height: auto;"/>
         
         <h2 id="issues"><span class="secno">3. </span>Issues</h2>
 				<ul>
 				<li>
 				XML EMMA can currently embed other XML languages (EmotionML, SSML, InkML), how would we handle this in a JSON version? Do we need to handle it? 
 				</li>
-				<li>Do nested entities cause any issues? Would it be sufficient to just allow entities to be children of other entities?</li>
-				<li>Some toolkits also have JSON or XML model formats for annotated training data. Is the JSON result agnostic to the model format?</li>
+				<li>Representation of nested or complex entities, where an entity value is made up of other entities. See <a href="#appendix">the example in the appendix</a></li>
+				<li>Some toolkits also have JSON or XML model formats for annotated training data. Is the JSON procesing result agnostic to the model format?</li>
 				<li>The character span in the input that was matched to an entity could be included.</li>
-				<li>It would be good to work through more examples.</li></ul>
+				<li>More examples are needed.</li></ul>
         
 <h2 id="references"><span class="secno">4. </span>References</h2>
-<p>(to be added)</p>
+
 <ul><li>EMMA: <a href="https://w3c.github.io/emma/emma2_0/emma_2_0_editor_draft.html">Extensible Multimodal Annotation</a></li>
 <li><a href="https://www.json.org/">JSON</a></li>
-<li>EmotionML</li>
-<li>SSML</li>
-<li>InkML</li></ul>
+<li>EmotionML: <a href="https://www.w3.org/TR/emotionml/"> Emotion Markup Language</a></li>
+<li>SSML: <a href="https://www.w3.org/TR/speech-synthesis11/"> Speech Synthesis Markup Language</a></li>
+<li>InkML: <a href="https://www.w3.org/TR/InkML/">Ink Markup Language</a></li></ul>
+<h2 id="acknowledgements"><span class="secno">5. </span>Acknowledgments</h2>
+<p>Thanks to Michael Johnston for comments on an earlier draft.</p>
+<h2 id="appendix"><span class="secno">6. </span>Appendix: Nested Example</h2>
+<p>An example of a possible representation for complex entities where the "value" of an entity is a group of entities, which are shown with a heavy border in the graphic. This example shows one interpretation from the "one-of" nbest list for the utterance" I want a large mushroom pizza and a small coke".</p>
+<img src="nested.svg" alt="nested entities" style="width: 100%; height: auto;"/>
+
     </body>
 </html>
 
