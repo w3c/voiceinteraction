@@ -1,11 +1,14 @@
-<html dir="ltr" about="" property="dcterms:language" content="en" xmlns="http://www.w3.org/1999/xhtml" prefix="bibo: http://purl.org/ontology/bibo/" typeof="bibo:Document">
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML+RDFa 1.1//EN' 'http://www.w3.org/MarkUp/DTD/xhtml-rdfa-2.dtd'>
+<html dir="ltr" about="" property="dcterms:language" content="en" xmlns="http://www.w3.org/1999/xhtml" prefix='bibo: http://purl.org/ontology/bibo/' typeof="bibo:Document">
 <head>
         <title>Intelligent Personal Assistant Architecture</title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 
         <link href="cg-draft.css" rel="stylesheet" type="text/css" charset="utf-8">
+
     </head>
-    <body contenteditable="true"><div class="head">
+    <body><div class="head">
             <p><a href="http://www.w3.org/">
                     <img width="72" height="48" src="http://www.w3.org/Icons/w3c_home" alt="W3C"></a></p>
             <h1 property="dcterms:title" class="title" id="title">Intelligent Personal Assistant Architecture</h1>
@@ -42,7 +45,11 @@
             <li><a href="#introduction">Introduction</a></li>
             <li><a href="#problemStatement">Problem Statement</a></li>
             <li><a href="#architecture">Architecture</a></li>
+            <li><a href="#walkthrough">Use Case Walk Through</a></li>
+            <li><a href="#potential">Architecture</a></li>
         </ul>
+
+        <h2 id="walkthrough"><span class="secno">4. </span>UPotential for Standardization</h2>
 
         <!-- OddPage -->
         <h2 id="introduction"><span class="secno">1. </span>Introduction</h2>
@@ -66,15 +73,24 @@ a rental car, or find out about local attractions in the destination city.
 Booking a hotel as part of attending a conference could also involve finding out about a designated conference hotel or special conference rates. </p>
 <h2 id="architecture"><span class="secno">3. </span></span><font face="Segoe UI">Architecture</font></span></h2>
 
+		<p>For the remnder of the document, we consider an IPA that is extendable via a standardized market place. Such an IPA features the architectural buildings blocks as shown in the following figure.</p>
+		
 		<img src="IPA-Architecture.svg" alt="IPA Architecture" style="width: 100%; height: auto;"/>
 
-        <h3><span class="secno">3.1 Client Layer</span></h3>
+		<p>This architecture comprises 3 layers that are detailed in the following sections</p>
+        <ol>
+            <li><a href="#clientlayer">Client Layer</a></li>
+            <li><a href="#dialoglayer">Dialog Layer</a></li>
+            <li><a href="#datalayer">APIs / Data Layer</a></li>
+        </ol>
+		
+        <h3 id="clientlayer"><span class="secno">3.1 Client Layer</span></h3>
 
         <h4><span class="secno">3.1.1 </span>IPA Client</h4>
 		<p>Client that enables the user to access the IPA via voice. Usually, IPA Clients make use of a microphone to capture the spoken input and a loud speaker to provide responses.
 As an extension an IPA Client may also receive commands to be executed locally.</p>
 
-        <h3><span class="secno">3.2 Dialog Layer</span></h3>
+        <h3 id="dialoglayer"><span class="secno">3.2 Dialog Layer</span></h3>
 
         <h4><span class="secno">3.2.1 </span>IPA Service</h4>
 		<p>General IPA Service API that mediates between the user and the overall IPA system. The service layer may be omitted in case the IPA Client communicates directly with the Dialog Management.</p>
@@ -119,7 +135,7 @@ As an extension an IPA Client may also receive commands to be executed locally.<
         <h4><span class="secno">3.2.9 </span>Dialog Registry</h4>
 		<p>The Dialog registry manages all available Dialogs with their associated Intent Sets. Dialogs and their Intent Sets can be added or removed as needed.</p>
 		
-        <h3><span class="secno">3.3 APIs/Data Layer</span></h3>
+        <h3 id="datalayer"><span class="secno">3.3 APIs/Data Layer</span></h3>
 		
         <h4><span class="secno">3.3.1 </span>Provider Selection Service</h4>
 		<p>A service that provides access to all known IPA Providers. This service also maps the IPA Intent Sets to the Intent Sets in the Dialog layer.</p>
@@ -159,14 +175,13 @@ As an extension an IPA Client may also receive commands to be executed locally.<
 		<p>A knowledge graph to reason about the detected input from the Provider NLU and Data Provider to come up with some more meaningful results.</p>
 		
 
-        <h2><span class="secno">4. </span>Got style?</h2>
+        <h2 id="walkthrough"><span class="secno">4. </span>Use Case Walk Through</h2>
 
-        <ul>
-            <li><a href="cg-draft.css">cg-draft.css</a></li>
-            <li><a href="cg-final.css">cg-final.css</a></li>
-        </ul>
+        <p>t.b.d.</p>
 
-        <p>All of those use <a href="base.css">base.css</a>.</p>
+        <h2 id="potential"><span class="secno">5. </span>Potential for Standardization</h2>
+
+        <p>t.b.d.</p>
 
 </body>
 </html>
