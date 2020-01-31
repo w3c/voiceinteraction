@@ -15,7 +15,7 @@
             <h2 property="bibo:subtitle" id="subtitle">Architecture and Potential for Standardization</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: January 30, 2020 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture.htm</a> (GitHub repository) </dd>
+                <dd>Last modified: January 31, 2020 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture.htm</a> (GitHub repository) </dd>
 				<dd><a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture.htm">HTML rendered version</a></dd>             
 			    <dt>Editors</dt>
                 <p><span style="color: rgb(51, 51, 51); font-family: Conv_DroidSerif-Regular, serif; font-size: 15.7072px; orphans: 2; text-align: center; widows: 2; background-color: rgba(255, 255, 255, 0.6);">Dirk Schnelle-Walka</br>
@@ -51,27 +51,35 @@
 
         <!-- OddPage -->
         <h2 id="introduction"><span class="secno">1. </span>Introduction</h2>
-        <p>Intelligent Personal Assistants (IPA) are already available in our daily lives through our smart phones. Apple’s Siri, Google Assistant, Microsoft’s Cortana, Samsung’s Bixby and 
-many more are helping us on various tasks, like shopping, playing music, setting schedule, sending messages, and offering answers to simple questions. Additionally, we equip our households
-with smart speakers like Amazon’s Alexa or Google Home to be available without the need to pick up explicit devices for this sort of tasks or even control household appliances in our homes.
-As of today, there is no interoperability between the available IPA providers. Especially for exchanging learned user behaviors this is unlikely to happen at all.</p>
-		<p>This document describes a general architecture of IPAs and explores the potential areas for standardization.</p>
+        <p>Intelligent Personal Assistants (IPA)s are already available in our daily lives through our smart phones. Apple’s Siri, Google Assistant, Microsoft’s Cortana, Samsung’s Bixby and 
+		many more are helping us on various tasks, like shopping, playing music, setting schedule, sending messages, and offering answers to simple questions. Additionally, we equip our households
+		with smart speakers like Amazon’s Alexa or Google Home to be available without the need to pick up explicit devices for this sort of tasks or even control household appliances in our homes.
+		As of today, there is no interoperability between the available IPA providers. Especially for exchanging learned user behaviors this is unlikely to happen at all.</p>
+		
+		<p>This document describes a general architecture of IPAs and explores the potential areas for standardization. </p>
 		
         <h2 id="problemStatement"><span class="secno">2. </span>Problem Statement</h2>
         
         <h3><span class="secno">2.1 Use Cases</span></h3>
+				<p>This section describes potential usages of IPAs.</p> 
+				
 				<h4><span class="secno">2.1.1 </span><font face="Segoe UI">Travel Planning</font></h4>
-				<p>A user would like to plan a trip to an international conference and she needs visa information and airline reservations. She will give the intelligent personal assistant her visa information (her citizenship, where she is going, purpose of travel, etc.) and it will respond by telling her the documentation she needs, how long the process will take and what the cost will be. This may require the personal assistant to consult with an auxiliary web service or another personal assistant that knows about visas.</p>
+				<p>A user would like to plan a trip to an international conference and she needs visa information and airline reservations. She will give the intelligent personal assistant her
+				visa information (her citizenship, where she is going, purpose of travel, etc.) and it will respond by telling her the documentation she needs, how long the process will take
+				and what the cost will be. This may require the personal assistant to consult with an auxiliary web service or another personal assistant that knows about visas.</p>
 
-<p>Once the user has found out about the visa, she tells the PA that she wants
-to make airline reservations. She specifies her dates of travel and airline preferences and the PA then interacts with her to find appropriate flights. </p>
+				<p>Once the user has found out about the visa, she tells the PA that she wants
+				to make airline reservations. She specifies her dates of travel and airline preferences and the PA then interacts with her to find appropriate flights. </p>
 
-<p>A similar process will be repeated if the user wants to book a hotel, find
-a rental car, or find out about local attractions in the destination city.
-Booking a hotel as part of attending a conference could also involve finding out about a designated conference hotel or special conference rates. </p>
+				<p>A similar process will be repeated if the user wants to book a hotel, find
+				a rental car, or find out about local attractions in the destination city.
+				Booking a hotel as part of attending a conference could also involve finding out about a designated conference hotel or special conference rates. </p>
+				
 <h2 id="architecture"><span class="secno">3. </span></span><font face="Segoe UI">Architecture</font></span></h2>
 
-		<p>For the remnder of the document, we consider an IPA that is extendable via a standardized market place. Such an IPA features the architectural buildings blocks as shown in the following figure.</p>
+		<p>In order to cope with such use cases as described above, an IPA may need to make use of several services descibing the capabilities of the IPA. These services may be selected from a
+		standardized market place. For the reminder of the document, we consider an IPA that is extendable via such a market place. This kind of IPA features the architectural buildings blocks as
+		shown in the following figure.</p>
 		
 		<img src="IPA-Architecture.svg" alt="IPA Architecture" style="width: 100%; height: auto;"/>
 
@@ -84,31 +92,40 @@ Booking a hotel as part of attending a conference could also involve finding out
 		
         <h3 id="clientlayer"><span class="secno">3.1 Client Layer</span></h3>
 
-        <h4><span class="secno">3.1.1 </span>IPA Client</h4>
+        <h4 id="client"><span class="secno">3.1.1 </span>IPA Client</h4>
 		<p>Client that enables the user to access the IPA via voice. Usually, IPA Clients make use of a microphone to capture the spoken input and a loud speaker to provide responses.
-As an extension an IPA Client may also receive commands to be executed locally.</p>
+		As an extension an IPA Client may also receive commands to be executed locally.</p>
 
         <h3 id="dialoglayer"><span class="secno">3.2 Dialog Layer</span></h3>
 
         <h4><span class="secno">3.2.1 </span>IPA Service</h4>
-		<p>General IPA Service API that mediates between the user and the overall IPA system. The service layer may be omitted in case the IPA Client communicates directly with the Dialog Management.</p>
+		<p>General IPA Service API that mediates between the user and the overall IPA system. The service layer may be omitted in case the IPA Client communicates directly with the 
+		<a href="#dialogmanagement">Dialog Management</a>.</p>
 
-        <h4><span class="secno">3.2.2 </span>Dialog Management</h4>
-		<p>Component that receives user input as spoken input, updates its internal state, decides upon subsequent steps to continue a dialog and provides output as synthesized or recorded utterances.</p>
-		<p>For this, it employs several Dialogs that are responsible to handle isolated tasks or intents. The overall set of available dialogs defines the behavior and capabilities of the interaction with the IPA. The Dialog Manager is also responsible for a good user experience across the available Dialogs.</p>
+        <h4 id="dialogmanagement"><span class="secno">3.2.2 </span>Dialog Management</h4>
+		<p>Component that receives user input as spoken input, updates its internal state, decides upon subsequent steps to continue a dialog and provides output as synthesized or recorded utterances.
+		As an extension, it may also provide commands as output to be executed by the <a href="#client">IPA Client</a></p>
+		<p>For this, it employs several Dialogs that are responsible to handle isolated tasks or intents. The following types of dialogs exist:</p>
+		<ul>
+			<li><a href="#coredialog">Core Dialog</a></li>
+			<li><a href="#dialogx">Dialog X</a></li>
+		</ul>
+		<p>The overall set of available dialogs defines the behavior and capabilities of the interaction with the IPA. The Dialog Manager is also responsible for a good user experience across the available Dialogs.</p>
 		<p>The Dialog Manager determines the Dialog that is best suited to serve the current user input and re-establishes the interaction state for that Dialog. Therefore, it may use the Dialog Registry.</p>
-		<p>The Dialog Manager also manages the session with a user. Conceptually, multiple sessions can be active in parallel. Dialogs are governed by Sessions, e.g. to free resources of ASR and NLU engines when a session expires. Linguistic phenomena, like anaphoric references and ellipsis are expected to work within a Session. The selected IPA Provider or the Dialog Manager may have leading roles for this task.</p>
-		<p>The Dialog Manager also features an ASR to convert spoken utterances into text strings and a TTS to convert text strings into audio.</p>
+		<p>The Dialog Manager also manages the session with a user. Conceptually, multiple sessions can be active in parallel. Dialogs are governed by Sessions, e.g. to free resources of ASR and NLU engines when
+		a session expires. Linguistic phenomena, like anaphoric references and ellipsis are expected to work within a Session. The selected IPA Provider or the Dialog Manager may have leading roles for this task.</p>
+		<p>The Dialog Manager also features an <a href="#asr">ASR</a> to convert spoken utterances into text strings and a <a href="#tts">TTS</a> to convert text strings into audio.</p>
 		<p>As an extension the Dialog Manager may also return commands to be executed by the IPA Client.</p>
 
-        <h4><span class="secno">3.2.3 </span>ASR</h4>
-		<p>The Automated Speech Recognizer (ASR) receives audio files of recorded utterances and generates a recognition hypothesis as text strings. Optionally, the ASR can also generate multiple recognition hypothesis along with a confidence score.</p>
+        <h4 id="asr"><span class="secno">3.2.3 </span>ASR</h4>
+		<p>The Automated Speech Recognizer (ASR) receives audio files of recorded utterances and generates a recognition hypothesis as text strings. Optionally, the ASR can also generate multiple recognition
+		hypothesis along with a confidence score.</p>
 
-        <h4><span class="secno">3.2.4 </span>TTS</h4>
+        <h4 id="tts"><span class="secno">3.2.4 </span>TTS</h4>
 		<p>The Text-to-Speech (TTS) component receives text strings, which it converts into audio data.</p>
 
-        <h4><span class="secno">3.2.5 </span>Core Dialog</h4>
-		<p>The Core Dialog is able to handle basic functionality via Core Intents to enable interaction with the user at all. This includes among others</p>
+        <h4 id="coredialog"><span class="secno">3.2.5 </span>Core Dialog</h4>
+		<p>The Core Dialog is able to handle basic functionality via <a href="coreintesets">Core Intent Sets</a> to enable interaction with the user at all. This includes among others</p>
 		<ul>
 			<li>Greetings</li>
 			<li>Goodbye</li>
@@ -116,21 +133,29 @@ As an extension an IPA Client may also receive commands to be executed locally.<
 			<li>Exception handling in case a requested intent cannot be matched to a known Dialog</li>
 			<li>Help</li>
 		</ul>
-		<p>Conceptually, the Core Dialog is a special Dialog that is always available.</p>
+		<p>Conceptually, the Core Dialog is a special <a href="dialogx">Dialog</a> as described in the following section that is always available</p>
+        <h5 id="dialog"><span class="secno">3.2.5.1 </span>Dialog</h5>
+		<p>A Dialog is able to handle functionality that can be added to the capabilities of the <a href="#dialogmanagement">Dialog Management</a> through their associated Intent Sets. 
+		The Dialogs must server different purpose in a sense that they are unique for a certain task. E.g., only a single flight reservation dialog may exist at a time.</p>
+		<p>Dialogs receive inputs as intents out of their supported Intent sets along with associated entities and return responses as text strings to be spoken.</p>
+		<p>As an extension Dialogs may also return commands to be executed by the <a href="#client">IPA Client</a>.</p>
+		<p>Dialogs access the Provider Selection Service to fulfill their task. They maintain state which they also share with the <a href="#dialogmanagement">Dialog Management</a> and know which
+		<a href="#provider">IPA Provider</a> evaluated their request with the help of an identifier.</p>
 
-        <h4><span class="secno">3.2.6 </span>Core Intent Sets</h4>
+        <h4 id="coreintentsets"><span class="secno">3.2.6 </span>Core Intent Sets</h4>
 		<p>A Core Intent Set usually identifies tasks to be executed and define the capabilities of the Core Dialog. Conceptually, the Core Intents are always available.</p>
 
-        <h4><span class="secno">3.2.7 </span>Intent Set X</h4>
-		<p>The Dialog x are able to handle functionality that can be added to the capabilities of the Dialog Manager through their associated Intent Sets. The Dialogs must server different purpose in a sense that they are unique for a certain task. E.g., only a single flight reservation dialog may exist at a time.</p>
+        <h4 id="dialogx"><span class="secno">3.2.7 </span>Dialog X</h4>
+		<p>The Dialog x are able to handle functionality that can be added to the capabilities of the Dialog Manager through their associated Intent Sets. The Dialogs must server different purpose
+		in a sense that they are unique for a certain task. E.g., only a single flight reservation dialog may exist at a time.</p>
 		<p>Dialogs receive inputs as intents out of their supported Intent sets along with associated entities and return responses as text strings to be spoken.</p>
 		<p>Dialogs access the Provider Selection Service to fulfill their task. They maintain state and know which IPA Provider evaluated their request with the help of an identifier.</p>
 		<p>As an extension Dialogs may also return commands to be executed by the IPA Client.</p>
 
-        <h4><span class="secno">3.2.8 </span>Core Intent Sets</h4>
+        <h4><span class="secno">3.2.9 </span>Intent Set X</h4>
 		<p>An Intent Set usually identifies tasks that can be executed within the associated Dialog.</p>
 		
-        <h4><span class="secno">3.2.9 </span>Dialog Registry</h4>
+        <h4><span class="secno">3.2.10 </span>Dialog Registry</h4>
 		<p>The Dialog registry manages all available Dialogs with their associated Intent Sets. Dialogs and their Intent Sets can be added or removed as needed.</p>
 		
         <h3 id="datalayer"><span class="secno">3.3 APIs/Data Layer</span></h3>
@@ -150,7 +175,7 @@ As an extension an IPA Client may also receive commands to be executed locally.<
         <h4><span class="secno">3.3.4 </span>Core Data Provider</h4>
 		<p>A generic data provider to aid the Core NLU determining the intent.</p>
 		
-        <h4><span class="secno">3.3.5 </span>IPA Provider X</h4>
+        <h4 id="provider"><span class="secno">3.3.5 </span>IPA Provider X</h4>
 		<p>A provider of an IPA service, like</p>
 		<ul>
 			<li>Google Assistant</li>
