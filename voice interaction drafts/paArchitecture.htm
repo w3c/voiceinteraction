@@ -15,7 +15,7 @@
             <h2 property="bibo:subtitle" id="subtitle">Architecture and Potential for Standardization</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: December 2, 2019 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture.htm</a> (GitHub repository) </dd>
+                <dd>Last modified: January 30, 2020 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture.htm</a> (GitHub repository) </dd>
 				<dd><a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture.htm">HTML rendered version</a></dd>             
 			    <dt>Editors</dt>
                 <p><span style="color: rgb(51, 51, 51); font-family: Conv_DroidSerif-Regular, serif; font-size: 15.7072px; orphans: 2; text-align: center; widows: 2; background-color: rgba(255, 255, 255, 0.6);">Dirk Schnelle-Walka</br>
@@ -175,7 +175,38 @@ As an extension an IPA Client may also receive commands to be executed locally.<
 
         <h2 id="walkthrough"><span class="secno">4. </span>Use Case Walk Through</h2>
 
-        <p>t.b.d.</p>
+        <p>This section expands on the use case above, filling in details according to the sample architecture.</p>
+        <p>A user would like to plan a trip to an international conference and she
+needs visa information and airline reservations. </p>
+
+<p>The user starts by asking a general purpose assistant ("IPA Service", on the left
+of the diagram) about what the visa requirements are for her situation. For
+a common situation, such as citizens of the EU traveling to the United
+States, the IPA is able to answer the question directly by getting the
+information from a web service that it knows about. This could be one of its
+dialogs 1-n. However, for less common situations (for example, a citizen of
+South Africa traveling to Japan), the generic IPA will try to identify a
+visa expert assistant application from the dialog registry. If it finds one,
+it will connect the user with the visa expert, one of the IPA providers on
+the right side. The visa expert will then engage in a dialog with the user
+to find out the dates and purposes of travel and will inform the user of the
+visa process. </p>
+
+<p>Once the user has found out about the visa, she tells the IPA that she wants
+to make airline reservations. If she wants to use a particular service, or
+use a particular airline, she would say something like "I want to book a
+flight on American". The IPA will then either connect the user with
+American's IPA or, if American doesn't have an IPA, will inform the user of
+that fact. On the other hand, if the user doesn't specify an airline, the
+IPA will find a general flight search IPA from its registry and connect the
+user with the IPA for that flight search service.  The flight search IPA
+will then interact with the user to find appropriate flights. </p>
+
+<p>A similar process would be repeated if the user wants to book a hotel, find
+a rental car, find out about local attractions in the destination city, etc.
+Booking a hotel could also involve interacting with the conference's IPA to
+find out about a designated conference hotel or special rates. 
+</p>
 
         <h2 id="potential"><span class="secno">5. </span>Potential for Standardization</h2>
 
