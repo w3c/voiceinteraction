@@ -75,7 +75,7 @@
 				a rental car, or find out about local attractions in the destination city.
 				Booking a hotel as part of attending a conference could also involve finding out about a designated conference hotel or special conference rates. </p>
 				
-<h2 id="architecture"><span class="secno">3. </span></span><font face="Segoe UI">Architecture</font></span></h2>
+		<h2 id="architecture"><span class="secno">3. </span></span><font face="Segoe UI">Architecture</font></span></h2>
 
 		<p>In order to cope with such use cases as described above, an IPA may need to make use of several services descibing the capabilities of the IPA. These services may be selected from a
 		standardized market place. For the reminder of the document, we consider an IPA that is extendable via such a market place. This kind of IPA features the architectural buildings blocks as
@@ -83,18 +83,23 @@
 		
 		<img src="IPA-Architecture.svg" alt="IPA Architecture" style="width: 100%; height: auto;"/>
 
-		<p>This architecture comprises 3 layers that are detailed in the following sections</p>
+		<p>This architecture comprises 3 layers that are detailed in the following sections
         <ol>
             <li><a href="#clientlayer">Client Layer</a></li>
             <li><a href="#dialoglayer">Dialog Layer</a></li>
             <li><a href="#datalayer">APIs / Data Layer</a></li>
         </ol>
+		Actual implementations may want to distinguish more than these layers.</p>
 		
         <h3 id="clientlayer"><span class="secno">3.1 Client Layer</span></h3>
 
         <h4 id="client"><span class="secno">3.1.1 </span>IPA Client</h4>
-		<p>Client that enables the user to access the IPA via voice. Usually, IPA Clients make use of a microphone to capture the spoken input and a loud speaker to provide responses.
-		As an extension an IPA Client may also receive commands to be executed locally.</p>
+		<p>Clients enable the user to access the IPA via voice with the following characteristics.
+		<ul>
+			<li>Usually, IPA Clients make use of a microphone to capture the spoken input and a loud speaker to provide responses.</li>
+			<li>As an extension an IPA Client may also receive commands to be executed locally.</li>
+		</ul>
+		</p>
 
         <h3 id="dialoglayer"><span class="secno">3.2 Dialog Layer</span></h3>
 
