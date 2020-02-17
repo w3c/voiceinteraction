@@ -15,7 +15,7 @@
             <h2 property="bibo:subtitle" id="subtitle">Architecture and Potential for Standardization</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: January 31, 2020 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture.htm</a> (GitHub repository) </dd>
+                <dd>Last modified: February 17, 2020 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture.htm</a> (GitHub repository) </dd>
 				<dd><a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture.htm">HTML rendered version</a></dd>             
 			    <dt>Editors</dt>
                 <p><span style="color: rgb(51, 51, 51); font-family: Conv_DroidSerif-Regular, serif; font-size: 15.7072px; orphans: 2; text-align: center; widows: 2; background-color: rgba(255, 255, 255, 0.6);">Dirk Schnelle-Walka</br>
@@ -108,19 +108,25 @@
 		<a href="#dialogmanagement">Dialog Management</a>.</p>
 
         <h4 id="dialogmanagement"><span class="secno">3.2.2 </span>Dialog Management</h4>
-		<p>Component that receives user input as spoken input, updates its internal state, decides upon subsequent steps to continue a dialog and provides output as synthesized or recorded utterances.
-		As an extension, it may also provide commands as output to be executed by the <a href="#client">IPA Client</a></p>
-		<p>For this, it employs several Dialogs that are responsible to handle isolated tasks or intents. The following types of dialogs exist:</p>
+		<p>Component that receives user input as spoken input, updates its internal state, decides upon subsequent steps to continue a dialog and provides output as synthesized or recorded utterances. 
+		It has the following characteristics
 		<ul>
-			<li><a href="#coredialog">Core Dialog</a></li>
-			<li><a href="#dialogx">Dialog X</a></li>
+			<li>As an extension, it may also provide commands as output to be executed by the <a href="#client">IPA Client</a></li>
+			<li>For this, it employs several <a href="#dialog">Dialogs</a> that are responsible to handle isolated tasks or intents. The following types of dialogs exist:</p>
+			<ul>
+				<li><a href="#coredialog">Core Dialog</a></li>
+				<li><a href="#dialogx">Dialog X</a></li>
+			</ul></li>
+			<li>>The overall set of available <a href="#dialog">Dialogs</a> defines the behavior and capabilities of the interaction with the IPA.</li>
+			<li>The Dialog Manager is also responsible for a good user experience across the available Dialogs.</li>
+			<li>The Dialog Manager determines the Dialog that is best suited to serve the current user input and re-establishes the interaction state for that <a href="#dialog">Dialog</a>.
+				Therefore, it may use the <a href="#dialogregistry">Dialog Registry</a>.</li>
+			<li>The Dialog Manager follows the principle to fill in all slots that are known before prompting the user for it.</a>
+			<li>The Dialog Manager also manages the session with a user. Conceptually, multiple sessions can be active in parallel. Dialogs are governed by Sessions, e.g. to free resources of ASR and NLU engines when
+				a session expires. Linguistic phenomena, like anaphoric references and ellipsis are expected to work within a Session. The selected IPA Provider or the Dialog Manager may have leading roles for this task.</li>
+			<li>The Dialog Manager also features an <a href="#asr">ASR</a> to convert spoken utterances into text strings and a <a href="#tts">TTS</a> to convert text strings into audio.</li>
 		</ul>
-		<p>The overall set of available dialogs defines the behavior and capabilities of the interaction with the IPA. The Dialog Manager is also responsible for a good user experience across the available Dialogs.</p>
-		<p>The Dialog Manager determines the Dialog that is best suited to serve the current user input and re-establishes the interaction state for that Dialog. Therefore, it may use the Dialog Registry.</p>
-		<p>The Dialog Manager also manages the session with a user. Conceptually, multiple sessions can be active in parallel. Dialogs are governed by Sessions, e.g. to free resources of ASR and NLU engines when
-		a session expires. Linguistic phenomena, like anaphoric references and ellipsis are expected to work within a Session. The selected IPA Provider or the Dialog Manager may have leading roles for this task.</p>
-		<p>The Dialog Manager also features an <a href="#asr">ASR</a> to convert spoken utterances into text strings and a <a href="#tts">TTS</a> to convert text strings into audio.</p>
-		<p>As an extension the Dialog Manager may also return commands to be executed by the IPA Client.</p>
+		</p>
 
         <h4 id="asr"><span class="secno">3.2.3 </span>ASR</h4>
 		<p>The Automated Speech Recognizer (ASR) receives audio files of recorded utterances and generates a recognition hypothesis as text strings. Optionally, the ASR can also generate multiple recognition
@@ -141,36 +147,72 @@
 		<p>Conceptually, the Core Dialog is a special <a href="dialogx">Dialog</a> as described in the following section that is always available</p>
         <h5 id="dialog"><span class="secno">3.2.5.1 </span>Dialog</h5>
 		<p>A Dialog is able to handle functionality that can be added to the capabilities of the <a href="#dialogmanagement">Dialog Management</a> through their associated Intent Sets. 
-		The Dialogs must server different purpose in a sense that they are unique for a certain task. E.g., only a single flight reservation dialog may exist at a time.</p>
-		<p>Dialogs receive inputs as intents out of their supported Intent sets along with associated entities and return responses as text strings to be spoken.</p>
-		<p>As an extension Dialogs may also return commands to be executed by the <a href="#client">IPA Client</a>.</p>
-		<p>Dialogs access the Provider Selection Service to fulfill their task. They maintain state which they also share with the <a href="#dialogmanagement">Dialog Management</a> and know which
-		<a href="#provider">IPA Provider</a> evaluated their request with the help of an identifier.</p>
+		The Dialogs must server different purpose in a sense that they are unique for a certain task. E.g., only a single flight reservation dialog may exist at a time. Dialogs have the following characteristics
+		<ul>
+			<li>Dialogs receive inputs as intents out of their supported Intent sets along with associated entities and return responses as text strings to be spoken.</li>
+			<li>Dialogs reference all <a href="#intentsets">Intent Sets</a> that they need to fullfill their service.</li>
+			<li>Dialogs do not require the existence of a corresponding <a href="#intentsets">Intent Set</a>.</li>
+			<li>Dialogs may specify entities from an <a href="#intentsets">Intent Set</a> that are filled after their execution.</li>
+			<li>Dialogs may specify follow-up dialogs that are to be executed once execution of this dialog is completed.</li>
+			<li>Dialogs may specify clarification dialogs by name or by a list of entities from an <a href="#intentsets">Intent Set</a>.</li>
+			<li>As an extension Dialogs may also return commands to be executed by the <a href="#client">IPA Client</a>.</li>
+			<li>Dialogs access the Provider Selection Service to fulfill their task. They maintain state which they also share with the <a href="#dialogmanagement">Dialog Management</a> and know which
+				<a href="#provider">IPA Provider</a> evaluated their request with the help of an identifier.</li>
+		</ul>
+		</p>
 
         <h4 id="coreintentsets"><span class="secno">3.2.6 </span>Core Intent Sets</h4>
-		<p>A Core Intent Set usually identifies tasks to be executed and define the capabilities of the Core Dialog. Conceptually, the Core Intents are always available.</p>
+		<p>A Core Intent Set usually identifies tasks to be executed and define the capabilities of the <a href="#coredialog">Core Dialog</a>. Conceptually, the Core Intent Sets are Intent Sets that are
+		always available.</p>
+        <h5 id="intentsets"><span class="secno">3.2.6.1 </span>Intent Sets</h5>
+		<p>Intent Sets define actions along with their parameters that can be consumed by a corresponding <a href="#dialog">Dialog</a> and has the following characteristics
+		<ul>
+			<li>An Intent Set defines one ore more intents with an optional number (including none) of entities to fullfill the corresponding action.</li>
+			<li>It abstracts from actual Intent Sets that are defined by the Intent Providers. In case the Intent Provider is identical to the platform provider, they may match.</li>
+			<li>It can be used in one ore more <a href="#dialog">Dialogs</a>.
+		</ul>
+		</p>
 
         <h4 id="dialogx"><span class="secno">3.2.7 </span>Dialog X</h4>
-		<p>The Dialog x are able to handle functionality that can be added to the capabilities of the Dialog Manager through their associated Intent Sets. The Dialogs must server different purpose
-		in a sense that they are unique for a certain task. E.g., only a single flight reservation dialog may exist at a time.</p>
-		<p>Dialogs receive inputs as intents out of their supported Intent sets along with associated entities and return responses as text strings to be spoken.</p>
-		<p>Dialogs access the Provider Selection Service to fulfill their task. They maintain state and know which IPA Provider evaluated their request with the help of an identifier.</p>
-		<p>As an extension Dialogs may also return commands to be executed by the IPA Client.</p>
+		<p>The Dialog x are able to handle functionality that can be added to the capabilities of the Dialog Manager through their associated <a href="#intentsetsx">Intent Set X</a>. Dialog X extennd the 
+		<a href="#coredialog">Core Dialogs</a> and add functionality by custom <a href="#dialog">Dialogs</a>. The Dialog X's must server different purpose
+		in a sense that they are unique for a certain task. E.g., only a single flight reservation dialog may exist at a time. They have the same characteristics as a <a href="#dialog">Dialog</a>.</p>
 
-        <h4><span class="secno">3.2.9 </span>Intent Set X</h4>
-		<p>An Intent Set usually identifies tasks that can be executed within the associated Dialog.</p>
+        <h4 id="intentsetsx"><span class="secno">3.2.9 </span>Intent Set X</h4>
+		<p>An Intent Set X is a special <a href="#intentsets">Intent Set</a> that identifies tasks that can be executed within the associated <a href="#dialogx">Dialog X</a>.</p>
 		
-        <h4><span class="secno">3.2.10 </span>Dialog Registry</h4>
-		<p>The Dialog registry manages all available Dialogs with their associated Intent Sets. Dialogs and their Intent Sets can be added or removed as needed.</p>
+        <h4 id="dialogregistry"><span class="secno">3.2.10 </span>Dialog Registry</h4>
+		<p>The Dialog Registry manages all available Dialogs with their associated Intent Sets. 
+		<ul>
+			<li><a href="#dialog">Dialogs</a> and their <a href="#intentsets">Intent Sets</a> can be added or removed as needed.</li>
+			<li>The Dialog Resgistry may notify the <a href="#dialogmanagement">Dialog Management</a> if <a href="#dialog">Dialogs</a> have been added or removed.</li>
+			<li>The Dialog Resgistry may be queried by the <a href="#dialogmanagement">Dialog Management</a> for <a href="#intentsets">Intent Sets</a> that are referenced in a <a href="#dialog">Dialog</a>.</li>
+			<li>The Dialog Resgistry may be queried by the <a href="#dialogmanagement">Dialog Management</a> for follow-up or clarfication <a href="#dialog">Dialog</a> that are referenced in a <a href="#dialog">Dialog</a> by name
+				or a list of entities from an <a href="#intentsets">Intent Set</a>.</li>
+			<li><a href="#intentsets">Intent Sets</a> will be removed if there are no more <a href="#dialog">Dialogs</a> referencing them.</li>
+			<li>The Dialog Registry ensures that added <a href="#dialog">Dialogs</a> are unique</li>
+			<li>The Dialog Registry is not responsible to know about the counterparts in the <a href="#datalayer">APIs/Data Layer</a>.
+			<li>The Dialog Resgistry notifies the <a href="#selectionservice">Selection Service</a> if <a href="#dialog">Dialogs</a> have been added or removed.</li>
+		</ul>
+		</p>
 		
         <h3 id="datalayer"><span class="secno">3.3 APIs/Data Layer</span></h3>
 		
-        <h4><span class="secno">3.3.1 </span>Provider Selection Service</h4>
-		<p>A service that provides access to all known IPA Providers. This service also maps the IPA Intent Sets to the Intent Sets in the Dialog layer.</p>
-		<p>The Provider Selection Service receives input as text strings and returns results as intents from all IPA Providers that are able to reply to the user input along with associated entities.</p>
-		<p>The Provider Selection Service is stateless and always returns the responses from the IPA Providers along with an identification of the issuing IPA Provider.</p>
+        <h4 id="selectionservice"><span class="secno">3.3.1 </span>Provider Selection Service</h4>
+		<p>A service that provides access to all known IPA Providers. This service also maps the IPA Intent Sets to the Intent Sets in the Dialog layer. It has the following characteristics
+		<ul>
+			<li>The Provider Selection Service receives input as text strings and returns results as intents with all recognized entities from all <a href="#provider">IPA Providers</a> that are able to reply to the user input
+			along with associated entities.</li>
+			<li>In case the Provider Selection Service is called with a preselected <a href="#provider">IPA Providers</a> only this one will be used.</li>
+			<li><a href="#provider">IPA Provers</a> and the <a href="#authentication">Accounts/Authentication</a> to access them can be added or removed as needed.</li>
+			<li>The Provider Selection Service is stateless and always returns the responses from the used <a href="#provider">IPA Providers</a> along with an identification of the issuing IPA Provider.</li>
+			<li>The Provider Selection Service makes use of the <a href="#authentication">Accunts/Authentication</a> to access <a href="#provider">IPA Provider</a>.
+			<li>The Provider Selection Services maps the <a href="#providerintentsets">Provider Intent Sets</a> to the <a href="#intentsets">Intent Sets</a> known by the <a href="#dialogregistry">Dialog Registry</a>.
+				The mapping must be configured when <a href="#provider">IPA Providers</a> are added.</li>
+		</ul>
+		</p>
 
-        <h4><span class="secno">3.3.2 </span>Accounts/Autenthication</h4>
+        <h4 id="authentication"><span class="secno">3.3.2 </span>Accounts/Autenthication</h4>
 		<p>A registry that knows how to access the known IPA Providers, i.e. which are available and credentials to access them. Storing of credentials must meet security and trust considerations that are expected from such a personalized service. IPA Providers can be added as needed.</p>
 
         <h4><span class="secno">3.3.3 </span>Core NLU</h4>
@@ -193,7 +235,7 @@
         <h5><span class="secno">3.3.5.1 </span>Provider NLU</h5>
 		<p>A component that is able to extract meaning as intents and associated entities from an utterance as text strings for IPA Provider X</p>
 
-        <h5><span class="secno">3.3.5.2 </span>Provider Intent Set</h5>
+        <h5 id="providerintentsets"><span class="secno">3.3.5.2 </span>Provider Intent Set</h5>
 		<p>An intent set that might be returned by Provider NLU to handle the capabilities of Provider X.</p>
 
         <h5><span class="secno">3.3.5.3 </span>Data Provider</h5>
