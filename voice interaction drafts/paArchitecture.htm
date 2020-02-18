@@ -103,7 +103,7 @@
 
         <h3 id="dialoglayer"><span class="secno">3.2 Dialog Layer</span></h3>
 
-        <h4><span class="secno">3.2.1 </span>IPA Service</h4>
+        <h4 id="ipaservice"><span class="secno">3.2.1 </span>IPA Service</h4>
 		<p>General IPA Service API that mediates between the user and the overall IPA system. The service layer may be omitted in case the IPA Client communicates directly with the 
 		<a href="#dialogmanagement">Dialog Management</a>.</p>
 
@@ -129,11 +129,21 @@
 		</p>
 
         <h4 id="asr"><span class="secno">3.2.3 </span>ASR</h4>
-		<p>The Automated Speech Recognizer (ASR) receives audio files of recorded utterances and generates a recognition hypothesis as text strings. Optionally, the ASR can also generate multiple recognition
-		hypothesis along with a confidence score.</p>
+		<p>The Automated Speech Recognizer (ASR) receives audio streams of recorded utterances and generates a recognition hypothesis as text strings. It has the following characteristics
+		<ul>
+			<li>Optionally, the ASR can also generate multiple recognition hypothesis along with a confidence score.</li>
+			<li>Optionally, the ASR can also be part of the <a href="#provider">IPA Provider</a>. In this case, the received audio streams must be forwarded to the <a href="#selectionservice">Provider Selection Service</a>.
+				In this case the <a href="#corenlu">Core NLU</a> must be part of an <a href="#provider">IPA Provider</a>.</li>
+			<li>Multiple ASR instances may exist if multiple <a href="#provider">IPA Providers</a> come with their own ASR</li>
+		</ul></p>
 
         <h4 id="tts"><span class="secno">3.2.4 </span>TTS</h4>
-		<p>The Text-to-Speech (TTS) component receives text strings, which it converts into audio data.</p>
+		<p>The Text-to-Speech (TTS) component receives text strings, which it converts into audio data. it has the following characteristics
+		<ul>
+			<li>Optionally, the TTS can also be part of the <a href="#provider">IPA Provider</a>. In this case, the audio streams is retrieved from the <a href="#selectionservice">Provider Selection Service</a>.</li>
+			<li>In case the TTS is part of the <a href="#provider">IPA Provider</a>, multiple TTS instances may exist. This may be useful in case of branding.</li>
+			<li>Multiple TTS instances may exist in parallel. In this case it is up to the current <a href="#dialog">Dialog</a> to specify the TTS engine to use.</li>
+		</ul></p>
 
         <h4 id="coredialog"><span class="secno">3.2.5 </span>Core Dialog</h4>
 		<p>The Core Dialog is able to handle basic functionality via <a href="coreintesets">Core Intent Sets</a> to enable interaction with the user at all. This includes among others</p>
@@ -158,6 +168,7 @@
 			<li>As an extension Dialogs may also return commands to be executed by the <a href="#client">IPA Client</a>.</li>
 			<li>Dialogs access the Provider Selection Service to fulfill their task. They maintain state which they also share with the <a href="#dialogmanagement">Dialog Management</a> and know which
 				<a href="#provider">IPA Provider</a> evaluated their request with the help of an identifier.</li>
+			<li>A Dialog may specify a <a href="#tts">TTS</a> engine to use in case there are multiple engines available.</li>
 		</ul>
 		</p>
 
@@ -204,45 +215,66 @@
 			<li>The Provider Selection Service receives input as text strings and returns results as intents with all recognized entities from all <a href="#provider">IPA Providers</a> that are able to reply to the user input
 			along with associated entities.</li>
 			<li>In case the Provider Selection Service is called with a preselected <a href="#provider">IPA Providers</a> only this one will be used.</li>
-			<li><a href="#provider">IPA Provers</a> and the <a href="#authentication">Accounts/Authentication</a> to access them can be added or removed as needed.</li>
+			<li><a href="#provider">IPA Provers</a> and the <a href="#authentication">Accounts/Authentication</a> to access them and optionally <a href="#asr">ASR</a> and <a href="#tts">TTS</a> capabilities can be 
+				added or removed as needed.</li>
 			<li>The Provider Selection Service is stateless and always returns the responses from the used <a href="#provider">IPA Providers</a> along with an identification of the issuing IPA Provider.</li>
 			<li>The Provider Selection Service makes use of the <a href="#authentication">Accunts/Authentication</a> to access <a href="#provider">IPA Provider</a>.
 			<li>The Provider Selection Services maps the <a href="#providerintentsets">Provider Intent Sets</a> to the <a href="#intentsets">Intent Sets</a> known by the <a href="#dialogregistry">Dialog Registry</a>.
 				The mapping must be configured when <a href="#provider">IPA Providers</a> are added.</li>
+			<li>In case the <a href="#asr">ASR</a> is bound to an <a href="#provider">IPA Providers</a> the Provider Selection Service is able to consume audio stream and forward them to the available
+				<a href="#asr">ASR</a> engines.</li>
 		</ul>
 		</p>
 
         <h4 id="authentication"><span class="secno">3.3.2 </span>Accounts/Autenthication</h4>
-		<p>A registry that knows how to access the known IPA Providers, i.e. which are available and credentials to access them. Storing of credentials must meet security and trust considerations that are expected from such a personalized service. IPA Providers can be added as needed.</p>
+		<p>A registry that knows how to access the known IPA Providers, i.e. which are available and credentials to access them. Storing of credentials must meet security and trust considerations that are
+			expected from such a personalized service.</p>
 
-        <h4><span class="secno">3.3.3 </span>Core NLU</h4>
-		<p>A component that is able to extract meaning as intents and associated entities from an utterance as text strings.</p>
-		<p>The Core NLU is able to handle basic functionality via Core Intents to enable interaction with the user at all.</p>
+        <h4 id="corenlu"><span class="secno">3.3.3 </span>Core NLU</h4>
+		<p>An NLU (Natural Language Understanding) component that is able to extract meaning as intents and associated entities from an utterance as text strings. It has the following characteristics
+		<ul>
+			<li>The Core NLU is able to handle basic functionality via <a href="#coreintentsets">Core Intent Sets</a> to enable interaction with the user at all.</li>
+			<li>The Core NLU may make use of the <a href="#coredataprovider">Core Data Provider</a> to access local or internal data or access external services.</li>
+		</ul></p>
 
-        <h4><span class="secno">3.3.4 </span>Core Data Provider</h4>
-		<p>A generic data provider to aid the Core NLU determining the intent.</p>
+        <h4 id="coredataprovider"><span class="secno">3.3.4 </span>Core Data Provider</h4>
+		<p>A generic <a href="#dataprovider">Data Provider</a> to aid the <a href="#corenlu">Core NLU</a> determining the intent. 
 		
         <h4 id="provider"><span class="secno">3.3.5 </span>IPA Provider X</h4>
-		<p>A provider of an IPA service, like</p>
+		<p>A provider of an IPA service, like
 		<ul>
 			<li>Google Assistant</li>
 			<li>Alexa</li>
 			<li>Microsoft Cortana</li>
 			<li>SoundHound</li>
 			<li>&#x2026;</li>
-		</ul>
+		</ul></p>
+		<p>The IPA provider may be part of the IPA implementation as an IPA Provider or alternatively a subset of the original functionaliy as described below as part of another IPA implementation.</p>
 
-        <h5><span class="secno">3.3.5.1 </span>Provider NLU</h5>
-		<p>A component that is able to extract meaning as intents and associated entities from an utterance as text strings for IPA Provider X</p>
+        <h5 id="providernlu"><span class="secno">3.3.5.1 </span>Provider NLU</h5>
+		<p>An NLU component that is able to extract meaning as intents and associated entities from an utterance as text strings for <a href="#provider">IPA Provider X</a>. It has the following characteristics
+		<ul>
+			<li>The Provider NLU may make use of the <a href="#dataprovider">Data Provider</a> to access local or internal data or access external services.</li>
+			<li>The Provider NLU may make use of the <a href="#knowledgegraph">Knowledge Graph</a> to derive meaning.</li>
+		</ul></p>
 
         <h5 id="providerintentsets"><span class="secno">3.3.5.2 </span>Provider Intent Set</h5>
-		<p>An intent set that might be returned by Provider NLU to handle the capabilities of Provider X.</p>
+		<p>An <a href="#intentsets">Intent Set</a> that might be returned by the <a href="#providernlu">Provider NLU</a> to handle the capabilities of <a href="#provider">IPA Provider X</a>.</p>
 
-        <h5><span class="secno">3.3.5.3 </span>Data Provider</h5>
-		<p>A data provider to aid the Provider NLU in determining the intent. This component may also be used to track the IPA Provider’s state
+        <h5 id="dataprovider"><span class="secno">3.3.5.3 </span>Data Provider</h5>
+		<p>A data provider to aid the <a href"#providernlu">Provider NLU</a> in determining the intent. It has the following characteristics
+		<ul>
+			<li>The Data Provider provides access to 
+			<ul>
+				<li>local data,</li>
+				<li>external data or</li>
+				<li>external services.</li>
+			</ul></li>
+			<li>The Data Provider may be used to track the IPA Provider’s state.</li>
+		</ul></p>
 
-        <h5><span class="secno">3.3.5.4 </span>Knowledge Graph</h5>
-		<p>A knowledge graph to reason about the detected input from the Provider NLU and Data Provider to come up with some more meaningful results.</p>
+        <h5 id="knowledgegraph"><span class="secno">3.3.5.4 </span>Knowledge Graph</h5>
+		<p>A knowledge graph to reason about the detected input from the <a href="#providernlu">Provider NLU</a> and <a href="#dataprovider">Data Provider</a> to come up with some more meaningful results.</p>
 		
 
         <h2 id="walkthrough"><span class="secno">4. </span>Use Case Walk Through</h2>
@@ -251,15 +283,16 @@
         <p>A user would like to plan a trip to an international conference and she
 needs visa information and airline reservations. </p>
 
-<p>The user starts by asking a general purpose assistant ("IPA Service", on the left
+<p>The user starts by asking a general purpose assistant (<a href="#client">IPA Client</a>, on the left
 of the diagram) about what the visa requirements are for her situation. For
 a common situation, such as citizens of the EU traveling to the United
-States, the IPA is able to answer the question directly by getting the
-information from a web service that it knows about. This could be one of its
-dialogs 1-n. However, for less common situations (for example, a citizen of
+States, the IPA is able to answer the question directly from one of its
+<a href"#dialog">dialogs 1-n</a> getting the
+information from a web service that it knows about via the corresponding <a href="#dataprovider">Data Provider</a>.
+However, for less common situations (for example, a citizen of
 South Africa traveling to Japan), the generic IPA will try to identify a
-visa expert assistant application from the dialog registry. If it finds one,
-it will connect the user with the visa expert, one of the IPA providers on
+visa expert assistant application from the <a href"#dialogregistry">dialog registry</a>. If it finds one,
+it will connect the user with the visa expert, one of the <a href="provider">IPA providers</a> on
 the right side. The visa expert will then engage in a dialog with the user
 to find out the dates and purposes of travel and will inform the user of the
 visa process. </p>
