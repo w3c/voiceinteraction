@@ -15,7 +15,7 @@
             <h2 property="bibo:subtitle" id="subtitle">Architecture and Potential for Standardization</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: February 17, 2020 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture.htm</a> (GitHub repository) </dd>
+                <dd>Last modified: February 26, 2020 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture.htm</a> (GitHub repository) </dd>
 				<dd><a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture.htm">HTML rendered version</a></dd>             
 			    <dt>Editors</dt>
                 <p><span style="color: rgb(51, 51, 51); font-family: Conv_DroidSerif-Regular, serif; font-size: 15.7072px; orphans: 2; text-align: center; widows: 2; background-color: rgba(255, 255, 255, 0.6);">Dirk Schnelle-Walka</br>
@@ -23,7 +23,7 @@
 								<p><span style="color: rgb(51, 51, 51); font-size: 15.7072px; orphans: 2; text-align: center; widows: 2; background-color: rgba(255, 255, 255, 0.6);"</p>
 							
             </dl>
-            <p class="copyright">Copyright © 2019 the Contributors to the Voice Interaction Community Group, 
+            <p class="copyright">Copyright © 2019-2020 the Contributors to the Voice Interaction Community Group, 
                 published by the  <a href="http://www.w3.org/community/voiceinteraction/">Voice Interaction Community Group</a> 
                 under the <a href="https://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a>. A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/">summary</a> is available.</p>
             <hr></div>
@@ -39,6 +39,7 @@
                 It is not a W3C Standard nor is it on the W3C Standards Track. 
                 Please note that under the 
                 <a href="http://www.w3.org/community/about/agreements/cla/">W3C&nbsp;</a></em><em><a href="http://www.w3.org/community/about/agreements/cla/">Community Contributor License Agreement (CLA)</a> there is a limited opt-out and other conditions apply. Learn more about <a href="http://www.w3.org/community/">W3C Community and Business Groups</a>.</em></p>
+		<p>Comments should be sent to the Voice Interaction Community Group public mailing list (public-voiceinteraction@w3.org), archived at <a href="https://lists.w3.org/Archives/Public/public-voiceinteraction/">https://lists.w3.org/Archives/Public/public-voiceinteraction</a></p>
 
         <h2 class="introductory">Table of Contents</h2>
         <ul>
@@ -315,7 +316,90 @@ find out about a designated conference hotel or special rates.
 
         <h2 id="potential"><span class="secno">5. </span>Potential for Standardization</h2>
 
-        <p>t.b.d.</p>
+        <p>The general architecture of IPAs described in this document should be detailed in subsequent documents. Further work must be done to
+		<ol>
+			<li>specify the interfaces among the components</li>
+			<li>refer to existing standards where applicable</li>
+			<li>suggest new standards where they are missing</li>
+		</ol>
+		Currently, the authors see the following situation at the time of writing
+		<table border="1">
+			<tr>
+				<th>Component</th>
+				<th>Potentially related standards</th>
+			</tr>
+			<tr>
+				<td>IPA Client</td>
+				<td>none</td>
+			</tr>
+			<tr>
+				<td>IPA Service</td>
+				<td>none</td>
+			</tr>
+			<tr>
+				<td>Dialog Management</td>
+				<td>none</td>
+			</tr>
+			<tr>
+				<td>TTS</td>
+				<td>
+					<ul>
+						<li><a href="https://wicg.github.io/speech-api/">Web Speech API</a></li>
+						<li><a href="https://www.w3.org/TR/2004/REC-speech-synthesis-20040907/">Speech Synthesis Markup Language (SSML) Version 1.0</a></li>
+					</ul></td>
+			</tr>
+			<tr>
+				<td>ASR</td>
+				<td>
+					<ul>
+						<li><a href="https://wicg.github.io/speech-api/">Web Speech API</a></li>
+						<li><a href="https://www.w3.org/TR/speech-grammar/">Speech Recognition Grammar Specification Version 1.0</a></li>
+					</ul></td>
+			</tr>
+			<tr>
+				<td>Core Dialog</td>
+				<td>none</td>
+			</tr>
+			<tr>
+				<td>Core Intent Set</td>
+				<td>none</td>
+			</tr>
+			<tr>
+				<td>Dialog Registry</td>
+				<td>
+					<ul>
+						<li><a href="https://www.w3.org/TR/mmi-mc-discovery/">Discovery & Registration of Multimodal Modality Components</a></li>
+					</ul></td>
+			</tr>
+			<tr>
+				<td>Provider Selection Service</td>
+				<td>none</td>
+			</tr>
+			<tr>
+				<td>Accounts/Autenthication</td>
+				<td>
+					<ul>
+						<li><a href="https://www.w3.org/TR/webauthn/">Web Authentication</a></li>
+						<li><a href="https://fidoalliance.org/specifications/">IDO Universal Authentication Framework</a></li>
+						<li>...</li>
+					</ul></td>
+			</tr>
+			<tr>
+				<td>Core NLU</td>
+				<td>
+					<ul>
+						<li><a href="https://www.w3.org/TR/emma20/">EMMA: Extensible MultiModal Annotation markup language Version 2.0</a></li>
+						<li>...</li>
+					</ul></td>
+			</tr>
+			<tr>
+				<td>Data Provider</td>
+				<td>none</td>
+			</tr>
+		</table>
+		</p>
+		<p>The table above does not claim that the identified standards are suited for IPA implementations but must be analyzed in more detail in subsequent work.</p>
+		<p>Out of scope of a possible standardization is the implementation inside the IPA Providers and a potential interoperability among them.</p>
 
 </body>
 </html>
