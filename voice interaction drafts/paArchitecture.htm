@@ -12,10 +12,10 @@
             <p><a href="http://www.w3.org/">
                     <img width="72" height="48" src="http://www.w3.org/Icons/w3c_home" alt="W3C"></a></p>
             <h1 property="dcterms:title" class="title" id="title">Intelligent Personal Assistant Architecture</h1>
-            <h2 property="bibo:subtitle" id="subtitle">Architecture and Potential for Standardization</h2>
+            <h2 property="bibo:subtitle" id="subtitle">Architecture and Potential for Standardization Version 1.0</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: February 26, 2020 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture.htm</a> (GitHub repository) </dd>
+                <dd>Last modified: February 28, 2020 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture.htm</a> (GitHub repository) </dd>
 				<dd><a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture.htm">HTML rendered version</a></dd>             
 			    <dt>Editors</dt>
                 <p><span style="color: rgb(51, 51, 51); font-family: Conv_DroidSerif-Regular, serif; font-size: 15.7072px; orphans: 2; text-align: center; widows: 2; background-color: rgba(255, 255, 255, 0.6);">Dirk Schnelle-Walka</br>
@@ -30,7 +30,9 @@
 
         <h2 id="abstract">Abstract</h2>
 
-        <p>This documents describes a general architecture of Intelligent Personal Assistants and explores the potential for standardization.</p>
+        <p>This documents describes a general architecture of Intelligent Personal Assistants and explores the potential for standardization. It is meant to be a first
+			structured exploration of Intelligent Personal Assistants by idenitifying the components and their tasks. Subsequent work is expected to detail the interaction among the
+			identified components and how they ought to perform their task as well as their actual tasks respectively. This document may need to be updated if any changes result of that detailing work.</p>
 
         <h2>Status of This Document</h2>
 
@@ -57,10 +59,25 @@
 		with smart speakers like Amazon’s Alexa or Google Home to be available without the need to pick up explicit devices for this sort of tasks or even control household appliances in our homes.
 		As of today, there is no interoperability between the available IPA providers. Especially for exchanging learned user behaviors this is unlikely to happen at all.</p>
 		
-		<p>This document describes a general architecture of IPAs and explores the potential areas for standardization. </p>
+		<p>This document describes a general architecture of IPAs and explores the potential areas for standardization. It focuses on voice as the major input modality. However,
+			the overall concept is not restricted to that but also covers purely text based interactions with so-called chatbots as well as interaction using multiple modalities.
+			Conceptually, the authors define executing of actions in the user's environment, like turning on the light, as a modality.
+			This means, that components that deal with speech recognition, natural language understanding or speech synthesis will not be available in these deployments. In case of chatbots, they will be omitted. In case of
+			multimodal interaction, they may be extended by components to recognize input from the respective modality, transform it into something meaningful and vice-versa generate output
+			for that modality. Some modalities may be used as output-only, like turning on the light, while other modalities may be used as input-only, like touch.</p>
 		
         <h2 id="problemStatement"><span class="secno">2. </span>Problem Statement</h2>
-        
+
+		<p>Currently, users are mainly using the IPA Provider that is shipped with a certain piece of hardware. Thus, selection of a smart phone manufacturer actually determines which IPA implementation
+			they are using. Switching among different IPA providers also envolves switching a manufacturer, including high costs and getting used to some other way of operation that comes with the UX of 
+			the selected manufacturer. 
+			On the one hand users should have more freedom in selecting the IPA implementation they want. They are bound to use that service that is available in that implementation but
+			not what they probably prefer. 
+			On the other hand, IPA providers, which are mainly producing software, must also function as hardware manufacturer to be successful. Additionally, manufacturers also have to take care to port
+			exisiting services to their platform. A standardization would clearly lower the needed efforts for that and thus reducing costs.</p>
+			
+			<p>In order to explore a typical usage scenario is described in the following section.</p>
+		
         <h3><span class="secno">2.1 Use Cases</span></h3>
 				<p>This section describes potential usages of IPAs.</p> 
 				
@@ -75,6 +92,10 @@
 				<p>A similar process will be repeated if the user wants to book a hotel, find
 				a rental car, or find out about local attractions in the destination city.
 				Booking a hotel as part of attending a conference could also involve finding out about a designated conference hotel or special conference rates. </p>
+
+        <h3><span class="secno">2.2 Roles and Responsibilites</span></h3>
+		
+		<p>Roles that are involved like user, developer, IPA supplier will be added in a future version of this document</p>
 				
 		<h2 id="architecture"><span class="secno">3. </span></span><font face="Segoe UI">Architecture</font></span></h2>
 
@@ -98,7 +119,10 @@
 		<p>Clients enable the user to access the IPA via voice with the following characteristics.
 		<ul>
 			<li>Usually, IPA Clients make use of a microphone to capture the spoken input and a loud speaker to provide responses.</li>
+			<li>As an extension IPA Clients may also capture input via text and output text.</li>
+			<li>As an extension IPA Clients may also capture input from a specific modality recognizer.</li>
 			<li>As an extension an IPA Client may also receive commands to be executed locally.</li>
+			<li>As an extension may also receive multimodal output to be rendered by a respective modality synthesizer.</li>
 		</ul>
 		</p>
 
@@ -112,13 +136,18 @@
 		<p>Component that receives user input as spoken input, updates its internal state, decides upon subsequent steps to continue a dialog and provides output as synthesized or recorded utterances. 
 		It has the following characteristics
 		<ul>
+			<li>The Dialog Management receives recorded voice input from the <a href="#ipaservice">IPA Service</a> and forwards it to the <a href="#asr">ASR</a></li>
+			<li>The output from the <a href="#asr">ASR</a> is forwarded to the <a href="#selectionservice">Provider Selection Service</a> to determine meaning.</li>
+			<li>Alternatively, the Dialog Manager may receive multimodal or text input from the client and forwards it directly to the <a href="#selectionservice">Provider Selection Service</a> to determine meaning.</li></li>
+			<li>The Dialog Management makes use of the <a href="#TTS">TTS</a> to generate audio data to be rendered on the <a href="#client">IPA Client</a></li>
 			<li>As an extension, it may also provide commands as output to be executed by the <a href="#client">IPA Client</a></li>
-			<li>For this, it employs several <a href="#dialog">Dialogs</a> that are responsible to handle isolated tasks or intents. The following types of dialogs exist:</p>
+			<li>As an extension Dialogs may also return multimodal output or text to be rendered by a respective modality synthesizer on the <a href="#client">IPA Client</a>.</li>
+			<li>For this, it employs several <a href="#dialog">Dialogs</a> that are responsible to handle isolated tasks or intents. The following types of dialogs exist:
 			<ul>
 				<li><a href="#coredialog">Core Dialog</a></li>
 				<li><a href="#dialogx">Dialog X</a></li>
 			</ul></li>
-			<li>>The overall set of available <a href="#dialog">Dialogs</a> defines the behavior and capabilities of the interaction with the IPA.</li>
+			<li>The overall set of available <a href="#dialog">Dialogs</a> defines the behavior and capabilities of the interaction with the IPA.</li>
 			<li>The Dialog Manager is also responsible for a good user experience across the available Dialogs.</li>
 			<li>The Dialog Manager determines the Dialog that is best suited to serve the current user input and re-establishes the interaction state for that <a href="#dialog">Dialog</a>.
 				Therefore, it may use the <a href="#dialogregistry">Dialog Registry</a>.</li>
@@ -136,6 +165,7 @@
 			<li>Optionally, the ASR can also be part of the <a href="#provider">IPA Provider</a>. In this case, the received audio streams must be forwarded to the <a href="#selectionservice">Provider Selection Service</a>.
 				In this case the <a href="#corenlu">Core NLU</a> must be part of an <a href="#provider">IPA Provider</a>.</li>
 			<li>Multiple ASR instances may exist if multiple <a href="#provider">IPA Providers</a> come with their own ASR</li>
+			<li>In case of a chatbot, this component will not be needed.</li>
 		</ul></p>
 
         <h4 id="tts"><span class="secno">3.2.4 </span>TTS</h4>
@@ -144,6 +174,7 @@
 			<li>Optionally, the TTS can also be part of the <a href="#provider">IPA Provider</a>. In this case, the audio streams is retrieved from the <a href="#selectionservice">Provider Selection Service</a>.</li>
 			<li>In case the TTS is part of the <a href="#provider">IPA Provider</a>, multiple TTS instances may exist. This may be useful in case of branding.</li>
 			<li>Multiple TTS instances may exist in parallel. In this case it is up to the current <a href="#dialog">Dialog</a> to specify the TTS engine to use.</li>
+			<li>In case of a chatbot, this component will not be needed.</li>
 		</ul></p>
 
         <h4 id="coredialog"><span class="secno">3.2.5 </span>Core Dialog</h4>
@@ -167,6 +198,7 @@
 			<li>Dialogs may specify follow-up dialogs that are to be executed once execution of this dialog is completed.</li>
 			<li>Dialogs may specify clarification dialogs by name or by a list of entities from an <a href="#intentsets">Intent Set</a>.</li>
 			<li>As an extension Dialogs may also return commands to be executed by the <a href="#client">IPA Client</a>.</li>
+			<li>As an extension Dialogs may also return multimodal output to be rendered by a respective modality synthesizer on the <a href="#client">IPA Client</a>.</li>
 			<li>Dialogs access the Provider Selection Service to fulfill their task. They maintain state which they also share with the <a href="#dialogmanagement">Dialog Management</a> and know which
 				<a href="#provider">IPA Provider</a> evaluated their request with the help of an identifier.</li>
 			<li>A Dialog may specify a <a href="#tts">TTS</a> engine to use in case there are multiple engines available.</li>
@@ -320,6 +352,7 @@ find out about a designated conference hotel or special rates.
 		<ol>
 			<li>specify the interfaces among the components</li>
 			<li>refer to existing standards where applicable</li>
+			<li>refer to existing standards as a starting point to be refined for the IPA case</li>
 			<li>suggest new standards where they are missing</li>
 		</ol>
 		Currently, the authors see the following situation at the time of writing
@@ -330,7 +363,10 @@ find out about a designated conference hotel or special rates.
 			</tr>
 			<tr>
 				<td>IPA Client</td>
-				<td>none</td>
+				<td>
+					<ul>
+						<li><a href="https://html.spec.whatwg.org/multipage/">(X)HTML</a></li>
+					</ul></td>
 			</tr>
 			<tr>
 				<td>IPA Service</td>
@@ -338,7 +374,10 @@ find out about a designated conference hotel or special rates.
 			</tr>
 			<tr>
 				<td>Dialog Management</td>
-				<td>none</td>
+				<td>
+					<ul>
+						<li><a href="https://www.w3.org/TR/voicexml21/">Voice Extensible Markup Language (VoiceXML) 2.1</a></li>
+					</ul></td>
 			</tr>
 			<tr>
 				<td>TTS</td>
@@ -381,7 +420,6 @@ find out about a designated conference hotel or special rates.
 					<ul>
 						<li><a href="https://www.w3.org/TR/webauthn/">Web Authentication</a></li>
 						<li><a href="https://fidoalliance.org/specifications/">IDO Universal Authentication Framework</a></li>
-						<li>...</li>
 					</ul></td>
 			</tr>
 			<tr>
@@ -389,7 +427,7 @@ find out about a designated conference hotel or special rates.
 				<td>
 					<ul>
 						<li><a href="https://www.w3.org/TR/emma20/">EMMA: Extensible MultiModal Annotation markup language Version 2.0</a></li>
-						<li>...</li>
+						<li><a href="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/emmaJSON.htm">JSON Representation of Semantic Information</a></li>
 					</ul></td>
 			</tr>
 			<tr>
@@ -398,8 +436,11 @@ find out about a designated conference hotel or special rates.
 			</tr>
 		</table>
 		</p>
-		<p>The table above does not claim that the identified standards are suited for IPA implementations but must be analyzed in more detail in subsequent work.</p>
-		<p>Out of scope of a possible standardization is the implementation inside the IPA Providers and a potential interoperability among them.</p>
+		<p>The table above is not meant to be exhaustive nor does it claim that the identified standards are suited for IPA implementations but must be analyzed in more detail in subsequent work. The majority
+			of them is a starting point for further refinement. For instance, the authors consider it unlikely that <a href="https://www.w3.org/TR/voicexml21/">VoiceXML</a> will actually be used in IPA implementations.</p>
+		<p>Out of scope of a possible standardization is the implementation inside the IPA Providers and a potential interoperability among them.
+			However, it eases the the integration of their exposed services or even allow to use services across different providers. Actual IPA providers may make use of any
+			upcoming standard to enhance their deployments as a market place of intelligent services.</p>
 
 </body>
 </html>
