@@ -26,7 +26,8 @@
 
         <h2 id="abstract">Abstract</h2>
 
-        <p>A summary of the document goes here.</p>
+        <p>This documents details the general architecture of Intelligent Personal Assistants as described in <a href="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture.htm">Architecture and Potential for Standardization Version</a>
+		with regard to interface definitions.</p>
 
         <h2>Status of This Document</h2>
 
@@ -37,19 +38,26 @@
                 <a href="http://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a> there is a limited opt-out and other conditions apply. Learn more about <a href="http://www.w3.org/community/">W3C Community and Business Groups</a>.</em></p>
 
         <h2 class="introductory">Table of Contents</h2>
-        <ul>
-            <li>1. Intrduction</li>
-            <li>2. Problem Statement</li>
-            <li>2.1 Use Cases</li>
-            <li>3. Architecture</li>
-        </ul>
+        <ol>
+            <li><a href="#introduction">Introduction</a></li>
+            <li><a href="#problemstatement">Problem Statement</a></li>
+            <li><a href="#architecture">Architecture</a></li>
+        </ol>
 
         <!-- OddPage -->
-        <h2><span class="secno">1. </span>Introduction</h2>
+        <h2 id="introduction"><span class="secno">1. </span>Introduction</h2>
+		<p>Intelligent Personal Assistants (IPA)s are already available in our daily lives through our smart phones. Apple’s Siri, Google Assistant, Microsoft’s Cortana, Samsung’s Bixby and 
+			many more are helping us with various tasks, like shopping, playing music, setting schedule, sending messages, and offering answers to simple questions. Additionally, we equip our households
+			with smart speakers like Amazon’s Alexa or Google Home to be available without the need to pick up explicit devices for these sorts of tasks or even control household appliances in our homes.
+			As of today, there is no interoperability between the available IPA providers. Especially for exchanging learned user behaviors this is unlikely to happen at all.</p>
+	
+		<p>This document describes a interfaces of the general architecture of IPAs described in <a href="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture.htm">Architecture and Potential for Standardization Version</a>.
+			Interfaces are described with the help of UML diagrams. The UML diagrams are provided as Enterprise Architect Model <a href="pa-architecture.EAP">pa-architecture.EAP</a>. They can be viewed with the free of charge tool
+			<a href="https://www.sparxsystems.eu/enterprise-architect/ea-lite-edition/">EA Lite</a></p>
         
-        <h2><span class="secno">2. </span>Problem Statement</h2>
+        <h2 id="problem statement"><span class="secno">2. </span>Problem Statement</h2>
         
-        <h3><span class="secno">2.1 </span>Use Cases</h3>
+        <h3 id="usecases"><span class="secno">2.1 </span>Use Cases</h3>
 
        
         <h4><span class="secno">2.1.1 </span>Flight Reservation</h4>
@@ -57,7 +65,7 @@
         <h4><span class="secno">2.1.1 </span>Weather Information</h4>
         
 
-        <h2><span class="secno">3. </span>Architecture</h2>
+        <h2 id="architecture"><span class="secno">3. </span>Architecture</h2>
 
 		<img src="IPA-Component-View.svg" alt="IPA Component View" style="width: 100%; height: auto;"/>
 
