@@ -15,7 +15,7 @@
             <h2 property="bibo:subtitle" id="subtitle">Architecture and Potential for Standardization Version 1.1</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: August 26, 2020 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm</a> (GitHub repository) </dd>
+                <dd>Last modified: July 23, 2020 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm</a> (GitHub repository) </dd>
 				<dd><a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture-1-1.htm">HTML rendered version</a></dd>             
 			    <dt>Editors</dt>
                 <p><span style="color: rgb(51, 51, 51); font-family: Conv_DroidSerif-Regular, serif; font-size: 15.7072px; orphans: 2; text-align: center; widows: 2; background-color: rgba(255, 255, 255, 0.6);">Dirk Schnelle-Walka</br>
@@ -255,17 +255,13 @@
 		<ul>
 			<li>The Provider Selection Service receives input as text strings and returns results as intents with all recognized entities from all <a href="#provider">IPA Providers</a> that are able to reply to the user input
 			along with associated entities.</li>
-			<li>In case the Provider Selection Service is called with a preselected identifier of an <a href="#provider">IPA Providers</a> only this one will be used as obtained from the <a href="#providerregistry">Provider Registry</a></li>
-			<li>In case no <a href="#provider">IPA Providers</a> is provided, all known <a href="#provider">IPA Providers</a> are asked in parallel. The <a href="#provider">IPA Providers</a> 
-			    that returns the n best results is selected (n &ge; 1). Determinging the best result considers at least a confidence score but may be improved by other metrics.</li>
+			<li>In case the Provider Selection Service is called with a preselected identifier of an<a href="#provider">IPA Providers</a> only this one will be used as obtained from the <a href="#providerregistry">Provider Registry</a></li>
 			<li><a href="#provider">IPA Provers</a> and the <a href="#authentication">Accounts/Authentication</a> to access them and optionally <a href="#asr">ASR</a> and <a href="#tts">TTS</a> capabilities can be 
 				added or removed as needed.</li>
-			<li>The Provider Selection Service is stateless and always returns the n best responses from the used <a href="#provider">IPA Providers</a> along with an identification of the issuing IPA Provider.</li>
+			<li>The Provider Selection Service is stateless and always returns the responses from the used <a href="#provider">IPA Providers</a> along with an identification of the issuing IPA Provider.</li>
 			<li>The Provider Selection Service makes use of the <a href="#authentication">Accunts/Authentication</a> to access <a href="#provider">IPA Provider</a>.
 			<li>The Provider Selection Services uses the <a href="#providerregistry">Provider Registry</a> to map the <a href="#providerintentsets">Provider Intent Sets</a> to the <a href="#intentsets">Intent Sets</a> known by the <a href="#dialogregistry">Dialog Registry</a>.
 				The mapping must be configured when <a href="#provider">IPA Providers</a> are added.</li>
-			<li>In case the Provider Selection Service retrieves a session identifier from the selected <a href="#provider">IPA Provider</a> it stores it in the <a href="#providerregistry">Provider Registry</a>,
-			e.g. for follow-up questions.</li>
 			<li>In case the <a href="#asr">ASR</a> is bound to an <a href="#provider">IPA Providers</a> the Provider Selection Service is able to consume audio stream and forward them to the available
 				<a href="#asr">ASR</a> engines.</li>
 		</ul>
@@ -274,11 +270,9 @@
 		<p>A registry for all IPA Providers that can be accessed. It has the following characteristics
 		<ul>
 			<li>It returns a set of <a href="#provider">IPA Providers</a> along with a unique identifier that may be used for a current input.</li>
-			<li>The <a href="#corenlu">Core Providers</a> is added to the Provider Registry when the system starts.</li>
 			<li>It can return an <a href="#provider">IPA Providers</a> for a current key</li>
 			<li>It knows the <a href="#intentsets">Intent Sets</a> of a specific <a href="#provider">IPA Providers</a> from the addition of that <a href="#provider">IPA Providers</a>.</li>
 			<li>Each Intent from the <a href="#intentsets">Intent Sets</a> of a specific <a href="#provider">IPA Providers</a> must also specify the mapping to the <a href="#intentsets">Intent Sets</a> known by the <a href="#dialogregistry">Dialog Registry</a>.
-			<li>Each <a href="#provider">IPA Providers</a> may have an associated session identifier to resume an existing session.</li>
 		</ul>
 		</p>
 
