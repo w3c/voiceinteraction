@@ -15,7 +15,7 @@
             <h2 property="bibo:subtitle" id="subtitle">Architecture and Potential for Standardization Version 1.1</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: August 28, 2020 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm</a> (GitHub repository) </dd>
+                <dd>Last modified: August 31, 2020 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm</a> (GitHub repository) </dd>
 				<dd><a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture-1-1.htm">HTML rendered version</a></dd>             
 			    <dt>Editors</dt>
                 <p><span style="color: rgb(51, 51, 51); font-family: Conv_DroidSerif-Regular, serif; font-size: 15.7072px; orphans: 2; text-align: center; widows: 2; background-color: rgba(255, 255, 255, 0.6);">Dirk Schnelle-Walka</br>
@@ -262,7 +262,8 @@
 			<li>In case the Provider Selection Service is called with a preselected identifier of an <a href="#provider">IPA Providers</a> only this one will be used as obtained from the <a href="#providerregistry">Provider Registry</a></li>
 			<li>In case no <a href="#provider">IPA Providers</a> the Provider Selection Service has to follow a <a href="#providerselectionstrategy">Provider Selection Strategy</a> as detailed below to determine those <a href="#provider">IPA Providers</a> 
 				that are best suited to answer the request. The resulting list of <a href="#provider">IPA Providers</a> candidates is asked in parallel and
-			    those that return the n best results are selected (n &ge; 1). Determinging the best result considers at least a confidence score but may be improved by other metrics.</li>
+			    those that return the n best results are selected (n &ge; 1). Determinging the best result considers at least a confidence score but may be improved by other metrics.
+				It may be necessary that the filtered list requires disambiguation in an additional dialog step.</li>
 			<li><a href="#provider">IPA Provers</a> and the <a href="#authentication">Accounts/Authentication</a> to access them and optionally <a href="#asr">ASR</a> and <a href="#tts">TTS</a> capabilities can be 
 				added or removed as needed.</li>
 			<li>The Provider Selection Service is stateless and always returns the n best responses from the used <a href="#provider">IPA Providers</a> along with an identification of the issuing IPA Provider.</li>
@@ -277,19 +278,23 @@
 		</p>
 		
         <h5 id="providerselectionstrategy"><span class="secno">3.3.1.1 </span>Provider Selection Strategy</h5>
-		<p>The provider selection strategy may be implemented for example as one of the following options or a combination thereof to determine a list of <a href="#provider">IPA Providers</a> candidates
+		<p>The provider selection strategy may be implemented for example as one of the following options or a combination thereof to determine a list of <a href="#provider">IPA Providers</a> candidates.
 		<ul>
 			<li>All known <a href="#provider">IPA Providers</a> are used. This strategy may only apply if there are only a small number of <a href="#provider">IPA Providers</a>.</li>
 			<li>The <a href="#provider">IPA Providers</a> is filtered by contextual data that is obtained from the client, e.g. location.</li>
-			<li>The <a href="#provider">IPA Providers</a> is filtered by established knowledge about the user.</li>
+			<li>The <a href="#provider">IPA Providers</a> is filtered by established knowledge about the user, e.g. language.</li>
 			<li>The <a href="#provider">IPA Providers</a> is filtered by knowledge that has been determined in the dialog with the user. This includes leading wake-up phrases like
 				<em>Hey Siri, &hellip;</em>, <em>OK Google, &hellip;</em>. For this, preprocessing of the user input by they <a href="#corenlu">Core NLU</a> may be required.</li>
 		</ul>
+		In case <a href="#provider">IPA Provider</a> does not abstract from determining a relevant list of intents, the same strategy may be applied to determine the n-best intents.
 		</p>
+
         <h4 id="providerregistry"><span class="secno">3.3.2 </span>Provider Registry</h4>
 		<p>A registry for all IPA Providers that can be accessed. It has the following characteristics
 		<ul>
 			<li>It returns a list of <a href="#provider">IPA Providers</a> along with their unique identifier that may be used for a current input.</li>
+			<li>Each <a href="#provider">IPA Providers</a> should have a list of names in the supported languages to allow for preselecting the <a href="#provider">IPA Providers</a>
+				in an utterance or to allow for disambiguation of multiple <a href="#provider">IPA Providers</a> in an additional dialog step.</li>
 			<li>Optionally, the retrieval of <a href="#provider">IPA Providers</a> may be filtered by additional parameters matching the implemented <a href="#providerselectionstrategy">Provider Selection Strategy</a>.
 				Therefore, the Provider Registry may request information from the <a href="#coredataprovider">Core Data Provider</a></li>
 			<li>The <a href="#corenlu">Core Provider</a> is added to the Provider Registry when the system starts.</li>
