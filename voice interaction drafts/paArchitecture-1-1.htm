@@ -15,7 +15,7 @@
             <h2 property="bibo:subtitle" id="subtitle">Architecture and Potential for Standardization Version 1.1</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: September 9, 2020 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm</a> (GitHub repository) </dd>
+                <dd>Last modified: September 11, 2020 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm</a> (GitHub repository) </dd>
 				<dd><a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture-1-1.htm">HTML rendered version</a></dd>             
 			    <dt>Editors</dt>
                 <p><span style="color: rgb(51, 51, 51); font-family: Conv_DroidSerif-Regular, serif; font-size: 15.7072px; orphans: 2; text-align: center; widows: 2; background-color: rgba(255, 255, 255, 0.6);">Dirk Schnelle-Walka</br>
@@ -418,48 +418,70 @@ find out about a designated conference hotel or special rates.
 </p>
 <h3 id="detailed-walkthrough"><span class="secno">4.1 Detailed Walkthrough</span></h3>
 <p>
-    This section provides a detailed walkthrough that aligns the steps in the use case interaction with the architecture. We begin with the case where the user's request can be handled by one of the internal Dialogs in the Dialog box.
+    This section provides a detailed walkthrough that aligns the steps in the use case interaction with the architecture. This is a very basic example, assuming that
+	this is the first request to IPA and that there is a suitable dialog ready that matches the user's request. It may also vary, e.g., depending on the used Dialog Strategy and other optional items that may actually result in different flows. 
+	The walkthrough is split into two parts	for the input path and for the output path.
+
+    <h4 id="provider"><span class="secno">4.1.1 </span>Walkthrough for the Input Path</h4>
+
+	We begin with the case where the user's request can be handled by one of the internal Dialogs in the Dialog box.
 	The input side is illustrated in the following figure
-	<img src="architecture-walkthrough-input.svg" alt="IPA Architecture Walkthrough fo rthe input" style="width: 100%; height: auto;"/>
+	<img src="architecture-walkthrough-input.svg" alt="IPA Architecture Walkthrough for the input" style="width: 100%; height: auto;"/>
     <ol>
         <li>
-            The user asks the IPA client about visa requirements for travel between the EU and the United States.
+            The user asks the IPA client about visa requirements for travel between the EU and the United States. The audio is sent along with
+			location Information as GPS coordnates from Mountain View, California.
         </li>
-        <li>The Dialog Management component sends the audio from the request to the ASR component and receives back the text of the user's request.
-        </li>
-        <li>
-            The Dialog Management component sends the text to the Dialog Registry.
-        </li>
-        <li>
-            The Dialog Registry sends the text to all of the Dialogs it knows about (Core Dialog, Dialog 1, etc.)
-        </li>
-        <li>
-            Each Dialog returns the intents that it identifies in the text to the Dialog Registry. Some of the intent sets will not be very good because the Dialog is a poor match for the utterance. These will likely have a low confidence. Other Dialogs will have a higher confidence. A "Visa Dialog" responds with a high confidence "Visa Information" intent.
-        </li>
-        <li>
-            The Dialog Registry sends back the nbest list of matching Dialogs to the Dialog Management component. The top candidate is the Visa Dialog.
-        </li>
-        <li>
-            The Dialog Management component selects the Visa Dialog. The Visa Dialog continues to interact with the user.
-        </li>
-        <li>
-            The Visa Dialog finds a Core Data Provider from the Provider Registry and obtains the requested data from the Core Data Provider. It prepares a response based on the data, which it returns to the Dialog Management Component.
-        </li>
-        <li>
-            The Dialog Management component presents the response to the user.
-        </li>
-        <li>
-            The Visa Dialog may continue to handle additional requests from the user.
-        </li>
+        <li>The Dialog Management component sends the audio from the request to the ASR component...</li>
+		<li>...and receives back the text of the user's request. For the example, this would be "I want to book a flight on American".</li>
+		<li>The Dialog Management sends the text "I want to book a flight on American" and the GPS coordinates for Mountian View to the Provider Selection Service to determine the meaning</li>
+		<li>The Provider Selection Service asks the Provider Registry for suitable IPA Providers for the incoming request.</li>
+		<li>The Provider Registry filters the suitable IPA Providers and asks for credentials at the Accounts/Authentication component. For the example, 
+			these may be those supporting English. At this level, only the pure text is known and the used language. Further knowledge about the user may be helpful to 
+			reduce these candidates.</li>
+		<li>The Provider Registry receives the credentials for the IPA Provider candidates.</li>
+		<li>The Provider Selection Service receives the list of IPA Providers along with their credentials, if any, back.</li>
+		<li>The Provider Registry forwards the text "I want to book a flight on American" from the utterance and the GPS coordinates for Mountain View to the received list of IPA Providers in parallel to determine meaning.</li>
+    </ol>
+    <h4 id="provider"><span class="secno">4.1.2 </span>Walkthrough for the Output Path</h4>
+	The output path begines where the IPA Providers are able to deliver their results.
+	This path is illustrated in the following figure
+	<img src="architecture-walkthrough-output.svg" alt="IPA Architecture Walkthrough for the output" style="width: 100%; height: auto;"/>
+
+	<ol>
+		<li>The IPA Provider's send their determined intents along with recognized entities to the Provider Selection Service. For our example this may be 
+			<ul>
+				<li>IPA Provider 1: phantastic-plan-flight-travel with entities preferred-airline: American, preferred-origin: SFO.</li>
+				<li>IPA Provider 2: rail-plan-travel with entity destination-station: American.</li>
+				<li>IPA Provider 3: transfer-money with no entities</li>
+			</ul>
+		</li>
+		<li>The Provider Selection Service determines an n-best list of meanings. This list may be truncated in case some replies are determined to be not suitable at all. 
+			For our example the reply from IPA Provider 3 for banks can be removed.
+			The Provider Selection Service then stores session identifiers for the reasonable replies, IPA Provider 1 and IPA Provider 2 in the Provider Registry to have them available in potential follow-up dialogs.</li>
+		<li>The Provider Selection Service maps the custom intents and entities to the core intents and entities that can be understood in the dialogs. For our example this could be
+			<ul>
+				<li>IPA Provider 1: plan-flight-travel with entities airline: American, origin: SFO.</li>
+				<li>IPA Provider 2: plan-rail-travel with entity destination: American.</li>
+			</ul>
+			It then sends this mapped result to the Dialog Manager.</li>
+        <li>The Dialog Management selects the best suited reply. For our example, it may remove the plan-rail-travel result as the confidence for the entity is very low.
+			It then sends the intent, plan-flight-travel to the Dialog Registry to determine the corresponding dialog...</li>
+		<li>...and receives the dialog to use  back. For the example this may be the plan-flight-travel-dialog.</li>
+        <li>The Dialog Manager calls the plan-flight-travel dialog and fills all known entities. In our example, the slots for airline and origin would be filled.</li>
+        <li>The Dialog determins the next dialog step and creates a response for the user. In our case it can be the question "Do you want to fly from San Francisco with American?"</li>
+		<li>The Dialog Manager sends the text string "Do you want to fly from San Francisco with American?" to the TTS to be converted into audio.</li>
+		<li>The TTS engine sends the audio file from the response to the IPA Client to be made audible.</li>
+	</ol>
+</p>
+    <h4 id="provider"><span class="secno">4.1.3 </span>Open Questions</h4>
+<p>
+    Suppose the Visa Dialog identifies the values of the "toCountry" and "fromCountry" slots in the visa request as being outside of its knowledge. It will inform the Dialog Management component of this. In that case the interaction will proceed as follows. 
+    <ol>
         <li>
             When the Visa Dialog ends, control is returned to the Dialog Management Component.
             (Question -- what happens if the user asks something that's outside of the current Dialog's expertise? Could the Dialog return a response that says it can't handle the request, which would allow the Dialog Management component to look for another Dialog in the Dialog Registry?)
         </li>
-    </ol>
-</p>
-<p>
-    Suppose the Visa Dialog identifies the values of the "toCountry" and "fromCountry" slots in the visa request as being outside of its knowledge. It will inform the Dialog Management component of this. In that case the interaction will proceed as follows. 
-    <ol>
         <li>
             The Dialog Management component will then query the Provider Selection Service to find services that have expert knowledge about visas. One of these could be "IPA Provider 1", which is a visa expert. For now, we leave open the question of whether the user should be informed about the transfer to an outside Provider. There are probably trust, authentication or branding issues that would make it advisable to notify the user that an external Provider will continue handling the dialog.
         </li>
