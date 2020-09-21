@@ -15,7 +15,7 @@
             <h2 property="bibo:subtitle" id="subtitle">Architecture and Potential for Standardization Version 1.1</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: September 14, 2020 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm</a> (GitHub repository) </dd>
+                <dd>Last modified: September 21, 2020 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm</a> (GitHub repository) </dd>
 				<dd><a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture-1-1.htm">HTML rendered version</a></dd>             
 			    <dt>Editors</dt>
                 <p><span style="color: rgb(51, 51, 51); font-family: Conv_DroidSerif-Regular, serif; font-size: 15.7072px; orphans: 2; text-align: center; widows: 2; background-color: rgba(255, 255, 255, 0.6);">Dirk Schnelle-Walka</br>
@@ -172,7 +172,7 @@
 			respective operations to process and generate events relevant to the interaction. This specification is agnostic to the employed Dialog Strategy. Examples of
 			dialog strategy include</p>
 		<ul>
-			<li>state-based</li>
+			<li>state-based, e.g. </li>
 			<li>frame-based</li>
 			<li>plan-based</li>
 			<li>information state update</li>
@@ -255,7 +255,8 @@
 		<p>An Intent Set X is a special <a href="#intentsets">Intent Set</a> that identifies tasks that can be executed within the associated <a href="#dialogx">Dialog X</a>.</p>
 		
         <h4 id="dialogregistry"><span class="secno">3.2.10 </span>Dialog Registry</h4>
-		<p>The Dialog Registry manages all available Dialogs with their associated Intent Sets with respect to the used <a href=#dialogstrategy">Dialog Strategy</a>.
+		<p>The Dialog Registry manages all available Dialogs with their associated Intent Sets with respect to the used <a href=#dialogstrategy">Dialog Strategy</a>. 
+			This means, it is the Dialog Registry would know which <a href="#dialog">Dialog</a> to use for a given intent.
 			For some <a href=#dialogstrategy">Dialog Strategy</a> this component may be omitted as it is taken over by the <a href="#dialogmanagement">Dialog Management</a>. 
 			One of these cases is when the <a href=#dialogstrategy">Dialog Strategies</a> does not allow for the dynamic handling of <a href="#dialog">Dialogs</a> as described below..
 		<ul>
@@ -431,7 +432,7 @@ find out about a designated conference hotel or special rates.
 	<img src="architecture-walkthrough-input.svg" alt="IPA Architecture Walkthrough for the input" style="width: 100%; height: auto;"/>
     <ol>
         <li>
-            The user asks the IPA client about visa requirements for travel between the EU and the United States. The audio is sent along with
+            The user asks the IPA client about a travel between the EU and the United States. The audio is sent along with
 			location Information as GPS coordnates from Mountain View, California.
         </li>
         <li>The Dialog Management component sends the audio from the request to the ASR component...</li>
@@ -446,7 +447,8 @@ find out about a designated conference hotel or special rates.
 		<li>The Provider Registry forwards the text "I want to book a flight on American" from the utterance and the GPS coordinates for Mountain View to the received list of IPA Providers in parallel to determine meaning.</li>
     </ol>
     <h4 id="provider"><span class="secno">4.1.2 </span>Walkthrough for the Output Path</h4>
-	The output path begines where the IPA Providers are able to deliver their results.
+	The output path begines where the IPA Providers are able to deliver their results. They identified the best match for the intents and entities based on the received
+	date that arrived as 
 	This path is illustrated in the following figure
 	<img src="architecture-walkthrough-output.svg" alt="IPA Architecture Walkthrough for the output" style="width: 100%; height: auto;"/>
 
@@ -457,6 +459,7 @@ find out about a designated conference hotel or special rates.
 				<li>IPA Provider 2: rail-plan-travel with entity destination-station: American.</li>
 				<li>IPA Provider 3: transfer-money with no entities</li>
 			</ul>
+			Note, that the reply also contains an identification of the provider for their result. This allows pre-selection of a provider in possible follow-up dialog turns.
 		</li>
 		<li>The Provider Selection Service determines an n-best list of meanings. This list may be truncated in case some replies are determined to be not suitable at all. 
 			For our example the reply from IPA Provider 3 for banks can be removed.
