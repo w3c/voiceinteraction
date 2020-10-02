@@ -215,10 +215,11 @@
 			The Dialogs must server different purpose in a sense that they are unique for a certain task. E.g., only a single flight reservation dialog may exist at a time. 
 			Dialogs have the following characteristics
 		<ul>
-			<li>Dialogs receive inputs as intents out of their supported <a href="#intentsets">Intent Sets</a> along with associated entities and return responses as text strings to be spoken.</li>
-			<li>Dialogs reference all <a href="#intentsets">Intent Sets</a> that they need to fullfill their service.</li>
+			<li>Dialogs receive inputs as intents out of their supported <a href="#intentsets">Intent Sets</a> along with associated entities and return responses as text 
+				strings to be spoken.</li>
+			<li>Dialogs reference all Intents from the <a href="#intentsets">Intent Sets</a> that they need to fullfill their service.</li>
 			<li>Dialogs do not require the existence of a corresponding <a href="#intentsets">Intent Set</a>.</li>
-			<li>Dialogs may specify entities from an <a href="#intentsets">Intent Set</a> that are filled after their execution.</li>
+			<li>Dialogs are expected to be slot-based and may specify entities from an <a href="#intentsets">Intent Set</a> that are filled after their execution.</li>
 			<li>Dialogs may specify follow-up dialogs that are to be executed once execution of this dialog is completed.</li>
 			<li>Dialogs may specify clarification dialogs by name or by a list of entities from an <a href="#intentsets">Intent Set</a>.</li>
 			<li>As an extension Dialogs may also return commands to be executed by the <a href="#client">IPA Client</a>.</li>
@@ -267,7 +268,7 @@
 			<li><a href="#intentsets">Intent Sets</a> will be removed if there are no more <a href="#dialog">Dialogs</a> referencing them.</li>
 			<li>The Dialog Registry ensures that added <a href="#dialog">Dialogs</a> are unique</li>
 			<li>The Dialog Registry is not responsible to know about the counterparts in the <a href="#datalayer">APIs/Data Layer</a>.
-			<li>The Dialog Resgistry notifies the <a href="#selectionservice">Selection Service</a> if <a href="#dialog">Dialogs</a> have been added or removed.</li>
+			<li>The Dialog Registry notifies the <a href="#selectionservice">Selection Service</a> if <a href="#dialog">Dialogs</a> have been added or removed.</li>
 		</ul>
 		</p>
 		
@@ -276,23 +277,30 @@
         <h4 id="selectionservice"><span class="secno">3.3.1 </span>Provider Selection Service</h4>
 		<p>A service that provides access to all known IPA Providers. This service also maps the IPA Intent Sets to the Intent Sets in the Dialog layer. It has the following characteristics
 		<ul>
-			<li>The Provider Selection Service receives input as text strings and returns results as intents with all recognized entities from all <a href="#provider">IPA Providers</a> that are able to reply to the user input
+			<li>The Provider Selection Service receives input as text strings and returns results as intents with all recognized entities from all <a href="#provider">IPA Providers</a> 
+				that are able to reply to the user input
 			along with associated entities.</li>
-			<li>In case the Provider Selection Service is called with a preselected identifier of an <a href="#provider">IPA Providers</a> only this one will be used as obtained from the <a href="#providerregistry">Provider Registry</a></li>
-			<li>In case no <a href="#provider">IPA Providers</a> the Provider Selection Service has to follow a <a href="#providerselectionstrategy">Provider Selection Strategy</a> as detailed below to determine those <a href="#provider">IPA Providers</a> 
+			<li>In case the Provider Selection Service is called with a preselected identifier of an <a href="#provider">IPA Providers</a> only this one will be used as obtained from the 
+				<a href="#providerregistry">Provider Registry</a></li>
+			<li>In case no <a href="#provider">IPA Providers</a> the Provider Selection Service has to follow a <a href="#providerselectionstrategy">Provider Selection Strategy</a> as 
+				detailed below to determine those <a href="#provider">IPA Providers</a> 
 				that are best suited to answer the request. The resulting list of <a href="#provider">IPA Providers</a> candidates is asked in parallel and
 			    those that return the n best results are selected (n &ge; 1). Determinging the best result considers at least a confidence score but may be improved by other metrics.
 				It may be necessary that the filtered list requires disambiguation in an additional dialog step.</li>
 			<li><a href="#provider">IPA Provers</a> and the <a href="#authentication">Accounts/Authentication</a> to access them and optionally <a href="#asr">ASR</a> and <a href="#tts">TTS</a> capabilities can be 
 				added or removed as needed.</li>
-			<li>The Provider Selection Service is stateless and always returns the n best responses from the used <a href="#provider">IPA Providers</a> along with an identification of the issuing IPA Provider.</li>
+			<li>The Provider Selection Service is stateless and always returns the n best responses from the used <a href="#provider">IPA Providers</a> along with an identification of 
+				the issuing IPA Provider.</li>
 			<li>The Provider Selection Service makes use of the <a href="#authentication">Accunts/Authentication</a> to access <a href="#provider">IPA Provider</a>.
-			<li>The Provider Selection Services uses the <a href="#providerregistry">Provider Registry</a> to map the <a href="#providerintentsets">Provider Intent Sets</a> to the <a href="#intentsets">Intent Sets</a> known by the <a href="#dialogregistry">Dialog Registry</a>.
+			<li>The Provider Selection Services uses the <a href="#providerregistry">Provider Registry</a> to map the <a href="#providerintentsets">Provider Intent Sets</a> to 
+				the <a href="#intentsets">Intent Sets</a> known by the <a href="#dialogregistry">Dialog Registry</a>.
 				The mapping must be configured when <a href="#provider">IPA Providers</a> are added.</li>
-			<li>In case the Provider Selection Service retrieves a session identifier from the selected <a href="#provider">IPA Provider</a> it stores it in the <a href="#providerregistry">Provider Registry</a>,
+			<li>In case no mapping tothe  <a href="#intentsets">Intent Sets</a> known by the <a href="#dialogregistry">Dialog Registry</a>is possible, the received Intent is uses.</li>
+			<li>In case the Provider Selection Service retrieves a session identifier from the selected <a href="#provider">IPA Provider</a> it stores it in the 
+				<a href="#providerregistry">Provider Registry</a>,
 			e.g. for follow-up questions.</li>
-			<li>In case the <a href="#asr">ASR</a> is bound to an <a href="#provider">IPA Providers</a> the Provider Selection Service is able to consume audio stream and forward them to the available
-				<a href="#asr">ASR</a> engines.</li>
+			<li>In case the <a href="#asr">ASR</a> is bound to an <a href="#provider">IPA Providers</a> the Provider Selection Service is able to consume audio stream and forward 
+				them to the available <a href="#asr">ASR</a> engines.</li>
 		</ul>
 		</p>
 		
@@ -477,23 +485,6 @@ find out about a designated conference hotel or special rates.
 		<li>The Dialog Manager sends the text string "Do you want to fly from San Francisco with American?" to the TTS to be converted into audio.</li>
 		<li>The TTS engine sends the audio file from the response to the IPA Client to be made audible.</li>
 	</ol>
-</p>
-    <h4 id="provider"><span class="secno">4.1.3 </span>Open Questions</h4>
-<p>
-    Suppose the Visa Dialog identifies the values of the "toCountry" and "fromCountry" slots in the visa request as being outside of its knowledge. It will inform the Dialog Management component of this. In that case the interaction will proceed as follows. 
-    <ol>
-        <li>
-            When the Visa Dialog ends, control is returned to the Dialog Management Component.
-            (Question -- what happens if the user asks something that's outside of the current Dialog's expertise? Could the Dialog return a response that says it can't handle the request, which would allow the Dialog Management component to look for another Dialog in the Dialog Registry?)
-        </li>
-        <li>
-            The Dialog Management component will then query the Provider Selection Service to find services that have expert knowledge about visas. One of these could be "IPA Provider 1", which is a visa expert. For now, we leave open the question of whether the user should be informed about the transfer to an outside Provider. There are probably trust, authentication or branding issues that would make it advisable to notify the user that an external Provider will continue handling the dialog.
-        </li>
-        <li>
-            IPA Provider 1 then goes through the same process as above, but obtains its data from its Data Provider, rather than the Core Data Provider. It formulates a response which is sent back and presented to the user by the Dialog Management component.
-        </li>
-    </ol>
-   
 </p>
 
         <h2 id="potential"><span class="secno">5. </span>Potential for Standardization</h2>

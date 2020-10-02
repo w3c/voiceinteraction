@@ -115,7 +115,7 @@
 			<text x="52.58" y="333.16" class="st8" v:langID="1031"><v:paragraph v:horizAlign="2"/><v:tabList/>Client</text>		</g>
 		<g id="shape47-19" v:mID="47" v:groupContext="shape" transform="translate(95.6693,-18.7087)">
 			<title>Rectangle.47</title>
-			<desc>1</desc>
+			<desc>Dialog</desc>
 			<v:userDefs>
 				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
 			</v:userDefs>
@@ -126,7 +126,7 @@
 				<rect x="0" y="33.3071" width="253.701" height="306.85" class="st2"/>
 			</g>
 			<rect x="0" y="33.3071" width="253.701" height="306.85" class="st9"/>
-			<text x="244.63" y="333.16" class="st10" v:langID="1031"><v:paragraph v:horizAlign="2"/><v:tabList/>1</text>		</g>
+			<text x="224.19" y="333.16" class="st10" v:langID="1031"><v:paragraph v:horizAlign="2"/><v:tabList/>Dialog</text>		</g>
 		<g id="shape34-25" v:mID="34" v:groupContext="shape" transform="translate(445.465,-160.724)">
 			<title>Rectangle.34</title>
 			<desc>IPA Provider 1</desc>
