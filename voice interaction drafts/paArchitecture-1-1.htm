@@ -15,7 +15,7 @@
             <h2 property="bibo:subtitle" id="subtitle">Architecture and Potential for Standardization Version 1.1</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: October 2, 2020 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm</a> (GitHub repository) </dd>
+                <dd>Last modified: October 4, 2020 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm</a> (GitHub repository) </dd>
 				<dd><a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture-1-1.htm">HTML rendered version</a></dd>             
 			    <dt>Editors</dt>
                 <p><span style="color: rgb(51, 51, 51); font-family: Conv_DroidSerif-Regular, serif; font-size: 15.7072px; orphans: 2; text-align: center; widows: 2; background-color: rgba(255, 255, 255, 0.6);">Dirk Schnelle-Walka</br>
@@ -100,7 +100,11 @@
 				
 		<h2 id="architecture"><span class="secno">3. </span></span><font face="Segoe UI">Architecture</font></span></h2>
 
-		<p>In order to cope with such use cases as described above, an IPA may need to make use of several services describing the capabilities of the IPA. These services may be selected from a
+		<p>In order to cope with such use cases as described above an IPA follows the general design concepts of a voice user interface as it can be seen in the following figure.</p>
+
+		<img src="Basic-IPA-Architecture.svg" alt="Basic IPA Architecture" style="width: 100%; height: auto;"/>
+		
+		<p>In order to increase the flexibility of that basic interface, an IPA may need to make use of several services describing the capabilities of the IPA. These services may be selected from a
 		standardized market place. For the reminder of this document, we consider an IPA that is extendable via such a market place. This kind of IPA features the architectural buildings blocks
 		shown in the following figure.</p>
 		
@@ -171,11 +175,28 @@
 		<p>A Dialog Strategy is a conceptualization of a dialog for an operationalization in a computer system. It defines the representation of the dialogs state and
 			respective operations to process and generate events relevant to the interaction. This specification is agnostic to the employed Dialog Strategy. Examples of
 			dialog strategy include</p>
-		<ul>
-			<li>state-based, e.g. <a href="https://www.w3.org/TR/scxml/">State Chart XML (SCXML): State Machine Notation for Control Abstraction</a></li>
-			<li>frame-based, e.g. <a href="https://www.w3.org/TR/voicexml21/">Voice Extensible Markup Language (VoiceXML) 2.1</a></li>
-			<li>plan-based, e.g. <a href="http://www.ict.usc.edu/~traum/Papers/traumlarsson.pdf">Information State Update</a></li>
-		</ul>
+			<table border="1">
+				<tr>
+					<th>Dialog Strategy</th>
+					<th>Example</th>
+				</tr>
+				<tr>
+					<td>State-based</td>
+					<td><a href="https://www.w3.org/TR/scxml/">State Chart XML (SCXML): State Machine Notation for Control Abstraction</a></td>
+				</tr>
+				<tr>
+					<td>Frame-based</td>
+					<td><a href="https://www.w3.org/TR/voicexml21/">Voice Extensible Markup Language (VoiceXML) 2.1</a></td>
+				</tr>
+				<tr>
+					<td>Plan-based</td>
+					<td><a href="http://www.ict.usc.edu/~traum/Papers/traumlarsson.pdf">Information State Update</a></td>
+				</tr>
+				<tr>
+					<td>...</td>
+					<td>...</td>
+				</tr>
+			</table>
 
         <h4 id="asr"><span class="secno">3.2.3 </span>ASR</h4>
 		<p>The Automated Speech Recognizer (ASR) receives audio streams of recorded utterances and generates a recognition hypothesis as text strings. Conceptually, ASR is 
@@ -191,7 +212,8 @@
         <h4 id="tts"><span class="secno">3.2.4 </span>TTS</h4>
 		<p>The Text-to-Speech (TTS) component receives text strings, which it converts into audio data. Conceptually, the TTS is a modality specifc renderer for speech. It has the following characteristics
 		<ul>
-			<li>Optionally, the TTS can also be part of the <a href="#provider">IPA Provider</a>. In this case, the audio streams is retrieved from the <a href="#selectionservice">Provider Selection Service</a>.</li>
+			<li>Optionally, the TTS can also be part of the <a href="#provider">IPA Provider</a>. In this case, the audio streams is retrieved from the 
+				<a href="#selectionservice">Provider Selection Service</a>.</li>
 			<li>In case the TTS is part of the <a href="#provider">IPA Provider</a>, multiple TTS instances may exist. This may be useful in case of branding.</li>
 			<li>Multiple TTS instances may exist in parallel. In this case it is up to the current <a href="#dialog">Dialog</a> to specify the TTS engine to use.</li>
 			<li>In case of a chatbot, this component will not be needed.</li>
@@ -200,13 +222,40 @@
         <h4 id="coredialog"><span class="secno">3.2.5 </span>Core Dialog</h4>
 		<p>The Core Dialog are logical entities that are able to handle basic functionality via <a href="coreintesets">Core Intent Sets</a> to enable interaction with the 
 			user at all. This includes among others</p>
-		<ul>
-			<li>Greetings</li>
-			<li>Goodbye</li>
-			<li>Exception handling in case a requested service is not available</li>
-			<li>Exception handling in case a requested intent cannot be matched to a known Dialog</li>
-			<li>Help</li>
-		</ul>
+		<table border="1">
+			<tr>
+				<th>Core Dialog</th>
+				<th>Purpose</th>
+			</tr>
+			<tr>
+				<td>Greeting</td>
+				<td>Welcome the user and and prepare for intial input.</td>
+			</tr>
+			<tr>
+				<td>Help</td>
+				<td>The user asked for more guidance.</td>
+			</tr>
+			<tr>
+				<td>Goodybye</td>
+				<td>Terminate the interaction with the user.</td>
+			</tr>
+			<tr>
+				<td>Service not available</td>
+				<td>The dialog relies on reaching out for a specific service but was not able to reach it, e.g. because of connection issues.</td>
+			</tr>
+			<tr>
+				<td>Intent not known</td>
+				<td>The <a href="#selectionservice">Provider Selection Service</a> returned an intent that can not be handled by a corresponding <a href="#dialog">Dialog</a>.</td>
+			</tr>
+			<tr>
+				<td>Transfer to external IPA Provider</td>
+				<td>Notify the user that the following dialog steps will be handled outside the scope of this IPA.</td>
+			</tr>
+			<tr>
+				<td>...</td>
+				<td>...</td>
+			</tr>
+		</table>
 		<p>Conceptually, the Core Dialog is a special <a href="dialogx">Dialog</a> as described in the following section that is always available</p>
         <h5 id="dialog"><span class="secno">3.2.5.1 </span>Dialog</h5>
 		<p>A Dialog is able to handle functionality that can be added to the capabilities of the <a href="#dialogmanagement">Dialog Management</a> through their associated Intent Sets. 
