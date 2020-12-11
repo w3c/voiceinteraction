@@ -106,13 +106,19 @@
 
 		<p>In order to cope with such use cases as described above an IPA follows the general design concepts of a voice user interface as it can be seen in the following figure.</p>
 
-		<img src="Basic-IPA-Architecture.svg" alt="Basic IPA Architecture" style="width: 100%; height: auto;"/>
+		<figure>
+			<img src="Basic-IPA-Architecture.svg" alt="Basic IPA Architecture" style="width: 100%; height: auto;"/>
+			<figcaption>Fig. 1 Basic architecture of an IPA</figcaption>
+		</figure>
 		
 		<p>In order to increase the flexibility of that basic interface, an IPA may need to make use of several services describing the capabilities of the IPA. These services may be selected from a
 		standardized market place. For the reminder of this document, we consider an IPA that is extendable via such a market place. This kind of IPA features the architectural buildings blocks
 		shown in the following figure.</p>
 		
-		<img src="IPA-Architecture-1-1.svg" alt="IPA Architecture" style="width: 100%; height: auto;"/>
+		<figure>
+			<img src="IPA-Architecture-1-1.svg" alt="IPA Architecture" style="width: 100%; height: auto;"/>
+			<figcaption>Fig. 2 Complete architecture of an IPA</figcaption>
+		</figure>
 
 		<p>Not all components may be needed for actual implementations, some may be omitted completely. However, we note them here to provide a more complete picture. 
 		This architecture comprises 3 layers that are detailed in the following sections
@@ -252,6 +258,14 @@
 			<tr>
 				<td>Intent not known</td>
 				<td>The <a href="#selectionservice">Provider Selection Service</a> returned an intent that can not be handled by a corresponding <a href="#dialog">Dialog</a>.</td>
+			</tr>
+			<tr>
+				<td>No input</td>
+				<td>The user did not say anything within a predefined timespan</td>
+			</tr>
+			<tr>
+				<td>Error</td>
+				<td>An unknown error occured</td>
 			</tr>
 			<tr>
 				<td>Transfer to external IPA Provider</td>
@@ -492,7 +506,10 @@ find out about a designated conference hotel or special rates.
 
 	We begin with the case where the user's request can be handled by one of the internal Dialogs in the Dialog box.
 	The input side is illustrated in the following figure
-	<img src="architecture-walkthrough-input.svg" alt="IPA Architecture Walkthrough for the input" style="width: 100%; height: auto;"/>
+	<figure>
+		<img src="architecture-walkthrough-input.svg" alt="IPA Architecture Walkthrough for the input" style="width: 100%; height: auto;"/>
+		<figcaption>Fig. 3 Walthrough for the output path of an IPA</figcaption>
+	</figure>
     <ol>
         <li>
             The user asks the IPA client about a travel between the EU and the United States. The audio is sent along with
@@ -513,7 +530,10 @@ find out about a designated conference hotel or special rates.
 	The output path begines where the IPA Providers are able to deliver their results. They identified the best match for the intents and entities based on the received
 	date that arrived as 
 	This path is illustrated in the following figure
-	<img src="architecture-walkthrough-output.svg" alt="IPA Architecture Walkthrough for the output" style="width: 100%; height: auto;"/>
+	<figure>
+		<img src="architecture-walkthrough-output.svg" alt="IPA Architecture Walkthrough for the output" style="width: 100%; height: auto;"/>
+		<figcaption>Fig. 4 Walthrough for the output path of an IPA</figcaption>
+	</figure>
 
 	<ol>
 		<li>The IPA Provider's send their determined intents along with recognized entities to the Provider Selection Service. For our example this may be 
