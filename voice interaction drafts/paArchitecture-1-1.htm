@@ -15,7 +15,7 @@
             <h2 property="bibo:subtitle" id="subtitle">Architecture and Potential for Standardization Version 1.1</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: October 7, 2020 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm</a> (GitHub repository) </dd>
+                <dd>Last modified: December 11, 2020 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm</a> (GitHub repository) </dd>
 				<dd><a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture-1-1.htm">HTML rendered version</a></dd>             
 			    <dt>Editors</dt>
                 <p><span style="color: rgb(51, 51, 51); font-family: Conv_DroidSerif-Regular, serif; font-size: 15.7072px; orphans: 2; text-align: center; widows: 2; background-color: rgba(255, 255, 255, 0.6);">Dirk Schnelle-Walka</br>
@@ -56,7 +56,7 @@
 
         <!-- OddPage -->
         <h2 id="introduction"><span class="secno">1. </span>Introduction</h2>
-        <p>Intelligent Personal Assistants (IPA)s are now available in our daily lives through our smart phones. Apple’s Siri, Google Assistant, Microsoft’s Cortana, Samsung’s Bixby and 
+        <p>Intelligent Personal Assistants (IPAs) are now available in our daily lives through our smart phones. Apple’s Siri, Google Assistant, Microsoft’s Cortana, Samsung’s Bixby and 
 		many more are helping us with various tasks, like shopping, playing music, setting a schedule, sending messages, and offering answers to simple questions. Additionally, we equip our households
 		with smart speakers like Amazon’s Alexa or Google Home which are available without the need to pick up explicit devices for these sorts of tasks or even control household appliances in our homes.
 		As of today, there is no interoperability between the available IPA providers. Especially for exchanging learned user behaviors this is unlikely to happen at all.</p>
@@ -125,9 +125,10 @@
 		view that the authors regard as ideal.</p>
 		
         <h3 id="clientlayer"><span class="secno">3.1 Client Layer</span></h3>
+		<img src="client-layer.svg" style="float:right" width="5%" height="auto" />
 
         <h4 id="client"><span class="secno">3.1.1 </span>IPA Client</h4>
-		<p>Clients enable the user to access the IPA via voice with the following characteristics.
+		Clients enable the user to access the IPA via voice with the following characteristics.
 		<ul>
 			<li>Usually, IPA Clients make use of a microphone to capture the spoken input and a loud speaker to provide responses.</li>
 			<li>As an extension IPA Clients may also capture input via text and output text.</li>
@@ -139,6 +140,7 @@
 		</p>
 
         <h3 id="dialoglayer"><span class="secno">3.2 Dialog Layer</span></h3>
+		<img src="dialog-layer.svg" style="float:right" width="10%" height="auto" />
 
         <h4 id="ipaservice"><span class="secno">3.2.1 </span>IPA Service</h4>
 		<p>General IPA Service API that mediates between the user and the overall IPA system. The service layer may be omitted in case the <a href="#client">IPA Client</a> communicates directly with 
@@ -326,6 +328,7 @@
 		</p>
 		
         <h3 id="datalayer"><span class="secno">3.3 APIs/Data Layer</span></h3>
+		<img src="api-data-layer.svg" style="float:right" width="10%" height="auto" />
 		
         <h4 id="selectionservice"><span class="secno">3.3.1 </span>Provider Selection Service</h4>
 		<p>A service that provides access to all known IPA Providers. This service also maps the IPA Intent Sets to the Intent Sets in the Dialog layer. It has the following characteristics
