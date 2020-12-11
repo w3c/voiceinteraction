@@ -17,10 +17,10 @@
 		.st9 {fill:#70ad47;stroke:none;stroke-width:0.25}
 		.st10 {fill:#c55a11;stroke:none;stroke-width:0.25}
 		.st11 {font-size:1em}
-		.st12 {fill:#5b9bd5;stroke:none;stroke-width:0.25}
+		.st12 {fill:#a5a5a5;stroke:none;stroke-width:0.25}
 		.st13 {stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:1}
-		.st14 {fill:#a5a5a5;stroke:none;stroke-width:0.25}
-		.st15 {fill:#7f7f7f;stroke:none;stroke-width:0.25}
+		.st14 {fill:#7f7f7f;stroke:none;stroke-width:0.25}
+		.st15 {fill:#5b9bd5;stroke:none;stroke-width:0.25}
 		.st16 {fill:none;fill-rule:evenodd;font-size:12px;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
 	]]>
 	</style>
@@ -105,30 +105,30 @@
 			<g id="shadow41-56" transform="matrix(1,0,0,1,0.345598,1.97279)" class="st1">
 				<path d="M0 346.33 A4.25197 4.25197 0 0 1 8.5 346.33 A4.25197 4.25197 0 1 1 0 346.33 Z" class="st2"/>
 			</g>
-			<path d="M0 346.33 A4.25197 4.25197 0 0 1 8.5 346.33 A4.25197 4.25197 0 1 1 0 346.33 Z" class="st12"/>
+			<path d="M0 346.33 A4.25197 4.25197 0 0 1 8.5 346.33 A4.25197 4.25197 0 1 1 0 346.33 Z" class="st14"/>
 		</g>
 		<g id="shape42-60" transform="translate(422.362,-199.843)">
 			<title>Circle.42</title>
 			<g id="shadow42-61" transform="matrix(1,0,0,1,0.345598,1.97279)" class="st1">
 				<path d="M0 346.33 A4.25197 4.25197 0 0 1 8.5 346.33 A4.25197 4.25197 0 1 1 0 346.33 Z" class="st2"/>
 			</g>
-			<path d="M0 346.33 A4.25197 4.25197 0 0 1 8.5 346.33 A4.25197 4.25197 0 1 1 0 346.33 Z" class="st12"/>
+			<path d="M0 346.33 A4.25197 4.25197 0 0 1 8.5 346.33 A4.25197 4.25197 0 1 1 0 346.33 Z" class="st14"/>
 		</g>
 		<g id="shape43-65" transform="translate(439.37,-199.843)">
 			<title>Circle.43</title>
 			<g id="shadow43-66" transform="matrix(1,0,0,1,0.345598,1.97279)" class="st1">
 				<path d="M0 346.33 A4.25197 4.25197 0 0 1 8.5 346.33 A4.25197 4.25197 0 1 1 0 346.33 Z" class="st2"/>
 			</g>
-			<path d="M0 346.33 A4.25197 4.25197 0 0 1 8.5 346.33 A4.25197 4.25197 0 1 1 0 346.33 Z" class="st12"/>
+			<path d="M0 346.33 A4.25197 4.25197 0 0 1 8.5 346.33 A4.25197 4.25197 0 1 1 0 346.33 Z" class="st14"/>
 		</g>
-		<g id="shape45-70" transform="translate(15.8433,299.563) rotate(-90)">
+		<g id="shape45-70" transform="translate(34.9771,299.563) rotate(-90)">
 			<title>Rectangle.45</title>
 			<desc>Provider Selection Service</desc>
 			<g id="shadow45-71" transform="matrix(1,0,0,1,-1.97279,0.345598)" class="st1">
-				<rect x="0" y="298.854" width="195.921" height="51.7323" class="st2"/>
+				<rect x="0" y="279.72" width="195.921" height="70.8661" class="st2"/>
 			</g>
-			<rect x="0" y="298.854" width="195.921" height="51.7323" class="st12"/>
-			<text x="45.32" y="327.72" class="st6">Provider Selection Service</text>		</g>
+			<rect x="0" y="279.72" width="195.921" height="70.8661" class="st15"/>
+			<text x="45.32" y="318.15" class="st6">Provider Selection Service</text>		</g>
 		<g id="shape59-76" transform="translate(146.796,-214.737)">
 			<title>Rectangle.59</title>
 			<desc>ASR</desc>
@@ -139,12 +139,12 @@
 			<text x="27.53" y="337.15" class="st6">ASR</text>		</g>
 		<g id="shape60-82" transform="translate(146.796,-50.6106)">
 			<title>Rectangle.60</title>
-			<desc>NLG</desc>
+			<desc>TTS</desc>
 			<g id="shadow60-83" transform="matrix(1,0,0,1,0.345598,1.97279)" class="st1">
 				<rect x="0" y="317.704" width="70.8661" height="32.8819" class="st2"/>
 			</g>
 			<rect x="0" y="317.704" width="70.8661" height="32.8819" class="st10"/>
-			<text x="26.95" y="337.15" class="st6">NLG</text>		</g>
+			<text x="28.26" y="337.15" class="st6">TTS</text>		</g>
 		<g id="shape65-88" transform="translate(224.749,-214.737)">
 			<title>Rectangle.65</title>
 			<desc>NLU</desc>
@@ -175,7 +175,7 @@
 			<g id="shadow78-107" transform="matrix(1,0,0,1,0.345598,1.97279)" class="st1">
 				<rect x="0" y="302.397" width="62.3622" height="48.189" class="st2"/>
 			</g>
-			<rect x="0" y="302.397" width="62.3622" height="48.189" class="st12"/>
+			<rect x="0" y="302.397" width="62.3622" height="48.189" class="st15"/>
 			<text x="9.48" y="317.49" class="st6">Accounts / <tspan x="6.09" dy="1.2em" class="st11">Authenticati</tspan><tspan
 						x="25.92" dy="1.2em" class="st11">on</tspan></text>		</g>
 		<g id="shape79-114" transform="translate(313.989,-261.118)">
@@ -184,7 +184,7 @@
 			<g id="shadow79-115" transform="matrix(1,0,0,1,0.345598,1.97279)" class="st1">
 				<rect x="0" y="302.397" width="70.8661" height="48.189" class="st2"/>
 			</g>
-			<rect x="0" y="302.397" width="70.8661" height="48.189" class="st12"/>
+			<rect x="0" y="302.397" width="70.8661" height="48.189" class="st15"/>
 			<text x="18.21" y="323.49" class="st6">Provider <tspan x="19.09" dy="1.2em" class="st11">Registry</tspan></text>		</g>
 		<g id="shape85-121" transform="translate(394.016,-103.181)">
 			<title>Rectangle.85</title>
@@ -192,7 +192,7 @@
 			<g id="shadow85-122" transform="matrix(1,0,0,1,0.345598,1.97279)" class="st1">
 				<rect x="0" y="317.704" width="62.3622" height="32.8819" class="st2"/>
 			</g>
-			<rect x="0" y="317.704" width="62.3622" height="32.8819" class="st14"/>
+			<rect x="0" y="317.704" width="62.3622" height="32.8819" class="st12"/>
 			<text x="24.45" y="331.15" class="st6">IPA<tspan x="10.29" dy="1.2em" class="st11">Provider </tspan>1</text>		</g>
 		<g id="shape86-128" transform="translate(394.016,-50.6929)">
 			<title>Rectangle.86</title>
@@ -200,28 +200,36 @@
 			<g id="shadow86-129" transform="matrix(1,0,0,1,0.345598,1.97279)" class="st1">
 				<rect x="0" y="317.704" width="62.3622" height="32.8819" class="st2"/>
 			</g>
-			<rect x="0" y="317.704" width="62.3622" height="32.8819" class="st14"/>
+			<rect x="0" y="317.704" width="62.3622" height="32.8819" class="st12"/>
 			<text x="24.45" y="331.15" class="st6">IPA<tspan x="10.2" dy="1.2em" class="st11">Provider n</tspan></text>		</g>
 		<g id="shape87-135" transform="translate(405.354,-89.2913)">
 			<title>Circle.87</title>
 			<g id="shadow87-136" transform="matrix(1,0,0,1,0.345598,1.97279)" class="st1">
 				<path d="M0 346.33 A4.25197 4.25197 0 0 1 8.5 346.33 A4.25197 4.25197 0 1 1 0 346.33 Z" class="st2"/>
 			</g>
-			<path d="M0 346.33 A4.25197 4.25197 0 0 1 8.5 346.33 A4.25197 4.25197 0 1 1 0 346.33 Z" class="st15"/>
+			<path d="M0 346.33 A4.25197 4.25197 0 0 1 8.5 346.33 A4.25197 4.25197 0 1 1 0 346.33 Z" class="st14"/>
 		</g>
 		<g id="shape88-140" transform="translate(422.362,-89.2913)">
 			<title>Circle.88</title>
 			<g id="shadow88-141" transform="matrix(1,0,0,1,0.345598,1.97279)" class="st1">
 				<path d="M0 346.33 A4.25197 4.25197 0 0 1 8.5 346.33 A4.25197 4.25197 0 1 1 0 346.33 Z" class="st2"/>
 			</g>
-			<path d="M0 346.33 A4.25197 4.25197 0 0 1 8.5 346.33 A4.25197 4.25197 0 1 1 0 346.33 Z" class="st15"/>
+			<path d="M0 346.33 A4.25197 4.25197 0 0 1 8.5 346.33 A4.25197 4.25197 0 1 1 0 346.33 Z" class="st14"/>
 		</g>
 		<g id="shape89-145" transform="translate(439.37,-89.2913)">
 			<title>Circle.89</title>
 			<g id="shadow89-146" transform="matrix(1,0,0,1,0.345598,1.97279)" class="st1">
 				<path d="M0 346.33 A4.25197 4.25197 0 0 1 8.5 346.33 A4.25197 4.25197 0 1 1 0 346.33 Z" class="st2"/>
 			</g>
-			<path d="M0 346.33 A4.25197 4.25197 0 0 1 8.5 346.33 A4.25197 4.25197 0 1 1 0 346.33 Z" class="st15"/>
+			<path d="M0 346.33 A4.25197 4.25197 0 0 1 8.5 346.33 A4.25197 4.25197 0 1 1 0 346.33 Z" class="st14"/>
 		</g>
+		<g id="shape90-150" transform="translate(224.749,-50.6106)">
+			<title>Rectangle.90</title>
+			<desc>NLG</desc>
+			<g id="shadow90-151" transform="matrix(1,0,0,1,0.345598,1.97279)" class="st1">
+				<rect x="0" y="317.704" width="64.385" height="32.8819" class="st2"/>
+			</g>
+			<rect x="0" y="317.704" width="64.385" height="32.8819" class="st10"/>
+			<text x="23.71" y="337.15" class="st6">NLG</text>		</g>
 	</g>
 </svg>

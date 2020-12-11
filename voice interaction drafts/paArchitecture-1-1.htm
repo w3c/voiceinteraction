@@ -112,14 +112,8 @@
 		</figure>
 		
 		<p>In order to increase the flexibility of that basic interface, an IPA may need to make use of several services describing the capabilities of the IPA. These services may be selected from a
-		standardized market place. For the reminder of this document, we consider an IPA that is extendable via such a market place. This kind of IPA features the architectural buildings blocks
-		shown in the following figure.</p>
+		standardized market place. For the reminder of this document, we consider an IPA that is extendable via such a market place.</p>
 		
-		<figure>
-			<img src="IPA-Architecture-1-1.svg" alt="IPA Architecture" style="width: 100%; height: auto;"/>
-			<figcaption>Fig. 2 Complete architecture of an IPA</figcaption>
-		</figure>
-
 		<p>Not all components may be needed for actual implementations, some may be omitted completely. However, we note them here to provide a more complete picture. 
 		This architecture comprises 3 layers that are detailed in the following sections
         <ol>
@@ -210,18 +204,35 @@
 				</tr>
 			</table>
 
-        <h4 id="asr"><span class="secno">3.2.3 </span>ASR</h4>
+        <h4 id="context"><span class="secno">3.2.3 </span>Context</h4>
+		<img src="context-component.svg" style="float:right" width="auto" height="auto" />
+		<p>t.b.d.</p>
+
+        <h5 id="knowledge-graph"><span class="secno">3.2.3.1 </span>Knowledge Graph</h5>
+		<p>A knowledge graph to reason about the detected input from the <a href="#nlu">NLU</a> and <a href="#coredataprovider">Core Data Provider</a> to come up with some more meaningful results.</p>
+
+        <h4 id="asr"><span class="secno">3.2.4 </span>ASR</h4>
 		<p>The Automated Speech Recognizer (ASR) receives audio streams of recorded utterances and generates a recognition hypothesis as text strings. Conceptually, ASR is 
 		a modality recognizer for speech. It has the following characteristics
 		<ul>
 			<li>Optionally, the ASR can generate multiple recognition hypothesis along with a confidence score.</li>
 			<li>Optionally, the ASR can be part of the <a href="#provider">IPA Provider</a>. In this case, the received audio streams must be forwarded to the <a href="#selectionservice">Provider Selection Service</a>.
-				In this case the <a href="#corenlu">Core NLU</a> must be part of an <a href="#provider">IPA Provider</a>.</li>
+				In this case the <a href="#nlu">NLU</a> must be part of an <a href="#provider">IPA Provider</a>.</li>
 			<li>Multiple ASR instances may exist if multiple <a href="#provider">IPA Providers</a> come with their own ASR</li>
 			<li>In case of a chatbot, this component will not be needed.</li>
 		</ul></p>
 
-        <h4 id="tts"><span class="secno">3.2.4 </span>TTS</h4>
+        <h4 id="nlu"><span class="secno">3.2.5 </span>NLU</h4>
+		<p>An NLU (Natural Language Understanding) component that is able to extract meaning as intents and associated entities from an utterance as text strings. It has the following characteristics
+		<ul>
+			<li>The NLU is able to handle basic functionality via <a href="#coreintentsets">Core Intent Sets</a> to enable interaction with the user at all.</li>
+			<li>The NLU may make use of the <a href="#coredataprovider">Core Data Provider</a> to access local or internal data or access external services.</li>
+		</ul></p>
+
+        <h4 id="nlg"><span class="secno">3.2.6 </span>NLG</h4>
+		<p>t.b.d.</p>
+		
+        <h4 id="tts"><span class="secno">3.2.7 </span>TTS</h4>
 		<p>The Text-to-Speech (TTS) component receives text strings, which it converts into audio data. Conceptually, the TTS is a modality specifc renderer for speech. It has the following characteristics
 		<ul>
 			<li>Optionally, the TTS can also be part of the <a href="#provider">IPA Provider</a>. In this case, the audio streams is retrieved from the 
@@ -231,7 +242,11 @@
 			<li>In case of a chatbot, this component will not be needed.</li>
 		</ul></p>
 
-        <h4 id="coredialog"><span class="secno">3.2.5 </span>Core Dialog</h4>
+        <h4 id="dialogs"><span class="secno">3.2.8 </span>Dialogs</h4>
+		<img src="dialogs-component.svg" style="float:right" width="auto" height="auto" />
+		<p>t.b.d.</p>
+		
+        <h5 id="coredialog"><span class="secno">3.2.8.1 </span>Core Dialog</h5>
 		<p>The Core Dialog are logical entities that are able to handle basic functionality via <a href="coreintesets">Core Intent Sets</a> to enable interaction with the 
 			user at all. This includes among others</p>
 		<table border="1">
@@ -277,7 +292,8 @@
 			</tr>
 		</table>
 		<p>Conceptually, the Core Dialog is a special <a href="dialogx">Dialog</a> as described in the following section that is always available</p>
-        <h5 id="dialog"><span class="secno">3.2.5.1 </span>Dialog</h5>
+
+        <h5 id="dialog"><span class="secno">3.2.8.2 </span>Dialog</h5>
 		<p>A Dialog is able to handle functionality that can be added to the capabilities of the <a href="#dialogmanagement">Dialog Management</a> through their associated Intent Sets. 
 			They are logical entities within the overall description of the interaction with the user, executed by the <a href="#dialogmanagement">Dialog Management</a>.
 			
@@ -299,10 +315,11 @@
 		</ul>
 		</p>
 
-        <h4 id="coreintentsets"><span class="secno">3.2.6 </span>Core Intent Sets</h4>
+        <h5 id="coreintentsets"><span class="secno">3.2.8.3 </span>Core Intent Sets</h5>
 		<p>A Core Intent Set usually identifies tasks to be executed and define the capabilities of the <a href="#coredialog">Core Dialog</a>. Conceptually, the Core Intent Sets are Intent Sets that are
 		always available.</p>
-        <h5 id="intentsets"><span class="secno">3.2.6.1 </span>Intent Sets</h5>
+		
+        <h5 id="intentsets"><span class="secno">3.2.8.4 </span>Intent Sets</h5>
 		<p>Intent Sets define actions along with their parameters that can be consumed by a corresponding <a href="#dialog">Dialog</a> and has the following characteristics
 		<ul>
 			<li>An Intent Set defines one ore more intents with an optional number (including none) of entities to fulfill the corresponding action.</li>
@@ -315,15 +332,15 @@
 		</ul>
 		</p>
 
-        <h4 id="dialogx"><span class="secno">3.2.7 </span>Dialog X</h4>
+        <h5 id="dialogx"><span class="secno">3.2.8.5 </span>Dialog X</h5>
 		<p>The Dialog X are able to handle functionality that can be added to the capabilities of the Dialog Manager through their associated <a href="#intentsetsx">Intent Set X</a>. Dialog X extends the 
 		<a href="#coredialog">Core Dialogs</a> and add functionality by custom <a href="#dialog">Dialogs</a>. The Dialog X's must server different purposes
 		in a sense that they are unique for a certain task. E.g., only a single flight reservation dialog may exist at a time. They have the same characteristics as a <a href="#dialog">Dialog</a>.</p>
 
-        <h4 id="intentsetsx"><span class="secno">3.2.9 </span>Intent Set X</h4>
+        <h5 id="intentsetsx"><span class="secno">3.2.8.6 </span>Intent Set X</h5>
 		<p>An Intent Set X is a special <a href="#intentsets">Intent Set</a> that identifies tasks that can be executed within the associated <a href="#dialogx">Dialog X</a>.</p>
 		
-        <h4 id="dialogregistry"><span class="secno">3.2.10 </span>Dialog Registry</h4>
+        <h5 id="dialogregistry"><span class="secno">3.2.8.7 </span>Dialog Registry</h5>
 		<p>The Dialog Registry manages all available Dialogs with their associated Intent Sets with respect to the used <a href=#dialogstrategy">Dialog Strategy</a>. 
 			This means, it is the Dialog Registry would know which <a href="#dialog">Dialog</a> to use for a given intent.
 			For some <a href=#dialogstrategy">Dialog Strategy</a> this component may be omitted as it is taken over by the <a href="#dialogmanagement">Dialog Management</a>. 
@@ -381,7 +398,7 @@
 			<li>The <a href="#provider">IPA Providers</a> is filtered by contextual data that is obtained from the client, e.g. location.</li>
 			<li>The <a href="#provider">IPA Providers</a> is filtered by established knowledge about the user, e.g. language.</li>
 			<li>The <a href="#provider">IPA Providers</a> is filtered by knowledge that has been determined in the dialog with the user. This includes leading wake-up phrases like
-				<em>Hey Siri, &hellip;</em>, <em>OK Google, &hellip;</em>. For this, preprocessing of the user input by they <a href="#corenlu">Core NLU</a> may be required.</li>
+				<em>Hey Siri, &hellip;</em>, <em>OK Google, &hellip;</em>. For this, preprocessing of the user input by they <a href="#nlu">NLU</a> may be required.</li>
 		</ul>
 		In case <a href="#provider">IPA Provider</a> does not abstract from determining a relevant list of intents, the same strategy may be applied to determine the n-best intents.
 		</p>
@@ -394,7 +411,7 @@
 				in an utterance or to allow for disambiguation of multiple <a href="#provider">IPA Providers</a> in an additional dialog step.</li>
 			<li>Optionally, the retrieval of <a href="#provider">IPA Providers</a> may be filtered by additional parameters matching the implemented <a href="#providerselectionstrategy">Provider Selection Strategy</a>.
 				Therefore, the Provider Registry may request information from the <a href="#coredataprovider">Core Data Provider</a></li>
-			<li>The <a href="#corenlu">Core Provider</a> is added to the Provider Registry when the system starts.</li>
+			<li>The <a href="#nlu">Core Provider</a> is added to the Provider Registry when the system starts.</li>
 			<li>It can return an <a href="#provider">IPA Providers</a> for a current key</li>
 			<li>It knows the <a href="#intentsets">Intent Sets</a> of a specific <a href="#provider">IPA Providers</a> from the addition of that <a href="#provider">IPA Providers</a>.</li>
 			<li>Each Intent from the <a href="#intentsets">Intent Sets</a> of a specific <a href="#provider">IPA Providers</a> must also specify the mapping to the <a href="#intentsets">Intent Sets</a> known by the <a href="#dialogregistry">Dialog Registry</a>.
@@ -411,20 +428,20 @@
 		</ul>
 		</p>
 
-        <h4 id="corenlu"><span class="secno">3.3.4 </span>Core NLU</h4>
-		<p>An NLU (Natural Language Understanding) component that is able to extract meaning as intents and associated entities from an utterance as text strings. It has the following characteristics
+        <h4 id="dataprovider"><span class="secno">3.3.4 </span>Data Provider X</h4>
+		<p>A data provider to get data to be used in the <a href="#dialog">Dialog</a>, e.g. as a result of a query. It has the following characteristics
 		<ul>
-			<li>The Core NLU is able to handle basic functionality via <a href="#coreintentsets">Core Intent Sets</a> to enable interaction with the user at all.</li>
-			<li>The Core NLU may make use of the <a href="#coredataprovider">Core Data Provider</a> to access local or internal data or access external services.</li>
+			<li>The Data Provider provides access to 
+			<ul>
+				<li>local data,</li>
+				<li>external data or</li>
+				<li>external services.</li>
+			</ul></li>
+			<li>The Data Provider can be used to trigger external services, e.g. to execute remote actions</li>
 		</ul></p>
-
-        <h4 id="coredataprovider"><span class="secno">3.3.5 </span>Core Data Provider</h4>
-		<p>A generic <a href="#dataprovider">Data Provider</a> to aid the <a href="#corenlu">Core NLU</a> determining the intent. 
 		
-        <h5 id="coreknowledgegraph"><span class="secno">3.3.6.6 </span>Core Knowledge Graph</h5>
-		<p>A knowledge graph to reason about the detected input from the <a href="#corenlu">Core NLU</a> and <a href="#coredataprovider">Core Data Provider</a> to come up with some more meaningful results.</p>
-		
-        <h4 id="provider"><span class="secno">3.3.7 </span>IPA Provider X</h4>
+        <h4 id="provider"><span class="secno">3.3.5 </span>IPA Provider X</h4>
+		<img src="ipaprovider-component.svg" style="float:right" width="auto" height="auto" />
 		<p>A provider of an IPA service, like
 		<ul>
 			<li>Google Assistant</li>
@@ -435,34 +452,28 @@
 		</ul></p>
 		<p>The IPA provider may be part of the IPA implementation as an IPA Provider or alternatively a subset of the original functionaliy as described below as part of another IPA implementation.</p>
 
-        <h5 id="providernlu"><span class="secno">3.3.7.1 </span>Provider NLU</h5>
+
+        <h5 id="providernlu"><span class="secno">3.3.5.1 </span>Provider NLU</h5>
 		<p>An NLU component that is able to extract meaning as intents and associated entities from an utterance as text strings for <a href="#provider">IPA Provider X</a>. It has the following characteristics
 		<ul>
 			<li>The Provider NLU may make use of the <a href="#dataprovider">Data Provider</a> to access local or internal data or access external services.</li>
 			<li>The Provider NLU may make use of the <a href="#knowledgegraph">Knowledge Graph</a> to derive meaning.</li>
 		</ul></p>
 
-        <h5 id="providerintentsets"><span class="secno">3.3.7.2 </span>Provider Intent Set</h5>
+        <h5 id="providerintentsets"><span class="secno">3.3.5.2 </span>Provider Intent Set</h5>
 		<p>An <a href="#intentsets">Intent Set</a> that might be returned by the <a href="#providernlu">Provider NLU</a> to handle the capabilities of <a href="#provider">IPA Provider X</a>.</p>
 
-        <h5 id="dataprovider"><span class="secno">3.3.7.3 </span>Data Provider</h5>
-		<p>A data provider to aid the <a href"#providernlu">Provider NLU</a> in determining the intent. It has the following characteristics
-		<ul>
-			<li>The Data Provider provides access to 
-			<ul>
-				<li>local data,</li>
-				<li>external data or</li>
-				<li>external services.</li>
-			</ul></li>
-			<li>The Data Provider may be used to track the IPA Provider’s state.</li>
-		</ul></p>
-
-        <h5 id="knowledgegraph"><span class="secno">3.3.7.4 </span>Knowledge Graph</h5>
-		<p>A knowledge graph to reason about the detected input from the <a href="#providernlu">Provider NLU</a> and <a href="#dataprovider">Data Provider</a> to come up with some more meaningful results.</p>
+        <h4 id="finalarchitecture"><span class="secno">3.4 </span>Resulting Architecture</h4>
+		<p>The previous sections showed a more detailed view onto the architectural buildings blocks. A general overview comprising these detailing is shown in the following figure.</p>
 		
+		<figure>
+			<img src="IPA-Architecture-1-1.svg" alt="IPA Architecture" style="width: 100%; height: auto;"/>
+			<figcaption>Fig. 2 Complete architecture of an IPA</figcaption>
+		</figure>
 
         <h2 id="walkthrough"><span class="secno">4. </span>Use Case Walk Through</h2>
-
+		<p>This section needs to be updated to match the changes as introduced above.</p>
+		
         <p>This section expands on the use case above, filling in details according to the sample architecture.</p>
         <p>A user would like to plan a trip to an international conference and she
 needs visa information and airline reservations. </p>
@@ -649,7 +660,7 @@ find out about a designated conference hotel or special rates.
 					</ul></td>
 			</tr>
 			<tr>
-				<td>Core NLU</td>
+				<td>NLU</td>
 				<td>
 					<ul>
 						<li><a href="https://www.w3.org/TR/emma20/">EMMA: Extensible MultiModal Annotation markup language Version 2.0</a></li>
