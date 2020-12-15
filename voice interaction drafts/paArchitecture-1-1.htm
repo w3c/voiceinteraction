@@ -213,7 +213,16 @@
 
         <h4 id="context"><span class="secno">3.2.3 </span>Context</h4>
 		<img src="context-component.svg" style="float:right" width="auto" height="auto" />
-		<p>t.b.d.</p>
+		<p>During the interaction with a user all kinds of information are collected and managed in the so-called conversation context. 
+		It contains all the short and long term information needed to handle a conversation. It also serves for context-based reasoning with the help of
+		the <a href="#knowledge-graph">Knowledge Graph</a> and to generate output for the output to the user <a href"=#nlg">NLG</a>. It has the following characteristics
+		<ul>
+		    <li>The dialog context is enhanced build interaction with the user (grounding) from spoken and other input.</a>
+			<li>The Context supports the <a href="#dialogmanagement">Dialog Management</a> to get the needed information for a current dialog</a>
+			<li>The Context supports the <a href="#dialogmanagement">Dialog Management</a> to get the needed information when switching from one dialog context to another</a>
+			<li>The Context supports the <a href"=#nlu">NLU</a> to determine meaning from the user's input, also by reasoning via a <a href="#knowledge-graph">Knowledge Graph</a>.</u>
+			<li>The Context supports the <a href"=#nlg">NLG</a> to create the reply to the user.</u>
+		</ul></p>
 
         <h5 id="knowledge-graph"><span class="secno">3.2.3.1 </span>Knowledge Graph</h5>
 		<p>A knowledge graph to reason about the detected input from the <a href="#nlu">NLU</a> and <a href="#coredataprovider">Core Data Provider</a> to come up with some more meaningful results.</p>
