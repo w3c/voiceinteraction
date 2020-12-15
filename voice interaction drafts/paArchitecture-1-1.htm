@@ -15,7 +15,7 @@
             <h2 property="bibo:subtitle" id="subtitle">Architecture and Potential for Standardization Version 1.1</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: December 11, 2020 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm</a> (GitHub repository) </dd>
+                <dd>Last modified: December 15, 2020 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm</a> (GitHub repository) </dd>
 				<dd><a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture-1-1.htm">HTML rendered version</a></dd>             
 			    <dt>Editors</dt>
                 <p><span style="color: rgb(51, 51, 51); font-family: Conv_DroidSerif-Regular, serif; font-size: 15.7072px; orphans: 2; text-align: center; widows: 2; background-color: rgba(255, 255, 255, 0.6);">Dirk Schnelle-Walka</br>
@@ -125,7 +125,7 @@
 		view that the authors regard as ideal.</p>
 		
         <h3 id="clientlayer"><span class="secno">3.1 Client Layer</span></h3>
-		<img src="client-layer.svg" style="float:right" width="5%" height="auto" />
+		<img src="client-layer.svg" style="float:right" width="10%" height="auto" />
 
         <h4 id="client"><span class="secno">3.1.1 </span>IPA Client</h4>
 		Clients enable the user to access the IPA via voice with the following characteristics.
@@ -139,8 +139,14 @@
 		</ul>
 		</p>
 
+        <h4 id="locals"><span class="secno">3.1.2 </span>Local Services</h4>
+		<p>t.b.d.</p>
+
+        <h4 id="localdataproviders"><span class="secno">3.1.3 </span>Local Data Providers</h4>
+		<p>t.b.d.</p>
+
         <h3 id="dialoglayer"><span class="secno">3.2 Dialog Layer</span></h3>
-		<img src="dialog-layer.svg" style="float:right" width="10%" height="auto" />
+		<img src="dialog-layer.svg" style="float:right" width="15%" height="auto" />
 		<p>t.b.d.</p>
 
         <h4 id="ipaservice"><span class="secno">3.2.1 </span>IPA Service</h4>
@@ -360,7 +366,7 @@
 		</p>
 		
         <h3 id="datalayer"><span class="secno">3.3 APIs/Data Layer</span></h3>
-		<img src="api-data-layer.svg" style="float:right" width="10%" height="auto" />
+		<img src="api-data-layer.svg" style="float:right" width="15%" height="auto" />
 		
         <h4 id="selectionservice"><span class="secno">3.3.1 </span>Provider Selection Service</h4>
 		<p>A service that provides access to all known IPA Providers. This service also maps the IPA Intent Sets to the Intent Sets in the Dialog layer. It has the following characteristics
@@ -429,7 +435,11 @@
 		</ul>
 		</p>
 
-        <h4 id="dataprovider"><span class="secno">3.3.4 </span>Data Provider X</h4>
+        <h4 id="dataproviders"><span class="secno">3.3.4 </span>Data Providers</h4>
+		<img src="dataproviders-component.svg" style="float:right" width="auto" height="auto" />
+		<p>t.b.d.</p>
+
+        <h5 id="dataprovider"><span class="secno">3.3.4.1 </span>Data Provider X</h5>
 		<p>A data provider to get data to be used in the <a href="#dialog">Dialog</a>, e.g. as a result of a query. It has the following characteristics
 		<ul>
 			<li>The Data Provider provides access to 
@@ -440,9 +450,19 @@
 			</ul></li>
 			<li>The Data Provider can be used to trigger external services, e.g. to execute remote actions</li>
 		</ul></p>
+
+        <h4 id="externalservices"><span class="secno">3.3.5 </span>External Services</h4>
+		<img src="externalservices-component.svg" style="float:right" width="auto" height="auto" />
+		<p>t.b.d.</p>
+
+        <h5 id="dataprovider"><span class="secno">3.3.5.1 </span>External Service X</h5>
+		<p>t.b.d.</p>
 		
-        <h4 id="provider"><span class="secno">3.3.5 </span>IPA Provider X</h4>
-		<img src="ipaprovider-component.svg" style="float:right" width="auto" height="auto" />
+        <h4 id="ipaproviders"><span class="secno">3.3.6 </span>IPA Providers</h4>
+		<img src="ipaproviders-component.svg" style="float:right" width="auto" height="auto" />
+		<p>t.b.d.</p>
+
+        <h5 id="provider"><span class="secno">3.3.6.1 </span>IPA Provider X</h5>
 		<p>A provider of an IPA service, like
 		<ul>
 			<li>Google Assistant</li>
@@ -454,14 +474,14 @@
 		<p>The IPA provider may be part of the IPA implementation as an IPA Provider or alternatively a subset of the original functionaliy as described below as part of another IPA implementation.</p>
 
 
-        <h5 id="providernlu"><span class="secno">3.3.5.1 </span>Provider NLU</h5>
+        <h5 id="providernlu"><span class="secno">3.3.6.2 </span>Provider NLU</h5>
 		<p>An NLU component that is able to extract meaning as intents and associated entities from an utterance as text strings for <a href="#provider">IPA Provider X</a>. It has the following characteristics
 		<ul>
 			<li>The Provider NLU may make use of the <a href="#dataprovider">Data Provider</a> to access local or internal data or access external services.</li>
 			<li>The Provider NLU may make use of the <a href="#knowledgegraph">Knowledge Graph</a> to derive meaning.</li>
 		</ul></p>
 
-        <h5 id="providerintentsets"><span class="secno">3.3.5.2 </span>Provider Intent Set</h5>
+        <h5 id="providerintentsets"><span class="secno">3.3.6.3 </span>Provider Intent Set</h5>
 		<p>An <a href="#intentsets">Intent Set</a> that might be returned by the <a href="#providernlu">Provider NLU</a> to handle the capabilities of <a href="#provider">IPA Provider X</a>.</p>
 
         <h4 id="finalarchitecture"><span class="secno">3.4 </span>Resulting Architecture</h4>
