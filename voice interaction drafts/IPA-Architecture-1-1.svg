@@ -348,14 +348,14 @@
 			<v:userDefs>
 				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
 			</v:userDefs>
-			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197" v:verticalAlign="2"/>
 			<v:textRect cx="132.468" cy="408.177" width="264.94" height="41.1024"/>
 			<g id="shadow64-131" v:groupContext="shadow" v:shadowOffsetX="0.345598" v:shadowOffsetY="-1.97279" v:shadowType="1"
 					transform="matrix(1,0,0,1,0.345598,1.97279)" class="st1">
 				<rect x="0" y="387.626" width="264.936" height="41.1024" class="st2"/>
 			</g>
 			<rect x="0" y="387.626" width="264.936" height="41.1024" class="st5"/>
-			<text x="116.54" y="411.18" class="st6" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>Context</text>		</g>
+			<text x="229.07" y="421.73" class="st6" v:langID="1031"><v:paragraph v:horizAlign="2"/><v:tabList/>Context</text>		</g>
 		<g id="shape66-136" v:mID="66" v:groupContext="shape" transform="translate(260.891,-300.603)">
 			<title>Rectangle.65</title>
 			<desc>NLU</desc>
@@ -398,7 +398,7 @@
 			</g>
 			<rect x="0" y="395.846" width="51.7323" height="32.8819" class="st5"/>
 			<text x="17.38" y="415.29" class="st6" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>NLG</text>		</g>
-		<g id="shape63-154" v:mID="63" v:groupContext="shape" transform="translate(316.772,-342.968)">
+		<g id="shape63-154" v:mID="63" v:groupContext="shape" transform="translate(260.079,-343.843)">
 			<title>Rectangle.63</title>
 			<desc>Knowledge Graph</desc>
 			<v:userDefs>
@@ -754,5 +754,19 @@
 			</g>
 			<rect x="0" y="397.547" width="62.3622" height="31.1811" class="st15"/>
 			<text x="4.29" y="416.14" class="st6" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>Provider NLU</text>		</g>
+		<g id="shape107-312" v:mID="107" v:groupContext="shape" transform="translate(158.386,-343.843)">
+			<title>Rectangle.107</title>
+			<desc>History</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="40.0394" cy="412.287" width="80.08" height="32.8819"/>
+			<g id="shadow107-313" v:groupContext="shadow" v:shadowOffsetX="0.345598" v:shadowOffsetY="-1.97279" v:shadowType="1"
+					transform="matrix(1,0,0,1,0.345598,1.97279)" class="st1">
+				<rect x="0" y="395.846" width="80.0787" height="32.8819" class="st2"/>
+			</g>
+			<rect x="0" y="395.846" width="80.0787" height="32.8819" class="st13"/>
+			<text x="25.5" y="415.29" class="st6" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>History</text>		</g>
 	</g>
 </svg>

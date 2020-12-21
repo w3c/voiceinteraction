@@ -15,7 +15,7 @@
             <h2 property="bibo:subtitle" id="subtitle">Architecture and Potential for Standardization Version 1.1</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: December 15, 2020 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm</a> (GitHub repository) </dd>
+                <dd>Last modified: December 17, 2020 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm</a> (GitHub repository) </dd>
 				<dd><a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture-1-1.htm">HTML rendered version</a></dd>             
 			    <dt>Editors</dt>
                 <p><span style="color: rgb(51, 51, 51); font-family: Conv_DroidSerif-Regular, serif; font-size: 15.7072px; orphans: 2; text-align: center; widows: 2; background-color: rgba(255, 255, 255, 0.6);">Dirk Schnelle-Walka</br>
@@ -215,7 +215,9 @@
 		<img src="context-component.svg" style="float:right" width="auto" height="auto" />
 		<p>During the interaction with a user all kinds of information are collected and managed in the so-called conversation context. 
 		It contains all the short and long term information needed to handle a conversation. It also serves for context-based reasoning with the help of
-		the <a href="#knowledge-graph">Knowledge Graph</a> and to generate output for the output to the user <a href"=#nlg">NLG</a>. It has the following characteristics
+		the <a href="#knowledge-graph">Knowledge Graph</a> and to generate output for the output to the user <a href"=#nlg">NLG</a>. It is not possible to capture
+		each and every aspect of what context should comprise as discussions about context are likely to end up in trying to explain the world. For the sake of this 
+		specification it should be possible to deal with the following characteristics
 		<ul>
 		    <li>The dialog context is enhanced build interaction with the user (grounding) from spoken and other input.</a>
 			<li>The Context supports the <a href="#dialogmanagement">Dialog Management</a> to get the needed information for a current dialog</a>
@@ -224,7 +226,10 @@
 			<li>The Context supports the <a href"=#nlg">NLG</a> to create the reply to the user.</u>
 		</ul></p>
 
-        <h5 id="knowledge-graph"><span class="secno">3.2.3.1 </span>Knowledge Graph</h5>
+        <h5 id="history"><span class="secno">3.2.3.1 </span>History</h5>
+		<p>t.b.d.</p>
+
+        <h5 id="knowledge-graph"><span class="secno">3.2.3.2 </span>Knowledge Graph</h5>
 		<p>A knowledge graph to reason about the detected input from the <a href="#nlu">NLU</a> and <a href="#coredataprovider">Core Data Provider</a> to come up with some more meaningful results.</p>
 
         <h4 id="asr"><span class="secno">3.2.4 </span>ASR</h4>
