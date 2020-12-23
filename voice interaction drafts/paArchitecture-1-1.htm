@@ -154,7 +154,8 @@
         <h4 id="localservice"><span class="secno">3.1.2 </span>Local Services</h4>
 		<p>t.b.d.</p>
 
-        <h4 id="localdataproviders"><span class="secno">3.1.3 </span>Local Data Providers</h4>
+		<p>t.b.d. Describe handling in case the call is forwarded to a nested IPA</p>
+		<h4 id="localdataproviders"><span class="secno">3.1.3 </span>Local Data Providers</h4>
 		<p>t.b.d.</p>
 
         <h3 id="dialoglayer"><span class="secno">3.2 Dialog Layer</span></h3>
@@ -174,7 +175,8 @@
 
         <h4 id="dialogmanagement"><span class="secno">3.2.2 </span>Dialog Management</h4>
 		<p>The Dialog Management is a component that receives semantic information determined from user input, updates its internal state, decides upon subsequent steps to continue a dialog and provides output
-			mainly as synthesized or recorded utterances. It has the following characteristics
+		mainly as synthesized or recorded utterances. Conceptually the dialog manager defines the playground that is used by the <a href="#dialog">Dialogs</a>. Both contribute to the user experience. 
+		The Dialog Manager has the following characteristics
 		<ul>
 			<li>Dialog Management receives recorded voice input from the <a href="#ipaservice">IPA Service</a> and forwards it to the <a href="#asr">ASR</a></li>
 			<li>Dialog Management makes use of the <a href="#TTS">TTS</a> to generate audio data to be rendered on the <a href="#client">IPA Client</a></li>
@@ -377,7 +379,7 @@
 		<p>The Dialog Registry manages all available Dialogs with their associated Intent Sets with respect to the used <a href=#dialogstrategy">Dialog Strategy</a>. 
 			This means, it is the Dialog Registry would know which <a href="#dialog">Dialog</a> to use for a given intent.
 			For some <a href=#dialogstrategy">Dialog Strategy</a> this component may be omitted as it is taken over by the <a href="#dialogmanagement">Dialog Management</a>. 
-			One of these cases is when the <a href=#dialogstrategy">Dialog Strategies</a> does not allow for the dynamic handling of <a href="#dialog">Dialogs</a> as described below..
+			One of these cases is when the <a href="#dialogstrategy">Dialog Strategies</a> does not allow for the dynamic handling of <a href="#dialog">Dialogs</a> as described below..
 		<ul>
 			<li><a href="#dialog">Dialogs</a> and their <a href="#intentsets">Intent Sets</a> can be added or removed as needed.</li>
 			<li>The Dialog Registry may notify the <a href="#dialogmanagement">Dialog Management</a> if <a href="#dialog">Dialogs</a> have been added or removed.</li>
@@ -422,7 +424,8 @@
 			<li>In case the <a href="#asr">ASR</a> is bound to an <a href="#provider">IPA Providers</a> the Provider Selection Service is able to consume audio stream and forward 
 				them to the available <a href="#asr">ASR</a> engines.</li>
 		</ul>
-		t.b.d. Desribe how IPA local hotwords can be used to preselect an IPA
+			t.b.d. Describe how IPA local hotwords can be used to preselect an IPA<br>
+			t.b.d. Describe passing russian doll principle of nested IPAs 
 		</p>
 		
         <h5 id="providerselectionstrategy"><span class="secno">3.3.1.1 </span>Provider Selection Strategy</h5>
