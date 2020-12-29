@@ -15,7 +15,7 @@
             <h2 property="bibo:subtitle" id="subtitle">Architecture and Potential for Standardization Version 1.1</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: December 23, 2020 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm</a> (GitHub repository) </dd>
+                <dd>Last modified: December 29, 2020 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm</a> (GitHub repository) </dd>
 				<dd><a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture-1-1.htm">HTML rendered version</a></dd>             
 			    <dt>Editors</dt>
                 <p><span style="color: rgb(51, 51, 51); font-family: Conv_DroidSerif-Regular, serif; font-size: 15.7072px; orphans: 2; text-align: center; widows: 2; background-color: rgba(255, 255, 255, 0.6);">Dirk Schnelle-Walka</br>
@@ -49,6 +49,11 @@
             <li><a href="#introduction">Introduction</a></li>
             <li><a href="#problemStatement">Problem Statement</a></li>
             <li><a href="#architecture">Architecture</a></li>
+				<ol>
+					<li><a href="#clientlayer">Client Layer</a>
+					<li><a href="#dialoglayer">Dialog Layer</a></li>
+					<li><a href="#datalayer">APIs / Data Layer</a></li></li>
+				</ol>
             <li><a href="#walkthrough">Use Case Walk Through</a></li>
             <li><a href="#potential">Potential for Standardization</a></li>
             <li><a href="#potential">Appendix</a></li>
@@ -117,7 +122,7 @@
 				<li>Executing local and/or remote services to accomplish tasks</li>
 			</ol>
 		This is supported by a flexible architecture that allows to dynamically add local and remote services or knowledge sources such as data providers. Moreover, it is possible
-		to include other IPAs, with actually the same architecture and forward requests to them, similar to the principle of a russion doll.
+		to include other IPAs, with actually the same architecture and forward requests to them, similar to the principle of a russian doll, omitting the Client Layer.
 		All this describes the capabilities of the IPA. These extensions may be selected from a
 		standardized market place. For the reminder of this document, we consider an IPA that is extendable via such a market place.</p>
 		
@@ -134,28 +139,67 @@
         <h3 id="clientlayer"><span class="secno">3.1 Client Layer</span></h3>
 		<img src="client-layer.svg" style="float:right" width="10%" height="auto" />
 
-        <h4 id="client"><span class="secno">3.1.1 </span>IPA Client</h4>
+        <h4 id="microphone"><span class="secno">3.1.1 </span>Microphone</h4>
+		<p>The microphone is used to capture the voice input of a user as a primary input modality. Additional input modalities can be employed that provide their input
+			similarly with a specific modality recognizer. Additional input may be gathered from <a href="#localdataproviders">Local Data Providers</a></p>
+
+        <h4 id="speaker"><span class="secno">3.1.2 </span>Speaker</h4>
+		<p>The loud spekaer is used to output replies as verbal auditory output in the shape of spoken utterances as a primary output modality. Utterances may be accompanied by nonverbal auditory output such as
+			<li>earcons,</li>
+			<li>auditory icons or</li>
+			<li>music.</li></p>
+		<p>Additional output modalities can be employed that render their output similarly with a specific modality synthesizer.</p>
+		<p>It is not always required that a verbal auditory output is made as a reply to a user. The user can also become aware of the output as a consequence of an obervable action as a result
+		of a <a href="localserverices">Local Service<a> or an <a href="#externalservices">External Services</a> call. In these cases an additional nonverbal auditory output may be considerd.</p>
+
+        <h4 id="client"><span class="secno">3.1.3 </span>IPA Client</h4>
 		Clients enable the user to access the IPA via voice with the following characteristics.
 		<ul>
-			<li>Usually, IPA Clients make use of a microphone to capture the spoken input and a loud speaker to provide responses.</li>
-			<li>The client may be activated by an explicit trigger of the user, such as a button, and/or by a hotword.</li>
-			<li>In case an IPA listens for a hot word to be activated, the speakers are always active.</li>
+			<li>Usually, IPA Clients make use of a <a href="#microphone">Microphone</a> to capture the spoken input and a <a href="#speaker">Speaker</a> to provide responses.</li>
+			<li>The client is activated by means of a <a href="#clientactivationstrategy">Client Activation Strategy</a>.</li>
+			<li>In case an IPA listens for a hot word to be activated, the microphones are always active.</li>
 			<li>As an extension IPA Clients may also capture input via text and output text.</li>
 			<li>As an extension IPA Clients may also capture input from a specific modality recognizer.</li>
-			<li>As an extension IPA Clients may also capture contextual information, e.g. location.</li>
+			<li>As an extension IPA Clients may also capture contextual information, e.g. location that it obtains from <a href="#localdataproviders">Local Data Providers</a>.</li>
 			<li>As an extension an IPA Client may also receive commands to be executed locally in the <a href="#localservices">Local Services</a>.</li>
 			<li>As an extension an IPA Client may also receive multimodal output to be rendered by a respective modality synthesizer.</li>
 		</ul>
 		</p>
 		
-		<p>The usage of hotwords includes privacy aspects. Streaming to the components outside the user's control should be avoided, hence detection of hotwords must happen locally.
+        <h5 id="clientactivtionstrategy"><span class="secno">3.2.2.1 </span>Client Activation Strategy</h5>
+		<p>The Client Activation Strategy defines how the client gets activated to be ready to receive spoken commands as input. In turn the <a href="#microphone">Microphone</a> 
+		is opened for recording. The most prominent activation strategies are described in the
+		table below</p>
+			<table border="1">
+				<tr>
+					<th>Client Activation Strategy</th>
+					<th>Description</th>
+				</tr>
+				<tr>
+					<td>Push-to-talk</td>
+					<td>The user explicitly triggers the start of the client by means of a physical button or its equivalent in a client appliction.</td>
+				</tr>
+				<tr>
+					<td>Hotword</td>
+					<td>In this case, the user utters a predefined word to activate the client by voice. This hotword is usually not part of the spoken command that is passed for further evaluation.</td>
+				</tr>
+				<tr>
+					<td>...</td>
+					<td>...</td>
+				</tr>
+			</table>
+		<p>The usage of hotwords includes privacy aspects. Streaming to the components outside the user's control should be avoided, hence detection of hotwords should idaeally happen locally.
 		With regard to nested usage of IPAs that may feature their own hotword, the detection of hotwords might be required to be extensible.</p>
+		
+		<p>todo Add a service registry</p>
+		
 
-        <h4 id="localservice"><span class="secno">3.1.2 </span>Local Services</h4>
-		<p>t.b.d.</p>
+        <h4 id="localservices"><span class="secno">3.1.4 </span>Local Services</h4>
+		<p>Local services can be used to execute local actions in the user's local environment. Examples include turning on the ligth or starting an application, for instance a navigation in a car.</p>
 
-        <h4 id="localdataproviders"><span class="secno">3.1.3 </span>Local Data Providers</h4>
-		<p>t.b.d.</p>
+        <h4 id="localdataproviders"><span class="secno">3.1.5 </span>Local Data Providers</h4>
+		<p>Local Data Providers capture input that is accessible in the user's local environment. They can be used to provide additional input to the <a href="client">IPA Client</a> or
+			to provide additional information that is needed to exectute services. An example for the latter is the state of the light, either turned on or turned off.</p>
 
         <h3 id="dialoglayer"><span class="secno">3.2 Dialog Layer</span></h3>
 		<img src="dialog-layer.svg" style="float:right" width="15%" height="auto" />
@@ -395,6 +439,7 @@
 		<img src="api-data-layer.svg" style="float:right" width="15%" height="auto" />
 		
         <h4 id="selectionservice"><span class="secno">3.3.1 </span>Provider Selection Service</h4>
+		<img src="provider-selection-service-component.svg" style="float:right" width="auto" height="auto" />
 		<p>A service that provides access to all known IPA Providers. This service also maps the IPA Intent Sets to the Intent Sets in the Dialog layer. It has the following characteristics
 		<ul>
 			<li>The Provider Selection Service receives input as text strings and returns results as intents with all recognized entities from all <a href="#provider">IPA Providers</a> 
@@ -437,7 +482,7 @@
 		In case <a href="#provider">IPA Provider</a> does not abstract from determining a relevant list of intents, the same strategy may be applied to determine the n-best intents.
 		</p>
 
-        <h4 id="providerregistry"><span class="secno">3.3.2 </span>Provider Registry</h4>
+        <h5 id="providerregistry"><span class="secno">3.3.1.2 </span>Provider Registry</h5>
 		<p>A registry for all IPA Providers that can be accessed. It has the following characteristics
 		<ul>
 			<li>It returns a list of <a href="#provider">IPA Providers</a> along with their unique identifier that may be used for a current input.</li>
@@ -453,7 +498,7 @@
 		</ul>
 		</p>
 
-        <h4 id="authentication"><span class="secno">3.3.3 </span>Accounts/Authentication</h4>
+        <h5 id="authentication"><span class="secno">3.3.1.3 </span>Accounts/Authentication</h5>
 		<p>A registry that knows how to access the known IPA Providers, i.e. which are available and credentials to access them. Storing of credentials must meet security and trust considerations that are
 			expected from such a personalized service. It has the following characteristics
 		<ul>
@@ -462,11 +507,11 @@
 		</ul>
 		</p>
 
-        <h4 id="dataproviders"><span class="secno">3.3.4 </span>Data Providers</h4>
+        <h4 id="dataproviders"><span class="secno">3.3.2 </span>Data Providers</h4>
 		<img src="dataproviders-component.svg" style="float:right" width="auto" height="auto" />
 		<p>t.b.d.</p>
 
-        <h5 id="dataprovider"><span class="secno">3.3.4.1 </span>Data Provider X</h5>
+        <h5 id="dataprovider"><span class="secno">3.3.2.1 </span>Data Provider X</h5>
 		<p>A data provider to get data to be used in the <a href="#dialog">Dialog</a>, e.g. as a result of a query. It has the following characteristics
 		<ul>
 			<li>The Data Provider provides access to 
@@ -478,18 +523,18 @@
 			<li>The Data Provider can be used to trigger external services, e.g. to execute remote actions</li>
 		</ul></p>
 
-        <h4 id="externalservices"><span class="secno">3.3.5 </span>External Services</h4>
+        <h4 id="externalservices"><span class="secno">3.3.3 </span>External Services</h4>
 		<img src="externalservices-component.svg" style="float:right" width="auto" height="auto" />
 		<p>t.b.d.</p>
 
-        <h5 id="dataprovider"><span class="secno">3.3.5.1 </span>External Service X</h5>
+        <h5 id="dataprovider"><span class="secno">3.3.3.1 </span>External Service X</h5>
 		<p>t.b.d.</p>
 		
-        <h4 id="ipaproviders"><span class="secno">3.3.6 </span>IPA Providers</h4>
+        <h4 id="ipaproviders"><span class="secno">3.3.4 </span>IPA Providers</h4>
 		<img src="ipaproviders-component.svg" style="float:right" width="auto" height="auto" />
 		<p>t.b.d.</p>
 
-        <h5 id="provider"><span class="secno">3.3.6.1 </span>IPA Provider X</h5>
+        <h5 id="provider"><span class="secno">3.3.4.1 </span>IPA Provider X</h5>
 		<p>A provider of an IPA service, like
 		<ul>
 			<li>Google Assistant</li>
@@ -501,14 +546,14 @@
 		<p>The IPA provider may be part of the IPA implementation as an IPA Provider or alternatively a subset of the original functionaliy as described below as part of another IPA implementation.</p>
 
 
-        <h5 id="providernlu"><span class="secno">3.3.6.2 </span>Provider NLU</h5>
+        <h5 id="providernlu"><span class="secno">3.3.4.2 </span>Provider NLU</h5>
 		<p>An NLU component that is able to extract meaning as intents and associated entities from an utterance as text strings for <a href="#provider">IPA Provider X</a>. It has the following characteristics
 		<ul>
 			<li>The Provider NLU may make use of the <a href="#dataprovider">Data Provider</a> to access local or internal data or access external services.</li>
 			<li>The Provider NLU may make use of the <a href="#knowledgegraph">Knowledge Graph</a> to derive meaning.</li>
 		</ul></p>
 
-        <h5 id="providerintentsets"><span class="secno">3.3.6.3 </span>Provider Intent Set</h5>
+        <h5 id="providerintentsets"><span class="secno">3.3.4.3 </span>Provider Intent Set</h5>
 		<p>An <a href="#intentsets">Intent Set</a> that might be returned by the <a href="#providernlu">Provider NLU</a> to handle the capabilities of <a href="#provider">IPA Provider X</a>.</p>
 
         <h4 id="finalarchitecture"><span class="secno">3.4 </span>Resulting Architecture</h4>
