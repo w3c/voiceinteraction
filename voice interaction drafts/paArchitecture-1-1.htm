@@ -168,7 +168,7 @@
 		
         <h5 id="clientactivtionstrategy"><span class="secno">3.2.2.1 </span>Client Activation Strategy</h5>
 		<p>The Client Activation Strategy defines how the client gets activated to be ready to receive spoken commands as input. In turn the <a href="#microphone">Microphone</a> 
-		is opened for recording. The most prominent activation strategies are described in the
+		is opened for recording. Client Activation Strategies are not exclusive but may may used concurrently. The most prominent activation strategies are described in the
 		table below</p>
 			<table border="1">
 				<tr>
@@ -233,7 +233,7 @@
 			</ul></li>
 			<li>The overall set of available <a href="#dialog">Dialogs</a> defines the behavior and capabilities of the interaction with the IPA.</li>
 			<li>The Dialog Manager is also responsible for a good user experience across the available Dialogs.</li>
-			<li>The Dialog Manager determines the Dialog following a <a href=#dialogstrategy">Dialog Strategy</a> that is best suited to serve the current user input and re-establishes the interaction state for that <a href="#dialog">Dialog</a>.
+			<li>The Dialog Manager determines the Dialog following a <a href="#dialogstrategy">Dialog Strategy</a> that is best suited to serve the current user input and re-establishes the interaction state for that <a href="#dialog">Dialog</a>.
 				Therefore, it may use the <a href="#dialogregistry">Dialog Registry</a>.</li>
 			<li>The Dialog Manager follows the principle to fill in all slots that are known before prompting the user for it.</a>
 			<li>The Dialog Manager also manages the session with a user. Conceptually, multiple sessions can be active in parallel. Dialogs are governed by Sessions, e.g. to free resources of ASR and NLU engines when
@@ -288,7 +288,7 @@
 		<p>t.b.d.</p>
 
         <h5 id="knowledge-graph"><span class="secno">3.2.3.2 </span>Knowledge Graph</h5>
-		<p>A knowledge graph to reason about the detected input from the <a href="#nlu">NLU</a> and <a href="#coredataprovider">Core Data Provider</a> to come up with some more meaningful results.</p>
+		<p>A knowledge graph to reason about entities. This may be received from the detected input from the <a href="#nlu">NLU</a> or <a href="#coredataprovider">Data Providerd</a> to come up with some more meaningful data matching the current task better. One example is the use of the name of a person as a navigation target as a person usually has an address that qualifies to be used in navigation tasks.</p>
 
         <h4 id="asr"><span class="secno">3.2.4 </span>ASR</h4>
 		<p>The Automated Speech Recognizer (ASR) receives audio streams of recorded utterances and generates a recognition hypothesis as text strings. Conceptually, ASR is 
