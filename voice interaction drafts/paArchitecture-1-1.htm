@@ -137,6 +137,7 @@
 		to other layers as needed. This view only reflects a view that the authors regard as ideal and to show the intended seperation of concerns.</p>
 		
         <h3 id="clientlayer"><span class="secno">3.1 Client Layer</span></h3>
+		<p>The Client Layer contains the main components that interface with the user. The following figure details the view onto the Client Layer shown in Figure 1.</p>
 		<img src="client-layer.svg" style="float:right" width="10%" height="auto" />
 
         <h4 id="microphone"><span class="secno">3.1.1 </span>Microphone</h4>
@@ -190,10 +191,14 @@
 			</table>
 		<p>The usage of hotwords includes privacy aspects. Streaming to the components outside the user's control should be avoided, hence detection of hotwords should idaeally happen locally.
 		With regard to nested usage of IPAs that may feature their own hotword, the detection of hotwords might be required to be extensible.</p>
-		
-		<p>todo Add a service registry</p>
-		
 
+        <h5 id="localserviceregistry"><span class="secno">3.2.2.2 </span>Local Service Registry</h5>
+		<p>A registry for all <a href="#localservices">Local Services</a> an <a href="#localdataproviders">Local Data Providers</a> that can be accessed by the client
+		<ul>
+			<li>It maintains a list of <a href="#localservices">Local Services</a> an <a href="#localdataproviders">Local Data Providers</a> along with their unique identifier that may be accessed by the client.</li>
+		</ul>
+		</p>
+		
         <h4 id="localservices"><span class="secno">3.1.4 </span>Local Services</h4>
 		<p>Local services can be used to execute local actions in the user's local environment. Examples include turning on the ligth or starting an application, for instance a navigation in a car.</p>
 
@@ -203,8 +208,8 @@
 		<p>t.b.d. Describe handling in case the call is forwarded to a nested IPA</p>
 
         <h3 id="dialoglayer"><span class="secno">3.2 Dialog Layer</span></h3>
+		<p>The Dialog Layer contains the main components to drive the interaction with the user. The following figure details the view onto the Dialog Layer shown in Figure 1.</p>
 		<img src="dialog-layer.svg" style="float:right" width="15%" height="auto" />
-		<p>t.b.d.</p>
 
         <h4 id="ipaservice"><span class="secno">3.2.1 </span>IPA Service</h4>
 		<p>General IPA Service API that mediates between the user and the overall IPA system. The service layer may be omitted in case the <a href="#client">IPA Client</a> communicates directly with 
@@ -285,10 +290,11 @@
 		</ul></p>
 
         <h5 id="history"><span class="secno">3.2.3.1 </span>History</h5>
-		<p>t.b.d.</p>
+		<p>The Dialog History mainly stores the past dialog events per user. Dialog events include users’ transcriptions, semantic interpretations and resulting actions.
+		   Thus, it has information how the user reacted in the past and knows her preferences. The history may also be used to resolve anaphoric references in the <a href="#nlu">NLU</a>.</p>
 
         <h5 id="knowledge-graph"><span class="secno">3.2.3.2 </span>Knowledge Graph</h5>
-		<p>A knowledge graph to reason about the detected input from the <a href="#nlu">NLU</a> and <a href="#coredataprovider">Core Data Provider</a> to come up with some more meaningful results.</p>
+		<p>A knowledge graph to reason about the detected input from the <a href="#nlu">NLU</a> and <a href="#coredataprovider">Data Providers</a> to come up with some more meaningful results.</p>
 
         <h4 id="asr"><span class="secno">3.2.4 </span>ASR</h4>
 		<p>The Automated Speech Recognizer (ASR) receives audio streams of recorded utterances and generates a recognition hypothesis as text strings. Conceptually, ASR is 
