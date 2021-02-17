@@ -15,7 +15,7 @@
             <h2 property="bibo:subtitle" id="subtitle">Architecture and Potential for Standardization Version 1.1</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: January 28, 2020 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm</a> (GitHub repository) </dd>
+                <dd>Last modified: February 17, 2021 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm</a> (GitHub repository) </dd>
 				<dd><a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture-1-1.htm">HTML rendered version</a></dd>             
 			    <dt>Editors</dt>
                 <p><span style="color: rgb(51, 51, 51); font-family: Conv_DroidSerif-Regular, serif; font-size: 15.7072px; orphans: 2; text-align: center; widows: 2; background-color: rgba(255, 255, 255, 0.6);">Dirk Schnelle-Walka</br>
@@ -23,7 +23,7 @@
 								<p><span style="color: rgb(51, 51, 51); font-size: 15.7072px; orphans: 2; text-align: center; widows: 2; background-color: rgba(255, 255, 255, 0.6);"</p>
 							
             </dl>
-            <p class="copyright">Copyright © 2019-2020 the Contributors to the Voice Interaction Community Group, 
+            <p class="copyright">Copyright © 2019-2021 the Contributors to the Voice Interaction Community Group, 
                 published by the  <a href="http://www.w3.org/community/voiceinteraction/">Voice Interaction Community Group</a> 
                 under the <a href="https://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a>. A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/">summary</a> is available.</p>
             <hr></div>
@@ -64,14 +64,14 @@
         <p>Intelligent Personal Assistants (IPAs) are now available in our daily lives through our smart phones. Apple’s Siri, Google Assistant, Microsoft’s Cortana, Samsung’s Bixby and 
 		many more are helping us with various tasks, like shopping, playing music, setting a schedule, sending messages, and offering answers to simple questions. Additionally, we equip our households
 		with smart speakers like Amazon’s Alexa or Google Home which are available without the need to pick up explicit devices for these sorts of tasks or even control household appliances in our homes.
-		As of today, there is no interoperability between the available IPA providers. Especially for exchanging learned user behaviors this is unlikely to happen at all.</p>
+		As of today, there is no interoperability among the available IPA providers. Especially for exchanging learned user behaviors this is unlikely to happen at all.</p>
         <p>
-            Furthermore, in addition to these general-purpose assistants, there are also specialized virtual assistants which are able to provide their users with in-depth information which is specific to an enterprise, government agency, school, or other organization. They may also have the ability to perform transactions on behalf of their users, such as purchasing items, paying bills, or making reservations. Because the breadth of possibilities for these specialized assistants, it is imperative that they be able to interoperate with the general-purpose assistants. Without this kind of interoperability, enterprise developers will need to re-implement their intelligent assistants for each major generic platform. 
+            Furthermore, in addition to these general-purpose assistants, there are also specialized virtual assistants which are able to provide their users with in-depth information which is specific to an enterprise, government agency, school, or other organization. They may also have the ability to perform transactions on behalf of their users, such as purchasing items, paying bills, or making reservations. Because of the breadth of possibilities for these specialized assistants, it is imperative that they be able to interoperate with the general-purpose assistants. Without this kind of interoperability, enterprise developers will need to re-implement their intelligent assistants for each major generic platform. 
         </p>
 		
 		<p>This document describes a general architecture of IPAs and explores the potential areas for standardization. It focuses on voice as the major input modality. However,
 			the overall concept is not restricted to voice but also covers purely text based interactions with so-called chatbots as well as interaction using multiple modalities.
-			Conceptually, the authors define executing actions in the user's environment, like turning on the light, as a modality.
+			Conceptually, the authors also define executing actions in the user's environment, like turning on the light, as a modality.
 			This means that components that deal with speech recognition, natural language understanding or speech synthesis will not necessarily be available in these deployments. In case of chatbots, speech components will be omitted. In case of
 			multimodal interaction, interaction modalities may be extended by components to recognize input from the respective modality, transform it into something meaningful and vice-versa to generate output
 			in one or more modalities. Some modalities may be used as output-only, like turning on the light, while other modalities may be used as input-only, like touch.</p>
@@ -79,12 +79,11 @@
         <h2 id="problemStatement"><span class="secno">2. </span>Problem Statement</h2>
 
 		<p>Currently, users are mainly using the IPA Provider that is shipped with a certain piece of hardware. Thus, selection of a smart phone manufacturer actually determines which IPA implementation
-			they are using. Switching among different IPA providers also involves switching a manufacturer, including high costs and getting used to a new user interface specific to 
-			the selected manufacturer. 
-			On the one hand users should have more freedom in selecting the IPA implementation they want. However, they are bound to use that service that is available in that implementation but
-			not what they necessarily prefer. 
-			On the other hand, IPA providers, which mainly produce the software, must also function as hardware manufacturer to be successful. Finally, manufacturers also have to take care to port
-			existing services to their platform. A standardization would clearly lower the needed efforts for that and thus reduce costs.</p>
+			they are using. Switching among different IPA providers also involves switching the manufacturer, which requires high costs and getting used to a new user interface specific to 
+			the new manufacturer. 
+			On the one hand users should have more freedom in selecting the IPA implementation they want. However, they are bound to use the service that is available in that implementation but which may not be what they necessarily prefer. 
+			On the other hand, IPA providers, which mainly produce the software, must also function as hardware manufacturers to be successful. Finally, manufacturers also have to take care to port
+			existing services to their platform. Standardization would clearly lower the needed efforts for porting and thus reduce costs.</p>
 			
 			<p>In order to explore the potential for standardization, a typical usage scenario is described in the following section.</p>
 		
@@ -92,24 +91,24 @@
 				<p>This section describes potential usages of IPAs.</p> 
 				
 				<h4><span class="secno">2.1.1 </span><font face="Segoe UI">Travel Planning</font></h4>
-				<p>A user would like to plan a trip to an international conference and she needs visa information and airline reservations. She will give the intelligent personal assistant her
+				<p>A user would like to plan a trip to an international conference and she needs visa information and airline reservations. She will give the intelligent personal assistant (IPA) her
 				visa information (her citizenship, where she is going, purpose of travel, etc.) and it will respond by telling her the documentation she needs, how long the process will take
 				and what the cost will be. This may require the personal assistant to consult with an auxiliary web service or another personal assistant that knows about visas.</p>
 
-				<p>Once the user has found out about the visa, she tells the PA that she wants
-				to make airline reservations. She specifies her dates of travel and airline preferences and the PA then interacts with her to find appropriate flights. </p>
+				<p>Once the user has found out about the visa, she tells the IPA that she wants
+				to make airline reservations. She specifies her dates of travel and airline preferences and the IPA then interacts with her to find appropriate flights. </p>
 
 				<p>A similar process will be repeated if the user wants to book a hotel, find
 				a rental car, or find out about local attractions in the destination city.
-				Booking a hotel as part of attending a conference could also involve finding out about a designated conference hotel or special conference rates. </p>
+				Booking a hotel as part of attending a conference could also involve finding out about a designated conference hotel or special conference rates, which, again, could require interaction with the hotel or the conference's IPA's.</p>
 
-        <h3><span class="secno">2.2 Roles and Responsibilites</span></h3>
+        <h3><span class="secno">2.2 Roles and Responsibilities</span></h3>
 		
 		<p>Roles like user, developer, IPA supplier will be added in a future version of this document</p>
 				
 		<h2 id="architecture"><span class="secno">3. </span></span><font face="Segoe UI">Architecture</font></span></h2>
 
-		<p>In order to cope with such use cases as described above an IPA follows the general design concepts of a voice user interface as it can be seen in the following figure.</p>
+		<p>In order to cope with such use cases as those described above an IPA follows the general design concepts of a voice user interface, as can be seen in Figure 1.</p>
 
 		<figure>
 			<img src="Basic-IPA-Architecture.svg" alt="Basic IPA Architecture" style="width: 100%; height: auto;"/>
@@ -118,23 +117,23 @@
 		
 		<p>This architecture aims at serving, among others, the following most popular high-level use cases for IPAs
 			<ol>
-				<li>Question Answering or Information Retreival</a>
+				<li>Question Answering or Information Retrieval</a>
 				<li>Executing local and/or remote services to accomplish tasks</li>
 			</ol>
-		This is supported by a flexible architecture that allows to dynamically add local and remote services or knowledge sources such as data providers. Moreover, it is possible
-		to include other IPAs, with actually the same architecture and forward requests to them, similar to the principle of a russian doll, omitting the Client Layer.
+		This is supported by a flexible architecture that supports dynamically adding local and remote services or knowledge sources such as data providers. Moreover, it is possible
+		to include other IPAs, with the same architecture, and forward requests to them, similar to the principle of a russian doll (omitting the Client Layer).
 		All this describes the capabilities of the IPA. These extensions may be selected from a
 		standardized market place. For the reminder of this document, we consider an IPA that is extendable via such a market place.</p>
 		
 		<p>Not all components may be needed for actual implementations, some may be omitted completely. However, we note them here to provide a more complete picture. 
-		This architecture comprises 3 layers that are detailed in the following sections
+		This architecture comprises three layers that are detailed in the following sections
         <ol>
             <li><a href="#clientlayer">Client Layer</a></li>
             <li><a href="#dialoglayer">Dialog Layer</a></li>
             <li><a href="#datalayer">APIs / Data Layer</a></li>
         </ol>
 		Actual implementations may want to distinguish more than these layers. The assignment to the layers is not considered to be strict so that some of the components may be shifted
-		to other layers as needed. This view only reflects a view that the authors regard as ideal and to show the intended seperation of concerns.</p>
+		to other layers as needed. This view only reflects a view that the Community Group regard as ideal and to show the intended separation of concerns.</p>
 		
         <h3 id="clientlayer"><span class="secno">3.1 Client Layer</span></h3>
 		<p>The Client Layer contains the main components that interface with the user. The following figure details the view onto the Client Layer shown in Figure 1.</p>
@@ -145,13 +144,13 @@
 			similarly with a specific modality recognizer. Additional input may be gathered from <a href="#localdataproviders">Local Data Providers</a></p>
 
         <h4 id="speaker"><span class="secno">3.1.2 </span>Speaker</h4>
-		<p>The loud spekaer is used to output replies as verbal auditory output in the shape of spoken utterances as a primary output modality. Utterances may be accompanied by nonverbal auditory output such as
+		<p>The loud speaker is used to output replies as verbal auditory output in the shape of spoken utterances as a primary output modality. Utterances may be accompanied by nonverbal auditory output such as
 			<li>earcons,</li>
 			<li>auditory icons or</li>
 			<li>music.</li></p>
 		<p>Additional output modalities can be employed that render their output similarly with a specific modality synthesizer.</p>
-		<p>It is not always required that a verbal auditory output is made as a reply to a user. The user can also become aware of the output as a consequence of an obervable action as a result
-		of a <a href="localserverices">Local Service<a> or an <a href="#externalservices">External Services</a> call. In these cases an additional nonverbal auditory output may be considerd.</p>
+		<p>It is not always required that a verbal auditory output is made as a reply to a user. The user can also become aware of the output as a consequence of an osbervable action as a result
+		of a <a href="localserverices">Local Service<a> or an <a href="#externalservices">External Services</a> call. In these cases an additional nonverbal auditory output may be considered.</p>
 
         <h4 id="client"><span class="secno">3.1.3 </span>IPA Client</h4>
 		Clients enable the user to access the IPA via voice with the following characteristics.
@@ -161,7 +160,7 @@
 			<li>In case an IPA listens for a hot word to be activated, the microphones are always active.</li>
 			<li>As an extension IPA Clients may also capture input via text and output text.</li>
 			<li>As an extension IPA Clients may also capture input from a specific modality recognizer.</li>
-			<li>As an extension IPA Clients may also capture contextual information, e.g. location that it obtains from <a href="#localdataproviders">Local Data Providers</a>.</li>
+			<li>As an extension IPA Clients may also capture contextual information, e.g. location, that it obtains from <a href="#localdataproviders">Local Data Providers</a>.</li>
 			<li>As an extension an IPA Client may also receive commands to be executed locally in the <a href="#localservices">Local Services</a>.</li>
 			<li>As an extension an IPA Client may also receive multimodal output to be rendered by a respective modality synthesizer.</li>
 		</ul>
@@ -169,7 +168,7 @@
 		
         <h5 id="clientactivtionstrategy"><span class="secno">3.2.2.1 </span>Client Activation Strategy</h5>
 		<p>The Client Activation Strategy defines how the client gets activated to be ready to receive spoken commands as input. In turn the <a href="#microphone">Microphone</a> 
-		is opened for recording. Client Activation Strategies are not exclusive but may may used concurrently. The most prominent activation strategies are described in the
+		is opened for recording. Client Activation Strategies are not exclusive but may be used concurrently. The most common activation strategies are described in the
 		table below</p>
 			<table border="1">
 				<tr>
@@ -178,59 +177,59 @@
 				</tr>
 				<tr>
 					<td>Push-to-talk</td>
-					<td>The user explicitly triggers the start of the client by means of a physical button or its equivalent in a client appliction.</td>
+					<td>The user explicitly triggers the start of the client by means of a physical or on-screen button or its equivalent in a client application.</td>
 				</tr>
 				<tr>
 					<td>Hotword</td>
-					<td>In this case, the user utters a predefined word to activate the client by voice. This hotword is usually not part of the spoken command that is passed for further evaluation.</td>
+					<td>In this case, the user utters a predefined word or phrase to activate the client by voice. This hotword is usually not part of the spoken command that is passed for further evaluation.</td>
 				</tr>
 				<tr>
 					<td>...</td>
 					<td>...</td>
 				</tr>
 			</table>
-		<p>The usage of hotwords includes privacy aspects. Streaming to the components outside the user's control should be avoided, hence detection of hotwords should idaeally happen locally.
-		With regard to nested usage of IPAs that may feature their own hotword, the detection of hotwords might be required to be extensible.</p>
+		<p>The usage of hotwords includes privacy aspects. Streaming to the components outside the user's control should be avoided, hence detection of hotwords should ideally happen locally.
+		With regard to nested usage of IPAs that may feature their own hotwords, the detection of hotwords might be required to be extensible.</p>
 
         <h5 id="localserviceregistry"><span class="secno">3.2.2.2 </span>Local Service Registry</h5>
-		<p>A registry for all <a href="#localservices">Local Services</a> an <a href="#localdataproviders">Local Data Providers</a> that can be accessed by the client
+		<p>A registry for all <a href="#localservices">Local Services</a> and <a href="#localdataproviders">Local Data Providers</a> that can be accessed by the client
 		<ul>
 			<li>It maintains a list of <a href="#localservices">Local Services</a> an <a href="#localdataproviders">Local Data Providers</a> along with their unique identifier that may be accessed by the client.</li>
 		</ul>
 		</p>
 		
         <h4 id="localservices"><span class="secno">3.1.4 </span>Local Services</h4>
-		<p>Local services can be used to execute local actions in the user's local environment. Examples include turning on the ligth or starting an application, for instance a navigation in a car.</p>
+		<p>Local services can be used to execute local actions in the user's local environment. Examples include turning on the light or starting an application, for instance a navigation system in a car.</p>
 
         <h4 id="localdataproviders"><span class="secno">3.1.5 </span>Local Data Providers</h4>
 		<p>Local Data Providers capture input that is accessible in the user's local environment. They can be used to provide additional input to the <a href="client">IPA Client</a> or
-			to provide additional information that is needed to exectute services. An example for the latter is the state of the light, either turned on or turned off.</p>
-		<p>t.b.d. Describe handling in case the call is forwarded to a nested IPA</p>
+			to provide additional information that is needed to execute services. An example for the latter is the state of the light, either turned on or turned off.</p>
+		<p>Handling in case the call is forwarded to a nested IPA will be discussed in future versions of this document.</p>
 
         <h3 id="dialoglayer"><span class="secno">3.2 Dialog Layer</span></h3>
-		<p>The Dialog Layer contains the main components to drive the interaction with the user. The following figure details the view onto the Dialog Layer shown in Figure 1.</p>
+		<p>The Dialog Layer contains the main components to drive the interaction with the user. The following figure details the view of the Dialog Layer shown in Figure 1.</p>
 		<img src="dialog-layer.svg" style="float:right" width="15%" height="auto" />
 
         <h4 id="ipaservice"><span class="secno">3.2.1 </span>IPA Service</h4>
-		<p>General IPA Service API that mediates between the user and the overall IPA system. The service layer may be omitted in case the <a href="#client">IPA Client</a> communicates directly with 
-		<a href="#dialogmanagement">Dialog Management</a>. However, this is not recommended as it may contradict the principle of seperation-of-concerns. It has the following characteristics
+		<p>The general IPA Service API that mediates between the user and the overall IPA system. The service layer may be omitted in case the <a href="#client">IPA Client</a> communicates directly with 
+		<a href="#dialogmanagement">Dialog Management</a>. However, this is not recommended as it may contradict the principle of separation-of-concerns. It has the following characteristics
 		<ul>
 			<li>The IPA Service functions as an interface between the <a href="#client">IPA Client</a> and the <a href="#dialogmanagement">Dialog Management</a> and
 				<a href="#selectionservice">Provider Selection Service</a>.</li>
 			<li>The output from the <a href="#asr">ASR</a> is forwarded to the <a href="#selectionservice">Provider Selection Service</a> to determine meaning.</li>
-			<li>Alternatively, the IPA Service may receive multimodal or text input from the client and forwards it directly to the <a href="#selectionservice">Provider Selection Service</a> to determine meaning.</li></li>
+			<li>Alternatively, the IPA Service may receive multimodal or text input from the client and forward it directly to the <a href="#selectionservice">Provider Selection Service</a> to determine meaning.</li></li>
 			<li>Alternatively, the output from the modality recognizers and contextual information may be forwarded directly to the <a href="#dialogmanagement">Dialog Management</a>.</li>
 		</ul></p>
 
         <h4 id="dialogmanagement"><span class="secno">3.2.2 </span>Dialog Management</h4>
-		<p>The Dialog Management is a component that receives semantic information determined from user input, updates its internal state, decides upon subsequent steps to continue a dialog and provides output
+		<p>The Dialog Management is a component that receives semantic information determined from user input, updates its internal state, decides upon subsequent steps to continue a dialog and provides output,
 		mainly as synthesized or recorded utterances. Conceptually the dialog manager defines the playground that is used by the <a href="#dialog">Dialogs</a>. Both contribute to the user experience. 
 		The Dialog Manager has the following characteristics
 		<ul>
 			<li>Dialog Management receives recorded voice input from the <a href="#ipaservice">IPA Service</a> and forwards it to the <a href="#asr">ASR</a></li>
 			<li>Dialog Management makes use of the <a href="#TTS">TTS</a> to generate audio data to be rendered on the <a href="#client">IPA Client</a></li>
 			<li>As an extension, it may also provide commands as output to be executed by the <a href="#client">IPA Client</a></li>
-			<li>As an extension Dialogs may also return multimodal output or text to be rendered by a respective modality synthesizer on the <a href="#client">IPA Client</a>.</li>
+			<li>As an extension, Dialogs may also return multimodal output or text to be rendered by a respective modality synthesizer on the <a href="#client">IPA Client</a>.</li>
 			<li>For this, it employs several <a href="#dialog">Dialogs</a> that are responsible for handling isolated tasks or intents. The following types of dialogs exist:
 			<ul>
 				<li><a href="#coredialog">Core Dialog</a></li>
@@ -240,15 +239,15 @@
 			<li>The Dialog Manager is also responsible for a good user experience across the available Dialogs.</li>
 			<li>The Dialog Manager determines the Dialog following a <a href="#dialogstrategy">Dialog Strategy</a> that is best suited to serve the current user input and re-establishes the interaction state for that <a href="#dialog">Dialog</a>.
 				Therefore, it may use the <a href="#dialogregistry">Dialog Registry</a>.</li>
-			<li>The Dialog Manager follows the principle to fill in all slots that are known before prompting the user for it.</a>
+			<li>The Dialog Manager follows the principle to fill in all slots that are known before prompting the user for additional slots.</a>
 			<li>The Dialog Manager also manages the session with a user. Conceptually, multiple sessions can be active in parallel. Dialogs are governed by Sessions, e.g. to free resources of ASR and NLU engines when
-				a session expires. Linguistic phenomena, like anaphoric references and ellipsis are expected to work within a Session. The selected IPA Provider or the Dialog Manager may have leading roles for this task.</li>
+				a session expires. Linguistic phenomena, like anaphoric references and ellipsis, are expected to work within a Session. The selected IPA Provider or the Dialog Manager may have leading roles for this task.</li>
 			<li>The Dialog Manager also features an <a href="#asr">ASR</a> to convert spoken utterances into text strings and a <a href="#tts">TTS</a> to convert text strings into audio.</li>
 		</ul>
 		</p>
 
         <h5 id="dialog"><span class="secno">3.2.2.1 </span>Dialog Strategy</h5>
-		<p>A Dialog Strategy is a conceptualization of a dialog for an operationalization in a computer system. It defines the representation of the dialogs state and
+		<p>A Dialog Strategy is a conceptualization of a dialog for an operationalization in a computer system. It defines the representation of the dialog's state and
 			respective operations to process and generate events relevant to the interaction. This specification is agnostic to the employed Dialog Strategy. Examples of
 			dialog strategy include</p>
 			<table border="1">
@@ -282,7 +281,7 @@
 		each and every aspect of what context should comprise as discussions about context are likely to end up in trying to explain the world. For the sake of this 
 		specification it should be possible to deal with the following characteristics
 		<ul>
-		    <li>The dialog context is enhanced build interaction with the user (grounding) from spoken and other input.</a>
+		    <li>The dialog context is enhanced to build interaction with the user (grounding) from spoken and other input.</a>
 			<li>The Context supports the <a href="#dialogmanagement">Dialog Management</a> to get the needed information for a current dialog</a>
 			<li>The Context supports the <a href="#dialogmanagement">Dialog Management</a> to get the needed information when switching from one dialog context to another</a>
 			<li>The Context supports the <a href"=#nlu">NLU</a> to determine meaning from the user's input, also by reasoning via a <a href="#knowledge-graph">Knowledge Graph</a>.</u>
@@ -294,7 +293,7 @@
 		   Thus, it has information how the user reacted in the past and knows her preferences. The history may also be used to resolve anaphoric references in the <a href="#nlu">NLU</a>.</p>
 
         <h5 id="knowledge-graph"><span class="secno">3.2.3.2 </span>Knowledge Graph</h5>
-		<p>A knowledge graph to reason about entities and intents. This may be received from the detected input from the <a href="#nlu">NLU</a> or <a href="#coredataprovider">Data Providerds</a> to come up with some more meaningful data matching the current task better. One example is the use of the name of a person as a navigation target as a person usually has an address that qualifies to be used in navigation tasks.</p>
+		<p>A knowledge graph to reason about entities and intents. This may be received from the detected input from the <a href="#nlu">NLU</a> or <a href="#coredataprovider">Data Providers</a> to come up with some more meaningful data matching the current task better. One example is the use of the name of a person as a navigation target as a person usually has an address that qualifies to be used in navigation tasks.</p>
 
         <h4 id="asr"><span class="secno">3.2.4 </span>ASR</h4>
 		<p>The Automated Speech Recognizer (ASR) receives audio streams of recorded utterances and generates a recognition hypothesis as text strings. Conceptually, ASR is 
@@ -304,7 +303,7 @@
 			<li>Optionally, the ASR can be part of the <a href="#provider">IPA Provider</a>. In this case, the received audio streams must be forwarded to the <a href="#selectionservice">Provider Selection Service</a>.
 				In this case the <a href="#nlu">NLU</a> must be part of an <a href="#provider">IPA Provider</a>.</li>
 			<li>Multiple ASR instances may exist if multiple <a href="#provider">IPA Providers</a> come with their own ASR</li>
-			<li>In case of a chatbot, this component will not be needed.</li>
+			<li>In case of a text-based chatbot, this component will not be needed.</li>
 		</ul></p>
 
         <h4 id="nlu"><span class="secno">3.2.5 </span>NLU</h4>
@@ -315,16 +314,16 @@
 		</ul></p>
 
         <h4 id="nlg"><span class="secno">3.2.6 </span>NLG</h4>
-		<p>The natural language generation (NLG) component is responsible for preparing the natural language text that represents the system’s output </p>
+		<p>The natural language generation (NLG) component is responsible for preparing the natural language text that represents the system’s output. </p>
 		
         <h4 id="tts"><span class="secno">3.2.7 </span>TTS</h4>
-		<p>The Text-to-Speech (TTS) component receives text strings, which it converts into audio data. Conceptually, the TTS is a modality specifc renderer for speech. It has the following characteristics
+		<p>The Text-to-Speech (TTS) component receives text strings, which it converts into audio data. Conceptually, the TTS is a modality specific renderer for speech. It has the following characteristics
 		<ul>
-			<li>Optionally, the TTS can also be part of the <a href="#provider">IPA Provider</a>. In this case, the audio streams is retrieved from the 
+			<li>Optionally, the TTS can also be part of the <a href="#provider">IPA Provider</a>. In this case, the audio stream is retrieved from the 
 				<a href="#selectionservice">Provider Selection Service</a>.</li>
 			<li>In case the TTS is part of the <a href="#provider">IPA Provider</a>, multiple TTS instances may exist. This may be useful in case of branding.</li>
 			<li>Multiple TTS instances may exist in parallel. In this case it is up to the current <a href="#dialog">Dialog</a> to specify the TTS engine to use.</li>
-			<li>In case of a chatbot, this component will not be needed.</li>
+			<li>In case of a text-based chatbot, this component will not be needed.</li>
 		</ul></p>
 
         <h4 id="dialogs"><span class="secno">3.2.8 </span>Dialogs</h4>
@@ -365,7 +364,7 @@
 			</tr>
 			<tr>
 				<td>Error</td>
-				<td>An unknown error occured</td>
+				<td>An unknown error occurred</td>
 			</tr>
 			<tr>
 				<td>Transfer to external IPA Provider</td>
@@ -376,24 +375,24 @@
 				<td>...</td>
 			</tr>
 		</table>
-		<p>Conceptually, the Core Dialog is a special <a href="dialogx">Dialog</a> as described in the following section that is always available</p>
+		<p>Conceptually, the Core Dialog is a special <a href="dialogx">Dialog</a> as described in the following section that is always available.</p>
 
         <h5 id="dialog"><span class="secno">3.2.8.2 </span>Dialog</h5>
-		<p>A Dialog is able to handle functionality that can be added to the capabilities of the <a href="#dialogmanagement">Dialog Management</a> through their associated Intent Sets. 
-			They are logical entities within the overall description of the interaction with the user, executed by the <a href="#dialogmanagement">Dialog Management</a>.
+		<p>A Dialog is able to handle functionality that can be added to the capabilities of the <a href="#dialogmanagement">Dialog Management</a> through its associated Intent Sets. 
+			Dialogs are logical entities within the overall description of the interaction with the user, executed by the <a href="#dialogmanagement">Dialog Management</a>.
 			
-			The Dialogs must server different purpose in a sense that they are unique for a certain task. E.g., only a single flight reservation dialog may exist at a time. 
+			Dialogs must serve different purposes in the sense that they are unique for a certain task. E.g., only a single flight reservation dialog may exist at a time. 
 			Dialogs have the following characteristics
 		<ul>
 			<li>Dialogs receive inputs as intents out of their supported <a href="#intentsets">Intent Sets</a> along with associated entities and return responses as text 
 				strings to be spoken.</li>
-			<li>Dialogs reference all Intents from the <a href="#intentsets">Intent Sets</a> that they need to fullfill their service.</li>
+			<li>Dialogs reference all Intents from the <a href="#intentsets">Intent Sets</a> that they need to fulfill their service.</li>
 			<li>Dialogs do not require the existence of a corresponding <a href="#intentsets">Intent Set</a>.</li>
 			<li>Dialogs are expected to be slot-based and may specify entities from an <a href="#intentsets">Intent Set</a> that are filled after their execution.</li>
 			<li>Dialogs may specify follow-up dialogs that are to be executed once execution of this dialog is completed.</li>
 			<li>Dialogs may specify clarification dialogs by name or by a list of entities from an <a href="#intentsets">Intent Set</a>.</li>
-			<li>As an extension Dialogs may also return commands to be executed by the <a href="#client">IPA Client</a>.</li>
-			<li>As an extension Dialogs may also return multimodal output to be rendered by a respective modality synthesizer on the <a href="#client">IPA Client</a>.</li>
+			<li>As an extension, Dialogs may also return commands to be executed by the <a href="#client">IPA Client</a>.</li>
+			<li>As an extension, Dialogs may also return multimodal output to be rendered by a respective modality synthesizer on the <a href="#client">IPA Client</a>.</li>
 			<li>Dialogs access the Provider Selection Service to fulfill their task. They maintain state which they also share with the <a href="#dialogmanagement">Dialog Management</a> and know which
 				<a href="#provider">IPA Provider</a> evaluated their request with the help of an identifier.</li>
 			<li>A Dialog may specify a <a href="#tts">TTS</a> engine to use in case there are multiple engines available.</li>
@@ -401,14 +400,14 @@
 		</p>
 
         <h5 id="coreintentsets"><span class="secno">3.2.8.3 </span>Core Intent Sets</h5>
-		<p>A Core Intent Set usually identifies tasks to be executed and define the capabilities of the <a href="#coredialog">Core Dialog</a>. Conceptually, the Core Intent Sets are Intent Sets that are
+		<p>A Core Intent Set usually identifies tasks to be executed and defines the capabilities of the <a href="#coredialog">Core Dialog</a>. Conceptually, the Core Intent Sets are Intent Sets that are
 		always available.</p>
 		
         <h5 id="intentsets"><span class="secno">3.2.8.4 </span>Intent Sets</h5>
-		<p>Intent Sets define actions along with their parameters that can be consumed by a corresponding <a href="#dialog">Dialog</a> and has the following characteristics
+		<p>Intent Sets define actions along with their parameters that can be consumed by a corresponding <a href="#dialog">Dialog</a> and have the following characteristics
 		<ul>
-			<li>An Intent Set defines one ore more intents with an optional number (including none) of entities to fulfill the corresponding action.</li>
-			<li>It abstracts from actual Intent Sets that are defined by the Intent Providers, e.g. <em>plan-travel</em> or <em>plan-air-travel</em> used by 
+			<li>An Intent Set defines one or more intents with an optional number (including none) of entities to fulfill the corresponding action.</li>
+			<li>An Intent Set abstracts from actual Intent Sets that are defined by the Intent Providers, e.g. <em>plan-travel</em> or <em>plan-air-travel</em> used by 
 				different Intent Provider implementations into the one used in the <a href="#dialog">Dialogs</a> for <em>travel-planning</em>.
 				In case the Intent Provider is identical to the platform provider, they may match.</li>
 			<li>Matching Intent Sets must be done carefully, as the various intent sets may not match one-to-one to not break the user experience. Therefore, 
@@ -418,7 +417,7 @@
 		</p>
 
         <h5 id="dialogx"><span class="secno">3.2.8.5 </span>Dialog X</h5>
-		<p>The Dialog X are able to handle functionality that can be added to the capabilities of the Dialog Manager through their associated <a href="#intentsetsx">Intent Set X</a>. Dialog X extends the 
+		<p>The Dialog X's are able to handle functionality that can be added to the capabilities of the Dialog Manager through their associated <a href="#intentsetsx">Intent Set X</a>. A Dialog X extends the 
 		<a href="#coredialog">Core Dialogs</a> and add functionality by custom <a href="#dialog">Dialogs</a>. The Dialog X's must server different purposes
 		in a sense that they are unique for a certain task. E.g., only a single flight reservation dialog may exist at a time. They have the same characteristics as a <a href="#dialog">Dialog</a>.</p>
 
@@ -426,10 +425,10 @@
 		<p>An Intent Set X is a special <a href="#intentsets">Intent Set</a> that identifies tasks that can be executed within the associated <a href="#dialogx">Dialog X</a>.</p>
 		
         <h5 id="dialogregistry"><span class="secno">3.2.8.7 </span>Dialog Registry</h5>
-		<p>The Dialog Registry manages all available Dialogs with their associated Intent Sets with respect to the used <a href=#dialogstrategy">Dialog Strategy</a>. 
-			This means, it is the Dialog Registry would know which <a href="#dialog">Dialog</a> to use for a given intent.
+		<p>The Dialog Registry manages all available Dialogs with their associated Intent Sets with respect to the current <a href=#dialogstrategy">Dialog Strategy</a>. 
+			This means, it is the Dialog Registry that would know which <a href="#dialog">Dialog</a> to use for a given intent.
 			For some <a href=#dialogstrategy">Dialog Strategy</a> this component may be omitted as it is taken over by the <a href="#dialogmanagement">Dialog Management</a>. 
-			One of these cases is when the <a href="#dialogstrategy">Dialog Strategies</a> does not allow for the dynamic handling of <a href="#dialog">Dialogs</a> as described below..
+			One of these cases is when the <a href="#dialogstrategy">Dialog Strategies</a> does not allow for the dynamic handling of <a href="#dialog">Dialogs</a> as described below.
 		<ul>
 			<li><a href="#dialog">Dialogs</a> and their <a href="#intentsets">Intent Sets</a> can be added or removed as needed.</li>
 			<li>The Dialog Registry may notify the <a href="#dialogmanagement">Dialog Management</a> if <a href="#dialog">Dialogs</a> have been added or removed.</li>
@@ -437,8 +436,8 @@
 			<li>The Dialog Registry may be queried by the <a href="#dialogmanagement">Dialog Management</a> for follow-up or clarification  <a href="#dialog">Dialogs</a> that are referenced in a <a href="#dialog">Dialog</a> by name
 				or a list of entities from an <a href="#intentsets">Intent Set</a>.</li>
 			<li><a href="#intentsets">Intent Sets</a> will be removed if there are no more <a href="#dialog">Dialogs</a> referencing them.</li>
-			<li>The Dialog Registry ensures that added <a href="#dialog">Dialogs</a> are unique</li>
-			<li>The Dialog Registry is not responsible to know about the counterparts in the <a href="#datalayer">APIs/Data Layer</a>.
+			<li>The Dialog Registry ensures that added <a href="#dialog">Dialogs</a> are unique.</li>
+			<li>The Dialog Registry is not responsible for knowing about the counterparts in the <a href="#datalayer">APIs/Data Layer</a>.
 			<li>The Dialog Registry notifies the <a href="#selectionservice">Selection Service</a> if <a href="#dialog">Dialogs</a> have been added or removed.</li>
 		</ul>
 		</p>
@@ -455,28 +454,28 @@
 			along with associated entities.</li>
 			<li>In case the Provider Selection Service is called with a preselected identifier of an <a href="#provider">IPA Providers</a> only this one will be used as obtained from the 
 				<a href="#providerregistry">Provider Registry</a></li>
-			<li>In case no <a href="#provider">IPA Providers</a> the Provider Selection Service has to follow a <a href="#providerselectionstrategy">Provider Selection Strategy</a> as 
+			<li>In case there are no <a href="#provider">IPA Providers</a> the Provider Selection Service has to follow a <a href="#providerselectionstrategy">Provider Selection Strategy</a> as 
 				detailed below to determine those <a href="#provider">IPA Providers</a> 
 				that are best suited to answer the request. The resulting list of <a href="#provider">IPA Providers</a> candidates is asked in parallel and
-			    those that return the n best results are selected (n &ge; 1). Determinging the best result considers at least a confidence score but may be improved by other metrics.
+			    those that return the n-best results are selected (n &ge; 1). Determining the best result considers at least a confidence score but may be improved by other metrics.
 				It may be necessary that the filtered list requires disambiguation in an additional dialog step.</li>
-			<li><a href="#provider">IPA Provers</a> and the <a href="#authentication">Accounts/Authentication</a> to access them and optionally <a href="#asr">ASR</a> and <a href="#tts">TTS</a> capabilities can be 
+			<li><a href="#provider">IPA Providers</a> and the <a href="#authentication">Accounts/Authentication</a> to access them and optionally <a href="#asr">ASR</a> and <a href="#tts">TTS</a> capabilities can be 
 				added or removed as needed.</li>
-			<li>The Provider Selection Service is stateless and always returns the n best responses from the used <a href="#provider">IPA Providers</a> along with an identification of 
+			<li>The Provider Selection Service is stateless and always returns the n-best responses from the used <a href="#provider">IPA Providers</a> along with an identification of 
 				the issuing IPA Provider.</li>
-			<li>The Provider Selection Service makes use of the <a href="#authentication">Accunts/Authentication</a> to access <a href="#provider">IPA Provider</a>.
+			<li>The Provider Selection Service makes use of <a href="#authentication">Accounts/Authentication</a> to access <a href="#provider">IPA Provider</a>.
 			<li>The Provider Selection Services uses the <a href="#providerregistry">Provider Registry</a> to map the <a href="#providerintentsets">Provider Intent Sets</a> to 
 				the <a href="#intentsets">Intent Sets</a> known by the <a href="#dialogregistry">Dialog Registry</a>.
 				The mapping must be configured when <a href="#provider">IPA Providers</a> are added.</li>
-			<li>In case no mapping tothe  <a href="#intentsets">Intent Sets</a> known by the <a href="#dialogregistry">Dialog Registry</a>is possible, the received Intent is uses.</li>
+			<li>In case no mapping to the  <a href="#intentsets">Intent Sets</a> known by the <a href="#dialogregistry">Dialog Registry</a> is possible, the received Intent is used.</li>
 			<li>In case the Provider Selection Service retrieves a session identifier from the selected <a href="#provider">IPA Provider</a> it stores it in the 
 				<a href="#providerregistry">Provider Registry</a>,
 			e.g. for follow-up questions.</li>
 			<li>In case the <a href="#asr">ASR</a> is bound to an <a href="#provider">IPA Providers</a> the Provider Selection Service is able to consume audio stream and forward 
 				them to the available <a href="#asr">ASR</a> engines.</li>
 		</ul>
-			t.b.d. Describe how IPA local hotwords can be used to preselect an IPA<br>
-			t.b.d. Describe passing russian doll principle of nested IPAs 
+			How IPA local hotwords can be used to preselect an IPA will be described in a future draft.<br>
+			The Russian doll principle of nested IPAs will be described in a future draft.
 		</p>
 		
         <h5 id="providerselectionstrategy"><span class="secno">3.3.1.1 </span>Provider Selection Strategy</h5>
@@ -488,14 +487,14 @@
 			<li>The <a href="#provider">IPA Providers</a> is filtered by knowledge that has been determined in the dialog with the user. This includes leading wake-up phrases like
 				<em>Hey Siri, &hellip;</em>, <em>OK Google, &hellip;</em>. For this, preprocessing of the user input by they <a href="#nlu">NLU</a> may be required.</li>
 		</ul>
-		In case <a href="#provider">IPA Provider</a> does not abstract from determining a relevant list of intents, the same strategy may be applied to determine the n-best intents.
+		In case the <a href="#provider">IPA Provider</a> does not abstract from determining a relevant list of intents, the same strategy may be applied to determine the n-best intents.
 		</p>
 
         <h5 id="providerregistry"><span class="secno">3.3.1.2 </span>Provider Registry</h5>
 		<p>A registry for all IPA Providers that can be accessed. It has the following characteristics
 		<ul>
 			<li>It returns a list of <a href="#provider">IPA Providers</a> along with their unique identifier that may be used for a current input.</li>
-			<li>Each <a href="#provider">IPA Providers</a> should have a list of names in the supported languages to allow for preselecting the <a href="#provider">IPA Providers</a>
+			<li>Each of the <a href="#provider">IPA Providers</a> should have a list of names in the supported languages to allow for preselecting the <a href="#provider">IPA Providers</a>
 				in an utterance or to allow for disambiguation of multiple <a href="#provider">IPA Providers</a> in an additional dialog step.</li>
 			<li>Optionally, the retrieval of <a href="#provider">IPA Providers</a> may be filtered by additional parameters matching the implemented <a href="#providerselectionstrategy">Provider Selection Strategy</a>.
 				Therefore, the Provider Registry may request information from the <a href="#coredataprovider">Core Data Provider</a></li>
@@ -508,7 +507,7 @@
 		</p>
 
         <h5 id="authentication"><span class="secno">3.3.1.3 </span>Accounts/Authentication</h5>
-		<p>A registry that knows how to access the known IPA Providers, i.e. which are available and credentials to access them. Storing of credentials must meet security and trust considerations that are
+		<p>A registry that knows how to access the known IPA Providers, i.e., which are available and credentials to access them. Storing of credentials must meet security and trust considerations that are
 			expected from such a personalized service. It has the following characteristics
 		<ul>
 			<li>It returns an authentication means for a key of an <a href="#provider">IPA Providers</a> that is known to the <a href="#providerregistry">Provider Registry</a></li>
@@ -640,16 +639,16 @@ find out about a designated conference hotel or special rates.
 		<li>The Provider Registry forwards the text "I want to book a flight on American" from the utterance and the GPS coordinates for Mountain View to the received list of IPA Providers in parallel to determine meaning.</li>
     </ol>
     <h4 id="provider"><span class="secno">4.1.2 </span>Walkthrough for the Output Path</h4>
-	The output path begines where the IPA Providers are able to deliver their results. They identified the best match for the intents and entities based on the received
-	date that arrived as 
+	The output path begins where the IPA Providers are able to deliver their results. They identified the best match for the intents and entities based on the received
+	data.
 	This path is illustrated in the following figure
 	<figure>
 		<img src="architecture-walkthrough-output.svg" alt="IPA Architecture Walkthrough for the output" style="width: 100%; height: auto;"/>
-		<figcaption>Fig. 4 Walthrough for the output path of an IPA</figcaption>
+		<figcaption>Fig. 4 Walkthrough for the output path of an IPA</figcaption>
 	</figure>
 
 	<ol>
-		<li>The IPA Provider's send their determined intents along with recognized entities to the Provider Selection Service. For our example this may be 
+		<li>The IPA Providers send their determined intents along with recognized entities to the Provider Selection Service. For our example this may be 
 			<ul>
 				<li>IPA Provider 1: phantastic-plan-flight-travel with entities preferred-airline: American, preferred-origin: SFO.</li>
 				<li>IPA Provider 2: rail-plan-travel with entity destination-station: American.</li>
@@ -681,7 +680,7 @@ find out about a designated conference hotel or special rates.
         <p>The general architecture of IPAs described in this document should be detailed in subsequent documents. Further work must be done to
 		<ol>
 			<li>specify the interfaces among the components</li>
-			<li>suggest new standards where they are missing and may therefore</li>
+			<li>suggest new standards where they are missing</li>
 			<li>refer to existing standards where applicable</li>
 			<li>refer to existing standards as a starting point to be refined for the IPA case</li>
 		</ol>
@@ -786,11 +785,11 @@ find out about a designated conference hotel or special rates.
 			</tr>
 		</table>
 		</p>
-		<p>The table above is not meant to be exhaustive nor does it claim that the identified standards are suited for IPA implementations but must be analyzed in more detail in subsequent work. The majority
-			of them is a starting point for further refinement. For instance, the authors consider it unlikely that <a href="https://www.w3.org/TR/voicexml21/">VoiceXML</a> will actually be used in IPA implementations.</p>
-		<p>Out of scope of a possible standardization is the implementation inside the IPA Providers and a potential interoperability among them.
+		<p>The table above is not meant to be exhaustive nor does it claim that the identified standards are suited for IPA implementations. They must be analyzed in more detail in subsequent work. The majority
+			are starting points for further refinement. For instance, the authors consider it unlikely that <a href="https://www.w3.org/TR/voicexml21/">VoiceXML</a> will actually be used in IPA implementations.</p>
+		<p>Out of scope of a possible standardization is the implementation inside the IPA Providers and potential interoperability among them.
 			However, it eases the the integration of their exposed services or even allow to use services across different providers. Actual IPA providers may make use of any
-			upcoming standard to enhance their deployments as a market place of intelligent services.</p>
+			upcoming standard to enhance their deployments as a marketplace of intelligent services.</p>
 
         <h2 id="appendix"><span class="secno">6. </span>Appendix</h2>
 
