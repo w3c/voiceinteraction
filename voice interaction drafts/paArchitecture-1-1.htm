@@ -15,7 +15,7 @@
             <h2 property="bibo:subtitle" id="subtitle">Architecture and Potential for Standardization Version 1.1</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: February 26, 2021 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm</a> (GitHub repository) </dd>
+                <dd>Last modified: March 1, 2021 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm</a> (GitHub repository) </dd>
 				<dd><a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture-1-1.htm">HTML rendered version</a></dd>             
 			    <dt>Editors</dt>
                 <p><span style="color: rgb(51, 51, 51); font-family: Conv_DroidSerif-Regular, serif; font-size: 15.7072px; orphans: 2; text-align: center; widows: 2; background-color: rgba(255, 255, 255, 0.6);">Dirk Schnelle-Walka</br>
@@ -447,11 +447,12 @@
 		
         <h4 id="selectionservice"><span class="secno">3.3.1 </span>Provider Selection Service</h4>
 		<img src="provider-selection-service-component.svg" style="float:right" width="auto" height="auto" />
-		<p>A service that provides access to all known IPA Providers. This service also maps the IPA Intent Sets to the Intent Sets in the Dialog layer. It has the following characteristics
+		<p>A service that provides access to all known Data Providers, External Services and IPA Providers. This service also maps the IPA Intent Sets to the Intent Sets in the Dialog layer. 
+			It has the following characteristics
 		<ul>
+			<li>The Provider Selection Service provides an interface to <a href="dataproviders">Data Providers</a>, <a href="externalservices">External Serives</a> and <a href="#provider">IPA Providers</a>./li>
 			<li>The Provider Selection Service receives input as text strings and returns results as intents with all recognized entities from all <a href="#provider">IPA Providers</a> 
-				that are able to reply to the user input
-			along with associated entities.</li>
+				that are able to reply to the user input along with associated entities.</li>
 			<li>In case the Provider Selection Service is called with a preselected identifier of an <a href="#provider">IPA Providers</a> only this one will be used as obtained from the 
 				<a href="#providerregistry">Provider Registry</a></li>
 			<li>In case there are no <a href="#provider">IPA Providers</a> the Provider Selection Service has to follow a <a href="#providerselectionstrategy">Provider Selection Strategy</a> as 
@@ -623,24 +624,30 @@ find out about a designated conference hotel or special rates.
 		<figcaption>Fig. 3 Walthrough for the output path of an IPA</figcaption>
 	</figure>
     <ol>
-        <li>
-            The user asks the IPA client about a travel between the EU and the United States. The audio is sent along with
-			location Information as GPS coordnates from Mountain View, California.
-        </li>
-        <li>The Dialog Management component sends the audio from the request to the ASR component...</li>
-		<li>...and receives back the text of the user's request. For the example, this would be "I want to book a flight on American".</li>
-		<li>The Dialog Management sends the text "I want to book a flight on American" and the GPS coordinates for Mountian View to the Provider Selection Service to determine the meaning</li>
-		<li>The Provider Selection Service asks the Provider Registry for suitable IPA Providers for the incoming request.</li>
+        <li>The user asks the IPA client about a travel between the EU and the United States. The IPA Cient captures the audio with the help of the microphone.</li>
+		<li>Requests are usually augmented by other data. The GPS location is one example that could be useful. Therefore the IPA Client asks the Local Data Provider for GPS for the current location...</li>
+		<li>...and gets it back. In this case the GPS coordinates from Mountain View, California.</li>
+		<li>The audio is sent along with all augmenting data to the dialog manager via the IPA Service.</li>
+        <li>The Dialog Management component sends the audio from the request to the ASR component.</li>
+		<li>The decoded text of the user's request, in this example "I want to book a flight on American" with all augmented data in parallel to the NLU component for the local path 
+			and to the Provider Selection Service for the remote path.</li>
+		<li>In the local path the NLU tries to determine intents and entities from the decoded text. For our example this may be intent: 
+			plan-flight-travel with entity destination: American. The NLU components makes use of the context to check if there are complementary information that might have been established
+			throughout the interaction with the user, such as preferred times for departure or arrival.</li>
+		<li>There was no info to add from the history but the GPS information could be mapped with the help of the Knowledge Graph to origin: SFO so the local input path is completed with this step
+			with the result: plan-flight-travel with entities airline: American, origin: SFO.</li>
+		<li>The remote path starts with the Provider Selection Service asking the Provider Registry for suitable IPA Providers for the incoming request.</li>
 		<li>The Provider Registry filters the suitable IPA Providers and asks for credentials at the Accounts/Authentication component. For the example, 
 			these may be those supporting English. At this level, only the pure text is known and the used language. Further knowledge about the user may be helpful to 
 			reduce these candidates.</li>
 		<li>The Provider Registry receives the credentials for the IPA Provider candidates.</li>
 		<li>The Provider Selection Service receives the list of IPA Providers along with their credentials, if any, back.</li>
-		<li>The Provider Registry forwards the text "I want to book a flight on American" from the utterance and the GPS coordinates for Mountain View to the received list of IPA Providers in parallel to determine meaning.</li>
+		<li>The Provider Registry forwards the text "I want to book a flight on American" from the utterance and the GPS coordinates for Mountain View to the received list of
+			IPA Providers in parallel to determine meaning which completes theremote input path.</li>
     </ol>
     <h4 id="provider"><span class="secno">4.1.2 </span>Walkthrough for the Output Path</h4>
-	The output path begins where the IPA Providers are able to deliver their results. They identified the best match for the intents and entities based on the received
-	data.
+	The output path begins where the local NLU and IPA Providers are able to deliver their results. In both paths the best match for the intents and entities based on the received
+	data have been identified.
 	This path is illustrated in the following figure
 	<figure>
 		<img src="architecture-walkthrough-output.svg" alt="IPA Architecture Walkthrough for the output" style="width: 100%; height: auto;"/>
@@ -656,22 +663,38 @@ find out about a designated conference hotel or special rates.
 			</ul>
 			Note, that the reply also contains an identification of the provider for their result. This allows pre-selection of a provider in possible follow-up dialog turns.
 		</li>
-		<li>The Provider Selection Service determines an n-best list of meanings. This list may be truncated in case some replies are determined to be not suitable at all. 
-			For our example the reply from IPA Provider 3 for banks can be removed.
-			The Provider Selection Service then stores session identifiers for the reasonable replies, IPA Provider 1 and IPA Provider 2 in the Provider Registry to have them available in potential follow-up dialogs.</li>
 		<li>The Provider Selection Service maps the custom intents and entities to the core intents and entities that can be understood in the dialogs. For our example this could be
 			<ul>
 				<li>IPA Provider 1: plan-flight-travel with entities airline: American, origin: SFO.</li>
 				<li>IPA Provider 2: plan-rail-travel with entity destination: American.</li>
+				<li>IPA Provider 3: transfer-money with no entities</li>
 			</ul>
-			It then sends this mapped result to the Dialog Manager.</li>
-        <li>The Dialog Management selects the best suited reply. For our example, it may remove the plan-rail-travel result as the confidence for the entity is very low.
-			It then sends the intent, plan-flight-travel to the Dialog Registry to determine the corresponding dialog...</li>
-		<li>...and receives the dialog to use  back. For the example this may be the plan-flight-travel-dialog.</li>
+			It then sends this mapped result to the Dialog Manager as an n-best list.</li>
+		<li>On the local path the NLU sends it result to the Dialog Manager. For our example this could be
+			<ul>
+				<li>Local NLU: lan-flight-travel with entity destination: American, origin: SFO.</li>
+			</ul>
+		
+		<li>The Dialog Manager determines an n-best list of meanings from the local and remote path as
+			<ul>
+				<li>IPA Provider 1: plan-flight-travel with entities airline: American, origin: SFO.</li>
+				<li>Local NLU: lan-flight-travel with entity destination: American, origin: SFO.</li>
+				<li>IPA Provider 2: plan-rail-travel with entity destination: American.</li>
+				<li>IPA Provider 3: transfer-money with no entities</li>
+			</ul>
+			It selects the best suited reply. For our example, it may remove the results from IPA Provider 2 and IPA Provider 3 as the confidence for the entity is very low and updates
+			the History with the determined dialog move from the user.</li>
+		<li>The Dialog Manger then sends the intent, plan-flight-travel to the Dialog Registry to determine the corresponding dialog...</li>
+		<li>...and receives the dialog to use back. For the example this may be the plan-flight-travel-dialog.</li>
         <li>The Dialog Manager calls the plan-flight-travel dialog and fills all known entities. In our example, the slots for airline and origin would be filled.</li>
-        <li>The Dialog determins the next dialog step and creates a response for the user. In our case it can be the question "Do you want to fly from San Francisco with American?"</li>
-		<li>The Dialog Manager sends the text string "Do you want to fly from San Francisco with American?" to the TTS to be converted into audio.</li>
-		<li>The TTS engine sends the audio file from the response to the IPA Client to be made audible.</li>
+        <li>The Dialog determins the next dialog step and indicates the request for a system move to query the user for the missing data.</li>
+		<li>The History is updated with this dialog move ...</li>
+		<li>...and forwarded to the NLG to create a response.</li>
+		<li>The NLG makes use of the Context to check output preferences and already established knowledge between the user and the system that might be used in the reply...</li>
+		<li>...and recieves the info back to come up with the question "Do you want to fly from San Francisco with American?",</li>
+		<li>The NLU forwards the text string "Do you want to fly from San Francisco with American?" to the TTS to be converted into audio.</li>
+		<li>The TTS engine sends the audio file from the response to the IPA Client to be made audible...</li>
+		<li>...in the Speaker.</li>
 	</ol>
 </p>
 
