@@ -15,7 +15,7 @@
             <h2 property="bibo:subtitle" id="subtitle">Architecture and Potential for Standardization Version 1.1</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: March 1, 2021 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm</a> (GitHub repository) </dd>
+                <dd>Last modified: March 10, 2021 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm</a> (GitHub repository) </dd>
 				<dd><a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture-1-1.htm">HTML rendered version</a></dd>             
 			    <dt>Editors</dt>
                 <p><span style="color: rgb(51, 51, 51); font-family: Conv_DroidSerif-Regular, serif; font-size: 15.7072px; orphans: 2; text-align: center; widows: 2; background-color: rgba(255, 255, 255, 0.6);">Dirk Schnelle-Walka</br>
@@ -69,7 +69,7 @@
             Furthermore, in addition to these general-purpose assistants, there are also specialized virtual assistants which are able to provide their users with in-depth information which is specific to an enterprise, government agency, school, or other organization. They may also have the ability to perform transactions on behalf of their users, such as purchasing items, paying bills, or making reservations. Because of the breadth of possibilities for these specialized assistants, it is imperative that they be able to interoperate with the general-purpose assistants. Without this kind of interoperability, enterprise developers will need to re-implement their intelligent assistants for each major generic platform. 
         </p>
 		
-		<p>This document describes a general architecture of IPAs and explores the potential areas for standardization. It focuses on voice as the major input modality. However,
+		<p>This document is a first step in our strategy for IPA standardization. It describes a general architecture of IPAs and explores the potential areas for standardization. It focuses on voice as the major input modality. However,
 			the overall concept is not restricted to voice but also covers purely text based interactions with so-called chatbots as well as interaction using multiple modalities.
 			Conceptually, the authors also define executing actions in the user's environment, like turning on the light, as a modality.
 			This means that components that deal with speech recognition, natural language understanding or speech synthesis will not necessarily be available in these deployments. In case of chatbots, speech components will be omitted. In case of
@@ -609,9 +609,11 @@ a rental car, find out about local attractions in the destination city, etc.
 Booking a hotel could also involve interacting with the conference's IPA to
 find out about a designated conference hotel or special rates. 
 </p>
+
 <h3 id="detailed-walkthrough"><span class="secno">4.1 Detailed Walkthrough</span></h3>
 <p>
-    This section provides a detailed walkthrough that aligns the steps in the use case interaction with the architecture. This is a very basic example, assuming that
+    This section provides a detailed walkthrough that aligns the steps in the use case interaction with the architecture. It covers only the part from the example above tha the user
+	asks for a flight travel with a dedicated airline. This very basic example assums that
 	this is the first request to IPA and that there is a suitable dialog ready that matches the user's request. It may also vary, e.g., depending on the used Dialog Strategy and other optional items that may actually result in different flows. 
 	The walkthrough is split into two parts	for the input path and for the output path.
 
@@ -678,9 +680,9 @@ find out about a designated conference hotel or special rates.
 		<li>The Dialog Manager determines an n-best list of meanings from the local and remote path as
 			<ul>
 				<li>IPA Provider 1: plan-flight-travel with entities airline: American, origin: SFO.</li>
-				<li>Local NLU: lan-flight-travel with entity destination: American, origin: SFO.</li>
+				<li>Local NLU: plan-flight-travel with entity destination: American, origin: SFO.</li>
 				<li>IPA Provider 2: plan-rail-travel with entity destination: American.</li>
-				<li>IPA Provider 3: transfer-money with no entities</li>
+				<li>IPA Provider 3: transfer-money with entities: bank: American, purpose: book flight</li>
 			</ul>
 			It selects the best suited reply. For our example, it may remove the results from IPA Provider 2 and IPA Provider 3 as the confidence for the entity is very low and updates
 			the History with the determined dialog move from the user.</li>
