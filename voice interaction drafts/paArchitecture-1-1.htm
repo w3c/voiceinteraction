@@ -15,7 +15,7 @@
             <h2 property="bibo:subtitle" id="subtitle">Architecture and Potential for Standardization Version 1.1</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: March 10, 2021 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm</a> (GitHub repository) </dd>
+                <dd>Last modified: April 20, 2021 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm</a> (GitHub repository) </dd>
 				<dd><a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture-1-1.htm">HTML rendered version</a></dd>             
 			    <dt>Editors</dt>
                 <p><span style="color: rgb(51, 51, 51); font-family: Conv_DroidSerif-Regular, serif; font-size: 15.7072px; orphans: 2; text-align: center; widows: 2; background-color: rgba(255, 255, 255, 0.6);">Dirk Schnelle-Walka</br>
@@ -554,6 +554,8 @@
 		</ul></p>
 		<p>The IPA provider may be part of the IPA implementation as an IPA Provider or alternatively a subset of the original functionaliy as described below as part of another IPA implementation.</p>
 
+        <h5 id="providerasr"><span class="secno">3.3.4.2 </span>Provider ASR</h5>
+		<p>An ASR component eceives audio streams of recorded utterances and generates a recognition hypothesis as text strings as an input for the <a href="#providernlu">Provider NLU</a>.</p>
 
         <h5 id="providernlu"><span class="secno">3.3.4.2 </span>Provider NLU</h5>
 		<p>An NLU component that is able to extract meaning as intents and associated entities from an utterance as text strings for <a href="#provider">IPA Provider X</a>. It has the following characteristics
@@ -629,8 +631,8 @@ find out about a designated conference hotel or special rates.
         <li>The user asks the IPA client about a travel between the EU and the United States. The IPA Cient captures the audio with the help of the microphone.</li>
 		<li>Requests are usually augmented by other data. The GPS location is one example that could be useful. Therefore the IPA Client asks the Local Data Provider for GPS for the current location...</li>
 		<li>...and gets it back. In this case the GPS coordinates from Mountain View, California.</li>
-		<li>The audio is sent along with all augmenting data to the dialog manager via the IPA Service.</li>
-        <li>The Dialog Management component sends the audio from the request to the ASR component.</li>
+		<li>The audio is sent along with all augmenting data to the IPA Service.</li>
+        <li>The IA Service forwards the received data simoultaneously to the ASR in the local path and to the Provider Selection Service in the remote path.</li>
 		<li>The decoded text of the user's request, in this example "I want to book a flight on American" with all augmented data in parallel to the NLU component for the local path 
 			and to the Provider Selection Service for the remote path.</li>
 		<li>In the local path the NLU tries to determine intents and entities from the decoded text. For our example this may be intent: 
