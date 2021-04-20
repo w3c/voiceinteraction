@@ -105,7 +105,7 @@
         <h3><span class="secno">2.2 Roles and Responsibilities</span></h3>
 		
 		<p>Roles like user, developer, IPA supplier will be added in a future version of this document</p>
-				
+
 		<h2 id="architecture"><span class="secno">3. </span></span><font face="Segoe UI">Architecture</font></span></h2>
 
 		<p>In order to cope with such <a href="#usecases">use cases</a> as those described above an IPA follows the general design concepts of a voice user interface, as can be seen in Figure 1.</p>
@@ -114,15 +114,15 @@
 			introduced by Robert C. Martin to arrive at a scalable, understandable and reusable software solution.
 			<dl>
 				<dt>Single responsibility principle</dt>
-				<dd>There should never be more than one reason for a class to change. In other words, every class should have only one responsibility</dd>
+				<dd>There should never be more than one reason for a class to change. In other words, every class should have only one responsibility.</dd>
 				<dt>Open closed principle</dt>
-				<dd>Software entities ... should be open for extension, but closed for modification</dd>
+				<dd>Software entities ... should be open for extension, but closed for modification.</dd>
 				<dt>Liskov substitution principle</dt>
-				<dd>Functions that use pointers or references to base classes must be able to use objects of derived classes without knowing it</dd>
+				<dd>Functions that use pointers or references to base classes must be able to use objects of derived classes without knowing it.</dd>
 				<dt>Interface segregation principle</dt>
-				<dd>Many client-specific interfaces are better than one general-purpose interface</dd>
+				<dd>Many client-specific interfaces are better than one general-purpose interface.</dd>
 				<dt>Dependency inversion principle</dt>
-				<dd>Depend upon abstractions, [not] concretions</dd>
+				<dd>Depend upon abstractions, [not] concretions.</dd>
 			</dl>
 		</p>
 
@@ -151,6 +151,7 @@
 		Actual implementations may want to distinguish more than these layers. The assignment to the layers is not considered to be strict so that some of the components may be shifted
 		to other layers as needed. This view only reflects a view that the Community Group regard as ideal and to show the intended separation of concerns.</p>
 		
+		
         <h3 id="clientlayer"><span class="secno">3.1 Client Layer</span></h3>
 		<p>The Client Layer contains the main components that interface with the user. The following figure details the view onto the Client Layer shown in Figure 1.</p>
 		<img src="client-layer.svg" style="float:right" width="10%" height="auto" />
@@ -169,7 +170,7 @@
 		of a <a href="localserverices">Local Service<a> or an <a href="#externalservices">External Services</a> call. In these cases an additional nonverbal auditory output may be considered.</p>
 
         <h4 id="client"><span class="secno">3.1.3 </span>IPA Client</h4>
-		Clients enable the user to access the IPA via voice with the following characteristics.
+		<p>Clients enable the user to access the IPA via voice with the following characteristics.
 		<ul>
 			<li>Usually, IPA Clients make use of a <a href="#microphone">Microphone</a> to capture the spoken input and a <a href="#speaker">Speaker</a> to provide responses.</li>
 			<li>The client is activated by means of a <a href="#clientactivationstrategy">Client Activation Strategy</a>.</li>
@@ -179,6 +180,7 @@
 			<li>As an extension IPA Clients may also capture contextual information, e.g. location, that it obtains from <a href="#localdataproviders">Local Data Providers</a>.</li>
 			<li>As an extension an IPA Client may also receive commands to be executed locally in the <a href="#localservices">Local Services</a>.</li>
 			<li>As an extension an IPA Client may also receive multimodal output to be rendered by a respective modality synthesizer.</li>
+			<li>IPA Clients maintain a <a href="#session">session</a> identifer.</p>
 		</ul>
 		</p>
 		
@@ -259,6 +261,7 @@
 			<li>The Dialog Manager also manages the session with a user. Conceptually, multiple sessions can be active in parallel. Dialogs are governed by Sessions, e.g. to free resources of ASR and NLU engines when
 				a session expires. Linguistic phenomena, like anaphoric references and ellipsis, are expected to work within a Session. The selected IPA Provider or the Dialog Manager may have leading roles for this task.</li>
 			<li>The Dialog Manager also features an <a href="#asr">ASR</a> to convert spoken utterances into text strings and a <a href="#tts">TTS</a> to convert text strings into audio.</li>
+			<li>The Dialog Management maintains a <a href="#session">session</a> wrapping the overall interaction of a user with the IPA.</p>
 		</ul>
 		</p>
 
@@ -289,10 +292,16 @@
 				</tr>
 			</table>
 
+        <h5 id="session"><span class="secno">3.2.2.2 </span>Session</h5>
+		<p>A session begins when the user starts to interact with an IPA, may continue over multiple interaction turns, i.e. an input and output cycle, and ends if the user does not start a new input within a predefined
+			time span. This includes that a session may persist over multiple requests that are not related to each other.</p>
+
+
         <h4 id="context"><span class="secno">3.2.3 </span>Context</h4>
 		<img src="context-component.svg" style="float:right" width="auto" height="auto" />
 		<p>During the interaction with a user all kinds of information are collected and managed in the so-called conversation context or dialog context. 
-		It contains all the short and long term information needed to handle a conversation. It also serves for context-based reasoning with the help of
+		It contains all the short and long term information needed to handle a conversation and thus may exceed the concept of a <a href="#session">session</a>. 
+		It also serves for context-based reasoning with the help of
 		the <a href="#knowledge-graph">Knowledge Graph</a> and to generate output for the output to the user <a href"=#nlg">NLG</a>. It is not possible to capture
 		each and every aspect of what context should comprise as discussions about context are likely to end up in trying to explain the world. For the sake of this 
 		specification it should be possible to deal with the following characteristics
