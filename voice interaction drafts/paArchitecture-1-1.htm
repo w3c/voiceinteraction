@@ -87,7 +87,7 @@
 			
 			<p>In order to explore the potential for standardization, a typical usage scenario is described in the following section.</p>
 		
-        <h3><span class="secno">2.1 Use Cases</span></h3>
+        <h3 id="usecases"><span class="secno">2.1 Use Cases</span></h3>
 				<p>This section describes potential usages of IPAs.</p> 
 				
 				<h4><span class="secno">2.1.1 </span><font face="Segoe UI">Travel Planning</font></h4>
@@ -108,7 +108,23 @@
 				
 		<h2 id="architecture"><span class="secno">3. </span></span><font face="Segoe UI">Architecture</font></span></h2>
 
-		<p>In order to cope with such use cases as those described above an IPA follows the general design concepts of a voice user interface, as can be seen in Figure 1.</p>
+		<p>In order to cope with such <a href="#usecases">use cases</a> as those described above an IPA follows the general design concepts of a voice user interface, as can be seen in Figure 1.</p>
+		
+		<p>The architecture described in this document follows the <a href="https://web.archive.org/web/20150906155800/http:/www.objectmentor.com/resources/articles/Principles_and_Patterns.pdf">SOLID principle</a>
+			introduced by Robert C. Martin to arrive at a scalable, understandable and reusable software solution.
+			<dl>
+				<dt>Single responsibility principle</dt>
+				<dd>There should never be more than one reason for a class to change. In other words, every class should have only one responsibility</dd>
+				<dt>Open closed principle</dt>
+				<dd>Software entities ... should be open for extension, but closed for modification</dd>
+				<dt>Liskov substitution principle</dt>
+				<dd>Functions that use pointers or references to base classes must be able to use objects of derived classes without knowing it</dd>
+				<dt>Interface segregation principle</dt>
+				<dd>Many client-specific interfaces are better than one general-purpose interface</dd>
+				<dt>Dependency inversion principle</dt>
+				<dd>Depend upon abstractions, [not] concretions</dd>
+			</dl>
+		</p>
 
 		<figure>
 			<img src="Basic-IPA-Architecture.svg" alt="Basic IPA Architecture" style="width: 100%; height: auto;"/>
