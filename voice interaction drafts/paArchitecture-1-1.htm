@@ -332,7 +332,15 @@
 		</ul></p>
 
         <h4 id="nlu"><span class="secno">3.2.5 </span>NLU</h4>
-		<p>An NLU (Natural Language Understanding) component that is able to extract meaning as intents and associated entities from an utterance as text strings. It has the following characteristics
+		<p>An NLU (Natural Language Understanding) component that is able to extract meaning as intents and associated entities from an utterance as text strings. 
+		<dl>
+			<dt>Intent</dt>
+			<dd>An intent is a group of utterances with similar meaning.</dd>
+			<dt>Entity</dt>
+			<dd>An entity captures additional information to an intent.</dd>
+		</dl>
+		
+		The NLU component has the following characteristics
 		<ul>
 			<li>The NLU is able to handle basic functionality via <a href="#coreintentsets">Core Intent Sets</a> to enable interaction with the user at all.</li>
 			<li>The NLU may make use of the <a href="#coredataprovider">Core Data Provider</a> to access local or internal data or access external services.</li>
@@ -429,7 +437,8 @@
 		always available.</p>
 		
         <h5 id="intentsets"><span class="secno">3.2.8.4 </span>Intent Sets</h5>
-		<p>Intent Sets define actions along with their parameters that can be consumed by a corresponding <a href="#dialog">Dialog</a> and have the following characteristics
+		<p>Intent Sets define actions, identified by the name of the intent, along with their parameters as entities as it is produced by the <a href="#nlu">NLU</a> that can be consumed by a corresponding
+			<a href="#dialog">Dialog</a> and have the following characteristics
 		<ul>
 			<li>An Intent Set defines one or more intents with an optional number (including none) of entities to fulfill the corresponding action.</li>
 			<li>An Intent Set abstracts from actual Intent Sets that are defined by the Intent Providers, e.g. <em>plan-travel</em> or <em>plan-air-travel</em> used by 
