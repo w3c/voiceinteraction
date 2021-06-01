@@ -180,7 +180,7 @@
 			<li>As an extension IPA Clients may also capture contextual information, e.g. location, that it obtains from <a href="#localdataproviders">Local Data Providers</a>.</li>
 			<li>As an extension an IPA Client may also receive commands to be executed locally in the <a href="#localservices">Local Services</a>.</li>
 			<li>As an extension an IPA Client may also receive multimodal output to be rendered by a respective modality synthesizer.</li>
-			<li>IPA Clients maintain a <a href="#session">session</a> identifer.</p>
+			<li>IPA Clients may maintain a <a href="#session">session</a> identifer.</p>
 		</ul>
 		</p>
 		
@@ -258,10 +258,8 @@
 			<li>The Dialog Manager determines the Dialog following a <a href="#dialogstrategy">Dialog Strategy</a> that is best suited to serve the current user input and re-establishes the interaction state for that <a href="#dialog">Dialog</a>.
 				Therefore, it may use the <a href="#dialogregistry">Dialog Registry</a>.</li>
 			<li>The Dialog Manager follows the principle to fill in all slots that are known before prompting the user for additional slots.</a>
-			<li>The Dialog Manager also manages the session with a user. Conceptually, multiple sessions can be active in parallel. Dialogs are governed by Sessions, e.g. to free resources of ASR and NLU engines when
-				a session expires. Linguistic phenomena, like anaphoric references and ellipsis, are expected to work within a Session. The selected IPA Provider or the Dialog Manager may have leading roles for this task.</li>
 			<li>The Dialog Manager also features an <a href="#asr">ASR</a> to convert spoken utterances into text strings and a <a href="#tts">TTS</a> to convert text strings into audio.</li>
-			<li>The Dialog Management maintains a <a href="#session">session</a> wrapping the overall interaction of a user with the IPA.</p>
+			<li>The Dialog Management may manage a <a href="#session">session</a> wrapping the overall interaction of a user with the IPA.</p>
 		</ul>
 		</p>
 
@@ -293,6 +291,10 @@
 			</table>
 
         <h5 id="session"><span class="secno">3.2.2.2 </span>Session</h5>
+        <p>Conceptually, multiple sessions can be active in parallel. Dialogs can be governed by a sessions,
+           e.g. to free resources of ASR and NLU engines when a session expires. 
+           Linguistic phenomena, like anaphoric references and ellipsis, are expected to work within a session. 
+           The selected IPA Provider or the Dialog Manager may have leading roles for this task.</p>
 		<p>A session begins when the user starts to interact with an IPA, may continue over multiple interaction turns, i.e. an input and output cycle, and ends if the user does not start a new input within a predefined
 			time span. This includes that a session may persist over multiple requests that are not related to each other.</p>
 
@@ -505,7 +507,8 @@
 			<li>In case no mapping to the  <a href="#intentsets">Intent Sets</a> known by the <a href="#dialogregistry">Dialog Registry</a> is possible, the received Intent is used.</li>
 			<li>In case the Provider Selection Service retrieves a session identifier from the selected <a href="#provider">IPA Provider</a> it stores it in the 
 				<a href="#providerregistry">Provider Registry</a>,
-			e.g. for follow-up questions.</li>
+			    e.g. for follow-up questions. Usually, this session identifier is different to the <a href="#session">session</a> 
+                identifier which is known by the <a href="#dialogmanagement">Dialog Management</a>.</li>
 			<li>In case the <a href="#asr">ASR</a> is bound to an <a href="#provider">IPA Providers</a> the Provider Selection Service is able to consume audio stream and forward 
 				them to the available <a href="#asr">ASR</a> engines.</li>
 		</ul>
