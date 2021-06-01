@@ -230,22 +230,22 @@
 
         <h4 id="ipaservice"><span class="secno">3.2.1 </span>IPA Service</h4>
 		<p>The general IPA Service API that mediates between the user and the overall IPA system. The service layer may be omitted in case the <a href="#client">IPA Client</a> communicates directly with 
-		<a href="#dialogmanagement">Dialog Management</a>. However, this is not recommended as it may contradict the principle of separation-of-concerns. It has the following characteristics
+		<a href="#dialogmanager">Dialog Manager</a>. However, this is not recommended as it may contradict the principle of separation-of-concerns. It has the following characteristics
 		<ul>
-			<li>The IPA Service functions as an interface between the <a href="#client">IPA Client</a> and the <a href="#dialogmanagement">Dialog Management</a> and
+			<li>The IPA Service functions as an interface between the <a href="#client">IPA Client</a> and the <a href="#dialogmanager">Dialog Manager</a> and
 				<a href="#selectionservice">Provider Selection Service</a>.</li>
 			<li>The output from the <a href="#asr">ASR</a> is forwarded to the <a href="#selectionservice">Provider Selection Service</a> to determine meaning.</li>
 			<li>Alternatively, the IPA Service may receive multimodal or text input from the client and forward it directly to the <a href="#selectionservice">Provider Selection Service</a> to determine meaning.</li></li>
-			<li>Alternatively, the output from the modality recognizers and contextual information may be forwarded directly to the <a href="#dialogmanagement">Dialog Management</a>.</li>
+			<li>Alternatively, the output from the modality recognizers and contextual information may be forwarded directly to the <a href="#dialogmanager">Dialog Manager</a>.</li>
 		</ul></p>
 
-        <h4 id="dialogmanagement"><span class="secno">3.2.2 </span>Dialog Management</h4>
-		<p>The Dialog Management is a component that receives semantic information determined from user input, updates its internal state, decides upon subsequent steps to continue a dialog and provides output,
+        <h4 id="dialogmanager"><span class="secno">3.2.2 </span>Dialog Manager</h4>
+		<p>The Dialog Manager is a component that receives semantic information determined from user input, updates its internal state, decides upon subsequent steps to continue a dialog and provides output,
 		mainly as synthesized or recorded utterances. Conceptually the dialog manager defines the playground that is used by the <a href="#dialog">Dialogs</a>. Both contribute to the user experience. 
 		The Dialog Manager has the following characteristics
 		<ul>
-			<li>Dialog Management receives recorded voice input from the <a href="#ipaservice">IPA Service</a> and forwards it to the <a href="#asr">ASR</a></li>
-			<li>Dialog Management makes use of the <a href="#TTS">TTS</a> to generate audio data to be rendered on the <a href="#client">IPA Client</a></li>
+			<li>The Dialog Manager receives recorded voice input from the <a href="#ipaservice">IPA Service</a> and forwards it to the <a href="#asr">ASR</a></li>
+			<li>The Dialog Manager makes use of the <a href="#TTS">TTS</a> to generate audio data to be rendered on the <a href="#client">IPA Client</a></li>
 			<li>As an extension, it may also provide commands as output to be executed by the <a href="#client">IPA Client</a></li>
 			<li>As an extension, Dialogs may also return multimodal output or text to be rendered by a respective modality synthesizer on the <a href="#client">IPA Client</a>.</li>
 			<li>For this, it employs several <a href="#dialog">Dialogs</a> that are responsible for handling isolated tasks or intents. The following types of dialogs exist:
@@ -259,7 +259,7 @@
 				Therefore, it may use the <a href="#dialogregistry">Dialog Registry</a>.</li>
 			<li>The Dialog Manager follows the principle to fill in all slots that are known before prompting the user for additional slots.</a>
 			<li>The Dialog Manager also features an <a href="#asr">ASR</a> to convert spoken utterances into text strings and a <a href="#tts">TTS</a> to convert text strings into audio.</li>
-			<li>The Dialog Management may manage a <a href="#session">session</a> wrapping the overall interaction of a user with the IPA.</p>
+			<li>The Dialog Manager may manage a <a href="#session">session</a> wrapping the overall interaction of a user with the IPA.</p>
 		</ul>
 		</p>
 
@@ -309,8 +309,8 @@
 		specification it should be possible to deal with the following characteristics
 		<ul>
 		    <li>The dialog context is enhanced to build interaction with the user (grounding) from spoken and other input.</a>
-			<li>The Context supports the <a href="#dialogmanagement">Dialog Management</a> to get the needed information for a current dialog</a>
-			<li>The Context supports the <a href="#dialogmanagement">Dialog Management</a> to get the needed information when switching from one dialog context to another</a>
+			<li>The Context supports the <a href="#dialogmanager">Dialog Manager</a> to get the needed information for a current dialog</a>
+			<li>The Context supports the <a href="#dialogmanager">Dialog Manager</a> to get the needed information when switching from one dialog context to another</a>
 			<li>The Context supports the <a href"=#nlu">NLU</a> to determine meaning from the user's input, also by reasoning via a <a href="#knowledge-graph">Knowledge Graph</a>.</u>
 			<li>The Context supports the <a href"=#nlg">NLG</a> to create the reply to the user.</u>
 		</ul></p>
@@ -413,8 +413,8 @@
 		<p>Conceptually, the Core Dialog is a special <a href="dialogx">Dialog</a> as described in the following section that is always available.</p>
 
         <h5 id="dialog"><span class="secno">3.2.8.2 </span>Dialog</h5>
-		<p>A Dialog is able to handle functionality that can be added to the capabilities of the <a href="#dialogmanagement">Dialog Management</a> through its associated Intent Sets. 
-			Dialogs are logical entities within the overall description of the interaction with the user, executed by the <a href="#dialogmanagement">Dialog Management</a>.
+		<p>A Dialog is able to handle functionality that can be added to the capabilities of the <a href="#dialogmanager">Dialog Manager</a> through its associated Intent Sets. 
+			Dialogs are logical entities within the overall description of the interaction with the user, executed by the <a href="#dialogmanager">Dialog Manager</a>.
 			
 			Dialogs must serve different purposes in the sense that they are unique for a certain task. E.g., only a single flight reservation dialog may exist at a time. 
 			Dialogs have the following characteristics
@@ -428,7 +428,7 @@
 			<li>Dialogs may specify clarification dialogs by name or by a list of entities from an <a href="#intentsets">Intent Set</a>.</li>
 			<li>As an extension, Dialogs may also return commands to be executed by the <a href="#client">IPA Client</a>.</li>
 			<li>As an extension, Dialogs may also return multimodal output to be rendered by a respective modality synthesizer on the <a href="#client">IPA Client</a>.</li>
-			<li>Dialogs access the Provider Selection Service to fulfill their task. They maintain state which they also share with the <a href="#dialogmanagement">Dialog Management</a> and know which
+			<li>Dialogs access the Provider Selection Service to fulfill their task. They maintain state which they also share with the <a href="#dialogmanager">Dialog Manager</a> and know which
 				<a href="#provider">IPA Provider</a> evaluated their request with the help of an identifier.</li>
 			<li>A Dialog may specify a <a href="#tts">TTS</a> engine to use in case there are multiple engines available.</li>
 		</ul>
@@ -463,13 +463,13 @@
         <h5 id="dialogregistry"><span class="secno">3.2.8.7 </span>Dialog Registry</h5>
 		<p>The Dialog Registry manages all available Dialogs with their associated Intent Sets with respect to the current <a href=#dialogstrategy">Dialog Strategy</a>. 
 			This means, it is the Dialog Registry that would know which <a href="#dialog">Dialog</a> to use for a given intent.
-			For some <a href=#dialogstrategy">Dialog Strategy</a> this component may be omitted as it is taken over by the <a href="#dialogmanagement">Dialog Management</a>. 
+			For some <a href=#dialogstrategy">Dialog Strategy</a> this component may be omitted as it is taken over by the <a href="#dialogmanager">Dialog Manager</a>. 
 			One of these cases is when the <a href="#dialogstrategy">Dialog Strategies</a> does not allow for the dynamic handling of <a href="#dialog">Dialogs</a> as described below.
 		<ul>
 			<li><a href="#dialog">Dialogs</a> and their <a href="#intentsets">Intent Sets</a> can be added or removed as needed.</li>
-			<li>The Dialog Registry may notify the <a href="#dialogmanagement">Dialog Management</a> if <a href="#dialog">Dialogs</a> have been added or removed.</li>
-			<li>The Dialog Registry may be queried by the <a href="#dialogmanagement">Dialog Management</a> for <a href="#intentsets">Intent Sets</a> that are referenced in a <a href="#dialog">Dialog</a>.</li>
-			<li>The Dialog Registry may be queried by the <a href="#dialogmanagement">Dialog Management</a> for follow-up or clarification  <a href="#dialog">Dialogs</a> that are referenced in a <a href="#dialog">Dialog</a> by name
+			<li>The Dialog Registry may notify the <a href="#dialogmanager">Dialog Manager</a> if <a href="#dialog">Dialogs</a> have been added or removed.</li>
+			<li>The Dialog Registry may be queried by the <a href="#dialogmanager">Dialog Manager</a> for <a href="#intentsets">Intent Sets</a> that are referenced in a <a href="#dialog">Dialog</a>.</li>
+			<li>The Dialog Registry may be queried by the <a href="#dialogmanager">Dialog Manager</a> for follow-up or clarification  <a href="#dialog">Dialogs</a> that are referenced in a <a href="#dialog">Dialog</a> by name
 				or a list of entities from an <a href="#intentsets">Intent Set</a>.</li>
 			<li><a href="#intentsets">Intent Sets</a> will be removed if there are no more <a href="#dialog">Dialogs</a> referencing them.</li>
 			<li>The Dialog Registry ensures that added <a href="#dialog">Dialogs</a> are unique.</li>
@@ -508,7 +508,7 @@
 			<li>In case the Provider Selection Service retrieves a session identifier from the selected <a href="#provider">IPA Provider</a> it stores it in the 
 				<a href="#providerregistry">Provider Registry</a>,
 			    e.g. for follow-up questions. Usually, this session identifier is different to the <a href="#session">session</a> 
-                identifier which is known by the <a href="#dialogmanagement">Dialog Management</a>.</li>
+                identifier which is known by the <a href="#dialogmanager">Dialog Manager</a>.</li>
 			<li>In case the <a href="#asr">ASR</a> is bound to an <a href="#provider">IPA Providers</a> the Provider Selection Service is able to consume audio stream and forward 
 				them to the available <a href="#asr">ASR</a> engines.</li>
 		</ul>
@@ -766,7 +766,7 @@ find out about a designated conference hotel or special rates.
 				<td>none</td>
 			</tr>
 			<tr>
-				<td>Dialog Management</td>
+				<td>Dialog Manager</td>
 				<td>
 					<ul>
 						<li><a href="https://www.w3.org/TR/voicexml21/">Voice Extensible Markup Language (VoiceXML) 2.1</a></li>
