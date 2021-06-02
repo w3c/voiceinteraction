@@ -69,7 +69,7 @@
 			<text x="106.43" y="337.68" class="st6" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>IPA Service</text>		</g>
 		<g id="shape3-13" v:mID="3" v:groupContext="shape" transform="translate(59.6308,-89.3035)">
 			<title>Rectangle.3</title>
-			<desc>Dialog Management</desc>
+			<desc>Dialog Manager</desc>
 			<v:userDefs>
 				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
 			</v:userDefs>
@@ -81,7 +81,7 @@
 			</g>
 			<rect x="0" y="235.465" width="70.8661" height="113.386" class="st5"/>
 			<text x="22.68" y="289.16" class="st6" v:langID="1031"><v:paragraph v:horizAlign="1"/><v:tabList/>Dialog <tspan
-						x="8.12" dy="1.2em" class="st7">Management</tspan></text>		</g>
+						x="17.16" dy="1.2em" class="st7">Manager</tspan></text>		</g>
 		<g id="shape30-20" v:mID="30" v:groupContext="shape" transform="translate(-326.424,289.736) rotate(-90)">
 			<title>Sheet.30</title>
 			<path d="M0 348.85 L0 348.85" class="st8"/>
