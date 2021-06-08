@@ -132,6 +132,9 @@
 			<img src="Basic-IPA-Architecture.svg" alt="Basic IPA Architecture" style="width: 100%; height: auto;"/>
 			<figcaption>Fig. 1 Basic architecture of an IPA</figcaption>
 		</figure>
+                <p>
+                    This architecture follows a traditional partitioning of conversational systems, with separate components for speech recognition, natural language understanding, dialog management, natural language generation, and audio output, (audio files or text to speech). This architecture does not rule out combining some of these components in specific systems. 
+                </p>
 		
 		<p>This architecture aims at serving, among others, the following most popular high-level use cases for IPAs
 			<ol>
@@ -327,7 +330,7 @@
 		   Thus, it has information how the user reacted in the past and knows her preferences. The history may also be used to resolve anaphoric references in the <a href="#nlu">NLU</a>.</p>
 
         <h5 id="knowledge-graph"><span class="secno">3.2.3.2 </span>Knowledge Graph</h5>
-		<p>A knowledge graph to reason about entities and intents. This may be received from the detected input from the <a href="#nlu">NLU</a> or <a href="#coredataprovider">Data Providers</a> to come up with some more meaningful data matching the current task better. One example is the use of the name of a person as a navigation target as a person usually has an address that qualifies to be used in navigation tasks.</p>
+		<p>A The system uses a knowledge graph to reason about entities and intents. This may be received from the detected input from the <a href="#nlu">NLU</a> or <a href="#coredataprovider">Data Providers</a> to come up with some more meaningful data matching the current task better. One example is the use of the name of a person as a navigation target as a person usually has an address that qualifies to be used in navigation tasks.</p>
 
         <h4 id="asr"><span class="secno">3.2.4 </span>ASR</h4>
 		<p>The Automated Speech Recognizer (ASR) receives audio streams of recorded utterances and generates a recognition hypothesis as text strings. Conceptually, ASR is 
