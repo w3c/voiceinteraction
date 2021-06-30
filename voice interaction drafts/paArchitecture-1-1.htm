@@ -207,7 +207,7 @@
 				</tr>
 				<tr>
 					<td><a href="#localdataproviders">Local Data Providers</a></td>
-					<td>In this case, a change in the environment may activate the client, for example if the enters a room.</td>
+					<td>In this case, a change in the environment may activate the client, for example if the user enters a room.</td>
 				</tr>
 				<tr>
 					<td>...</td>
@@ -230,7 +230,7 @@
         <h4 id="localdataproviders"><span class="secno">3.1.5 </span>Local Data Providers</h4>
 		<p>Local Data Providers capture input that is accessible in the user's local environment. They can be used to provide additional input to the <a href="client">IPA Client</a> or
 			to provide additional information that is needed to execute services. An example for the latter is the state of the light, either turned on or turned off.</p>
-		<p>Handling in case the input is forwarded to a nested IPA will be discussed in future versions of this document.</p>
+		<p>Handling in case the inputs are forwarded to a nested IPA will be discussed in future versions of this document.</p>
 		<p>Functionality as a <a href="#clientactivationstrategy">Client Activation Strategy</a> will be discussed in future versions of this document.</p>
 
         <h3 id="dialoglayer"><span class="secno">3.2 Dialog Layer</span></h3>
@@ -249,7 +249,7 @@
 			<li>Alternatively IPA Service may receive text ouput from the <a href="#nlg">NLG</a> and forwards it <a href="#client">IPA Client</a>. In this case the <a href="#ASR">TTS</a> is ommitted.</li></li>
 		</ul></p>
 		
-        <h4 id="asr"><span class="secno">3.2.4 </span>ASR</h4>
+        <h4 id="asr"><span class="secno">3.2.2 </span>ASR</h4>
 		<p>The Automated Speech Recognizer (ASR) receives audio streams of recorded utterances and generates a recognition hypothesis as text strings for the local IPA.
 			Conceptually, ASR is a modality recognizer for speech. It has the following characteristics
 		<ul>
@@ -258,7 +258,7 @@
 			<li>In case of a text-based chatbot, this component will not be needed and input is directly forwarded from the <a href="#ipaservice">IPA Service</a> to the <a href="#nlu">NLU</a></li>
 		</ul></p>
 
-        <h4 id="nlu"><span class="secno">3.2.5 </span>NLU</h4>
+        <h4 id="nlu"><span class="secno">3.2.3 </span>NLU</h4>
 		<p>An Natural Language Understanding (NLU) component that able to extract meaning as intents and associated entities from an utterance as text strings. 
 		<dl>
 			<dt>Intent</dt>
@@ -277,7 +277,7 @@
 			<li>The NLU forwards the result to the <a href="#dialogmanager">Dialog Manager</a></li>
 		</ul></p>
 
-        <h4 id="dialogmanager"><span class="secno">3.2.2 </span>Dialog Manager</h4>
+        <h4 id="dialogmanager"><span class="secno">3.2.4 </span>Dialog Manager</h4>
 		<p>The Dialog Manager is a component that receives semantic information determined from user input, updates its internal state, decides upon subsequent steps to continue a dialog and provides output,
 		mainly as synthesized or recorded utterances. Conceptually the dialog manager defines the playground that is used by the <a href="#dialog">Dialogs</a>. Both contribute to the user experience. 
 		The Dialog Manager has the following characteristics
@@ -301,7 +301,7 @@
 		</ul>
 		</p>
 
-        <h5 id="dialog"><span class="secno">3.2.2.1 </span>Dialog Strategy</h5>
+        <h5 id="dialog"><span class="secno">3.2.4.1 </span>Dialog Strategy</h5>
 		<p>A Dialog Strategy is a conceptualization of a dialog for an operationalization in a computer system. It defines the representation of the dialog's state and
 			respective operations to process and generate events relevant to the interaction. This specification is agnostic to the employed Dialog Strategy. Examples of
 			dialog strategy include</p>
@@ -328,7 +328,7 @@
 				</tr>
 			</table>
 
-        <h5 id="session"><span class="secno">3.2.2.2 </span>Session</h5>
+        <h5 id="session"><span class="secno">3.2.4.2 </span>Session</h5>
         <p>Conceptually, multiple sessions can be active in parallel. Dialogs can be governed by a sessions,
            e.g. to free resources of ASR and NLU engines when a session expires. 
            Linguistic phenomena, like anaphoric references and ellipsis, are expected to work within a session. 
@@ -337,7 +337,7 @@
 			time span. This includes that a session may persist over multiple requests that are not related to each other.</p>
 
 
-        <h4 id="context"><span class="secno">3.2.3 </span>Context</h4>
+        <h4 id="context"><span class="secno">3.2.5 </span>Context</h4>
 		<img src="context-component.svg" style="float:right" width="auto" height="auto" />
 		<p>During the interaction with a user all kinds of information are collected and managed in the so-called conversation context or dialog context. 
 		It contains all the short and long term information needed to handle a conversation and thus may exceed the concept of a <a href="#session">session</a>. 
@@ -353,11 +353,11 @@
 			<li>The Context supports the <a href"=#nlg">NLG</a> to create the reply to the user.</u>
 		</ul></p>
 
-        <h5 id="history"><span class="secno">3.2.3.1 </span>History</h5>
+        <h5 id="history"><span class="secno">3.2.5.1 </span>History</h5>
 		<p>The Dialog History mainly stores the past dialog events per user. Dialog events include users’ transcriptions, semantic interpretations and resulting actions.
 		   Thus, it has information how the user reacted in the past and knows her preferences. The history may also be used to resolve anaphoric references in the <a href="#nlu">NLU</a>.</p>
 
-        <h5 id="knowledge-graph"><span class="secno">3.2.3.2 </span>Knowledge Graph</h5>
+        <h5 id="knowledge-graph"><span class="secno">3.2.5.2 </span>Knowledge Graph</h5>
 		<p>A The system uses a knowledge graph to reason about entities and intents. This may be received from the detected input from the <a href="#nlu">NLU</a> or <a href="#coredataprovider">Data Providers</a> to come up with some more meaningful data matching the current task better. One example is the use of the name of a person as a navigation target as a person usually has an address that qualifies to be used in navigation tasks.</p>
 
         <h4 id="nlg"><span class="secno">3.2.6 </span>NLG</h4>
