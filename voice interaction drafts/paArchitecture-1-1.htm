@@ -15,10 +15,10 @@
             <h2 property="bibo:subtitle" id="subtitle">Architecture and Potential for Standardization Version 1.1</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: June 30, 2021 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm</a> (GitHub repository) </dd>
+                <dd>Last modified: July 2, 2021 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm</a> (GitHub repository) </dd>
 				<dd><a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture-1-1.htm">HTML rendered version</a></dd>             
 			    <dt>Editors</dt>
-                <dd>Dirk Schnelle-Walka</br>
+                <dd>Dirk Schnelle-Walka, modality.ai</br>
 					Deborah Dahl, Conversational Technologies</dd>
             </dl>
             <p class="copyright">Copyright © 2019-2021 the Contributors to the Voice Interaction Community Group, 
@@ -253,6 +253,7 @@
 		<p>The Automated Speech Recognizer (ASR) receives audio streams of recorded utterances and generates a recognition hypothesis as text strings for the local IPA.
 			Conceptually, ASR is a modality recognizer for speech. It has the following characteristics
 		<ul>
+			<li>The ASR receives recorded voice input from the <a href="#ipaservice">IPA Service</a></li>
 			<li>Optionally, the ASR can generate multiple recognition hypotheses along with a confidence score.</li>
 			<li>The ASR forwards the recognition hypotheses to the <a href="#nlu">NLU</a>
 			<li>In case of a text-based chatbot, this component will not be needed and input is directly forwarded from the <a href="#ipaservice">IPA Service</a> to the <a href="#nlu">NLU</a></li>
@@ -278,25 +279,31 @@
 		</ul></p>
 
         <h4 id="dialogmanager"><span class="secno">3.2.4 </span>Dialog Manager</h4>
-		<p>The Dialog Manager is a component that receives semantic information determined from user input, updates its internal state, decides upon subsequent steps to continue a dialog and provides output,
-		mainly as synthesized or recorded utterances. Conceptually the dialog manager defines the playground that is used by the <a href="#dialog">Dialogs</a>. Both contribute to the user experience. 
-		The Dialog Manager has the following characteristics
+		<p>The Dialog Manager is a component that receives semantic information determined from user input, updates the dialog history, 
+			its internal state, decides upon subsequent steps to continue a dialog and provides output,
+			mainly as synthesized or recorded utterances. Conceptually the dialog manager defines the playground that is used by the <a href="#dialog">Dialogs</a> 
+			and contributes significantly to the user experience. 
+			The Dialog Manager has the following characteristics
 		<ul>
-			<li>The Dialog Manager receives recorded voice input from the <a href="#ipaservice">IPA Service</a> and forwards it to the <a href="#asr">ASR</a></li>
-			<li>The Dialog Manager makes use of the <a href="#TTS">TTS</a> to generate audio data to be rendered on the <a href="#client">IPA Client</a></li>
-			<li>As an extension, it may also provide commands as output to be executed by the <a href="#client">IPA Client</a></li>
-			<li>As an extension, Dialogs may also return multimodal output or text to be rendered by a respective modality synthesizer on the <a href="#client">IPA Client</a>.</li>
+			<li>The overall set of available <a href="#dialog">Dialogs</a> defines the behavior and capabilities of the interaction with the IPA.</li>
+			<li>The Dialog Manager is also responsible for a good user experience across the available Dialogs.</li>
 			<li>For this, it employs several <a href="#dialog">Dialogs</a> that are responsible for handling isolated tasks or intents. The following types of dialogs exist:
 			<ul>
 				<li><a href="#coredialog">Core Dialog</a></li>
 				<li><a href="#dialogx">Dialog X</a></li>
 			</ul></li>
-			<li>The overall set of available <a href="#dialog">Dialogs</a> defines the behavior and capabilities of the interaction with the IPA.</li>
-			<li>The Dialog Manager is also responsible for a good user experience across the available Dialogs.</li>
-			<li>The Dialog Manager determines the Dialog following a <a href="#dialogstrategy">Dialog Strategy</a> that is best suited to serve the current user input and re-establishes the interaction state for that <a href="#dialog">Dialog</a>.
-				Therefore, it may use the <a href="#dialogregistry">Dialog Registry</a>.</li>
 			<li>The Dialog Manager follows the principle to fill in all slots that are known before prompting the user for additional slots.</a>
-			<li>The Dialog Manager also features an <a href="#asr">ASR</a> to convert spoken utterances into text strings and a <a href="#tts">TTS</a> to convert text strings into audio.</li>
+		    <li>The Dialog Manager receives input for the local IPA from the <a href="#nlu"> and for the remote IPAs from 
+				the <a href="#selectionservice">Provider Selection Service</a></li>
+			<li>The Dialog Manager selects the best suited input from the available input alternatives for further processing</li>
+			<li>The Dialog Manager may update the <a href="#history">History</a> with dialog moves, i.e., determined input and output</a>
+			<li>The Dialog Manager determines the Dialog following a <a href="#dialogstrategy">Dialog Strategy</a> that is best suited to serve the current user
+				input and re-establishes the interaction state for that <a href="#dialog">Dialog</a>.
+				Therefore, it may use the <a href="#dialogregistry">Dialog Registry</a>.</li>
+			<li>The Dialog Manager receives the next dialog move as output from the selected <a href="#dialog">Dialog</a>.</li>
+			<li>The Dialog Manager makes use of the <a href="#nlg">NLG</a> to generate audio data to be rendered on the <a href="#client">IPA Client</a></li>
+			<li>As an extension, it may also provide commands as output to be executed by the <a href="#client">IPA Client</a></li>
+			<li>As an extension, Dialogs may also return multimodal output or text to be rendered by a respective modality synthesizer on the <a href="#client">IPA Client</a>.</li>
 			<li>The Dialog Manager may manage a <a href="#session">session</a> wrapping the overall interaction of a user with the IPA.</p>
 		</ul>
 		</p>
@@ -329,12 +336,13 @@
 			</table>
 
         <h5 id="session"><span class="secno">3.2.4.2 </span>Session</h5>
-        <p>Conceptually, multiple sessions can be active in parallel. Dialogs can be governed by a sessions,
+        <p>Conceptually, multiple sessions can be active in parallel. Dialog execution can be governed by a sessions,
            e.g. to free resources of ASR and NLU engines when a session expires. 
            Linguistic phenomena, like anaphoric references and ellipsis, are expected to work within a session. 
-           The selected IPA Provider or the Dialog Manager may have leading roles for this task.</p>
-		<p>A session begins when the user starts to interact with an IPA, may continue over multiple interaction turns, i.e. an input and output cycle, and ends if the user does not start a new input within a predefined
-			time span. This includes that a session may persist over multiple requests that are not related to each other.</p>
+           The selected <a href="#provider">IPA Providers</a> or the <a href="#dialogmanager">Dialog Manager</a> may have leading roles for this task.</p>
+		<p>A session begins when the user starts to interact with an IPA, may continue over multiple interaction turns, i.e. an input and output cycle,
+			and ends if the user does not start a new input within a predefined
+			time span. This includes that a session may persist over multiple requests.</p>
 
 
         <h4 id="context"><span class="secno">3.2.5 </span>Context</h4>
