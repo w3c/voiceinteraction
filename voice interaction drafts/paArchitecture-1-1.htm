@@ -253,9 +253,10 @@
 		<p>The Automated Speech Recognizer (ASR) receives audio streams of recorded utterances and generates a recognition hypothesis as text strings for the local IPA.
 			Conceptually, ASR is a modality recognizer for speech. It has the following characteristics
 		<ul>
-			<li>The ASR receives recorded voice input from the <a href="#ipaservice">IPA Service</a></li>
+			<li>The ASR receives recorded voice input from the <a href="#ipaservice">IPA Service.</a></li>
 			<li>Optionally, the ASR can generate multiple recognition hypotheses along with a confidence score.</li>
-			<li>The ASR forwards the recognition hypotheses to the <a href="#nlu">NLU</a>
+			<li>The ASR forwards the recognition hypotheses to the <a href="#nlu">NLU</a>.</li>
+			<li>The ASR may update the <a href="#history">History</a> with the determined recognition hypotheses.</li>
 			<li>In case of a text-based chatbot, this component will not be needed and input is directly forwarded from the <a href="#ipaservice">IPA Service</a> to the <a href="#nlu">NLU</a></li>
 		</ul></p>
 
@@ -275,6 +276,7 @@
 			<li>The NLU may make use of the <a href="#coredataprovider">Core Data Provider</a> to access local or internal data or access external services.</li>
 			<li>The NLU components may make use of the <a href="#context">Context</a> to check for complementary information that might have been established throughout 
 				the interaction with the user and captures to complete an intent's related entities.</li>
+			<li>The NLU may update the <a href="#history">History</a> with the derived semantic input.</li>
 			<li>The NLU forwards the result to the <a href="#dialogmanager">Dialog Manager</a></li>
 		</ul></p>
 
@@ -301,7 +303,12 @@
 				input and re-establishes the interaction state for that <a href="#dialog">Dialog</a>.
 				Therefore, it may use the <a href="#dialogregistry">Dialog Registry</a>.</li>
 			<li>The Dialog Manager receives the next dialog move as output from the selected <a href="#dialog">Dialog</a>.</li>
+			<li>Optionally, the Dialog Manager may receive input via the <a href="#ipaservice">IPA Service</a> from the selected <a href="#provider">IPA Provider</a></li>
 			<li>The Dialog Manager makes use of the <a href="#nlg">NLG</a> to generate audio data to be rendered on the <a href="#client">IPA Client</a></li>
+			<li>Alternatively, the Dialog Manager may receive audio output from the selected <a href="#provider">IPA Provider</a>, e.g.,
+				to support branding. In this case, the output is directly sent to the <a href="#ipaservice">IPA Service</a>.</li>
+			<li>Alternatively, the Dialog Manager may receive text output from the selected <a href="#provider">IPA Provider</a>, e.g.,
+				to support branding. In this case, the output is directly sent to the <a href="#tts">TTS</a>.</li>
 			<li>As an extension, it may also provide commands as output to be executed by the <a href="#client">IPA Client</a></li>
 			<li>As an extension, Dialogs may also return multimodal output or text to be rendered by a respective modality synthesizer on the <a href="#client">IPA Client</a>.</li>
 			<li>The Dialog Manager may manage a <a href="#session">session</a> wrapping the overall interaction of a user with the IPA.</p>
@@ -363,21 +370,34 @@
 
         <h5 id="history"><span class="secno">3.2.5.1 </span>History</h5>
 		<p>The Dialog History mainly stores the past dialog events per user. Dialog events include users’ transcriptions, semantic interpretations and resulting actions.
-		   Thus, it has information how the user reacted in the past and knows her preferences. The history may also be used to resolve anaphoric references in the <a href="#nlu">NLU</a>.</p>
+		   Thus, it has information how the user reacted in the past and knows her preferences. The history may also be used to resolve anaphoric
+		   references in the <a href="#nlu">NLU</a>.</p>
 
         <h5 id="knowledge-graph"><span class="secno">3.2.5.2 </span>Knowledge Graph</h5>
-		<p>A The system uses a knowledge graph to reason about entities and intents. This may be received from the detected input from the <a href="#nlu">NLU</a> or <a href="#coredataprovider">Data Providers</a> to come up with some more meaningful data matching the current task better. One example is the use of the name of a person as a navigation target as a person usually has an address that qualifies to be used in navigation tasks.</p>
+		<p>A The system uses a knowledge graph to reason about entities and intents. This may be received from the detected input from the
+			<a href="#nlu">NLU</a> or <a href="#coredataprovider">Data Providers</a> to come up with some more meaningful data matching the current task better. 
+			One example is the use of the name of a person as a navigation target as a person usually has an address that qualifies to be used in navigation tasks.</p>
 
         <h4 id="nlg"><span class="secno">3.2.6 </span>NLG</h4>
-		<p>The natural language generation (NLG) component is responsible for preparing the natural language text that represents the system’s output. </p>
+		<p>The natural language generation (NLG) component is responsible for preparing the natural language text that represents the system’s output.
+			It has the following characteristics
+		<ul>
+			<li>The NLG receives the output dialog move from the <a href="#dialogmanager">Dialog Manager</a></li>
+			<li>The NLG may make use of the <a href="#context">Context</a> to optimize the output</li>
+			<li>The NLG forwards sends the text string to be spoken to the <a href="#tts">TTS</a></li>
+			<li>The NLG may update the <a href="#history">History</a> with the generated output.</li>
+			<li>In case of a text-based chatbot, the NLG forwards its output directly to the <a href="#ipaservice">IPA Service</a>.</li>
+		</ul></p>
 		
         <h4 id="tts"><span class="secno">3.2.7 </span>TTS</h4>
-		<p>The Text-to-Speech (TTS) component receives text strings, which it converts into audio data. Conceptually, the TTS is a modality specific renderer for speech. It has the following characteristics
+		<p>The Text-to-Speech (TTS) component receives text strings, which it converts into audio data. Conceptually, the TTS is a modality specific renderer for speech.
+			It has the following characteristics
 		<ul>
-			<li>Optionally, the TTS can also be part of the <a href="#provider">IPA Provider</a>. In this case, the audio stream is retrieved from the 
-				<a href="#selectionservice">Provider Selection Service</a>.</li>
-			<li>In case the TTS is part of the <a href="#provider">IPA Provider</a>, multiple TTS instances may exist. This may be useful in case of branding.</li>
-			<li>Multiple TTS instances may exist in parallel. In this case it is up to the current <a href="#dialog">Dialog</a> to specify the TTS engine to use.</li>
+			<li>The TTS receives its input from the <a href="#nlg">NLG</a></li>
+			<li>Alternatively, the TTS may receive its input from the <a href="#dialogmanager">Dialog Manager</a> if the output originates 
+				from an <a href="#provider">IPA Provider</a></li>
+			<li>Multiple TTS instances may exist in parallel, e.g. to distinguish between different active dialogs. In this case it is up to the current
+				<a href="#dialog">Dialog</a> to specify the TTS engine to use.</li>
 			<li>In case of a text-based chatbot, this component will not be needed.</li>
 		</ul></p>
 
