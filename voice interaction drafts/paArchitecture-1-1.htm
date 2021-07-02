@@ -203,7 +203,10 @@
 				</tr>
 				<tr>
 					<td>Hotword</td>
-					<td>In this case, the user utters a predefined word or phrase to activate the client by voice. This hotword is usually not part of the spoken command that is passed for further evaluation.</td>
+					<td>In this case, the user utters a predefined word or phrase to activate the client by voice. Hotwords may also be used to preselect a known
+						<a href="#provider">IPA Provider</a>. In this case the identifier of that <a href="#provider">IPA Provider</a> is also used as additional metadata
+						augmenting the input</a>
+						This hotword is usually not part of the spoken command that is passed for further evaluation.</td>
 				</tr>
 				<tr>
 					<td><a href="#localdataproviders">Local Data Providers</a></td>
@@ -241,7 +244,10 @@
 		<p>The general IPA Service API that mediates between the user and the overall IPA system. The service layer may be omitted in case the <a href="#client">IPA Client</a> communicates directly with 
 		<a href="#dialogmanager">Dialog Manager</a>. However, this is not recommended as it may contradict the principle of separation-of-concerns. It has the following characteristics
 		<ul>
-			<li>The IPA Service receives audio input from the <a href="#client">IPA Client</a> and forwards it simultaneously to the local IPA, i.e. the  <a href="#asr">ASR</a> and nested IPAs via the <a href="#selectionservice">Provider Selection Service</a>.</li>
+			<li>The IPA Service receives audio input from the <a href="#client">IPA Client</a> and forwards it simultaneously to the local IPA, i.e. the  <a href="#asr">ASR</a>
+				and nested IPAs via the <a href="#selectionservice">Provider Selection Service</a>.</li>
+			<li>In case the metadata augmenting the user input contain a preselection of an <a href="#provider">IPA Provider</a> the input is only forwarded to the
+				<a href="#selectionservice">Provider Selection Service</a>.</li>
 			<li>Additionally, the IPA Service may receive multimodal input via the modality recognizers from the <a href="#client">IPA Client</a> and forwards that in addition to audio input.</li></li>
 			<li>Alternatively IPA Service may receive text input from the client and forwards that instead to audio input. In this case the <a href="#ASR">ASR</a> is ommitted.</li></li>
 			<li>The IPA Service functions receives audio output from the <a href="#tts">TTS</a> and forwards it <a href="#client">IPA Client</a>.</li>
@@ -309,7 +315,9 @@
 				to support branding. In this case, the output is directly sent to the <a href="#ipaservice">IPA Service</a>.</li>
 			<li>Alternatively, the Dialog Manager may receive text output from the selected <a href="#provider">IPA Provider</a>, e.g.,
 				to support branding. In this case, the output is directly sent to the <a href="#tts">TTS</a>.</li>
-			<li>As an extension, it may also provide commands as output to be executed by the <a href="#client">IPA Client</a></li>
+			<li>As an extension, it may also provide commands as output to be executed by the <a href="#client">IPA Client</a> in the <a href="localserverices">Local Services<a></li>
+			<li>As an extension, it may also provide commands as output to be executed by the <a href="#selectionservice">Provider Selection Service</a>
+				in the <a href="#externalservices">External Services</a>.</li>
 			<li>As an extension, Dialogs may also return multimodal output or text to be rendered by a respective modality synthesizer on the <a href="#client">IPA Client</a>.</li>
 			<li>The Dialog Manager may manage a <a href="#session">session</a> wrapping the overall interaction of a user with the IPA.</p>
 		</ul>
@@ -475,8 +483,8 @@
 		</p>
 
         <h5 id="coreintentsets"><span class="secno">3.2.8.3 </span>Core Intent Sets</h5>
-		<p>A Core Intent Set usually identifies tasks to be executed and defines the capabilities of the <a href="#coredialog">Core Dialog</a>. Conceptually, the Core Intent Sets are Intent Sets that are
-		always available.</p>
+		<p>A Core Intent Set usually identifies tasks to be executed and defines the capabilities of the <a href="#coredialog">Core Dialog</a>. 
+			Conceptually, the Core Intent Sets are Intent Sets that are always available.</p>
 		
         <h5 id="intentsets"><span class="secno">3.2.8.4 </span>Intent Sets</h5>
 		<p>Intent Sets define actions, identified by the name of the intent, along with their parameters as entities as it is produced by the <a href="#nlu">NLU</a> that can be consumed by a corresponding
@@ -526,31 +534,32 @@
 		<p>A service that provides access to all known Data Providers, External Services and IPA Providers. This service also maps the IPA Intent Sets to the Intent Sets in the Dialog layer. 
 			It has the following characteristics
 		<ul>
-			<li>The Provider Selection Service provides an interface to <a href="dataproviders">Data Providers</a>, <a href="externalservices">External Serives</a> and <a href="#provider">IPA Providers</a>./li>
-			<li>The Provider Selection Service receives input as text strings and returns results as intents with all recognized entities from all <a href="#provider">IPA Providers</a> 
-				that are able to reply to the user input along with associated entities.</li>
-			<li>In case the Provider Selection Service is called with a preselected identifier of an <a href="#provider">IPA Providers</a> only this one will be used as obtained from the 
+			<li>The Provider Selection Service provides an interface to <a href="dataproviders">Data Providers</a>, <a href="externalservices">External Serives</a> 
+				and <a href="#provider">IPA Providers</a>.</li>
+			<li>The Provider Selection Service may receive input from the <a href="#dialogmanager">Dialog Manager</a> to query data from <a href="dataproviders">Data Providers</a>.</li>
+			<li>The Provider Selection Service may receive input from the <a href="#dialogmanager">Dialog Manager</a> to execute <a href="externalservices">External Serives</a>.</li>
+			<li>The Provider Selection Service receives input as audio data along with metadata</li>
+			<li>In case the Provider Selection Service is called with a preselected identifier of an <a href="#provider">IPA Provider</a> only this one will be used as obtained from the 
 				<a href="#providerregistry">Provider Registry</a></li>
-			<li>In case there are no <a href="#provider">IPA Providers</a> the Provider Selection Service has to follow a <a href="#providerselectionstrategy">Provider Selection Strategy</a> as 
+			<li>In case there are no <a href="#provider">IPA Providers</a> preselected the Provider Selection Service has to follow a <a href="#providerselectionstrategy">Provider Selection Strategy</a> as 
 				detailed below to determine those <a href="#provider">IPA Providers</a> 
 				that are best suited to answer the request. The resulting list of <a href="#provider">IPA Providers</a> candidates is asked in parallel and
 			    those that return the n-best results are selected (n &ge; 1). Determining the best result considers at least a confidence score but may be improved by other metrics.
 				It may be necessary that the filtered list requires disambiguation in an additional dialog step.</li>
-			<li><a href="#provider">IPA Providers</a> and the <a href="#authentication">Accounts/Authentication</a> to access them and optionally <a href="#asr">ASR</a> and <a href="#tts">TTS</a> capabilities can be 
-				added or removed as needed.</li>
-			<li>The Provider Selection Service is stateless and always returns the n-best responses from the used <a href="#provider">IPA Providers</a> along with an identification of 
-				the issuing IPA Provider.</li>
-			<li>The Provider Selection Service makes use of <a href="#authentication">Accounts/Authentication</a> to access <a href="#provider">IPA Provider</a>.
+			<li>The Provider Selection Service makes use of <a href="#authentication">Accounts/Authentication</a> to access <a href="#provider">IPA Providers</a>.</li>
 			<li>The Provider Selection Services uses the <a href="#providerregistry">Provider Registry</a> to map the <a href="#providerintentsets">Provider Intent Sets</a> to 
 				the <a href="#intentsets">Intent Sets</a> known by the <a href="#dialogregistry">Dialog Registry</a>.
 				The mapping must be configured when <a href="#provider">IPA Providers</a> are added.</li>
+			<li><a href="#provider">IPA Providers</a> and the <a href="#authentication">Accounts/Authentication</a> to access them can be added or removed as needed.</li>
 			<li>In case no mapping to the  <a href="#intentsets">Intent Sets</a> known by the <a href="#dialogregistry">Dialog Registry</a> is possible, the received Intent is used.</li>
 			<li>In case the Provider Selection Service retrieves a session identifier from the selected <a href="#provider">IPA Provider</a> it stores it in the 
 				<a href="#providerregistry">Provider Registry</a>,
 			    e.g. for follow-up questions. Usually, this session identifier is different to the <a href="#session">session</a> 
                 identifier which is known by the <a href="#dialogmanager">Dialog Manager</a>.</li>
-			<li>In case the <a href="#asr">ASR</a> is bound to an <a href="#provider">IPA Providers</a> the Provider Selection Service is able to consume audio stream and forward 
-				them to the available <a href="#asr">ASR</a> engines.</li>
+			<li>The Provider Selection Service is stateless and always returns the n-best responses from the used <a href="#provider">IPA Providers</a> along with an identification of 
+				the issuing IPA Provider.</li>
+			<li>Alternatively, the Provider Seletion Service may return output as text strings to be rendered by the <a href="#TTS">TTS</a></li>
+			<li>Alternatively, the Provider Seletion Service may return audio output to be played by the <a href="#speaker">Speaker</a></li>
 		</ul>
 			How IPA local hotwords can be used to preselect an IPA will be described in a future draft.<br>
 			The Russian doll principle of nested IPAs will be described in a future draft.
