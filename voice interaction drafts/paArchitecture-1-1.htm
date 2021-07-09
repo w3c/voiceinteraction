@@ -15,7 +15,7 @@
             <h2 property="bibo:subtitle" id="subtitle">Architecture and Potential for Standardization Version 1.1</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: July 2, 2021 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm</a> (GitHub repository) </dd>
+                <dd>Last modified: July 9, 2021 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-1.htm</a> (GitHub repository) </dd>
 				<dd><a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture-1-1.htm">HTML rendered version</a></dd>             
 			    <dt>Editors</dt>
                 <dd>Dirk Schnelle-Walka, modality.ai</br>
@@ -223,7 +223,8 @@
         <h5 id="localserviceregistry"><span class="secno">3.2.2.2 </span>Local Service Registry</h5>
 		<p>A registry for all <a href="#localservices">Local Services</a> and <a href="#localdataproviders">Local Data Providers</a> that can be accessed by the client
 		<ul>
-			<li>The Local Service Registry maintains a list of <a href="#localservices">Local Services</a> and <a href="#localdataproviders">Local Data Providers</a> along with their unique identifier that may be accessed by the client.</li>
+			<li>The Local Service Registry maintains a list of <a href="#localservices">Local Services</a> and <a href="#localdataproviders">Local Data Providers</a> along with their unique identifier 
+				that may be accessed by the <a href="client">IPA Client</a> or the <a href="#context">Context</a>.</li>
 		</ul>
 		</p>
 		
@@ -237,22 +238,26 @@
 		<p>Functionality as a <a href="#clientactivationstrategy">Client Activation Strategy</a> will be discussed in future versions of this document.</p>
 
         <h3 id="dialoglayer"><span class="secno">3.2 Dialog Layer</span></h3>
-		<p>The Dialog Layer contains the main components to drive the interaction with the user. The following figure details the view of the Dialog Layer shown in Figure 1.</p>
+		<p>The Dialog Layer contains the main components to drive the interaction with the user. The following figure details the high-level view of the Dialog Layer shown in Figure 1.</p>
 		<img src="dialog-layer.svg" style="float:right" width="15%" height="auto" />
 
         <h4 id="ipaservice"><span class="secno">3.2.1 </span>IPA Service</h4>
-		<p>The general IPA Service API that mediates between the user and the overall IPA system. The service layer may be omitted in case the <a href="#client">IPA Client</a> communicates directly with 
+		<p>The general IPA Service API mediates between the user and the overall IPA system. The service layer may be omitted in case the <a href="#client">IPA Client</a> communicates directly with 
 		<a href="#dialogmanager">Dialog Manager</a>. However, this is not recommended as it may contradict the principle of separation-of-concerns. It has the following characteristics
 		<ul>
-			<li>The IPA Service receives audio input from the <a href="#client">IPA Client</a> and forwards it simultaneously to the local IPA, i.e. the  <a href="#asr">ASR</a>
+			<li>The IPA Service receives audio input from the <a href="#client">IPA Client</a> and forwards it simultaneously to the local IPA, i.e. the <a href="#asr">ASR</a>
 				and nested IPAs via the <a href="#selectionservice">Provider Selection Service</a>.</li>
+			<li>In case the audio input is augmented with metadata, such as location, the metatdata are also simultaneously forwarded to the local IP", i.e. the the <a href="#nlu">NLU</a>
+				and the nested IPAs via the <a href="#selectionservice">Provider Selection Service</a>.</li>
 			<li>In case the metadata augmenting the user input contain a preselection of an <a href="#provider">IPA Provider</a> the input is only forwarded to the
 				<a href="#selectionservice">Provider Selection Service</a>.</li>
-			<li>Additionally, the IPA Service may receive multimodal input via the modality recognizers from the <a href="#client">IPA Client</a> and forwards that in addition to audio input.</li></li>
+			<li>Additionally, the IPA Service may receive multimodal input via the modality recognizers from the <a href="#client">IPA Client</a> and forwards that in addition to the
+				<a href="#nlu">NLU</a> as additional semantic interpretation input to be considered. Deriving semantic interpretation may require incorporation of dedicated modality specific
+				components.</li></li>
 			<li>Alternatively IPA Service may receive text input from the client and forwards that instead to audio input. In this case the <a href="#ASR">ASR</a> is ommitted.</li></li>
-			<li>The IPA Service functions receives audio output from the <a href="#tts">TTS</a> and forwards it <a href="#client">IPA Client</a>.</li>
+			<li>The IPA Service functions receives audio output from the <a href="#tts">TTS</a> and forwards it to the <a href="#client">IPA Client</a>.</li>
 			<li>Additionally, the IPA Service may receive multimodal output from the <a href="#dialogmanager">Dialog Manager</a> and forwards that in addition to audio input to the modality renderes.</li></li>
-			<li>Alternatively IPA Service may receive text ouput from the <a href="#nlg">NLG</a> and forwards it <a href="#client">IPA Client</a>. In this case the <a href="#ASR">TTS</a> is ommitted.</li></li>
+			<li>Alternatively IPA Service may receive text ouput from the <a href="#nlg">NLG</a> and forwards it <a href="#client">IPA Client</a>. In this case the <a href="#TTS">TTS</a> is ommitted.</li></li>
 		</ul></p>
 		
         <h4 id="asr"><span class="secno">3.2.2 </span>ASR</h4>
@@ -277,17 +282,18 @@
 		
 		The NLU component has the following characteristics
 		<ul>
-		    <li>Optionally, the NLU can generate multiple intents with their entities along with with a confidence score.</li>
+			<li>The NLU consumes multiple incoming streams, e.g. from the <a href="#ASR">ASR</a> and for metadata augmenting the input from the <a href="#ipaservice">IPA Service</a> and must synchronize
+				them into a single input, i.e. an input dialog move.</li>
 			<li>The NLU is able to handle basic functionality via <a href="#coreintentsets">Core Intent Sets</a> to enable interaction with the user at all.</li>
 			<li>The NLU may make use of the <a href="#coredataprovider">Core Data Provider</a> to access local or internal data or access external services.</li>
 			<li>The NLU components may make use of the <a href="#context">Context</a> to check for complementary information that might have been established throughout 
-				the interaction with the user and captures to complete an intent's related entities.</li>
-			<li>The NLU may update the <a href="#history">History</a> with the derived semantic input.</li>
-			<li>The NLU forwards the result to the <a href="#dialogmanager">Dialog Manager</a></li>
+				the interaction with the user to complete an intent's related entities or include external knowledge.</li>
+			<li>The NLU forwards the the derived semantic input from all received input streams to the <a href="#dialogmanager">Dialog Manager</a></li>
+		    <li>Optionally, the NLU can generate multiple intents with their entities along with with a confidence score.</li>
 		</ul></p>
 
         <h4 id="dialogmanager"><span class="secno">3.2.4 </span>Dialog Manager</h4>
-		<p>The Dialog Manager is a component that receives semantic information determined from user input, updates the dialog history, 
+		<p>The Dialog Manager is a component that receives semantic information determined from user input, updates the  <a href="#history">dialog history</a>, 
 			its internal state, decides upon subsequent steps to continue a dialog and provides output,
 			mainly as synthesized or recorded utterances. Conceptually the dialog manager defines the playground that is used by the <a href="#dialog">Dialogs</a> 
 			and contributes significantly to the user experience. 
@@ -303,13 +309,14 @@
 			<li>The Dialog Manager follows the principle to fill in all slots that are known before prompting the user for additional slots.</a>
 		    <li>The Dialog Manager receives input for the local IPA from the <a href="#nlu"> and for the remote IPAs from 
 				the <a href="#selectionservice">Provider Selection Service</a></li>
-			<li>The Dialog Manager selects the best suited input from the available input alternatives for further processing</li>
+			<li>The Dialog Manager selects the best suited input from the available input alternatives for further processing. For this, it should generally
+				expect that the user may switch the goals and thus dialog flows at any time, but must also consider ongoing workflows that must not be interrupted.</li>
 			<li>The Dialog Manager may update the <a href="#history">History</a> with dialog moves, i.e., determined input and output</a>
 			<li>The Dialog Manager determines the Dialog following a <a href="#dialogstrategy">Dialog Strategy</a> that is best suited to serve the current user
 				input and re-establishes the interaction state for that <a href="#dialog">Dialog</a>.
 				Therefore, it may use the <a href="#dialogregistry">Dialog Registry</a>.</li>
 			<li>The Dialog Manager receives the next dialog move as output from the selected <a href="#dialog">Dialog</a>.</li>
-			<li>Optionally, the Dialog Manager may receive input via the <a href="#ipaservice">IPA Service</a> from the selected <a href="#provider">IPA Provider</a></li>
+			<li>Optionally, the Dialog Manager may receive the next dialog move via the <a href="#ipaservice">IPA Service</a> from the selected <a href="#provider">IPA Provider</a></li>
 			<li>The Dialog Manager makes use of the <a href="#nlg">NLG</a> to generate audio data to be rendered on the <a href="#client">IPA Client</a></li>
 			<li>Alternatively, the Dialog Manager may receive audio output from the selected <a href="#provider">IPA Provider</a>, e.g.,
 				to support branding. In this case, the output is directly sent to the <a href="#ipaservice">IPA Service</a>.</li>
@@ -369,20 +376,23 @@
 		each and every aspect of what context should comprise as discussions about context are likely to end up in trying to explain the world. For the sake of this 
 		specification it should be possible to deal with the following characteristics
 		<ul>
-		    <li>The dialog context is enhanced to build interaction with the user (grounding) from spoken and other input.</a>
-			<li>The Context supports the <a href="#dialogmanager">Dialog Manager</a> to get the needed information for a current dialog</a>
-			<li>The Context supports the <a href="#dialogmanager">Dialog Manager</a> to get the needed information when switching from one dialog context to another</a>
-			<li>The Context supports the <a href"=#nlu">NLU</a> to determine meaning from the user's input, also by reasoning via a <a href="#knowledge-graph">Knowledge Graph</a>.</u>
-			<li>The Context supports the <a href"=#nlg">NLG</a> to create the reply to the user.</u>
+		    <li>The dialog context is enhanced to build interaction with the user (grounding) from spoken and other input.</a></li>
+			<li>The Context supports the <a href="#dialogmanager">Dialog Manager</a> to get the needed information for a current dialog</a></li>
+			<li>The Context supports the <a href="#dialogmanager">Dialog Manager</a> to get the needed information when switching from one dialog context to another</a></li>
+			<li>The Context supports the <a href"=#nlu">NLU</a> to determine meaning from the user's input, also by reasoning via a <a href="#knowledge-graph">Knowledge Graph</a>.</li>
+			<li>The Context supports the <a href"=#nlg">NLG</a> to create the reply to the user, e.g. to avoid repetition of information that is already known.</li>
+			<li>The Context may make use of the <a href="#localserviceregistry">Local Service Registry</a> to include external knowledge from <a href="#localdataproviders">Local Data Providers</a></li>
+			<li>The Context may make use of the <a href="#selectionservice">Provider Selection Service to include external knowledge from <a href="dataproviders">Data Providers</a></li>
+			<li>The Context may provide external knowledge temporarirly to the <a href="#knowledge-graph">Knowledge Graph</a> to be considered in reasoning.</li>
 		</ul></p>
 
         <h5 id="history"><span class="secno">3.2.5.1 </span>History</h5>
 		<p>The Dialog History mainly stores the past dialog events per user. Dialog events include users’ transcriptions, semantic interpretations and resulting actions.
 		   Thus, it has information how the user reacted in the past and knows her preferences. The history may also be used to resolve anaphoric
-		   references in the <a href="#nlu">NLU</a>.</p>
+		   references in the <a href="#nlu">NLU</a> or can be used as termorary knowledge in the <a href="#knowledge-graph">Knowledge Graph</a>.</p>
 
         <h5 id="knowledge-graph"><span class="secno">3.2.5.2 </span>Knowledge Graph</h5>
-		<p>A The system uses a knowledge graph to reason about entities and intents. This may be received from the detected input from the
+		<p>A The system uses a knowledge graph, e.g., to reason about entities and intents. This may be received from the detected input from the
 			<a href="#nlu">NLU</a> or <a href="#coredataprovider">Data Providers</a> to come up with some more meaningful data matching the current task better. 
 			One example is the use of the name of a person as a navigation target as a person usually has an address that qualifies to be used in navigation tasks.</p>
 
@@ -390,9 +400,9 @@
 		<p>The natural language generation (NLG) component is responsible for preparing the natural language text that represents the system’s output.
 			It has the following characteristics
 		<ul>
-			<li>The NLG receives the output dialog move from the <a href="#dialogmanager">Dialog Manager</a></li>
-			<li>The NLG may make use of the <a href="#context">Context</a> to optimize the output</li>
-			<li>The NLG forwards sends the text string to be spoken to the <a href="#tts">TTS</a></li>
+			<li>The NLG receives the output dialog move from the <a href="#dialogmanager">Dialog Manager</a>.</li>
+			<li>The NLG may make use of the <a href="#context">Context</a> to optimize the output.</li>
+			<li>The NLG forwards sends the text string to be spoken to the <a href="#tts">TTS</a>.</li>
 			<li>The NLG may update the <a href="#history">History</a> with the generated output.</li>
 			<li>In case of a text-based chatbot, the NLG forwards its output directly to the <a href="#ipaservice">IPA Service</a>.</li>
 		</ul></p>
@@ -566,7 +576,9 @@
 		</p>
 		
         <h5 id="providerselectionstrategy"><span class="secno">3.3.1.1 </span>Provider Selection Strategy</h5>
-		<p>The provider selection strategy may be implemented for example as one of the following options or a combination thereof to determine a list of <a href="#provider">IPA Providers</a> candidates.
+		<p>The Provider Selection Strategy aims at determining those <a href="#provider">IPA Providers</a> that are most likely suited to handle the current input.
+			Generally,the system should not make any assumptions about the user's current input as she may switch goals with each input but there may be some deviating use cases.
+			The provider selection strategy may be implemented for example as one of the following options or a combination thereof to determine a list of <a href="#provider">IPA Providers</a> candidates.
 		<ul>
 			<li>All known <a href="#provider">IPA Providers</a> are used. This strategy may only apply if there are only a small number of <a href="#provider">IPA Providers</a>.</li>
 			<li>The <a href="#provider">IPA Providers</a> is filtered by contextual data that is obtained from the client, e.g. location.</li>
@@ -580,14 +592,11 @@
         <h5 id="providerregistry"><span class="secno">3.3.1.2 </span>Provider Registry</h5>
 		<p>A registry for all IPA Providers that can be accessed. It has the following characteristics
 		<ul>
-			<li>It returns a list of <a href="#provider">IPA Providers</a> along with their unique identifier that may be used for a current input.</li>
+			<li>The Provider Registry can be queired for a list of <a href="#provider">IPA Providers</a> along with their unique identifier.</li>
 			<li>Each of the <a href="#provider">IPA Providers</a> should have a list of names in the supported languages to allow for preselecting the <a href="#provider">IPA Providers</a>
 				in an utterance or to allow for disambiguation of multiple <a href="#provider">IPA Providers</a> in an additional dialog step.</li>
-			<li>Optionally, the retrieval of <a href="#provider">IPA Providers</a> may be filtered by additional parameters matching the implemented <a href="#providerselectionstrategy">Provider Selection Strategy</a>.
-				Therefore, the Provider Registry may request information from the <a href="#coredataprovider">Core Data Provider</a></li>
-			<li>The <a href="#nlu">Core Provider</a> is added to the Provider Registry when the system starts.</li>
-			<li>It can return an <a href="#provider">IPA Providers</a> for a current key</li>
-			<li>It knows the <a href="#intentsets">Intent Sets</a> of a specific <a href="#provider">IPA Providers</a> from the addition of that <a href="#provider">IPA Providers</a>.</li>
+			<li>The Provider Registry can return an <a href="#provider">IPA Providers</a> for a current identifier.</li>
+			<li>The Provider Registry knows the <a href="#intentsets">Intent Sets</a> of a specific <a href="#provider">IPA Providers</a> from the addition of that <a href="#provider">IPA Providers</a>.</li>
 			<li>Each Intent from the <a href="#intentsets">Intent Sets</a> of a specific <a href="#provider">IPA Providers</a> must also specify the mapping to the <a href="#intentsets">Intent Sets</a> known by the <a href="#dialogregistry">Dialog Registry</a>.
 			<li>Each <a href="#provider">IPA Providers</a> may have an associated session identifier to resume an existing session.</li>
 		</ul>
@@ -882,7 +891,7 @@ find out about a designated conference hotel or special rates.
 					</ul></td>
 			</tr>
                     <tr>
-				<td>World Knowledge</td>
+				<td>Knowledge Graph</td>
                                 <td><ul>
                                         <li>
                                             <a href="https://www.w3.org/OWL/">Web Ontology Language (OWL)</a>
