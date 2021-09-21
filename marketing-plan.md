@@ -12,9 +12,9 @@ put together list of talking points -- how do we describe it, purpose of the doc
 * Rain agency
 * Voice Summit
 * Clubhouse
-* Speech Technology Magazine, standards column for August 1
+* Speech Technology Magazine, standards column for August 1 submitted
 * Martin and Bradley newsletters
-* Len Klie (Speech Technology Magazine) 
+* Len Klie (Speech Technology Magazine) Posted September 9 https://www.speechtechmag.com/Articles/News/Speech-Technology-News/W3C-Looks-to-Implement-Standards-for-Personal-Assistant-Interoperability-148856.aspx
 * AVIOS website, post on news part of website
 * Podcasts -- Carl Robinson, Voice podcast, Nick Shyamala Pryaga
 * priorities
