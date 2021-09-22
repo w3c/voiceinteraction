@@ -7,13 +7,13 @@ put together list of talking points -- how do we describe it, purpose of the doc
 * Voice lunch
 * Voice First, newsletter and events
 * Women in Voice
-* LinkedIn posts
-* Twitter
+* LinkedIn posts -- Bev reshared posts
+* Twitter -- Bev retweeted
 * Rain agency
 * Voice Summit
-* Clubhouse
+* Human Behavior Clubhouse-- Jon will bring us in, with Terry Fisher
 * Speech Technology Magazine, standards column for August 1 submitted
-* Martin and Bradley newsletters
+* Martin and Bradley weekly newsletters -- Jon will do this
 * Len Klie (Speech Technology Magazine) Posted September 9 https://www.speechtechmag.com/Articles/News/Speech-Technology-News/W3C-Looks-to-Implement-Standards-for-Personal-Assistant-Interoperability-148856.aspx
 * AVIOS website, post on news part of website
 * Podcasts -- Carl Robinson, Voice podcast, Nick Shyamala Pryaga
@@ -23,5 +23,6 @@ put together list of talking points -- how do we describe it, purpose of the doc
 * Debbie and Jon to put together talking points
 * Twitter and LinkedIn are almost no work
 * Debbie to do LinkedIn post, Twitter OVON will amplify, 
+* OVON speaker bureau list
 
 Please add comments and other ideas here.
