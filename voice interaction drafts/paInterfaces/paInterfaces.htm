@@ -12,7 +12,7 @@
             <dl>
                 <dt>Latest version</dt>
                 <dt>Latest version</dt>
-                <dd>Last modified: October 29, 2021 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a> (GitHub repository) </dd>
+                <dd>Last modified: November 8, 2021 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a> (GitHub repository) </dd>
 				<dd><a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces.htm">HTML rendered version</a></dd>             
                 <dt>Editor</dt>
                 <p><span style="color: rgb(51, 51, 51); font-family: Conv_DroidSerif-Regular, serif; font-size: 15.7072px; orphans: 2; text-align: center; widows: 2; background-color: rgba(255, 255, 255, 0.6);">Dirk Schnelle-Walka</br>
@@ -70,7 +70,19 @@
 		<img src="IPA-Component-View.svg" alt="IPA Component View" style="width: 100%; height: auto;"/>
 
         <h2 id="client"><span class="secno">3.1. </span>Client Layer</h2>
+		<p>The Client Layer contains the main components that interface with the user. </p>
 
+        <h3 id="client"><span class="secno">3.1.1 </span>IPA Client</h3>
+		<p>Clients enable the user to access the IPA via voice. The following diagram provides some more insight.</p>
 		<img src="IPA-Client.svg" alt="IPA Client" style="width: 50%; height: auto;"/>
+		
+        <h4 id="modalitymanager"><span class="secno">3.1.1.1 </span>Modality Manager</h4>
+		<p>The modality manager enables access to the modalities that are supported by the IPA Client. Major modalities are voice and text in case of chatbots. The follwoing interfaces are supported
+		<ul>
+		  <li>Client Interaction</li>
+		  <li>Handle-xxx-Modality</li>
+		</ul>
+		</p>
+		
 
 </body></html>
