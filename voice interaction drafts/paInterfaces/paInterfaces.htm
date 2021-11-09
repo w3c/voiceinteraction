@@ -12,7 +12,7 @@
             <dl>
                 <dt>Latest version</dt>
                 <dt>Latest version</dt>
-                <dd>Last modified: November 8, 2021 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a> (GitHub repository) </dd>
+                <dd>Last modified: November 9, 2021 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a> (GitHub repository) </dd>
 				<dd><a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces.htm">HTML rendered version</a></dd>             
                 <dt>Editor</dt>
                 <p><span style="color: rgb(51, 51, 51); font-family: Conv_DroidSerif-Regular, serif; font-size: 15.7072px; orphans: 2; text-align: center; widows: 2; background-color: rgba(255, 255, 255, 0.6);">Dirk Schnelle-Walka</br>
@@ -46,13 +46,33 @@
 
         <!-- OddPage -->
         <h1 id="introduction"><span class="secno">1. </span>Introduction</h1>
-		<p>Intelligent Personal Assistants (IPA)s are already available in our daily lives through our smart phones. Apple’s Siri, Google Assistant, Microsoft’s Cortana, Samsung’s Bixby and 
-			many more are helping us with various tasks, like shopping, playing music, setting schedule, sending messages, and offering answers to simple questions. Additionally, we equip our households
-			with smart speakers like Amazon’s Alexa or Google Home to be available without the need to pick up explicit devices for these sorts of tasks or even control household appliances in our homes.
-			As of today, there is no interoperability between the available IPA providers. Especially for exchanging learned user behaviors this is unlikely to happen at all.</p>
+        <p>Intelligent Personal Assistants (IPAs) are now available in our daily lives through our smart phones. Apple’s Siri, Google Assistant, Microsoft’s Cortana, Samsung’s Bixby and 
+		many more are helping us with various tasks, like shopping, playing music, setting a schedule, sending messages, and offering answers to simple questions. Additionally, we equip our households
+		with smart speakers like Amazon’s Alexa or Google Home which are available without the need to pick up explicit devices for these sorts of tasks or even control household appliances in our homes.
+		As of today, there is no interoperability among the available IPA providers. Especially for exchanging learned user behaviors this is unlikely to happen at all.</p>
+        <p>
+            Furthermore, in addition to these general-purpose assistants, there are also specialized virtual assistants which are able to provide their users with in-depth information which is specific to an enterprise, government agency, school, or other organization. They may also have the ability to perform transactions on behalf of their users, such as purchasing items, paying bills, or making reservations. Because of the breadth of possibilities for these specialized assistants, it is imperative that they be able to interoperate with the general-purpose assistants. Without this kind of interoperability, enterprise developers will need to re-implement their intelligent assistants for each major generic platform. 
+        </p>
+		
+		<p>This document is a first step in our strategy for IPA standardization. It describes a general architecture of IPAs and explores the potential areas for standardization. It focuses on voice as the major input modality. We believe it will be of value not only to developers, but to many of the constituencies within the intelligent personal assistant ecosystem.  Enterprise decision-makers, strategists and consultants, and entrepreneurs may study this work to learn of best practices and seek adjacencies for creation or investment. 			
+			The overall concept is not restricted to voice but also covers purely text based interactions with so-called chatbots as well as interaction using multiple modalities.
+			Conceptually, the authors also define executing actions in the user's environment, like turning on the light, as a modality.
+			This means that components that deal with speech recognition, natural language understanding or speech synthesis will not necessarily be available in these deployments. In case of chatbots, speech components will be omitted. In case of
+			multimodal interaction, interaction modalities may be extended by components to recognize input from the respective modality, transform it into something meaningful and vice-versa to generate output
+			in one or more modalities. Some modalities may be used as output-only, like turning on the light, while other modalities may be used as input-only, like touch.</p>
 	
-		<p>This document describes a interfaces of the general architecture of IPAs described in <a href="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture.htm">Architecture and Potential for Standardization Version</a>.
-			Interfaces are described with the help of UML diagrams. The UML diagrams are provided as Enterprise Architect Model <a href="pa-architecture.EAP">pa-architecture.EAP</a>. They can be viewed with the free of charge tool
+		<p>This document describes the interfaces of the general architecture of IPAs described in <a href="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture.htm">Architecture and Potential for Standardization Version</a>.
+			We believe it will be of value not only to developers, but to many of the constituencies within the intelligent personal assistant ecosystem. Enterprise decision-makers, strategists and consultants, and entrepreneurs may study this work to learn of best practices and seek adjacencies for creation or investment. 			
+			The overall concept is not restricted to voice but also covers purely text based interactions with so-called chatbots as well as interaction using multiple modalities.
+			Conceptually, the authors also define executing actions in the user's environment, like turning on the light, as a modality.
+			This means that components that deal with speech recognition, natural language understanding or speech synthesis will not necessarily be available in these deployments. In case of chatbots, speech components will be omitted. In case of
+			multimodal interaction, interaction modalities may be extended by components to recognize input from the respective modality, transform it into something meaningful and vice-versa to generate output
+			in one or more modalities. Some modalities may be used as output-only, like turning on the light, while other modalities may be used as input-only, like touch.</p>
+		
+				<p>In order to cope with such <a href="#usecases">use cases</a> as those described above an IPA follows the general design concepts of a voice user interface, as can be seen in Figure 1.</p>
+		
+
+		<p>Interfaces are described with the help of UML diagrams. The UML diagrams are provided as Enterprise Architect Model <a href="pa-architecture.EAP">pa-architecture.EAP</a>. They can be viewed with the free of charge tool
 			<a href="https://www.sparxsystems.eu/enterprise-architect/ea-lite-edition/">EA Lite</a></p>
         
         <h1 id="problem statement"><span class="secno">2. </span>Problem Statement</h1>
@@ -66,6 +86,46 @@
         
 
         <h1 id="architecture"><span class="secno">3. </span>Architecture</h1>
+
+		<p>The architecture described in this document follows the <a href="https://web.archive.org/web/20150906155800/http:/www.objectmentor.com/resources/articles/Principles_and_Patterns.pdf">SOLID principle</a>
+			introduced by Robert C. Martin to arrive at a scalable, understandable and reusable software solution.
+			<dl>
+				<dt>Single responsibility principle</dt>
+				<dd>The components should have only one clearly-defined responsibility.</dd>
+				<dt>Open closed principle</dt>
+				<dd>Components should be open for extension, but closed for modification.</dd>
+				<dt>Liskov substitution principle</dt>
+				<dd>Components may be replaced without impacts onto the basic system behavior.</dd>
+				<dt>Interface segregation principle</dt>
+				<dd>Many specific interfaces are better than one general-purpose interface.</dd>
+				<dt>Dependency inversion principle</dt>
+				<dd>High-level components should not depend on low-level components. Both should depend on their interfaces.</dd>
+			</dl>
+		</p>
+
+                <p>
+                    This architecture follows a traditional partitioning of conversational systems, with separate components for speech recognition, natural language understanding, dialog management, natural language generation, and audio output, (audio files or text to speech). This architecture does not rule out combining some of these components in specific systems. 
+                </p>
+		
+		<p>This architecture aims at serving, among others, the following most popular high-level use cases for IPAs
+			<ol>
+				<li>Question Answering or Information Retrieval</a>
+				<li>Executing local and/or remote services to accomplish tasks</li>
+			</ol>
+		This is supported by a flexible architecture that supports dynamically adding local and remote services or knowledge sources such as data providers. Moreover, it is possible
+		to include other IPAs, with the same architecture, and forward requests to them, similar to the principle of a russian doll (omitting the Client Layer).
+		All this describes the capabilities of the IPA. These extensions may be selected from a
+		standardized marketplace. For the reminder of this document, we consider an IPA that is extendable via such a marketplace.</p>
+		
+		<p>Not all components may be needed for actual implementations, some may be omitted completely. However, we note them here to provide a more complete picture. 
+		This architecture comprises three layers that are detailed in the following sections
+        <ol>
+            <li><a href="#clientlayer">Client Layer</a></li>
+            <li><a href="#dialoglayer">Dialog Layer</a></li>
+            <li><a href="#datalayer">APIs / Data Layer</a></li>
+        </ol>
+		Actual implementations may want to distinguish more than these layers. The assignment to the layers is not considered to be strict so that some of the components may be shifted
+		to other layers as needed. This view only reflects a view that the Community Group regard as ideal and to show the intended separation of concerns.</p>
 
 		<img src="IPA-Component-View.svg" alt="IPA Component View" style="width: 100%; height: auto;"/>
 
@@ -83,6 +143,11 @@
 		  <li>Handle-xxx-Modality</li>
 		</ul>
 		</p>
+
+        <h2 id="dialoglayer"><span class="secno">3.2 Dialog Layer</span></h2>
+		<p>The Dialog Layer contains the main components to drive the interaction with the user.</p>
 		
+        <h2 id="datalayer"><span class="secno">3.3 APIs/Data Layer</span></h2>
+
 
 </body></html>
