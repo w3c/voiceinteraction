@@ -12,7 +12,7 @@
             <dl>
                 <dt>Latest version</dt>
                 <dt>Latest version</dt>
-                <dd>Last modified: November 26, 2021 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a> (GitHub repository) </dd>
+                <dd>Last modified: December 1, 2021 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a> (GitHub repository) </dd>
 				<dd><a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">HTML rendered version</a></dd>             
                 <dt>Editor</dt>
                 <p><span style="color: rgb(51, 51, 51); font-family: Conv_DroidSerif-Regular, serif; font-size: 15.7072px; orphans: 2; text-align: center; widows: 2; background-color: rgba(255, 255, 255, 0.6);">Dirk Schnelle-Walka</br>
@@ -134,19 +134,19 @@
 		<p>This section details the interfaces that from the figure shown in the <a href="#architecture">architecture</a>.</p>
 
 		
-		<h2>Interface Client Input</h2>
+		<h2 id="if-clientinput"><span class="secno">4.1 </span></span><font face="Segoe UI">Interface Client Input</font></span></h2>
 		<p>This interface describes the data that is sent from the <a href="#ipaclient">IPA Client</a> to the <a href="#ipaservice">IPA Service</a>. The following table details the data that should be considered for this interface</p>
 
-		<table border="1">
+		<table>
 			<tr>
 				<th>name</th>
-				<th>descritption</th>
+				<th>description</th>
 				<th>required</th>
 			</tr>
 			<tr>
 				<td>session id</td>
 				<td>identifier of the session</td>
-				<td>yes</td>
+				<td>yes, if obtained</td>
 			</tr>
 			<tr>
 				<td>audio data</td>
@@ -154,12 +154,70 @@
 				<td>yes</td>
 			</tr>
 			<tr>
-				<td>meta data</td>
-				<td>data augmenting the request like, like location</td>
+				<td>multimodal input</td>
+				<td>input that has been received from modality recognizers</td>
 				<td>no</td>
 			</tr>
-
+			<tr>
+				<td>meta data</td>
+				<td>data augmenting the request like, like user identification, timestamp or location</td>
+				<td>no</td>
+			</tr>
 		</table>
+		
+		<p>The <b>session id</b> can be returned by the <a href="#ipaclient">IPA Client</a>, e.g. to serve multiple clients and allow to distinguish between them. In case
+			a session id is provided, it must be used for subsequent calls.</p>
+		
+		<p><b>Audio data</b> can be delivered mainly in two ways
+			<ol>
+				<li>Endpointed audio data</li>
+				<li>Streamed audio data</li>
+			</ol></p>
+			
+		<p>For endpointed audio data the <a href="#ipaclient">IPA Client</a> determined the end of speech, e.g. with the help of voice activity detection.
+			In this case only that portion of audio is sent that contains the potential spoken user input. In this case, an audio codec may be used, e.g., to reduce
+			the amount of data to be transferred. In terms of user experience this means that processing of the user input can only happen after the end of
+			speech has been detected.</p>
+		
+		<p>For streamed audio data, the <a href="#ipaclient">IPA Client</a> starts sending audio data as soon as it has been detected that the user is speaking to
+			the system with the help of the <a href="#clientactivtionstrategy">Client Activation Strategy</a>. In terms of user experience this means that 
+			processing of the user input can happen while the user is speaking.</p>
+			
+		<p>Optionally, <b>multimodal input</b> can be transferred that has been captured as input from a specific modality recognizer.</p>
+
+		<p>Optionally, <b>meta data</b> may be transferred augmenting the input. Examples of such data include user identification, timestamp and location.</p>
+		
+        <h2 id="clientactivtionstrategy"><span class="secno">4.2 </span>Client Activation Strategy</h2>
+		<p>The Client Activation Strategy defines how the client gets activated to be ready to receive spoken commands as input. In turn the <a href="#microphone">Microphone</a> 
+		is opened for recording. Client Activation Strategies are not exclusive but may be used concurrently. The most common activation strategies are described in the
+		table below</p>
+			<table border="1">
+				<tr>
+					<th>Client Activation Strategy</th>
+					<th>Description</th>
+				</tr>
+				<tr>
+					<td>Push-to-talk</td>
+					<td>The user explicitly triggers the start of the client by means of a physical or on-screen button or its equivalent in a client application.</td>
+				</tr>
+				<tr>
+					<td>Hotword</td>
+					<td>In this case, the user utters a predefined word or phrase to activate the client by voice. Hotwords may also be used to preselect a known
+						<a href="#provider">IPA Provider</a>. In this case the identifier of that <a href="#provider">IPA Provider</a> is also used as additional metadata
+						augmenting the input</a>
+						This hotword is usually not part of the spoken command that is passed for further evaluation.</td>
+				</tr>
+				<tr>
+					<td><a href="#localdataproviders">Local Data Providers</a></td>
+					<td>In this case, a change in the environment may activate the client, for example if the user enters a room.</td>
+				</tr>
+				<tr>
+					<td>...</td>
+					<td>...</td>
+				</tr>
+			</table>
+		<p>The usage of hotwords includes privacy aspects as the microphone needs to be always active. Streaming to the components outside the user's control should be avoided, hence detection of hotwords should ideally happen locally.
+		With regard to nested usage of IPAs that may feature their own hotwords, the detection of hotwords might be required to be extensible.</p>			
 		
         <h1 id="highlevelinterfaces"><span class="secno">5. </span>Low Level Interfaces</h1>
 		

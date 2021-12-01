@@ -58,3 +58,28 @@ section#abstract p {
  margin-right: 5%;
  font-size: 110%;
 }
+
+table {
+  width: 100%;
+  border: 1px solid #000;
+  border-collapse: collapse;
+}
+
+th, td {
+  width: 25%;
+  text-align: left;
+  vertical-align: top;
+  border: 1px solid #000;
+  padding: 0.3em;
+  caption-side: bottom;
+}
+
+caption {
+  padding: 0.3em;
+  color: #fff;
+  background: #000;
+}
+
+th {
+  background: #eee;
+}
