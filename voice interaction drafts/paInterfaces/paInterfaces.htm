@@ -24,7 +24,7 @@
 
         <h2 id="abstract">Abstract</h2>
 
-        <p>This documents details the general architecture of Intelligent Personal Assistants as described in <a href="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture-1.2.htm">Architecture and Potential for Standardization Version</a>
+        <p>This documents details the general architecture of Intelligent Personal Assistants as described in <a href="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture-1-2.htm">Architecture and Potential for Standardization Version</a>
 		with regard to interface definitions.</p>
 
         <h2>Status of This Document</h2>
@@ -40,6 +40,8 @@
             <li><a href="#introduction">Introduction</a></li>
             <li><a href="#problemstatement">Problem Statement</a></li>
             <li><a href="#architecture">Architecture</a></li>
+            <li><a href="#highlevelinterfaces">High Level Interfaces</a></li>
+            <li><a href="#lowlevelinterfaces">Low Level Interfaces</a></li>
         </ol>
 
         <!-- OddPage -->
@@ -211,7 +213,7 @@
 
 		<p>Optionally, <b>meta data</b> may be transferred augmenting the input. Examples of such data include user identification, timestamp and location.</p>
 
-		<h2 id="if-asrinput"><span class="secno">4.2 </span></span><font face="Segoe UI">ASR Input</font></span></h2>
+		<h2 id="if-asrinput"><span class="secno">4.2 </span></span><font face="Segoe UI">Interface ASR Input</font></span></h2>
 		<p>This interface describes the data that is sent from the <a href="#ipaservice">IPA Service</a> to the <a href="#asr">ASR</a> and 
 			<a href="#providerselectionservice">Provider Selection Service</a>. The following table details the data that should be considered for this interface</p>
 
@@ -252,6 +254,127 @@
 		
 		<p>The <a href="#ipaservice">IPA Service</a> may maintain a <b>session id</b>, e.g. to serve multiple clients and allow to distinguish between them.</p>
 		
+		<h2 id="if-asrinput"><span class="secno">4.3 </span></span><font face="Segoe UI">Interface Semantic Interpretation</font></span></h2>
+		<p>This interface describes the data that is sent from the <a href="#providerselectionservice">Provider Selection Service</a> and the <a href="#nlu">NLU</a> and 
+			<a href="#dialogmanagement">Dialog Management</a>. The following table details the data that should be considered for this interface</p>
+
+		<table>
+			<tr>
+				<th>name</th>
+				<th>type</th>
+				<th>description</th>
+				<th>required</th>
+			</tr>
+			<tr>
+				<td>session id</td>
+				<td>data item</td>
+				<td>unique identifier of the session</td>
+				<td>yes, if the IPA requires the usage</td>
+			</tr>
+			<tr>
+				<td>request id</td>
+				<td>data item</td>
+				<td>unique identifier of the request within a session</td>
+				<td>yes</td>
+			</tr>
+			<tr>
+				<td>interpretation</td>
+				<td>category</td>
+				<td>meaning as intents and associated entities</td>
+				<td>yes</td>
+			</tr>
+		</table>
+		
+		<p>The parameters <b>name</b>, <b>session id</b> and <b>request id</b> are copies of the data received from the <a href="#if-clientinput">Interface Client Input</a>.</p>
+
+		<p>The category <b>interpretation</b> is detailed in the following table
+		<table style="width:100%">
+			<tr>
+				<th colspan="3">name</th>
+				<th>data type</th>
+				<th>description</th>
+				<th>required</th>
+			</tr>
+			<tr>
+				<td colspan="3">interpretation</td>
+				<td>array</td>
+				<td>meaning as intents and associated entities</td>
+				<td>yes</td>
+			</tr>
+			<tr>
+				<td style="width:20px;"></td>
+				<td colspan="2">intent</td>
+				<td>string</td>
+				<td>group of utterances with similar meaning</td>
+				<td>yes</td>
+			</tr>
+			<tr>
+				<td style="width:20px;"></td>
+				<td colspan="2">intent confidence</td>
+				<td>float</td>
+				<td>confidence value for the intent in the range [0,1]</td>
+				<td>no</td>
+			</tr>
+			<tr>
+				<td style="width:20px;"></td>
+				<td colspan="2">entities</td>
+				<td>array</td>
+				<td>entitities associated to the intent</td>
+				<td>no</td>
+			</tr>
+			<tr>
+				<td style="width:20px;"></td>
+				<td style="width:20px;"></td>
+				<td>entity</td>
+				<td>string</td>
+				<td>additional information to the intent</td>
+				<td>no</td>
+			</tr>
+			<tr>
+				<td style="width:20px;"></td>
+				<td style="width:20px;"></td>
+				<td>entity confidence</td>
+				<td>float</td>
+				<td>confidence value for the entity in the range [0,1]</td>
+				<td>no</td>
+			</tr>
+		</table>
+		
+		<h2 id="if-clientinput"><span class="secno">4.4 </span></span><font face="Segoe UI">Interface Client Response</font></span></h2>
+		<p>This interface describes the data that is sent from the <a href="#ipaservice">IPA Service</a> to the <a href="#ipaclient">IPA Client</a>. The following table details the data that should be considered for this interface</p>
+
+		<table>
+			<tr>
+				<th>name</th>
+				<th>type</th>
+				<th>description</th>
+				<th>required</th>
+			</tr>
+			<tr>
+				<td>session id</td>
+				<td>data item</td>
+				<td>unique identifier of the session</td>
+				<td>yes, if obtained</td>
+			</tr>
+			<tr>
+				<td>request id</td>
+				<td>data item</td>
+				<td>unique identifier of the request within a session</td>
+				<td>yes</td>
+			</tr>
+			<tr>
+				<td>audio data</td>
+				<td>data item</td>
+				<td>encoded or raw audio data</td>
+				<td>yes</td>
+			</tr>
+			<tr>
+				<td>multimodal output</td>
+				<td>category</td>
+				<td>output that has been received from modality synthesizers, e.g., text, command to execute an observable action, ...</td>
+				<td>no</td>
+			</tr>
+		</table>		
 		
         <h1 id="lowlevelinterfaces"><span class="secno">5. </span>Low Level Interfaces</h1>
 		
@@ -308,6 +431,10 @@
         <h3 id="ipaservice"><span class="secno">5.2.1 </span>IPA Service</h3>
 
         <h3 id="asr"><span class="secno">5.2.2 </span>ASR</h3>
+
+        <h3 id="nlu"><span class="secno">5.2.3 </span>NLU</h3>
+
+        <h3 id="dialogmanagement"><span class="secno">5.2.4 </span>Dialog Management</h3>
 		
         <h2 id="datalayer"><span class="secno">5.3 APIs/Data Layer</span></h2>
 
