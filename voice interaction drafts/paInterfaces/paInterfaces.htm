@@ -11,7 +11,7 @@
             <h2 property="bibo:subtitle" id="subtitle">Intelligent Personal Assistant Interfaces</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: February 1, 2021 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a> (GitHub repository)<br/>
+                <dd>Last modified: February 7, 2021 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a> (GitHub repository)<br/>
 					<a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">HTML rendered version</a></dd>             
                 <dt>Editor</dt>
 					<dd>Dirk Schnelle-Walka<br/>
@@ -131,9 +131,6 @@
 
         <h1 id="highlevelinterfaces"><span class="secno">4. </span>High Level Interfaces</h1>
 
-		<p>A typical flow for the high level interfaces is shown in the following figure.</p>
-		<img src="Major-Components-Interaction.svg" alt="IPA Major Components Interaction" style="width: 100%; height: auto;"/>
-	
 		<p>This section details the interfaces that from the figure shown in the <a href="#architecture">architecture</a>. The interfaces are described with the following attributes
 			<dl>
 				<dt>name</dt>
@@ -148,10 +145,13 @@
 			The data types of the attributes are left open for now.
 		</p>
 
+		<p>A typical flow for the high level interfaces is shown in the following figure.</p>
+		<img src="Major-Components-Interaction.svg" alt="IPA Major Components Interaction" style="width: 100%; height: auto;"/>
 		
 		<h2 id="if-clientinput"><span class="secno">4.1 </span></span><font face="Segoe UI">Interface Client Input</font></span></h2>
 		<p>This interface describes the data that is sent from the <a href="#ipaclient">IPA Client</a> to the <a href="#ipaservice">IPA Service</a> and from there as a copy
-			to the <a href="#providerselectionservice">Provider Selection Service</a>. The following table details the data that should be considered for this interface</p>
+			to the <a href="#providerselectionservice">Provider Selection Service</a>. The following table details the data that should be considered for this interface
+			in the method <b>processInput</b></p>
 
 		<table>
 			<tr>
@@ -224,7 +224,8 @@
 		
 		<h2 id="if-asrinput"><span class="secno">4.2 </span></span><font face="Segoe UI">Interface Semantic Interpretation</font></span></h2>
 		<p>This interface describes the data that is sent from the <a href="#providerselectionservice">Provider Selection Service</a> and the <a href="#nlu">NLU</a> and 
-			<a href="#dialogmanagement">Dialog Management</a>. The following table details the data that should be considered for this interface</p>
+			<a href="#dialogmanagement">Dialog Management</a>. The following table details the data that should be considered for this interface in the
+			method <b>sendInterpretation</b></p>
 
 		<table>
 			<tr>
@@ -255,6 +256,8 @@
 		
 		<p>The parameters <b>name</b>, <b>session id</b> and <b>request id</b> are copies of the data received from the <a href="#if-clientinput">Interface Client Input</a>.</p>
 
+		<p>This call is optional depending if external IPAs are used or not.</p>
+		
 		<p>The category <b>interpretation</b> is detailed in the following table
 		<table style="width:100%">
 			<tr>
@@ -308,9 +311,9 @@
 			</tr>
 		</table>
 
-		<h2 id="if-servicecall"><span class="secno">4.2 </span></span><font face="Segoe UI">Interface Service Call</font></span></h2>
+		<h2 id="if-servicecall"><span class="secno">4.3 </span></span><font face="Segoe UI">Interface Service Call</font></span></h2>
 		<p>This interface describes the data that is sent from the <a href="#dialog">Dialog</a> to the <a href="#providerselectionservice">Provider Selection Service</a>.
-			The following table details the data that should be considered for this interface</p>
+			The following table details the data that should be considered for this interface in the method <b>callService</b></p>
 
 		<table>
 			<tr>
@@ -345,8 +348,11 @@
 			</tr>
 		</table>
 		
+		<p>This call is optional depending on the result of the next dialog step if an external service shall be called or not.</p>
+		
 		<h2 id="if-clientinput"><span class="secno">4.4 </span></span><font face="Segoe UI">Interface Client Response</font></span></h2>
-		<p>This interface describes the data that is sent from the <a href="#ipaservice">IPA Service</a> to the <a href="#ipaclient">IPA Client</a>. The following table details the data that should be considered for this interface</p>
+		<p>This interface describes the data that is sent from the <a href="#ipaservice">IPA Service</a> to the <a href="#ipaclient">IPA Client</a>. 
+			The following table details the data that should be considered for this interface in the method <b>deliverResponse</b>.</p>
 
 		<table>
 			<tr>
