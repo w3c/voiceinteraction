@@ -153,8 +153,8 @@
 		<img src="Major-Components-Interaction.svg" alt="IPA Major Components Interaction" style="width: 100%; height: auto;"/>
 		
 		<h2 id="if-clientinput"><span class="secno">4.1 </span></span><font face="Segoe UI">Interface Client Input</font></span></h2>
-		<p>This interface describes the data that is sent from the <a href="#ipaclient">IPA Client</a> to the <a href="#ipaservice">IPA Service</a> and from there as a copy
-			to the <a href="#providerselectionservice">Provider Selection Service</a>. The following table details the data that should be considered for this interface
+		<p>This interface describes the data that is sent from the <a href="#ipaclient">IPA Client</a> to the <a href="#ipaservice">IPA Service</a>.
+			The following table details the data that should be considered for this interface
 			in the method <b>processInput</b></p>
 
 		<table>
@@ -226,11 +226,57 @@
 		
 		<p>The <a href="#ipaservice">IPA Service</a> may maintain a <b>session id</b>, e.g. to serve multiple clients and allow to distinguish between them.</p>
 		
-		<h2 id="if-asrinput"><span class="secno">4.2 </span></span><font face="Segoe UI">Interface Semantic Interpretation</font></span></h2>
-		<p>This interface describes the data that is sent from the <a href="#providerselectionservice">Provider Selection Service</a> and the <a href="#nlu">NLU</a> and 
-			<a href="#dialogmanagement">Dialog Management</a>. The following table details the data that should be considered for this interface in the
-			method <b>sendInterpretation</b></p>
+		<p>As a return value this interface describes the data that is sent from the <a href="#ipaservice">IPA Service</a> to the <a href="#ipaclient">IPA Client</a>. 
+			The following table details the data that should be considered for this interface in the method <b>deliverResponse</b>.</p>
 
+		<table>
+			<tr>
+				<th>name</th>
+				<th>type</th>
+				<th>description</th>
+				<th>required</th>
+			</tr>
+			<tr>
+				<td>session id</td>
+				<td>data item</td>
+				<td>unique identifier of the session</td>
+				<td>yes, if obtained</td>
+			</tr>
+			<tr>
+				<td>request id</td>
+				<td>data item</td>
+				<td>unique identifier of the request within a session</td>
+				<td>yes</td>
+			</tr>
+			<tr>
+				<td>audio data</td>
+				<td>data item</td>
+				<td>encoded or raw audio data</td>
+				<td>yes</td>
+			</tr>
+			<tr>
+				<td>multimodal output</td>
+				<td>category</td>
+				<td>output that has been received from modality synthesizers, e.g., text, command to execute an observable action, ...</td>
+				<td>no</td>
+			</tr>
+		</table>		
+		
+		<p>In case the parameter <b>multimodal output</b> contains commands to be executed, they are expected to follow the specification of the
+			<a href="#if-servicecall">Interface Service Call</a></p>
+
+		<h2 id="if-clientinput"><span class="secno">4.2 </span></span><font face="Segoe UI">External Client Input</font></span></h2>
+		<p>This interface describes the data that is sent from t the <a href="#providerselectionservice">Provider Selection Service</a>. The input is 
+			a copy of the data that is sent from the <a href="#ipaclient">IPA Client</a> to the <a href="#ipaservice">IPA Service</a> in
+			<a href="#if-clientinput">Interface Client Input</a>. This interface mainly differs in the return value.
+			The following table details the data that should be considered for this interface
+			in the method <b>processInput</b></p>
+
+		<p>As a return value this interface describes the data that is sent from the <a href="#providerselectionservice">Provider Selection Service</a> and the <a href="#nlu">NLU</a> and 
+			<a href="#dialogmanagement">Dialog Management</a>. The following table details the data that should be considered for this interface in the
+			method <b>deliverInterpretation</b></p>
+
+		
 		<table>
 			<tr>
 				<th>name</th>
@@ -315,7 +361,7 @@
 			</tr>
 		</table>
 
-		<h2 id="if-servicecall"><span class="secno">4.3 </span></span><font face="Segoe UI">Interface Service Call</font></span></h2>
+		<h2 id="if-servicecall"><span class="secno">4.3 </span></span><font face="Segoe UI">External Service Call</font></span></h2>
 		<p>This interface describes the data that is sent from the <a href="#dialog">Dialog</a> to the <a href="#providerselectionservice">Provider Selection Service</a>.
 			The following table details the data that should be considered for this interface in the method <b>callService</b></p>
 
@@ -344,20 +390,16 @@
 				<td>id of the service to be exceuted</td>
 				<td>yes</td>
 			</tr>
-				<tr>
+			<tr>
 				<td>parameters</td>
 				<td>data item</td>
 				<td>Parameters to the service call</td>
 				<td>no</td>
 			</tr>
 		</table>
-		
-		<p>This call is optional depending on the result of the next dialog step if an external service shall be called or not.</p>
-		
-		<h2 id="if-clientinput"><span class="secno">4.4 </span></span><font face="Segoe UI">Interface Client Response</font></span></h2>
-		<p>This interface describes the data that is sent from the <a href="#ipaservice">IPA Service</a> to the <a href="#ipaclient">IPA Client</a>. 
-			The following table details the data that should be considered for this interface in the method <b>deliverResponse</b>.</p>
 
+		
+		<p>As a return value the result of this call is sent back in the method <b>deliverResponse</b>.</p>
 		<table>
 			<tr>
 				<th>name</th>
@@ -369,7 +411,7 @@
 				<td>session id</td>
 				<td>data item</td>
 				<td>unique identifier of the session</td>
-				<td>yes, if obtained</td>
+				<td>yes, if the IPA requires the usage</td>
 			</tr>
 			<tr>
 				<td>request id</td>
@@ -378,21 +420,26 @@
 				<td>yes</td>
 			</tr>
 			<tr>
-				<td>audio data</td>
+				<td>service id</td>
 				<td>data item</td>
-				<td>encoded or raw audio data</td>
+				<td>id of the service to be exceuted</td>
 				<td>yes</td>
 			</tr>
 			<tr>
-				<td>multimodal output</td>
-				<td>category</td>
-				<td>output that has been received from modality synthesizers, e.g., text, command to execute an observable action, ...</td>
+				<td>call result</td>
+				<td>data item</td>
+				<td>success or failure</td>
+				<td>yes</td>
+			</tr>
+			<tr>
+				<td>call result details</td>
+				<td>data item</td>
+				<td>detailed information in case of a failed service call</td>
 				<td>no</td>
 			</tr>
-		</table>		
+		</table>
 		
-		<p>In case the parameter <b>multimodal output</b> contains commands to be executed, they are expected to follow the specification of the
-			<a href="#if-servicecall">Interface Service Call</a></p>
+		<p>This call is optional depending on the result of the next dialog step if an external service shall be called or not.</p>
 		
         <h1 id="lowlevelinterfaces"><span class="secno">5. </span>Low Level Interfaces</h1>
 		
