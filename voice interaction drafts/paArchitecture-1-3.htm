@@ -15,7 +15,7 @@
             <h2 property="bibo:subtitle" id="subtitle">Architecture and Potential for Standardization Version 1.3</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: February 15, 2022 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-3.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-3.htm</a> (GitHub repository) </dd>
+                <dd>Last modified: June 23, 2022 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-3.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-3.htm</a> (GitHub repository) </dd>
 				<dd><a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture-1-3.htm">HTML rendered version</a></dd>             
 			    <dt>Editors</dt>
                 <dd>Dirk Schnelle-Walka, modality.ai</br>
@@ -312,6 +312,7 @@
 				the <a href="#selectionservice">Provider Selection Service</a></li>
 			<li>The Dialog Manager selects the best suited input from the available input alternatives for further processing. For this, it should generally
 				expect that the user may switch the goals and thus dialog flows at any time, but must also consider ongoing workflows that must not be interrupted.</li>
+			<li>The Dialog Manager may consider a maximum timespan to wait until the various inputs arrived and consider only those that arrive within that limt.</a>
 			<li>The Dialog Manager may update the <a href="#history">History</a> with dialog moves, i.e., determined input and output</a>
 			<li>The Dialog Manager determines the Dialog following a <a href="#dialogstrategy">Dialog Strategy</a> that is best suited to serve the current user
 				input and re-establishes the interaction state for that <a href="#dialog">Dialog</a>.
@@ -584,6 +585,7 @@
 			<li>All known <a href="#provider">IPA Providers</a> are used. This strategy may only apply if there are only a small number of <a href="#provider">IPA Providers</a>.</li>
 			<li>The <a href="#provider">IPA Providers</a> is filtered by contextual data that is obtained from the client, e.g. location.</li>
 			<li>The <a href="#provider">IPA Providers</a> is filtered by established knowledge about the user, e.g. language.</li>
+			<li>The <a href="#provider">IPA Providers</a> is filtered based on user preferences.</li>
 			<li>The <a href="#provider">IPA Providers</a> is filtered by knowledge that has been determined in the dialog with the user. This includes leading wake-up phrases like
 				<em>Hey Siri, &hellip;</em>, <em>OK Google, &hellip;</em>. For this, preprocessing of the user input by they <a href="#nlu">NLU</a> may be required.</li>
 		</ul>
@@ -772,7 +774,7 @@ find out about a designated conference hotel or special rates.
 			It then sends this mapped result to the Dialog Manager as an n-best list.</li>
 		<li>On the local path the NLU sends it result to the Dialog Manager. For our example this could be
 			<ul>
-				<li>Local NLU: lan-flight-travel with entity destination: American, origin: SFO.</li>
+				<li>Local NLU: plan-flight-travel with entity destination: American, origin: SFO.</li>
 			</ul>
 		
 		<li>The Dialog Manager determines an n-best list of meanings from the local and remote path as
@@ -783,7 +785,8 @@ find out about a designated conference hotel or special rates.
 				<li>IPA Provider 3: transfer-money with entities: bank: American, purpose: book flight</li>
 			</ul>
 			It selects the best suited reply. For our example, it may remove the results from IPA Provider 2 and IPA Provider 3 as the confidence for the entity is very low and updates
-			the History with the determined dialog move from the user.</li>
+			the History with the determined dialog move from the user. Results from IPA Provider 1 and Local NLU have the same result, however due to the employed
+			rules, IPA Provider 1 is selected as cloud based providers are expected to have better accuracy than local engines because of constraints with the embedded environment.</li>
 		<li>The Dialog Manger then sends the intent, plan-flight-travel to the Dialog Registry to determine the corresponding dialog...</li>
 		<li>...and receives the dialog to use back. For the example this may be the plan-flight-travel-dialog.</li>
         <li>The Dialog Manager calls the plan-flight-travel dialog and fills all known entities. In our example, the slots for airline and origin would be filled.</li>
