@@ -11,7 +11,7 @@
             <h2 property="bibo:subtitle" id="subtitle">Intelligent Personal Assistant Interfaces</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: June 14, 2022 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a> (GitHub repository)<br/>
+                <dd>Last modified: June 23, 2022 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a> (GitHub repository)<br/>
 					<a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">HTML rendered version</a></dd>             
                 <dt>Editor</dt>
 					<dd>Dirk Schnelle-Walka<br/>
@@ -308,7 +308,14 @@
 
 		<p>This call is optional depending if external IPAs are used or not.</p>
 		
-		<p>The category <b>interpretation</b> is detailed in the following table
+		<p>The category <b>interpretation</b> may be one of the following options, depending on the capabilities of the external IPA
+		<ul>
+			<li>multi-intent</li>
+			<li>single-intent</li>
+		</ul>
+		</p>
+		
+		<p>The structure for <b>multi-intent</b> is detailed in the following table</p>
 		<table style="width:100%">
 			<tr>
 				<th colspan="3">name</th>
@@ -318,7 +325,7 @@
 			</tr>
 			<tr>
 				<td colspan="3">interpretation</td>
-				<td>array</td>
+				<td>list</td>
 				<td>meaning as intents and associated entities</td>
 				<td>yes</td>
 			</tr>
@@ -339,7 +346,60 @@
 			<tr>
 				<td style="width:20px;"></td>
 				<td colspan="2">entities</td>
-				<td>array</td>
+				<td>list</td>
+				<td>entitities associated to the intent</td>
+				<td>no</td>
+			</tr>
+			<tr>
+				<td style="width:20px;"></td>
+				<td style="width:20px;"></td>
+				<td>entity</td>
+				<td>string</td>
+				<td>additional information to the intent</td>
+				<td>no</td>
+			</tr>
+			<tr>
+				<td style="width:20px;"></td>
+				<td style="width:20px;"></td>
+				<td>entity confidence</td>
+				<td>float</td>
+				<td>confidence value for the entity in the range [0,1]</td>
+				<td>no</td>
+			</tr>
+		</table>
+
+		<p>The structure for <b>single-intent</b> is detailed in the following table</p>
+		<table style="width:100%">
+			<tr>
+				<th colspan="3">name</th>
+				<th>data type</th>
+				<th>description</th>
+				<th>required</th>
+			</tr>
+			<tr>
+				<td colspan="3">interpretation</td>
+				<td>data item</td>
+				<td>meaning as intents and associated entities</td>
+				<td>yes</td>
+			</tr>
+			<tr>
+				<td style="width:20px;"></td>
+				<td colspan="2">intent</td>
+				<td>string</td>
+				<td>group of utterances with similar meaning</td>
+				<td>yes</td>
+			</tr>
+			<tr>
+				<td style="width:20px;"></td>
+				<td colspan="2">intent confidence</td>
+				<td>float</td>
+				<td>confidence value for the intent in the range [0,1]</td>
+				<td>no</td>
+			</tr>
+			<tr>
+				<td style="width:20px;"></td>
+				<td colspan="2">entities</td>
+				<td>list</td>
 				<td>entitities associated to the intent</td>
 				<td>no</td>
 			</tr>
