@@ -310,12 +310,19 @@
 		
 		<p>The category <b>interpretation</b> may be one of the following options, depending on the capabilities of the external IPA
 		<ul>
-			<li>multi-intent, i.e. provide one intent in a single utterance</li>
 			<li>single-intent, i.e. provide multiple intents in a single utterance</li>
+			<li>multi-intent, i.e. provide one intent in a single utterance</li>
 		</ul>
 		</p>
 		
-		<p>As multi-intent is not common in today's IPAs the focus for now is on single-intent</b> as detailed in the following table</p>
+		<p>
+			With <b>single-intent</b> the user provides a single intent per utterance. An example for single-intent is <em>"Book a flight to New York for tomorrow morning."</em> The single intent is here book-flight.
+			With <b>multi-intent</b> the user provides multiple intents in a single utterenancee. An example for multi-intent is <em>"How is the weather in New York and book a flight for tomorrow morning."</em>
+			Provided intents are check-weather and book-flight. In this case the IPA needs to determine the order of intent execution based on the strucure of the utterance. If not to be
+			done in parallel, the IPA will trigger the next intent in the identified order.
+		</p>
+		
+		<p>As multi-intent is not very common in today's IPAs the focus for now is on single-intent</b> as detailed in the following table</p>
 		<table style="width:100%">
 			<tr>
 				<th colspan="3">name</th>
