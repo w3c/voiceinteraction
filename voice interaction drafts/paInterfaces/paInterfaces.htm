@@ -11,7 +11,7 @@
             <h2 property="bibo:subtitle" id="subtitle">Intelligent Personal Assistant Interfaces</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: August 15, 2022 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a> (GitHub repository)<br/>
+                <dd>Last modified: August 25, 2022 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a> (GitHub repository)<br/>
 					<a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">HTML rendered version</a></dd>             
                 <dt>Editor</dt>
 					<dd>Dirk Schnelle-Walka<br/>
@@ -69,7 +69,7 @@
 			multimodal interaction, interaction modalities may be extended by components to recognize input from the respective modality, transform it into something meaningful and vice-versa to generate output
 			in one or more modalities. Some modalities may be used as output-only, like turning on the light, while other modalities may be used as input-only, like touch.</p>
 		
-				<p>In order to cope with such <a href="#usecases">use cases</a> as those described above an IPA follows the general design concepts of a voice user interface, as can be seen in Figure 1.</p>
+		<p>In order to cope with such <a href="#usecases">use cases</a> as those described above an IPA follows the general design concepts of a voice user interface, as can be seen in Figure 1.</p>
 		
 
 		<p>Interfaces are described with the help of <a href="https://www.omg.org/spec/UML/">UML diagrams</a>. We expect the reader to be familiar with that notation,
@@ -107,9 +107,9 @@
 			</dl>
 		</p>
 
-                <p>
-                    This architecture follows a traditional partitioning of conversational systems, with separate components for speech recognition, natural language understanding, dialog management, natural language generation, and audio output, (audio files or text to speech). This architecture does not rule out combining some of these components in specific systems. 
-                </p>
+        <p>
+            This architecture follows a traditional partitioning of conversational systems, with separate components for speech recognition, natural language understanding, dialog management, natural language generation, and audio output, (audio files or text to speech). This architecture does not rule out combining some of these components in specific systems. 
+        </p>
 		
 		<p>This architecture aims at serving, among others, the following most popular high-level use cases for IPAs
 			<ol>
@@ -151,7 +151,13 @@
 
 		<p>A typical flow for the high level interfaces is shown in the following figure.</p>
 		<img src="Major-Components-Interaction.svg" alt="IPA Major Components Interaction" style="width: 100%; height: auto;"/>
-		
+		<p>This sequence shows the support of the major use cases stated above at high level
+			<ol>
+				<li>Question Answering or Information Retrieval</a>
+				<li>Executing local and/or remote services to accomplish tasks</li>
+			</ol>
+		</p>
+			
 		<h2 id="if-clientinput"><span class="secno">4.1 </span></span><font face="Segoe UI">Interface Client Input</font></span></h2>
 		<p>This interface describes the data that is sent from the <a href="#ipaclient">IPA Client</a> to the <a href="#ipaservice">IPA Service</a>.
 			The following table details the data that should be considered for this interface
