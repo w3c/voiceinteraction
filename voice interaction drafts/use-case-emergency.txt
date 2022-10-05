@@ -1,0 +1,7 @@
+User encounters an emergency situations that requires them to use their hands while administering medical care, driving or operating machinery. Manual interactions on control panels, keyboards or touch pads can impede life saving activities and diminish focus while operating sensitive vehicles, devices and machinery. User would benefit from a voice interactive system that can be used to access necessary information, keeping hands free to perform these actions. 
+
+Examples of emergency applications include:
+
+-User interacts with a voice-activated GPS systems while navigating evacuation routes and alternate travel routes in extreme weather conditions, which could include washed out, flooded roadways, low visibility from smoke and haze and other conditions requiring focused, manual control.
+-User encounters a choking victim and accesses audio-based emergency medical care  instructions while providing life saving trauma care such as CPR or Epipen.
+-User accesses real time, audio translation services while caring for someone who speaks a different language.
