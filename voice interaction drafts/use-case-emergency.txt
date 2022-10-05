@@ -1,7 +1,20 @@
-User encounters an emergency situations that requires them to use their hands while administering medical care, driving or operating machinery. Manual interactions on control panels, keyboards or touch pads can impede life saving activities and diminish focus while operating sensitive vehicles, devices and machinery. User would benefit from a voice interactive system that can be used to access necessary information, keeping hands free to perform these actions. 
+User encounters emergency situations that requires them to use their hands while administering medical care, driving or operating machinery. Manual interactions on control panels, keyboards or touch pads can impede life saving activities and diminish focus while operating sensitive vehicles, devices and machinery. User would benefit from a secure, interoperable, voice interactive system that can be used to access necessary information, keeping hands free to perform these actions. 
 
 Examples of emergency applications include:
 
--User interacts with a voice-activated GPS systems while navigating evacuation routes and alternate travel routes in extreme weather conditions, which could include washed out, flooded roadways, low visibility from smoke and haze and other conditions requiring focused, manual control.
--User encounters a choking victim and accesses audio-based emergency medical care  instructions while providing life saving trauma care such as CPR or Epipen.
--User accesses real time, audio translation services while caring for someone who speaks a different language.
+-User interacts with a voice-activated GPS systems while navigating evacuation routes and alternate travel routes in extreme weather conditions, which could include washed out, flooded roadways, low visibility from smoke and haze and other conditions requiring focused, manual control. System has access to and can use voice query of real-time weather and road condition databases.
+-User interacts with a GPS system to privately and securely communicate their location to emergency services or other entities.
+-User encounters a choking victim and accesses audio-based emergency medical care instructions while providing life saving trauma care such as CPR or Epipen.
+-User accesses real time, audio translation/transcription services while caring for someone who speaks a different language.
+
+Concerns: 
+
+-There should be both audio and visual output.
+-Multiple ways to control (stop, start, go back, go forward, change rate of speed) either verbally or manually via GUI or physical control.
+-Additional information about the person receiving care such as age, medical history would be useful.
+-Interoperability with EHR systems (personal health information systems).
+-Conforms with health data privacy laws.
+
+Interoperability:
+-How to Discover it (Where is it? Who produces it?)
+-How to Interact with it (What format is it, etc.)
