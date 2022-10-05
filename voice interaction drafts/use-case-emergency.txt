@@ -7,11 +7,11 @@ Examples of emergency applications include:
 -User encounters a choking victim and accesses audio-based emergency medical care instructions while providing life saving trauma care such as CPR or Epipen.
 -User accesses real time, audio translation/transcription services while caring for someone who speaks a different language.
 
-Concerns: 
+All of these use cases benefit from voice interation systems that have: 
 
--There should be both audio and visual output.
+-Both audio and visual output as well as other accessible, multimodal output formats.
 -Multiple ways to control (stop, start, go back, go forward, change rate of speed) either verbally or manually via GUI or physical control.
--Additional information about the person receiving care such as age, medical history would be useful.
+-Ability to securely access information about the person receiving care such as age, medical history.
 -Interoperability with EHR systems (personal health information systems).
 -Conforms with health data privacy laws.
 
