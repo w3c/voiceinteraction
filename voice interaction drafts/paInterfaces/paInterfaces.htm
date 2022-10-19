@@ -11,7 +11,7 @@
             <h2 property="bibo:subtitle" id="subtitle">Intelligent Personal Assistant Interfaces</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: August 25, 2022 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a> (GitHub repository)<br/>
+                <dd>Last modified: September 1, 2022 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a> (GitHub repository)<br/>
 					<a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">HTML rendered version</a></dd>             
                 <dt>Editor</dt>
 					<dd>Dirk Schnelle-Walka<br/>
@@ -83,10 +83,10 @@
         
         <h2 id="usecases"><span class="secno">2.1 </span>Use Cases</h2>
 
-       
-        <h3><span class="secno">2.1.1 </span>Flight Reservation</h3>
-
         <h3><span class="secno">2.1.1 </span>Weather Information</h3>
+
+        <h3><span class="secno">2.1.2 </span>Flight Reservation</h3>
+
         
 
         <h1 id="architecture"><span class="secno">3. </span>Architecture</h1>
@@ -120,6 +120,22 @@
 		to include other IPAs, with the same architecture, and forward requests to them, similar to the principle of a russian doll (omitting the Client Layer).
 		All this describes the capabilities of the IPA. These extensions may be selected from a
 		standardized marketplace. For the reminder of this document, we consider an IPA that is extendable via such a marketplace.</p>
+
+		<p>The following table lists the IPA main use cases and related examples that are used in this document</p>
+		<table>
+			<tr>
+				<th>Main Use Case</th>
+				<th>Example</th>
+			</tr>
+			<tr>
+				<td>Question Answering or Information Retrieval</td>
+				<td>Weather information</td>
+			</tr>
+			<tr>
+				<td>Executing local and/or remote services to accomplish tasks</td>
+				<td>Flight reservation</td>
+			</tr>
+		</table>
 		
 		<p>Not all components may be needed for actual implementations, some may be omitted completely. However, we note them here to provide a more complete picture. 
 		This architecture comprises three layers that are detailed in the following sections
@@ -226,7 +242,6 @@
 			modalities but audio, e.g., text for a chat bot, gestures </p>
 
 		<p>Optionally, <b>meta data</b> may be transferred augmenting the input. Examples of such data include user identification, timestamp and location.</p>
-
 		
 		<p>The data transferred via this interface mainly copies the data received from the <a href="#if-clientinput">Interface Client Input</a>.</p>
 		
@@ -271,6 +286,30 @@
 		<p>In case the parameter <b>multimodal output</b> contains commands to be executed, they are expected to follow the specification of the
 			<a href="#if-servicecall">Interface Service Call</a></p>
 
+		<p>The following sections will provide examples using the JSON format to illustrate the interfaces. JSON is only 
+		   chosen as it is easy to understand and read. This specification does not make any assumptions about the
+		   underlying languages or data format.</p>
+		
+		<h3 id="if-clientinput"><span class="secno">4.1.2 </span></span><font face="Segoe UI">Example Weather information</font></span></h3>
+		
+		<p>
+			<pre>
+{
+	"sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
+	"requestId": "42",
+	"audio": {
+		"data": "ZmhhcGh2cGF3aGZwYWhuZ...zI0MDc4NDY1NiB5dGhvaGF3",
+		"encoding": "PCM-16BIT"
+	}
+	"multimodal": {},
+	"meta": {
+		
+		"timestamp": "2022-09-01T18:45:00.000Z"
+	}
+}
+			</pre>
+		</p>
+		
 		<h2 id="if-clientinput"><span class="secno">4.2 </span></span><font face="Segoe UI">External Client Input</font></span></h2>
 		<p>This interface describes the data that is sent from t the <a href="#providerselectionservice">Provider Selection Service</a>. The input is 
 			a copy of the data that is sent from the <a href="#ipaclient">IPA Client</a> to the <a href="#ipaservice">IPA Service</a> in
