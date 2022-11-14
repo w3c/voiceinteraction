@@ -11,7 +11,7 @@
             <h2 property="bibo:subtitle" id="subtitle">Intelligent Personal Assistant Interfaces</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: September 1, 2022 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a> (GitHub repository)<br/>
+                <dd>Last modified: November 14, 2022 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a> (GitHub repository)<br/>
 					<a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">HTML rendered version</a></dd>             
                 <dt>Editor</dt>
 					<dd>Dirk Schnelle-Walka<br/>
@@ -288,11 +288,13 @@
 
 		<p>The following sections will provide examples using the JSON format to illustrate the interfaces. JSON is only 
 		   chosen as it is easy to understand and read. This specification does not make any assumptions about the
-		   underlying languages or data format.</p>
+		   underlying programming languages or data format.</p>
 		
 		<h3 id="if-clientinput"><span class="secno">4.1.2 </span></span><font face="Segoe UI">Example Weather information</font></span></h3>
 		
 		<p>
+			The following request sends audio data with the user's current location to query for tomorrow's weather with the utterance
+			<em>How will be the weather tomorrow"</em>.
 			<pre>
 {
 	"sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
@@ -301,10 +303,44 @@
 		"data": "ZmhhcGh2cGF3aGZwYWhuZ...zI0MDc4NDY1NiB5dGhvaGF3",
 		"encoding": "PCM-16BIT"
 	}
-	"multimodal": {},
+	"multimodal": {
+		"location": {
+			"latitude": 38.897957,
+			"longitude": -77.036560
+		}
+		...
+	},
 	"meta": {
-		
 		"timestamp": "2022-09-01T18:45:00.000Z"
+		...
+	}
+}
+			</pre>
+		</p>
+
+		<h3 id="if-clientinput"><span class="secno">4.1.3 </span></span><font face="Segoe UI">Example Flight Reservation</font></span></h3>
+		
+		<p>
+			The following request sends audio data with the user's current location to book a flight with the utterance
+			<em>I want to fly to San Francisco"</em>.
+			<pre>
+{
+	"sessionId": "0c27895c-644d-11ed-81ce-0242ac120002",
+	"requestId": "15",
+	"audio": {
+		"data": "ZmhhcGh2cGF3aGZwYWhuZ...zI0MDc4NDY1NiB5dGhvaGF3",
+		"encoding": "PCM-16BIT"
+	}
+	"multimodal": {
+		"location": {
+			"latitude": 38.897957,
+			"longitude": -77.036560
+		}
+		...
+	},
+	"meta": {
+		"timestamp": "2022-11-14T19:50:00.000Z"
+		...
 	}
 }
 			</pre>
