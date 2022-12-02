@@ -15,7 +15,7 @@
             <h2 property="bibo:subtitle" id="subtitle">Architecture and Potential for Standardization Version 1.3</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: June 23, 2022 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-3.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-3.htm</a> (GitHub repository) </dd>
+                <dd>Last modified: December 2, 2023 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-3.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-3.htm</a> (GitHub repository) </dd>
 				<dd><a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture-1-3.htm">HTML rendered version</a></dd>             
 			    <dt>Editors</dt>
                 <dd>Dirk Schnelle-Walka, modality.ai</br>
@@ -383,6 +383,10 @@
 					<td><a href="http://www.ict.usc.edu/~traum/Papers/traumlarsson.pdf">Information State Update</a></td>
 				</tr>
 				<tr>
+					<td>Dialog State Tracking</td>
+					<td><a href="https://storage.googleapis.com/pub-tools-public-publication-data/pdf/44018.pdf">Machine Learning for Dialog State Tracking: A Review</a></td>
+				</tr>
+				<tr>
 					<td>...</td>
 					<td>...</td>
 				</tr>
@@ -687,6 +691,10 @@
         <h5 id="providernlu"><span class="secno">3.3.4.2 </span>Provider NLU</h5>
 		<p>An NLU component that is able to extract meaning as intents and associated entities from an utterance as text strings for <a href="#provider">IPA Provider X</a>. It has the following characteristics
 		<ul>
+		    <li>The Provider NLU may be specialized to handle specific domains</li>
+			<li>Optionally, the Provider NLU can generate multiple intents with their entities along with with a confidence score.</li>
+			<li>The Provider NLU may make use of own <a href="#providerintentsets">Provider Intenet Sets</a> indpendent of the <a href="#coreintentsets">Core Intent Sets</a> which are then mapped in the <a href="#selectionservice">Provider Selection Service</a>
+				so that they can be consumed by the <a href="#dialogmanager">Dialog Manager</a></li>
 			<li>The Provider NLU may make use of the <a href="#dataprovider">Data Provider</a> to access local or internal data or access external services.</li>
 			<li>The Provider NLU may make use of the <a href="#knowledgegraph">Knowledge Graph</a> to derive meaning.</li>
 		</ul></p>
