@@ -18,7 +18,7 @@ This repository contains the reports published by the group
 
 ## Interfaces:
 
-- Version 1.0 <https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm>
+- Version 1.0 (the one we’re actively working on): <https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm>
 
 # Contributing to the Repository
 
