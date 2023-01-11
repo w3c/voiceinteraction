@@ -312,7 +312,7 @@
 		...
 	},
 	"meta": {
-		"timestamp": "2022-09-01T18:45:00.000Z"
+		"timestamp": "2022-12-01T18:45:00.000Z"
 		...
 	}
 }</pre>
@@ -331,6 +331,7 @@
 		"encoding": "PCM-16BIT"
 	}
 	"multimodal": {
+		"text": "Tomorrow there will be snow showers in Berlin with temperatures between 0 and -1 degrees."
 		...
 	},
 	"meta": {
@@ -366,6 +367,27 @@
 	}
 }</pre>
 		</p>
+		
+		<p>
+			In return the the IPA may send back the following response <em>When do you want to fly from Berlin to San Francisco?</em>
+			via <b>deliverResponse</b> to the Client
+			<pre>
+{
+	"sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
+	"requestId": "42",
+	"audio": {
+		"type": "Endpointed",
+		"data": "Uvrs4hcGh2cGF3aGZwYWhuZ...vI0MDc4DGY1NiB5dGhvaRD2",
+		"encoding": "PCM-16BIT"
+	}
+	"multimodal": {
+		"text": "When do you want to fly from Berlin to San Francisco?"
+		...
+	},
+	"meta": {
+		...
+	}
+}</pre>
 		
 		<h2 id="if-clientinput"><span class="secno">4.2 </span></span><font face="Segoe UI">External Client Input</font></span></h2>
 		<p>This interface describes the data that is sent from t the <a href="#providerselectionservice">Provider Selection Service</a>. The input is 
