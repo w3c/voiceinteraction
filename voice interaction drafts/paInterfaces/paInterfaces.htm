@@ -11,7 +11,7 @@
             <h2 property="bibo:subtitle" id="subtitle">Intelligent Personal Assistant Interfaces</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: January 11, 2023 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a> (GitHub repository)<br/>
+                <dd>Last modified: January 23, 2023 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a> (GitHub repository)<br/>
 					<a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">HTML rendered version</a></dd>             
                 <dt>Editor</dt>
 					<dd>Dirk Schnelle-Walka<br/>
@@ -290,7 +290,7 @@
 		   chosen as it is easy to understand and read. This specification does not make any assumptions about the
 		   underlying programming languages or data format.</p>
 		
-		<h3 id="if-clientinput"><span class="secno">4.1.2 </span></span><font face="Segoe UI">Example Weather information</font></span></h3>
+		<h3 id="if-clientinput-weather-example"><span class="secno">4.1.2 </span></span><font face="Segoe UI">Example Weather Information for Interface Client Input</font></span></h3>
 		
 		<p>
 			The following request to <b>processInput</b> sends endpointed audio data with the user's current location to query for tomorrow's weather with the utterance
@@ -340,7 +340,7 @@
 }</pre>
 		</p>
 
-		<h3 id="if-clientinput"><span class="secno">4.1.3 </span></span><font face="Segoe UI">Example Flight Reservation</font></span></h3>
+		<h3 id="if-clientinput-flight-example"><span class="secno">4.1.3 </span></span><font face="Segoe UI">Example Flight Reservation for Interface Client Input</font></span></h3>
 		
 		<p>
 			The following request to <b>processInput</b> sends endpointed audio data with the user's current location to book a flight with the utterance
@@ -389,7 +389,7 @@
 	}
 }</pre>
 		
-		<h2 id="if-clientinput"><span class="secno">4.2 </span></span><font face="Segoe UI">External Client Input</font></span></h2>
+		<h2 id="if-externalclientinput"><span class="secno">4.2 </span></span><font face="Segoe UI">External Client Input</font></span></h2>
 		<p>This interface describes the data that is sent from t the <a href="#providerselectionservice">Provider Selection Service</a>. The input is 
 			a copy of the data that is sent from the <a href="#ipaclient">IPA Client</a> to the <a href="#ipaservice">IPA Service</a> in
 			<a href="#if-clientinput">Interface Client Input</a>. This interface mainly differs in the return value.
@@ -398,8 +398,7 @@
 
 		<p>As a return value this interface describes the data that is sent from the <a href="#providerselectionservice">Provider Selection Service</a> and the <a href="#nlu">NLU</a> and 
 			<a href="#dialogmanagement">Dialog Management</a>. The following table details the data that should be considered for this interface in the
-			method <b>deliverInterpretation</b></p>
-
+			method <b>deliverSemanticInterpretation</b></p>
 		
 		<table>
 			<tr>
@@ -456,8 +455,8 @@
 			</tr>
 			<tr>
 				<td colspan="3">interpretation</td>
-				<td>data item</td>
-				<td>meaning as intents and associated entities</td>
+				<td>list</td>
+				<td>list of meaning as intents and associated entities</td>
 				<td>yes</td>
 			</tr>
 			<tr>
@@ -478,13 +477,13 @@
 				<td style="width:20px;"></td>
 				<td colspan="2">entities</td>
 				<td>list</td>
-				<td>entitities associated to the intent</td>
+				<td>list of entitities associated to the intent</td>
 				<td>no</td>
 			</tr>
 			<tr>
 				<td style="width:20px;"></td>
 				<td style="width:20px;"></td>
-				<td>entity</td>
+				<td>name of the entity</td>
 				<td>string</td>
 				<td>additional information to the intent</td>
 				<td>no</td>
@@ -499,6 +498,58 @@
 			</tr>
 		</table>
 
+		<h3 id="if-externalclientinput-example-weather"><span class="secno">4.1.2 </span></span><font face="Segoe UI">Example Weather Information for Interface External Client Input</font></span></h3>
+		
+		<p>
+			The following request to <b>processInput</b> is a copy of <a href="if-clientinput-weather-example">Example Weather Information for Interface Client Input</a>.
+		</p>
+		
+		<p>
+			In return the the external IPA may send back the following respons via <b>deliverSemanticInterpretation</b> to the Dialog
+			<pre>
+{
+    "sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
+    "requestId": "42",
+    "interpretation": [
+        {
+            "intent": "weather-information",
+            "intentConfidence": 0.9,
+            "entities": [
+                {
+                    "location": "Berlin",
+                    "entityConfidence": 100
+                }
+            ]
+        },
+        ...	
+    ]
+}</pre>
+		</p>
+
+		<h3 id="if-externalclientinputexample-flight"><span class="secno">4.1.3 </span></span><font face="Segoe UI">Example Flight Reservation for Interface External Client Input</font></span></h3>
+		
+		<p>
+			The following request to <b>processInput</b> is a copy of <a href="if-clientinput-flight-example">Example Flight Reservation for Interface Client Input</a>.
+		</p>
+		
+		<p>
+			In return the the IPA may send back the following response <em>When do you want to fly from Berlin to San Francisco?</em>
+			via <b>deliverResponse</b> to the Client
+			<pre>
+{
+	"sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
+	"requestId": "42",
+    "interpretation": [
+        {
+            "intent": "flight-information",
+            "intentConfidence": 0.87,
+            "entities": [
+                "origin": "Berlin"    
+            ]
+        },
+        ...	
+    ]
+}</pre>
 		<h2 id="if-servicecall"><span class="secno">4.3 </span></span><font face="Segoe UI">External Service Call</font></span></h2>
 		<p>This interface describes the data that is sent from the <a href="#dialog">Dialog</a> to the <a href="#providerselectionservice">Provider Selection Service</a>.
 			The following table details the data that should be considered for this interface in the method <b>callService</b></p>
