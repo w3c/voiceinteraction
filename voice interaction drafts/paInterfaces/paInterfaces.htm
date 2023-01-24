@@ -538,7 +538,8 @@
 		
 		<p>
 			In return the the IPA may send back the following response <em>When do you want to fly from Berlin to San Francisco?</em>
-			via <b>deliverResponse</b> to the Client
+			via <b>deliverResponse</b> to the Client. In this case, empty entities, like <em>date</em> indicate that there are still slots to be filled and no service call 
+            can be made right now.
 			<pre>
 {
     "sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
@@ -556,6 +557,10 @@
                     "destination": "San Francisco",   
                     "entityConfidence": 0.827
                 },
+                {
+                    "date": "",   
+                },
+                ...
             ]
         },
         ...	
@@ -644,7 +649,7 @@
 		<h3 id="if-externalclientinput-example-weather"><span class="secno">4.3.1 </span></span><font face="Segoe UI">Example Weather Information for Interface Service Call</font></span></h3>
 		
 		<p>
-			The following request to <b>callService</b> is made to call the weather information service</a>.
+			The following request to <b>callService</b> may be made to call the weather information service</a>.
 			<pre>
 {
     "sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
@@ -674,7 +679,7 @@
         {
             "serviceId": "weather-information",
             "callResult": "SUCCESS",
-            "calLResultDetails": [
+            "callResultDetails": [
                 {
                     "location": "Berlin",
                     "date": "2022-12-02",
@@ -690,8 +695,6 @@
 }</pre>
 		</p>
 
-		<h3 id="if-externalclientinputexample-flight"><span class="secno">4.3.2 </span></span><font face="Segoe UI">Example Flight Reservation for Interface Service Call</font></span></h3>
-		
         <h1 id="lowlevelinterfaces"><span class="secno">5. </span>Low Level Interfaces</h1>
 		
         <p>This section is still under preparation. </p>
