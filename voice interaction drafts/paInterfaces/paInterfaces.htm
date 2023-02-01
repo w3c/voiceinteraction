@@ -11,7 +11,7 @@
             <h2 property="bibo:subtitle" id="subtitle">Intelligent Personal Assistant Interfaces</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: January 24, 2023 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a> (GitHub repository)<br/>
+                <dd>Last modified: February 1, 2023 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a> (GitHub repository)<br/>
 					<a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">HTML rendered version</a></dd>             
                 <dt>Editor</dt>
 					<dd>Dirk Schnelle-Walka<br/>
@@ -529,6 +529,15 @@
     ]
 }</pre>
 		</p>
+        <p>The external speech recognizer converts the obtained audio into text like <em>How will be the weather tomorrow</em>. The NLU then extracts the following from that decoded utterance
+        <ul>
+            <li>intent: check-weather from, e.g., utterance part <em>How will the weather&hellip;</em></li>
+            <li>entity: date from utterance part <em>&hellip;tomorrow&hellip;</em></li>
+            <li>entity: location, e.g., from metatdata of location</li>
+        </ul>
+        This is illustrated in the following figure.
+        </p>
+		<img src="processInputWeather.svg" alt="Processing Input of the check weather example" style="width: 40%; height: auto;"/>
 
 		<h3 id="if-externalclientinputexample-flight"><span class="secno">4.2.2 </span></span><font face="Segoe UI">Example Flight Reservation for Interface External Client Input</font></span></h3>
 		
