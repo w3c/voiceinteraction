@@ -11,7 +11,7 @@
             <h2 property="bibo:subtitle" id="subtitle">Intelligent Personal Assistant Interfaces</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: February 1, 2023 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a> (GitHub repository)<br/>
+                <dd>Last modified: February 6, 2023 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a> (GitHub repository)<br/>
 					<a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">HTML rendered version</a></dd>             
                 <dt>Editor</dt>
 					<dd>Dirk Schnelle-Walka<br/>
@@ -288,7 +288,9 @@
 
 		<p>The following sections will provide examples using the JSON format to illustrate the interfaces. JSON is only 
 		   chosen as it is easy to understand and read. This specification does not make any assumptions about the
-		   underlying programming languages or data format.</p>
+		   underlying programming languages or data format. They are just meant to be an illustration of how responses may be generated with the provided data.
+           It is not required that implementations follow exactly the described behavior.
+        </p>
 		
 		<h3 id="if-clientinput-weather-example"><span class="secno">4.1.2 </span></span><font face="Segoe UI">Example Weather Information for Interface Client Input</font></span></h3>
 		
@@ -344,7 +346,7 @@
 		
 		<p>
 			The following request to <b>processInput</b> sends endpointed audio data with the user's current location to book a flight with the utterance
-			<em>I want to fly to San Francisco"</em>.
+			<em>I want to fly to San Francisco</em>.
 			<pre>
 {
 	"sessionId": "0c27895c-644d-11ed-81ce-0242ac120002",
@@ -529,11 +531,12 @@
     ]
 }</pre>
 		</p>
-        <p>The external speech recognizer converts the obtained audio into text like <em>How will be the weather tomorrow</em>. The NLU then extracts the following from that decoded utterance
+        <p>The external speech recognizer converts the obtained audio into text like <em>How will be the weather tomorrow</em>. The NLU then extracts the following from that decoded
+            utterance, other multimodal input and metadata.
         <ul>
             <li>intent: check-weather from, e.g., utterance part <em>How will the weather&hellip;</em></li>
             <li>entity: date from utterance part <em>&hellip;tomorrow&hellip;</em></li>
-            <li>entity: location, e.g., from metatdata of location</li>
+            <li>entity: location, e.g., from the multimodal input of location</li>
         </ul>
         This is illustrated in the following figure.
         </p>
@@ -575,6 +578,21 @@
         ...	
     ]
 }</pre>
+
+        <p>The external speech recognizer converts the obtained audio into text like <em>I want to fly to San Francisco</em>. The NLU then extracts the following from that decoded
+            utterance, other multimodal input and metadata.
+        <ul>
+            <li>intent: book-fligh from, e.g., utterance part <em>I want to fly&hellip;</em></li>
+            <li>entity: location from utterance part <em>&hellip;San Francisco&hellip;</em></li>
+            <li>entity: location, e.g., from the multimodal input of location</li>
+        </ul>
+        This is illustrated in the following figure.
+        </p>
+		<img src="processFlightReservation.svg" alt="Processing Input of the flight reservation example" style="width: 40%; height: auto;"/>
+        
+        <p>Further steps will be needed to convert both location entities to <em>origin</em> and <em>destination</em> in the actual reply. This may be 
+            either done by the flight reservation IPA directly or by calling external services before to determine the nearest airports from these locations.</p>
+
 		<h2 id="if-servicecall"><span class="secno">4.3 </span></span><font face="Segoe UI">External Service Call</font></span></h2>
 		<p>This interface describes the data that is sent from the <a href="#dialog">Dialog</a> to the <a href="#providerselectionservice">Provider Selection Service</a>.
 			The following table details the data that should be considered for this interface in the method <b>callService</b></p>
