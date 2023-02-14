@@ -25,7 +25,9 @@
         <h2 id="abstract">Abstract</h2>
 
         <p>This documents details the general architecture of Intelligent Personal Assistants as described in <a href="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture-1-3.htm">Architecture and Potential for Standardization Version 1.3</a>
-		with regard to interface definitions.</p>
+		with regard to interface definitions. The architectural descriptions focus on intent-based
+		voice-based personal assistants and chatbots. Current LLM intent-less chatbots may have
+		other interface needs.</p>
 
         <h2>Status of This Document</h2>
 
@@ -46,6 +48,7 @@
 
         <!-- OddPage -->
         <h1 id="introduction"><span class="secno">1. </span>Introduction</h1>
+        
         <p>Intelligent Personal Assistants (IPAs) are now available in our daily lives through our smart phones. Apple’s Siri, Google Assistant, Microsoft’s Cortana, Samsung’s Bixby and 
 		many more are helping us with various tasks, like shopping, playing music, setting a schedule, sending messages, and offering answers to simple questions. Additionally, we equip our households
 		with smart speakers like Amazon’s Alexa or Google Home which are available without the need to pick up explicit devices for these sorts of tasks or even control household appliances in our homes.
@@ -54,14 +57,16 @@
             Furthermore, in addition to these general-purpose assistants, there are also specialized virtual assistants which are able to provide their users with in-depth information which is specific to an enterprise, government agency, school, or other organization. They may also have the ability to perform transactions on behalf of their users, such as purchasing items, paying bills, or making reservations. Because of the breadth of possibilities for these specialized assistants, it is imperative that they be able to interoperate with the general-purpose assistants. Without this kind of interoperability, enterprise developers will need to re-implement their intelligent assistants for each major generic platform. 
         </p>
 		
-		<p>This document is a first step in our strategy for IPA standardization. It describes a general architecture of IPAs and explores the potential areas for standardization. It focuses on voice as the major input modality. We believe it will be of value not only to developers, but to many of the constituencies within the intelligent personal assistant ecosystem.  Enterprise decision-makers, strategists and consultants, and entrepreneurs may study this work to learn of best practices and seek adjacencies for creation or investment. 			
+		<p>This document is the second step in our strategy for IPA standardization. It is based on a
+            general architecture of IPAs described in <a href="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture-1-3.htm">Architecture and Potential for Standardization Version 1.3</a>
+            which aimes at exploring the potential areas for standardization. It focuses on voice as the major input modality. We believe it will be of value not only to developers, but to many of the constituencies within the intelligent personal assistant ecosystem.  Enterprise decision-makers, strategists and consultants, and entrepreneurs may study this work to learn of best practices and seek adjacencies for creation or investment. 			
 			The overall concept is not restricted to voice but also covers purely text based interactions with so-called chatbots as well as interaction using multiple modalities.
 			Conceptually, the authors also define executing actions in the user's environment, like turning on the light, as a modality.
 			This means that components that deal with speech recognition, natural language understanding or speech synthesis will not necessarily be available in these deployments. In case of chatbots, speech components will be omitted. In case of
 			multimodal interaction, interaction modalities may be extended by components to recognize input from the respective modality, transform it into something meaningful and vice-versa to generate output
 			in one or more modalities. Some modalities may be used as output-only, like turning on the light, while other modalities may be used as input-only, like touch.</p>
 	
-		<p>This document describes the interfaces of the general architecture of IPAs described in <a href="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture-1-3.htm">Architecture and Potential for Standardization Version 1.3</a>.
+		<p>In this second step we describe the interfaces of the general architecture of IPAs in <a href="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture-1-3.htm">Architecture and Potential for Standardization Version 1.3</a>.
 			We believe it will be of value not only to developers, but to many of the constituencies within the intelligent personal assistant ecosystem. Enterprise decision-makers, strategists and consultants, and entrepreneurs may study this work to learn of best practices and seek adjacencies for creation or investment. 			
 			The overall concept is not restricted to voice but also covers purely text based interactions with so-called chatbots as well as interaction using multiple modalities.
 			Conceptually, the authors also define executing actions in the user's environment, like turning on the light, as a modality.
@@ -71,7 +76,6 @@
 		
 		<p>In order to cope with such <a href="#usecases">use cases</a> as those described above an IPA follows the general design concepts of a voice user interface, as can be seen in Figure 1.</p>
 		
-
 		<p>Interfaces are described with the help of <a href="https://www.omg.org/spec/UML/">UML diagrams</a>. We expect the reader to be familiar with that notation,
 			although most concepts are easy to understand and do not require in-depth knowledge. The main diagram types used in this document are
 			<a href="https://sparxsystems.com/resources/tutorials/uml2/component-diagram.html">component diagrams</a> and 
@@ -319,6 +323,10 @@
 	}
 }</pre>
 		</p>
+		
+		<p>In this example endpointed audio data is transfered as a value. There are other ways to
+		   send the audio data to the IPA, e.g., as a reference. This way is chosen as it is easier to
+		   illustrate the usage.</p>
 		
 		<p>
 			In return the the IPA may send back the following response <em>Tomorrow there will be snow showers in Berlin with temperatures between 0 and -1 degrees</em>
@@ -595,7 +603,8 @@
 
 		<h2 id="if-servicecall"><span class="secno">4.3 </span></span><font face="Segoe UI">External Service Call</font></span></h2>
 		<p>This interface describes the data that is sent from the <a href="#dialog">Dialog</a> to the <a href="#providerselectionservice">Provider Selection Service</a>.
-			The following table details the data that should be considered for this interface in the method <b>callService</b></p>
+			The following table details the data that should be considered for this interface in the method <b>callService</b>.
+            </p>
 
 		<table>
 			<tr>
@@ -677,6 +686,8 @@
 		
 		<p>
 			The following request to <b>callService</b> may be made to call the weather information service</a>.
+			Although calling the weather service is not a direct functionality of the IPA, it may help to understand
+            how the entered data may be processed to obtain a spoken reply to the user's input. 
 			<pre>
 {
     "sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
@@ -721,6 +732,8 @@
     ]
 }</pre>
 		</p>
+		<p>This information is the used to actually create a reply to the user as
+			desribed in <a href="#if-clientinput-weather-example">deliverResponse</a> to the Client.</p>
 
         <h1 id="lowlevelinterfaces"><span class="secno">5. </span>Low Level Interfaces</h1>
 		
