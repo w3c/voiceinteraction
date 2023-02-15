@@ -11,7 +11,7 @@
             <h2 property="bibo:subtitle" id="subtitle">Intelligent Personal Assistant Interfaces</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: February 14, 2023 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a> (GitHub repository)<br/>
+                <dd>Last modified: February 15, 2023 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a> (GitHub repository)<br/>
 					<a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">HTML rendered version</a></dd>             
                 <dt>Editor</dt>
 					<dd>Dirk Schnelle-Walka<br/>
@@ -59,7 +59,7 @@
 		
 		<p>This document is the second step in our strategy for IPA standardization. It is based on a
             general architecture of IPAs described in <a href="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture-1-3.htm">Architecture and Potential for Standardization Version 1.3</a>
-            which aimes at exploring the potential areas for standardization. It focuses on voice as the major input modality. We believe it will be of value not only to developers, but to many of the constituencies within the intelligent personal assistant ecosystem.  Enterprise decision-makers, strategists and consultants, and entrepreneurs may study this work to learn of best practices and seek adjacencies for creation or investment. 			
+            which aims at exploring the potential areas for standardization. It focuses on voice as the major input modality. We believe it will be of value not only to developers, but to many of the constituencies within the intelligent personal assistant ecosystem.  Enterprise decision-makers, strategists and consultants, and entrepreneurs may study this work to learn of best practices and seek adjacencies for creation or investment. 			
 			The overall concept is not restricted to voice but also covers purely text based interactions with so-called chatbots as well as interaction using multiple modalities.
 			Conceptually, the authors also define executing actions in the user's environment, like turning on the light, as a modality.
 			This means that components that deal with speech recognition, natural language understanding or speech synthesis will not necessarily be available in these deployments. In case of chatbots, speech components will be omitted. In case of
@@ -67,12 +67,9 @@
 			in one or more modalities. Some modalities may be used as output-only, like turning on the light, while other modalities may be used as input-only, like touch.</p>
 	
 		<p>In this second step we describe the interfaces of the general architecture of IPAs in <a href="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture-1-3.htm">Architecture and Potential for Standardization Version 1.3</a>.
-			We believe it will be of value not only to developers, but to many of the constituencies within the intelligent personal assistant ecosystem. Enterprise decision-makers, strategists and consultants, and entrepreneurs may study this work to learn of best practices and seek adjacencies for creation or investment. 			
-			The overall concept is not restricted to voice but also covers purely text based interactions with so-called chatbots as well as interaction using multiple modalities.
-			Conceptually, the authors also define executing actions in the user's environment, like turning on the light, as a modality.
-			This means that components that deal with speech recognition, natural language understanding or speech synthesis will not necessarily be available in these deployments. In case of chatbots, speech components will be omitted. In case of
-			multimodal interaction, interaction modalities may be extended by components to recognize input from the respective modality, transform it into something meaningful and vice-versa to generate output
-			in one or more modalities. Some modalities may be used as output-only, like turning on the light, while other modalities may be used as input-only, like touch.</p>
+			We believe it will be of value not only to developers, but to many of the constituencies within the intelligent personal assistant ecosystem. Enterprise decision-makers, strategists and consultants,
+            and entrepreneurs may study this work to learn of best practices and seek adjacencies for creation or investment. 			
+			</p>
 		
 		<p>In order to cope with such <a href="#usecases">use cases</a> as those described above an IPA follows the general design concepts of a voice user interface, as can be seen in Figure 1.</p>
 		
@@ -86,11 +83,19 @@
         <h1 id="problem statement"><span class="secno">2. </span>Problem Statement</h1>
         
         <h2 id="usecases"><span class="secno">2.1 </span>Use Cases</h2>
-
+        <p>This section describes potential usages of IPAs that will be used later in the document to
+           illustrate the usage of the specified interfaces.</p> 
+				
         <h3><span class="secno">2.1.1 </span>Weather Information</h3>
 
+        <p> A user located in Berlin, Germany, is planning to visit her friend a few kilometers away, the next day.
+        As she considers taking the bike, she asks the IPA for weather conditions.</p>
+        
         <h3><span class="secno">2.1.2 </span>Flight Reservation</h3>
-
+        
+        <p>A user located in Berlin, Germany, would like to plan a trio to an international conference
+        and she wants to book a flight to the conference in San Francisco. Therefore, she
+        approaches the IPA to help her with booking the flight,</p>
         
 
         <h1 id="architecture"><span class="secno">3. </span>Architecture</h1>
