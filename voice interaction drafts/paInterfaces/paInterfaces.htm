@@ -24,7 +24,7 @@
 
         <h2 id="abstract">Abstract</h2>
 
-        <p>This documents details the general architecture of Intelligent Personal Assistants as described in <a href="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture-1-3.htm">Architecture and Potential for Standardization Version 1.3</a>
+        <p>This document details the general architecture of Intelligent Personal Assistants as described in <a href="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture-1-3.htm">Architecture and Potential for Standardization Version 1.3</a>
 		with regard to interface definitions. The architectural descriptions focus on intent-based
 		voice-based personal assistants and chatbots. Current LLM intent-less chatbots may have
 		other interface needs.</p>
@@ -160,7 +160,7 @@
 
         <h1 id="highlevelinterfaces"><span class="secno">4. </span>High Level Interfaces</h1>
 
-		<p>This section details the interfaces that from the figure shown in the <a href="#architecture">architecture</a>. The interfaces are described with the following attributes
+		<p>This section details the interfaces from the figure shown in the <a href="#architecture">architecture</a>. The interfaces are described with the following attributes
 			<dl>
 				<dt>name</dt>
 				<dd>Name of the attribute</dd>
@@ -238,7 +238,7 @@
 				<li>Streamed audio data</li>
 			</ol></p>
 			
-		<p>For endpointed audio data the <a href="#ipaclient">IPA Client</a> determined the end of speech, e.g. with the help of voice activity detection.
+		<p>For endpointed audio data the <a href="#ipaclient">IPA Client</a> determines the end of speech, e.g., with the help of voice activity detection.
 			In this case only that portion of audio is sent that contains the potential spoken user input. In this case, an audio codec may be used, e.g., to reduce
 			the amount of data to be transferred. In terms of user experience this means that processing of the user input can only happen after the end of
 			speech has been detected.</p>
@@ -248,13 +248,13 @@
 			processing of the user input can happen while the user is speaking.</p>
 			
 		<p>Optionally, <b>multimodal input</b> can be transferred that has been captured as input from a specific modality recognizer. Modalities are all other
-			modalities but audio, e.g., text for a chat bot, gestures </p>
+			modalities but audio, e.g., text for a chat bot, or gestures. </p>
 
 		<p>Optionally, <b>meta data</b> may be transferred augmenting the input. Examples of such data include user identification, timestamp and location.</p>
 		
 		<p>The data transferred via this interface mainly copies the data received from the <a href="#if-clientinput">Interface Client Input</a>.</p>
 		
-		<p>The <a href="#ipaservice">IPA Service</a> may maintain a <b>session id</b>, e.g. to serve multiple clients and allow to distinguish between them.</p>
+		<p>The <a href="#ipaservice">IPA Service</a> may maintain a <b>session id</b>, e.g., to serve multiple clients and allow them to be distinguished.</p>
 		
 		<p>As a return value this interface describes the data that is sent from the <a href="#ipaservice">IPA Service</a> to the <a href="#ipaclient">IPA Client</a>. 
 			The following table details the data that should be considered for this interface in the method <b>deliverResponse</b>.</p>
@@ -293,7 +293,7 @@
 		</table>		
 		
 		<p>In case the parameter <b>multimodal output</b> contains commands to be executed, they are expected to follow the specification of the
-			<a href="#if-servicecall">Interface Service Call</a></p>
+			<a href="#if-servicecall">Interface Service Call.</a></p>
 
 		<p>The following sections will provide examples using the JSON format to illustrate the interfaces. JSON is only 
 		   chosen as it is easy to understand and read. This specification does not make any assumptions about the
@@ -305,7 +305,7 @@
 		
 		<p>
 			The following request to <b>processInput</b> sends endpointed audio data with the user's current location to query for tomorrow's weather with the utterance
-			<em>How will be the weather tomorrow"</em>.
+			<em>What will the weather be like tomorrow"</em>.
 			<pre>
 {
 	"sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
@@ -335,7 +335,7 @@
 		
 		<p>
 			In return the the IPA may send back the following response <em>Tomorrow there will be snow showers in Berlin with temperatures between 0 and -1 degrees</em>
-			via <b>deliverResponse</b> to the Client
+			via <b>deliverResponse</b> to the Client.
 			<pre>
 {
 	"sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
@@ -409,11 +409,11 @@
 			a copy of the data that is sent from the <a href="#ipaclient">IPA Client</a> to the <a href="#ipaservice">IPA Service</a> in
 			<a href="#if-clientinput">Interface Client Input</a>. This interface mainly differs in the return value.
 			The following table details the data that should be considered for this interface
-			in the method <b>processInput</b></p>
+			in the method <b>processInput.</b></p>
 
 		<p>As a return value this interface describes the data that is sent from the <a href="#providerselectionservice">Provider Selection Service</a> and the <a href="#nlu">NLU</a> and 
 			<a href="#dialogmanagement">Dialog Management</a>. The following table details the data that should be considered for this interface in the
-			method <b>deliverSemanticInterpretation</b></p>
+			method <b>deliverSemanticInterpretation.</b></p>
 		
 		<table>
 			<tr>
