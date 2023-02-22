@@ -520,7 +520,7 @@
 		</p>
 		
 		<p>
-			In return the the external IPA may send back the following response via <b>deliverSemanticInterpretation</b> to the Dialog
+			In return the the external IPA may send back the following response via <b>deliverSemanticInterpretation</b> to the Dialog.
 			<pre>
 {
     "sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
@@ -604,7 +604,7 @@
 		<img src="processFlightReservation.svg" alt="Processing Input of the flight reservation example" style="width: 40%; height: auto;"/>
         
         <p>Further steps will be needed to convert both location entities to <em>origin</em> and <em>destination</em> in the actual reply. This may be 
-            either done by the flight reservation IPA directly or by calling external services before to determine the nearest airports from these locations.</p>
+            either done by the flight reservation IPA directly or by calling external services beforehand to determine the nearest airports from these locations.</p>
 
 		<h2 id="if-servicecall"><span class="secno">4.3 </span></span><font face="Segoe UI">External Service Call</font></span></h2>
 		<p>This interface describes the data that is sent from the <a href="#dialog">Dialog</a> to the <a href="#providerselectionservice">Provider Selection Service</a>.
@@ -685,7 +685,7 @@
 			</tr>
 		</table>
 		
-		<p>This call is optional depending on the result of the next dialog step if an external service shall be called or not.</p>
+		<p>This call is optional depending on the result of the next dialog step if an external service should be called or not.</p>
 
 		<h3 id="if-externalclientinput-example-weather"><span class="secno">4.3.1 </span></span><font face="Segoe UI">Example Weather Information for Interface Service Call</font></span></h3>
 		
@@ -738,7 +738,7 @@
 }</pre>
 		</p>
 		<p>This information is the used to actually create a reply to the user as
-			desribed in <a href="#if-clientinput-weather-example">deliverResponse</a> to the Client.</p>
+			described in <a href="#if-clientinput-weather-example">deliverResponse</a> to the Client.</p>
 
         <h1 id="lowlevelinterfaces"><span class="secno">5. </span>Low Level Interfaces</h1>
 		
@@ -764,7 +764,7 @@
         <h4 id="clientactivtionstrategy"><span class="secno">5.1.1.2 </span>Client Activation Strategy</h4>
 		<p>The Client Activation Strategy defines how the client gets activated to be ready to receive spoken commands as input. In turn the <a href="#microphone">Microphone</a> 
 		is opened for recording. Client Activation Strategies are not exclusive but may be used concurrently. The most common activation strategies are described in the
-		table below</p>
+		table below.</p>
 			<table border="1">
 				<tr>
 					<th>Client Activation Strategy</th>
