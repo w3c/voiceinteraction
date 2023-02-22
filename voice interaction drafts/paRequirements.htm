@@ -53,6 +53,9 @@ IPA's MUST be able to transfer a partially completed task to another IPA
 </li>
 </ol>
 <h2><span class="secno">3. </span> Architecture</h2>
+<ol>
+<li>Components MAY be shifted to other layers as needed</li>
+</ol>
 <h3><span class="secno">3.1 </span> Client Layer</h3>
 <ol>
 <li>The architecture SHOULD support question answering and information retrieval applications</li>
@@ -65,7 +68,7 @@ IPA's MUST be able to transfer a partially completed task to another IPA
 <li>IPA's MAY include a Client layer</li>
 <li>IPA's MUST include a Dialog layer</li>
 <li>IPA's MAY include an API/Data layer</li>
-<li>Components MAY be shifted to other layers as needed (need to clarify with Dirk)?</li>
+<li>Components MAY be shifted to other layers as needed</li>
 </ol>
 
   <h3><span class="secno">3.3.3</span> Microphone</h3>
@@ -74,7 +77,7 @@ IPA's MUST be able to transfer a partially completed task to another IPA
 <li>	The Client layer MAY include a means for text input</li>
 <li>	The Client layer MAY include a speaker</li>
 <li>	The Client layer MAY include a display</li>
-<li>	Additional (non-speech) output modalities MAY be employed to render outputor to capture input
+<li>	Additional (non-speech) output modalities MAY be employed to render output or to capture input
 </li> 
 </ol>
 
@@ -83,13 +86,13 @@ IPA's MUST be able to transfer a partially completed task to another IPA
 <li>The IPA Client MUST allow activation and deactivation by means of a Client Activation Strategy.</li>
 <li>	As an extension IPA Clients MAY also capture input via text and output text</li>
 <li>	As an extension IPA Clients MAY also capture input from various modality recognizers </li>
-<li>	As an extension IPA Clients MAY also capture contextual information, e.g.,</li> location, time, environmental sounds or other inputs that it obtains from Local Data Providers.
+<li>	As an extension IPA Clients MAY also capture contextual information, e.g., location, time, environmental sounds or other inputs that it obtains from Local Data Providers</li>
 <li>	As an extension an IPA Client MAY also receive commands to be executed locally in the Local Services.</li>
-<li>	As an extension an IPA Client MAY also receive multimodal output to be< rendered by a respective modality synthesizer</li>
+<li>	As an extension an IPA Client MAY also receive multimodal output to be rendered by a respective modality synthesizer</li>
 <li>	IPA Clients MAY reference a session identifier.</li>
-<li>	Accessibility to be discussed</li>
+
 </ol>
-  <h4><span class="secno">3.2.2.1</span> Client Activation Strategu</h4>
+  <h4><span class="secno">3.2.2.1</span> Client Activation Strategy</h4>
     <ol>
 <li>The IPA Client MUST be activated with a Client Activation Strategy</li>
 <li>	The Client Activation Strategy MAY be push-to-talk</li>
@@ -132,11 +135,11 @@ IPA's MUST be able to transfer a partially completed task to another IPA
 
 <h3><span class="secno">3.2.3</span> NLU</h3>
   <ol>
-<li>The NLU MUST extract textual interpretations from text strings (either fromaudio or text)</li>
+<li>The NLU MUST extract textual interpretations from text strings (either from audio or text)</li>
 <li>	The NLU MAY extract multiple interpretations from input text strings (either from audio or text)</li>
 <li>	The NLU MUST be able to interpret input Core Intent Sets</li>
 <li>	The NLU MUST be able to interpret spoken activation strategies that require interpretation, if they exist </li> 
-<li>	The NLU MAY make use of the Core Data Provider to access local or internal data or access external services. (revisit Core Data Provider, are we still using that?)
+<li>	The NLU MAY make use of the Data Provider to access local or internal data or access external services.
 </li> 
 <li>	The NLU MAY make use of the Context to check for complementary information such as information in the history or knowledge </li>
 <li>	The NLU MUST forward the semantic interpretation of the input to the Dialog Manager </>
@@ -165,7 +168,7 @@ IPA's MUST be able to transfer a partially completed task to another IPA
 <h3><span class="secno">3.2.5</span> Context</h3>
   <ol>
 <li>The Context MAY make use of the Local Service Registry to include external knowledge from Local Data Providers</li>
-<li>	The Context MAY make use of the Provider Selection Service to includeexternal knowledge from Data Providers
+<li>	The Context MAY make use of the Provider Selection Service to include external knowledge from Data Providers
 </li> 
 <li>	The Context MAY provide external knowledge temporarily to the Knowledge Graph to be considered in reasoning
 </li>
@@ -185,6 +188,5 @@ IPA's MUST be able to transfer a partially completed task to another IPA
   </ol>
 
   
-
 
 </body></html>
