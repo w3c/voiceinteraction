@@ -9,14 +9,20 @@ This repository contains the reports published by the group
 
 - Version 1.0: <https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/emmaJSON/emmaJSON.htm>
 
-## Architecture:
+## Intelligent Personal Assistant Architecture
+
+### Architecture Requirements for Intelligent Personal Assistants
+
+- Version 1.0 <https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paRequirements.htm>
+
+### Architecture and Potential for Standardization Version
 
 - Version 1.3 (the one we’re actively working on): <https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm>
 - Version 1.2: <https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-2.htm>
 - Version 1.1: <https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-1.htm>
 - Version 1.0: <https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture/paArchitecture.htm>
 
-## Interfaces:
+### Intelligent Personal Assistant Interfaces:
 
 - Version 1.0 (the one we’re actively working on): <https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm>
 
