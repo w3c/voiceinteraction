@@ -5,18 +5,18 @@
         <title>Intelligent Personal Assistant Architecture</title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 
-        <link href="cg-draft.css" rel="stylesheet" type="text/css" charset="utf-8">
+        <link href="../cg-draft.css" rel="stylesheet" type="text/css" charset="utf-8">
 
     </head>
     <body><div class="head">
             <p><a href="http://www.w3.org/">
                     <img width="72" height="48" src="http://www.w3.org/Icons/w3c_home" alt="W3C"></a></p>
             <h1 property="dcterms:title" class="title" id="title">Intelligent Personal Assistant Architecture</h1>
-            <h2 property="bibo:subtitle" id="subtitle">Architecture and Potential for Standardization Version 1.2</h2>
+            <h2 property="bibo:subtitle" id="subtitle">Architecture and Potential for Standardization Version 1.3</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: July 19, 2021 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-2.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture-1-2.htm</a> (GitHub repository) </dd>
-				<dd><a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture-1-2.htm">HTML rendered version</a></dd>             
+                <dd>Last modified: December 2, 2023 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm</a> (GitHub repository) </dd>
+				<dd><a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm">HTML rendered version</a></dd>             
 			    <dt>Editors</dt>
                 <dd>Dirk Schnelle-Walka, modality.ai</br>
 					Deborah Dahl, Conversational Technologies</dd>
@@ -31,7 +31,8 @@
         <p>This document describes a general architecture of Intelligent Personal Assistants and explores the potential for standardization. It is meant to be a first
 			structured exploration of Intelligent Personal Assistants by identifying the components and their tasks. Subsequent work is expected to detail the interaction among the
 			identified components and how they ought to perform their task as well as their actual tasks respectively. This document may need to be updated if any changes result of that detailing work.
-			It extends and refines the description of the previous versions <a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture.htm">Architecture and Potential for Standardization Version 1.0</a> and <a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture-1-1.htm">Architecture and Potential for Standardization Version 1.1.</a> The changes primarily consist of clarifications and additional architectural details in new and expanded figures, include input and output data paths. 
+			It extends and refines the description of the previous versions <a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture/paArchitecture-1.2.htm">Architecture and Potential for Standardization Version 1.2</a>.
+            The changes primarily consist of clarifications and additional architectural details in new and expanded figures, include input and output data paths. 
         </p>
 
         <h2>Status of This Document</h2>
@@ -51,7 +52,7 @@
 				<ol>
 					<li><a href="#clientlayer">Client Layer</a>
 					<li><a href="#dialoglayer">Dialog Layer</a></li>
-					<li><a href="#datalayer">APIs / Data Layer</a></li></li>
+					<li><a href="#datalayer">External Data / Services / IPA Providers Layer</a></li></li>
 				</ol>
             <li><a href="#walkthrough">Use Case Walk Through</a></li>
             <li><a href="#potential">Potential for Standardization</a></li>
@@ -105,7 +106,36 @@
 				a rental car, or find out about local attractions in the destination city.
 				Booking a hotel as part of attending a conference could also involve finding out about a designated conference hotel or special conference rates, which, again, could require interaction with the hotel or the conference's IPA's.</p>
 
-        <h3><span class="secno">2.2 Roles and Responsibilities</span></h3>
+				<h4><span class="secno">2.1.2 </span><font face="Segoe UI">Emergency Events</font></h4>
+				<p>User encounters emergency situations that requires them to use their hands while administering medical care, driving or operating machinery. Manual interactions on control panels, keyboards or touch pads can impede life saving activities and diminish focus while operating sensitive vehicles, devices and machinery. User would benefit from a secure, interoperable, voice interactive system that can be used to access necessary information, keeping hands free to perform these actions.</p>
+
+				<p>Examples of emergency applications include:</p>
+
+				<ul>
+					<li>User interacts with a voice-activated GPS systems while navigating evacuation routes and alternate travel routes in extreme weather conditions, which could include washed out, flooded roadways, low visibility from smoke and haze and other conditions requiring focused, manual control. System has access to and can use voice query of real-time weather and road condition databases.</li>
+					<li>User interacts with a GPS system to privately and securely communicate their location to emergency services or other entities.</li>
+					<li>User encounters a choking victim and accesses audio-based emergency medical care instructions while providing life saving trauma care such as CPR or Epipen.</li>
+					<li>User accesses real time, audio translation/transcription services while caring for someone who speaks a different language.</li>
+				</ul>
+
+				<p>All of these use cases benefit from voice interation systems that have: </p>
+
+				<ul>
+					<li>Both audio and visual output as well as other accessible, multimodal output formats.</li>
+					<li>Multiple ways to control (stop, start, go back, go forward, change rate of speed) either verbally or manually via GUI or physical control.</li>
+					<li>Ability to securely access information about the person receiving care such as age, medical history.</li>
+					<li>Interoperability with EHR systems (personal health information systems).</li>
+					<li>Conforms with health data privacy laws.</li>
+				</ul>
+
+				<p>Interoperability:</p>
+
+				<ul>
+					<li>How to Discover it (Where is it? Who produces it?)</li>
+					<li>How to Interact with it (What format is it, etc.)</li>
+				</ul>
+
+	<h3><span class="secno">2.2 Roles and Responsibilities</span></h3>
 		
 		<p>Roles like user, developer, IPA supplier will be added in a future version of this document</p>
 
@@ -130,7 +160,7 @@
 		</p>
 
 		<figure>
-			<img src="Basic-IPA-Architecture.svg" alt="Basic IPA Architecture" style="width: 100%; height: auto;"/>
+			<img src="Basic-IPA-Architecture-1-3.svg" alt="Basic IPA Architecture" style="width: 100%; height: auto;"/>
 			<figcaption>Fig. 1 Basic architecture of an IPA</figcaption>
 		</figure>
                 <p>
@@ -152,7 +182,7 @@
         <ol>
             <li><a href="#clientlayer">Client Layer</a></li>
             <li><a href="#dialoglayer">Dialog Layer</a></li>
-            <li><a href="#datalayer">APIs / Data Layer</a></li>
+            <li><a href="#datalayer">External Data / Services / IPA Providers</a></li>
         </ol>
 		Actual implementations may want to distinguish more than these layers. The assignment to the layers is not considered to be strict so that some of the components may be shifted
 		to other layers as needed. This view only reflects a view that the Community Group regard as ideal and to show the intended separation of concerns.</p>
@@ -312,6 +342,7 @@
 				the <a href="#selectionservice">Provider Selection Service</a></li>
 			<li>The Dialog Manager selects the best suited input from the available input alternatives for further processing. For this, it should generally
 				expect that the user may switch the goals and thus dialog flows at any time, but must also consider ongoing workflows that must not be interrupted.</li>
+			<li>The Dialog Manager may consider a maximum timespan to wait until the various inputs arrived and consider only those that arrive within that limt.</a>
 			<li>The Dialog Manager may update the <a href="#history">History</a> with dialog moves, i.e., determined input and output</a>
 			<li>The Dialog Manager determines the Dialog following a <a href="#dialogstrategy">Dialog Strategy</a> that is best suited to serve the current user
 				input and re-establishes the interaction state for that <a href="#dialog">Dialog</a>.
@@ -351,6 +382,10 @@
 				<tr>
 					<td>Plan-based</td>
 					<td><a href="http://www.ict.usc.edu/~traum/Papers/traumlarsson.pdf">Information State Update</a></td>
+				</tr>
+				<tr>
+					<td>Dialog State Tracking</td>
+					<td><a href="https://storage.googleapis.com/pub-tools-public-publication-data/pdf/44018.pdf">Machine Learning for Dialog State Tracking: A Review</a></td>
 				</tr>
 				<tr>
 					<td>...</td>
@@ -532,13 +567,13 @@
 				or a list of entities from an <a href="#intentsets">Intent Set</a>.</li>
 			<li><a href="#intentsets">Intent Sets</a> will be removed if there are no more <a href="#dialog">Dialogs</a> referencing them.</li>
 			<li>The Dialog Registry ensures that added <a href="#dialog">Dialogs</a> are unique.</li>
-			<li>The Dialog Registry is not responsible for knowing about the counterparts in the <a href="#datalayer">APIs/Data Layer</a>.
+			<li>The Dialog Registry is not responsible for knowing about the counterparts in the <a href="#datalayer">External Data / Services / IPA Providers Layer</a>.
 			<li>The Dialog Registry notifies the <a href="#selectionservice">Selection Service</a> if <a href="#dialog">Dialogs</a> have been added or removed.</li>
 		</ul>
 		</p>
 		
-        <h3 id="datalayer"><span class="secno">3.3 APIs/Data Layer</span></h3>
-		<img src="api-data-layer.svg" style="float:right" width="15%" height="auto" />
+        <h3 id="datalayer"><span class="secno">3.3 External Data / Services / IPA Providers Layer</span></h3>
+		<img src="external-data-services-ipa-providers-layer.svg" style="float:right" width="15%" height="auto" />
 		
         <h4 id="selectionservice"><span class="secno">3.3.1 </span>Provider Selection Service</h4>
 		<img src="provider-selection-service-component.svg" style="float:right" width="auto" height="auto" />
@@ -584,6 +619,7 @@
 			<li>All known <a href="#provider">IPA Providers</a> are used. This strategy may only apply if there are only a small number of <a href="#provider">IPA Providers</a>.</li>
 			<li>The <a href="#provider">IPA Providers</a> is filtered by contextual data that is obtained from the client, e.g. location.</li>
 			<li>The <a href="#provider">IPA Providers</a> is filtered by established knowledge about the user, e.g. language.</li>
+			<li>The <a href="#provider">IPA Providers</a> is filtered based on user preferences.</li>
 			<li>The <a href="#provider">IPA Providers</a> is filtered by knowledge that has been determined in the dialog with the user. This includes leading wake-up phrases like
 				<em>Hey Siri, &hellip;</em>, <em>OK Google, &hellip;</em>. For this, preprocessing of the user input by they <a href="#nlu">NLU</a> may be required.</li>
 		</ul>
@@ -656,6 +692,10 @@
         <h5 id="providernlu"><span class="secno">3.3.4.2 </span>Provider NLU</h5>
 		<p>An NLU component that is able to extract meaning as intents and associated entities from an utterance as text strings for <a href="#provider">IPA Provider X</a>. It has the following characteristics
 		<ul>
+		    <li>The Provider NLU may be specialized to handle specific domains</li>
+			<li>Optionally, the Provider NLU can generate multiple intents with their entities along with with a confidence score.</li>
+			<li>The Provider NLU may make use of own <a href="#providerintentsets">Provider Intenet Sets</a> indpendent of the <a href="#coreintentsets">Core Intent Sets</a> which are then mapped in the <a href="#selectionservice">Provider Selection Service</a>
+				so that they can be consumed by the <a href="#dialogmanager">Dialog Manager</a></li>
 			<li>The Provider NLU may make use of the <a href="#dataprovider">Data Provider</a> to access local or internal data or access external services.</li>
 			<li>The Provider NLU may make use of the <a href="#knowledgegraph">Knowledge Graph</a> to derive meaning.</li>
 		</ul></p>
@@ -667,7 +707,7 @@
 		<p>The previous sections showed a more detailed view onto the architectural buildings blocks. A general overview comprising these detailing is shown in the following figure.</p>
 		
 		<figure>
-			<img src="IPA-Architecture-1-1.svg" alt="IPA Architecture" style="width: 100%; height: auto;"/>
+			<img src="IPA-Architecture-1-3.svg" alt="IPA Architecture" style="width: 100%; height: auto;"/>
 			<figcaption>Fig. 2 Complete architecture of an IPA</figcaption>
 		</figure>
 
@@ -772,7 +812,7 @@ find out about a designated conference hotel or special rates.
 			It then sends this mapped result to the Dialog Manager as an n-best list.</li>
 		<li>On the local path the NLU sends it result to the Dialog Manager. For our example this could be
 			<ul>
-				<li>Local NLU: lan-flight-travel with entity destination: American, origin: SFO.</li>
+				<li>Local NLU: plan-flight-travel with entity destination: American, origin: SFO.</li>
 			</ul>
 		
 		<li>The Dialog Manager determines an n-best list of meanings from the local and remote path as
@@ -783,7 +823,8 @@ find out about a designated conference hotel or special rates.
 				<li>IPA Provider 3: transfer-money with entities: bank: American, purpose: book flight</li>
 			</ul>
 			It selects the best suited reply. For our example, it may remove the results from IPA Provider 2 and IPA Provider 3 as the confidence for the entity is very low and updates
-			the History with the determined dialog move from the user.</li>
+			the History with the determined dialog move from the user. Results from IPA Provider 1 and Local NLU have the same result, however due to the employed
+			rules, IPA Provider 1 is selected as cloud based providers are expected to have better accuracy than local engines because of constraints with the embedded environment.</li>
 		<li>The Dialog Manger then sends the intent, plan-flight-travel to the Dialog Registry to determine the corresponding dialog...</li>
 		<li>...and receives the dialog to use back. For the example this may be the plan-flight-travel-dialog.</li>
         <li>The Dialog Manager calls the plan-flight-travel dialog and fills all known entities. In our example, the slots for airline and origin would be filled.</li>
