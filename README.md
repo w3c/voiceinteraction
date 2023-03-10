@@ -7,13 +7,13 @@ This repository contains the reports published by the group
 
 ## JSON Representation of Semantic Information
 
-- Version 1.0 (the one we’re actively working on): <https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/emmaJSON/emmaJSON.htm>
+- Version 1.0: <https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/emmaJSON/emmaJSON.htm>
 
 ## Intelligent Personal Assistant Architecture
 
 ### Architecture Requirements for Intelligent Personal Assistants
 
-- Version 1.0 <https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paRequirements.htm>
+- Version 1.0 (the one we’re actively working on): <https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paRequirements/paRequirements.htm>
 
 ### Architecture and Potential for Standardization Version
 
