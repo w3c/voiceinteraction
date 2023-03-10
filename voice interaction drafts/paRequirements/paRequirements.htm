@@ -11,7 +11,7 @@
            
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: February 22, 2023</dd>
+                <dd>Last modified: March 7, 2023</dd>
                 <dd><a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paRequirements.htm"</a> https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paRequirements.htm</a> </dd>
                 <dt>Editor</dt>
                 <dd>Deborah Dahl, Conversational Technologies</dd>
@@ -44,16 +44,19 @@
 <li>IPA's SHOULD be able to perform transactions</li>
 <li>Specialized assistants MUST be able to interoperate with general IPA's</li>
 <li>IPA's SHOULD be able to execute operations in a user's environment</li>
-<li>IPA's MUST be able to interact with users through voice or text (language?) or both.</li>
+<li>IPA's MUST be able to interact with users through voice or text or both.</li>
 </ol>
 <h2><span class="secno">2. </span> Problem Statement</h2>
 <ol>
 <li>
-IPA's MUST be able to transfer a partially completed task to another IPA
+IPA's MAY be able to transfer a partially completed task to another IPA
 </li>
 </ol>
 <h2><span class="secno">3. </span> Architecture</h2>
 <ol>
+<li>IPA's MAY include a Client layer</li>
+<li>IPA's MUST include a Dialog layer</li>
+<li>IPA's MAY include an API/Data layer</li>
 <li>Components MAY be shifted to other layers as needed</li>
 </ol>
 <h3><span class="secno">3.1 </span> Client Layer</h3>
@@ -62,16 +65,12 @@ IPA's MUST be able to transfer a partially completed task to another IPA
 <li>The architecture SHOULD support executing local services to accomplish tasks</li>
 <li>The architecture SHOULD support executing remote services to accomplish tasks</li>
 <li>The architecture MUST support dynamically adding local and remote services or knowledge sources.</li>
-<li>It MUST be possible to forward requests from one IPA to another with the same architecture</li>
-<li>It MUST be possible to forward requests or partial requests from one IPA to another with the same architecture, omitting the client layer</li>
+<li>It MAY be possible to forward requests from one IPA to another with the same architecture</li>
+<li>It MAY be possible to forward requests or partial requests from one IPA to another with the same architecture, omitting the client layer</li>
 <li>IPA extensions MAY be selected from a standardized marketplace </li>
-<li>IPA's MAY include a Client layer</li>
-<li>IPA's MUST include a Dialog layer</li>
-<li>IPA's MAY include an API/Data layer</li>
-<li>Components MAY be shifted to other layers as needed</li>
 </ol>
 
-  <h3><span class="secno">3.3.3</span> Microphone</h3>
+  <h3><span class="secno">3.1.2</span> Microphone</h3>
   <ol>
  <li>	The Client layer MAY include a microphone</li>
 <li>	The Client layer MAY include a means for text input</li>
@@ -111,17 +110,17 @@ IPA's MUST be able to transfer a partially completed task to another IPA
 <h2><span class="secno"></span> Dialog Layer</h2>
 <h3><span class="secno">3.2.1</span> IPA Service</h3>
   <ol>
-<li>The IPA Client SHOULD forward audio data and metadata (if any) to the IPA Service</li>
-<li>	The IPA Client MAY forward audio data and metadata (if any) to the Dialog Manager</li>
-<li>	The IPA Service MUST forward audio data and metadata (if any) to the Dialog Manager</li>
-<li>	The IPA Service MUST forward audio data and metadata (if any) to the Local IPA</li>
+<li>The IPA Client SHOULD forward audio data and metadata (if any) to the ASR</li>
+<li>	The IPA Client MAY forward audio data and metadata (if any) to the ASR</li>
+<li>	The IPA Service MUST forward audio data and metadata (if any) to the ASR</li>
+<li>	The IPA Service MUST forward audio data and metadata (if any) to the ASR</li>
 <li>	The IPA Service MUST forward text data and metadata (if any) to the Dialog Manager</li>
 <li>	The IPA Service MUST forward text data and metadata (if any) to the Local IPA</li>
 <li>	The IPA Service MUST forward multimodal data and metadata (if any) to the Dialog Manager</li>
 <li>	The IPA Service MUST forward multimodal data and metadata (if any) to the Local IPA</li>
 
 <li>	The IPA Service MUST forward audio output from the TTS to the IPA Client</li>
-<li>	The IPA Service MUST forward multimodal output from the Dialog Manager to the modality renderers</li>
+<li>	The IPA Service MUST forward multimodal output from the Dialog Manager to the Client</li>
 <li>The IPA Service MUST forward text output from the NLG to the IPA Client</li>
 </ol>
 
