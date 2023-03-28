@@ -11,12 +11,12 @@
            
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: March 7, 2023</dd>
+                <dd>Last modified: March 28, 2023</dd>
                 <dd><a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paRequirements.htm"</a> https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paRequirements.htm</a> </dd>
                 <dt>Editor</dt>
                 <dd>Deborah Dahl, Conversational Technologies</dd>
             </dl>
-            <p class="copyright">Copyright © 2023 the Contributors to the Voice Interaction Community Group, 
+            <p class="copyright">Copyright &copy; 2023 the Contributors to the Voice Interaction Community Group, 
                 published by the  <a href="http://www.w3.org/community/voiceinteraction/">Voice Interaction Community Group</a> 
                 under the <a href="https://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a>. A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/">summary</a> is available.</p>
             <hr></div>
@@ -37,7 +37,7 @@
         <!-- OddPage -->
         <h2><span class="secno">1. </span>Introduction</h2>
         
-<ol>
+<ol class="req">
 <li>Intelligent Personal Assistants (IPA's) MUST be able to provide general purpose information</li>
 <li>Specialized virtual assistants MUST be able to provide enterprise-specific information</li>
 <li>Specialized virtual assistants MAY be able to provide non-enterprise-specific information</li>
@@ -47,20 +47,20 @@
 <li>IPA's MUST be able to interact with users through voice or text or both.</li>
 </ol>
 <h2><span class="secno">2. </span> Problem Statement</h2>
-<ol>
+<ol class="req" start="8">
 <li>
 IPA's MAY be able to transfer a partially completed task to another IPA
 </li>
 </ol>
 <h2><span class="secno">3. </span> Architecture</h2>
-<ol>
+<ol class="req" start="9">
 <li>IPA's MAY include a Client layer</li>
 <li>IPA's MUST include a Dialog layer</li>
 <li>IPA's MAY include an API/Data layer</li>
 <li>Components MAY be shifted to other layers as needed</li>
 </ol>
 <h3><span class="secno">3.1 </span> Client Layer</h3>
-<ol>
+<ol class="req" start="13">
 <li>The architecture SHOULD support question answering and information retrieval applications</li>
 <li>The architecture SHOULD support executing local services to accomplish tasks</li>
 <li>The architecture SHOULD support executing remote services to accomplish tasks</li>
@@ -71,7 +71,7 @@ IPA's MAY be able to transfer a partially completed task to another IPA
 </ol>
 
   <h3><span class="secno">3.1.2</span> Microphone</h3>
-  <ol>
+  <ol class="req" start="20">
  <li>	The Client layer MAY include a microphone</li>
 <li>	The Client layer MAY include a means for text input</li>
 <li>	The Client layer MAY include a speaker</li>
@@ -81,7 +81,7 @@ IPA's MAY be able to transfer a partially completed task to another IPA
 </ol>
 
   <h3><span class="secno">3.1.3</span> IPA Client</h3>
-    <ol>
+    <ol class="req" start="25">
 <li>The IPA Client MUST allow activation and deactivation by means of a Client Activation Strategy.</li>
 <li>	As an extension IPA Clients MAY also capture input via text and output text</li>
 <li>	As an extension IPA Clients MAY also capture input from various modality recognizers </li>
@@ -92,7 +92,7 @@ IPA's MAY be able to transfer a partially completed task to another IPA
 
 </ol>
   <h4><span class="secno">3.2.2.1</span> Client Activation Strategy</h4>
-    <ol>
+    <ol class="req" start="32">
 <li>The IPA Client MUST be activated with a Client Activation Strategy</li>
 <li>	The Client Activation Strategy MAY be push-to-talk</li>
 <li>	The Client Activation Strategy MAY be hotword</li>
@@ -102,14 +102,14 @@ IPA's MAY be able to transfer a partially completed task to another IPA
 <li>	The Client Activation Strategy MAY be a different strategy not enumerated here</li>
   </ol>
 <h4><span class="secno">3.2.2.2</span> Local Service Registry</h4>
-  <ol>
+  <ol class="req" start="39">
 <li>The IPA Client MUST include a Local Service Registry</li>
 <li>	The Local Service Registry MUST maintain a list of Local Services</li>
 <li>	The Local Service Registry MUST maintain a list of Local Data Providers</li>
   </ol>
 <h2><span class="secno"></span> Dialog Layer</h2>
 <h3><span class="secno">3.2.1</span> IPA Service</h3>
-  <ol>
+  <ol class="req" start="42">
 <li>The IPA Client SHOULD forward audio data and metadata (if any) to the ASR</li>
 <li>	The IPA Client MAY forward audio data and metadata (if any) to the ASR</li>
 <li>	The IPA Service MUST forward audio data and metadata (if any) to the ASR</li>
@@ -125,7 +125,7 @@ IPA's MAY be able to transfer a partially completed task to another IPA
 </ol>
 
 <h3><span class="secno">3.2.2</span> ASR</h3>
-  <ol>
+  <ol class="req" start="53">
 <li>The ASR MUST generate one or more recognition hypotheses from voice input that it receives from the IPA Service</li>
 <li>	The ASR MAY associate recognition hypotheses with confidence scores</li>
 <li>	The ASR MUST forward the recognition hypotheses to the NLU</li>
@@ -133,7 +133,7 @@ IPA's MAY be able to transfer a partially completed task to another IPA
 </ol>
 
 <h3><span class="secno">3.2.3</span> NLU</h3>
-  <ol>
+  <ol class="req" start="57">
 <li>The NLU MUST extract textual interpretations from text strings (either from audio or text)</li>
 <li>	The NLU MAY extract multiple interpretations from input text strings (either from audio or text)</li>
 <li>	The NLU MUST be able to interpret input Core Intent Sets</li>
@@ -147,25 +147,25 @@ IPA's MAY be able to transfer a partially completed task to another IPA
   </ol>
 
 <h3><span class="secno">3.2.4</span> Dialog Manager</h3>
-  <ol>
+  <ol  class="req" start="66">
 <li>The Dialog Manager MUST recognize when the user goals are changed</li>
 <li>	The Dialog Manager SHOULD confirm when the user goals are changed</li>
 <li>	The Dialog Manager MAY consider ongoing workflows that must not be interrupted when the user switches goals.</li>
 <li>	The Dialog Manager SHOULD update the History with dialog moves</li>
 <li>	The Dialog Manager SHOULD determine the next dialog move </li>
-<ol>
+</ol>
+<ol class="req" start="73">
 <li>based on internal considerations</li>
 <li>based on output from other components in the same dialog system </li>
 <li>based on output from other agents (IPA services)</li>
 <li>how the Dialog Manager determines the next move is outside the scope of these requirements</li>
-</ol>
 <li>	The Dialog Manager SHOULD make use of the TTS to generate audio data to be rendered on the IPA Client </li> 
 
 <li>	The Dialog Manager MAY provide commands to be executed by the IPA Client or the External Services </li>
 </ol>
 
 <h3><span class="secno">3.2.5</span> Context</h3>
-  <ol>
+  <ol class="req" start="79">
 <li>The Context MAY make use of the Local Service Registry to include external knowledge from Local Data Providers</li>
 <li>	The Context MAY make use of the Provider Selection Service to include external knowledge from Data Providers
 </li> 
@@ -174,12 +174,12 @@ IPA's MAY be able to transfer a partially completed task to another IPA
 </ol>
 
 <h4><span class="secno">3.2.5.1</span> History</h4>
-  <ol>
+  <ol class="req" start="82">
 <li>The Dialog History MAY store the past dialog events per user</li>
 </ol>
 
 <h2><span class="secno">3.3</span> API's/Data Layer</h2>
-  <ol>
+  <ol class="req" start="83">
 <li>The Provider Selection Service MAY receive input from the Dialog Manager to query data from Data Providers</li>
 <li>The Provider Selection Service MAY receive input from the Dialog Manager to execute External Services</li>
 <li>	If the Provider Selection Service is called by the Dialog Manager with a preselected identifier of an IPA provider, it MUST use the preselected provider</li>

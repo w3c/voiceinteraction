@@ -87,3 +87,13 @@ th {
 pre{
   background-color: EBECE4; 
 }
+
+@counter-style ipareq {
+  system: extends decimal;
+  prefix: "IPA-REQ-";
+}
+
+ol.req {
+  list-style: ipareq;
+  padding-left: 7em;
+}
