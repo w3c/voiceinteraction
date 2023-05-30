@@ -15,7 +15,7 @@
             <h2 property="bibo:subtitle" id="subtitle">Architecture and Potential for Standardization Version 1.3</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: December 2, 2023 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm</a> (GitHub repository) </dd>
+                <dd>Last modified: May 30, 2023 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm</a> (GitHub repository) </dd>
 				<dd><a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm">HTML rendered version</a></dd>             
 			    <dt>Editors</dt>
                 <dd>Dirk Schnelle-Walka, modality.ai</br>
@@ -66,14 +66,18 @@
         <!-- OddPage -->
         <h2 id="introduction"><span class="secno">1. </span>Introduction</h2>
         <p>Intelligent Personal Assistants (IPAs) are now available in our daily lives through our smart phones. Apple’s Siri, Google Assistant, Microsoft’s Cortana, Samsung’s Bixby and 
-		many more are helping us with various tasks, like shopping, playing music, setting a schedule, sending messages, and offering answers to simple questions. Additionally, we equip our households
-		with smart speakers like Amazon’s Alexa or Google Home which are available without the need to pick up explicit devices for these sorts of tasks or even control household appliances in our homes.
-		As of today, there is no interoperability among the available IPA providers. Especially for exchanging learned user behaviors this is unlikely to happen at all.</p>
+            many more are helping us with various tasks, like shopping, playing music, setting a schedule, sending messages, and offering answers to simple questions. Additionally, we equip our households
+            with smart speakers like Amazon’s Alexa or Google Home which are available without the need to pick up explicit devices for these sorts of tasks or even control household appliances in our homes.
+            As of today, there is no interoperability among the available IPA providers. Especially for exchanging learned user behaviors this is unlikely to happen at all.</p>
         <p>
-            Furthermore, in addition to these general-purpose assistants, there are also specialized virtual assistants which are able to provide their users with in-depth information which is specific to an enterprise, government agency, school, or other organization. They may also have the ability to perform transactions on behalf of their users, such as purchasing items, paying bills, or making reservations. Because of the breadth of possibilities for these specialized assistants, it is imperative that they be able to interoperate with the general-purpose assistants. Without this kind of interoperability, enterprise developers will need to re-implement their intelligent assistants for each major generic platform. 
+            Furthermore, in addition to these general-purpose assistants, there are also specialized virtual assistants which are able to provide their users with in-depth information which is specific to an enterprise, government agency, school, or other organization.
+            They may also have the ability to perform transactions on behalf of their users, such as purchasing items, paying bills, or making reservations. Because of the breadth of possibilities for these specialized assistants, it is imperative that they be able to 
+            interoperate with the general-purpose assistants. Without this kind of interoperability, enterprise developers will need to re-implement their intelligent assistants for each major generic platform. 
         </p>
 		
-		<p>This document is a first step in our strategy for IPA standardization. It describes a general architecture of IPAs and explores the potential areas for standardization. It focuses on voice as the major input modality. We believe it will be of value not only to developers, but to many of the constituencies within the intelligent personal assistant ecosystem.  Enterprise decision-makers, strategists and consultants, and entrepreneurs may study this work to learn of best practices and seek adjacencies for creation or investment. 			
+		<p>This document is a first step in our strategy for IPA standardization. It describes a general architecture of IPAs and explores the potential areas for standardization. It focuses on voice as the major input modality. 
+            We believe it will be of value not only to developers, but to many of the constituencies within the intelligent personal assistant ecosystem. Enterprise decision-makers, strategists and consultants, and entrepreneurs may study this work to learn of best 
+            practices and seek adjacencies for creation or investment. 			
 			The overall concept is not restricted to voice but also covers purely text based interactions with so-called chatbots as well as interaction using multiple modalities.
 			Conceptually, the authors also define executing actions in the user's environment, like turning on the light, as a modality.
 			This means that components that deal with speech recognition, natural language understanding or speech synthesis will not necessarily be available in these deployments. In case of chatbots, speech components will be omitted. In case of
@@ -87,9 +91,10 @@
 			the new manufacturer. 
 			On the one hand users should have more freedom in selecting the IPA implementation they want. However, they are bound to use the service that is available in that implementation but which may not be what they necessarily prefer. 
 			On the other hand, IPA providers, which mainly produce the software, must also function as hardware manufacturers to be successful. Finally, manufacturers also have to take care to port
-			existing services to their platform. Standardization would clearly lower the needed efforts for porting and thus reduce costs.</p>
+			existing services to their platform. Standardization would clearly lower the needed efforts for porting and thus reduce costs. Additionally, it may also pave the way for interoperability among available IPA providers.
+            Tasks may be transferred, partially or completely to other IPAs.</p>
 			
-			<p>In order to explore the potential for standardization, a typical usage scenario is described in the following section.</p>
+		<p>In order to explore the potential for standardization, a typical usage scenario is described in the following section.</p>
 		
         <h3 id="usecases"><span class="secno">2.1 Use Cases</span></h3>
 				<p>This section describes potential usages of IPAs.</p> 
@@ -203,7 +208,8 @@
 			<li>music.</li></p>
 		<p>Additional output modalities can be employed that render their output similarly with a specific modality synthesizer.</p>
 		<p>It is not always required that a verbal auditory output is made as a reply to a user. The user can also become aware of the output as a consequence of an observable action as a result
-		of a <a href="localserverices">Local Service<a> or an <a href="#externalservices">External Services</a> call. In these cases an additional nonverbal auditory output may be considered.</p>
+		of a <a href="localserverices">Local Service<a> within the <a href="#clientlayer">Client Layer</a> or an <a href="#externalservices">External Services</a> call from the <a href="#datalayer">External Data / Services / IPA Providers Layer</a>. 
+        In these cases an additional nonverbal auditory output may be considered.</p>
 
         <h4 id="client"><span class="secno">3.1.3 </span>IPA Client</h4>
 		<p>Clients enable the user to access the IPA via voice with the following characteristics.
@@ -219,7 +225,7 @@
 		</ul>
 		</p>
 		
-        <h5 id="clientactivtionstrategy"><span class="secno">3.2.2.1 </span>Client Activation Strategy</h5>
+        <h5 id="clientactivtionstrategy"><span class="secno">3.1.3.1 </span>Client Activation Strategy</h5>
 		<p>The Client Activation Strategy defines how the client gets activated to be ready to receive spoken commands as input. In turn the <a href="#microphone">Microphone</a> 
 		is opened for recording. Client Activation Strategies are not exclusive but may be used concurrently. The most common activation strategies are described in the
 		table below</p>
@@ -251,18 +257,20 @@
 		<p>The usage of hotwords includes privacy aspects as the microphone needs to be always active. Streaming to the components outside the user's control should be avoided, hence detection of hotwords should ideally happen locally.
 		With regard to nested usage of IPAs that may feature their own hotwords, the detection of hotwords might be required to be extensible.</p>
 
-        <h5 id="localserviceregistry"><span class="secno">3.2.2.2 </span>Local Service Registry</h5>
+        <h5 id="localserviceregistry"><span class="secno">3.1.3.2 </span>Local Service Registry</h5>
 		<p>A registry for all <a href="#localservices">Local Services</a> and <a href="#localdataproviders">Local Data Providers</a> that can be accessed by the client
 		<ul>
 			<li>The Local Service Registry maintains a list of <a href="#localservices">Local Services</a> and <a href="#localdataproviders">Local Data Providers</a> along with their unique identifier 
 				that may be accessed by the <a href="client">IPA Client</a> or the <a href="#context">Context</a>.</li>
+            <li>The Local Service Registry may allow to add <a href="#localservices">Local Services</a> and <a href="#localdataproviders">Local Data Providers</a> at runtime.</li>
+            <li><a href="#localservices">Local Services</a> and <a href="#localdataproviders">Local Data Providers</a> may be obtained from a standardized market place.</a>
 		</ul>
 		</p>
 		
-        <h4 id="localservices"><span class="secno">3.1.4 </span>Local Services</h4>
+        <h4 id="localservices"><span class="secno">3.1.3 </span>Local Services</h4>
 		<p>Local services can be used to execute local actions in the user's local environment. Examples include turning on the light or starting an application, for instance a navigation system in a car.</p>
 
-        <h4 id="localdataproviders"><span class="secno">3.1.5 </span>Local Data Providers</h4>
+        <h4 id="localdataproviders"><span class="secno">3.1.4 </span>Local Data Providers</h4>
 		<p>Local Data Providers capture input that is accessible in the user's local environment. They can be used to provide additional input to the <a href="client">IPA Client</a> or
 			to provide additional information that is needed to execute services. An example for the latter is the state of the light, either turned on or turned off.</p>
 		<p>Handling in case the inputs are forwarded to a nested IPA will be discussed in future versions of this document.</p>
@@ -296,6 +304,7 @@
 			Conceptually, ASR is a modality recognizer for speech. It has the following characteristics
 		<ul>
 			<li>The ASR receives recorded voice input from the <a href="#ipaservice">IPA Service.</a></li>
+			<li>The ASR generates a recognition hypothesis from the received audio input optionally with a confidence score.</li>
 			<li>Optionally, the ASR can generate multiple recognition hypotheses along with a confidence score.</li>
 			<li>The ASR forwards the recognition hypotheses to the <a href="#nlu">NLU</a>.</li>
 			<li>The ASR may update the <a href="#history">History</a> with the determined recognition hypotheses.</li>
@@ -316,7 +325,7 @@
 			<li>The NLU consumes multiple incoming streams, e.g. from the <a href="#ASR">ASR</a> and for metadata augmenting the input from the <a href="#ipaservice">IPA Service</a> and must synchronize
 				them into a single input, i.e. an input dialog move.</li>
 			<li>The NLU is able to handle basic functionality via <a href="#coreintentsets">Core Intent Sets</a> to enable any interaction with the user at all.</li>
-			<li>The NLU may make use of the <a href="#coredataprovider">Core Data Provider</a> to access local or internal data or access external services.</li>
+			<li>The NLU may make use of <a href="#localdataproviders">Local Data Providers</a> or <a href="dataproviders">Data Providers</a> to access local or external.</li>
 			<li>The NLU components may make use of the <a href="#context">Context</a> to check for complementary information that might have been established throughout 
 				the interaction with the user to complete an intent's related entities or include external knowledge.</li>
 			<li>The NLU forwards the the derived semantic input from all received input streams to the <a href="#dialogmanager">Dialog Manager</a></li>
@@ -341,7 +350,7 @@
 		    <li>The Dialog Manager receives input for the local IPA from the <a href="#nlu"> and for the remote IPAs from 
 				the <a href="#selectionservice">Provider Selection Service</a></li>
 			<li>The Dialog Manager selects the best suited input from the available input alternatives for further processing. For this, it should generally
-				expect that the user may switch the goals and thus dialog flows at any time, but must also consider ongoing workflows that must not be interrupted.</li>
+				expect that the user may switch the goals and thus dialog flows at any time and should consider confirming that, but must also consider ongoing workflows that must not be interrupted.</li>
 			<li>The Dialog Manager may consider a maximum timespan to wait until the various inputs arrived and consider only those that arrive within that limt.</a>
 			<li>The Dialog Manager may update the <a href="#history">History</a> with dialog moves, i.e., determined input and output</a>
 			<li>The Dialog Manager determines the Dialog following a <a href="#dialogstrategy">Dialog Strategy</a> that is best suited to serve the current user
@@ -349,7 +358,7 @@
 				Therefore, it may use the <a href="#dialogregistry">Dialog Registry</a>.</li>
 			<li>The Dialog Manager receives the next dialog move as output from the selected <a href="#dialog">Dialog</a>.</li>
 			<li>Optionally, the Dialog Manager may receive the next dialog move via the <a href="#ipaservice">IPA Service</a> from the selected <a href="#provider">IPA Provider</a></li>
-			<li>The Dialog Manager makes use of the <a href="#nlg">NLG</a> to generate audio data to be rendered on the <a href="#client">IPA Client</a></li>
+			<li>The Dialog Manager makes use of the <a href="#nlg">NLG</a> to generate text to be converted into to audio data by the <a href="#tts">TTS</a> to be rendered on the <a href="#client">IPA Client</a></li>
 			<li>Alternatively, the Dialog Manager may receive audio output from the selected <a href="#provider">IPA Provider</a>, e.g.,
 				to support branding. In this case, the output is directly sent to the <a href="#ipaservice">IPA Service</a>.</li>
 			<li>Alternatively, the Dialog Manager may receive text output from the selected <a href="#provider">IPA Provider</a>, e.g.,
@@ -418,6 +427,7 @@
 			<li>The Context supports the <a href"=#nlu">NLU</a> to determine meaning from the user's input, also by reasoning via a <a href="#knowledge-graph">Knowledge Graph</a>.</li>
 			<li>The Context supports the <a href"=#nlg">NLG</a> to create the reply to the user, e.g. to avoid repetition of information that is already known.</li>
 			<li>The Context may make use of the <a href="#localserviceregistry">Local Service Registry</a> to include external knowledge from <a href="#localdataproviders">Local Data Providers</a></li>
+			<li>The Context may make use of the <a href="#serviceregistry">External Service Registry</a> to include external knowledge from <a href="#dataproviders">External Data Providers</a></li>
 			<li>The Context may make use of the <a href="#selectionservice">Provider Selection Service to include external knowledge from <a href="dataproviders">Data Providers</a></li>
 			<li>The Context may provide external knowledge temporarily to the <a href="#knowledge-graph">Knowledge Graph</a> to be considered in reasoning.</li>
 		</ul></p>
@@ -576,14 +586,16 @@
 		<img src="external-data-services-ipa-providers-layer.svg" style="float:right" width="15%" height="auto" />
 		
         <h4 id="selectionservice"><span class="secno">3.3.1 </span>Provider Selection Service</h4>
-		<img src="provider-selection-service-component.svg" style="float:right" width="auto" height="auto" />
+		<img src="provider-selection-service-component-1.3.svg" style="float:right" width="auto" height="auto" />
 		<p>A service that provides access to all known Data Providers, External Services and IPA Providers. This service also maps the IPA Intent Sets to the Intent Sets in the Dialog layer. 
 			It has the following characteristics
 		<ul>
 			<li>The Provider Selection Service provides an interface to <a href="dataproviders">Data Providers</a>, <a href="externalservices">External Services</a> 
 				and <a href="#provider">IPA Providers</a>.</li>
 			<li>The Provider Selection Service may receive input from the <a href="#dialogmanager">Dialog Manager</a> to query data from <a href="dataproviders">Data Providers</a>.</li>
+            <li>The relevant <a href="dataproviders">Data Provider</a> is obtained via its unique id from the <a href="#serviceregistry">External Service Registry</a>.</li>
 			<li>The Provider Selection Service may receive input from the <a href="#dialogmanager">Dialog Manager</a> to execute <a href="externalservices">External Serives</a>.</li>
+            <li>The relevant <a href="externalservices">External Service</a> is obtained via its unique id from the <a href="#serviceregistry">External Service Registry</a>.</li>
 			<li>The Provider Selection Service receives input as audio data along with metadata</li>
 			<li>In case the Provider Selection Service is called with a preselected identifier of an <a href="#provider">IPA Provider</a> only this one will be used as obtained from the 
 				<a href="#providerregistry">Provider Registry</a></li>
@@ -636,6 +648,7 @@
 			<li>The Provider Registry knows the <a href="#intentsets">Intent Sets</a> of a specific <a href="#provider">IPA Providers</a> from the addition of that <a href="#provider">IPA Providers</a>.</li>
 			<li>Each Intent from the <a href="#intentsets">Intent Sets</a> of a specific <a href="#provider">IPA Providers</a> must also specify the mapping to the <a href="#intentsets">Intent Sets</a> known by the <a href="#dialogregistry">Dialog Registry</a>.
 			<li>Each <a href="#provider">IPA Providers</a> may have an associated session identifier to resume an existing session.</li>
+            <li><a href="#provider">IPA Providers</a> may be obtained from a standardized market place.</a>
 		</ul>
 		</p>
 
@@ -648,34 +661,35 @@
 		</ul>
 		</p>
 
-        <h4 id="dataproviders"><span class="secno">3.3.2 </span>Data Providers</h4>
-		<img src="dataproviders-component.svg" style="float:right" width="auto" height="auto" />
-		<p>Data Providers obtain data from various sources for use in the interaction.</p>
-
-        <h5 id="dataprovider"><span class="secno">3.3.2.1 </span>Data Provider X</h5>
-		<p>A data provider to get data to be used in the <a href="#dialog">Dialog</a>, e.g. as a result of a query. It has the following characteristics
+        <h5 id="serviceregistry"><span class="secno">3.3.2 </span>External Service Registry</h5>
+		<p>A registry for all <a href="#externalservices">External Services</a> and <a href="#dataproviders">Data Providers</a> that can be accessed by the client
 		<ul>
-			<li>The Data Provider provides access to 
-			<ul>
-				<li>local data,</li>
-				<li>external data or</li>
-				<li>external services.</li>
-			</ul></li>
-			<li>The Data Provider can be used to trigger external services, e.g. to execute remote actions</li>
-		</ul></p>
+			<li>The External Service Registry maintains a list of <a href="#externalservices">External Services</a> and <a href="#dataproviders">Data Providers</a> along with their unique identifier 
+				that may be accessed by the <a href="client">Provider Selection Service</a> or the <a href="#context">Context</a>.</li>
+            <li>The External Service Registry may allow to add <a href="#externalservices">External Services</a> and <a href="#dataproviders">Data Providers</a> at runtime.</li>
+            <li><a href="#externalservices">External Services</a> and <a href="#dataproviders">Data Providers</a> may be obtained from a standardized market place.</a>
+		</ul>
+		</p>
 
-        <h4 id="externalservices"><span class="secno">3.3.3 </span>External Services</h4>
+        <h4 id="dataproviders"><span class="secno">3.3.3 </span>Data Providers</h4>
+		<img src="dataproviders-component.svg" style="float:right" width="auto" height="auto" />
+		<p>Data Providers obtain data from various external sources for use in the interaction, for example, data obtained from a third-party web service.</p>
+
+        <h5 id="dataprovider"><span class="secno">3.3.3.1 </span>Data Provider X</h5>
+		<p>A data provider to get data to be used in the <a href="#dialog">Dialog</a>, e.g. as a result of a query.</p>
+
+        <h4 id="externalservices"><span class="secno">3.3.4 </span>External Services</h4>
 		<img src="externalservices-component.svg" style="float:right" width="auto" height="auto" />
-		<p>External Services provide data that can be obtained from sources outside of the system; for example, data obtained from a third-party web service.</p>
-
-        <h5 id="dataprovider"><span class="secno">3.3.3.1 </span>External Service X</h5>
-		<p>A specific External Service, which provides data to be used for a particular application. An application can use multiple External Services.</p>
+		<p>External Services provide access to trigger actions  outside of the system; for example, triggered from a third-party web service.</p>
+        
+        <h5 id="dataprovider"><span class="secno">3.3.4.1 </span>External Service X</h5>
+		<p>A specific External Service, which provides output of the system, e.g. through an application can use multiple External Services.</p>
 		
-        <h4 id="ipaproviders"><span class="secno">3.3.4 </span>IPA Providers</h4>
+        <h4 id="ipaproviders"><span class="secno">3.3.5 </span>IPA Providers</h4>
 		<img src="ipaproviders-component.svg" style="float:right" width="auto" height="auto" />
 		<p>IPA providers provide IPA's that can interact with users in an application.</p>
 
-        <h5 id="provider"><span class="secno">3.3.4.1 </span>IPA Provider X</h5>
+        <h5 id="provider"><span class="secno">3.3.5.1 </span>IPA Provider X</h5>
 		<p>A provider of an IPA service, like
 		<ul>
 			<li>Google Assistant</li>
@@ -686,10 +700,10 @@
 		</ul></p>
 		<p>The IPA provider may be part of the IPA implementation as an IPA Provider or alternatively a subset of the original functionality as described below as part of another IPA implementation.</p>
 
-        <h5 id="providerasr"><span class="secno">3.3.4.2 </span>Provider ASR</h5>
+        <h5 id="providerasr"><span class="secno">3.3.5.2 </span>Provider ASR</h5>
 		<p>An ASR component receives audio streams of recorded utterances and generates a recognition hypothesis as text strings as an input for the <a href="#providernlu">Provider NLU</a>.</p>
 
-        <h5 id="providernlu"><span class="secno">3.3.4.2 </span>Provider NLU</h5>
+        <h5 id="providernlu"><span class="secno">3.3.5.2 </span>Provider NLU</h5>
 		<p>An NLU component that is able to extract meaning as intents and associated entities from an utterance as text strings for <a href="#provider">IPA Provider X</a>. It has the following characteristics
 		<ul>
 		    <li>The Provider NLU may be specialized to handle specific domains</li>
@@ -700,10 +714,10 @@
 			<li>The Provider NLU may make use of the <a href="#knowledgegraph">Knowledge Graph</a> to derive meaning.</li>
 		</ul></p>
 
-        <h5 id="providerintentsets"><span class="secno">3.3.4.3 </span>Provider Intent Set</h5>
+        <h5 id="providerintentsets"><span class="secno">3.3.5.3 </span>Provider Intent Set</h5>
 		<p>An <a href="#intentsets">Intent Set</a> that might be returned by the <a href="#providernlu">Provider NLU</a> to handle the capabilities of <a href="#provider">IPA Provider X</a>.</p>
 
-        <h4 id="finalarchitecture"><span class="secno">3.4 </span>Resulting Architecture</h4>
+        <h4 id="finalarchitecture"><span class="secno">3.6 </span>Resulting Architecture</h4>
 		<p>The previous sections showed a more detailed view onto the architectural buildings blocks. A general overview comprising these detailing is shown in the following figure.</p>
 		
 		<figure>
@@ -760,7 +774,7 @@ find out about a designated conference hotel or special rates.
 	We begin with the case where the user's request can be handled by one of the internal Dialogs in the Dialog box.
 	The input side is illustrated in the following figure
 	<figure>
-		<img src="architecture-walkthrough-input.svg" alt="IPA Architecture Walkthrough for the input" style="width: 100%; height: auto;"/>
+		<img src="architecture-walkthrough-input-1.3.svg" alt="IPA Architecture Walkthrough for the input" style="width: 100%; height: auto;"/>
 		<figcaption>Fig. 3 Walkthrough for the output path of an IPA</figcaption>
 	</figure>
     <ol>
@@ -790,7 +804,7 @@ find out about a designated conference hotel or special rates.
 	data have been identified.
 	This path is illustrated in the following figure
 	<figure>
-		<img src="architecture-walkthrough-output.svg" alt="IPA Architecture Walkthrough for the output" style="width: 100%; height: auto;"/>
+		<img src="architecture-walkthrough-output-1.3.svg" alt="IPA Architecture Walkthrough for the output" style="width: 100%; height: auto;"/>
 		<figcaption>Fig. 4 Walkthrough for the output path of an IPA</figcaption>
 	</figure>
 
