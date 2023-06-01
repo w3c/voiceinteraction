@@ -15,7 +15,7 @@
             <h2 property="bibo:subtitle" id="subtitle">Architecture and Potential for Standardization Version 1.3</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: May 30, 2023 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm</a> (GitHub repository) </dd>
+                <dd>Last modified: June 1, 2023 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm</a> (GitHub repository) </dd>
 				<dd><a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm">HTML rendered version</a></dd>             
 			    <dt>Editors</dt>
                 <dd>Dirk Schnelle-Walka, modality.ai</br>
@@ -195,21 +195,36 @@
 		
         <h3 id="clientlayer"><span class="secno">3.1 Client Layer</span></h3>
 		<p>The Client Layer contains the main components that interface with the user. The following figure details the view onto the Client Layer shown in Figure 1.</p>
-		<img src="client-layer.svg" style="float:right" width="10%" height="auto" />
+		<img src="client-layer-1.3.svg" style="float:right" width="10%" height="auto" />
 
-        <h4 id="microphone"><span class="secno">3.1.1 </span>Microphone</h4>
-		<p>The microphone is used to capture the voice input of a user as a primary input modality. Additional input modalities can be employed that provide their input
-			similarly with a specific modality recognizer. Additional input may be gathered from <a href="#localdataproviders">Local Data Providers</a></p>
+        <h4 id="capture"><span class="secno">3.1.1 </span>Capture</h4>
+        
+        <p>Capture devices or modality recognizers are used to capture mutlimodal user input, such as voice or text input. Additional input modalities can be
+            employed that capture input with a specific modality recognizers.
+            Additional input may be gathered from <a href="#localdataproviders">Local Data Providers</a></p>
+        
+        <h5 id="microphone"><span class="secno">3.1.1.1 </span>Microphone</h5>
+		<p>The microphone is used to capture the voice input of a user as a primary input modality.</p>
 
-        <h4 id="speaker"><span class="secno">3.1.2 </span>Speaker</h4>
-		<p>The loudspeaker is used to output replies as verbal auditory output in the shape of spoken utterances as a primary output modality. Utterances may be accompanied by nonverbal auditory output such as
-			<li>earcons,</li>
-			<li>auditory icons or</li>
-			<li>music.</li></p>
-		<p>Additional output modalities can be employed that render their output similarly with a specific modality synthesizer.</p>
-		<p>It is not always required that a verbal auditory output is made as a reply to a user. The user can also become aware of the output as a consequence of an observable action as a result
+        <h5 id="keyboard"><span class="secno">3.1.1.2 </span>Keyboard</h5>
+		<p>The keyboard may be optionally used to capture the text input if the IPA accepts this input modality.</p>
+
+        <h4 id="capture"><span class="secno">3.1.2 </span>Presentation</h4>
+        <p>Presentation devices or modality synthesizers are used to provide system output to the user. Additional output modalities can be employed that render their output
+            with a specific modality synthesizer. It is not always required that a verbal auditory output is made as a reply to a user. The user can also become aware of the output as a consequence of an observable action as a result
 		of a <a href="localserverices">Local Service<a> within the <a href="#clientlayer">Client Layer</a> or an <a href="#externalservices">External Services</a> call from the <a href="#datalayer">External Data / Services / IPA Providers Layer</a>. 
         In these cases an additional nonverbal auditory output may be considered.</p>
+        
+        <h5 id="speaker"><span class="secno">3.1.2.1 </span>Speaker</h5>
+		<p>The loudspeaker is used to output replies as verbal auditory output in the shape of spoken utterances as a primary output modality. Utterances may be accompanied by nonverbal auditory output such as
+			<ul>
+                <li>earcons,</li>
+                <li>auditory icons or</li>
+                <li>music.</li>
+            </ul></p>
+            
+        <h5 id="speaker"><span class="secno">3.1.2.2 </span>Display</h5>
+        <p>The display may be optionally used to present text output if the IPA supports this output modality.</p>
 
         <h4 id="client"><span class="secno">3.1.3 </span>IPA Client</h4>
 		<p>Clients enable the user to access the IPA via voice with the following characteristics.
