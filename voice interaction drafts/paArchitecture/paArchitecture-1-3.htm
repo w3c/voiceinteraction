@@ -639,9 +639,8 @@
 			<li>Alternatively, the Provider Selection Service may return output as text strings to be rendered by the <a href="#TTS">TTS</a></li>
 			<li>Alternatively, the Provider Selection Service may return audio output to be played by the <a href="#speaker">Speaker</a></li>
 		</ul>
-			The Russian doll principle of nested IPAs will be described in a future draft.
 		</p>
-		
+        		
         <h5 id="providerselectionstrategy"><span class="secno">3.3.1.1 </span>Provider Selection Strategy</h5>
 		<p>The Provider Selection Strategy aims at determining those <a href="#provider">IPA Providers</a> that are most likely suited to handle the current input.
 			Generally,the system should not make any assumptions about the user's current input as she may switch goals with each input but there may be some deviating use cases.
@@ -707,6 +706,12 @@
         <h4 id="ipaproviders"><span class="secno">3.3.5 </span>IPA Providers</h4>
 		<img src="ipaproviders-component.svg" style="float:right" width="auto" height="auto" />
 		<p>IPA providers provide IPA's that can interact with users in an application.</p>
+        
+        <p>
+            In this sense an IPA might be again a fully fledged IPA, with the exception of the <a href="#clientlayer">Client Layer</a> as this IPA
+            will take over the role of a client to the nested IPA. Actually, this can be perceived as the Matryoshka (or Russian Doll) principle.
+            Each IPA may be perfectly used as is but can also be approached by other IPAs.
+        </p>
 
         <h5 id="provider"><span class="secno">3.3.5.1 </span>IPA Provider X</h5>
 		<p>A provider of an IPA service, like
