@@ -32,7 +32,9 @@ endfunction()
 # build library from source
 function(build_dependency lib_name)
   set(supported_libs
-      log4cplus)
+      log4cplus
+      nlohmann_json
+      openssl)
   list(FIND supported_libs ${lib_name} index)
   if(${index} EQUAL -1)
     message(WARNING "${lib_name} is not supported to build from source")

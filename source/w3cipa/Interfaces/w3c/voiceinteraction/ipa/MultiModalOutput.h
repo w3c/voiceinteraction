@@ -8,6 +8,8 @@
 #if !defined(EA_FDD12529_7D17_4eb4_9E7A_D5CDE344613C__INCLUDED_)
 #define EA_FDD12529_7D17_4eb4_9E7A_D5CDE344613C__INCLUDED_
 
+#include <string>
+
 namespace w3c
 {
 	namespace voiceinteraction
@@ -19,13 +21,12 @@ namespace w3c
 
 			public:
 				MultiModalOutput() {
-
 				}
 
 				virtual ~MultiModalOutput() {
-
 				}
 
+                virtual const std::string getModality() const = 0;
 			};
 
 		}

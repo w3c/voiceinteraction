@@ -8,6 +8,8 @@
 #if !defined(EA_D4083AFB_7D40_4225_A755_EEF04D2E5A2E__INCLUDED_)
 #define EA_D4083AFB_7D40_4225_A755_EEF04D2E5A2E__INCLUDED_
 
+#include <string>
+
 namespace w3c
 {
 	namespace voiceinteraction
@@ -25,6 +27,8 @@ namespace w3c
 				virtual ~MultiModalInput() {
 
 				}
+
+                virtual const std::string getModality() const = 0;
 
 			};
 

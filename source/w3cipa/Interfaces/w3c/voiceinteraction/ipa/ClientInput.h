@@ -8,6 +8,15 @@
 #if !defined(EA_FDD868C2_7466_4191_8546_AA16ADA40292__INCLUDED_)
 #define EA_FDD868C2_7466_4191_8546_AA16ADA40292__INCLUDED_
 
+#include <memory>
+
+#include "SessionId.h"
+#include "RequestId.h"
+#include "AudioData.h"
+#include "MultiModalInputs.h"
+#include "MetaData.h"
+#include "ClientResponse.h"
+
 namespace w3c
 {
 	namespace voiceinteraction
@@ -22,8 +31,10 @@ namespace w3c
 
 				}
 
-				virtual ~ClientInput() =0;
-				virtual const ClientResponse& processInput(const SessionId& sessionId, const RequestId& requestId, const AudioData& audioData, const MultiModalInput& multiModalInput, const MetaData& metaData) =0;
+                virtual ~ClientInput() {
+                };
+
+                virtual const std::shared_ptr<ClientResponse> processInput(const std::shared_ptr<SessionId>& sessionId, const std::shared_ptr<RequestId>& requestId, const std::shared_ptr<AudioData>& audioData, const std::shared_ptr<MultiModalInputs>& multiModalInputs, const std::shared_ptr<MetaData>& metaData) =0;
 
 			};
 

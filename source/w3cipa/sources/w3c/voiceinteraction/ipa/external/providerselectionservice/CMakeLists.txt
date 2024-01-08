@@ -1,0 +1,1 @@
+target_sources(${PROJECT_NAME} PRIVATE referenceproviderregistry.h referenceproviderregistry.cpp referenceproviderselectionservice.h referenceproviderselectionservice.cpp)

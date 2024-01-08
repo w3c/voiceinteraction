@@ -9,4 +9,7 @@ file(GLOB projectSRC
 )
 
 add_executable(${PROJECT_NAME} main.cpp)
-target_link_libraries(${PROJECT_NAME} ${Log4cplus})
+add_subdirectory(w3c/voiceinteraction/ipa)
+add_subdirectory(w3c/voiceinteraction/ipa/external/providerselectionservice)
+add_subdirectory(w3c/voiceinteraction/ipa/external/ipa/chatgpt)
+target_link_libraries(${PROJECT_NAME} ${requiredlibs})

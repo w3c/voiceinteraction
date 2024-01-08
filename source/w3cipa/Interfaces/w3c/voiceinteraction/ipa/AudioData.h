@@ -8,6 +8,9 @@
 #if !defined(EA_C9A6027B_742F_4f41_8BBD_1F4DB2B672B3__INCLUDED_)
 #define EA_C9A6027B_742F_4f41_8BBD_1F4DB2B672B3__INCLUDED_
 
+#include "AudioDeliveryType.h"
+#include "AudioEncoding.h"
+
 namespace w3c
 {
 	namespace voiceinteraction

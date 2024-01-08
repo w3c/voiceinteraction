@@ -8,6 +8,8 @@
 #if !defined(EA_3D3A7FC2_E841_4cc6_8F89_F77CC1D02EB4__INCLUDED_)
 #define EA_3D3A7FC2_E841_4cc6_8F89_F77CC1D02EB4__INCLUDED_
 
+#include "Timestamp.h"
+
 namespace w3c
 {
 	namespace voiceinteraction
