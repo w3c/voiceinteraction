@@ -4,7 +4,7 @@
 #include <memory>
 #include <list>
 
-#include <w3c/voiceinteraction/ipa/IPAProvider.h>
+#include <w3c/voiceinteraction/ipa/ProviderRegistry.h>
 
 namespace w3c {
 namespace voiceinteraction {
@@ -12,7 +12,7 @@ namespace ipa {
 namespace external {
 namespace providerselectionservice {
 
-class ReferenceProviderRegistry {
+class ReferenceProviderRegistry : public ProviderRegistry {
 public:
     ReferenceProviderRegistry();
 

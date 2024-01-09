@@ -1,3 +1,4 @@
+#include "referenceproviderregistry.h"
 #include "referenceproviderselectionservice.h"
 
 namespace w3c {
@@ -7,7 +8,7 @@ namespace external {
 namespace providerselectionservice {
 
 ReferenceProviderSelectionService::ReferenceProviderSelectionService()
-    : providerRegistry(std::make_shared<ReferenceProviderRegistry>()) {
+    : ProviderSelectionService(std::make_shared<ReferenceProviderRegistry>()) {
 }
 
 const std::shared_ptr<ClientResponse> ReferenceProviderSelectionService::processInput(const std::shared_ptr<SessionId>& sessionId, const std::shared_ptr<RequestId>& requestId, const std::shared_ptr<AudioData>& audioData, const std::shared_ptr<MultiModalInputs>& multiModalInputs, const std::shared_ptr<MetaData>& metaData) {
