@@ -1,6 +1,6 @@
-
 source/w3cipa/CMakeLists.txt.user
 source/build-w3cipa-Desktop_Qt_6_5_1_MinGW_64_bit-Debug/**
 source/w3cipa/open-source/**
 *.bkp
-*.bkp
+**/*.bkp
+
