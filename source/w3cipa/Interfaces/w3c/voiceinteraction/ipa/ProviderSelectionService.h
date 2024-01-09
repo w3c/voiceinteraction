@@ -19,8 +19,6 @@ public:
     virtual ~ProviderSelectionService() {
     }
 
-    virtual const std::shared_ptr<ClientResponse> processInput(const std::shared_ptr<SessionId>& sessionId, const std::shared_ptr<RequestId>& requestId, const std::shared_ptr<AudioData>& audioData, const std::shared_ptr<MultiModalInputs>& multiModalInputs, const std::shared_ptr<MetaData>& metaData) = 0;
-
 protected:
     std::shared_ptr<ProviderRegistry> providerRegistry;
 };
