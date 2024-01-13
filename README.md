@@ -36,3 +36,6 @@ Editorial changes that improve the readability of the spec or correct spelling o
 # Code of Conduct
 
 W3C functions under a [code of conduct](https://www.w3.org/Consortium/cepc/).
+
+# Source Code
+Reference implementation of an [IPA framework](source/SOURCE.md)
