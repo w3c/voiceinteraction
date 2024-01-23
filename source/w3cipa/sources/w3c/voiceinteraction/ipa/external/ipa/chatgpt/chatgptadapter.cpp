@@ -114,7 +114,7 @@ const std::shared_ptr<ClientResponse> ChatGPTAdapter::processInput(const std::sh
     }
     // Set the header and API key
     struct curl_slist *headers = NULL;
-    headers = curl_slist_append(headers, "Authorization: Bearer OPEN_API_DEV_KEY");
+    headers = curl_slist_append(headers, "Authorization: Bearer OPENAI-DEVELOPER-KEY");
     headers = curl_slist_append(headers, "Content-Type: application/json");
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 
