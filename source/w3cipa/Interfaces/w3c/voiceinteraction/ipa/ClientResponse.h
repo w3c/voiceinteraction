@@ -21,29 +21,58 @@ namespace w3c
 	{
 		namespace ipa
 		{
+			/**
+			 * This interface is used to return the results of a request to the client.
+			 */
 			class ClientResponse
 			{
 
             public:
+				/**
+				 * Constructs a new object.
+				 * @param multiModalOutputs The multimodal outputs to be returned to the client.
+				 */
                 ClientResponse(const std::shared_ptr<MultiModalOutputs>& multiModalOutputs)
                     : outputs(multiModalOutputs) {
-
 				}
 
+                /**
+                 * Destroys the object.
+                 */
 				virtual ~ClientResponse() {
 
 				}
 
+				/**
+				 * Returns the audio data to be played to the user.
+				 * @return The audio data to be played to the user.
+				 */
 				virtual const AudioData& getAudioData() =0;
 
+				/**
+				 * Returns the multimodal outputs to be returned to the client.
+				 * qreturn The multimodal outputs to be returned to the client.
+				 */
                 virtual const std::shared_ptr<MultiModalOutputs> getMultiModalOutputs() {
                     return outputs;
                 }
 
+                /**
+                 * Returns the request id of the request this response belongs to.
+                 * @return The request id of the request this response belongs to.
+                 */
 				virtual const RequestId& getRequestId() =0;
+
+				/**
+				 * Returns the session id of the session this response belongs to.
+				 * @return The session id of the session this response belongs to.
+				 */
                 virtual const SessionId& getSessionId() =0;
 
             private:
+                /**
+                 * The multimodal outputs to be returned to the client.
+                 */
                 std::shared_ptr<MultiModalOutputs> outputs;
 			};
 

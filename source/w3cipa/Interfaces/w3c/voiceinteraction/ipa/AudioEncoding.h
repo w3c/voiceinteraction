@@ -14,16 +14,22 @@ namespace w3c
 	{
 		namespace ipa
 		{
+			/**
+			 * The AudioEncoding interface represents the encoding of an audio stream.
+			 */
 			class AudioEncoding
 			{
-
 			public:
+				/**
+				 * Constructs a new object.
+				 */
 				AudioEncoding() {
-
 				}
 
+				/**
+				 * Destroys this object.
+				 */
 				virtual ~AudioEncoding() {
-
 				}
 
 			};

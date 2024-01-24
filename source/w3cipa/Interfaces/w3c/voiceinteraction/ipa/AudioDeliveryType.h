@@ -14,9 +14,18 @@ namespace w3c
 	{
 		namespace ipa
 		{
+			/**
+			 * Type of audio delivery.
+			 */
 			enum AudioDeliveryType
 			{
+				/**
+				 * The audio is delivered in a single chunk.
+				 */
 				Endpointed = 0,
+				/**
+				 * The audio is delivered in a stream.
+				 */
 				Streaming = 1
 			};
 

@@ -17,20 +17,34 @@ namespace w3c
 	{
 		namespace ipa
 		{
+			/**
+			 * Base class for all audio data types.
+			 */
 			class AudioData
 			{
 
 			public:
+				/**
+				 * Constructs a new object.
+				 */
 				AudioData() {
-
 				}
 
+				/**
+				 * Destroys the object.
+				 */
 				virtual ~AudioData() {
-
 				}
 
-				virtual w3c::voiceinteraction::ipa::AudioDeliveryType getAudioDeliveryType() =0;
-				virtual const AudioEncoding& getEncoding() =0;
+				/**
+				 * Retrieves the audio delivery type of this audio data object.
+				 */
+				virtual AudioDeliveryType getAudioDeliveryType() = 0;
+
+				/**
+				 * Retrieves the audio encoding of this audio data object.
+				 */
+				virtual const AudioEncoding& getEncoding() = 0;
 
 			};
 

@@ -23,17 +23,33 @@ namespace w3c
 	{
 		namespace ipa
 		{
+			/**
+			 * The interface for the client input.
+			 */
 			class ClientInput
 			{
 
 			public:
+				/**
+				 * Constructs a new object.
+				 */
 				ClientInput() {
-
 				}
 
+				/**
+				 * Destroys the object.
+				 */
                 virtual ~ClientInput() {
                 };
 
+                /**
+                 * Processes the input from the client.
+                 * @param sessionId The session id.
+                 * @param requestId The request id.
+                 * @param audioData The audio data.
+                 * @param multiModalInputs The multi modal inputs.
+                 * @param metaData The meta data.
+                 */
                 virtual const std::shared_ptr<ClientResponse> processInput(const std::shared_ptr<SessionId>& sessionId, const std::shared_ptr<RequestId>& requestId, const std::shared_ptr<AudioData>& audioData, const std::shared_ptr<MultiModalInputs>& multiModalInputs, const std::shared_ptr<MetaData>& metaData) =0;
 
 			};
