@@ -16,16 +16,28 @@ namespace w3c
 	{
 		namespace ipa
 		{
+			/**
+			 * This interface is used to represent the output of a modality.
+			 */
 			class MultiModalOutput
 			{
 
 			public:
+				/**
+				 * Constructs a new object.
+				 */
 				MultiModalOutput() {
 				}
 
+				/**
+				 * Destroys the object.
+				 */
 				virtual ~MultiModalOutput() {
 				}
 
+				/**
+				 * Returns the modality of this output.
+				 */
                 virtual const std::string getModality() const = 0;
 			};
 

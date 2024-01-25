@@ -14,16 +14,24 @@ namespace w3c
 	{
 		namespace ipa
 		{
+			/**
+			 * The request id is used to identify a request. It is used to match a request
+			 * with a response.
+			 */
 			class RequestId
 			{
 
 			public:
+				/**
+				 * Constructs a new request id.
+				 */
 				RequestId() {
-
 				}
 
+				/**
+				 * Destroys the request id.
+				 */
 				virtual ~RequestId() {
-
 				}
 
 			};

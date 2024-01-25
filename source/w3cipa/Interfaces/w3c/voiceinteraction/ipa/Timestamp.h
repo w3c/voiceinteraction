@@ -14,14 +14,22 @@ namespace w3c
 	{
 		namespace ipa
 		{
+			/**
+			 * A timestamp is a point in time.
+			 */
 			class Timestamp
 			{
 
 			public:
+				/**
+				 * Constructs a new object.
+				 */
 				Timestamp() {
-
 				}
 
+				/**
+				 * Destroys the object.
+				 */
 				virtual ~Timestamp() {
 
 				}

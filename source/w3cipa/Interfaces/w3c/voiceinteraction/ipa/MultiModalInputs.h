@@ -19,24 +19,45 @@ namespace w3c
 	{
 		namespace ipa
 		{
+			/**
+			 * This class contains a set of multimodal inputs.
+			 */
             class MultiModalInputs
 			{
 
 			public:
+            	/**
+            	 * Constructs an empty set of multimodal inputs.
+            	 */
                 MultiModalInputs() {
 				}
 
+                /**
+                 * Destroys the set of multimodal inputs.
+                 */
                 virtual ~MultiModalInputs() {
                 }
 
+                /**
+                 * Adds a multimodal input to the set.
+                 * @param input The multimodal input to add.
+                 */
                 void addMultiModalInput(const std::shared_ptr<MultiModalInput> input) {
                     inputs[input->getModality()] = input;
                 }
 
+				/**
+				 * Returns the multimodal input for the given modality.
+				 * @param modality The modality to return.
+				 * @return The multimodal input for the given modality.
+				 */
                 std::shared_ptr<MultiModalInput> getMultiModalInput(const std::string& modality) {
                     return inputs[modality];
                 }
             private:
+				/**
+				 * The map of known multimodal inputs.
+				 */
                 std::map<std::string, std::shared_ptr<MultiModalInput>> inputs;
 			};
 

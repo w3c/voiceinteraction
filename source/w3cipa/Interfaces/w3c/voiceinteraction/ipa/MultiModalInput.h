@@ -16,20 +16,30 @@ namespace w3c
 	{
 		namespace ipa
 		{
+			/**
+			 * This interface is used to represent input from a modality.
+			 */
 			class MultiModalInput
 			{
 
 			public:
+				/**
+				 * Constructs a new object.
+				 */
 				MultiModalInput() {
-
 				}
 
+				/**
+				 * Destroys the object.
+				 */
 				virtual ~MultiModalInput() {
 
 				}
 
+				/**
+				 * Retrieves a string identifying the modality of this input.
+				 */
                 virtual const std::string getModality() const = 0;
-
 			};
 
 		}

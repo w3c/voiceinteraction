@@ -14,16 +14,22 @@ namespace w3c
 	{
 		namespace ipa
 		{
+			/**
+			 * The SessionId interface is used to identify a session.
+			 */
 			class SessionId
 			{
-
 			public:
+				/**
+                 * Constucts a new SessionId.
+                 */
 				SessionId() {
-
 				}
 
+				/**
+				 * Destroys the SessionId.
+				 */
 				virtual ~SessionId() {
-
 				}
 
 			};

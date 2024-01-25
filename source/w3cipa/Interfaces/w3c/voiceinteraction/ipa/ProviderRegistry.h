@@ -10,14 +10,29 @@ namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
 
+/**
+ * @brief The ProviderRegistry class
+ * This class knows all registered IPA providers.
+ */
 class ProviderRegistry {
 public:
+	/**
+	 * Constructs a new object.
+	 */
     ProviderRegistry() {
     }
 
+    /**
+     * Destroys this object.
+     */
     virtual ~ProviderRegistry() {
     }
 
+	/**
+	 * Returns a list of all registered IPA providers.
+	 *
+	 * @return A list of all registered IPA providers.
+	 */
     virtual const std::shared_ptr<std::list<std::shared_ptr<IPAProvider>>> getIPAProviders() const = 0;
 
 };
