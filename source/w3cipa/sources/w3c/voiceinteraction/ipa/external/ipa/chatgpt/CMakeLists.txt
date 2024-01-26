@@ -1,2 +1,2 @@
-target_sources(${PROJECT_NAME} PRIVATE chatgptadapter.h chatgptadapter.cpp
-    chatgptclientresponse.h chatgptclientresponse.cpp)
+target_sources(${PROJECT_NAME} PRIVATE ChatGPTAdapter.cpp ChatGPTAdapter.h
+    ChatGPTClientResponse.cpp ChatGPTClientResponse.h)

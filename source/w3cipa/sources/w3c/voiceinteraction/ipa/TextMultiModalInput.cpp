@@ -1,4 +1,4 @@
-#include "textmultimodalinput.h"
+﻿#include "TextMultiModalInput.h"
 
 namespace w3c {
 namespace voiceinteraction {

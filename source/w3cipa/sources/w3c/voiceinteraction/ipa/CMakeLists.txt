@@ -1,1 +1,1 @@
-target_sources(${PROJECT_NAME} PRIVATE textmultimodaloutput.h textmultimodaloutput.cpp textmultimodalinput.h textmultimodalinput.cpp)
+target_sources(${PROJECT_NAME} PRIVATE TextMultiModalInput.cpp TextMultiModalInput.h TextMultiModalOutput.cpp TextMultiModalOutput.h)

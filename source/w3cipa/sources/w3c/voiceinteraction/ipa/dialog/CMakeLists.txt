@@ -1,1 +1,1 @@
-target_sources(${PROJECT_NAME} PRIVATE referenceipaservice.h referenceipaservice.cpp)
+target_sources(${PROJECT_NAME} PRIVATE ReferenceIPAService.cpp ReferenceIPAService.h)
