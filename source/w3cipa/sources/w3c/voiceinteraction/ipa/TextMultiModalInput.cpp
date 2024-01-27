@@ -1,13 +1,15 @@
-﻿#include "TextMultiModalInput.h"
+﻿#include "TextModalityType.h"
+#include "TextMultiModalInput.h"
 
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
 
-const std::string TextMultiModalInput::MODALITY = std::string("text");
+const ModalityType TextMultiModalInput::MODALITY = TextModalityType();
 
-TextMultiModalInput::TextMultiModalInput(const std::string& output)
-    : text(output) {
+TextMultiModalInput::TextMultiModalInput(const std::string& input)
+    : MultiModalInput(MODALITY),
+      text(input) {
 }
 
 } // namespace ipa

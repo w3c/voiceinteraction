@@ -1,4 +1,4 @@
-#ifndef TEXTMULTIMODALINPUT_H
+﻿#ifndef TEXTMULTIMODALINPUT_H
 #define TEXTMULTIMODALINPUT_H
 
 #include <string>
@@ -13,15 +13,11 @@ class TextMultiModalInput : public MultiModalInput {
 public:
     TextMultiModalInput(const std::string& input);
 
-    virtual const std::string getModality() const {
-        return MODALITY;
-    };
-
     const std::string& getTextInput() const {
         return text;
     }
 
-    const static std::string MODALITY;
+    const static ModalityType MODALITY;
 private:
     std::string text;
 };
