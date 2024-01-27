@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.24)
+﻿cmake_minimum_required(VERSION 3.24)
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMake;${CMAKE_MODULE_PATH}")
 
 include(FindPkgConfig)
@@ -58,6 +58,6 @@ include_directories(${CURL_INCLUDE_DIR})
 
 set(requiredlibs ${requiredlibs} ${CURL_LIBRARIES})
 
-include_directories(Interfaces)
+include_directories(include)
 
 add_subdirectory(sources)
