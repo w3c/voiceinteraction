@@ -1,4 +1,4 @@
-#ifndef CHATGPTCLIENTRESPONSE_H
+﻿#ifndef CHATGPTCLIENTRESPONSE_H
 #define CHATGPTCLIENTRESPONSE_H
 
 #include <w3c/voiceinteraction/ipa/ClientResponse.h>
@@ -15,10 +15,10 @@ class ChatGPTClientResponse : public ClientResponse {
 public:
     ChatGPTClientResponse(const std::shared_ptr<MultiModalOutputs>& outputs);
 
-    const AudioData& getAudioData();
-    const MultiModalOutput& getMultiModalOutput();
-    const RequestId& getRequestId();
-    const SessionId& getSessionId();
+    const std::shared_ptr<AudioData> getAudioData();
+    const std::shared_ptr<MultiModalOutput> getMultiModalOutput();
+    const std::shared_ptr<RequestId> getRequestId();
+    const std::shared_ptr<SessionId> getSessionId();
 };
 
 } // chatgpt

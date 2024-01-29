@@ -12,16 +12,20 @@ ChatGPTClientResponse::ChatGPTClientResponse(
     : ClientResponse(outputs) {
 }
 
-const AudioData& ChatGPTClientResponse::getAudioData() {
+const std::shared_ptr<AudioData> ChatGPTClientResponse::getAudioData() {
+    return nullptr;
 }
 
-const MultiModalOutput& ChatGPTClientResponse::getMultiModalOutput() {
+const std::shared_ptr<MultiModalOutput> ChatGPTClientResponse::getMultiModalOutput() {
+    return nullptr;
 }
 
-const RequestId& ChatGPTClientResponse::getRequestId() {
+const std::shared_ptr<RequestId> ChatGPTClientResponse::getRequestId() {
+    return nullptr;
 }
 
-const SessionId& ChatGPTClientResponse::getSessionId() {
+const std::shared_ptr<SessionId> ChatGPTClientResponse::getSessionId() {
+    return nullptr;
 }
 
 } // chatgpt
