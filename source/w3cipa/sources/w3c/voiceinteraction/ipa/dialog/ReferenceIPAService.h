@@ -1,4 +1,4 @@
-#ifndef REFERENCEIPASERVICE_H
+﻿#ifndef REFERENCEIPASERVICE_H
 #define REFERENCEIPASERVICE_H
 
 #include <memory>
@@ -13,7 +13,8 @@ namespace dialog {
 class ReferenceIPAService : public IPAService {
 public:
     ReferenceIPAService(const std::shared_ptr<ProviderSelectionService>& service);
-    const std::shared_ptr<ClientResponse> processInput(const std::shared_ptr<SessionId>& sessionId, const std::shared_ptr<RequestId>& requestId, const std::shared_ptr<AudioData>& audioData, const std::shared_ptr<MultiModalInputs>& multiModalInputs, const std::shared_ptr<MetaData>& metaData);
+    const std::shared_ptr<ClientResponse> processInput(
+        const std::shared_ptr<ClientRequest>& request);
 };
 
 } // namespace dialog

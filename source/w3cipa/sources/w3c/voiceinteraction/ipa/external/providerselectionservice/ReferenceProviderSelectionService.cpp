@@ -11,12 +11,12 @@ ReferenceProviderSelectionService::ReferenceProviderSelectionService()
     : ProviderSelectionService(std::make_shared<ReferenceProviderRegistry>()) {
 }
 
-const std::shared_ptr<ClientResponse> ReferenceProviderSelectionService::processInput(const std::shared_ptr<SessionId>& sessionId, const std::shared_ptr<RequestId>& requestId, const std::shared_ptr<AudioData>& audioData, const std::shared_ptr<MultiModalInputs>& multiModalInputs, const std::shared_ptr<MetaData>& metaData) {
+const std::shared_ptr<ClientResponse> ReferenceProviderSelectionService::processInput(
+    const std::shared_ptr<ClientRequest> &request) {
     std::shared_ptr<std::list<std::shared_ptr<IPAProvider>>> providers =
         providerRegistry->getIPAProviders();
-    for (std::shared_ptr<IPAProvider> provider : *providers) {
-        return provider->processInput(sessionId, requestId, audioData,
-                                      multiModalInputs, metaData);
+    for (const std::shared_ptr<IPAProvider>& provider : *providers) {
+        return provider->processInput(request);
     }
     return nullptr;
 }

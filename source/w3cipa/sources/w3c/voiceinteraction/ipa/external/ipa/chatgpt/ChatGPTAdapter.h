@@ -1,4 +1,4 @@
-#ifndef CHATGPTADAPTER_H
+﻿#ifndef CHATGPTADAPTER_H
 #define CHATGPTADAPTER_H
 
 #include <log4cplus/logger.h>
@@ -18,7 +18,8 @@ public:
     virtual ~ChatGPTAdapter() {
     }
 
-    const std::shared_ptr<ClientResponse> processInput(const std::shared_ptr<SessionId>& sessionId, const std::shared_ptr<RequestId>& requestId, const std::shared_ptr<AudioData>& audioData, const std::shared_ptr<MultiModalInputs>& multiModalInputs, const std::shared_ptr<MetaData>& metaData);
+    const std::shared_ptr<ClientResponse> processInput(
+        const std::shared_ptr<ClientRequest>& request);
 
     const std::string getId() const {
         return ID;

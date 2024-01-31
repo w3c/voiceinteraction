@@ -10,11 +10,7 @@
 
 #include <memory>
 
-#include "SessionId.h"
-#include "RequestId.h"
-#include "AudioData.h"
-#include "MultiModalInputs.h"
-#include "MetaData.h"
+#include "ClientRequest.h"
 #include "ClientResponse.h"
 
 namespace w3c {
@@ -48,7 +44,7 @@ public:
      * @param multiModalInputs The multi modal inputs.
      * @param metaData The meta data.
      */
-    virtual const std::shared_ptr<ClientResponse> processInput(const std::shared_ptr<SessionId>& sessionId, const std::shared_ptr<RequestId>& requestId, const std::shared_ptr<AudioData>& audioData, const std::shared_ptr<MultiModalInputs>& multiModalInputs, const std::shared_ptr<MetaData>& metaData) =0;
+    virtual const std::shared_ptr<ClientResponse> processInput(const std::shared_ptr<ClientRequest>& request) =0;
 
 };
 

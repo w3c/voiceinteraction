@@ -1,6 +1,4 @@
-﻿#include <iostream>
-
-#include <curl/curl.h>
+﻿#include <curl/curl.h>
 #include <nlohmann/json.hpp>
 #include <log4cplus/loggingmacros.h>
 
@@ -107,7 +105,7 @@ void from_json(const nlohmann::json& j, ChatGPTJSONResponse& response) {
     j.at("choices").get_to(response.choices);
 }
 
-const std::shared_ptr<ClientResponse> ChatGPTAdapter::processInput(const std::shared_ptr<SessionId>& sessionId, const std::shared_ptr<RequestId>& requestId, const std::shared_ptr<AudioData>& audioData, const std::shared_ptr<MultiModalInputs>& multiModalInputs, const std::shared_ptr<MetaData>& metaData) {
+const std::shared_ptr<ClientResponse> ChatGPTAdapter::processInput(const std::shared_ptr<ClientRequest> &request) {
     CURL* curl = curl_easy_init();
     if(curl == nullptr) {
         LOG4CPLUS_WARN(LOGGER, LOG4CPLUS_TEXT("Failed to initialize CURL"));
@@ -138,7 +136,10 @@ const std::shared_ptr<ClientResponse> ChatGPTAdapter::processInput(const std::sh
     // Set the payload
     ChatGPTJSONRequest req;
     req.model = std::string("gpt-3.5-turbo");
-    ChatGPTMessage systemMessage {"system", "You are a junkie who is tired of this world."};
+    ChatGPTMessage systemMessage {"system",
+                                "You are a junkie who is tired of this world."};
+    std::shared_ptr<MultiModalInputs> multiModalInputs =
+        request->getMultiModalInputs();
     std::shared_ptr<TextMultiModalInput> input =
         std::dynamic_pointer_cast<TextMultiModalInput>(multiModalInputs->getMultiModalInput(TextMultiModalInput::MODALITY));
     const std::string& textInput = input->getTextInput();

@@ -9,8 +9,8 @@ ReferenceIPAService::ReferenceIPAService(const std::shared_ptr<ProviderSelection
     : IPAService(service) {
 }
 
-const std::shared_ptr<ClientResponse> ReferenceIPAService::processInput(const std::shared_ptr<SessionId>& sessionId, const std::shared_ptr<RequestId>& requestId, const std::shared_ptr<AudioData>& audioData, const std::shared_ptr<MultiModalInputs>& multiModalInputs, const std::shared_ptr<MetaData>& metaData) {
-    return providerSelectionService->processInput( sessionId, requestId, audioData, multiModalInputs, metaData);
+const std::shared_ptr<ClientResponse> ReferenceIPAService::processInput(const std::shared_ptr<ClientRequest> &request) {
+    return providerSelectionService->processInput(request);
 }
 
 } // namespace dialog

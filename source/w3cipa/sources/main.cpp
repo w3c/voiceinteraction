@@ -36,8 +36,11 @@ int main() {
     std::shared_ptr<TextMultiModalInput> multiModalInput = std::make_shared<TextMultiModalInput>(input);
     multiModalInputs->addMultiModalInput(multiModalInput);
     //w3c::voiceinteraction::ipa::MetaData metaData;
+    std::shared_ptr<ClientRequest> request =
+        std::make_shared<ClientRequest>(nullptr, nullptr, multiModalInputs,
+                                                                             nullptr, nullptr);
     LOG4CPLUS_INFO_FMT(LOGGER, LOG4CPLUS_TEXT("Sending input to ChatGPT: %s"), input.c_str());
-    std::shared_ptr<ClientResponse> response = ipaService.processInput(nullptr, nullptr, nullptr, multiModalInputs, nullptr);
+    std::shared_ptr<ClientResponse> response = ipaService.processInput(request);
     std::shared_ptr<MultiModalOutputs> outputs = response->getMultiModalOutputs();
     std::shared_ptr<TextMultiModalOutput> output = std::dynamic_pointer_cast<TextMultiModalOutput>(outputs->getMultiModalOutput(TextMultiModalOutput::MODALITY));
     LOG4CPLUS_INFO_FMT(LOGGER, LOG4CPLUS_TEXT("Received response from ChatGPT: %s"), output->getTextOutput().c_str());

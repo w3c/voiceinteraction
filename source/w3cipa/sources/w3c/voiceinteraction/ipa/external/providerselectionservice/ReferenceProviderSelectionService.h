@@ -1,4 +1,4 @@
-#ifndef REFERENCEPROVIDERSELECTIONSERVICE_H
+﻿#ifndef REFERENCEPROVIDERSELECTIONSERVICE_H
 #define REFERENCEPROVIDERSELECTIONSERVICE_H
 
 #include <w3c/voiceinteraction/ipa/ProviderSelectionService.h>
@@ -13,7 +13,8 @@ class ReferenceProviderSelectionService : public ProviderSelectionService {
 public:
     ReferenceProviderSelectionService();
 
-    const std::shared_ptr<ClientResponse> processInput(const std::shared_ptr<SessionId>& sessionId, const std::shared_ptr<RequestId>& requestId, const std::shared_ptr<AudioData>& audioData, const std::shared_ptr<MultiModalInputs>& multiModalInputs, const std::shared_ptr<MetaData>& metaData);
+    const std::shared_ptr<ClientResponse> processInput(
+        const std::shared_ptr<ClientRequest>& request);
 };
 
 } // namespace providerselectionservice
