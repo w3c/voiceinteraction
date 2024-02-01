@@ -23,8 +23,8 @@ git clone git@github.com:w3c/voiceinteraction.git
 
 The source code is in the folder source/w3cipa
 
-- Interfaces contains the interfaces as described at https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm
-- sources contain the actual reference implementation using these interfaces
+- `include` contains the interfaces as described at [Intelligent Personal Assistant Interfaces](https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm).
+- `sources` contain the actual reference implementation using these interfaces
 
 ### Configuring Keys
 
@@ -43,6 +43,9 @@ cd build
 cmake ..
 make && make install
 ```
+## Open Issues
+
+A list of open issues can be displayed via [Open Issues for Reference Implementation](https://github.com/w3c/voiceinteraction/issues?q=is%3Aissue+is%3Aopen+label%3A%22reference+implementation%22).
 
 
 
