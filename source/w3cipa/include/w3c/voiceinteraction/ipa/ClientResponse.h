@@ -14,6 +14,7 @@
 #include "MultiModalOutputs.h"
 #include "RequestId.h"
 #include "SessionId.h"
+#include "MetaData.h"
 
 namespace w3c {
 namespace voiceinteraction {
@@ -30,8 +31,14 @@ public:
      * Constructs a new object.
      * @param multiModalOutputs The multimodal outputs to be returned to the client.
      */
-    ClientResponse(const std::shared_ptr<MultiModalOutputs>& multiModalOutputs)
-        : outputs(multiModalOutputs) {
+    ClientResponse(const std::shared_ptr<SessionId>& sessionIdentifier,
+                   const std::shared_ptr<RequestId>& requestIdentifier,
+                   const std::shared_ptr<MultiModalOutputs>& multiModalOutputs,
+                   const std::shared_ptr<AudioData>& audioDataToSend,
+                   const std::shared_ptr<MetaData> metaDataToSend)
+        : sessionId(sessionIdentifier), requestId(requestIdentifier),
+            outputs(multiModalOutputs), audioData(audioDataToSend),
+            metaData(metaDataToSend) {
     }
 
     /**
@@ -42,10 +49,28 @@ public:
     }
 
     /**
+     * Returns the session id of the session this response belongs to.
+     * @return The session id of the session this response belongs to.
+     */
+    const std::shared_ptr<SessionId> getSessionId() const {
+        return sessionId;
+    }
+
+    /**
+     * Returns the request id of the request this response belongs to.
+     * @return The request id of the request this response belongs to.
+     */
+    const std::shared_ptr<RequestId>& getRequestId() const {
+        return requestId;
+    }
+
+    /**
      * Returns the audio data to be played to the user.
      * @return The audio data to be played to the user.
      */
-    virtual const std::shared_ptr<AudioData> getAudioData() =0;
+    const std::shared_ptr<AudioData>& getAudioData() {
+        return audioData;
+    }
 
     /**
      * Returns the multimodal outputs to be returned to the client.
@@ -56,23 +81,25 @@ public:
     }
 
     /**
-     * Returns the request id of the request this response belongs to.
-     * @return The request id of the request this response belongs to.
+     * Returns the metadata of the request.
+     * @return The metadata of the request.
      */
-    virtual const std::shared_ptr<RequestId> getRequestId() =0;
+    const std::shared_ptr<MetaData>& getMetaData() {
+        return metaData;
+    }
 
-    /**
-     * Returns the session id of the session this response belongs to.
-     * @return The session id of the session this response belongs to.
-     */
-    virtual const std::shared_ptr<SessionId> getSessionId() =0;
-
-    private:
-        /**
-         * The multimodal outputs to be returned to the client.
-         */
-        std::shared_ptr<MultiModalOutputs> outputs;
-    };
+private:
+    /** The session id. */
+    std::shared_ptr<SessionId> sessionId;
+    /** The request id. */
+    std::shared_ptr<RequestId> requestId;
+    /** The audio data. */
+    std::shared_ptr<AudioData> audioData;
+    /** The multimodal outputs to be returned to the client. */
+    std::shared_ptr<MultiModalOutputs> outputs;
+    /** The metadata. */
+    std::shared_ptr<MetaData> metaData;
+};
 
 } // namespace ipa
 } // namespace voiceinteraction

@@ -6,7 +6,6 @@
 #include "../../../TextMultiModalOutput.h"
 
 #include "ChatGPTAdapter.h"
-#include "ChatGPTClientResponse.h"
 
 namespace w3c {
 namespace voiceinteraction {
@@ -105,7 +104,8 @@ void from_json(const nlohmann::json& j, ChatGPTJSONResponse& response) {
     j.at("choices").get_to(response.choices);
 }
 
-const std::shared_ptr<ClientResponse> ChatGPTAdapter::processInput(const std::shared_ptr<ClientRequest> &request) {
+const std::shared_ptr<ClientResponse> ChatGPTAdapter::processInput(
+    const std::shared_ptr<ClientRequest> &request) {
     CURL* curl = curl_easy_init();
     if(curl == nullptr) {
         LOG4CPLUS_WARN(LOGGER, LOG4CPLUS_TEXT("Failed to initialize CURL"));
@@ -140,10 +140,12 @@ const std::shared_ptr<ClientResponse> ChatGPTAdapter::processInput(const std::sh
                                 "You are a junkie who is tired of this world."};
     std::shared_ptr<MultiModalInputs> multiModalInputs =
         request->getMultiModalInputs();
-    std::shared_ptr<TextMultiModalInput> input =
-        std::dynamic_pointer_cast<TextMultiModalInput>(multiModalInputs->getMultiModalInput(TextMultiModalInput::MODALITY));
-    const std::string& textInput = input->getTextInput();
-    ChatGPTMessage userMessage { "user", textInput };
+    std::shared_ptr<MultiModalInput> input =
+        multiModalInputs->getMultiModalInput(TextMultiModalInput::MODALITY);
+    std::shared_ptr<TextMultiModalInput> textInput =
+        std::dynamic_pointer_cast<TextMultiModalInput>(input);
+    const std::string& text = textInput->getTextInput();
+    ChatGPTMessage userMessage { "user", text };
     req.messages = std::vector({ systemMessage, userMessage });
     req.temperature = 1;
     req.top_p = 1;
@@ -201,10 +203,14 @@ const std::shared_ptr<ClientResponse> ChatGPTAdapter::processInput(const std::sh
     nlohmann::json responseData = nlohmann::json::parse(response);
     ChatGPTJSONResponse parsedResponse = responseData;
     std::string textOutput = parsedResponse.choices[0].message.content;
-    std::shared_ptr<MultiModalOutput> output = std::make_shared<TextMultiModalOutput>(textOutput);
-    std::shared_ptr<MultiModalOutputs> outputs = std::make_shared<MultiModalOutputs>();
+    std::shared_ptr<MultiModalOutput> output =
+        std::make_shared<TextMultiModalOutput>(textOutput);
+    std::shared_ptr<MultiModalOutputs> outputs =
+        std::make_shared<MultiModalOutputs>();
     outputs->addMultiModalOutput(output);
-    std::shared_ptr<ChatGPTClientResponse> out = std::make_shared<ChatGPTClientResponse>(outputs);
+    std::shared_ptr<ClientResponse> out =
+        std::make_shared<ClientResponse>(request->getSessionId(),
+            request->getRequestId(), outputs, nullptr, nullptr);
 
     return out;
 }
