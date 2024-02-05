@@ -15,14 +15,14 @@ using namespace w3c::voiceinteraction::ipa;
 
 static log4cplus::Logger LOGGER;
 
+
 int main() {
     LOGGER = log4cplus::Logger::getInstance(LOG4CPLUS_TEXT("main"));
 
     // Initialization and deinitialization.
     log4cplus::Initializer initializer;
-
-    log4cplus::BasicConfigurator config;
-    config.configure();
+    log4cplus::PropertyConfigurator::doConfigure(
+        LOG4CPLUS_TEXT("config/log4cplus.properties"));
     LOG4CPLUS_INFO(LOGGER, LOG4CPLUS_TEXT("W3C IPA started"));
 
     // Build up the components
@@ -49,8 +49,12 @@ int main() {
     LOG4CPLUS_INFO_FMT(LOGGER, LOG4CPLUS_TEXT("Sending input to ChatGPT: %s"),
                        input.c_str());
     std::shared_ptr<ClientResponse> response = ipaService.processInput(request);
+    if (response == nullptr) {
+        LOG4CPLUS_ERROR(LOGGER, "no response received");
+        return -1;
+    }
 
-    // Determin the output
+    // Determine the output
     std::shared_ptr<MultiModalOutputs> outputs =
         response->getMultiModalOutputs();
     std::shared_ptr<MultiModalOutput> output =
