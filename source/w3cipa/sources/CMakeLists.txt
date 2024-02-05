@@ -16,7 +16,6 @@ add_subdirectory(w3c/voiceinteraction/ipa/external/ipa/chatgpt)
 target_link_libraries(${PROJECT_NAME} ${requiredlibs})
 
 set(PROJECT_CONFIG_DIR ${CMAKE_CURRENT_BINARY_DIR}/config)
-message(${PROJECT_CONFIG_DIR})
 file(MAKE_DIRECTORY ${PROJECT_CONFIG_DIR})
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/log4cplus.properties
     ${PROJECT_CONFIG_DIR}/log4cplus.properties COPYONLY)
