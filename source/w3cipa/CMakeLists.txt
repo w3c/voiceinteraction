@@ -18,7 +18,7 @@ message(STATUS "dependencies install path is ${W3CIPA_OPEN_SOURCE_SRC}")
 # Build dependent libraries
 #
 
-build_dependency(log4cplus -DBUILD_STATIC=${BUILD_STATIC})
+build_dependency(log4cplus -DBUILD_SHARED_LIBS=${BUILD_SHARED_LIBS})
 build_dependency(nlohmann_json)
 #build_dependency(openssl)
 #build_dependency(curl)
@@ -39,8 +39,8 @@ set(FETCHCONTENT_QUIET FALSE)
 
 FetchContent_Declare(
         nlohmann
-        GIT_REPOSITORY  "https://github.com/onavratil-monetplus/json"
-        GIT_TAG         "v3.7.3"
+        GIT_REPOSITORY  "https://github.com/nlohmann/json"
+        GIT_TAG         "v3.9.1"
 )
 FetchContent_MakeAvailable(nlohmann)
 
