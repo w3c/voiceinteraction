@@ -15,7 +15,9 @@
 
 #include <memory>
 
-#include <w3c/voiceinteraction/ipa/IPAService.h>
+#include <w3c/voiceinteraction/ipa/external/ipa/IPAService.h>
+
+using namespace w3c::voiceinteraction::ipa::external;
 
 namespace w3c {
 namespace voiceinteraction {

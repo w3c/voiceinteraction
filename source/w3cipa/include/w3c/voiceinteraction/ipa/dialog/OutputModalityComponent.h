@@ -16,11 +16,12 @@
 #include <memory>
 
 #include "ModalityComponent.h"
-#include "MultiModalOutput.h"
+#include "../MultiModalOutput.h"
 
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
+namespace dialog {
 
 /**
  * A compponent to hand mutlimodal outputs.
@@ -52,6 +53,7 @@ public:
             const std::shared_ptr<MultiModalOutput> output) = 0;
 };
 
+} // namespace dialog
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c

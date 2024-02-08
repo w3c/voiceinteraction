@@ -16,6 +16,8 @@
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
+namespace dialog {
+
 /**
  * Type of input or output of a {@link ModalityComponent}.
  * @author Dirk Schnelle-Walka
@@ -32,6 +34,7 @@ enum IOType
     OUTPUT = 1
 };
 
+} // namespace dialog
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c

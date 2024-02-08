@@ -21,6 +21,7 @@
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
+namespace dialog {
 
 /**
  * A component that manages multiple modalities.
@@ -83,6 +84,7 @@ private:
     std::map<ModalityType, std::shared_ptr<ModalityComponent>> outputComponents;
 };
 
+} // namespace dialog
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c

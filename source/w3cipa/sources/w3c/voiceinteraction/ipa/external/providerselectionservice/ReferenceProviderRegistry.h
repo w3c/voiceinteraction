@@ -16,7 +16,7 @@
 #include <memory>
 #include <list>
 
-#include <w3c/voiceinteraction/ipa/ProviderRegistry.h>
+#include <w3c/voiceinteraction/ipa/external/ProviderSelectionService.h>
 
 namespace w3c {
 namespace voiceinteraction {

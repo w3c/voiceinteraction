@@ -1,4 +1,4 @@
-/*
+﻿/*
  * IPA Reference Implementation: https://github.com/w3c/voiceinteraction
  *
  * Copyright (C) 2024 World Wide Web Consortium. All Rights Reserved.
@@ -10,48 +10,50 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
-#ifndef PROVIDERREGISTRY_H
-#define PROVIDERREGISTRY_H
+#if !defined(IPAPROVIDER_H)
+#define IPAPROVIDER_H
 
-#include <memory>
-#include <list>
+#include <string>
 
-#include <w3c/voiceinteraction/ipa/IPAProvider.h>
+#include "w3c/voiceinteraction/ipa/ClientInput.h"
 
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
+namespace external {
+namespace ipa {
 
 /**
- * @brief The ProviderRegistry class
- * This class knows all registered IPA providers.
+ * Interface for IPA providers.
  * @author Dirk Schnelle-Walka
  */
-class ProviderRegistry {
+class IPAProvider : public ClientInput
+{
+
 public:
     /**
      * Constructs a new object.
      */
-    ProviderRegistry() {
+    IPAProvider() {
     }
 
     /**
      * Destroys this object.
      */
-    virtual ~ProviderRegistry() {
+    virtual ~IPAProvider() {
     }
 
     /**
-     * Returns a list of all registered IPA providers.
-     *
-     * @return A list of all registered IPA providers.
+     * Returns the IPA provider's ID.
+     * @return the IPA provider's ID.
      */
-    virtual const std::shared_ptr<std::list<std::shared_ptr<IPAProvider>>> getIPAProviders() const = 0;
-
+    virtual const std::string getId() const = 0;
 };
 
+} // namespace ipa
+} // namespace external
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c
 
-#endif // PROVIDERREGISTRY_H
+#endif // !defined(IPAPROVIDER_H)

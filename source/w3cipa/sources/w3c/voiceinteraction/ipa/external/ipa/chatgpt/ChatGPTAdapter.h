@@ -15,7 +15,9 @@
 
 #include <log4cplus/logger.h>
 
-#include <w3c/voiceinteraction/ipa/IPAProvider.h>
+#include <w3c/voiceinteraction/ipa/external/ipa/IPAProvider.h>
+
+using namespace w3c::voiceinteraction::ipa::external::ipa;
 
 namespace w3c {
 namespace voiceinteraction {

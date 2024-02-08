@@ -10,48 +10,52 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
-#ifndef IPASERVICE_H
-#define IPASERVICE_H
+#ifndef PROVIDERREGISTRY_H
+#define PROVIDERREGISTRY_H
 
 #include <memory>
+#include <list>
 
-#include "ClientInput.h"
-#include "ProviderSelectionService.h"
+#include "w3c/voiceinteraction/ipa/external/ipa/IPAProvider.h"
 
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
+namespace external {
+namespace ipa {
 
 /**
- * @brief The IPAService class
- * The IPAService is the base class for the IPA service.
+ * @brief The ProviderRegistry class
+ * This class knows all registered IPA providers.
  * @author Dirk Schnelle-Walka
  */
-class IPAService : public ClientInput {
+class ProviderRegistry {
 public:
     /**
      * Constructs a new object.
-     * @param service The provider selection service.
      */
-    IPAService(const std::shared_ptr<ProviderSelectionService>& service)
-        : providerSelectionService(service) {
+    ProviderRegistry() {
     }
 
     /**
-     * Destroys the object.
+     * Destroys this object.
      */
-    virtual ~IPAService() {
+    virtual ~ProviderRegistry() {
     }
 
-protected:
     /**
-     * @brief providerSelectionService The provider selection service.
+     * Returns a list of all registered IPA providers.
+     *
+     * @return A list of all registered IPA providers.
      */
-    std::shared_ptr<ProviderSelectionService> providerSelectionService;
+    virtual const std::shared_ptr<std::list<std::shared_ptr<IPAProvider>>> getIPAProviders() const = 0;
+
 };
 
+} // namespace ipa
+} // namespace external
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c
 
-#endif // IPASERVICE_H
+#endif // PROVIDERREGISTRY_H

@@ -13,7 +13,7 @@
 #ifndef REFERENCEPROVIDERSELECTIONSERVICE_H
 #define REFERENCEPROVIDERSELECTIONSERVICE_H
 
-#include <w3c/voiceinteraction/ipa/ProviderSelectionService.h>
+#include <w3c/voiceinteraction/ipa/external/ProviderSelectionService.h>
 
 namespace w3c {
 namespace voiceinteraction {

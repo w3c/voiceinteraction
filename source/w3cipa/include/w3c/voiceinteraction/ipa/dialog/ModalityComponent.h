@@ -13,12 +13,13 @@
 #ifndef MODALITYCOMPONENT_H
 #define MODALITYCOMPONENT_H
 
-#include "ModalityType.h"
+#include "../ModalityType.h"
 #include "IOType.h"
 
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
+namespace dialog {
 
 /**
  * A compponent to hand mutlimodal input or output.
@@ -60,6 +61,7 @@ private:
     ModalityType modality;
 };
 
+} // namespace dialog
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c

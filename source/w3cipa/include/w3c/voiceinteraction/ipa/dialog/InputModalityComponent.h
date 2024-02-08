@@ -16,12 +16,14 @@
 #include <memory>
 
 #include "ModalityComponent.h"
-#include "MultiModalInput.h"
+#include "../MultiModalInput.h"
 
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
+namespace dialog {
 
+}
 /**
  * A compponent to hand mutlimodal inputs.
  * @author Dirk Schnelle-Walka
@@ -51,6 +53,7 @@ public:
     virtual const std::shared_ptr<MultiModalInput> getMultiModalInput() = 0;
 };
 
+} // namespace dialog
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c
