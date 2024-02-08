@@ -1,6 +1,6 @@
 # Reference Implementation of an IPA Framework
 
-This project aims at providing a reference implementation for an IPA framework.
+This project aims at providing an IPA framework along with a reference implementation.
 
 ## Prerequisites
 
