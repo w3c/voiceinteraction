@@ -1,12 +1,17 @@
-﻿///////////////////////////////////////////////////////////
-//  ClientResponse.h
-//  Implementation of the Interface ClientResponse
-//  Created on:      13-Jun-2023 20:55:09
-//  Original author: Dirk Schnelle-Walka
-///////////////////////////////////////////////////////////
+﻿/*
+ * IPA Reference Implementation: https://github.com/w3c/voiceinteraction
+ *
+ * Copyright (C) 2024 World Wide Web Consortium. All Rights Reserved.
+ *
+ * This work is distributed under the W3C Software and Document License [1]
+ * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+ * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * [1] https://www.w3.org/Consortium/Legal/copyright-software
+ */
 
-#if !defined(EA_9A15E3C9_7222_460b_AEDE_1EDEEE5E9298__INCLUDED_)
-#define EA_9A15E3C9_7222_460b_AEDE_1EDEEE5E9298__INCLUDED_
+#if !defined(CLIENT_RESPONSE_H)
+#define CLIENT_RESPONSE_H
 
 #include <memory>
 
@@ -22,6 +27,7 @@ namespace ipa {
 
 /**
  * This interface is used to return the results of a request to the client.
+ * @author Dirk Schnelle-Walka
  */
 class ClientResponse
 {
@@ -105,4 +111,4 @@ private:
 } // namespace voiceinteraction
 } // namespace w3c
 
-#endif // !defined(EA_9A15E3C9_7222_460b_AEDE_1EDEEE5E9298__INCLUDED_)
+#endif // !defined(CLIENT_RESPONSE_H)

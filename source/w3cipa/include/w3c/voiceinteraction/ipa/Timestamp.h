@@ -1,44 +1,47 @@
-///////////////////////////////////////////////////////////
-//  Timestamp.h
-//  Implementation of the Interface Timestamp
-//  Created on:      13-Jun-2023 20:55:10
-//  Original author: Dirk Schnelle-Walka
-///////////////////////////////////////////////////////////
+/*
+ * IPA Reference Implementation: https://github.com/w3c/voiceinteraction
+ *
+ * Copyright (C) 2024 World Wide Web Consortium. All Rights Reserved.
+ *
+ * This work is distributed under the W3C Software and Document License [1]
+ * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+ * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * [1] https://www.w3.org/Consortium/Legal/copyright-software
+ */
 
-#if !defined(EA_51561335_13C8_418d_8068_2CE7EDA6F06E__INCLUDED_)
-#define EA_51561335_13C8_418d_8068_2CE7EDA6F06E__INCLUDED_
+#if !defined(TIMESTAMP_H)
+#define TIMESTAMP_H
 
-namespace w3c
+namespace w3c {
+namespace voiceinteraction {
+namespace ipa {
+
+/**
+ * A timestamp is a point in time.
+ * @author Dirk Schnelle-Walka
+ */
+class Timestamp
 {
-	namespace voiceinteraction
-	{
-		namespace ipa
-		{
-			/**
-			 * A timestamp is a point in time.
-			 */
-			class Timestamp
-			{
 
-			public:
-				/**
-				 * Constructs a new object.
-				 */
-				Timestamp() {
-				}
+public:
+    /**
+     * Constructs a new object.
+     */
+    Timestamp() {
+    }
 
-				/**
-				 * Destroys the object.
-				 */
-				virtual ~Timestamp() {
+    /**
+     * Destroys the object.
+     */
+    virtual ~Timestamp() {
 
-				}
+    }
 
-			};
+};
 
-		}
+} // namespace ipa
+} // namespace voiceinteraction
+} // namespace w3c
 
-	}
-
-}
-#endif // !defined(EA_51561335_13C8_418d_8068_2CE7EDA6F06E__INCLUDED_)
+#endif // !defined(TIMESTAMP_H)

@@ -1,42 +1,45 @@
-///////////////////////////////////////////////////////////
-//  AudioEncoding.h
-//  Implementation of the Interface AudioEncoding
-//  Created on:      13-Jun-2023 20:55:09
-//  Original author: Dirk Schnelle-Walka
-///////////////////////////////////////////////////////////
+/*
+ * IPA Reference Implementation: https://github.com/w3c/voiceinteraction
+ *
+ * Copyright (C) 2024 World Wide Web Consortium. All Rights Reserved.
+ *
+ * This work is distributed under the W3C Software and Document License [1]
+ * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+ * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * [1] https://www.w3.org/Consortium/Legal/copyright-software
+ */
 
-#if !defined(EA_03EBBAEA_11EE_446d_8DFF_6F98152CABCF__INCLUDED_)
-#define EA_03EBBAEA_11EE_446d_8DFF_6F98152CABCF__INCLUDED_
+#if !defined(AUDIOENCODING_H)
+#define AUDIOENCODING_H
 
-namespace w3c
+namespace w3c {
+namespace voiceinteraction {
+namespace ipa {
+
+/**
+ * The AudioEncoding interface represents the encoding of an audio stream.
+ * @author Dirk Schnelle-Walka
+ */
+class AudioEncoding
 {
-	namespace voiceinteraction
-	{
-		namespace ipa
-		{
-			/**
-			 * The AudioEncoding interface represents the encoding of an audio stream.
-			 */
-			class AudioEncoding
-			{
-			public:
-				/**
-				 * Constructs a new object.
-				 */
-				AudioEncoding() {
-				}
+public:
+    /**
+     * Constructs a new object.
+     */
+    AudioEncoding() {
+    }
 
-				/**
-				 * Destroys this object.
-				 */
-				virtual ~AudioEncoding() {
-				}
+    /**
+     * Destroys this object.
+     */
+    virtual ~AudioEncoding() {
+    }
 
-			};
+};
 
-		}
+} // namespace ipa
+} // namespace voiceinteraction
+} // namespace w3c
 
-	}
-
-}
-#endif // !defined(EA_03EBBAEA_11EE_446d_8DFF_6F98152CABCF__INCLUDED_)
+#endif // !defined(AUDIOENCODING_H)

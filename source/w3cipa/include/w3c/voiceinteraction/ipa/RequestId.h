@@ -1,44 +1,47 @@
-///////////////////////////////////////////////////////////
-//  RequestId.h
-//  Implementation of the Interface RequestId
-//  Created on:      13-Jun-2023 20:55:10
-//  Original author: Dirk Schnelle-Walka
-///////////////////////////////////////////////////////////
+/*
+ * IPA Reference Implementation: https://github.com/w3c/voiceinteraction
+ *
+ * Copyright (C) 2024 World Wide Web Consortium. All Rights Reserved.
+ *
+ * This work is distributed under the W3C Software and Document License [1]
+ * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+ * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * [1] https://www.w3.org/Consortium/Legal/copyright-software
+ */
 
-#if !defined(EA_3182575A_C3AE_4d3f_93CF_9488CA7EFE9C__INCLUDED_)
-#define EA_3182575A_C3AE_4d3f_93CF_9488CA7EFE9C__INCLUDED_
+#if !defined(REQUEST_ID_H)
+#define REQUEST_ID_H
 
-namespace w3c
+namespace w3c {
+namespace voiceinteraction {
+namespace ipa {
+
+/**
+ * The request id is used to identify a request. It is used to match a request
+ * with a response.
+ * @author Dirk Schnelle-Walka
+ */
+class RequestId
 {
-	namespace voiceinteraction
-	{
-		namespace ipa
-		{
-			/**
-			 * The request id is used to identify a request. It is used to match a request
-			 * with a response.
-			 */
-			class RequestId
-			{
 
-			public:
-				/**
-				 * Constructs a new request id.
-				 */
-				RequestId() {
-				}
+public:
+    /**
+     * Constructs a new request id.
+     */
+    RequestId() {
+    }
 
-				/**
-				 * Destroys the request id.
-				 */
-				virtual ~RequestId() {
-				}
+    /**
+     * Destroys the request id.
+     */
+    virtual ~RequestId() {
+    }
 
-			};
+};
 
-		}
+} // namespace ipa
+} // namespace voiceinteraction
+} // namespace w3c
 
-	}
-
-}
-#endif // !defined(EA_3182575A_C3AE_4d3f_93CF_9488CA7EFE9C__INCLUDED_)
+#endif // !defined(REQUEST_ID_H)

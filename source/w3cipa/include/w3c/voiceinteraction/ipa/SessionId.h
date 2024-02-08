@@ -1,42 +1,45 @@
-///////////////////////////////////////////////////////////
-//  SessionId.h
-//  Implementation of the Interface SessionId
-//  Created on:      13-Jun-2023 20:55:10
-//  Original author: Dirk Schnelle-Walka
-///////////////////////////////////////////////////////////
+/*
+ * IPA Reference Implementation: https://github.com/w3c/voiceinteraction
+ *
+ * Copyright (C) 2024 World Wide Web Consortium. All Rights Reserved.
+ *
+ * This work is distributed under the W3C Software and Document License [1]
+ * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+ * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * [1] https://www.w3.org/Consortium/Legal/copyright-software
+ */
 
-#if !defined(EA_5D623C18_968C_4465_A5F1_DB5D928347E0__INCLUDED_)
-#define EA_5D623C18_968C_4465_A5F1_DB5D928347E0__INCLUDED_
+#if !defined(SESSION_ID)
+#define SESSION_ID
 
-namespace w3c
+namespace w3c {
+namespace voiceinteraction {
+namespace ipa {
+
+/**
+ * The SessionId interface is used to identify a session.
+ * @author Dirk Schnelle-Walka
+ */
+class SessionId
 {
-	namespace voiceinteraction
-	{
-		namespace ipa
-		{
-			/**
-			 * The SessionId interface is used to identify a session.
-			 */
-			class SessionId
-			{
-			public:
-				/**
-                 * Constucts a new SessionId.
-                 */
-				SessionId() {
-				}
+public:
+    /**
+     * Constucts a new SessionId.
+     */
+    SessionId() {
+    }
 
-				/**
-				 * Destroys the SessionId.
-				 */
-				virtual ~SessionId() {
-				}
+    /**
+     * Destroys the SessionId.
+     */
+    virtual ~SessionId() {
+    }
 
-			};
+};
 
-		}
+} // namespace ipa
+} // namespace voiceinteraction
+} // namespace w3c
 
-	}
-
-}
-#endif // !defined(EA_5D623C18_968C_4465_A5F1_DB5D928347E0__INCLUDED_)
+#endif // !defined(SESSION_ID)

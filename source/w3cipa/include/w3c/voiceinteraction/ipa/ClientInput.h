@@ -1,12 +1,17 @@
-﻿///////////////////////////////////////////////////////////
-//  ClientInput.h
-//  Implementation of the Interface ClientInput
-//  Created on:      13-Jun-2023 21:09:30
-//  Original author: Dirk Schnelle-Walka
-///////////////////////////////////////////////////////////
+﻿/*
+ * IPA Reference Implementation: https://github.com/w3c/voiceinteraction
+ *
+ * Copyright (C) 2024 World Wide Web Consortium. All Rights Reserved.
+ *
+ * This work is distributed under the W3C Software and Document License [1]
+ * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+ * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * [1] https://www.w3.org/Consortium/Legal/copyright-software
+ */
 
-#if !defined(EA_FDD868C2_7466_4191_8546_AA16ADA40292__INCLUDED_)
-#define EA_FDD868C2_7466_4191_8546_AA16ADA40292__INCLUDED_
+#if !defined(CLIENTINPUT_H)
+#define CLIENTINPUT_H
 
 #include <memory>
 
@@ -19,6 +24,7 @@ namespace ipa {
 
 /**
  * The interface for the client input.
+ * @author Dirk Schnelle-Walka
  */
 class ClientInput
 {
@@ -52,4 +58,4 @@ public:
 } // namespace voiceinteraction
 } // namespace w3c
 
-#endif // !defined(EA_FDD868C2_7466_4191_8546_AA16ADA40292__INCLUDED_)
+#endif // !defined(CLIENTINPUT_H)
