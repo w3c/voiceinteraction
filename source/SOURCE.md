@@ -34,12 +34,18 @@ While the W3C IPA Framework in the folder `include` is a header-only
 implementation without any dependency, the reference implementation in folder 
 `source` makes use of 3rd-party software.
 
-| 3rd-party software | URL                                      | License          |
-| ------------------ | ---------------------------------------- | ------- -------- |
-| OpenSSL            | <https://www.openssl.org/>               | Apache License 2 |
-| libCURL            | <https://curl.se/libcurl/>               | MIT/X like       |
-| log4cplus          | <https://github.com/log4cplus/log4cplus> | Two clause BSD   |
-| nlohmann JSON      | <https://github.com/nlohmann/json>       | MIT              |
+- OpenSSL 
+    - <https://www.openssl.org/>
+    - Apache License 2 
+- libCURL
+    - <https://curl.se/libcurl/>
+    - MIT/X like license
+- log4cplus
+    - <https://github.com/log4cplus/log4cplus>
+    - Two clause BSD license
+- nlohmann JSON
+    - <https://github.com/nlohmann/json>
+    - MIT license
 
 ### Configuring Keys
 
