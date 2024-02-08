@@ -26,6 +26,21 @@ The source code is in the folder source/w3cipa
 - `include` contains the interfaces as described at [Intelligent Personal Assistant Interfaces](https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm).
 - `sources` contain the actual reference implementation using these interfaces
 
+### License
+
+This code is distributed under the [Software and Document license - 2023 version](https://www.w3.org/copyright/software-license-2023/).
+
+While the W3C IPA Framework in the folder `include` is a header-only
+implementation without any dependency, the reference implementation in folder 
+`source` makes use of 3rd-party software.
+
+| 3rd-party software | URL                                      | License          |
+| ------------------ | ---------------------------------------- | ------- -------- |
+| OpenSSL            | <https://www.openssl.org/>               | Apache License 2 |
+| libCURL            | <https://curl.se/libcurl/>               | MIT/X like       |
+| log4cplus          | <https://github.com/log4cplus/log4cplus> | Two clause BSD   |
+| nlohmann JSON      | <https://github.com/nlohmann/json>       | MIT              |
+
 ### Configuring Keys
 
 As of now, everything is hard coded, yo you will need to replace your OpenAI developer key in the file w3c/voiceinteraction/ipa/external/ipa/chatgpt/chatgptadapter.cpp
