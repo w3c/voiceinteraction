@@ -67,8 +67,3 @@ make && make install
 ## Open Issues
 
 A list of open issues can be displayed via [Open Issues for Reference Implementation](https://github.com/w3c/voiceinteraction/issues?q=is%3Aissue+is%3Aopen+label%3A%22reference+implementation%22).
-
-
-
-
-
