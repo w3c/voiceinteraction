@@ -29,7 +29,7 @@ namespace chatgpt {
 const std::string ChatGPTAdapter::ID = std::string("ChatGPT");
 const log4cplus::Logger ChatGPTAdapter::LOGGER =
     log4cplus::Logger::getInstance(LOG4CPLUS_TEXT(
-        "w3c.voiceinteraction.ipa.external.chatgpt"));
+        "w3c.voiceinteraction.ipa.external.ChatGPT"));
 
 ChatGPTAdapter::ChatGPTAdapter() {
 }

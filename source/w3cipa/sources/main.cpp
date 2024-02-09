@@ -18,10 +18,12 @@
 #include <log4cplus/configurator.h>
 #include <log4cplus/initializer.h>
 
-#include "w3c/voiceinteraction/ipa/textmultimodalinput.h"
-#include "w3c/voiceinteraction/ipa/textmultimodaloutput.h"
-#include "w3c/voiceinteraction/ipa/dialog/referenceipaservice.h"
-#include "w3c/voiceinteraction/ipa/external/providerselectionservice/referenceproviderselectionservice.h"
+#include <w3c/voiceinteraction/ipa/dialog/ModalityManager.h>
+
+#include "w3c/voiceinteraction/ipa/TextMultiModalInput.h"
+#include "w3c/voiceinteraction/ipa/dialog/ConsoleTextModalityComponent.h"
+#include "w3c/voiceinteraction/ipa/dialog/ReferenceIPAService.h"
+#include "w3c/voiceinteraction/ipa/external/providerselectionservice/ReferenceProviderSelectionService.h"
 
 using namespace w3c::voiceinteraction::ipa;
 
@@ -38,9 +40,14 @@ int main() {
     LOG4CPLUS_INFO(LOGGER, LOG4CPLUS_TEXT("W3C IPA started"));
 
     // Build up the components
-    std::shared_ptr<w3c::voiceinteraction::ipa::external::providerselectionservice::ReferenceProviderSelectionService> providerSelectionService =
-        std::make_shared<w3c::voiceinteraction::ipa::external::providerselectionservice::ReferenceProviderSelectionService>();
-    w3c::voiceinteraction::ipa::dialog::ReferenceIPAService ipaService(providerSelectionService);
+    std::shared_ptr<dialog::ModalityManager> modalityManager =
+        std::make_shared<dialog::ModalityManager>();
+    std::shared_ptr<dialog::ConsoleTextModalityComponent> console =
+        std::make_shared<dialog::ConsoleTextModalityComponent>();
+    modalityManager->addModalityComponent(console);
+    std::shared_ptr<external::providerselectionservice::ReferenceProviderSelectionService> providerSelectionService =
+        std::make_shared<external::providerselectionservice::ReferenceProviderSelectionService>();
+    dialog::ReferenceIPAService ipaService(providerSelectionService);
 
     // Prepare the request
     //w3c::voiceinteraction::ipa::SessionId sessionId;
@@ -71,11 +78,7 @@ int main() {
         response->getMultiModalOutputs();
     std::shared_ptr<MultiModalOutput> output =
         outputs->getMultiModalOutput(TextMultiModalInput::MODALITY);
-    std::shared_ptr<TextMultiModalOutput> textOutput =
-        std::dynamic_pointer_cast<TextMultiModalOutput>(output);
-    LOG4CPLUS_INFO_FMT(LOGGER,
-                       LOG4CPLUS_TEXT("Received response from ChatGPT: %s"),
-                       textOutput->getTextOutput().c_str());
+    console->handleOutput(output);
 
     return 0;
 }

@@ -45,6 +45,7 @@ public:
 
 private:
     const static std::string ID;
+    /** Logger instance. */
     const static log4cplus::Logger LOGGER;
 };
 

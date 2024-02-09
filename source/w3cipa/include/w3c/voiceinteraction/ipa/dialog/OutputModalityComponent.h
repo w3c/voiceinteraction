@@ -48,7 +48,7 @@ public:
      * @param output the obtained output.
      */
     virtual void handleOutput(
-            const std::shared_ptr<MultiModalOutput> output) = 0;
+            const std::shared_ptr<MultiModalOutput>& output) = 0;
 };
 
 } // namespace dialog
