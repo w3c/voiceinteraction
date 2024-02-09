@@ -15,6 +15,9 @@
 
 #include <memory>
 #include <map>
+#include <string>
+#include <sstream>
+#include <stdexcept>
 
 #include "ModalityComponent.h"
 
@@ -51,21 +54,32 @@ public:
     void addModalityComponent(
             const std::shared_ptr<ModalityComponent> component) {
         const ModalityType& modality = component->getModality();
-        const IOType& ioType = component->getIOType();
-        if (ioType == IOType::INPUT) {
-            inputComponents[modality] = component;
-        } else {
-            outputComponents[modality] = component;
+        const std::list<IOType>& types = component->getSupportedIOTypes();
+        for (IOType type : types) {
+            switch (type) {
+            case IOType::INPUT:
+                addInputModality(modality, component);
+                break;
+            case IOType::OUTPUT:
+                addOutputModality(modality, component);
+                break;
+            default:
+                std::stringstream ss;
+                ss << "Unsupported IO type " << type;
+                std::string error = ss.str();
+                throw new std::invalid_argument(error.c_str());
+            }
         }
     }
 
     /**
-     * Gets the modality component for the specified modality.
+     * Gets the modality components for the specified modality and IO type.
      * @param modality The modality for which to get the modality component.
      * @param ioType The IOType for which to get the modality component.
-     * @return The modality component for the specified modality.
+     * @return The known modality components for the specified modality and
+     *          type.
      */
-    std::shared_ptr<ModalityComponent> getModalityComponent(
+    std::list<std::shared_ptr<ModalityComponent>> getModalityComponents(
             const ModalityType& modality, const IOType& ioType) {
         if (ioType == IOType::INPUT) {
             return inputComponents[modality];
@@ -75,13 +89,49 @@ public:
     }
 private:
     /**
+     * @brief Adds the provided modality component as an input modality
+     * @param modality The modality for which to get the modality component.
+     * @param component the component to add
+     */
+    void addInputModality(const ModalityType& modality,
+                          const std::shared_ptr<ModalityComponent> component) {
+        std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>>::iterator iterator =
+            inputComponents.find(modality);
+        if (iterator == inputComponents.end()) {
+            std::list<std::shared_ptr<ModalityComponent>> emptyList;
+            inputComponents[modality] = emptyList;
+        }
+        std::list<std::shared_ptr<ModalityComponent>>& components =
+            inputComponents.at(modality);
+        components.push_back(component);
+    }
+
+    /**
+     * @brief Adds the provided modality component as an output modality
+     * @param modality The modality for which to get the modality component.
+     * @param component the component to add
+     */
+    void addOutputModality(const ModalityType& modality,
+                           const std::shared_ptr<ModalityComponent> component) {
+        std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>>::iterator iterator =
+            inputComponents.find(modality);
+        if (iterator == inputComponents.end()) {
+            std::list<std::shared_ptr<ModalityComponent>> emptyList;
+            inputComponents[modality] = emptyList;
+        }
+        std::list<std::shared_ptr<ModalityComponent>>& components =
+            inputComponents.at(modality);
+        components.push_back(component);
+    }
+
+    /**
      * The map of known input modality components.
      */
-    std::map<ModalityType, std::shared_ptr<ModalityComponent>> inputComponents;
+    std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>> inputComponents;
     /**
      * The map of known output modality components.
      */
-    std::map<ModalityType, std::shared_ptr<ModalityComponent>> outputComponents;
+    std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>> outputComponents;
 };
 
 } // namespace dialog

@@ -13,8 +13,10 @@
 #ifndef MODALITYCOMPONENT_H
 #define MODALITYCOMPONENT_H
 
-#include "../ModalityType.h"
-#include "IOType.h"
+#include <list>
+
+#include "w3c/voiceinteraction/ipa/ModalityType.h"
+#include "w3c/voiceinteraction/ipa/dialog/IOType.h"
 
 namespace w3c {
 namespace voiceinteraction {
@@ -39,7 +41,6 @@ public:
      * Destroys the object.
      */
     virtual ~ModalityComponent() {
-
     }
 
     /**
@@ -50,10 +51,11 @@ public:
     }
 
     /**
-     * Retrieves the IO type of this modality component.
-     * @return the IO type of this modality component.
+     * Retrieves a list IO type that are supported by this modality component.
+     * @return the supported IO types of this modality component.
      */
-    virtual const IOType getIOType() const = 0;
+    virtual const std::list<IOType> getSupportedIOTypes() const = 0;
+
 private:
     /**
      * The modality of this input.

@@ -15,8 +15,7 @@
 
 #include <memory>
 
-#include "ModalityComponent.h"
-#include "../MultiModalOutput.h"
+#include "w3c/voiceinteraction/ipa/MultiModalOutput.h"
 
 namespace w3c {
 namespace voiceinteraction {
@@ -25,26 +24,25 @@ namespace dialog {
 
 /**
  * A compponent to hand mutlimodal outputs.
+ *
+ * Output modality components are also asked to inherit from
+ * {@link ModalityComponent} and support {@link IOType::OUTPUT}.
+ *
  * @author Dirk Schnelle-Walka
  */
-class OutputModalityComponent : public ModalityComponent {
+class OutputModalityComponent {
 public:
     /**
      * Creates a object.
-     * @param modality the supported modality.
      */
-     OutputModalityComponent(const ModalityType& modality)
-        : ModalityComponent(modality) {
+    OutputModalityComponent() {
     }
 
     /**
-     * Retrieves the IO type of this modality component.
-     * @return {@link IOType#OUTPUT}
+     * @brief Destroys this object
      */
-    virtual const IOType getIOType() const {
-         return IOType::OUTPUT;
+    virtual ~OutputModalityComponent() {
     }
-
     /**
      * Handles the obtained mutlitmodal output.
      * @param output the obtained output.

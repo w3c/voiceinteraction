@@ -15,8 +15,7 @@
 
 #include <memory>
 
-#include "ModalityComponent.h"
-#include "../MultiModalInput.h"
+#include "w3c/voiceinteraction/ipa/MultiModalInput.h"
 
 namespace w3c {
 namespace voiceinteraction {
@@ -26,24 +25,23 @@ namespace dialog {
 }
 /**
  * A compponent to hand mutlimodal inputs.
+ *
+ * Input modality components are also asked to inherit from
+ * {@link ModalityComponent} and support {@link IOType::INPUT}.
  * @author Dirk Schnelle-Walka
  */
-class InputModalityComponent : public ModalityComponent {
+class InputModalityComponent {
 public:
     /**
      * Creates a object.
-     * @param modality the supported modality.
      */
-     InputModalityComponent(modality)
-        : ModalityComponent(modality) {
+    InputModalityComponent() {
     }
 
     /**
-     * Retrieves the IO type of this modality component.
-     * @return {@link IOType#INPUT}.
+     * @brief Destroy this object.
      */
-    virtual const IOType getIOType() const {
-         return IOType::INPUT;
+    virtual ~InputModalityComponent() {
     }
 
     /**
