@@ -42,7 +42,7 @@ void ConsoleTextModalityComponent::handleOutput(
     std::shared_ptr<TextMultiModalOutput> textOutput =
         std::dynamic_pointer_cast<TextMultiModalOutput>(output);
     const std::string& text = textOutput->getTextOutput();
-    std::cout << text.c_str() << std::endl;
+    std::cout << "System: " << text.c_str() << std::endl;
     LOG4CPLUS_INFO_FMT(LOGGER,
                        LOG4CPLUS_TEXT("Received response from ChatGPT: %s"),
                        text.c_str());

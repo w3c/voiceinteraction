@@ -14,6 +14,7 @@
 #define MULTIMODALOUTPUTS_H
 
 #include <memory>
+#include <list>
 #include <map>
 
 #include "ModalityType.h"
@@ -57,8 +58,23 @@ public:
      * @param modality The modality to get the multi modal output for.
      * @return The multi modal output for the given modality.
      */
-    std::shared_ptr<MultiModalOutput> getMultiModalOutput(const ModalityType& modality) {
+    std::shared_ptr<MultiModalOutput> getMultiModalOutput(
+        const ModalityType& modality) {
         return outputs[modality];
+    }
+
+    /**
+     * Retrieves all known modality types.
+     * @return known modality types
+     */
+    std::list<ModalityType> getModalityTypes() const {
+        std::list<ModalityType> types;
+        for (std::map<ModalityType, std::shared_ptr<MultiModalOutput>>::const_iterator iterator = outputs.begin();
+             iterator != outputs.end(); ++iterator) {
+            const ModalityType type = iterator->first;
+            types.push_back(type);
+        }
+        return types;
     }
 private:
     /**

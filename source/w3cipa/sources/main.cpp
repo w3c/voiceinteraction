@@ -73,12 +73,10 @@ int main() {
         return -1;
     }
 
-    // Determine the output
+    // Determine the output and process it
     std::shared_ptr<MultiModalOutputs> outputs =
         response->getMultiModalOutputs();
-    std::shared_ptr<MultiModalOutput> output =
-        outputs->getMultiModalOutput(TextMultiModalInput::MODALITY);
-    console->handleOutput(output);
+    modalityManager->handleOutput(outputs);
 
     return 0;
 }
