@@ -16,6 +16,7 @@
 #include <log4cplus/logger.h>
 
 #include <w3c/voiceinteraction/ipa/dialog/ModalityComponent.h>
+#include <w3c/voiceinteraction/ipa/dialog/InputModalityComponent.h>
 #include <w3c/voiceinteraction/ipa/dialog/OutputModalityComponent.h>
 
 namespace w3c {
@@ -24,11 +25,15 @@ namespace ipa {
 namespace dialog {
 
 class ConsoleTextModalityComponent : public ModalityComponent,
-                                     public OutputModalityComponent {
+    public InputModalityComponent, public OutputModalityComponent {
 public:
     ConsoleTextModalityComponent();
 
     const std::list<IOType> getSupportedIOTypes() const;
+
+    void startInput(std::shared_ptr<InputModalityComponentListener>& listener);
+
+    void stopInput();
 
     void handleOutput(const std::shared_ptr<MultiModalOutput>& output);
 

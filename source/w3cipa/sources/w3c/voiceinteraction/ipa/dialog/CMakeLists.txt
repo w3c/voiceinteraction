@@ -12,4 +12,5 @@
 
 target_sources(${PROJECT_NAME} PRIVATE ReferenceIPAService.cpp
     ReferenceIPAService.h ConsoleTextModalityComponent.cpp
-    ConsoleTextModalityComponent.h)
+    ConsoleTextModalityComponent.h TakeFirstInputModalityComponentListener.h
+    TakeFirstInputModalityComponentListener.cpp)

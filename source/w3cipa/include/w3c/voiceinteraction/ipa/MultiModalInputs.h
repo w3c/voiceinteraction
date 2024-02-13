@@ -47,7 +47,7 @@ public:
      * Adds a multimodal input to the set.
      * @param input The multimodal input to add.
      */
-    void addMultiModalInput(const std::shared_ptr<MultiModalInput> input) {
+    void addMultiModalInput(const std::shared_ptr<MultiModalInput>& input) {
         const ModalityType& modality = input->getModality();
         inputs[modality] = input;
     }

@@ -15,6 +15,7 @@
 #include <log4cplus/loggingmacros.h>
 
 #include "../TextModalityType.h"
+#include "../TextMultiModalInput.h"
 #include "../TextMultiModalOutput.h"
 #include "ConsoleTextModalityComponent.h"
 
@@ -35,6 +36,25 @@ ConsoleTextModalityComponent::ConsoleTextModalityComponent()
 const std::list<IOType> ConsoleTextModalityComponent::getSupportedIOTypes() const {
     std::list<IOType> types = {IOType::INPUT, IOType::OUTPUT };
     return types;
+}
+
+void ConsoleTextModalityComponent::startInput(
+    std::shared_ptr<InputModalityComponentListener>& listener) {
+    std::cout << "User: ";
+    std::cout.flush();
+    LOG4CPLUS_INFO(LOGGER, LOG4CPLUS_TEXT("Input started"));
+    std::string input;
+    std::getline(std::cin, input);
+    LOG4CPLUS_INFO_FMT(LOGGER,
+                       LOG4CPLUS_TEXT("User entered: %s"),
+                       input.c_str());
+    std::shared_ptr<MultiModalInput> multiModalInput =
+        std::make_shared<TextMultiModalInput>(input);
+    listener->onMultiModalInput(multiModalInput);
+}
+
+void ConsoleTextModalityComponent::stopInput() {
+    LOG4CPLUS_INFO(LOGGER, LOG4CPLUS_TEXT("Input started"));
 }
 
 void ConsoleTextModalityComponent::handleOutput(

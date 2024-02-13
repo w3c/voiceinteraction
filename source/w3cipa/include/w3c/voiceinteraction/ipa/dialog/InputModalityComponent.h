@@ -15,16 +15,15 @@
 
 #include <memory>
 
-#include "w3c/voiceinteraction/ipa/MultiModalInput.h"
+#include "w3c/voiceinteraction/ipa/dialog/InputModalityComponentListener.h"
 
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
 namespace dialog {
 
-}
 /**
- * A compponent to hand mutlimodal inputs.
+ * A component to hand mutlimodal inputs.
  *
  * Input modality components are also asked to inherit from
  * {@link ModalityComponent} and support {@link IOType::INPUT}.
@@ -45,10 +44,17 @@ public:
     }
 
     /**
-     * Obtains some multimodal input from this input modality component.
-     * @return the multimodal input.
+     * Starts listening asynchronously for inputs and notify the provided
+     * listner if any input is received from this component.
+     * @param listener the lister to notify
      */
-    virtual const std::shared_ptr<MultiModalInput> getMultiModalInput() = 0;
+    virtual void startInput(
+        std::shared_ptr<InputModalityComponentListener>& listener) = 0;
+
+    /**
+     * Stops listening for inputs.
+     */
+    virtual void stopInput() = 0;
 };
 
 } // namespace dialog
