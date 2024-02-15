@@ -48,7 +48,7 @@ public:
      * Adds a multi modal output to the set.
      * @param output The multi modal output to add.
      */
-    void addMultiModalOutput(const std::shared_ptr<MultiModalOutput> output) {
+    void addMultiModalOutput(const std::shared_ptr<MultiModalOutput>& output) {
         const ModalityType& modality = output->getModality();
         outputs[modality] = output;
     }

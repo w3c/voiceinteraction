@@ -40,6 +40,13 @@ public:
     const static ModalityType MODALITY;
 
 private:
+    /**
+     * Asynchronously started method to capture user input from the console.
+     * @param listener the listener to inform, once the user entered data
+     */
+    void captureInputAsynchronously(
+        std::shared_ptr<InputModalityComponentListener>& listener);
+
     const static std::string ID;
     /** Logger instance. */
     const static log4cplus::Logger LOGGER;

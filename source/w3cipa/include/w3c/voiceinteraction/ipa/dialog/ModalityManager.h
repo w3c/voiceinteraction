@@ -21,6 +21,8 @@
 
 #include "w3c/voiceinteraction/ipa/MultiModalOutputs.h"
 #include "ModalityComponent.h"
+#include "InputModalityComponent.h"
+#include "InputModalityComponentListener.h"
 #include "OutputModalityComponent.h"
 
 namespace w3c {
@@ -84,16 +86,16 @@ public:
      * @throws std::invalid_argument if the type is not supported
      */
     std::list<std::shared_ptr<ModalityComponent>> getModalityComponents(
-            const ModalityType& modality, const IOType& ioType) {
+            const ModalityType& modality, const IOType& ioType) const {
         if (ioType == IOType::INPUT) {
-            std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>>::iterator iterator =
+            std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>>::const_iterator iterator =
                 inputComponents.find(modality);
             if (iterator == inputComponents.end()) {
                 return std::list<std::shared_ptr<ModalityComponent>>();
             }
             return iterator->second;
         } else if (ioType == IOType::OUTPUT){
-            std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>>::iterator iterator =
+            std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>>::const_iterator iterator =
                 outputComponents.find(modality);
             if (iterator == outputComponents.end()) {
                 return std::list<std::shared_ptr<ModalityComponent>>();
@@ -108,10 +110,28 @@ public:
     }
 
     /**
+     * Starts the input for all known modality handlers.
+     * @param listener the listener for inputs.
+     */
+    void startInput(std::shared_ptr<InputModalityComponentListener>& listener) const {
+        for (std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>>::const_iterator iterator =
+            inputComponents.begin(); iterator != inputComponents.end();
+             ++iterator) {
+            std::list<std::shared_ptr<ModalityComponent>> components = iterator->second;
+            for (std::shared_ptr<ModalityComponent> component : components) {
+                std::shared_ptr<dialog::InputModalityComponent> inputComponent =
+                    std::dynamic_pointer_cast<dialog::InputModalityComponent>(component);
+                inputComponent->startInput(listener);
+            }
+
+        }
+    }
+
+    /**
      * Handles the provided multimodal output with all known modality handlers.
      * @param outputs the outputs to process
      */
-    void handleOutput(std::shared_ptr<MultiModalOutputs> outputs) {
+    void handleOutput(const std::shared_ptr<MultiModalOutputs>& outputs) const {
         std::list<ModalityType> outputModalities = outputs->getModalityTypes();
         for (ModalityType outputModality : outputModalities) {
             std::shared_ptr<MultiModalOutput> output =
@@ -132,7 +152,7 @@ private:
      * @param component the component to add
      */
     void addInputModality(const ModalityType& modality,
-                          const std::shared_ptr<ModalityComponent> component) {
+                          const std::shared_ptr<ModalityComponent>& component) {
         std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>>::iterator iterator =
             inputComponents.find(modality);
         if (iterator == inputComponents.end()) {
@@ -150,7 +170,7 @@ private:
      * @param component the component to add
      */
     void addOutputModality(const ModalityType& modality,
-                           const std::shared_ptr<ModalityComponent> component) {
+                           const std::shared_ptr<ModalityComponent>& component) {
         std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>>::iterator iterator =
             outputComponents.find(modality);
         if (iterator == outputComponents.end()) {

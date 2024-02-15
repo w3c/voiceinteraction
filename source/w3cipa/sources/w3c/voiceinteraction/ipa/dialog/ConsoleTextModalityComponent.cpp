@@ -11,6 +11,7 @@
  */
 
 #include <iostream>
+#include <thread>
 
 #include <log4cplus/loggingmacros.h>
 
@@ -39,6 +40,14 @@ const std::list<IOType> ConsoleTextModalityComponent::getSupportedIOTypes() cons
 }
 
 void ConsoleTextModalityComponent::startInput(
+    std::shared_ptr<InputModalityComponentListener>& listener) {
+    std::thread thread([&] {
+        captureInputAsynchronously(listener);
+    });
+    thread.detach();
+}
+
+void ConsoleTextModalityComponent::captureInputAsynchronously(
     std::shared_ptr<InputModalityComponentListener>& listener) {
     std::cout << "User: ";
     std::cout.flush();

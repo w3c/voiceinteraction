@@ -54,7 +54,7 @@ int main() {
     //w3c::voiceinteraction::ipa::AudioData audioData;
     std::shared_ptr<dialog::InputModalityComponentListener> listener =
         std::make_shared<dialog::TakeFirstInputModalityComponentListener>();
-    console->startInput(listener);
+    modalityManager->startInput(listener);
 
     std::shared_ptr<MultiModalInputs> multiModalInputs = listener->getMultiModalInputs();
     //w3c::voiceinteraction::ipa::MetaData metaData;
