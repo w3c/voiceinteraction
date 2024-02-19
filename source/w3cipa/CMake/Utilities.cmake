@@ -10,6 +10,13 @@
 # [1] https://www.w3.org/Consortium/Legal/copyright-software
 #
 
+if(NOT OPEN_SRC_INSTALL_PREFIX OR OPEN_SRC_INSTALL_PREFIX STREQUAL "")
+  set(OPEN_SRC_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/open-source" CACHE PATH "Libraries will be downloaded and built in this directory.")
+else()
+  set(OPEN_SRC_INSTALL_PREFIX ${OPEN_SRC_INSTALL_PREFIX} CACHE PATH "Libraries will be downloaded and built in this directory.")
+endif()
+message(STATUS "Libraries will be downloaded and built in ${OPEN_SRC_INSTALL_PREFIX}")
+
 # only fetch target repo for add_subdirectory later
 function(fetch_repo lib_name)
   set(supported_libs
@@ -46,7 +53,8 @@ function(build_dependency lib_name)
   set(supported_libs
       log4cplus
       nlohmann_json
-      openssl)
+      openssl
+      stduuid)
   list(FIND supported_libs ${lib_name} index)
   if(${index} EQUAL -1)
     message(WARNING "${lib_name} is not supported to build from source")

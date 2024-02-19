@@ -34,6 +34,7 @@ build_dependency(log4cplus -DBUILD_SHARED_LIBS=${BUILD_SHARED_LIBS})
 build_dependency(nlohmann_json)
 #build_dependency(openssl)
 #build_dependency(curl)
+build_dependency(stduuid)
 
 #
 # Find required libraris
@@ -42,6 +43,7 @@ build_dependency(nlohmann_json)
 find_package(PkgConfig REQUIRED)
 find_package(CURL REQUIRED)
 find_package(Log4cplus REQUIRED)
+find_package(stduuid REQUIRED)
 
 #
 # Special handling for nlohmann_json as stated on https://github.com/nlohmann/json/blob/develop/README.md#cmake
@@ -65,10 +67,10 @@ set(Log4cplus ${LOG4CPLUS_LIBRARIES})
 set(requiredlibs ${requiredlibs} ${Log4cplus})
 
 include_directories(${nlohmann_json_SOURCE_DIR}/include)
-
 include_directories(${CURL_INCLUDE_DIR})
-
 set(requiredlibs ${requiredlibs} ${CURL_LIBRARIES})
+
+include_directories(${STDUUID_INCLUDE_DIR})
 
 add_subdirectory(sources)
 

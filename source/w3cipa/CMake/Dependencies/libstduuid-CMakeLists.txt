@@ -1,0 +1,24 @@
+#
+# IPA Reference Implementation: https://github.com/w3c/voiceinteraction
+#
+# Copyright (C) 2024 World Wide Web Consortium. All Rights Reserved.
+#
+# This work is distributed under the W3C Software and Document License [1]
+# in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+# the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+#
+# [1] https://www.w3.org/Consortium/Legal/copyright-software
+#
+
+cmake_minimum_required(VERSION 3.7.0)
+find_program(MAKE_EXE NAMES make)
+
+project(stduuid-download NONE)
+
+include(ExternalProject)
+
+ExternalProject_Add(project_stduuid
+  GIT_REPOSITORY    https://github.com/mariusbancila/stduuid
+  GIT_TAG           v1.2.3
+  PREFIX            ${CMAKE_CURRENT_BINARY_DIR}/build
+  CMAKE_ARGS        -DCMAKE_INSTALL_PREFIX=${OPEN_SRC_INSTALL_PREFIX} -DUUID_BUILD_TESTS=OFF -DUUID_TIME_GENERATOR=ON -DUUID_ENABLE_INSTALL=ON -DUUID_USING_CXX20_SPAN=OFF)
