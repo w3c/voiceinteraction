@@ -63,6 +63,14 @@ public:
     }
 
     /**
+     * Sets the session identifier.
+     * @param sessionIdentifier the new session identifier
+     */
+    void setSessionId(const std::shared_ptr<SessionId>& sessionIdentifier) {
+        sessionId = sessionIdentifier;
+    }
+
+    /**
      * Returns the request id of the request this response belongs to.
      * @return The request id of the request this response belongs to.
      */

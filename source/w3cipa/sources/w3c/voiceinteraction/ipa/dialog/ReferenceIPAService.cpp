@@ -10,18 +10,38 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
+#include <log4cplus/loggingmacros.h>
+
+#include "../UUIDSessionId.h"
+
 #include "ReferenceIPAService.h"
+
 
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
 namespace dialog {
 
+const log4cplus::Logger ReferenceIPAService::LOGGER =
+    log4cplus::Logger::getInstance(LOG4CPLUS_TEXT(
+        "w3c.voiceinteraction.dialog.ReferenceIPAService"));
+
 ReferenceIPAService::ReferenceIPAService(const std::shared_ptr<ProviderSelectionService> &service)
     : IPAService(service) {
 }
 
 const std::shared_ptr<ClientResponse> ReferenceIPAService::processInput(const std::shared_ptr<ClientRequest> &request) {
+    // Check if there is already a session identifer and set one if there is
+    // none
+    const std::shared_ptr<SessionId>& id = request->getSessionId();
+    if (id == nullptr) {
+        std::shared_ptr<SessionId> sessionIdentifier =
+            std::make_shared<UUIDSessionId>();
+        request->setSessionId(sessionIdentifier);
+        LOG4CPLUS_INFO_FMT(LOGGER,
+                           LOG4CPLUS_TEXT("Created new session identifier: %s"),
+                           sessionIdentifier->toString().c_str());
+    }
     return providerSelectionService->processInput(request);
 }
 

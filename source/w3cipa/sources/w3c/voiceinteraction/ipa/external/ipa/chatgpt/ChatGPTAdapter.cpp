@@ -118,9 +118,13 @@ void from_json(const nlohmann::json& j, ChatGPTJSONResponse& response) {
 
 const std::shared_ptr<ClientResponse> ChatGPTAdapter::processInput(
     const std::shared_ptr<ClientRequest> &request) {
+    const std::string sessionId = request->getSessionId()->toString();
+
     CURL* curl = curl_easy_init();
     if(curl == nullptr) {
-        LOG4CPLUS_WARN(LOGGER, LOG4CPLUS_TEXT("Failed to initialize CURL"));
+        LOG4CPLUS_WARN_FMT(LOGGER,
+                           LOG4CPLUS_TEXT("%s Failed to initialize CURL"),
+                           sessionId.c_str());
 
         return nullptr;
     }
@@ -166,16 +170,17 @@ const std::shared_ptr<ClientResponse> ChatGPTAdapter::processInput(
     req.frequency_penalty = 0;
     nlohmann::json data = req;
     std::string dataString = data.dump();
-    LOG4CPLUS_INFO_FMT(LOGGER, LOG4CPLUS_TEXT("Sending request to ChatGPT: %s"),
-                       dataString.c_str());
+    LOG4CPLUS_INFO_FMT(LOGGER,
+                       LOG4CPLUS_TEXT("%s Sending request to ChatGPT: %s"),
+                       sessionId.c_str(), dataString.c_str());
     curl_easy_setopt(curl, CURLOPT_POSTFIELDS, dataString.c_str());
 
     CURLcode res = curl_easy_perform(curl);
     headers = nullptr;
     if (res != CURLE_OK) {
         LOG4CPLUS_WARN_FMT(LOGGER,
-                           LOG4CPLUS_TEXT("Failed to get HTTP response code: %s"),
-                           curl_easy_strerror(res));
+                           LOG4CPLUS_TEXT("%s Failed to get HTTP response code: %s"),
+                           sessionId.c_str(), curl_easy_strerror(res));
         curl_easy_cleanup(curl);
 
         return nullptr;
@@ -185,18 +190,18 @@ const std::shared_ptr<ClientResponse> ChatGPTAdapter::processInput(
     res = curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
     if (res != CURLE_OK){
         LOG4CPLUS_WARN_FMT(LOGGER,
-                           LOG4CPLUS_TEXT("Failed to get HTTP response code: %s"),
-                           curl_easy_strerror(res));
+                           LOG4CPLUS_TEXT("%s Failed to get HTTP response code: %s"),
+                           sessionId.c_str(), curl_easy_strerror(res));
         return nullptr;
         curl_easy_cleanup(curl);
     }
 
     if (http_code != 200) {
         LOG4CPLUS_WARN_FMT(LOGGER,
-                           LOG4CPLUS_TEXT("Failed with HTTP error code: %ld"),
-                           http_code);
-        LOG4CPLUS_WARN_FMT(LOGGER, LOG4CPLUS_TEXT("response: %s"),
-                           response.c_str());
+                           LOG4CPLUS_TEXT("%s Failed with HTTP error code: %ld"),
+                           sessionId.c_str(), http_code);
+        LOG4CPLUS_WARN_FMT(LOGGER, LOG4CPLUS_TEXT("%s response: %s"),
+                           sessionId.c_str(), response.c_str());
         curl_easy_cleanup(curl);
 
         return nullptr;
@@ -208,8 +213,8 @@ const std::shared_ptr<ClientResponse> ChatGPTAdapter::processInput(
     response.erase(0, response.find_first_not_of(" \n\r\t"));
 
     LOG4CPLUS_INFO_FMT(LOGGER,
-                       LOG4CPLUS_TEXT("Received response from ChatGPT: %s"),
-                       response.c_str());
+                       LOG4CPLUS_TEXT("%s Received response from ChatGPT: %s"),
+                       sessionId.c_str(), response.c_str());
 
     // Parse the response as JSON
     nlohmann::json responseData = nlohmann::json::parse(response);

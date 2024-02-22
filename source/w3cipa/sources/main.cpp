@@ -57,7 +57,7 @@ int main() {
     modalityManager->startInput(listener);
 
     std::shared_ptr<MultiModalInputs> multiModalInputs = listener->getMultiModalInputs();
-    //w3c::voiceinteraction::ipa::MetaData metaData;
+    //w3c::voiceinteraction::ipa::MetaData metaData;++++++++++++
     std::shared_ptr<ClientRequest> request =
         std::make_shared<ClientRequest>(nullptr, nullptr, multiModalInputs,
             nullptr, nullptr);

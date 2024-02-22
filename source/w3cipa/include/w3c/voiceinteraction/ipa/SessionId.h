@@ -13,6 +13,8 @@
 #if !defined(SESSION_ID)
 #define SESSION_ID
 
+#include <string>
+
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
@@ -34,6 +36,34 @@ public:
      * Destroys the SessionId.
      */
     virtual ~SessionId() {
+    }
+
+    /**
+     * Creates a human readable representation of this session id.
+     * @return session identifier as a string
+     */
+    virtual const std::string toString() const = 0;
+
+    /**
+     * @brief operator <
+     * Comparison to allow for usage in {@code std::map}s.
+     * @param other the other session identifier
+     * @return {@code true} in case the
+     *          {@code toString() < other.toString()}.
+     */
+    bool operator<(const SessionId& other) const
+    {
+        return toString() < other.toString();
+    }
+
+    /**
+     * @brief operator ==
+     * @param other the other session identifier
+     * @return {@code true} in case the
+     *          {@code toString() == other.toString()}.
+     */
+    bool operator==(const SessionId& other) const {
+        return toString() == other.toString();
     }
 
 };

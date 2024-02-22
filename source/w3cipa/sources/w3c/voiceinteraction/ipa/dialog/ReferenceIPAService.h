@@ -15,6 +15,8 @@
 
 #include <memory>
 
+#include <log4cplus/logger.h>
+
 #include <w3c/voiceinteraction/ipa/external/ipa/IPAService.h>
 
 using namespace w3c::voiceinteraction::ipa::external;
@@ -33,6 +35,10 @@ public:
     ReferenceIPAService(const std::shared_ptr<ProviderSelectionService>& service);
     const std::shared_ptr<ClientResponse> processInput(
         const std::shared_ptr<ClientRequest>& request);
+
+private:
+    /** Logger instance. */
+    const static log4cplus::Logger LOGGER;
 };
 
 } // namespace dialog
