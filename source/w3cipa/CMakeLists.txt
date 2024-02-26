@@ -43,20 +43,8 @@ build_dependency(stduuid)
 find_package(PkgConfig REQUIRED)
 find_package(CURL REQUIRED)
 find_package(Log4cplus REQUIRED)
+find_package(nlohmann_json REQUIRED)
 find_package(stduuid REQUIRED)
-
-#
-# Special handling for nlohmann_json as stated on https://github.com/nlohmann/json/blob/develop/README.md#cmake
-#
-
-set(FETCHCONTENT_QUIET FALSE)
-
-FetchContent_Declare(
-        nlohmann
-        GIT_REPOSITORY  "https://github.com/nlohmann/json"
-        GIT_TAG         "v3.9.1"
-)
-FetchContent_MakeAvailable(nlohmann)
 
 #
 # Add settings to the build envionment
@@ -69,6 +57,8 @@ set(requiredlibs ${requiredlibs} ${Log4cplus})
 include_directories(${nlohmann_json_SOURCE_DIR}/include)
 include_directories(${CURL_INCLUDE_DIR})
 set(requiredlibs ${requiredlibs} ${CURL_LIBRARIES})
+
+include_directories(${NLOHMANN_JSON_INCLUDE_DIR})
 
 include_directories(${STDUUID_INCLUDE_DIR})
 

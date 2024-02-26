@@ -10,16 +10,22 @@
 # [1] https://www.w3.org/Consortium/Legal/copyright-software
 #
 
-cmake_minimum_required(VERSION 3.24)
-
-project(nlohmann_json-download NONE)
-
-include(ExternalProject)
-
-ExternalProject_Add(project_nlohmann
-  GIT_REPOSITORY    https://github.com/nlohmann/json
-  GIT_TAG           v3.9.1
-  PREFIX            ${CMAKE_CURRENT_BINARY_DIR}/build
-  CMAKE_ARGS        -DCMAKE_INSTALL_PREFIX=${OPEN_SRC_INSTALL_PREFIX} -DJSON_BuildTests=ON -DJSON_Install=ON -DJSON_MultipleHeaders=OFF -DJSON_ImplicitConversions=ON
+find_path(NLOHMANN_JSON_INCLUDE_DIR
+  NAMES
+    json.hpp
+  PATH_PREFIXES
+    nlohmann
+  PATHS
+    /usr/local/include
+    /usr/include
+    /opt/local/include
+    /opt/csw/include
+    /opt/include
+    ${OPEN_SRC_INSTALL_PREFIX}/include
 )
+
+if(NLOHMANN_JSON_INCLUDE_DIR)
+  set(NLOHMANN_JSON_INCLUDE_DIR ${NLOHMANN_JSON_INCLUDE_DIR} CACHE STRING "nlohmann_json headers")
+  message("found nlohmann_json.")
+endif()
 
