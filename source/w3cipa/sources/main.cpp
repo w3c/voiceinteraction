@@ -22,7 +22,8 @@
 #include "w3c/voiceinteraction/ipa/dialog/ConsoleTextModalityComponent.h"
 #include "w3c/voiceinteraction/ipa/dialog/ReferenceIPAService.h"
 #include "w3c/voiceinteraction/ipa/dialog/TakeFirstInputModalityComponentListener.h"
-#include "w3c/voiceinteraction/ipa/external/providerselectionservice/ReferenceProviderSelectionService.h"
+#include "w3c/voiceinteraction/ipa/external/ipa/chatgpt/ChatGPTAdapter.h"
+#include "w3c/voiceinteraction/ipa/external/providerselectionservice/ModalityMatchingProviderSelectionStrategy.h"
 
 using namespace w3c::voiceinteraction::ipa;
 
@@ -44,8 +45,16 @@ int main() {
     std::shared_ptr<dialog::ConsoleTextModalityComponent> console =
         std::make_shared<dialog::ConsoleTextModalityComponent>();
     modalityManager->addModalityComponent(console);
-    std::shared_ptr<external::providerselectionservice::ReferenceProviderSelectionService> providerSelectionService =
-        std::make_shared<external::providerselectionservice::ReferenceProviderSelectionService>();
+    std::shared_ptr<providerselectionservice::ModalityMatchingProviderSelectionStrategy> providerSelectionStrategy =
+        std::make_shared<providerselectionservice::ModalityMatchingProviderSelectionStrategy>();
+    std::shared_ptr<ProviderRegistry> registry =
+        std::make_shared<ProviderRegistry>(providerSelectionStrategy);
+    std::shared_ptr<IPAProvider> chatGPT =
+        std::make_shared<ipa::chatgpt::ChatGPTAdapter>();
+    registry->addIPAProvider(chatGPT);
+    std::shared_ptr<ProviderSelectionService> providerSelectionService =
+        std::make_shared<ProviderSelectionService>(registry);
+
     dialog::ReferenceIPAService ipaService(providerSelectionService);
 
     // Prepare the request

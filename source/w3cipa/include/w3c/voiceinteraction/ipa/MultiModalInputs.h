@@ -15,6 +15,7 @@
 
 #include <memory>
 #include <map>
+#include <list>
 
 #include "ModalityType.h"
 #include "MultiModalInput.h"
@@ -55,10 +56,29 @@ public:
     /**
      * Returns the multimodal input for the given modality.
      * @param modality The modality to return.
-     * @return The multimodal input for the given modality.
+     * @return The multimodal input for the given modality, {@code nullptr} if
+     *  the modality could not be found.
      */
-    std::shared_ptr<MultiModalInput> getMultiModalInput(const ModalityType& modality) {
-        return inputs[modality];
+    std::shared_ptr<MultiModalInput> getMultiModalInput(const ModalityType& modality) const {
+        std::map<ModalityType, std::shared_ptr<MultiModalInput>>::const_iterator iterator =
+            inputs.find(modality);
+        if (iterator == inputs.end()) {
+            return nullptr;
+        }
+        return iterator->second;
+    }
+
+    /**
+     * Retrieves all modality types provided in this input.
+     * @return list of all modality types
+     */
+    std::list<ModalityType> getInputModalities() const {
+        std::list<ModalityType> types;
+        for (std::map<ModalityType, std::shared_ptr<MultiModalInput>>::const_iterator iterator = inputs.begin();
+             iterator != inputs.end(); ++iterator) {
+            types.push_back(iterator->first);
+        }
+        return types;
     }
 private:
     /**

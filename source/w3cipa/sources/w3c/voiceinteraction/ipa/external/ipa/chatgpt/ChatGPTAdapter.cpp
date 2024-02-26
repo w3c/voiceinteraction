@@ -14,6 +14,8 @@
 #include <nlohmann/json.hpp>
 #include <log4cplus/loggingmacros.h>
 
+
+#include "../../../TextModalityType.h"
 #include "../../../TextMultiModalInput.h"
 #include "../../../TextMultiModalOutput.h"
 
@@ -32,6 +34,11 @@ const log4cplus::Logger ChatGPTAdapter::LOGGER =
         "w3c.voiceinteraction.ipa.external.ChatGPT"));
 
 ChatGPTAdapter::ChatGPTAdapter() {
+}
+
+const std::list<ModalityType> ChatGPTAdapter::getSupportedModalityTypes() const {
+    std::list<ModalityType> types = { TextModalityType() };
+    return types;
 }
 
 size_t WriteCallback(char* ptr, size_t size, size_t nmemb, void* userdata)

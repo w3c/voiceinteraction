@@ -16,7 +16,8 @@
 #include <memory>
 #include <list>
 
-#include "w3c/voiceinteraction/ipa/external/ipa/IPAProvider.h"
+#include "IPAProvider.h"
+#include "ProviderSelectionStrategy.h"
 
 namespace w3c {
 namespace voiceinteraction {
@@ -34,7 +35,8 @@ public:
     /**
      * Constructs a new object.
      */
-    ProviderRegistry() {
+    ProviderRegistry(const std::shared_ptr<ProviderSelectionStrategy>& strategy)
+        : providerSelectionStrategy(strategy) {
     }
 
     /**
@@ -44,12 +46,30 @@ public:
     }
 
     /**
+     * Adds the IPA provider to the known IPA providers.
+     * @param provider the provider to add
+     */
+    void addIPAProvider(const std::shared_ptr<IPAProvider>& provider) {
+        providers.push_back(provider);
+    }
+
+    /**
      * Returns a list of all registered IPA providers.
-     *
+     * @param request incoming request
      * @return A list of all registered IPA providers.
      */
-    virtual const std::shared_ptr<std::list<std::shared_ptr<IPAProvider>>> getIPAProviders() const = 0;
+    const std::list<std::shared_ptr<IPAProvider>> getIPAProviders(
+        const std::shared_ptr<ClientRequest>& request) {
+        return providerSelectionStrategy->filterIPAProviders(providers,
+                                                             request);
+    }
 
+private:
+    /** The strategy to determine the suitable IPA providers. */
+    std::shared_ptr<ProviderSelectionStrategy> providerSelectionStrategy;
+
+    /** Known IPA providers. */
+    std::list<std::shared_ptr<IPAProvider>> providers;
 };
 
 } // namespace ipa

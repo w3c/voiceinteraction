@@ -43,6 +43,8 @@ public:
         return ID;
     }
 
+    const std::list<ModalityType> getSupportedModalityTypes() const;
+
 private:
     const static std::string ID;
     /** Logger instance. */

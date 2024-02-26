@@ -42,7 +42,12 @@ const std::shared_ptr<ClientResponse> ReferenceIPAService::processInput(const st
                            LOG4CPLUS_TEXT("Created new session identifier: %s"),
                            sessionIdentifier->toString().c_str());
     }
-    return providerSelectionService->processInput(request);
+    std::list<std::shared_ptr<ClientResponse>> responses =
+        providerSelectionService->processInput(request);
+    if (responses.size() == 0) {
+        return nullptr;
+    }
+    return responses.front();
 }
 
 } // namespace dialog

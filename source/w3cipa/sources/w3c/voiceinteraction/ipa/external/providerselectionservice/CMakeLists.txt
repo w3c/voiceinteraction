@@ -10,6 +10,6 @@
 # [1] https://www.w3.org/Consortium/Legal/copyright-software
 #
 
-target_sources(${PROJECT_NAME} PRIVATE  ReferenceProviderRegistry.cpp
-    ReferenceProviderRegistry.h ReferenceProviderSelectionService.cpp
-    ReferenceProviderSelectionService.h)
+target_sources(${PROJECT_NAME} PRIVATE
+    ModalityMatchingProviderSelectionStrategy.cpp
+    ModalityMatchingProviderSelectionStrategy.h)

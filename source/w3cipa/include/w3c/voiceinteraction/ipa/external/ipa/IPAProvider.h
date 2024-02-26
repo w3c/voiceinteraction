@@ -15,6 +15,7 @@
 
 #include <string>
 
+#include "w3c/voiceinteraction/ipa/ModalityType.h"
 #include "w3c/voiceinteraction/ipa/ClientInput.h"
 
 namespace w3c {
@@ -48,6 +49,35 @@ public:
      * @return the IPA provider's ID.
      */
     virtual const std::string getId() const = 0;
+
+    /**
+     * @brief operator <
+     * Comparison to allow for usage in {@code std::map}s.
+     * @param other the other IPA provider
+     * @return {@code true} in case the
+     *          {@code getId() < other.getId()}.
+     */
+    bool operator<(const IPAProvider& other) const
+    {
+        return getId() < other.getId();
+    }
+
+    /**
+     * @brief operator ==
+     * @param other the other IPA provider
+     * @return {@code true} in case the
+     *          {@code getId() == other.getId()}.
+     */
+    bool operator==(const IPAProvider& other) const {
+        return getId() == other.getId();
+    }
+
+    /**
+     * Retrieves a list modality type that are supported as input by this IPA
+     *      provider.
+     * @return the supported input modality types of this modality component.
+     */
+    virtual const std::list<ModalityType> getSupportedModalityTypes() const = 0;
 };
 
 } // namespace ipa
