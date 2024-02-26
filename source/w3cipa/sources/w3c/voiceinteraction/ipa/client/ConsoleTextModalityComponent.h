@@ -15,14 +15,14 @@
 
 #include <log4cplus/logger.h>
 
-#include <w3c/voiceinteraction/ipa/dialog/ModalityComponent.h>
-#include <w3c/voiceinteraction/ipa/dialog/InputModalityComponent.h>
-#include <w3c/voiceinteraction/ipa/dialog/OutputModalityComponent.h>
+#include <w3c/voiceinteraction/ipa/client/ModalityComponent.h>
+#include <w3c/voiceinteraction/ipa/client/InputModalityComponent.h>
+#include <w3c/voiceinteraction/ipa/client/OutputModalityComponent.h>
 
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
-namespace dialog {
+namespace client {
 
 class ConsoleTextModalityComponent : public ModalityComponent,
     public InputModalityComponent, public OutputModalityComponent {
@@ -52,7 +52,7 @@ private:
     const static log4cplus::Logger LOGGER;
 };
 
-} // namespace dialog
+} // namespace client
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c

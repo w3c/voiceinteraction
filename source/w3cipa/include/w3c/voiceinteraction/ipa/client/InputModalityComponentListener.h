@@ -20,7 +20,7 @@
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
-namespace dialog {
+namespace client {
 
 /**
  * A listner for multimodal input events
@@ -55,7 +55,7 @@ public:
     virtual std::shared_ptr<MultiModalInputs> getMultiModalInputs() = 0;
 };
 
-} // namespace dialog
+} // namespace client
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c

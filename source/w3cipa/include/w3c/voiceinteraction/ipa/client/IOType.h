@@ -16,7 +16,7 @@
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
-namespace dialog {
+namespace client {
 
 /**
  * Type of input or output of a {@link ModalityComponent}.
@@ -34,7 +34,7 @@ enum IOType
     OUTPUT = 1
 };
 
-} // namespace dialog
+} // namespace client
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c

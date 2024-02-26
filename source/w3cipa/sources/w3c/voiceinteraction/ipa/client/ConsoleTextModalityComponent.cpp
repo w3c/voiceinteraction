@@ -23,7 +23,7 @@
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
-namespace dialog {
+namespace client {
 
 const ModalityType ConsoleTextModalityComponent::MODALITY = TextModalityType();
 const log4cplus::Logger ConsoleTextModalityComponent::LOGGER =
@@ -77,7 +77,7 @@ void ConsoleTextModalityComponent::handleOutput(
                        text.c_str());
 }
 
-} // namespace dialog
+} // namespace client
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c

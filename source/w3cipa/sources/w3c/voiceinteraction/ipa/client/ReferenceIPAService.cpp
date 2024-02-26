@@ -20,7 +20,7 @@
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
-namespace dialog {
+namespace client {
 
 const log4cplus::Logger ReferenceIPAService::LOGGER =
     log4cplus::Logger::getInstance(LOG4CPLUS_TEXT(
@@ -50,7 +50,7 @@ const std::shared_ptr<ClientResponse> ReferenceIPAService::processInput(const st
     return responses.front();
 }
 
-} // namespace dialog
+} // namespace client
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c

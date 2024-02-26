@@ -28,7 +28,7 @@
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
-namespace dialog {
+namespace client {
 
 /**
  * A component that manages multiple modalities.
@@ -119,8 +119,8 @@ public:
              ++iterator) {
             std::list<std::shared_ptr<ModalityComponent>> components = iterator->second;
             for (std::shared_ptr<ModalityComponent> component : components) {
-                std::shared_ptr<dialog::InputModalityComponent> inputComponent =
-                    std::dynamic_pointer_cast<dialog::InputModalityComponent>(component);
+                std::shared_ptr<client::InputModalityComponent> inputComponent =
+                    std::dynamic_pointer_cast<client::InputModalityComponent>(component);
                 inputComponent->startInput(listener);
             }
 
@@ -136,11 +136,11 @@ public:
         for (ModalityType outputModality : outputModalities) {
             std::shared_ptr<MultiModalOutput> output =
                 outputs->getMultiModalOutput(outputModality);
-            std::list<std::shared_ptr<dialog::ModalityComponent>> outputComponents =
-                getModalityComponents(outputModality, dialog::IOType::OUTPUT);
-            for (std::shared_ptr<dialog::ModalityComponent> outputComponent : outputComponents) {
-                std::shared_ptr<dialog::OutputModalityComponent> outputModality =
-                    std::dynamic_pointer_cast<dialog::OutputModalityComponent>(outputComponent);
+            std::list<std::shared_ptr<client::ModalityComponent>> outputComponents =
+                getModalityComponents(outputModality, client::IOType::OUTPUT);
+            for (std::shared_ptr<client::ModalityComponent> outputComponent : outputComponents) {
+                std::shared_ptr<client::OutputModalityComponent> outputModality =
+                    std::dynamic_pointer_cast<client::OutputModalityComponent>(outputComponent);
                 outputModality->handleOutput(output);
             }
         }
@@ -192,7 +192,7 @@ private:
     std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>> outputComponents;
 };
 
-} // namespace dialog
+} // namespace client
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c

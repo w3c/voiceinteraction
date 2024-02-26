@@ -16,12 +16,12 @@
 #include <mutex>
 #include <condition_variable>
 
-#include <w3c/voiceinteraction/ipa/dialog/InputModalityComponentListener.h>
+#include <w3c/voiceinteraction/ipa/client/InputModalityComponentListener.h>
 
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
-namespace dialog {
+namespace client {
 
 /**
  * A listener for inputs from input modality components that takes the
@@ -44,7 +44,7 @@ private:
     std::shared_ptr<MultiModalInput> multiModalInput;
 };
 
-} // namespace dialog
+} // namespace client
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c

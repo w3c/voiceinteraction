@@ -15,7 +15,7 @@
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
-namespace dialog {
+namespace client {
 
 TakeFirstInputModalityComponentListener::TakeFirstInputModalityComponentListener() {
 }
@@ -39,7 +39,7 @@ std::shared_ptr<MultiModalInputs> TakeFirstInputModalityComponentListener::getMu
     return multiModalInputs;
 }
 
-} // namespace dialog
+} // namespace client
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c

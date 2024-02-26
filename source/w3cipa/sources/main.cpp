@@ -17,11 +17,11 @@
 #include <log4cplus/configurator.h>
 #include <log4cplus/initializer.h>
 
-#include <w3c/voiceinteraction/ipa/dialog/ModalityManager.h>
+#include <w3c/voiceinteraction/ipa/client/ModalityManager.h>
 
-#include "w3c/voiceinteraction/ipa/dialog/ConsoleTextModalityComponent.h"
-#include "w3c/voiceinteraction/ipa/dialog/ReferenceIPAService.h"
-#include "w3c/voiceinteraction/ipa/dialog/TakeFirstInputModalityComponentListener.h"
+#include "w3c/voiceinteraction/ipa/client/ConsoleTextModalityComponent.h"
+#include "w3c/voiceinteraction/ipa/client/ReferenceIPAService.h"
+#include "w3c/voiceinteraction/ipa/client/TakeFirstInputModalityComponentListener.h"
 #include "w3c/voiceinteraction/ipa/external/ipa/chatgpt/ChatGPTAdapter.h"
 #include "w3c/voiceinteraction/ipa/external/providerselectionservice/ModalityMatchingProviderSelectionStrategy.h"
 
@@ -40,10 +40,10 @@ int main() {
     LOG4CPLUS_INFO(LOGGER, LOG4CPLUS_TEXT("W3C IPA started"));
 
     // Build up the components
-    std::shared_ptr<dialog::ModalityManager> modalityManager =
-        std::make_shared<dialog::ModalityManager>();
-    std::shared_ptr<dialog::ConsoleTextModalityComponent> console =
-        std::make_shared<dialog::ConsoleTextModalityComponent>();
+    std::shared_ptr<client::ModalityManager> modalityManager =
+        std::make_shared<client::ModalityManager>();
+    std::shared_ptr<client::ConsoleTextModalityComponent> console =
+        std::make_shared<client::ConsoleTextModalityComponent>();
     modalityManager->addModalityComponent(console);
     std::shared_ptr<providerselectionservice::ModalityMatchingProviderSelectionStrategy> providerSelectionStrategy =
         std::make_shared<providerselectionservice::ModalityMatchingProviderSelectionStrategy>();
@@ -55,14 +55,14 @@ int main() {
     std::shared_ptr<ProviderSelectionService> providerSelectionService =
         std::make_shared<ProviderSelectionService>(registry);
 
-    dialog::ReferenceIPAService ipaService(providerSelectionService);
+    client::ReferenceIPAService ipaService(providerSelectionService);
 
     // Prepare the request
     //w3c::voiceinteraction::ipa::SessionId sessionId;
     //w3c::voiceinteraction::ipa::RequestId requestId;
     //w3c::voiceinteraction::ipa::AudioData audioData;
-    std::shared_ptr<dialog::InputModalityComponentListener> listener =
-        std::make_shared<dialog::TakeFirstInputModalityComponentListener>();
+    std::shared_ptr<client::InputModalityComponentListener> listener =
+        std::make_shared<client::TakeFirstInputModalityComponentListener>();
     modalityManager->startInput(listener);
 
     std::shared_ptr<MultiModalInputs> multiModalInputs = listener->getMultiModalInputs();

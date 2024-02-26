@@ -15,12 +15,12 @@
 
 #include <memory>
 
-#include "w3c/voiceinteraction/ipa/dialog/InputModalityComponentListener.h"
+#include "w3c/voiceinteraction/ipa/client/InputModalityComponentListener.h"
 
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
-namespace dialog {
+namespace client {
 
 /**
  * A component to hand mutlimodal inputs.
@@ -57,7 +57,7 @@ public:
     virtual void stopInput() = 0;
 };
 
-} // namespace dialog
+} // namespace client
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c

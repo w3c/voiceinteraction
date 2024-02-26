@@ -30,7 +30,7 @@ source_group("Reference Implementation" FILES ${projectSRC})
 
 add_executable(${PROJECT_NAME} ${projectSRC}  ${w3cIPAFramework})
 add_subdirectory(w3c/voiceinteraction/ipa)
-add_subdirectory(w3c/voiceinteraction/ipa/dialog)
+add_subdirectory(w3c/voiceinteraction/ipa/client)
 add_subdirectory(w3c/voiceinteraction/ipa/external/providerselectionservice)
 add_subdirectory(w3c/voiceinteraction/ipa/external/ipa/chatgpt)
 target_link_libraries(${PROJECT_NAME} ${requiredlibs})

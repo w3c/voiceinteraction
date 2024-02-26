@@ -16,12 +16,12 @@
 #include <list>
 
 #include "w3c/voiceinteraction/ipa/ModalityType.h"
-#include "w3c/voiceinteraction/ipa/dialog/IOType.h"
+#include "w3c/voiceinteraction/ipa/client/IOType.h"
 
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
-namespace dialog {
+namespace client {
 
 /**
  * A compponent to hand mutlimodal input or output.
@@ -63,7 +63,7 @@ private:
     ModalityType modality;
 };
 
-} // namespace dialog
+} // namespace client
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c
