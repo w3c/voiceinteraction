@@ -37,7 +37,7 @@ build_dependency(nlohmann_json)
 build_dependency(stduuid)
 
 #
-# Find required libraris
+# Find required libraries
 #
 
 find_package(PkgConfig REQUIRED)

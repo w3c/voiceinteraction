@@ -10,6 +10,9 @@
 # [1] https://www.w3.org/Consortium/Legal/copyright-software
 #
 
+find_package(PkgConfig)
+pkg_check_modules(PC_STDUUID QUIET stduuid)
+
 find_path(STDUUID_INCLUDE_DIR
   NAMES
     uuid.h
@@ -27,3 +30,10 @@ if(STDUUID_INCLUDE_DIR)
   message("found stduuid.")
 endif()
 
+include(FindPackageHandleStandardArgs)
+
+# handle the QUIETLY and REQUIRED arguments and set STDUUID_FOUND to TRUE if
+# all listed variables are TRUE
+FIND_PACKAGE_HANDLE_STANDARD_ARGS(stduuid DEFAULT_MSG STDUUID_INCLUDE_DIR)
+
+MARK_AS_ADVANCED(STDUUID_INCLUDE_DIR)
