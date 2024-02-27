@@ -55,6 +55,9 @@ function(build_dependency lib_name)
       nlohmann_json
       openssl
       stduuid)
+  set(header_only_libs
+      nlohmann_json
+      stduuid)
   list(FIND supported_libs ${lib_name} index)
   if(${index} EQUAL -1)
     message(WARNING "${lib_name} is not supported to build from source")
@@ -76,22 +79,27 @@ function(build_dependency lib_name)
     if (${lib_name} STREQUAL "openssl")
       set(lib_file_name ssl)
     endif()
-    if (${header_file_name} STREQUAL "nlohmann_json")
-      set(header_file_name "nlohmann")
-    endif()
-    if (${header_file_name} STREQUAL "stduuid")
-      set(header_file_name "uuid.h")
-    endif()
 
-    find_path(header_found
-        NAMES ${header_file_name}
-        PATHS ${OPEN_SRC_INSTALL_PREFIX}/include
-        NO_DEFAULT_PATH)
-    find_library(
-      target_found
-      NAMES ${lib_file_name}
-      PATHS ${OPEN_SRC_INSTALL_PREFIX}/lib
-      NO_DEFAULT_PATH)
+    list(FIND header_only_libs ${lib_name} index)
+    if(NOT ${index} EQUAL -1)
+        if (${header_file_name} STREQUAL "nlohmann_json")
+          set(header_file_name "nlohmann")
+        endif()
+        if (${header_file_name} STREQUAL "stduuid")
+          set(header_file_name "uuid.h")
+        endif()
+
+        find_path(header_found
+            NAMES ${header_file_name}
+            PATHS ${OPEN_SRC_INSTALL_PREFIX}/include
+            NO_DEFAULT_PATH)
+    else()
+        find_library(
+          target_found
+          NAMES ${lib_file_name}
+          PATHS ${OPEN_SRC_INSTALL_PREFIX}/lib
+          NO_DEFAULT_PATH)
+    endif()
   endif()
 
   if(target_found OR header_found)
