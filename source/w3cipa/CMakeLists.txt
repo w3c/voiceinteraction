@@ -24,17 +24,19 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(W3CIPA_OPEN_SOURCE_SRC ${CMAKE_CURRENT_SOURCE_DIR}/open-source)
 
-message(STATUS "dependencies install path is ${W3CIPA_OPEN_SOURCE_SRC}")
-
+set(ENV{PKG_CONFIG_PATH}
+          "$ENV{PKG_CONFIG_PATH}:${OPEN_SRC_INSTALL_PREFIX}/lib/pkgconfig")
 #
 # Build dependent libraries
 #
 
+message(STATUS "Begin building dependencies.")
 build_dependency(log4cplus -DBUILD_SHARED_LIBS=${BUILD_SHARED_LIBS})
 build_dependency(nlohmann_json)
 #build_dependency(openssl)
 #build_dependency(curl)
 build_dependency(stduuid)
+message(STATUS "Finished building dependencies.")
 
 #
 # Find required libraries

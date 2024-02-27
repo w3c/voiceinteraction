@@ -62,6 +62,7 @@ function(build_dependency lib_name)
   endif()
 
   set(target_found NOTFOUND)
+  set(header_found NOTFOUND)
 
   if (${lib_name} STREQUAL "autoconf" OR ${lib_name} STREQUAL "automake")
     find_program(
@@ -71,10 +72,21 @@ function(build_dependency lib_name)
       NO_DEFAULT_PATH)
   else()
     set(lib_file_name ${lib_name})
+    set(header_file_name ${lib_name})
     if (${lib_name} STREQUAL "openssl")
       set(lib_file_name ssl)
     endif()
+    if (${header_file_name} STREQUAL "nlohmann_json")
+      set(header_file_name "nlohmann")
+    endif()
+    if (${header_file_name} STREQUAL "stduuid")
+      set(header_file_name "uuid.h")
+    endif()
 
+    find_path(header_found
+        NAMES ${header_file_name}
+        PATHS ${OPEN_SRC_INSTALL_PREFIX}/include
+        NO_DEFAULT_PATH)
     find_library(
       target_found
       NAMES ${lib_file_name}
@@ -82,7 +94,7 @@ function(build_dependency lib_name)
       NO_DEFAULT_PATH)
   endif()
 
-  if(target_found)
+  if(target_found OR header_found)
     message(STATUS "${lib_name} already built")
     return()
   endif()
