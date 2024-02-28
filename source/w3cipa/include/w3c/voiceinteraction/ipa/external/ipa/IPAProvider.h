@@ -16,7 +16,7 @@
 #include <string>
 
 #include "w3c/voiceinteraction/ipa/ModalityType.h"
-#include "w3c/voiceinteraction/ipa/ClientInput.h"
+#include "w3c/voiceinteraction/ipa/ExternalClientInput.h"
 
 namespace w3c {
 namespace voiceinteraction {
@@ -28,7 +28,7 @@ namespace ipa {
  * Interface for IPA providers.
  * @author Dirk Schnelle-Walka
  */
-class IPAProvider : public ClientInput
+class IPAProvider : public ExternalClientInput
 {
 
 public:

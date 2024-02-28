@@ -36,7 +36,7 @@ public:
     virtual ~ChatGPTAdapter() {
     }
 
-    const std::shared_ptr<ClientResponse> processInput(
+    const std::shared_ptr<ExternalClientResponse> processInput(
         const std::shared_ptr<ClientRequest>& request);
 
     const std::string getId() const {

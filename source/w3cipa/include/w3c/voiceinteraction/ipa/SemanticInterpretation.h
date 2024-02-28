@@ -1,4 +1,4 @@
-﻿/*
+/*
  * IPA Reference Implementation: https://github.com/w3c/voiceinteraction
  *
  * Copyright (C) 2024 World Wide Web Consortium. All Rights Reserved.
@@ -10,44 +10,32 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
-#if !defined(CLIENTINPUT_H)
-#define CLIENTINPUT_H
-
-#include <memory>
-
-#include "ClientRequest.h"
-#include "ClientResponse.h"
+#if !defined(SEMANTI_INTERPRETATION_H)
+#define SEMANTI_INTERPRETATION_H
 
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
 
 /**
- * The interface for the client input.
+ * Semantic interpretation of an utterance.
  * @author Dirk Schnelle-Walka
  */
-class ClientInput
+class SemanticInterpretation
 {
 
 public:
     /**
-     * Constructs a new object.
+     * Constructs a new request id.
      */
-    ClientInput() {
+    SemanticInterpretation() {
     }
 
     /**
-     * Destroys the object.
+     * Destroys the request id.
      */
-    virtual ~ClientInput() {
-    };
-
-    /**
-     * Processes the input from the client.
-     * @param request the request coming from the client
-     */
-    virtual const std::shared_ptr<ClientResponse> processInput(
-        const std::shared_ptr<ClientRequest>& request) =0;
+    virtual ~SemanticInterpretation() {
+    }
 
 };
 
@@ -55,4 +43,4 @@ public:
 } // namespace voiceinteraction
 } // namespace w3c
 
-#endif // !defined(CLIENTINPUT_H)
+#endif // !defined(SEMANTI_INTERPRETATION_H)

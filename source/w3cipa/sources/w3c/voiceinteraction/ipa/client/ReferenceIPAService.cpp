@@ -42,12 +42,19 @@ const std::shared_ptr<ClientResponse> ReferenceIPAService::processInput(const st
                            LOG4CPLUS_TEXT("Created new session identifier: %s"),
                            sessionIdentifier->toString().c_str());
     }
-    std::list<std::shared_ptr<ClientResponse>> responses =
+    std::list<std::shared_ptr<ExternalClientResponse>> responses =
         providerSelectionService->processInput(request);
     if (responses.size() == 0) {
         return nullptr;
     }
-    return responses.front();
+
+    const std::shared_ptr<ExternalClientResponse>& externalResponse =
+        responses.front();
+    std::shared_ptr<ClientResponse> response =
+        std::make_shared<ClientResponse>(externalResponse->getSessionId(),
+        externalResponse->getRequestId(),
+        externalResponse->getMultiModalOutputs(), nullptr, nullptr);
+    return response;
 }
 
 } // namespace client

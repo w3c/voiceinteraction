@@ -16,7 +16,7 @@
 #include <list>
 
 #include "w3c/voiceinteraction/ipa/ClientRequest.h"
-#include "w3c/voiceinteraction/ipa/ClientResponse.h"
+#include "w3c/voiceinteraction/ipa/ExternalClientResponse.h"
 #include "w3c/voiceinteraction/ipa/external/ipa/ProviderRegistry.h"
 
 using namespace w3c::voiceinteraction::ipa::external::ipa;
@@ -55,14 +55,14 @@ public:
      * @param request incoming request.
      * @return list of responses from the IPA providers
      */
-    const std::list<std::shared_ptr<ClientResponse>> processInput(
+    const std::list<std::shared_ptr<ExternalClientResponse>> processInput(
         const std::shared_ptr<ClientRequest>& request) {
-        std::list<std::shared_ptr<ClientResponse>> responses;
+        std::list<std::shared_ptr<ExternalClientResponse>> responses;
         std::list<std::shared_ptr<IPAProvider>> providers =
             providerRegistry->getIPAProviders(request);
         for (std::shared_ptr<IPAProvider> provider : providers) {
             // TODO check to call the IPA providers asynchronously
-            std::shared_ptr<ClientResponse> response =
+            std::shared_ptr<ExternalClientResponse> response =
                 provider->processInput(request);
             if (response != nullptr) {
                 responses.push_back(response);

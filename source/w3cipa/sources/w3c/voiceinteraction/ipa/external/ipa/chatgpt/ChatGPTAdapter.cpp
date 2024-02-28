@@ -123,7 +123,7 @@ void from_json(const nlohmann::json& j, ChatGPTJSONResponse& response) {
     j.at("choices").get_to(response.choices);
 }
 
-const std::shared_ptr<ClientResponse> ChatGPTAdapter::processInput(
+const std::shared_ptr<ExternalClientResponse> ChatGPTAdapter::processInput(
     const std::shared_ptr<ClientRequest> &request) {
     const std::string sessionId = request->getSessionId()->toString();
 
@@ -232,9 +232,9 @@ const std::shared_ptr<ClientResponse> ChatGPTAdapter::processInput(
     std::shared_ptr<MultiModalOutputs> outputs =
         std::make_shared<MultiModalOutputs>();
     outputs->addMultiModalOutput(output);
-    std::shared_ptr<ClientResponse> out =
-        std::make_shared<ClientResponse>(request->getSessionId(),
-            request->getRequestId(), outputs, nullptr, nullptr);
+    std::shared_ptr<ExternalClientResponse> out =
+        std::make_shared<ExternalClientResponse>(request->getSessionId(),
+            request->getRequestId(), outputs, nullptr);
 
     return out;
 }

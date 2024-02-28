@@ -10,43 +10,43 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
-#if !defined(CLIENTINPUT_H)
-#define CLIENTINPUT_H
+#if !defined(EXTERNAL_CLIENTINPUT_H)
+#define EXTERNAL_CLIENTINPUT_H
 
 #include <memory>
 
 #include "ClientRequest.h"
-#include "ClientResponse.h"
+#include "ExternalClientResponse.h"
 
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
 
 /**
- * The interface for the client input.
+ * The interface for the external client input.
  * @author Dirk Schnelle-Walka
  */
-class ClientInput
+class ExternalClientInput
 {
 
 public:
     /**
      * Constructs a new object.
      */
-    ClientInput() {
+    ExternalClientInput() {
     }
 
     /**
      * Destroys the object.
      */
-    virtual ~ClientInput() {
+    virtual ~ExternalClientInput() {
     };
 
     /**
      * Processes the input from the client.
      * @param request the request coming from the client
      */
-    virtual const std::shared_ptr<ClientResponse> processInput(
+    virtual const std::shared_ptr<ExternalClientResponse> processInput(
         const std::shared_ptr<ClientRequest>& request) =0;
 
 };
@@ -55,4 +55,4 @@ public:
 } // namespace voiceinteraction
 } // namespace w3c
 
-#endif // !defined(CLIENTINPUT_H)
+#endif // !defined(EXTERNAL_CLIENTINPUT_H)
