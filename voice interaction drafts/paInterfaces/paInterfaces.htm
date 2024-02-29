@@ -1,17 +1,17 @@
 <html dir="ltr" about="" property="dcterms:language" content="en" xmlns="http://www.w3.org/1999/xhtml" prefix="bibo: http://purl.org/ontology/bibo/" typeof="bibo:Document"><head>
         <title>Intelligent Personal Assistant Interfaces</title>
-        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 
-        <link href="../cg-draft.css" rel="stylesheet" type="text/css" charset="utf-8">
+        <link href="../cg-draft.css" rel="stylesheet" type="text/css" charset="utf-8"/>
     </head>
     <body><div class="head">
             <p><a href="http://www.w3.org/">
-                    <img width="72" height="48" src="http://www.w3.org/Icons/w3c_home" alt="W3C"></a></p>
+                    <img width="72" height="48" src="http://www.w3.org/Icons/w3c_home" alt="W3C"/></a></p>
             <h1 property="dcterms:title" class="title" id="title">Intelligent Personal Assistant Architecture</h1>
             <h2 property="bibo:subtitle" id="subtitle">Intelligent Personal Assistant Interfaces</h2>
             <dl>
                 <dt>Latest version</dt>
-                <dd>Last modified: February 15, 2023 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a> (GitHub repository)<br/>
+                <dd>Last modified: February 29, 2024 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a> (GitHub repository)<br/>
 					<a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">HTML rendered version</a></dd>             
                 <dt>Editor</dt>
 					<dd>Dirk Schnelle-Walka<br/>
@@ -20,7 +20,7 @@
             <p class="copyright">Copyright © 2022 the Contributors to the Voice Interaction Community Group, 
                 published by the  <a href="http://www.w3.org/community/voiceinteraction/">Voice Interaction Community Group</a> 
                 under the <a href="https://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a>. A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/">summary</a> is available.</p>
-            <hr></div>
+            <hr/></div>
 
         <h2 id="abstract">Abstract</h2>
 
@@ -120,15 +120,15 @@
             This architecture follows a traditional partitioning of conversational systems, with separate components for speech recognition, natural language understanding, dialog management, natural language generation, and audio output, (audio files or text to speech). This architecture does not rule out combining some of these components in specific systems. 
         </p>
 		
-		<p>This architecture aims at serving, among others, the following most popular high-level use cases for IPAs
+		<p>This architecture aims at serving, among others, the following most popular high-level use cases for IPAs</p>
 			<ol>
 				<li>Question Answering or Information Retrieval</a>
 				<li>Executing local and/or remote services to accomplish tasks</li>
 			</ol>
-		This is supported by a flexible architecture that supports dynamically adding local and remote services or knowledge sources such as data providers. Moreover, it is possible
+		<p>This is supported by a flexible architecture that supports dynamically adding local and remote services or knowledge sources such as data providers. Moreover, it is possible
 		to include other IPAs, with the same architecture, and forward requests to them, similar to the principle of a russian doll (omitting the Client Layer).
 		All this describes the capabilities of the IPA. These extensions may be selected from a
-		standardized marketplace. For the reminder of this document, we consider an IPA that is extendable via such a marketplace.</p>
+		standardized marketplace. For the reminder of this document, we consider an IPA that is extendible via such a marketplace.</p>
 
 		<p>The following table lists the IPA main use cases and related examples that are used in this document</p>
 		<table>
@@ -145,18 +145,23 @@
 				<td>Flight reservation</td>
 			</tr>
 		</table>
-		
+        <p>These main use cases are shown in the following figure</p>
+        <img src="Main-IPA-Use-Cases.svg" alt="Main IPA Use Cases" style="width: 40%; height: auto;"/>
+        		
 		<p>Not all components may be needed for actual implementations, some may be omitted completely. However, we note them here to provide a more complete picture. 
-		This architecture comprises three layers that are detailed in the following sections
+		This architecture comprises three layers that are detailed in the following sections</p>
         <ol>
             <li><a href="#clientlayer">Client Layer</a></li>
             <li><a href="#dialoglayer">Dialog Layer</a></li>
             <li><a href="#datalayer">External Data / Services / IPA Providers</a></li>
         </ol>
-		Actual implementations may want to distinguish more than these layers. The assignment to the layers is not considered to be strict so that some of the components may be shifted
+		<p>Actual implementations may want to distinguish more than these layers. The assignment to the layers is not considered to be strict so that some of the components may be shifted
 		to other layers as needed. This view only reflects a view that the Community Group regard as ideal and to show the intended separation of concerns.</p>
 
-		<img src="IPA-Major-Components.svg" alt="IPA Major Components" style="width: 100%; height: auto;"/>
+		<img src="IPA-Major-Components.svg" alt="IPA Major Components" style="width: 50%; height: auto;"/>
+		
+		<p>According to these components they are assigned to the packages shown below.</p> 
+        <img src="IPA-Package-Hierarchy.svg" alt="IPA Package Hierarchy" style="width: 50%; height: auto;"/>
 
         <h1 id="highlevelinterfaces"><span class="secno">4. </span>High Level Interfaces</h1>
 
@@ -183,7 +188,7 @@
 			</ol>
 		</p>
 			
-		<h2 id="if-clientinput"><span class="secno">4.1 </span></span><font face="Segoe UI">Interface Client Input</font></span></h2>
+		<h2 id="if-clientinput"><span class="secno">4.1 </span><span><font face="Segoe UI">Interface Client Input</font></span></h2>
 		<p>This interface describes the data that is sent from the <a href="#ipaclient">IPA Client</a> to the <a href="#ipaservice">IPA Service</a>.
 			The following table details the data that should be considered for this interface
 			in the method <b>processInput</b></p>
