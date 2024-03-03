@@ -16,7 +16,7 @@
         <h2 property="bibo:subtitle" id="subtitle">Architecture and Potential for Standardization Version 1.3</h2>
         <dl>
             <dt>Latest version</dt>
-            <dd>Last modified: March 1, 2023 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm</a> (GitHub repository) </dd>
+            <dd>Last modified: March 3, 2023 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm</a> (GitHub repository) </dd>
             <dd><a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm">HTML rendered version</a></dd>
             <dt>Editors</dt>
             <dd>Dirk Schnelle-Walka, modality.ai<br/>
@@ -36,16 +36,24 @@
 
     <h2 id="abstract">Abstract</h2>
 
-        <p>This document describes a general architecture of Intelligent Personal Assistants and explores the potential for standardization. It is meant to be a first
-			structured exploration of Intelligent Personal Assistants by identifying the components and their tasks. Subsequent work is expected to detail the interaction among the
-			identified components and how they ought to perform their task as well as their actual tasks respectively. This document may need to be updated if any changes result of that detailing work.
-			It extends and refines the description of the previous versions <a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture/paArchitecture-1.2.htm">Architecture and Potential for Standardization Version 1.2</a>.
-            The changes primarily consist of clarifications and additional architectural details in new and expanded figures, include input and output data paths. 
-        </p>
+    <p>This document describes a general architecture of Intelligent Personal
+        Assistants and explores the potential for standardization. It is meant
+        to be a first structured exploration of Intelligent Personal Assistants
+        by identifying the components and their tasks. Subsequent work is
+        expected to detail the interaction among the identified components and
+        how they ought to perform their task as well as their actual tasks
+        respectively. This document may need to be updated if any changes
+        result of that detailing work.
+        It extends and refines the description of the previous versions
+        <a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture/paArchitecture-1.2.htm">Architecture and Potential for Standardization Version 1.2</a>.
+        The changes primarily consist of clarifications and additional
+        architectural details in new and expanded figures, include input and
+        output data paths. 
+    </p>
 
-        <h2>Status of This Document</h2>
+    <h2>Status of This Document</h2>
 
-        <p><em>This specification was published by the 
+    <p><em>This specification was published by the 
                 <a href="http://www.w3.org/community/voiceinteraction/">Voice Interaction Community Group</a>. 
                 It is not a W3C Standard nor is it on the W3C Standards Track. 
                 Please note that under the 
@@ -537,23 +545,35 @@
 			</table>
 
         <h5 id="session"><span class="secno">3.2.4.2 </span>Session</h5>
-        <p>Conceptually, multiple sessions can be active in parallel. Dialog execution can be governed by a sessions,
-           e.g. to free resources of ASR and NLU engines when a session expires. 
-           Linguistic phenomena, like anaphoric references and ellipsis, are expected to work within a session. 
-           The selected <a href="#provider">IPA Providers</a> or the <a href="#dialogmanager">Dialog Manager</a> may have leading roles for this task.</p>
-		<p>A session begins when the user starts to interact with an IPA, may continue over multiple interaction turns, i.e. an input and output cycle,
-			and ends if the user does not start a new input within a predefined
-			time span. This includes the possibility that a session may persist over multiple requests.</p>
-
+        <p>Dialog execution can be governed by sessions,
+            e.g. to free resources of ASR and NLU engines when a session
+            expires. Linguistic phenomena, like anaphoric references and
+            ellipsis, are expected to work within a session. Conceptually, 
+            multiple sessions can be active in parallel on a single IPA
+            depending on the capabilities of the IPA.  
+            The selected <a href="#provider">IPA Providers</a> or the
+            <a href="#dialogmanager">Dialog Manager</a> may have leading roles
+            for the task of session management. </p>
+        <p>A session begins when the user starts to interact with an IPA, 
+            may continue over multiple interaction turns, i.e. an input and
+            output cycle, and ends</p>
+        <ul>
+            <li>if the user explicitly ends the interaction with the IPA,</li>
+            <li>if the IPA ends the interaction with the user, e.g. by
+                saying "Goodbye", or</li>
+            <li>if the user does not start a new input within a predefined
+                time span. This includes the possibility that a session may
+                persist over multiple requests.</li>
+        </ul>
 
         <h4 id="context"><span class="secno">3.2.5 </span>Context</h4>
 		<img src="context-component.svg" style="float:right" width="auto" height="auto" />
 		<p>During the interaction with a user all kinds of information are collected and managed in the so-called conversation context or dialog context. 
 		It contains all the short and long term information needed to handle a conversation and thus may exceed the concept of a <a href="#session">session</a>. 
 		It also serves for context-based reasoning with the help of
-		the <a href="#knowledge-graph">Knowledge Graph</a> and to generate output for the output to the user <a href"=#nlg">NLG</a>. It is not possible to capture
+		the <a href="#knowledge-graph">Knowledge Graph</a> and to generate output for the output to the user <a href="=#nlg">NLG</a>. It is not possible to capture
 		each and every aspect of what context should comprise as discussions about context are likely to end up in trying to explain the world. For the sake of this 
-		specification it should be possible to deal with the following characteristics
+		specification it should be possible to deal with the following characteristics</p>
 		<ul>
 		    <li>The dialog context is enhanced to build interaction with the user (grounding) from spoken and other input.</li>
 			<li>The Context supports the <a href="#dialogmanager">Dialog Manager</a> to get the needed information for a current dialog</li>
@@ -564,7 +584,7 @@
 			<li>The Context may make use of the <a href="#serviceregistry">External Service Registry</a> to include external knowledge from <a href="#dataproviders">External Data Providers</a></li>
 			<li>The Context may make use of the <a href="#selectionservice">Provider Selection Service</a> to include external knowledge from <a href="dataproviders">Data Providers</a></li>
 			<li>The Context may provide external knowledge temporarily to the <a href="#knowledge-graph">Knowledge Graph</a> to be considered in reasoning.</li>
-		</ul></p>
+		</ul>
 
         <h5 id="history"><span class="secno">3.2.5.1 </span>History</h5>
 		<p>The Dialog History mainly stores the past dialog events per user. Dialog events include users’ transcriptions, semantic interpretations and resulting actions.
