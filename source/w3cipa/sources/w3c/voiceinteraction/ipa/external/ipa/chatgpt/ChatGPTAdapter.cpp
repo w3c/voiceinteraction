@@ -104,7 +104,7 @@ const std::shared_ptr<ExternalClientResponse> ChatGPTAdapter::processInput(
     req.presence_penalty = 0;
     req.frequency_penalty = 0;
     nlohmann::json data = req;
-    std::string dataString = data.dump();
+    std::string dataString = data.dump(2, ' ');
     LOG4CPLUS_INFO_FMT(LOGGER,
                        LOG4CPLUS_TEXT("%s %s sending request to ChatGPT: %s"),
                        sessionId.c_str(), requestId.c_str(),
