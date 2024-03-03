@@ -30,7 +30,7 @@ const std::list<std::shared_ptr<ipa::IPAProvider>> ModalityMatchingProviderSelec
     const std::shared_ptr<MultiModalInputs> inputs =
         request->getMultiModalInputs();
     std::list<ModalityType> requestedTypes = inputs->getInputModalities();
-    for (std::shared_ptr<ipa::IPAProvider> provider : providers) {
+    for (const std::shared_ptr<ipa::IPAProvider>& provider : providers) {
         std::list<ModalityType> supportedTypes =
             provider->getSupportedModalityTypes();
         if (isModalitySupported(requestedTypes, supportedTypes)) {
@@ -44,8 +44,8 @@ const std::list<std::shared_ptr<ipa::IPAProvider>> ModalityMatchingProviderSelec
 bool ModalityMatchingProviderSelectionStrategy::isModalitySupported(
     const std::list<ModalityType>& requestedTypes,
     const std::list<ModalityType>& supportedTypes) const {
-    for (ModalityType requestedType : requestedTypes) {
-        for (ModalityType supportedType : supportedTypes) {
+    for (const ModalityType& requestedType : requestedTypes) {
+        for (const ModalityType& supportedType : supportedTypes) {
             if (requestedType == supportedType) {
                 return true;
             }

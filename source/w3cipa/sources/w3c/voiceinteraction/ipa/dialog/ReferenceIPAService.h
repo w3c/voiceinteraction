@@ -24,7 +24,7 @@ using namespace w3c::voiceinteraction::ipa::external;
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
-namespace client {
+namespace dialog {
 
 /**
  * @brief A reference implementation of an IPA Service
@@ -41,7 +41,7 @@ private:
     const static log4cplus::Logger LOGGER;
 };
 
-} // namespace client
+} // namespace dialog
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c

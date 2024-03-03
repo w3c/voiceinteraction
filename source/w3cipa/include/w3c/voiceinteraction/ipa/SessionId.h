@@ -20,7 +20,14 @@ namespace voiceinteraction {
 namespace ipa {
 
 /**
- * The SessionId interface is used to identify a session.
+ * @brief The SessionId interface is used to identify a session.
+ *
+ * Dialog execution can be governed by a sessions, e.g. to free resources of
+ * ASR and NLU engines when a session expires. Linguistic phenomena, like
+ * anaphoric references and ellipsis, are expected to work within a session. The
+ * selected IPA Providers or the Dialog Manager may have leading roles for this
+ * task.
+ *
  * @author Dirk Schnelle-Walka
  */
 class SessionId
@@ -42,7 +49,7 @@ public:
      * Creates a human readable representation of this session id.
      * @return session identifier as a string
      */
-    virtual const std::string toString() const = 0;
+    virtual const std::string& toString() const = 0;
 
     /**
      * @brief operator <

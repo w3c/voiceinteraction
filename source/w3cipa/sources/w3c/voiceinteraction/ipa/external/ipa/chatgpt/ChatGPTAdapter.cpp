@@ -20,6 +20,7 @@
 #include "../../../TextMultiModalOutput.h"
 
 #include "ChatGPTAdapter.h"
+#include "ChatGPTMessage.h"
 
 namespace w3c {
 namespace voiceinteraction {
@@ -33,14 +34,6 @@ const log4cplus::Logger ChatGPTAdapter::LOGGER =
     log4cplus::Logger::getInstance(LOG4CPLUS_TEXT(
         "w3c.voiceinteraction.ipa.external.ChatGPT"));
 
-ChatGPTAdapter::ChatGPTAdapter() {
-}
-
-const std::list<ModalityType> ChatGPTAdapter::getSupportedModalityTypes() const {
-    std::list<ModalityType> types = { TextModalityType() };
-    return types;
-}
-
 size_t WriteCallback(char* ptr, size_t size, size_t nmemb, void* userdata)
 {
     size_t num_bytes = size * nmemb;
@@ -49,89 +42,24 @@ size_t WriteCallback(char* ptr, size_t size, size_t nmemb, void* userdata)
     return num_bytes;
 }
 
-struct ChatGPTMessage {
-    std::string role;
-    std::string content;
-};
-
-void to_json(nlohmann::json& j, const ChatGPTMessage& message) {
-    j = nlohmann::json {
-        {"role", message.role},
-        {"content", message.content}
-    };
+ChatGPTAdapter::ChatGPTAdapter() {
 }
 
-void from_json(const nlohmann::json& j, ChatGPTMessage& message) {
-    j.at("role").get_to(message.role);
-    j.at("content").get_to(message.content);
-}
-
-struct ChatGPTJSONRequest {
-    std::string model;
-    std::vector<ChatGPTMessage> messages;
-    int temperature;
-    int max_tokens;
-    int top_p;
-    int frequency_penalty;
-    int presence_penalty;
-
-};
-
-void to_json(nlohmann::json& j, const ChatGPTJSONRequest& request) {
-    j = nlohmann::json {
-        {"model", request.model},
-        {"messages", request.messages},
-        {"temperature", request.temperature},
-        {"max_tokens", request.max_tokens},
-        {"top_p", request.top_p},
-        {"frequency_penalty", request.frequency_penalty},
-        {"presence_penalty", request.presence_penalty}
-    };
-}
-
-void from_json(const nlohmann::json& j, ChatGPTJSONRequest& request) {
-    j.at("model").get_to(request.model);
-    j.at("temperature").get_to(request.temperature);
-    j.at("max_tokens").get_to(request.max_tokens);
-    j.at("top_p").get_to(request.top_p);
-    j.at("frequency_penalty").get_to(request.frequency_penalty);
-    j.at("presence_penalty").get_to(request.presence_penalty);
-}
-
-struct ChatGPTChoice {
-    int index;
-    ChatGPTMessage message;
-    std::string finishReason;
-};
-
-void from_json(const nlohmann::json& j, ChatGPTChoice& choices) {
-    j.at("index").get_to(choices.index);
-    j.at("message").get_to(choices.message);
-    j.at("finish_reason").get_to(choices.finishReason);
-}
-
-struct ChatGPTJSONResponse {
-    std::string id;
-    std::string object;
-    std::string model;
-    std::vector<ChatGPTChoice> choices;
-};
-
-void from_json(const nlohmann::json& j, ChatGPTJSONResponse& response) {
-    j.at("id").get_to(response.id);
-    j.at("object").get_to(response.object);
-    j.at("choices").get_to(response.choices);
+const std::list<ModalityType> ChatGPTAdapter::getSupportedModalityTypes() const {
+    std::list<ModalityType> types = { TextModalityType() };
+    return types;
 }
 
 const std::shared_ptr<ExternalClientResponse> ChatGPTAdapter::processInput(
     const std::shared_ptr<ClientRequest> &request) {
-    const std::string sessionId = request->getSessionId()->toString();
+    const std::string& sessionId = request->getSessionId()->toString();
+    const std::string& requestId = request->getRequestId()->toString();
 
     CURL* curl = curl_easy_init();
     if(curl == nullptr) {
         LOG4CPLUS_WARN_FMT(LOGGER,
-                           LOG4CPLUS_TEXT("%s Failed to initialize CURL"),
-                           sessionId.c_str());
+                           LOG4CPLUS_TEXT("%s %s failed to initialize CURL"),
+                           sessionId.c_str(), requestId.c_str());
 
         return nullptr;
     }
@@ -160,7 +88,7 @@ const std::shared_ptr<ExternalClientResponse> ChatGPTAdapter::processInput(
     ChatGPTJSONRequest req;
     req.model = std::string("gpt-3.5-turbo");
     ChatGPTMessage systemMessage {"system",
-                                "You are a junkie who is tired of this world."};
+                                "You are a standards maniac."};
     std::shared_ptr<MultiModalInputs> multiModalInputs =
         request->getMultiModalInputs();
     std::shared_ptr<MultiModalInput> input =
@@ -178,16 +106,18 @@ const std::shared_ptr<ExternalClientResponse> ChatGPTAdapter::processInput(
     nlohmann::json data = req;
     std::string dataString = data.dump();
     LOG4CPLUS_INFO_FMT(LOGGER,
-                       LOG4CPLUS_TEXT("%s Sending request to ChatGPT: %s"),
-                       sessionId.c_str(), dataString.c_str());
+                       LOG4CPLUS_TEXT("%s %s sending request to ChatGPT: %s"),
+                       sessionId.c_str(), requestId.c_str(),
+                       dataString.c_str());
     curl_easy_setopt(curl, CURLOPT_POSTFIELDS, dataString.c_str());
 
     CURLcode res = curl_easy_perform(curl);
     headers = nullptr;
     if (res != CURLE_OK) {
         LOG4CPLUS_WARN_FMT(LOGGER,
-                           LOG4CPLUS_TEXT("%s Failed to get HTTP response code: %s"),
-                           sessionId.c_str(), curl_easy_strerror(res));
+                           LOG4CPLUS_TEXT("%s %s failed to get HTTP response code: %s"),
+                           sessionId.c_str(), requestId.c_str(),
+                           curl_easy_strerror(res));
         curl_easy_cleanup(curl);
 
         return nullptr;
@@ -197,18 +127,20 @@ const std::shared_ptr<ExternalClientResponse> ChatGPTAdapter::processInput(
     res = curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
     if (res != CURLE_OK){
         LOG4CPLUS_WARN_FMT(LOGGER,
-                           LOG4CPLUS_TEXT("%s Failed to get HTTP response code: %s"),
-                           sessionId.c_str(), curl_easy_strerror(res));
+                           LOG4CPLUS_TEXT("%s %s failed to get HTTP response code: %s"),
+                           sessionId.c_str(), requestId.c_str(),
+                           curl_easy_strerror(res));
         return nullptr;
         curl_easy_cleanup(curl);
     }
 
     if (http_code != 200) {
         LOG4CPLUS_WARN_FMT(LOGGER,
-                           LOG4CPLUS_TEXT("%s Failed with HTTP error code: %ld"),
-                           sessionId.c_str(), http_code);
-        LOG4CPLUS_WARN_FMT(LOGGER, LOG4CPLUS_TEXT("%s response: %s"),
-                           sessionId.c_str(), response.c_str());
+                           LOG4CPLUS_TEXT("%s %s failed with HTTP error code: %ld"),
+                           sessionId.c_str(), requestId.c_str(), http_code);
+        LOG4CPLUS_WARN_FMT(LOGGER, LOG4CPLUS_TEXT("%s %s response: %s"),
+                           sessionId.c_str(), requestId.c_str(),
+                           response.c_str());
         curl_easy_cleanup(curl);
 
         return nullptr;
@@ -220,8 +152,8 @@ const std::shared_ptr<ExternalClientResponse> ChatGPTAdapter::processInput(
     response.erase(0, response.find_first_not_of(" \n\r\t"));
 
     LOG4CPLUS_INFO_FMT(LOGGER,
-                       LOG4CPLUS_TEXT("%s Received response from ChatGPT: %s"),
-                       sessionId.c_str(), response.c_str());
+                       LOG4CPLUS_TEXT("%s %s received response from ChatGPT: %s"),
+                       sessionId.c_str(), requestId.c_str(), response.c_str());
 
     // Parse the response as JSON
     nlohmann::json responseData = nlohmann::json::parse(response);

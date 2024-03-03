@@ -25,6 +25,7 @@ UUIDSessionId::UUIDSessionId() {
     uuids::uuid_random_generator gen{generator};
 
     id = gen();
+    idString = uuids::to_string(id);
 }
 
 UUIDSessionId::UUIDSessionId(const UUIDSessionId& sessionId)
@@ -35,8 +36,8 @@ void UUIDSessionId::operator=(const UUIDSessionId& other) {
     id = other.id;
 }
 
-const std::string UUIDSessionId::toString() const {
-    return uuids::to_string(id);
+const std::string& UUIDSessionId::toString() const {
+    return idString;
 }
 
 } // namespace ipa

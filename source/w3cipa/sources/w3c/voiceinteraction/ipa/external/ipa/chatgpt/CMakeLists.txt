@@ -10,4 +10,5 @@
 # [1] https://www.w3.org/Consortium/Legal/copyright-software
 #
 
-target_sources(${PROJECT_NAME} PRIVATE ChatGPTAdapter.cpp ChatGPTAdapter.h)
+target_sources(${PROJECT_NAME} PRIVATE ChatGPTAdapter.cpp ChatGPTAdapter.h
+    ChatGPTMessage.h)

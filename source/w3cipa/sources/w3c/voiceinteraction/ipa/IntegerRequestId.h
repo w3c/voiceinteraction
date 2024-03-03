@@ -10,45 +10,32 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
-#if !defined(REQUEST_ID_H)
-#define REQUEST_ID_H
+#ifndef INTEGERREQUESTID_H
+#define INTEGERREQUESTID_H
 
 #include <string>
+
+#include <w3c/voiceinteraction/ipa/RequestId.h>
 
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
 
-/**
- * The request id is used to identify a request within a session. It can used to
- * match a request with a response.
- * @author Dirk Schnelle-Walka
- */
-class RequestId
-{
-
+class IntegerRequestId : public RequestId {
 public:
-    /**
-     * Constructs a new request id.
-     */
-    RequestId() {
-    }
+    IntegerRequestId();
 
-    /**
-     * Destroys the request id.
-     */
-    virtual ~RequestId() {
-    }
+    const std::string& toString() const;
 
-    /**
-     * Creates a human readable representation of this request id.
-     * @return request identifier as a string
-     */
-    virtual const std::string& toString() const = 0;
+private:
+    static long nextId();
+
+    long id;
+    std::string idString;
 };
 
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c
 
-#endif // !defined(REQUEST_ID_H)
+#endif // INTEGERREQUESTID_H

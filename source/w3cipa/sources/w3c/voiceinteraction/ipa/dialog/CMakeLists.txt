@@ -1,4 +1,4 @@
-﻿#
+#
 # IPA Reference Implementation: https://github.com/w3c/voiceinteraction
 #
 # Copyright (C) 2024 World Wide Web Consortium. All Rights Reserved.
@@ -10,7 +10,5 @@
 # [1] https://www.w3.org/Consortium/Legal/copyright-software
 #
 
-target_sources(${PROJECT_NAME} PRIVATE TextModalityType.cpp TextModalityType.h
-    TextMultiModalInput.cpp TextMultiModalInput.h TextMultiModalOutput.cpp
-    TextMultiModalOutput.h UUIDSessionId.cpp UUIDSessionId.h
-    IntegerRequestId.cpp IntegerRequestId.h)
+target_sources(${PROJECT_NAME} PRIVATE ReferenceIPAService.cpp
+    ReferenceIPAService.h)

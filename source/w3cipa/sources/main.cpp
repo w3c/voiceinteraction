@@ -19,8 +19,9 @@
 
 #include <w3c/voiceinteraction/ipa/client/ModalityManager.h>
 
+#include "w3c/voiceinteraction/ipa/IntegerRequestId.h"
 #include "w3c/voiceinteraction/ipa/client/ConsoleTextModalityComponent.h"
-#include "w3c/voiceinteraction/ipa/client/ReferenceIPAService.h"
+#include "w3c/voiceinteraction/ipa/dialog/ReferenceIPAService.h"
 #include "w3c/voiceinteraction/ipa/client/TakeFirstInputModalityComponentListener.h"
 #include "w3c/voiceinteraction/ipa/external/ipa/chatgpt/ChatGPTAdapter.h"
 #include "w3c/voiceinteraction/ipa/external/providerselectionservice/ModalityMatchingProviderSelectionStrategy.h"
@@ -55,11 +56,12 @@ int main() {
     std::shared_ptr<ProviderSelectionService> providerSelectionService =
         std::make_shared<ProviderSelectionService>(registry);
 
-    client::ReferenceIPAService ipaService(providerSelectionService);
+    dialog::ReferenceIPAService ipaService(providerSelectionService);
 
     // Prepare the request
     //w3c::voiceinteraction::ipa::SessionId sessionId;
-    //w3c::voiceinteraction::ipa::RequestId requestId;
+    std::shared_ptr<w3c::voiceinteraction::ipa::RequestId> requestId =
+        std::make_shared<IntegerRequestId>();
     //w3c::voiceinteraction::ipa::AudioData audioData;
     std::shared_ptr<client::InputModalityComponentListener> listener =
         std::make_shared<client::TakeFirstInputModalityComponentListener>();
@@ -68,7 +70,7 @@ int main() {
     std::shared_ptr<MultiModalInputs> multiModalInputs = listener->getMultiModalInputs();
     //w3c::voiceinteraction::ipa::MetaData metaData;++++++++++++
     std::shared_ptr<ClientRequest> request =
-        std::make_shared<ClientRequest>(nullptr, nullptr, multiModalInputs,
+        std::make_shared<ClientRequest>(nullptr, requestId, multiModalInputs,
             nullptr, nullptr);
 
     // Actually make the request

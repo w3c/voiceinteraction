@@ -10,7 +10,6 @@
 # [1] https://www.w3.org/Consortium/Legal/copyright-software
 #
 
-target_sources(${PROJECT_NAME} PRIVATE ReferenceIPAService.cpp
-    ReferenceIPAService.h ConsoleTextModalityComponent.cpp
+target_sources(${PROJECT_NAME} PRIVATE ConsoleTextModalityComponent.cpp
     ConsoleTextModalityComponent.h TakeFirstInputModalityComponentListener.h
     TakeFirstInputModalityComponentListener.cpp)

@@ -38,11 +38,14 @@ public:
      */
     void operator=(const UUIDSessionId& other);
 
-    const std::string toString() const;
+    const std::string& toString() const;
 
 private:
     /** The UUID. */
     uuids::uuid id;
+
+    /** String representation of the id. */
+    std::string idString;
 };
 
 } // namespace ipa
