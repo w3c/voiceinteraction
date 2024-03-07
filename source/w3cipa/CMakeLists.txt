@@ -54,16 +54,21 @@ find_package(stduuid REQUIRED)
 
 include_directories(${LOG4CPLUS_INCLUDE_DIR})
 set(Log4cplus ${LOG4CPLUS_LIBRARIES})
-set(requiredlibs ${requiredlibs} ${Log4cplus})
+set(REQUIRED_LIBS ${REQUIRED_LIBS} ${Log4cplus})
 
 include_directories(${nlohmann_json_SOURCE_DIR}/include)
 include_directories(${CURL_INCLUDE_DIR})
-set(requiredlibs ${requiredlibs} ${CURL_LIBRARIES})
+set(REQUIRED_LIBS ${REQUIRED_LIBS} ${CURL_LIBRARIES})
 
 include_directories(${NLOHMANN_JSON_INCLUDE_DIR})
 
 include_directories(${STDUUID_INCLUDE_DIR})
 
-add_subdirectory(sources)
+#
+# W3C IPA Framework and Reference Implementation
+#
+
+add_subdirectory(w3cipaframework)
+add_subdirectory(w3cipareferenceimplementation)
 
 
