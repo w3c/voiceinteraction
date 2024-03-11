@@ -16,7 +16,7 @@
         <h2 property="bibo:subtitle" id="subtitle">Architecture and Potential for Standardization Version 1.3</h2>
         <dl>
             <dt>Latest version</dt>
-            <dd>Last modified: March 7, 2023 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm</a> (GitHub repository) </dd>
+            <dd>Last modified: March 11, 2023 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm</a> (GitHub repository) </dd>
             <dd><a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm">HTML rendered version</a></dd>
             <dt>Editors</dt>
             <dd>Dirk Schnelle-Walka, modality.ai<br/>
@@ -65,18 +65,20 @@
             <li><a href="#introduction">Introduction</a></li>
             <li><a href="#problemStatement">Problem Statement</a></li>
             <li><a href="#architecture">Architecture</a>
-				<ol>
-					<li><a href="#clientlayer">Client Layer</a>
-					<li><a href="#dialoglayer">Dialog Layer</a></li>
-					<li><a href="#datalayer">External Data / Services / IPA Providers Layer</a></li>
-				</ol></li>
+                <ol>
+                    <li><a href="#clientlayer">Client Layer</a>
+                    <li><a href="#dialoglayer">Dialog Layer</a></li>
+                    <li><a href="#datalayer">External Data / Services / IPA Providers Layer</a></li>
+                </ol></li>
+            <li><a href="#errorhandling">Error Handling</a></li>
             <li><a href="#walkthrough">Use Case Walk Through</a></li>
             <li><a href="#potential">Potential for Standardization</a></li>
+            <li><a href="#footnotes">Footnotes</a>
             <li><a href="#potential">Appendix</a>
-				<ol>
-					<li><a href="#acknowledgements">Acknowledgements</a></li>
-					<li><a href="#abbreviations">Abbreviations</a></li>
-				</ol></li>
+                <ol>
+                    <li><a href="#acknowledgements">Acknowledgments</a></li>
+                    <li><a href="#abbreviations">Abbreviations</a></li>
+                </ol></li>
         </ol>
 
         <!-- OddPage -->
@@ -894,7 +896,41 @@
 			<figcaption>Fig. 2 Complete architecture of an IPA</figcaption>
 		</figure>
 
-        <h2 id="walkthrough"><span class="secno">4. </span>Use Case Walk Through</h2>
+        <h2 id="errorhandling"><span class="secno">4. </span>Error Handling</h2>
+        <p>Errors may occur anywhere in the processing chain of the IPA. 
+            The following gives an overview of how they are handled.</p>
+        
+        <p>Along the processing path errors may occur</p>
+        <ol>
+            <li>in the response of a call to another component</li>
+            <li>inside this component to be further processed by subsequent
+                components</li>
+        </ol>
+
+        <p>As a consequence of the latter, components must be prepared to
+            receive an error message or a list thereof instead of the actually
+            expected data. Errors should only be forwarded in case there are
+            no valid continuations that have a chance to provide a response
+            to the IPA user.</p>
+            
+        <p>In case multiple errors are received the component should try to</p>
+        <ul>
+            <li>identify the most severe error and forward this error along
+                with a list of less severe errors</li>
+            <li>derive a new higher-level error from the received errors and 
+                forward this</li>
+        </ul>
+        
+        <p>An error message should contain at least</p>
+        <ul>
+            <li>an error code that could be transformed into a reasonable IPA
+                response matching the conversation</li>
+            <li>an id of the component that has produced the error</li>
+            <li>a human-readable error message for logging and debugging</li>
+            <li>an optional list of errors that have been received from
+                subsequent components</li></ul>
+
+        <h2 id="walkthrough"><span class="secno">5. </span>Use Case Walk Through</h2>
 		<p>This section needs to be updated to match the changes as introduced above.</p>
 		
         <p>This section expands on the use case above, filling in details according to the sample architecture.</p>
@@ -931,14 +967,14 @@ Booking a hotel could also involve interacting with the conference's IPA to
 find out about a designated conference hotel or special rates. 
 </p>
 
-<h3 id="detailed-walkthrough"><span class="secno">4.1 Detailed Walkthrough</span></h3>
+<h3 id="detailed-walkthrough"><span class="secno">5.1 Detailed Walkthrough</span></h3>
 <p>
     This section provides a detailed walkthrough that aligns the steps in the use case interaction with the architecture. It covers only the part from the example above that the user
 	asks for a flight travel with a dedicated airline. This very basic example assumes that
 	this is the first request to IPA and that there is a suitable dialog ready that matches the user's request. It may also vary, e.g., depending on the used Dialog Strategy and other optional items that may actually result in different flows. 
 	The walkthrough is split into two parts	for the input path and for the output path.
 
-    <h4 id="provider"><span class="secno">4.1.1 </span>Walkthrough for the Input Path</h4>
+    <h4 id="provider"><span class="secno">5.1.1 </span>Walkthrough for the Input Path</h4>
 
 	We begin with the case where the user's request can be handled by one of the internal Dialogs in the Dialog box.
 	The input side is illustrated in the following figure
@@ -968,7 +1004,7 @@ find out about a designated conference hotel or special rates.
 		<li>The Provider Registry forwards the text "I want to book a flight on American" from the utterance and the GPS coordinates for Mountain View to the received list of
 			IPA Providers in parallel to determine meaning which completes the remote input path.</li>
     </ol>
-    <h4 id="provider"><span class="secno">4.1.2 </span>Walkthrough for the Output Path</h4>
+    <h4 id="provider"><span class="secno">5.1.2 </span>Walkthrough for the Output Path</h4>
 	The output path begins where the local NLU and IPA Providers are able to deliver their results. In both paths the best match for the intents and entities based on the received
 	data have been identified.
 	This path is illustrated in the following figure
@@ -1022,7 +1058,7 @@ find out about a designated conference hotel or special rates.
 	</ol>
 </p>
 
-        <h2 id="potential"><span class="secno">5. </span>Potential for Standardization</h2>
+        <h2 id="potential"><span class="secno">7. </span>Potential for Standardization</h2>
 
         <p>The general architecture of IPAs described in this document should be detailed in subsequent documents. Further work must be done to
 		<ol>
@@ -1137,15 +1173,24 @@ find out about a designated conference hotel or special rates.
 		<p>Out of scope of a possible standardization is the implementation inside the IPA Providers and potential interoperability among them.
 			However, it eases the the integration of their exposed services or even allow to use services across different providers. Actual IPA providers may make use of any
 			upcoming standard to enhance their deployments as a marketplace of intelligent services.</p>
-			<h2 id="footnotes"><span class="secno">6. </span> Footnotes</h2>
-			
-			<sup id="fn1">1. The Russian Doll principle is a recursion technique that is used in computer science, mathematics, logic, grammar, and art. It is a problem-solving strategy for dealing with complexity, where the same control structure always occurs on multiple, infinitely nested levels. The principle is illustrated in the form of Russian dolls (matryoshkas) that are nested such that the same homomorphic structure appears on each level. Summarized from Pfiffner, M. (2022). Russian Dolls. In: The Neurology of Business. Management for Professionals. Springer, Cham. https://doi.org/10.1007/978-3-031-14260-4_5.
 
-<a href="#ref1" title="Jump back to footnote 1 in the text.">↩</a></sup>
+        <h2 id="footnotes"><span class="secno">7. </span> Footnotes</h2>
 
-        <h2 id="appendix"><span class="secno">7. </span>Appendix</h2>
+        <sup id="fn1">1. The Russian Doll principle is a recursion technique
+            that is used in computer science, mathematics, logic, grammar, and
+            art. It is a problem-solving strategy for dealing with complexity,
+            where the same control structure always occurs on multiple, 
+            infinitely nested levels. The principle is illustrated in the form 
+            of Russian dolls (matryoshkas) that are nested such that the same
+            homomorphic structure appears on each level. Summarized from 
+            Pfiffner, M. (2022). Russian Dolls. In: The Neurology of Business. 
+            Management for Professionals. Springer, Cham. 
+            https://doi.org/10.1007/978-3-031-14260-4_5.
+            <a href="#ref1" title="Jump back to footnote 1 in the text.">↩</a></sup>
 
-		<h3 id="acknowledgements"><span class="secno">7.1 Acknowledgements</span></h3>
+        <h2 id="appendix"><span class="secno">8. </span>Appendix</h2>
+
+		<h3 id="acknowledgements"><span class="secno">8.1 Acknowledgements</span></h3>
 		
 		<p>
 			This version of the document was written with the participation of members of the <a href="https://www.w3.org/community/voiceinteraction/">W3C Voice Interaction Community Group</a>. 
