@@ -31,20 +31,35 @@ public:
     /**
      * Constructs a new request id.
      */
-    RequestId() {
-    }
+    RequestId();
 
     /**
      * Destroys the request id.
      */
-    virtual ~RequestId() {
-    }
+    virtual ~RequestId();
 
     /**
      * Creates a human readable representation of this request id.
      * @return request identifier as a string
      */
     virtual const std::string& toString() const = 0;
+
+    /**
+     * @brief operator <
+     * Comparison to allow for usage in {@code std::map}s.
+     * @param other the other session identifier
+     * @return {@code true} in case the
+     *          {@code toString() < other.toString()}.
+     */
+    bool operator<(const RequestId& other) const;
+
+    /**
+     * @brief operator ==
+     * @param other the other session identifier
+     * @return {@code true} in case the
+     *          {@code toString() == other.toString()}.
+     */
+    bool operator==(const RequestId& other) const;
 };
 
 } // namespace ipa

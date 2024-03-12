@@ -41,58 +41,42 @@ public:
                    const std::shared_ptr<RequestId>& requestIdentifier,
                    const std::shared_ptr<MultiModalOutputs>& multiModalOutputs,
                    const std::shared_ptr<AudioData>& audioDataToSend,
-                   const std::shared_ptr<MetaData> metaDataToSend)
-        : sessionId(sessionIdentifier), requestId(requestIdentifier),
-            outputs(multiModalOutputs), audioData(audioDataToSend),
-            metaData(metaDataToSend) {
-    }
+                   const std::shared_ptr<MetaData> metaDataToSend);
 
     /**
      * Destroys the object.
      */
-    virtual ~ClientResponse() {
-
-    }
+    virtual ~ClientResponse();
 
     /**
      * Returns the session id of the session this response belongs to.
      * @return The session id of the session this response belongs to.
      */
-    const std::shared_ptr<SessionId> getSessionId() const {
-        return sessionId;
-    }
+    const std::shared_ptr<SessionId> getSessionId() const;
 
     /**
      * Returns the request id of the request this response belongs to.
      * @return The request id of the request this response belongs to.
      */
-    const std::shared_ptr<RequestId>& getRequestId() const {
-        return requestId;
-    }
+    const std::shared_ptr<RequestId>& getRequestId() const;
 
     /**
      * Returns the audio data to be played to the user.
      * @return The audio data to be played to the user.
      */
-    const std::shared_ptr<AudioData>& getAudioData() {
-        return audioData;
-    }
+    const std::shared_ptr<AudioData>& getAudioData();
 
     /**
      * Returns the multimodal outputs to be returned to the client.
      * qreturn The multimodal outputs to be returned to the client.
      */
-    virtual const std::shared_ptr<MultiModalOutputs> getMultiModalOutputs() {
-        return outputs;
-    }
+    virtual const std::shared_ptr<MultiModalOutputs> getMultiModalOutputs();
 
     /**
      * Returns the metadata of the request.
      * @return The metadata of the request.
      */
-    const std::shared_ptr<MetaData>& getMetaData() {
-        return metaData;
-    }
+    const std::shared_ptr<MetaData>& getMetaData();
 
 private:
     /** The session id. */

@@ -23,8 +23,8 @@ git clone git@github.com:w3c/voiceinteraction.git
 
 The source code is in the folder source/w3cipa
 
-- `include` contains the interfaces as described at [Intelligent Personal Assistant Interfaces](https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm).
-- `sources` contain the actual reference implementation using these interfaces
+- `w3cipaframework` contains the interfaces as described at [Intelligent Personal Assistant Interfaces](https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm).
+- `w3cipareferenceimplementatiopn` contain the actual reference implementation using these interfaces
 
 ### License
 
@@ -52,7 +52,7 @@ implementation without any dependency, the reference implementation in folder
 
 ### Configuring Keys
 
-As of now, everything is hard coded, yo you will need to replace your OpenAI developer key in the file w3c/voiceinteraction/ipa/external/ipa/chatgpt/chatgptadapter.cpp
+As of now, everything is hard coded, you will need to replace your OpenAI developer key in the file w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/chatgptadapter.cpp
 
 Replace OPENAI-DEVELOPER-KEY with your actual key
 

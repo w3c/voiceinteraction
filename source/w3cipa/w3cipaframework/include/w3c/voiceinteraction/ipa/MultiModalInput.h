@@ -31,23 +31,17 @@ public:
      * Constructs a new object.
      * @param modality The modality of this input.
      */
-    MultiModalInput(const ModalityType modality)
-        : modality(modality) {
-    }
+    MultiModalInput(const ModalityType modality);
 
     /**
      * Destroys the object.
      */
-    virtual ~MultiModalInput() {
-
-    }
+    virtual ~MultiModalInput();
 
     /**
      * Retrieves a string identifying the modality of this input.
      */
-    const ModalityType& getModality() const {
-        return modality;
-    }
+    const ModalityType& getModality() const;
 
 private:
     /**

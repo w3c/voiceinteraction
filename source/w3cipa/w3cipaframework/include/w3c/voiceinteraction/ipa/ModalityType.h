@@ -20,7 +20,7 @@ namespace voiceinteraction {
 namespace ipa {
 
 /**
- * The SessionId interface is used to identify a session.
+ * A modality type.
  * @author Dirk Schnelle-Walka
  */
 class ModalityType {
@@ -30,31 +30,24 @@ public:
      * @param modalityType A human readable string identifying the modality
      *          type.
      */
-    ModalityType(const std::string& modalityType)
-        : modalityType(modalityType) {
-    }
+    ModalityType(const std::string& modalityType);
 
     /**
      * Copy constructor.
      * @param other the other modality to copy from.
      */
-    ModalityType(const ModalityType& other)
-        : modalityType(other.getModalityType()) {
-    }
+    ModalityType(const ModalityType& other);
 
     /**
      * Destroys the object.
      */
-    virtual ~ModalityType() {
-    }
+    virtual ~ModalityType();
 
     /**
      * Returns the modality type.
      * @return The modality type.
      */
-    const std::string& getModalityType() const {
-        return modalityType;
-    }
+    const std::string& getModalityType() const;
 
     /**
      * @brief operator <
@@ -63,18 +56,13 @@ public:
      * @return {@code true} in case the
      *          {@code getModalityType() < other.getModalityType()}.
      */
-    bool operator<(const ModalityType& other) const
-    {
-        return modalityType < other.getModalityType();
-    }
+    bool operator<(const ModalityType& other) const;
 
     /**
      * @brief operator =
      * @param other the other modality
      */
-    void operator=(const ModalityType& other) {
-        modalityType = other.getModalityType();
-    }
+    void operator=(const ModalityType& other);
 
     /**
      * @brief operator ==
@@ -82,9 +70,7 @@ public:
      * @return {@code true} in case the
      *          {@code getModalityType() == other.getModalityType()}.
      */
-    bool operator==(const ModalityType& other) const {
-        return modalityType == other.getModalityType();
-    }
+    bool operator==(const ModalityType& other) const;
 
 private:
     /** A human readable string identifying the modality type. */

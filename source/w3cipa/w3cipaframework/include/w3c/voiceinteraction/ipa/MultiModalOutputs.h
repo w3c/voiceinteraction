@@ -25,7 +25,8 @@ namespace voiceinteraction {
 namespace ipa {
 
 /**
- * This class represents a set of multi modal outputs.
+ * This class represents a set of multi modal outputs. This implementation
+ * allows for only on output per modality.
  * @author Dirk Schnelle-Walka
  */
 class MultiModalOutputs
@@ -35,23 +36,19 @@ public:
     /**
      * Constructs an empty set of multi modal outputs.
      */
-    MultiModalOutputs() {
-    }
+    MultiModalOutputs();
 
     /**
      * Destroys the set of multi modal outputs.
      */
-    virtual ~MultiModalOutputs() {
-    }
+    virtual ~MultiModalOutputs();
 
     /**
-     * Adds a multi modal output to the set.
+     * Adds a multi modal output to the set. An existing entry for the
+     * provided modality will be overwritten.
      * @param output The multi modal output to add.
      */
-    void addMultiModalOutput(const std::shared_ptr<MultiModalOutput>& output) {
-        const ModalityType& modality = output->getModality();
-        outputs[modality] = output;
-    }
+    void addMultiModalOutput(const std::shared_ptr<MultiModalOutput>& output);
 
     /**
      * Returns the multi modal output for the given modality.
@@ -59,23 +56,14 @@ public:
      * @return The multi modal output for the given modality.
      */
     std::shared_ptr<MultiModalOutput> getMultiModalOutput(
-        const ModalityType& modality) {
-        return outputs[modality];
-    }
+        const ModalityType& modality);
 
     /**
      * Retrieves all known modality types.
      * @return known modality types
      */
-    std::list<ModalityType> getModalityTypes() const {
-        std::list<ModalityType> types;
-        for (std::map<ModalityType, std::shared_ptr<MultiModalOutput>>::const_iterator iterator = outputs.begin();
-             iterator != outputs.end(); ++iterator) {
-            const ModalityType type = iterator->first;
-            types.push_back(type);
-        }
-        return types;
-    }
+    std::list<ModalityType> getModalityTypes() const;
+
 private:
     /**
      * The map of known multi modal outputs.

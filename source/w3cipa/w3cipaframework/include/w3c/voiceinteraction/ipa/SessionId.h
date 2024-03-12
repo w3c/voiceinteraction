@@ -36,14 +36,12 @@ public:
     /**
      * Constucts a new SessionId.
      */
-    SessionId() {
-    }
+    SessionId();
 
     /**
      * Destroys the SessionId.
      */
-    virtual ~SessionId() {
-    }
+    virtual ~SessionId();
 
     /**
      * Creates a human readable representation of this session id.
@@ -58,10 +56,7 @@ public:
      * @return {@code true} in case the
      *          {@code toString() < other.toString()}.
      */
-    bool operator<(const SessionId& other) const
-    {
-        return toString() < other.toString();
-    }
+    bool operator<(const SessionId& other) const;
 
     /**
      * @brief operator ==
@@ -69,10 +64,7 @@ public:
      * @return {@code true} in case the
      *          {@code toString() == other.toString()}.
      */
-    bool operator==(const SessionId& other) const {
-        return toString() == other.toString();
-    }
-
+    bool operator==(const SessionId& other) const;
 };
 
 } // namespace ipa

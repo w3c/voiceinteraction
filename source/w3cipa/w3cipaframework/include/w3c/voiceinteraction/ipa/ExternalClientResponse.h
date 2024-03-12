@@ -42,50 +42,36 @@ public:
     ExternalClientResponse(const std::shared_ptr<SessionId>& sessionIdentifier,
                    const std::shared_ptr<RequestId>& requestIdentifier,
                    const std::shared_ptr<MultiModalOutputs>& multiModalOutputs,
-                   const std::shared_ptr<SemanticInterpretation> semanticInterpretation)
-        : sessionId(sessionIdentifier), requestId(requestIdentifier),
-        outputs(multiModalOutputs), interpretation(semanticInterpretation) {
-    }
+                   const std::shared_ptr<SemanticInterpretation> semanticInterpretation);
 
     /**
      * Destroys the object.
      */
-    virtual ~ExternalClientResponse() {
-
-    }
+    virtual ~ExternalClientResponse();
 
     /**
      * Returns the session id of the session this response belongs to.
      * @return The session id of the session this response belongs to.
      */
-    const std::shared_ptr<SessionId> getSessionId() const {
-        return sessionId;
-    }
+    const std::shared_ptr<SessionId> getSessionId() const;
 
     /**
      * Returns the request id of the request this response belongs to.
      * @return The request id of the request this response belongs to.
      */
-    const std::shared_ptr<RequestId>& getRequestId() const {
-        return requestId;
-    }
+    const std::shared_ptr<RequestId>& getRequestId() const;
 
     /**
      * Returns the multimodal outputs to be returned to the client.
      * @return The multimodal outputs to be returned to the client.
      */
-    const std::shared_ptr<MultiModalOutputs> getMultiModalOutputs() const {
-        return outputs;
-    }
+    const std::shared_ptr<MultiModalOutputs> getMultiModalOutputs() const;
 
     /**
      * Returns the multimodal outputs to be returned to the client.
      * @return The multimodal outputs to be returned to the client.
      */
-    const std::shared_ptr<SemanticInterpretation> getSemanticInterpretation() const {
-        return interpretation;
-    }
-
+    const std::shared_ptr<SemanticInterpretation> getSemanticInterpretation() const;
 
 private:
     /** The session id. */
