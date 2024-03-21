@@ -7,7 +7,8 @@ This project aims at providing a reference implementation for an IPA framework.
 You will need
 - A C/C++ compiler supporting at least C++ 17
 - CMake version 3.24
-- a local copy of libcurl https://curl.se/download.html so that it can be found by FindPackage
+- a local copy of libcurl https://curl.se/download.html so that it can be found
+  by FindPackage
 - A C++ IDE of your choice
 - An OpenAI developer key
 
@@ -23,14 +24,16 @@ git clone git@github.com:w3c/voiceinteraction.git
 
 The source code is in the folder source/w3cipa
 
-- `w3cipaframework` contains the interfaces as described at [Intelligent Personal Assistant Interfaces](https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm).
+- `w3cipaframework` contains the interfaces as described at
+  [Intelligent Personal Assistant Interfaces](https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm).
 - `w3cipareferenceimplementatiopn` contain the actual reference implementation using these interfaces
 
 ### License
 
-This code is distributed under the [Software and Document license - 2023 version](https://www.w3.org/copyright/software-license-2023/).
+This code is distributed under the
+[Software and Document license - 2023 version](https://www.w3.org/copyright/software-license-2023/).
 
-While the W3C IPA Framework in the folder `include` is a header-only
+While the W3C IPA Framework in the folder `include` is a dependency free
 implementation without any dependency, the reference implementation in folder 
 `source` makes use of 3rd-party software.
 
@@ -52,7 +55,8 @@ implementation without any dependency, the reference implementation in folder
 
 ### Configuring Keys
 
-As of now, everything is hard coded, you will need to replace your OpenAI developer key in the file w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/chatgptadapter.cpp
+As of now, everything is hard coded, you will need to replace your OpenAI
+developer key in the file w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/chatgptadapter.cpp
 
 Replace OPENAI-DEVELOPER-KEY with your actual key
 
@@ -69,4 +73,5 @@ make && make install
 ```
 ## Open Issues
 
-A list of open issues can be displayed via [Open Issues for Reference Implementation](https://github.com/w3c/voiceinteraction/issues?q=is%3Aissue+is%3Aopen+label%3A%22reference+implementation%22).
+A list of open issues can be displayed via
+[Open Issues for Reference Implementation](https://github.com/w3c/voiceinteraction/issues?q=is%3Aissue+is%3Aopen+label%3A%22reference+implementation%22).
