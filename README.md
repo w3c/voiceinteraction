@@ -13,7 +13,7 @@ This repository contains the reports published by the group
 
 ### Architecture Requirements for Intelligent Personal Assistants
 
-- Version 1.0 (the one we’re actively working on): <https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paRequirements/paRequirements.htm>
+- Version 1.0: <https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paRequirements/paRequirements.htm>
 
 ### Architecture and Potential for Standardization Version
 
@@ -28,7 +28,7 @@ This repository contains the reports published by the group
 
 # Contributing to the Repository
 
-Use the standard fork, branch, and pull request workflow to propose changes to the specifications. Please make branch names informative—by including the issue or bug number for example.
+Use the standard fork, branch, and pull request workflow to propose changes to the specifications. Please make branch names informative — by including the issue or bug number for example.
 
 Editorial changes that improve the readability of the spec or correct spelling or grammatical mistakes are welcome.
 
