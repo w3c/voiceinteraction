@@ -33,22 +33,17 @@ public:
      * Creates a object.
      * @param modality the supported modality.
      */
-    ModalityComponent(const ModalityType& modality)
-        : modality(modality) {
-    }
+    ModalityComponent(const ModalityType& modality);
 
     /**
      * Destroys the object.
      */
-    virtual ~ModalityComponent() {
-    }
+    virtual ~ModalityComponent();
 
     /**
      * Retrieves a string identifying the modality of this input.
      */
-    const ModalityType& getModality() const {
-        return modality;
-    }
+    const ModalityType& getModality() const;
 
     /**
      * Retrieves a list IO type that are supported by this modality component.

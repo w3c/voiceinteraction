@@ -35,14 +35,13 @@ public:
     /**
      * Creates a object.
      */
-    OutputModalityComponent() {
-    }
+    OutputModalityComponent();
 
     /**
      * @brief Destroys this object
      */
-    virtual ~OutputModalityComponent() {
-    }
+    virtual ~OutputModalityComponent();
+
     /**
      * Handles the obtained mutlitmodal output.
      * @param output the obtained output.

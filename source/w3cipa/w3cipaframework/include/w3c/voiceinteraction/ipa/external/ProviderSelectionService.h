@@ -40,15 +40,12 @@ public:
     /**
      * Constructs a new object.
      */
-    ProviderSelectionService(const std::shared_ptr<ProviderRegistry> registry)
-        : providerRegistry(registry) {
-    }
+    ProviderSelectionService(const std::shared_ptr<ProviderRegistry> registry);
 
     /**
      * Destroys the object.
      */
-    virtual ~ProviderSelectionService() {
-    }
+    virtual ~ProviderSelectionService();
 
     /**
      * Processes the input and forwards it to the relevant IPA providers.
@@ -56,21 +53,7 @@ public:
      * @return list of responses from the IPA providers
      */
     const std::list<std::shared_ptr<ExternalClientResponse>> processInput(
-        const std::shared_ptr<ClientRequest>& request) {
-        std::list<std::shared_ptr<ExternalClientResponse>> responses;
-        std::list<std::shared_ptr<IPAProvider>> providers =
-            providerRegistry->getIPAProviders(request);
-        for (std::shared_ptr<IPAProvider> provider : providers) {
-            // TODO check to call the IPA providers asynchronously
-            std::shared_ptr<ExternalClientResponse> response =
-                provider->processInput(request);
-            if (response != nullptr) {
-                responses.push_back(response);
-            }
-        }
-        return responses;
-    }
-
+        const std::shared_ptr<ClientRequest>& request);
 protected:
     /** The provider registry. */
     std::shared_ptr<ProviderRegistry> providerRegistry;

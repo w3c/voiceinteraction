@@ -34,14 +34,12 @@ public:
     /**
      * Constructs a new object.
      */
-    ProviderSelectionStrategy() {
-    }
+    ProviderSelectionStrategy();
 
     /**
      * Destroys this instance.
      */
-    virtual ~ProviderSelectionStrategy() {
-    }
+    virtual ~ProviderSelectionStrategy();
 
     /**
      * Returns a list of all applicable IPA providers.

@@ -34,14 +34,12 @@ public:
     /**
      * Creates a object.
      */
-    InputModalityComponent() {
-    }
+    InputModalityComponent();
 
     /**
      * @brief Destroy this object.
      */
-    virtual ~InputModalityComponent() {
-    }
+    virtual ~InputModalityComponent();
 
     /**
      * Starts listening asynchronously for inputs and notify the provided

@@ -35,15 +35,12 @@ public:
      * Constructs a new object.
      * @param service The provider selection service.
      */
-    IPAService(const std::shared_ptr<ProviderSelectionService>& service)
-        : providerSelectionService(service) {
-    }
+    IPAService(const std::shared_ptr<ProviderSelectionService>& service);
 
     /**
      * Destroys the object.
      */
-    virtual ~IPAService() {
-    }
+    virtual ~IPAService();
 
 protected:
     /**

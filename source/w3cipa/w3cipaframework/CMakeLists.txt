@@ -41,6 +41,7 @@ set(HEADERS
     include/w3c/voiceinteraction/ipa/client/InputModalityComponent.h
     include/w3c/voiceinteraction/ipa/client/InputModalityComponentListener.h
     include/w3c/voiceinteraction/ipa/client/IOType.h
+    include/w3c/voiceinteraction/ipa/client/ModalityComponent.h
     include/w3c/voiceinteraction/ipa/client/ModalityManager.h
     include/w3c/voiceinteraction/ipa/client/OutputModalityComponent.h
     include/w3c/voiceinteraction/ipa/external/ProviderSelectionService.h
@@ -61,6 +62,16 @@ set(SOURCES
     src/w3c/voiceinteraction/ipa/MultiModalOutputs.cpp
     src/w3c/voiceinteraction/ipa/RequestId.cpp
     src/w3c/voiceinteraction/ipa/SessionId.cpp
+    src/w3c/voiceinteraction/ipa/client/InputModalityComponent.cpp
+    src/w3c/voiceinteraction/ipa/client/InputModalityComponentListener.cpp
+    src/w3c/voiceinteraction/ipa/client/ModalityComponent.cpp
+    src/w3c/voiceinteraction/ipa/client/ModalityManager.cpp
+    src/w3c/voiceinteraction/ipa/client/OutputModalityComponent.cpp
+    src/w3c/voiceinteraction/ipa/external/ProviderSelectionService.cpp
+    src/w3c/voiceinteraction/ipa/external/ipa/IPAProvider.cpp
+    src/w3c/voiceinteraction/ipa/external/ipa/IPAService.cpp
+    src/w3c/voiceinteraction/ipa/external/ipa/ProviderRegistry.cpp
+    src/w3c/voiceinteraction/ipa/external/ipa/ProviderSelectionStrategy.cpp
 )
 
 source_group("W3C IPA Framework" FILES ${SOURCES} ${HEADERS})

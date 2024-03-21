@@ -23,7 +23,7 @@ namespace ipa {
 namespace client {
 
 /**
- * A listner for multimodal input events
+ * A listener for multimodal input events
  * @author Dirk Schnelle-Walka
  */
 class InputModalityComponentListener {
@@ -31,14 +31,12 @@ public:
     /**
      * Creates a object.
      */
-    InputModalityComponentListener() {
-    }
+    InputModalityComponentListener();
 
     /**
      * @brief Destroy this object.
      */
-    virtual ~InputModalityComponentListener() {
-    }
+    virtual ~InputModalityComponentListener();
 
     /**
      * The input modality component received the provided multimodal input.

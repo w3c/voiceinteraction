@@ -35,14 +35,12 @@ public:
     /**
      * Constructs a new object.
      */
-    IPAProvider() {
-    }
+    IPAProvider();
 
     /**
      * Destroys this object.
      */
-    virtual ~IPAProvider() {
-    }
+    virtual ~IPAProvider();
 
     /**
      * Returns the IPA provider's ID.
@@ -57,10 +55,7 @@ public:
      * @return {@code true} in case the
      *          {@code getId() < other.getId()}.
      */
-    bool operator<(const IPAProvider& other) const
-    {
-        return getId() < other.getId();
-    }
+    bool operator<(const IPAProvider& other) const;
 
     /**
      * @brief operator ==
@@ -68,9 +63,7 @@ public:
      * @return {@code true} in case the
      *          {@code getId() == other.getId()}.
      */
-    bool operator==(const IPAProvider& other) const {
-        return getId() == other.getId();
-    }
+    bool operator==(const IPAProvider& other) const;
 
     /**
      * Retrieves a list modality type that are supported as input by this IPA
