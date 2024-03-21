@@ -68,7 +68,7 @@ Replace OPENAI-DEVELOPER-KEY with your actual key
 cd source/w3cipa
 mkdir build
 cd build
-cmake ..
+cmake .. -DCURL_INCLUDE_DIR=<Your path to the CURL include directory> -DCURL_LIBRARY=<Your path to the CURL library directory>
 make && make install
 ```
 ## Open Issues
