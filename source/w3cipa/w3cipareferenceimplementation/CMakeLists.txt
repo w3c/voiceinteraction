@@ -45,12 +45,11 @@ set(SOURCES
 
 source_group("W3C IPA Reference Implementation" FILES ${SOURCES} ${HEADERS})
 
-include_directories(${W3C_IPA_FRAMEWORK_INCLUDE_DIR})
 include_directories(include)
 
-add_executable(${PROJECT_NAME}  ${SOURCES} ${HEADERS})
+add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 target_link_libraries(${PROJECT_NAME} ${REQUIRED_LIBS})
-target_link_libraries(${PROJECT_NAME} ${W3C_IPA_FRAMEWORK_LIBRARY})
+target_link_libraries(${PROJECT_NAME} w3cipaframework)
 
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
 

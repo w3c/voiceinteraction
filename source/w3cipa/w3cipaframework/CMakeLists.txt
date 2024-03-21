@@ -77,6 +77,7 @@ set(SOURCES
 source_group("W3C IPA Framework" FILES ${SOURCES} ${HEADERS})
 
 add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+target_include_directories(${PROJECT_NAME} PUBLIC include)
 
 install(TARGETS ${PROJECT_NAME}
     LIBRARY DESTINATION lib

@@ -68,8 +68,7 @@ include_directories(${STDUUID_INCLUDE_DIR})
 # W3C IPA Framework and Reference Implementation
 #
 
-add_subdirectory(w3cipaframework)
-find_package(W3CIPAFramework REQUIRED)
-
 add_subdirectory(w3cipareferenceimplementation)
+add_subdirectory(w3cipaframework)
+
 
