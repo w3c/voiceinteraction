@@ -27,15 +27,22 @@ ProviderSelectionService::~ProviderSelectionService() {
 const std::list<std::shared_ptr<ExternalClientResponse>> ProviderSelectionService::processInput(
     const std::shared_ptr<ClientRequest>& request) {
     std::list<std::shared_ptr<ExternalClientResponse>> responses;
+    std::list<std::shared_ptr<ExternalClientResponse>> errorResponses;
     std::list<std::shared_ptr<IPAProvider>> providers =
         providerRegistry->getIPAProviders(request);
-    for (std::shared_ptr<IPAProvider> provider : providers) {
+    for (std::shared_ptr<IPAProvider>& provider : providers) {
         // TODO check to call the IPA providers asynchronously
         std::shared_ptr<ExternalClientResponse> response =
             provider->processInput(request);
-        if (response != nullptr) {
+        if (response->hasError()) {
+            errorResponses.push_back(response);
+        } else {
             responses.push_back(response);
         }
+    }
+    // In case there is no positive response, return all error responses
+    if (responses.empty()) {
+        return errorResponses;
     }
     return responses;
 }

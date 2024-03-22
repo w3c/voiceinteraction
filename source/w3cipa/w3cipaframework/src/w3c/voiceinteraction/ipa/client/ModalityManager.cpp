@@ -73,7 +73,7 @@ void ModalityManager::startInput(std::shared_ptr<InputModalityComponentListener>
         inputComponents.begin(); iterator != inputComponents.end();
          ++iterator) {
         std::list<std::shared_ptr<ModalityComponent>> components = iterator->second;
-        for (std::shared_ptr<ModalityComponent> component : components) {
+        for (std::shared_ptr<ModalityComponent>& component : components) {
             std::shared_ptr<client::InputModalityComponent> inputComponent =
                 std::dynamic_pointer_cast<client::InputModalityComponent>(component);
             inputComponent->startInput(listener);
@@ -84,12 +84,12 @@ void ModalityManager::startInput(std::shared_ptr<InputModalityComponentListener>
 
 void ModalityManager::handleOutput(const std::shared_ptr<MultiModalOutputs>& outputs) const {
     std::list<ModalityType> outputModalities = outputs->getModalityTypes();
-    for (ModalityType outputModality : outputModalities) {
+    for (ModalityType& outputModality : outputModalities) {
         std::shared_ptr<MultiModalOutput> output =
             outputs->getMultiModalOutput(outputModality);
         std::list<std::shared_ptr<client::ModalityComponent>> outputComponents =
             getModalityComponents(outputModality, client::IOType::OUTPUT);
-        for (std::shared_ptr<client::ModalityComponent> outputComponent : outputComponents) {
+        for (std::shared_ptr<client::ModalityComponent>& outputComponent : outputComponents) {
             std::shared_ptr<client::OutputModalityComponent> outputModality =
                 std::dynamic_pointer_cast<client::OutputModalityComponent>(outputComponent);
             outputModality->handleOutput(output);

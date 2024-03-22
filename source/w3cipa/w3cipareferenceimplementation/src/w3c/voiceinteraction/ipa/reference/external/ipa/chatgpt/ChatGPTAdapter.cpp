@@ -75,7 +75,6 @@ const std::shared_ptr<ExternalClientResponse> ChatGPTAdapter::processInput(
     curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
     curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
 
-
     // Set the URL to the OpenAI API endpoint
     std::string apiUrl = "https://api.openai.com/v1/chat/completions";
     curl_easy_setopt(curl, CURLOPT_URL, apiUrl.c_str());
@@ -115,26 +114,38 @@ const std::shared_ptr<ExternalClientResponse> ChatGPTAdapter::processInput(
     CURLcode res = curl_easy_perform(curl);
     headers = nullptr;
     if (res != CURLE_OK) {
+        std::string curlError(curl_easy_strerror(res));
+        curl_easy_cleanup(curl);
         LOG4CPLUS_WARN_FMT(LOGGER,
                            LOG4CPLUS_TEXT("%s %s failed to get HTTP response code: %s"),
                            sessionId.c_str(), requestId.c_str(),
-                           curl_easy_strerror(res));
-        curl_easy_cleanup(curl);
-
-        return nullptr;
+                           curlError.c_str());
+        std::shared_ptr<ErrorMessage> error =
+            std::make_shared<ErrorMessage>(res, curlError, ID);
+        std::shared_ptr<ExternalClientResponse> out =
+            std::make_shared<ExternalClientResponse>(request->getSessionId(),
+                request->getRequestId(), error);
+        return out;
     }
 
     long http_code = 0;
     res = curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
     if (res != CURLE_OK){
+        std::string curlError(curl_easy_strerror(res));
+        curl_easy_cleanup(curl);
         LOG4CPLUS_WARN_FMT(LOGGER,
                            LOG4CPLUS_TEXT("%s %s failed to get HTTP response code: %s"),
                            sessionId.c_str(), requestId.c_str(),
-                           curl_easy_strerror(res));
-        return nullptr;
-        curl_easy_cleanup(curl);
+                           curlError.c_str());
+        std::shared_ptr<ErrorMessage> error =
+            std::make_shared<ErrorMessage>(res, curlError, ID);
+        std::shared_ptr<ExternalClientResponse> out =
+            std::make_shared<ExternalClientResponse>(request->getSessionId(),
+                                                     request->getRequestId(), error);
+        return out;
     }
 
+    curl_easy_cleanup(curl);
     if (http_code != 200) {
         LOG4CPLUS_WARN_FMT(LOGGER,
                            LOG4CPLUS_TEXT("%s %s failed with HTTP error code: %ld"),
@@ -142,11 +153,17 @@ const std::shared_ptr<ExternalClientResponse> ChatGPTAdapter::processInput(
         LOG4CPLUS_WARN_FMT(LOGGER, LOG4CPLUS_TEXT("%s %s response: %s"),
                            sessionId.c_str(), requestId.c_str(),
                            response.c_str());
-        curl_easy_cleanup(curl);
+        std::stringstream errorMessage;
+        errorMessage << "ChatGPT failed with HTTP error code " << http_code;
+        std::shared_ptr<ErrorMessage> error =
+            std::make_shared<ErrorMessage>(res, errorMessage.str(), ID);
 
-        return nullptr;
+        std::shared_ptr<ExternalClientResponse> out =
+            std::make_shared<ExternalClientResponse>(request->getSessionId(),
+                                                     request->getRequestId(), error);
+
+        return out;
     }
-    curl_easy_cleanup(curl);
 
     // Trim whitespaces
     response.erase(response.find_last_not_of(" \n\r\t") + 1);

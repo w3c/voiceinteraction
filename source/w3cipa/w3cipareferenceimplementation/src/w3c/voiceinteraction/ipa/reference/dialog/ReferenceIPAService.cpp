@@ -13,7 +13,7 @@
 #include <log4cplus/loggingmacros.h>
 
 #include "w3c/voiceinteraction/ipa/reference/UUIDSessionId.h"
-
+#include "w3c/voiceinteraction/ipa/reference/TextMultiModalOutput.h"
 #include "w3c/voiceinteraction/ipa/reference/dialog/ReferenceIPAService.h"
 
 
@@ -27,11 +27,13 @@ const log4cplus::Logger ReferenceIPAService::LOGGER =
     log4cplus::Logger::getInstance(LOG4CPLUS_TEXT(
         "w3c.voiceinteraction.dialog.ReferenceIPAService"));
 
-ReferenceIPAService::ReferenceIPAService(const std::shared_ptr<ProviderSelectionService> &service)
+ReferenceIPAService::ReferenceIPAService(
+    const std::shared_ptr<ProviderSelectionService> &service)
     : IPAService(service) {
 }
 
-const std::shared_ptr<ClientResponse> ReferenceIPAService::processInput(const std::shared_ptr<ClientRequest> &request) {
+const std::shared_ptr<ClientResponse> ReferenceIPAService::processInput(
+    const std::shared_ptr<ClientRequest> &request) {
     // Check if there is already a session identifer and set one if there is
     // none
     const std::shared_ptr<SessionId>& id = request->getSessionId();
@@ -49,12 +51,29 @@ const std::shared_ptr<ClientResponse> ReferenceIPAService::processInput(const st
         return nullptr;
     }
 
+    // TODO For now, only return the first response
     const std::shared_ptr<ExternalClientResponse>& externalResponse =
         responses.front();
-    std::shared_ptr<ClientResponse> response =
-        std::make_shared<ClientResponse>(externalResponse->getSessionId(),
-        externalResponse->getRequestId(),
-        externalResponse->getMultiModalOutputs(), nullptr, nullptr);
+    std::shared_ptr<ClientResponse> response;
+    if (externalResponse->hasError()) {
+        // TODO temporarily take the error message as the output
+        const std::shared_ptr<ErrorMessage>& error =
+            externalResponse->getErrorMessage();
+        const std::string& message = error->getErrorMessage();
+        std::shared_ptr<MultiModalOutput> errorOutput =
+            std::make_shared<TextMultiModalOutput>(message);
+        std::shared_ptr<MultiModalOutputs> outputs =
+            std::make_shared<MultiModalOutputs>();
+        outputs->addMultiModalOutput(errorOutput);
+        response =
+            std::make_shared<ClientResponse>(externalResponse->getSessionId(),
+                externalResponse->getRequestId(), outputs, nullptr, nullptr);
+    } else {
+        response =
+            std::make_shared<ClientResponse>(externalResponse->getSessionId(),
+            externalResponse->getRequestId(),
+            externalResponse->getMultiModalOutputs(), nullptr, nullptr);
+    }
     return response;
 }
 

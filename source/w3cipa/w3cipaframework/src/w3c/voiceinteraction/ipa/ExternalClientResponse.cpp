@@ -21,7 +21,17 @@ ExternalClientResponse::ExternalClientResponse(const std::shared_ptr<SessionId>&
                const std::shared_ptr<MultiModalOutputs>& multiModalOutputs,
                const std::shared_ptr<SemanticInterpretation> semanticInterpretation)
     : sessionId(sessionIdentifier), requestId(requestIdentifier),
-    outputs(multiModalOutputs), interpretation(semanticInterpretation) {
+    outputs(multiModalOutputs), interpretation(semanticInterpretation),
+    error(nullptr) {
+}
+
+ExternalClientResponse::ExternalClientResponse(
+                const std::shared_ptr<SessionId>& sessionIdentifier,
+                const std::shared_ptr<RequestId>& requestIdentifier,
+                const std::shared_ptr<ErrorMessage>& errorMessage)
+    : sessionId(sessionIdentifier), requestId(requestIdentifier),
+    outputs(nullptr), interpretation(nullptr),
+    error(errorMessage) {
 }
 
 ExternalClientResponse::~ExternalClientResponse() {
@@ -43,6 +53,13 @@ const std::shared_ptr<SemanticInterpretation> ExternalClientResponse::getSemanti
     return interpretation;
 }
 
+bool ExternalClientResponse::hasError() const {
+    return error != nullptr;
+}
+
+const std::shared_ptr<ErrorMessage> ExternalClientResponse:: getErrorMessage() const {
+    return error;
+}
 
 } // namespace ipa
 } // namespace voiceinteraction

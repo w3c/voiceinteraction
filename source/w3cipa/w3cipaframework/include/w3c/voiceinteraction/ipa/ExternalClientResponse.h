@@ -15,6 +15,7 @@
 
 #include <memory>
 
+#include "ErrorMessage.h"
 #include "MultiModalOutputs.h"
 #include "RequestId.h"
 #include "SessionId.h"
@@ -32,7 +33,7 @@ class ExternalClientResponse
 {
 public:
     /**
-     * Constructs a new object.
+     * Constructs a new object with a meaningful result
      * @param sessionIdentifier identifier of the session
      * @param requestIdentifier identifier of the request
      * @param multiModalOutputs The multimodal outputs to be returned to the
@@ -43,6 +44,16 @@ public:
                    const std::shared_ptr<RequestId>& requestIdentifier,
                    const std::shared_ptr<MultiModalOutputs>& multiModalOutputs,
                    const std::shared_ptr<SemanticInterpretation> semanticInterpretation);
+
+    /**
+     * Constructs a new object.
+     * @param sessionIdentifier identifier of the session
+     * @param requestIdentifier identifier of the request
+     * @param errorMessage the error to be returned
+     */
+    ExternalClientResponse(const std::shared_ptr<SessionId>& sessionIdentifier,
+                           const std::shared_ptr<RequestId>& requestIdentifier,
+                           const std::shared_ptr<ErrorMessage>& errorMessage);
 
     /**
      * Destroys the object.
@@ -73,6 +84,17 @@ public:
      */
     const std::shared_ptr<SemanticInterpretation> getSemanticInterpretation() const;
 
+    /**
+     * Checks if this reponse includes an error
+     * @return {@code true} if the response includes an error
+     */
+    bool hasError() const;
+
+    /**
+     * Retrieves a potentially available error message.
+     * @return the error message
+     */
+    const std::shared_ptr<ErrorMessage> getErrorMessage() const;
 private:
     /** The session id. */
     std::shared_ptr<SessionId> sessionId;
@@ -82,6 +104,8 @@ private:
     std::shared_ptr<MultiModalOutputs> outputs;
     /** Semantic interpretation of an utterance. */
     std::shared_ptr<SemanticInterpretation> interpretation;
+    /** Optionalla a caught error. */
+    std::shared_ptr<ErrorMessage> error;
 };
 
 } // namespace ipa
