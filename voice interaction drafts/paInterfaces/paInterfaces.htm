@@ -15,7 +15,7 @@
         <h2 property="bibo:subtitle" id="subtitle">Intelligent Personal Assistant Interfaces</h2>
         <dl>
             <dt>Latest version</dt>
-            <dd>Last modified: March 21, 2024 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a> (GitHub repository)<br/>
+            <dd>Last modified: March 22, 2024 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a> (GitHub repository)<br/>
                 <a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">HTML rendered version</a></dd>
             <dt>Editor</dt>
             <dd>Dirk Schnelle-Walka<br/>
@@ -801,7 +801,50 @@
 		<p>This information is the used to actually create a reply to the user as
 			described in <a href="#if-clientinput-weather-example">deliverResponse</a> to the Client.</p>
 
-        <h1 id="lowlevelinterfaces"><span class="secno">5. </span>Low Level Interfaces</h1>
+    <h2 id=errorhandling>Error Handling</h2>
+    <p>Errors may occur anywhere in the processing chain of the IPA.
+        The following gives an overview of how they are suggested to be
+        handled.</p>
+
+    <p>Along the processing path errors may occur</p>
+    <ol>
+        <li>in the response of a call to another component</li>
+        <li>inside this component to be further processed by
+            subsequent components</li>
+    </ol>
+
+    <p>Error messages carry the following information</p>
+    <table>
+        <tr>
+            <th>name</th>
+            <th>type</th>
+            <th>description</th>
+            <th>required</th>
+        </tr>
+        <tr>
+            <td>error code</td>
+            <td>data item</td>
+            <td>unique error code that could be transformed into a
+                IPA response matching the language and conversation</td>
+            <td>yes</td>
+        </tr>
+        <tr>
+            <td>error message</td>
+            <td>data item</td>
+            <td>human-readable error message for logging and
+                debugging</td>
+            <td>yes</td>
+        </tr>
+        <tr>
+            <td>component id</td>
+            <td>data item</td>
+            <td>id of the component that has produced or handled
+                the error</td>
+            <td>yes</td>
+        </tr>
+    </table>
+
+    <h1 id="lowlevelinterfaces"><span class="secno">5. </span>Low Level Interfaces</h1>
 		
         <p>This section is still under preparation. </p>
         
