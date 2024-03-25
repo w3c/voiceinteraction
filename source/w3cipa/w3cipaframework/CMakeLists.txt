@@ -10,7 +10,7 @@
 # [1] https://www.w3.org/Consortium/Legal/copyright-software
 #
 
-cmake_minimum_required(VERSION 3.24)
+cmake_minimum_required(VERSION 3.22)
 
 project(w3cipaframework LANGUAGES CXX)
 

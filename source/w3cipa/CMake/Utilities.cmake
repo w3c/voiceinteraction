@@ -54,6 +54,7 @@ function(build_dependency lib_name)
       log4cplus
       nlohmann_json
       openssl
+      curl
       stduuid)
   set(header_only_libs
       nlohmann_json
