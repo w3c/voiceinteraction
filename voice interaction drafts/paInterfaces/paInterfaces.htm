@@ -15,7 +15,7 @@
         <h2 property="bibo:subtitle" id="subtitle">Intelligent Personal Assistant Interfaces</h2>
         <dl>
             <dt>Latest version</dt>
-            <dd>Last modified: March 22, 2024 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a> (GitHub repository)<br/>
+            <dd>Last modified: March 27, 2024 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a> (GitHub repository)<br/>
                 <a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">HTML rendered version</a></dd>
             <dt>Editor</dt>
             <dd>Dirk Schnelle-Walka<br/>
@@ -230,7 +230,7 @@
 				<dt>description</dt>
 				<dd>A short description to illustrate the purpose of this attribute.</dd>
 				<dt>required</dt>
-				<dd>Flag, if this attribute is rquired to be used in this interface.</dd>
+				<dd>Flag, if this attribute is required to be used in this interface.</dd>
 			</dl>
 			The data types of the attributes are left open for now.
 		</p>
@@ -464,117 +464,176 @@
 		...
 	}
 }</pre>
-		
-		<h2 id="if-externalclientinput"><span class="secno">4.2 </span></span><font face="Segoe UI">External Client Input</font></span></h2>
-		<p>This interface describes the data that is sent from t the <a href="#providerselectionservice">Provider Selection Service</a>. The input is 
-			a copy of the data that is sent from the <a href="#ipaclient">IPA Client</a> to the <a href="#ipaservice">IPA Service</a> in
-			<a href="#if-clientinput">Interface Client Input</a>. This interface mainly differs in the return value.
-			The following table details the data that should be considered for this interface
-			in the method <b>processInput.</b></p>
 
-		<p>As a return value this interface describes the data that is sent from the <a href="#providerselectionservice">Provider Selection Service</a> and the <a href="#nlu">NLU</a> and 
-			<a href="#dialogmanagement">Dialog Management</a>. The following table details the data that should be considered for this interface in the
-			method <b>deliverSemanticInterpretation.</b></p>
-		
-		<table>
-			<tr>
-				<th>name</th>
-				<th>type</th>
-				<th>description</th>
-				<th>required</th>
-			</tr>
-			<tr>
-				<td>session id</td>
-				<td>data item</td>
-				<td>unique identifier of the session</td>
-				<td>yes, if the IPA requires the usage</td>
-			</tr>
-			<tr>
-				<td>request id</td>
-				<td>data item</td>
-				<td>unique identifier of the request within a session</td>
-				<td>yes</td>
-			</tr>
-			<tr>
-				<td>interpretation</td>
-				<td>category</td>
-				<td>meaning as intents and associated entities</td>
-				<td>yes</td>
-			</tr>
-		</table>
-		
-		<p>The parameters <b>name</b>, <b>session id</b> and <b>request id</b> are copies of the data received from the <a href="#if-clientinput">Interface Client Input</a>.</p>
+    <h2 id="if-externalclientinput">
+        <span class="secno">4.2 </span><span><font face="Segoe UI">External
+            Client Input</font></span>
+    </h2>
+    <p>
+        This interface describes the data that is sent from t the <a
+            href="#providerselectionservice">Provider Selection
+            Service</a>. The input is a copy of the data that is sent from
+        the <a href="#ipaclient">IPA Client</a> to the <a
+            href="#ipaservice">IPA Service</a> in <a
+            href="#if-clientinput">Interface Client Input</a>. This
+        interface mainly differs in the return value. The following
+        table details the data that should be considered for this
+        interface in the method <b>processInput.</b>
+    </p>
 
-		<p>This call is optional depending if external IPAs are used or not.</p>
-		
-		<p>The category <b>interpretation</b> may be one of the following options, depending on the capabilities of the external IPA
-		<ul>
-			<li>single-intent, i.e. provide multiple intents in a single utterance</li>
-			<li>multi-intent, i.e. provide one intent in a single utterance</li>
-		</ul>
-		</p>
-		
-		<p>
-			With <b>single-intent</b> the user provides a single intent per utterance. An example for single-intent is <em>"Book a flight to San Francisco for tomorrow morning."</em> The single intent is here book-flight.
-			With <b>multi-intent</b> the user provides multiple intents in a single utterenancee. An example for multi-intent is <em>"How is the weather in San Francisco and book a flight for tomorrow morning."</em>
-			Provided intents are check-weather and book-flight. In this case the IPA needs to determine the order of intent execution based on the strucure of the utterance. If not to be
-			done in parallel, the IPA will trigger the next intent in the identified order.
-		</p>
-		
-		<p>As multi-intent is not very common in today's IPAs the focus for now is on single-intent</b> as detailed in the following table</p>
-		<table style="width:100%">
-			<tr>
-				<th colspan="3">name</th>
-				<th>data type</th>
-				<th>description</th>
-				<th>required</th>
-			</tr>
-			<tr>
-				<td colspan="3">interpretation</td>
-				<td>list</td>
-				<td>list of meaning as intents and associated entities</td>
-				<td>yes</td>
-			</tr>
-			<tr>
-				<td style="width:20px;"></td>
-				<td colspan="2">intent</td>
-				<td>string</td>
-				<td>group of utterances with similar meaning</td>
-				<td>yes</td>
-			</tr>
-			<tr>
-				<td style="width:20px;"></td>
-				<td colspan="2">intent confidence</td>
-				<td>float</td>
-				<td>confidence value for the intent in the range [0,1]</td>
-				<td>no</td>
-			</tr>
-			<tr>
-				<td style="width:20px;"></td>
-				<td colspan="2">entities</td>
-				<td>list</td>
-				<td>list of entitities associated to the intent</td>
-				<td>no</td>
-			</tr>
-			<tr>
-				<td style="width:20px;"></td>
-				<td style="width:20px;"></td>
-				<td>name of the entity</td>
-				<td>string</td>
-				<td>additional information to the intent</td>
-				<td>no</td>
-			</tr>
-			<tr>
-				<td style="width:20px;"></td>
-				<td style="width:20px;"></td>
-				<td>entity confidence</td>
-				<td>float</td>
-				<td>confidence value for the entity in the range [0,1]</td>
-				<td>no</td>
-			</tr>
-		</table>
+    <p>
+        As a return value this interface describes the data that is sent
+        from the <a href="#providerselectionservice">Provider
+            Selection Service</a> and the <a href="#nlu">NLU</a> and <a
+            href="#dialogmanagement">Dialog Management</a>. The
+        following table details the data that should be considered for
+        this interface in the method <b>deliverSemanticInterpretation.</b>
+    </p>
 
-		<h3 id="if-externalclientinput-example-weather"><span class="secno">4.2.1 </span></span><font face="Segoe UI">Example Weather Information for Interface External Client Input</font></span></h3>
+    <table>
+        <tr>
+            <th>name</th>
+            <th>type</th>
+            <th>description</th>
+            <th>required</th>
+        </tr>
+        <tr>
+            <td>session id</td>
+            <td>data item</td>
+            <td>unique identifier of the session</td>
+            <td>yes, if the IPA requires the usage</td>
+        </tr>
+        <tr>
+            <td>request id</td>
+            <td>data item</td>
+            <td>unique identifier of the request within a session</td>
+            <td>yes</td>
+        </tr>
+        <tr>
+            <td>call result</td>
+            <td>data item</td>
+            <td>success or failure</td>
+            <td>yes</td>
+        </tr>
+        <tr>
+            <td>multimodal output</td>
+            <td>category</td>
+            <td>output that has been received from an external IPA</td>
+            <td>yes, if no interpretation is provided</td>
+        </tr>
+        <tr>
+            <td>interpretation</td>
+            <td>category</td>
+            <td>meaning as intents and associated entities</td>
+            <td>yes, if no multimodal output is provided</td>
+        </tr>
+        <tr>
+            <td>error</td>
+            <td>category</td>
+            <td>error as detailed in section <a
+                href="#errorhandling">Error Handling"</a></td>
+            <td>yes, if an error during execution is observed</td>
+        </tr>
+    </table>
+
+    <p>
+        The parameters <b>name</b>, <b>session id</b> and <b>request
+            id</b> are copies of the data received from the <a
+            href="#if-clientinput">Interface Client Input</a>.
+    </p>
+
+    <p>This call is optional depending if external IPAs are used or
+        not.</p>
+
+    <p>Depending on the capabilities of the external IPA the return
+        value may be one of the following options</p>
+    <ul>
+        <li>multimodal output</li>
+        <li>interpretation</li>
+    </ul>
+
+    <p>
+        The category <b>interpretation</b> may be one of the following
+        options, depending on the capabilities of the external IPA</p>
+    
+    <ul>
+        <li>single-intent, i.e. provide multiple intents in a
+            single utterance</li>
+        <li>multi-intent, i.e. provide one intent in a single
+            utterance</li>
+    </ul>
+
+    <p>
+        With <b>single-intent</b> the user provides a single intent per
+        utterance. An example for single-intent is <em>"Book a
+            flight to San Francisco for tomorrow morning."</em> The single
+        intent is here book-flight. With <b>multi-intent</b> the user
+        provides multiple intents in a single utterance. An example
+        for multi-intent is <em>"How is the weather in San
+            Francisco and book a flight for tomorrow morning."</em> Provided
+        intents are check-weather and book-flight. In this case the IPA
+        needs to determine the order of intent execution based on the
+        structure of the utterance. If not to be done in parallel, the
+        IPA will trigger the next intent in the identified order.
+    </p>
+
+    <p>
+        As multi-intent is not very common in today's IPAs the focus for
+        now is on single-intent</b> as detailed in the following table
+    </p>
+    <table style="width: 100%">
+        <tr>
+            <th colspan="3">name</th>
+            <th>data type</th>
+            <th>description</th>
+            <th>required</th>
+        </tr>
+        <tr>
+            <td colspan="3">interpretation</td>
+            <td>list</td>
+            <td>list of meaning as intents and associated entities</td>
+            <td>yes</td>
+        </tr>
+        <tr>
+            <td style="width: 20px;"></td>
+            <td colspan="2">intent</td>
+            <td>string</td>
+            <td>group of utterances with similar meaning</td>
+            <td>yes</td>
+        </tr>
+        <tr>
+            <td style="width: 20px;"></td>
+            <td colspan="2">intent confidence</td>
+            <td>float</td>
+            <td>confidence value for the intent in the range [0,1]</td>
+            <td>no</td>
+        </tr>
+        <tr>
+            <td style="width: 20px;"></td>
+            <td colspan="2">entities</td>
+            <td>list</td>
+            <td>list of entities associated to the intent</td>
+            <td>no</td>
+        </tr>
+        <tr>
+            <td style="width: 20px;"></td>
+            <td style="width: 20px;"></td>
+            <td>name of the entity</td>
+            <td>string</td>
+            <td>additional information to the intent</td>
+            <td>no</td>
+        </tr>
+        <tr>
+            <td style="width: 20px;"></td>
+            <td style="width: 20px;"></td>
+            <td>entity confidence</td>
+            <td>float</td>
+            <td>confidence value for the entity in the range [0,1]</td>
+            <td>no</td>
+        </tr>
+    </table>
+
+    <h3 id="if-externalclientinput-example-weather"><span class="secno">4.2.1 </span></span><font face="Segoe UI">Example Weather Information for Interface External Client Input</font></span></h3>
 		
 		<p>
 			The following request to <b>processInput</b> is a copy of <a href="#if-clientinput-weather-example">Example Weather Information for Interface Client Input</a>.
@@ -667,86 +726,104 @@
         <p>Further steps will be needed to convert both location entities to <em>origin</em> and <em>destination</em> in the actual reply. This may be 
             either done by the flight reservation IPA directly or by calling external services beforehand to determine the nearest airports from these locations.</p>
 
-		<h2 id="if-servicecall"><span class="secno">4.3 </span></span><font face="Segoe UI">External Service Call</font></span></h2>
-		<p>This interface describes the data that is sent from the <a href="#dialog">Dialog</a> to the <a href="#providerselectionservice">Provider Selection Service</a>.
-			The following table details the data that should be considered for this interface in the method <b>callService</b>.
-            </p>
+    <h2 id="if-servicecall">
+        <span class="secno">4.3 </span></span><font face="Segoe UI">External
+            Service Call</font></span>
+    </h2>
+    <p>
+        This interface describes the data that is sent from the <a
+            href="#dialog">Dialog</a> to the <a
+            href="#providerselectionservice">Provider Selection
+            Service</a>. The following table details the data that should be
+        considered for this interface in the method <b>callService</b>.
+    </p>
 
-		<table>
-			<tr>
-				<th>name</th>
-				<th>type</th>
-				<th>description</th>
-				<th>required</th>
-			</tr>
-			<tr>
-				<td>session id</td>
-				<td>data item</td>
-				<td>unique identifier of the session</td>
-				<td>yes, if the IPA requires the usage</td>
-			</tr>
-			<tr>
-				<td>request id</td>
-				<td>data item</td>
-				<td>unique identifier of the request within a session</td>
-				<td>yes</td>
-			</tr>
-			<tr>
-				<td>service id</td>
-				<td>data item</td>
-				<td>id of the service to be exceuted</td>
-				<td>yes</td>
-			</tr>
-			<tr>
-				<td>parameters</td>
-				<td>data item</td>
-				<td>Parameters to the service call</td>
-				<td>no</td>
-			</tr>
-		</table>
+    <table>
+        <tr>
+            <th>name</th>
+            <th>type</th>
+            <th>description</th>
+            <th>required</th>
+        </tr>
+        <tr>
+            <td>session id</td>
+            <td>data item</td>
+            <td>unique identifier of the session</td>
+            <td>yes, if the IPA requires the usage</td>
+        </tr>
+        <tr>
+            <td>request id</td>
+            <td>data item</td>
+            <td>unique identifier of the request within a session</td>
+            <td>yes</td>
+        </tr>
+        <tr>
+            <td>service id</td>
+            <td>data item</td>
+            <td>id of the service to be executed</td>
+            <td>yes</td>
+        </tr>
+        <tr>
+            <td>parameters</td>
+            <td>data item</td>
+            <td>Parameters to the service call</td>
+            <td>no</td>
+        </tr>
+    </table>
 
-		
-		<p>As a return value the result of this call is sent back in the method <b>deliverResponse</b>.</p>
-		<table>
-			<tr>
-				<th>name</th>
-				<th>type</th>
-				<th>description</th>
-				<th>required</th>
-			</tr>
-			<tr>
-				<td>session id</td>
-				<td>data item</td>
-				<td>unique identifier of the session</td>
-				<td>yes, if the IPA requires the usage</td>
-			</tr>
-			<tr>
-				<td>request id</td>
-				<td>data item</td>
-				<td>unique identifier of the request within a session</td>
-				<td>yes</td>
-			</tr>
-			<tr>
-				<td>service id</td>
-				<td>data item</td>
-				<td>id of the service that was exceuted</td>
-				<td>yes</td>
-			</tr>
-			<tr>
-				<td>call result</td>
-				<td>data item</td>
-				<td>success or failure</td>
-				<td>yes</td>
-			</tr>
-			<tr>
-				<td>call result details</td>
-				<td>data item</td>
-				<td>detailed information in case of a failed service call</td>
-				<td>no</td>
-			</tr>
-		</table>
-		
-		<p>This call is optional depending on the result of the next dialog step if an external service should be called or not.</p>
+
+    <p>
+        As a return value the result of this call is sent back in the
+        method <b>deliverResponse</b>.
+    </p>
+    <table>
+        <tr>
+            <th>name</th>
+            <th>type</th>
+            <th>description</th>
+            <th>required</th>
+        </tr>
+        <tr>
+            <td>session id</td>
+            <td>data item</td>
+            <td>unique identifier of the session</td>
+            <td>yes, if the IPA requires the usage</td>
+        </tr>
+        <tr>
+            <td>request id</td>
+            <td>data item</td>
+            <td>unique identifier of the request within a session</td>
+            <td>yes</td>
+        </tr>
+        <tr>
+            <td>service id</td>
+            <td>data item</td>
+            <td>id of the service that was executed</td>
+            <td>yes</td>
+        </tr>
+        <tr>
+            <td>call result</td>
+            <td>data item</td>
+            <td>success or failure</td>
+            <td>yes</td>
+        </tr>
+        <tr>
+            <td>call result details</td>
+            <td>data item</td>
+            <td>detailed information in case of a failed service
+                call</td>
+            <td>no</td>
+        </tr>
+        <tr>
+            <td>error</td>
+            <td>category</td>
+            <td>error as detailed in section <a
+                href="#errorhandling">Error Handling"</a></td>
+            <td>yes, if an error during execution is observed</td>
+        </tr>
+    </table>
+
+    <p>This call is optional depending on the result of the next dialog step if an external service should be called or not.</p>
 
 		<h3 id="if-externalclientinput-example-weather"><span class="secno">4.3.1 </span></span><font face="Segoe UI">Example Weather Information for Interface Service Call</font></span></h3>
 		
