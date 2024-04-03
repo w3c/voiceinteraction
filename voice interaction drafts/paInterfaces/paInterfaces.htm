@@ -452,8 +452,8 @@
         data to be transferred. The selection of the codec is not part
         of this specification.</p>
 
-    Optionally,
-    <b>multimodal input</b> can be transferred that has
+    <p>
+        Optionally, <b>multimodal input</b> can be transferred that has
         been captured as input from a specific modality recognizer.
         Modalities are all other modalities but audio, e.g., text for a
         chat bot, or gestures.
@@ -530,7 +530,7 @@
         behavior.</p>
 
     <h3 id="if-clientinput-weather-example">
-        <span class="secno">4.1.2 </span></span><font face="Segoe UI">Example
+        <span class="secno">4.1.2 </span><span><font face="Segoe UI">Example
             Weather Information for Interface Client Input</font></span>
     </h3>
 
@@ -590,14 +590,14 @@
 }</pre>
 
     <h3 id="if-clientinput-flight-example">
-        <span class="secno">4.1.3 </span></span><font face="Segoe UI">Example
+        <span class="secno">4.1.3 </span><span><font face="Segoe UI">Example
             Flight Reservation for Interface Client Input</font></span>
     </h3>
 
     <p>
         The following request to <b>processInput</b> sends endpointed
         audio data with the user's current location to book a flight
-        with the utterance <em>I want to fly to San Francisco</em>.
+        with the utterance <em>I want to fly to San Francisco</em>.</p>
     <pre>
 {
 	"sessionId": "0c27895c-644d-11ed-81ce-0242ac120002",
@@ -619,12 +619,11 @@
 		...
 	}
 }</pre>
-    </p>
 
     <p>
         In return the the IPA may send back the following response <em>When
             do you want to fly from Berlin to San Francisco?</em> via <b>ClientResponse</b>
-        to the Client
+        to the Client</p>
     <pre>
 {
 	"sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
@@ -760,7 +759,7 @@
 
     <p>
         As multi-intent is not very common in today's IPAs the focus for
-        now is on single-intent</b> as detailed in the following table
+        now is on single-intent as detailed in the following table
     </p>
     <table style="width: 100%">
         <tr>
@@ -834,6 +833,7 @@
 {
     "sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
     "requestId": "42",
+    "callResult": "success",
     "interpretation": [
         {
             "intent": "check-weather",
@@ -872,7 +872,7 @@
         style="width: 40%; height: auto;" />
 
     <h3 id="if-externalclientinputexample-flight">
-        <span class="secno">4.2.2 </span></span><font face="Segoe UI">Example
+        <span class="secno">4.2.2 </span><span><font face="Segoe UI">Example
             Flight Reservation for Interface External Client Input</font></span>
     </h3>
 
@@ -887,11 +887,12 @@
             do you want to fly from Berlin to San Francisco?</em> via <b>ClientResponse</b>
         to the Client. In this case, empty entities, like <em>date</em>
         indicate that there are still slots to be filled and no service
-        call can be made right now.
+        call can be made right now.</p>
     <pre>
 {
     "sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
     "requestId": "42",
+    "callResult": "success",
     "interpretation": [
         {
             "intent": "book-flight",
@@ -919,7 +920,7 @@
         The external speech recognizer converts the obtained audio into
         text like <em>I want to fly to San Francisco</em>. The NLU then
         extracts the following from that decoded utterance, other
-        multimodal input and metadata.
+        multimodal input and metadata.</p>
     <ul>
         <li>intent: book-fligh from, e.g., utterance part <em>I
                 want to fly&hellip;</em></li>
@@ -928,12 +929,12 @@
         <li>entity: location, e.g., from the multimodal input of
             location</li>
     </ul>
-    This is illustrated in the following figure.
+    <p>
+        This is illustrated in the following figure. <img
+            src="processFlightReservation.svg"
+            alt="Processing Input of the flight reservation example"
+            style="width: 40%; height: auto;" />
     </p>
-    <img src="processFlightReservation.svg"
-        alt="Processing Input of the flight reservation example"
-        style="width: 40%; height: auto;" />
-
     <p>
         Further steps will be needed to convert both location entities
         to <em>origin</em> and <em>destination</em> in the actual reply.
@@ -943,7 +944,7 @@
     </p>
 
     <h2 id="if-servicecall">
-        <span class="secno">4.3 </span></span><font face="Segoe UI">External
+        <span class="secno">4.3 </span><span><font face="Segoe UI">External
             Service Call</font></span>
     </h2>
     <p>
@@ -1060,7 +1061,7 @@
 {
     "sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
     "requestId": "42",
-    "interpretation": [
+    "services": [
         {
             "serviceId": "weather-service",
             "parameters": [
@@ -1083,10 +1084,11 @@
 {
     "sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
     "requestId": "42",
-    "interpretation": [
+    "callResult": "success",
+    "services": [
         {
             "serviceId": "weather-information",
-            "callResult": "SUCCESS",
+            "callResult": "success",
             "callResultDetails": [
                 {
                     "location": "Berlin",
@@ -1176,15 +1178,14 @@
     <h4 id="modalitymanager">
         <span class="secno">5.1.1.1 </span>Modality Manager
     </h4>
+
     <p>The modality manager enables access to the modalities that
         are supported by the IPA Client. Major modalities are voice and
-        text in case of chatbots. The following interfaces are supported
-    
+        text in case of chatbots. The following interfaces are supported</p>
     <ul>
         <li>Client Interaction</li>
         <li>Handle-xxx-Modality</li>
     </ul>
-    </p>
 
     <h4 id="clientactivtionstrategy">
         <span class="secno">5.1.1.2 </span>Client Activation Strategy
@@ -1215,7 +1216,7 @@
                 also be used to preselect a known <a href="#provider">IPA
                     Provider</a>. In this case the identifier of that <a
                 href="#provider">IPA Provider</a> is also used as
-                additional metadata augmenting the input</a> This hotword is
+                additional metadata augmenting the input. This hotword is
                 usually not part of the spoken command that is passed
                 for further evaluation.
             </td>
