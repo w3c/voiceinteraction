@@ -1,55 +1,81 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<html dir="ltr" about="" property="dcterms:language" content="en" xmlns="http://www.w3.org/1999/xhtml" prefix="bibo: http://purl.org/ontology/bibo/" typeof="bibo:Document">
+<html dir="ltr" about="" property="dcterms:language" content="en"
+    xmlns="http://www.w3.org/1999/xhtml"
+    prefix="bibo: http://purl.org/ontology/bibo/" typeof="bibo:Document">
 <head>
-    <title>Intelligent Personal Assistant Interfaces</title>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-    <link href="../cg-draft.css" rel="stylesheet" type="text/css" charset="utf-8"/>
+<title>Intelligent Personal Assistant Interfaces</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="../cg-draft.css" rel="stylesheet" type="text/css"/>
 </head>
 
 <body>
     <div class="head">
-        <p><a href="http://www.w3.org/">
-            <img width="72" height="48" src="http://www.w3.org/Icons/w3c_home" alt="W3C"/></a></p>
+        <p>
+            <a href="http://www.w3.org/"> <img width="72"
+                height="48" src="http://www.w3.org/Icons/w3c_home"
+                alt="W3C" /></a>
+        </p>
 
-        <h1 property="dcterms:title" class="title" id="title">Intelligent Personal Assistant Architecture</h1>
-        <h2 property="bibo:subtitle" id="subtitle">Intelligent Personal Assistant Interfaces</h2>
+        <h1 property="dcterms:title" class="title" id="title">Intelligent
+            Personal Assistant Architecture</h1>
+        <h2 property="bibo:subtitle" id="subtitle">Intelligent
+            Personal Assistant Interfaces</h2>
         <dl>
             <dt>Latest version</dt>
-            <dd>Last modified: March 27, 2024 <a href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a> (GitHub repository)<br/>
-                <a href ="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">HTML rendered version</a></dd>
+            <dd>
+                Last modified: April 03, 2024 <a
+                    href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a>
+                (GitHub repository)<br /> <a
+                    href="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">HTML
+                    rendered version</a>
+            </dd>
             <dt>Editor</dt>
-            <dd>Dirk Schnelle-Walka<br/>
-                Deborah Dahl, Conversational Technologies</dd>
+            <dd>
+                Dirk Schnelle-Walka<br /> Deborah Dahl, Conversational
+                Technologies
+            </dd>
         </dl>
-        <p class="copyright">Copyright © 2022-2024 the Contributors to the Voice
-            Interaction Community Group, published by the 
-            <a href="http://www.w3.org/community/voiceinteraction/">Voice Interaction Community Group</a> 
-            under the 
-            <a href="https://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a>.
-            A human-readable 
-            <a href="http://www.w3.org/community/about/agreements/cla-deed/">summary</a>
-            is available.</p>
-        <hr/>
+        <p class="copyright">
+            Copyright © 2022-2024 the Contributors to the Voice
+            Interaction Community Group, published by the <a
+                href="http://www.w3.org/community/voiceinteraction/">Voice
+                Interaction Community Group</a> under the <a
+                href="https://www.w3.org/community/about/agreements/cla/">W3C
+                Community Contributor License Agreement (CLA)</a>. A
+            human-readable <a
+                href="http://www.w3.org/community/about/agreements/cla-deed/">summary</a>
+            is available.
+        </p>
+        <hr />
     </div>
 
     <h2 id="abstract">Abstract</h2>
 
-    <p>This document details the general architecture of Intelligent Personal
-        Assistants as described in 
-        <a href="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm">Architecture and Potential for Standardization Version 1.3</a>
-        with regard to interface definitions. The architectural descriptions
-        focus on intent-based voice-based personal assistants and chatbots. 
-        Current LLM intent-less chatbots may have other interface needs.</p>
+    <p>
+        This document details the general architecture of Intelligent
+        Personal Assistants as described in <a
+            href="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm">Architecture
+            and Potential for Standardization Version 1.3</a> with regard to
+        interface definitions. The architectural descriptions focus on
+        intent-based voice-based personal assistants and chatbots.
+        Current LLM intent-less chatbots may have other interface needs.
+    </p>
 
     <h2>Status of This Document</h2>
 
-    <p><em>This specification was published by the 
-        <a href="http://www.w3.org/community/voiceinteraction/">Voice Interaction Community Group</a>. 
-        It is not a W3C Standard nor is it on the W3C Standards Track. 
-        Please note that under the 
-        <a href="http://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a>
-        there is a limited opt-out and other conditions apply. Learn more about
-        <a href="http://www.w3.org/community/">W3C Community and Business Groups</a>.</em></p>
+    <p>
+        <em>This specification was published by the <a
+            href="http://www.w3.org/community/voiceinteraction/">Voice
+                Interaction Community Group</a>. It is not a W3C Standard
+            nor is it on the W3C Standards Track. Please note that under
+            the <a
+            href="http://www.w3.org/community/about/agreements/cla/">W3C
+                Community Contributor License Agreement (CLA)</a> there is a
+            limited opt-out and other conditions apply. Learn more about
+            <a href="http://www.w3.org/community/">W3C Community and
+                Business Groups</a>.
+        </em>
+    </p>
 
     <h2 class="introductory">Table of Contents</h2>
 
@@ -57,66 +83,73 @@
         <li><a href="#introduction">Introduction</a></li>
         <li><a href="#problemstatement">Problem Statement</a></li>
         <li><a href="#architecture">Architecture</a></li>
-        <li><a href="#highlevelinterfaces">High Level Interfaces</a></li>
+        <li><a href="#highlevelinterfaces">High Level
+                Interfaces</a></li>
         <li><a href="#lowlevelinterfaces">Low Level Interfaces</a></li>
     </ol>
 
-        <!-- OddPage -->
+    <!-- OddPage -->
     <h1 id="introduction">
         <span class="secno">1. </span>Introduction
     </h1>
 
-    <p>Intelligent Personal Assistants (IPAs) are now available in our
-        daily lives through our smart phones. Apple’s Siri, Google Assistant,
-        Microsoft’s Cortana, Samsung’s Bixby and many more are helping us with
-        various tasks, like shopping, playing music, setting a schedule,
-        sending messages, and offering answers to simple questions.
-        Additionally, we equip our households with smart speakers like
-        Amazon’s Alexa or Google Home which are available without the need to
-        pick up explicit devices for these sorts of tasks or even control
-        household appliances in our homes. As of today, there is no
-        interoperability among the available IPA providers. Especially for
-        exchanging learned user behaviors this is unlikely to happen at all.</p>
+    <p>Intelligent Personal Assistants (IPAs) are now available in
+        our daily lives through our smart phones. Apple’s Siri, Google
+        Assistant, Microsoft’s Cortana, Samsung’s Bixby and many more
+        are helping us with various tasks, like shopping, playing music,
+        setting a schedule, sending messages, and offering answers to
+        simple questions. Additionally, we equip our households with
+        smart speakers like Amazon’s Alexa or Google Home which are
+        available without the need to pick up explicit devices for these
+        sorts of tasks or even control household appliances in our
+        homes. As of today, there is no interoperability among the
+        available IPA providers. Especially for exchanging learned user
+        behaviors this is unlikely to happen at all.</p>
     <p>Furthermore, in addition to these general-purpose assistants,
         there are also specialized virtual assistants which are able to
-        provide their users with in-depth information which is specific to an
-        enterprise, government agency, school, or other organization. They may
-        also have the ability to perform transactions on behalf of their
-        users, such as purchasing items, paying bills, or making reservations.
-        Because of the breadth of possibilities for these specialized
-        assistants, it is imperative that they be able to interoperate with
-        the general-purpose assistants. Without this kind of interoperability,
-        enterprise developers will need to re-implement their intelligent
+        provide their users with in-depth information which is specific
+        to an enterprise, government agency, school, or other
+        organization. They may also have the ability to perform
+        transactions on behalf of their users, such as purchasing items,
+        paying bills, or making reservations. Because of the breadth of
+        possibilities for these specialized assistants, it is imperative
+        that they be able to interoperate with the general-purpose
+        assistants. Without this kind of interoperability, enterprise
+        developers will need to re-implement their intelligent
         assistants for each major generic platform.</p>
 
-    <p>This document is the second step in our strategy for IPA
+    <p>
+        This document is the second step in our strategy for IPA
         standardization. It is based on a general architecture of IPAs
         described in <a
-            href="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm">Architecture and Potential for Standardization Version 1.3</a>
-         which aims at exploring
-        the potential areas for standardization. It focuses on voice as the
-        major input modality. We believe it will be of value not only to
-        developers, but to many of the constituencies within the intelligent
-        personal assistant ecosystem. Enterprise decision-makers, strategists
-        and consultants, and entrepreneurs may study this work to learn of
-        best practices and seek adjacencies for creation or investment. The
-        overall concept is not restricted to voice but also covers purely text
-        based interactions with so-called chatbots as well as interaction
+            href="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm">Architecture
+            and Potential for Standardization Version 1.3</a> which aims at
+        exploring the potential areas for standardization. It focuses on
+        voice as the major input modality. We believe it will be of
+        value not only to developers, but to many of the constituencies
+        within the intelligent personal assistant ecosystem. Enterprise
+        decision-makers, strategists and consultants, and entrepreneurs
+        may study this work to learn of best practices and seek
+        adjacencies for creation or investment. The overall concept is
+        not restricted to voice but also covers purely text based
+        interactions with so-called chatbots as well as interaction
         using multiple modalities. Conceptually, the authors also define
         executing actions in the user's environment, like turning on the
-        light, as a modality. This means that components that deal with speech
-        recognition, natural language understanding or speech synthesis will
-        not necessarily be available in these deployments. In case of
-        chatbots, speech components will be omitted. In case of multimodal
-        interaction, interaction modalities may be extended by components to
-        recognize input from the respective modality, transform it into
-        something meaningful and vice-versa to generate output in one or more
-        modalities. Some modalities may be used as output-only, like turning
-        on the light, while other modalities may be used as input-only, like
+        light, as a modality. This means that components that deal with
+        speech recognition, natural language understanding or speech
+        synthesis will not necessarily be available in these
+        deployments. In case of chatbots, speech components will be
+        omitted. In case of multimodal interaction, interaction
+        modalities may be extended by components to recognize input from
+        the respective modality, transform it into something meaningful
+        and vice-versa to generate output in one or more modalities.
+        Some modalities may be used as output-only, like turning on the
+        light, while other modalities may be used as input-only, like
         touch.
     </p>
 
-    <p>In this second step we describe the interfaces of the general
+    <p>
+        In this second step we describe the interfaces of the general
         architecture of IPAs in <a
             href="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm">Architecture
             and Potential for Standardization Version 1.3</a>. We believe it
@@ -127,247 +160,386 @@
         best practices and seek adjacencies for creation or investment.
     </p>
 
-    <p>In order to cope with such <a href="#usecases">use cases</a> as those described above an IPA follows the general design concepts of a voice user interface, as can be seen in Figure 1.</p>
-		
-		<p>Interfaces are described with the help of <a href="https://www.omg.org/spec/UML/">UML diagrams</a>. We expect the reader to be familiar with that notation,
-			although most concepts are easy to understand and do not require in-depth knowledge. The main diagram types used in this document are
-			<a href="https://sparxsystems.com/resources/tutorials/uml2/component-diagram.html">component diagrams</a> and 
-			<a href="https://sparxsystems.com/resources/tutorials/uml2/sequence-diagram.html">sequence diagrams</a>.
-			The UML diagrams are provided as Enterprise Architect Model <a href="pa-architecture.EAP">pa-architecture.EAP</a>. They can be viewed with the free of charge tool
-			<a href="https://www.sparxsystems.eu/enterprise-architect/ea-lite-edition/">EA Lite</a></p>
-        
-        <h1 id="problem statement"><span class="secno">2. </span>Problem Statement</h1>
-        
-        <h2 id="usecases"><span class="secno">2.1 </span>Use Cases</h2>
-        <p>This section describes potential usages of IPAs that will be used later in the document to
-           illustrate the usage of the specified interfaces.</p> 
-				
-        <h3><span class="secno">2.1.1 </span>Weather Information</h3>
+    <p>
+        In order to cope with such <a href="#usecases">use cases</a> as
+        those described above an IPA follows the general design concepts
+        of a voice user interface, as can be seen in Figure 1.
+    </p>
 
-        <p> A user located in Berlin, Germany, is planning to visit her friend a few kilometers away, the next day.
-        As she considers taking the bike, she asks the IPA for weather conditions.</p>
-        
-        <h3><span class="secno">2.1.2 </span>Flight Reservation</h3>
-        
-        <p>A user located in Berlin, Germany, would like to plan a trio to an international conference
-        and she wants to book a flight to the conference in San Francisco. Therefore, she
-        approaches the IPA to help her with booking the flight,</p>
-        
+    <p>
+        Interfaces are described with the help of <a
+            href="https://www.omg.org/spec/UML/">UML diagrams</a>. We
+        expect the reader to be familiar with that notation, although
+        most concepts are easy to understand and do not require in-depth
+        knowledge. The main diagram types used in this document are <a
+            href="https://sparxsystems.com/resources/tutorials/uml2/component-diagram.html">component
+            diagrams</a> and <a
+            href="https://sparxsystems.com/resources/tutorials/uml2/sequence-diagram.html">sequence
+            diagrams</a>. The UML diagrams are provided as Enterprise
+        Architect Model <a href="pa-architecture.EAP">pa-architecture.EAP</a>.
+        They can be viewed with the free of charge tool <a
+            href="https://www.sparxsystems.eu/enterprise-architect/ea-lite-edition/">EA
+            Lite</a>
+    </p>
 
-        <h1 id="architecture"><span class="secno">3. </span>Architecture</h1>
+    <h1 id="problem statement">
+        <span class="secno">2. </span>Problem Statement
+    </h1>
 
-		<p>The architecture described in this document follows the <a href="https://web.archive.org/web/20150906155800/http:/www.objectmentor.com/resources/articles/Principles_and_Patterns.pdf">SOLID principle</a>
-			introduced by Robert C. Martin to arrive at a scalable, understandable and reusable software solution.
-			<dl>
-				<dt>Single responsibility principle</dt>
-				<dd>The components should have only one clearly-defined responsibility.</dd>
-				<dt>Open closed principle</dt>
-				<dd>Components should be open for extension, but closed for modification.</dd>
-				<dt>Liskov substitution principle</dt>
-				<dd>Components may be replaced without impacts onto the basic system behavior.</dd>
-				<dt>Interface segregation principle</dt>
-				<dd>Many specific interfaces are better than one general-purpose interface.</dd>
-				<dt>Dependency inversion principle</dt>
-				<dd>High-level components should not depend on low-level components. Both should depend on their interfaces.</dd>
-			</dl>
-		</p>
+    <h2 id="usecases">
+        <span class="secno">2.1 </span>Use Cases
+    </h2>
+    <p>This section describes potential usages of IPAs that will be
+        used later in the document to illustrate the usage of the
+        specified interfaces.</p>
 
-        <p>
-            This architecture follows a traditional partitioning of conversational systems, with separate components for speech recognition, natural language understanding, dialog management, natural language generation, and audio output, (audio files or text to speech). This architecture does not rule out combining some of these components in specific systems. 
-        </p>
-		
-		<p>This architecture aims at serving, among others, the following most popular high-level use cases for IPAs</p>
-			<ol>
-				<li>Question Answering or Information Retrieval</a>
-				<li>Executing local and/or remote services to accomplish tasks</li>
-			</ol>
-		<p>This is supported by a flexible architecture that supports dynamically adding local and remote services or knowledge sources such as data providers. Moreover, it is possible
-		to include other IPAs, with the same architecture, and forward requests to them, similar to the principle of a russian doll (omitting the Client Layer).
-		All this describes the capabilities of the IPA. These extensions may be selected from a
-		standardized marketplace. For the reminder of this document, we consider an IPA that is extendible via such a marketplace.</p>
+    <h3>
+        <span class="secno">2.1.1 </span>Weather Information
+    </h3>
 
-		<p>The following table lists the IPA main use cases and related examples that are used in this document</p>
-		<table>
-			<tr>
-				<th>Main Use Case</th>
-				<th>Example</th>
-			</tr>
-			<tr>
-				<td>Question Answering or Information Retrieval</td>
-				<td>Weather information</td>
-			</tr>
-			<tr>
-				<td>Executing local and/or remote services to accomplish tasks</td>
-				<td>Flight reservation</td>
-			</tr>
-		</table>
-        <p>These main use cases are shown in the following figure</p>
-        <img src="Main-IPA-Use-Cases.svg" alt="Main IPA Use Cases" style="width: 40%; height: auto;"/>
-        		
-		<p>Not all components may be needed for actual implementations, some may be omitted completely. However, we note them here to provide a more complete picture. 
-		This architecture comprises three layers that are detailed in the following sections</p>
-        <ol>
-            <li><a href="#clientlayer">Client Layer</a></li>
-            <li><a href="#dialoglayer">Dialog Layer</a></li>
-            <li><a href="#datalayer">External Data / Services / IPA Providers</a></li>
-        </ol>
-		<p>Actual implementations may want to distinguish more than these layers. The assignment to the layers is not considered to be strict so that some of the components may be shifted
-		to other layers as needed. This view only reflects a view that the Community Group regard as ideal and to show the intended separation of concerns.</p>
+    <p>A user located in Berlin, Germany, is planning to visit her
+        friend a few kilometers away, the next day. As she considers
+        taking the bike, she asks the IPA for weather conditions.</p>
 
-		<img src="IPA-Major-Components.svg" alt="IPA Major Components" style="width: 50%; height: auto;"/>
-		
-		<p>According to these components they are assigned to the packages shown below.</p> 
-        <img src="IPA-Package-Hierarchy.svg" alt="IPA Package Hierarchy" style="width: 50%; height: auto;"/>
+    <h3>
+        <span class="secno">2.1.2 </span>Flight Reservation
+    </h3>
 
-        <h1 id="highlevelinterfaces"><span class="secno">4. </span>High Level Interfaces</h1>
+    <p>A user located in Berlin, Germany, would like to plan a trio
+        to an international conference and she wants to book a flight to
+        the conference in San Francisco. Therefore, she approaches the
+        IPA to help her with booking the flight,</p>
 
-		<p>This section details the interfaces from the figure shown in the <a href="#architecture">architecture</a>. The interfaces are described with the following attributes
-			<dl>
-				<dt>name</dt>
-				<dd>Name of the attribute</dd>
-				<dt>type</dt>
-				<dd>Hint if this attribute is a single data item or a category. A category may contain other categories or data items.</dd>
-				<dt>description</dt>
-				<dd>A short description to illustrate the purpose of this attribute.</dd>
-				<dt>required</dt>
-				<dd>Flag, if this attribute is required to be used in this interface.</dd>
-			</dl>
-			The data types of the attributes are left open for now.
-		</p>
 
-		<p>A typical flow for the high level interfaces is shown in the following figure.</p>
-		<img src="Major-Components-Interaction.svg" alt="IPA Major Components Interaction" style="width: 100%; height: auto;"/>
-		<p>This sequence shows the support of the major use cases stated above at high level
-			<ol>
-				<li>Question Answering or Information Retrieval</a>
-				<li>Executing local and/or remote services to accomplish tasks</li>
-			</ol>
-		</p>
-			
-		<h2 id="if-clientinput"><span class="secno">4.1 </span><span><font face="Segoe UI">Interface Client Input</font></span></h2>
-		<p>This interface describes the data that is sent from the <a href="#ipaclient">IPA Client</a> to the <a href="#ipaservice">IPA Service</a>.
-			The following table details the data that should be considered for this interface
-			in the method <b>processInput</b></p>
+    <h1 id="architecture">
+        <span class="secno">3. </span>Architecture
+    </h1>
 
-		<table>
-			<tr>
-				<th>name</th>
-				<th>type</th>
-				<th>description</th>
-				<th>required</th>
-			</tr>
-			<tr>
-				<td>session id</td>
-				<td>data item</td>
-				<td>unique identifier of the session</td>
-				<td>yes, if obtained</td>
-			</tr>
-			<tr>
-				<td>request id</td>
-				<td>data item</td>
-				<td>unique identifier of the request within a session</td>
-				<td>yes</td>
-			</tr>
-			<tr>
-				<td>audio data</td>
-				<td>data item</td>
-				<td>encoded or raw audio data</td>
-				<td>yes</td>
-			</tr>
-			<tr>
-				<td>multimodal input</td>
-				<td>category</td>
-				<td>input that has been received from modality recognizers, e.g., text, gestures, pen input, ...</td>
-				<td>no</td>
-			</tr>
-			<tr>
-				<td>meta data</td>
-				<td>category</td>
-				<td>data augmenting the request, e.g., user identification, timestamp, location, ...</td>
-				<td>no</td>
-			</tr>
-		</table>
-		
-		<p>The <b>session id</b> can be created by the <a href="#ipaservice">IPA Service</a>. In case a session id is provided, it must be used for subsequent calls.</p>
-		
-		<p>The <a href="#ipaclient">IPA Client</a> maintains <b>request id</b> for each request that is being sent via this interface. These ids must be unique within a
-			session.</p>
-		
-		<p><b>Audio data</b> can be delivered mainly in two ways
-			<ol>
-				<li>Endpointed audio data</li>
-				<li>Streamed audio data</li>
-			</ol></p>
-			
-		<p>For endpointed audio data the <a href="#ipaclient">IPA Client</a> determines the end of speech, e.g., with the help of voice activity detection.
-			In this case only that portion of audio is sent that contains the potential spoken user input. In this case, an audio codec may be used, e.g., to reduce
-			the amount of data to be transferred. In terms of user experience this means that processing of the user input can only happen after the end of
-			speech has been detected.</p>
-		
-		<p>For streamed audio data, the <a href="#ipaclient">IPA Client</a> starts sending audio data as soon as it has been detected that the user is speaking to
-			the system with the help of the <a href="#clientactivtionstrategy">Client Activation Strategy</a>. In terms of user experience this means that 
-			processing of the user input can happen while the user is speaking.</p>
-			
-		<p>Optionally, <b>multimodal input</b> can be transferred that has been captured as input from a specific modality recognizer. Modalities are all other
-			modalities but audio, e.g., text for a chat bot, or gestures. </p>
+    <h2 id="architectur-principle">
+        <span class="secno">3.1 </span><span><font
+            face="Segoe UI">Architectural Principle</font></span>
+    </h2>
 
-		<p>Optionally, <b>meta data</b> may be transferred augmenting the input. Examples of such data include user identification, timestamp and location.</p>
-		
-		<p>The data transferred via this interface mainly copies the data received from the <a href="#if-clientinput">Interface Client Input</a>.</p>
-		
-		<p>The <a href="#ipaservice">IPA Service</a> may maintain a <b>session id</b>, e.g., to serve multiple clients and allow them to be distinguished.</p>
-		
-		<p>As a return value this interface describes the data that is sent from the <a href="#ipaservice">IPA Service</a> to the <a href="#ipaclient">IPA Client</a>. 
-			The following table details the data that should be considered for this interface in the method <b>deliverResponse</b>.</p>
+    <p>
+        The architecture described in this document follows the <a
+            href="https://web.archive.org/web/20150906155800/http:/www.objectmentor.com/resources/articles/Principles_and_Patterns.pdf">SOLID
+            principle</a> introduced by Robert C. Martin to arrive at a
+        scalable, understandable and reusable software solution.
+    </p>
+    <dl>
+        <dt>Single responsibility principle</dt>
+        <dd>The components should have only one clearly-defined
+            responsibility.</dd>
+        <dt>Open closed principle</dt>
+        <dd>Components should be open for extension, but closed for
+            modification.</dd>
+        <dt>Liskov substitution principle</dt>
+        <dd>Components may be replaced without impacts onto the
+            basic system behavior.</dd>
+        <dt>Interface segregation principle</dt>
+        <dd>Many specific interfaces are better than one
+            general-purpose interface.</dd>
+        <dt>Dependency inversion principle</dt>
+        <dd>High-level components should not depend on low-level
+            components. Both should depend on their interfaces.</dd>
+    </dl>
 
-		<table>
-			<tr>
-				<th>name</th>
-				<th>type</th>
-				<th>description</th>
-				<th>required</th>
-			</tr>
-			<tr>
-				<td>session id</td>
-				<td>data item</td>
-				<td>unique identifier of the session</td>
-				<td>yes, if obtained</td>
-			</tr>
-			<tr>
-				<td>request id</td>
-				<td>data item</td>
-				<td>unique identifier of the request within a session</td>
-				<td>yes</td>
-			</tr>
-			<tr>
-				<td>audio data</td>
-				<td>data item</td>
-				<td>encoded or raw audio data</td>
-				<td>yes</td>
-			</tr>
-			<tr>
-				<td>multimodal output</td>
-				<td>category</td>
-				<td>output that has been received from modality synthesizers, e.g., text, command to execute an observable action, ...</td>
-				<td>no</td>
-			</tr>
-		</table>		
-		
-		<p>In case the parameter <b>multimodal output</b> contains commands to be executed, they are expected to follow the specification of the
-			<a href="#if-servicecall">Interface Service Call.</a></p>
+    <p>This architecture aims at following both, a traditional
+        partitioning of conversational systems, with separate components
+        for speech recognition, natural language understanding, dialog
+        management, natural language generation, and audio output,
+        (audio files or text to speech) as well as newer LLM (Large
+        Language Model) based approaches. This architecture does not
+        rule out combining some of these components in specific systems.</p>
 
-		<p>The following sections will provide examples using the JSON format to illustrate the interfaces. JSON is only 
-		   chosen as it is easy to understand and read. This specification does not make any assumptions about the
-		   underlying programming languages or data format. They are just meant to be an illustration of how responses may be generated with the provided data.
-           It is not required that implementations follow exactly the described behavior.
-        </p>
-		
-		<h3 id="if-clientinput-weather-example"><span class="secno">4.1.2 </span></span><font face="Segoe UI">Example Weather Information for Interface Client Input</font></span></h3>
-		
-		<p>
-			The following request to <b>processInput</b> sends endpointed audio data with the user's current location to query for tomorrow's weather with the utterance
-			<em>What will the weather be like tomorrow"</em>.
-			<pre>
+    <h2 id="main-use-cases">
+        <span class="secno">3.2 </span><span><font
+            face="Segoe UI">Main Use Cases</font></span>
+    </h2>
+
+    <p>Among others, the following most popular high-level use cases
+        for IPAs are to be supported</p>
+    <ol>
+        <li>Question Answering or Information Retrieval</li>
+        <li>Executing local and/or remote services to accomplish
+            tasks</li>
+    </ol>
+    <p>This is supported by a flexible architecture that supports
+        dynamically adding local and remote services or knowledge
+        sources such as data providers. Moreover, it is possible to
+        include other IPAs, with the same architecture, and forward
+        requests to them, similar to the principle of a Russian doll
+        (omitting the Client Layer). All this describes the capabilities
+        of the IPA. These extensions may be selected from a standardized
+        marketplace. For the reminder of this document, we consider an
+        IPA that is extendible via such a marketplace.</p>
+
+    <p>The following table lists the IPA main use cases and related
+        examples that are used in this document</p>
+    <table>
+        <tr>
+            <th>Main Use Case</th>
+            <th>Example</th>
+        </tr>
+        <tr>
+            <td>Question Answering or Information Retrieval</td>
+            <td>Weather information</td>
+        </tr>
+        <tr>
+            <td>Executing local and/or remote services to
+                accomplish tasks</td>
+            <td>Flight reservation</td>
+        </tr>
+    </table>
+    <p>These main use cases are shown in the following figure</p>
+    <img src="Main-IPA-Use-Cases.svg" alt="Main IPA Use Cases"
+        style="width: 40%; height: auto;" />
+
+    <p>Not all components may be needed for actual implementations,
+        some may be omitted completely. Especially, LLM-based
+        architectures may combine the functionality of multiple
+        components into only one or few components. However, we note
+        them here to provide a more complete picture.</p>
+    <p>The architecture comprises three layers that are detailed in
+        the following sections</p>
+    <ol>
+        <li><a href="#clientlayer">Client Layer</a></li>
+        <li><a href="#dialoglayer">Dialog Layer</a></li>
+        <li><a href="#datalayer">External Data / Services / IPA
+                Providers</a></li>
+    </ol>
+    <p>Actual implementations may want to distinguish more or fewer
+        than these layers. The assignment to the layers is not
+        considered to be strict so that some of the components may be
+        shifted to other layers as needed. This view only reflects a
+        view that the Community Group regard as ideal and to show the
+        intended separation of concerns.</p>
+    <img src="IPA-Major-Components.svg" alt="IPA Major Components"
+        style="width: 50%; height: auto;" />
+
+    <p>According to these components they are assigned to the
+        packages shown below.</p>
+    <img src="IPA-Package-Hierarchy.svg" alt="IPA Package Hierarchy"
+        style="width: 50%; height: auto;" />
+
+    <h1 id="highlevelinterfaces">
+        <span class="secno">4. </span>High Level Interfaces
+    </h1>
+
+    <p>
+        This section details the interfaces from the figure shown in the
+        <a href="#architecture">architecture</a>. The interfaces are
+        described with the following attributes
+    </p>
+    <dl>
+        <dt>name</dt>
+        <dd>Name of the attribute</dd>
+        <dt>type</dt>
+        <dd>Hint if this attribute is a single data item or a
+            category. The exact data types of the attributes are left
+            open for now. A category may contain other categories or data
+            items.</dd>
+        <dt>description</dt>
+        <dd>A short description to illustrate the purpose of this
+            attribute.</dd>
+        <dt>required</dt>
+        <dd>Flag, if this attribute is required to be used in this
+            interface.</dd>
+    </dl>
+
+    <p>A typical flow for the high level interfaces is shown in the
+        following figure.</p>
+    <img src="Major-Components-Interaction.svg"
+        alt="IPA Major Components Interaction"
+        style="width: 100%; height: auto;" />
+    <p>This sequence supports the major use cases stated
+        <a href="#main-use-cases">above</a>.</p>
+
+    <h2 id="if-clientinput">
+        <span class="secno">4.1 </span><span><font
+            face="Segoe UI">Interface Client Input</font></span>
+    </h2>
+    <p>
+        This interface describes the data that is sent from the <a
+            href="#ipaclient">IPA Client</a> to the <a
+            href="#ipaservice">IPA Service</a>. The following table
+        details the data that should be considered for this interface in
+        the method <b>processInput</b>
+    </p>
+
+    <table>
+        <tr>
+            <th>name</th>
+            <th>type</th>
+            <th>description</th>
+            <th>required</th>
+        </tr>
+        <tr>
+            <td>session id</td>
+            <td>data item</td>
+            <td>unique identifier of the session</td>
+            <td>yes, if obtained</td>
+        </tr>
+        <tr>
+            <td>request id</td>
+            <td>data item</td>
+            <td>unique identifier of the request within a session</td>
+            <td>yes</td>
+        </tr>
+        <tr>
+            <td>audio data</td>
+            <td>data item</td>
+            <td>encoded or raw audio data</td>
+            <td>yes</td>
+        </tr>
+        <tr>
+            <td>multimodal input</td>
+            <td>category</td>
+            <td>input that has been received from modality
+                recognizers, e.g., text, gestures, pen input, ...</td>
+            <td>no</td>
+        </tr>
+        <tr>
+            <td>meta data</td>
+            <td>category</td>
+            <td>data augmenting the request, e.g., user
+                identification, timestamp, location, ...</td>
+            <td>no</td>
+        </tr>
+    </table>
+
+    <p>
+        The <b>session id</b> can be created by the <a
+            href="#ipaservice">IPA Service</a>. In case a session id is
+        provided, it must be used for subsequent calls.
+    </p>
+
+    <p>
+        The <a href="#ipaclient">IPA Client</a> maintains <b>request
+            id</b> for each request that is being sent via this interface.
+        These ids must be unique within a session.
+    </p>
+
+    <p>
+        <b>Audio data</b> can be delivered mainly in two ways
+    </p>
+    <ol>
+        <li>Endpointed audio data</li>
+        <li>Streamed audio data</li>
+    </ol>
+
+    <p>
+        For endpointed audio data the <a href="#ipaclient">IPA
+            Client</a> determines the end of speech, e.g., with the help of
+        voice activity detection. In this case only that portion of
+        audio is sent that contains the potential spoken user input.In
+        terms of user experience this means that processing of the user
+        input can only happen <em>after</em> the end of speech has
+        been detected.
+    </p>
+
+    <p>
+        For streamed audio data, the <a href="#ipaclient">IPA Client</a>
+        starts sending audio data as soon as it has been detected that
+        the user is speaking to the system with the help of the <a
+            href="#clientactivtionstrategy">Client Activation
+            Strategy</a>. In terms of user experience this means that
+        processing of the user input can happen <em>while</em> the user is
+        speaking.
+    </p>
+
+    <p>An audio codec may be used, e.g., to reduce the amount of
+        data to be transferred. The selection of the codec is not part
+        of this specification.</p>
+
+    Optionally,
+    <b>multimodal input</b> can be transferred that has
+        been captured as input from a specific modality recognizer.
+        Modalities are all other modalities but audio, e.g., text for a
+        chat bot, or gestures.
+    </p>
+
+    <p>
+        Optionally, <b>meta data</b> may be transferred augmenting the
+        input. Examples of such data include user identification,
+        timestamp and location.
+    </p>
+
+    <p>
+        The <a href="#ipaservice">IPA Service</a> may maintain a <b>session
+            id</b>, e.g., to serve multiple clients and allow them to be
+        distinguished.
+    </p>
+
+    <p>
+        As a return value this interface describes the data that is sent
+        from the <a href="#ipaservice">IPA Service</a> to the <a
+            href="#ipaclient">IPA Client</a>. The following table
+        details the data that should be considered for this interface in
+        the <b>ClientResponse</b>.
+    </p>
+
+    <table>
+        <tr>
+            <th>name</th>
+            <th>type</th>
+            <th>description</th>
+            <th>required</th>
+        </tr>
+        <tr>
+            <td>session id</td>
+            <td>data item</td>
+            <td>unique identifier of the session</td>
+            <td>yes, if obtained</td>
+        </tr>
+        <tr>
+            <td>request id</td>
+            <td>data item</td>
+            <td>unique identifier of the request within a session</td>
+            <td>yes</td>
+        </tr>
+        <tr>
+            <td>audio data</td>
+            <td>data item</td>
+            <td>encoded or raw audio data</td>
+            <td>yes</td>
+        </tr>
+        <tr>
+            <td>multimodal output</td>
+            <td>category</td>
+            <td>output that has been received from modality
+                synthesizers, e.g., text, command to execute an
+                observable action, ...</td>
+            <td>no</td>
+        </tr>
+    </table>
+
+    <p>
+        In case the parameter <b>multimodal output</b> contains commands
+        to be executed, they are expected to follow the specification of
+        the <a href="#if-servicecall">Interface Service Call.</a>
+    </p>
+
+    <p>The following sections will provide examples using the JSON
+        format to illustrate the interfaces. JSON is only chosen as it
+        is easy to understand and read. This specification does not make
+        any assumptions about the underlying programming languages or
+        data format. They are just meant to be an illustration of how
+        responses may be generated with the provided data. It is not
+        required that implementations follow exactly the described
+        behavior.</p>
+
+    <h3 id="if-clientinput-weather-example">
+        <span class="secno">4.1.2 </span></span><font face="Segoe UI">Example
+            Weather Information for Interface Client Input</font></span>
+    </h3>
+
+    <p>
+        The following request to <b>processInput</b> sends endpointed
+        audio data with the user's current location to query for
+        tomorrow's weather with the utterance <em>What will the
+            weather be like tomorrow"</em>.</p>
+    <pre>
 {
 	"sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
 	"requestId": "42",
@@ -388,16 +560,18 @@
 		...
 	}
 }</pre>
-		</p>
-		
-		<p>In this example endpointed audio data is transfered as a value. There are other ways to
-		   send the audio data to the IPA, e.g., as a reference. This way is chosen as it is easier to
-		   illustrate the usage.</p>
-		
-		<p>
-			In return the the IPA may send back the following response <em>Tomorrow there will be snow showers in Berlin with temperatures between 0 and -1 degrees</em>
-			via <b>deliverResponse</b> to the Client.
-			<pre>
+
+    <p>In this example endpointed audio data is transfered as a
+        value. There are other ways to send the audio data to the IPA,
+        e.g., as a reference. This way is chosen as it is easier to
+        illustrate the usage.</p>
+
+    <p>
+        In return the the IPA may send back the following response <em>Tomorrow
+            there will be snow showers in Berlin with temperatures
+            between 0 and -1 degrees</em> via <b>ClientResponse</b> to the
+        Client.</p>
+    <pre>
 {
 	"sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
 	"requestId": "42",
@@ -414,14 +588,17 @@
 		...
 	}
 }</pre>
-		</p>
 
-		<h3 id="if-clientinput-flight-example"><span class="secno">4.1.3 </span></span><font face="Segoe UI">Example Flight Reservation for Interface Client Input</font></span></h3>
-		
-		<p>
-			The following request to <b>processInput</b> sends endpointed audio data with the user's current location to book a flight with the utterance
-			<em>I want to fly to San Francisco</em>.
-			<pre>
+    <h3 id="if-clientinput-flight-example">
+        <span class="secno">4.1.3 </span></span><font face="Segoe UI">Example
+            Flight Reservation for Interface Client Input</font></span>
+    </h3>
+
+    <p>
+        The following request to <b>processInput</b> sends endpointed
+        audio data with the user's current location to book a flight
+        with the utterance <em>I want to fly to San Francisco</em>.
+    <pre>
 {
 	"sessionId": "0c27895c-644d-11ed-81ce-0242ac120002",
 	"requestId": "15",
@@ -442,12 +619,13 @@
 		...
 	}
 }</pre>
-		</p>
-		
-		<p>
-			In return the the IPA may send back the following response <em>When do you want to fly from Berlin to San Francisco?</em>
-			via <b>deliverResponse</b> to the Client
-			<pre>
+    </p>
+
+    <p>
+        In return the the IPA may send back the following response <em>When
+            do you want to fly from Berlin to San Francisco?</em> via <b>ClientResponse</b>
+        to the Client
+    <pre>
 {
 	"sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
 	"requestId": "42",
@@ -466,8 +644,8 @@
 }</pre>
 
     <h2 id="if-externalclientinput">
-        <span class="secno">4.2 </span><span><font face="Segoe UI">External
-            Client Input</font></span>
+        <span class="secno">4.2 </span><span><font
+            face="Segoe UI">External Client Input</font></span>
     </h2>
     <p>
         This interface describes the data that is sent from t the <a
@@ -487,7 +665,7 @@
             Selection Service</a> and the <a href="#nlu">NLU</a> and <a
             href="#dialogmanagement">Dialog Management</a>. The
         following table details the data that should be considered for
-        this interface in the method <b>deliverSemanticInterpretation.</b>
+        this interface in the method <b>ExternalClientResponse.</b>
     </p>
 
     <table>
@@ -519,19 +697,21 @@
             <td>multimodal output</td>
             <td>category</td>
             <td>output that has been received from an external IPA</td>
-            <td>yes, if no interpretation is provided</td>
+            <td>yes, if no interpretation is provided and no error
+                occurred</td>
         </tr>
         <tr>
             <td>interpretation</td>
             <td>category</td>
             <td>meaning as intents and associated entities</td>
-            <td>yes, if no multimodal output is provided</td>
+            <td>yes, if no multimodal output is provided and no
+                error occurred</td>
         </tr>
         <tr>
             <td>error</td>
             <td>category</td>
             <td>error as detailed in section <a
-                href="#errorhandling">Error Handling"</a></td>
+                href="#errorhandling">Error Handling</a></td>
             <td>yes, if an error during execution is observed</td>
         </tr>
     </table>
@@ -554,8 +734,9 @@
 
     <p>
         The category <b>interpretation</b> may be one of the following
-        options, depending on the capabilities of the external IPA</p>
-    
+        options, depending on the capabilities of the external IPA
+    </p>
+
     <ul>
         <li>single-intent, i.e. provide multiple intents in a
             single utterance</li>
@@ -568,13 +749,13 @@
         utterance. An example for single-intent is <em>"Book a
             flight to San Francisco for tomorrow morning."</em> The single
         intent is here book-flight. With <b>multi-intent</b> the user
-        provides multiple intents in a single utterance. An example
-        for multi-intent is <em>"How is the weather in San
-            Francisco and book a flight for tomorrow morning."</em> Provided
-        intents are check-weather and book-flight. In this case the IPA
-        needs to determine the order of intent execution based on the
-        structure of the utterance. If not to be done in parallel, the
-        IPA will trigger the next intent in the identified order.
+        provides multiple intents in a single utterance. An example for
+        multi-intent is <em>"How is the weather in San Francisco
+            and book a flight for tomorrow morning."</em> Provided intents
+        are check-weather and book-flight. In this case the IPA needs to
+        determine the order of intent execution based on the structure
+        of the utterance. If not to be done in parallel, the IPA will
+        trigger the next intent in the identified order.
     </p>
 
     <p>
@@ -633,15 +814,23 @@
         </tr>
     </table>
 
-    <h3 id="if-externalclientinput-example-weather"><span class="secno">4.2.1 </span></span><font face="Segoe UI">Example Weather Information for Interface External Client Input</font></span></h3>
-		
-		<p>
-			The following request to <b>processInput</b> is a copy of <a href="#if-clientinput-weather-example">Example Weather Information for Interface Client Input</a>.
-		</p>
-		
-		<p>
-			In return the the external IPA may send back the following response via <b>deliverSemanticInterpretation</b> to the Dialog.
-			<pre>
+    <h3 id="if-externalclientinput-example-weather">
+        <span class="secno">4.2.1 </span><span><font
+            face="Segoe UI">Example Weather Information for
+                Interface External Client Input</font></span>
+    </h3>
+
+    <p>
+        The following request to <b>processInput</b> is a copy of <a
+            href="#if-clientinput-weather-example">Example Weather
+            Information for Interface Client Input</a>.
+    </p>
+
+    <p>
+        In return the the external IPA may send back the following
+        response via <b>ExternalClientResponse</b> to the Dialog.
+    </p>
+    <pre>
 {
     "sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
     "requestId": "42",
@@ -663,29 +852,43 @@
         ...	
     ]
 }</pre>
-		</p>
-        <p>The external speech recognizer converts the obtained audio into text like <em>How will be the weather tomorrow</em>. The NLU then extracts the following from that decoded
-            utterance, other multimodal input and metadata.
-        <ul>
-            <li>intent: check-weather from, e.g., utterance part <em>How will the weather&hellip;</em></li>
-            <li>entity: date from utterance part <em>&hellip;tomorrow&hellip;</em></li>
-            <li>entity: location, e.g., from the multimodal input of location</li>
-        </ul>
-        This is illustrated in the following figure.
-        </p>
-		<img src="processInputWeather.svg" alt="Processing Input of the check weather example" style="width: 40%; height: auto;"/>
 
-		<h3 id="if-externalclientinputexample-flight"><span class="secno">4.2.2 </span></span><font face="Segoe UI">Example Flight Reservation for Interface External Client Input</font></span></h3>
-		
-		<p>
-			The following request to <b>processInput</b> is a copy of <a href="#if-clientinput-flight-example">Example Flight Reservation for Interface Client Input</a>.
-		</p>
-		
-		<p>
-			In return the the IPA may send back the following response <em>When do you want to fly from Berlin to San Francisco?</em>
-			via <b>deliverResponse</b> to the Client. In this case, empty entities, like <em>date</em> indicate that there are still slots to be filled and no service call 
-            can be made right now.
-			<pre>
+    <p>
+        The external speech recognizer converts the obtained audio into
+        text like <em>How will be the weather tomorrow</em>. The NLU
+        then extracts the following from that decoded utterance, other
+        multimodal input and metadata.
+    </p>
+    <ul>
+        <li>intent: check-weather from, e.g., utterance part <em>How
+                will the weather&hellip;</em></li>
+        <li>entity: date from utterance part <em>&hellip;tomorrow&hellip;</em></li>
+        <li>entity: location, e.g., from the multimodal input of
+            location</li>
+    </ul>
+    <p>This is illustrated in the following figure.</p>
+    <img src="processInputWeather.svg"
+        alt="Processing Input of the check weather example"
+        style="width: 40%; height: auto;" />
+
+    <h3 id="if-externalclientinputexample-flight">
+        <span class="secno">4.2.2 </span></span><font face="Segoe UI">Example
+            Flight Reservation for Interface External Client Input</font></span>
+    </h3>
+
+    <p>
+        The following request to <b>processInput</b> is a copy of <a
+            href="#if-clientinput-flight-example">Example Flight
+            Reservation for Interface Client Input</a>.
+    </p>
+
+    <p>
+        In return the the IPA may send back the following response <em>When
+            do you want to fly from Berlin to San Francisco?</em> via <b>ClientResponse</b>
+        to the Client. In this case, empty entities, like <em>date</em>
+        indicate that there are still slots to be filled and no service
+        call can be made right now.
+    <pre>
 {
     "sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
     "requestId": "42",
@@ -712,19 +915,32 @@
     ]
 }</pre>
 
-        <p>The external speech recognizer converts the obtained audio into text like <em>I want to fly to San Francisco</em>. The NLU then extracts the following from that decoded
-            utterance, other multimodal input and metadata.
-        <ul>
-            <li>intent: book-fligh from, e.g., utterance part <em>I want to fly&hellip;</em></li>
-            <li>entity: location from utterance part <em>&hellip;San Francisco&hellip;</em></li>
-            <li>entity: location, e.g., from the multimodal input of location</li>
-        </ul>
-        This is illustrated in the following figure.
-        </p>
-		<img src="processFlightReservation.svg" alt="Processing Input of the flight reservation example" style="width: 40%; height: auto;"/>
-        
-        <p>Further steps will be needed to convert both location entities to <em>origin</em> and <em>destination</em> in the actual reply. This may be 
-            either done by the flight reservation IPA directly or by calling external services beforehand to determine the nearest airports from these locations.</p>
+    <p>
+        The external speech recognizer converts the obtained audio into
+        text like <em>I want to fly to San Francisco</em>. The NLU then
+        extracts the following from that decoded utterance, other
+        multimodal input and metadata.
+    <ul>
+        <li>intent: book-fligh from, e.g., utterance part <em>I
+                want to fly&hellip;</em></li>
+        <li>entity: location from utterance part <em>&hellip;San
+                Francisco&hellip;</em></li>
+        <li>entity: location, e.g., from the multimodal input of
+            location</li>
+    </ul>
+    This is illustrated in the following figure.
+    </p>
+    <img src="processFlightReservation.svg"
+        alt="Processing Input of the flight reservation example"
+        style="width: 40%; height: auto;" />
+
+    <p>
+        Further steps will be needed to convert both location entities
+        to <em>origin</em> and <em>destination</em> in the actual reply.
+        This may be either done by the flight reservation IPA directly
+        or by calling external services beforehand to determine the
+        nearest airports from these locations.
+    </p>
 
     <h2 id="if-servicecall">
         <span class="secno">4.3 </span></span><font face="Segoe UI">External
@@ -773,8 +989,8 @@
 
 
     <p>
-        As a return value the result of this call is sent back in the
-        method <b>deliverResponse</b>.
+        As a return value the result of this call is sent back in the 
+        <b>ClientResponse</b>.
     </p>
     <table>
         <tr>
@@ -818,20 +1034,29 @@
             <td>error</td>
             <td>category</td>
             <td>error as detailed in section <a
-                href="#errorhandling">Error Handling"</a></td>
+                href="#errorhandling">Error Handling</a></td>
             <td>yes, if an error during execution is observed</td>
         </tr>
     </table>
 
-    <p>This call is optional depending on the result of the next dialog step if an external service should be called or not.</p>
+    <p>This call is optional depending on the result of the next
+        dialog step if an external service should be called or not.</p>
 
-		<h3 id="if-externalclientinput-example-weather"><span class="secno">4.3.1 </span></span><font face="Segoe UI">Example Weather Information for Interface Service Call</font></span></h3>
-		
-		<p>
-			The following request to <b>callService</b> may be made to call the weather information service</a>.
-			Although calling the weather service is not a direct functionality of the IPA, it may help to understand
-            how the entered data may be processed to obtain a spoken reply to the user's input. 
-			<pre>
+    <h3 id="if-externalclientinput-example-weather">
+        <span class="secno">4.3.1 </span><span><font
+            face="Segoe UI">Example Weather Information for
+                Interface Service Call</font></span>
+    </h3>
+
+    <p>
+        The following request to <b>callService</b> may be made to call
+        the weather information service. Although calling the weather
+        service is not a direct functionality of the IPA, it may help to
+        understand how the entered data may be processed to obtain a
+        spoken reply to the user's input.
+    </p>
+
+    <pre>
 {
     "sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
     "requestId": "42",
@@ -848,11 +1073,13 @@
         ...	
     ]
 }</pre>
-		</p>
-		
-		<p>
-			In return the the external service may send back the following response via <b>deliverResponse</b> to the Dialog
-			<pre>
+
+    <p>
+        In return the the external service may send back the following
+        response via <b>ExternalClientResponse</b> to the Dialog
+    </p>
+
+    <pre>
 {
     "sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
     "requestId": "42",
@@ -874,11 +1101,13 @@
         ...	
     ]
 }</pre>
-		</p>
-		<p>This information is the used to actually create a reply to the user as
-			described in <a href="#if-clientinput-weather-example">deliverResponse</a> to the Client.</p>
+    <p>
+        This information is the used to actually create a reply to the
+        user as described in <a href="#if-clientinput-weather-example">ExternalClientResponse</a>
+        to the Client.
+    </p>
 
-    <h2 id=errorhandling>Error Handling</h2>
+    <h2 id=errorhandling><span class="secno">4.4.</span>Error Handling</h2>
     <p>Errors may occur anywhere in the processing chain of the IPA.
         The following gives an overview of how they are suggested to be
         handled.</p>
@@ -921,75 +1150,131 @@
         </tr>
     </table>
 
-    <h1 id="lowlevelinterfaces"><span class="secno">5. </span>Low Level Interfaces</h1>
-		
-        <p>This section is still under preparation. </p>
-        
-        <h2 id="client"><span class="secno">5.1. </span>Client Layer</h2>
-		<p>The Client Layer contains the main components that interface with the user.</p>
-		
-		<img src="Client-Component.svg" alt="Client Component" style="width: 100%; height: auto;"/>
-		
-        <h3 id="ipaclient"><span class="secno">5.1.1 </span>IPA Client</h3>
-		<p>Clients enable the user to access the IPA via voice. The following diagram provides some more insight.</p>
-		<img src="IPA-Client.svg" alt="IPA Client" style="width: 100%; height: auto;"/>
-		
-        <h4 id="modalitymanager"><span class="secno">5.1.1.1 </span>Modality Manager</h4>
-		<p>The modality manager enables access to the modalities that are supported by the IPA Client. Major modalities are voice and text in case of chatbots. The following interfaces are supported
-		<ul>
-		  <li>Client Interaction</li>
-		  <li>Handle-xxx-Modality</li>
-		</ul>
-		</p>
+    <h1 id="lowlevelinterfaces">
+        <span class="secno">5. </span>Low Level Interfaces
+    </h1>
 
-        <h4 id="clientactivtionstrategy"><span class="secno">5.1.1.2 </span>Client Activation Strategy</h4>
-		<p>The Client Activation Strategy defines how the client gets activated to be ready to receive spoken commands as input. In turn the <a href="#microphone">Microphone</a> 
-		is opened for recording. Client Activation Strategies are not exclusive but may be used concurrently. The most common activation strategies are described in the
-		table below.</p>
-			<table border="1">
-				<tr>
-					<th>Client Activation Strategy</th>
-					<th>Description</th>
-				</tr>
-				<tr>
-					<td>Push-to-talk</td>
-					<td>The user explicitly triggers the start of the client by means of a physical or on-screen button or its equivalent in a client application.</td>
-				</tr>
-				<tr>
-					<td>Hotword</td>
-					<td>In this case, the user utters a predefined word or phrase to activate the client by voice. Hotwords may also be used to preselect a known
-						<a href="#provider">IPA Provider</a>. In this case the identifier of that <a href="#provider">IPA Provider</a> is also used as additional metadata
-						augmenting the input</a>
-						This hotword is usually not part of the spoken command that is passed for further evaluation.</td>
-				</tr>
-				<tr>
-					<td><a href="#localdataproviders">Local Data Providers</a></td>
-					<td>In this case, a change in the environment may activate the client, for example if the user enters a room.</td>
-				</tr>
-				<tr>
-					<td>...</td>
-					<td>...</td>
-				</tr>
-			</table>
-		<p>The usage of hotwords includes privacy aspects as the microphone needs to be always active. Streaming to the components outside the user's control should be avoided, hence detection of hotwords should ideally happen locally.
-		With regard to nested usage of IPAs that may feature their own hotwords, the detection of hotwords might be required to be extensible.</p>			
+    <p>This section is still under preparation.</p>
 
-        <h2 id="dialoglayer"><span class="secno">5.2 Dialog Layer</span></h2>
-		<p>The Dialog Layer contains the main components to drive the interaction with the user.</p>
-		<img src="Dialog-Component.svg" alt="Dialog Component" style="width: 100%; height: auto;"/>
+    <h2 id="client">
+        <span class="secno">5.1. </span>Client Layer
+    </h2>
+    <p>The Client Layer contains the main components that interface
+        with the user.</p>
 
-        <h3 id="ipaservice"><span class="secno">5.2.1 </span>IPA Service</h3>
+    <img src="Client-Component.svg" alt="Client Component"
+        style="width: 100%; height: auto;" />
 
-        <h3 id="asr"><span class="secno">5.2.2 </span>ASR</h3>
+    <h3 id="ipaclient">
+        <span class="secno">5.1.1 </span>IPA Client
+    </h3>
+    <p>Clients enable the user to access the IPA via voice. The
+        following diagram provides some more insight.</p>
+    <img src="IPA-Client.svg" alt="IPA Client"
+        style="width: 100%; height: auto;" />
 
-        <h3 id="nlu"><span class="secno">5.2.3 </span>NLU</h3>
+    <h4 id="modalitymanager">
+        <span class="secno">5.1.1.1 </span>Modality Manager
+    </h4>
+    <p>The modality manager enables access to the modalities that
+        are supported by the IPA Client. Major modalities are voice and
+        text in case of chatbots. The following interfaces are supported
+    
+    <ul>
+        <li>Client Interaction</li>
+        <li>Handle-xxx-Modality</li>
+    </ul>
+    </p>
 
-        <h3 id="dialogmanagement"><span class="secno">5.2.4 </span>Dialog Management</h3>
-		
-        <h2 id="datalayer"><span class="secno">5.3 External Data / Services / IPA Providers</span></h2>
-		<img src="External-Data-Services-IPA-Providers.svg" alt="External Data / Services / IPA Providers Component" style="width: 100%; height: auto;"/>
+    <h4 id="clientactivtionstrategy">
+        <span class="secno">5.1.1.2 </span>Client Activation Strategy
+    </h4>
+    <p>
+        The Client Activation Strategy defines how the client gets
+        activated to be ready to receive spoken commands as input. In
+        turn the <a href="#microphone">Microphone</a> is opened for
+        recording. Client Activation Strategies are not exclusive but
+        may be used concurrently. The most common activation strategies
+        are described in the table below.
+    </p>
+    <table border="1">
+        <tr>
+            <th>Client Activation Strategy</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Push-to-talk</td>
+            <td>The user explicitly triggers the start of the
+                client by means of a physical or on-screen button or its
+                equivalent in a client application.</td>
+        </tr>
+        <tr>
+            <td>Hotword</td>
+            <td>In this case, the user utters a predefined word or
+                phrase to activate the client by voice. Hotwords may
+                also be used to preselect a known <a href="#provider">IPA
+                    Provider</a>. In this case the identifier of that <a
+                href="#provider">IPA Provider</a> is also used as
+                additional metadata augmenting the input</a> This hotword is
+                usually not part of the spoken command that is passed
+                for further evaluation.
+            </td>
+        </tr>
+        <tr>
+            <td><a href="#localdataproviders">Local Data
+                    Providers</a></td>
+            <td>In this case, a change in the environment may
+                activate the client, for example if the user enters a
+                room.</td>
+        </tr>
+        <tr>
+            <td>...</td>
+            <td>...</td>
+        </tr>
+    </table>
+    <p>The usage of hotwords includes privacy aspects as the
+        microphone needs to be always active. Streaming to the
+        components outside the user's control should be avoided, hence
+        detection of hotwords should ideally happen locally. With regard
+        to nested usage of IPAs that may feature their own hotwords, the
+        detection of hotwords might be required to be extensible.</p>
 
-        <h3 id="providerselectionservice"><span class="secno">5.3.1 </span>Provider Selection Service</h3>
+    <h2 id="dialoglayer">
+        <span class="secno">5.2 Dialog Layer</span>
+    </h2>
+    <p>The Dialog Layer contains the main components to drive the
+        interaction with the user.</p>
+    <img src="Dialog-Component.svg" alt="Dialog Component"
+        style="width: 100%; height: auto;" />
+
+    <h3 id="ipaservice">
+        <span class="secno">5.2.1 </span>IPA Service
+    </h3>
+
+    <h3 id="asr">
+        <span class="secno">5.2.2 </span>ASR
+    </h3>
+
+    <h3 id="nlu">
+        <span class="secno">5.2.3 </span>NLU
+    </h3>
+
+    <h3 id="dialogmanagement">
+        <span class="secno">5.2.4 </span>Dialog Management
+    </h3>
+
+    <h2 id="datalayer">
+        <span class="secno">5.3 External Data / Services / IPA
+            Providers</span>
+    </h2>
+    <img src="External-Data-Services-IPA-Providers.svg"
+        alt="External Data / Services / IPA Providers Component"
+        style="width: 100%; height: auto;" />
+
+    <h3 id="providerselectionservice">
+        <span class="secno">5.3.1 </span>Provider Selection Service
+    </h3>
 
 
-</body></html>
+</body>
+</html>
