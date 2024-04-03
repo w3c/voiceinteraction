@@ -10,31 +10,31 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
-#if !defined(AUDIODELIVERYTYPE_H)
-#define AUDIODELIVERYTYPE_H
+#if !defined(CALL_RESULT_H)
+#define CALL_RESULT_H
 
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
 
 /**
- * Type of audio delivery.
+ * Indicator to success or failure.
  * @author Dirk Schnelle-Walka
  */
-enum AudioDeliveryType
+enum CallResult
 {
     /**
-     * The audio is delivered in a single chunk.
+     * A call has been completed successfully.
      */
-    Endpointed = 0,
+    SUCCESS = 0,
     /**
-     * The audio is delivered in a stream.
+     * There was an error in the call.
      */
-    Streaming = 1
+    FAILURE = 1
 };
 
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c
 
-#endif // !defined(AUDIODELIVERYTYPE_H)
+#endif // !defined(CALL_RESULT_H)

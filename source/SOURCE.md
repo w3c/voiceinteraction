@@ -8,7 +8,7 @@ You will need
 - A C/C++ compiler supporting at least C++ 17
 - CMake version 3.24
 - a local copy of libcurl https://curl.se/download.html so that it can be found
-  by FindPackage
+  by FindPackage on Windows systems
 - A C++ IDE of your choice
 - An OpenAI developer key
 
@@ -64,6 +64,8 @@ Replace OPENAI-DEVELOPER-KEY with your actual key
 
 ### Manual Build
 
+On Windows systems
+
 ```
 cd source/w3cipa
 mkdir build
@@ -71,6 +73,18 @@ cd build
 cmake .. -DCURL_INCLUDE_DIR=<Your path to the CURL include directory> -DCURL_LIBRARY=<Your path to the CURL library directory>
 make && make install
 ```
+
+On Linux based systems or any other
+
+```
+cd source/w3cipa
+mkdir build
+cd build
+cmake ..
+make && make install
+```
+
+
 ## Open Issues
 
 A list of open issues can be displayed via

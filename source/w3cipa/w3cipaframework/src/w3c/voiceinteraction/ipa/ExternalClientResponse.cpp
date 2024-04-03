@@ -53,6 +53,14 @@ const std::shared_ptr<SemanticInterpretation> ExternalClientResponse::getSemanti
     return interpretation;
 }
 
+CallResult ExternalClientResponse::getCallResult() const {
+    if (error == nullptr) {
+        return CallResult::SUCCESS;
+    } else {
+        return CallResult::FAILURE;
+    }
+}
+
 bool ExternalClientResponse::hasError() const {
     return error != nullptr;
 }

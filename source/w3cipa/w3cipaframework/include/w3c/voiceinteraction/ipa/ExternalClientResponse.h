@@ -15,6 +15,7 @@
 
 #include <memory>
 
+#include "CallResult.h"
 #include "ErrorMessage.h"
 #include "MultiModalOutputs.h"
 #include "RequestId.h"
@@ -83,6 +84,12 @@ public:
      * @return The multimodal outputs to be returned to the client.
      */
     const std::shared_ptr<SemanticInterpretation> getSemanticInterpretation() const;
+
+    /**
+     * Checks if there was an error in the call.
+     * @return {@link CallResult#SUCCESS} in case there was no error.
+     */
+    CallResult getCallResult() const;
 
     /**
      * Checks if this reponse includes an error
