@@ -211,8 +211,7 @@
     <p>This section describes potential usages of IPAs.</p>
 
     <h4>
-        <span class="secno">2.1.1 </span><font face="Segoe UI">Travel
-            Planning</font>
+        <span class="secno">2.1.1 </span>Travel Planning
     </h4>
     <p>A user would like to plan a trip to an international
         conference and she needs visa information and airline
@@ -238,8 +237,7 @@
         IPA's.</p>
 
     <h4>
-        <span class="secno">2.1.2 </span><font face="Segoe UI">Emergency
-            Events</font>
+        <span class="secno">2.1.2 </span>Emergency Events
     </h4>
     <p>User encounters emergency situations that requires them to
         use their hands while administering medical care, driving or
@@ -295,7 +293,7 @@
     </ul>
 
     <h3>
-        <span class="secno">2.2 Roles and Responsibilities</span>
+        <span class="secno">2.2 </span>Roles and Responsibilities
     </h3>
 
     <p>The following roles and responsibilities following the RACI
@@ -365,8 +363,8 @@
             Accountable for the UX, content, and operational performance
             of any and all assistants that represent the brand and its
             services to brand constituents (including clients,
-            customers, and internal stakeholders).<br> Example: a
-                financial services enterprise, such as a bank
+            customers, and internal stakeholders).<br>
+            Example: a financial services enterprise, such as a bank.
         </dd>
         <dt>Developer</dt>
         <dd>
@@ -418,7 +416,7 @@
     </dl>
 
     <h2 id="architecture">
-        <span class="secno">3. </span><span><font face="Segoe UI">Architecture</font></span>
+        <span class="secno">3. </span>Architecture
     </h2>
 
     <p>
@@ -451,9 +449,11 @@
             components. Both should depend on their interfaces.</dd>
     </dl>
 
-    <figure> <img src="Basic-IPA-Architecture-1-3.svg"
-        alt="Basic IPA Architecture" style="width: 100%; height: auto;" />
-    <figcaption>Fig. 1 Basic architecture of an IPA</figcaption> </figure>
+    <figure>
+        <img src="Basic-IPA-Architecture-1-3.svg"
+            alt="Basic IPA Architecture" style="width: 100%; height: auto;" />
+        <figcaption>Fig. 1 Basic architecture of an IPA</figcaption>
+    </figure>
     <p>This architecture aims at following both, a traditional
         partitioning of conversational systems, with separate components
         for speech recognition, natural language understanding, dialog
@@ -498,7 +498,7 @@
 
 
     <h3 id="clientlayer">
-        <span class="secno">3.1 Client Layer</span>
+        <span class="secno">3.1 </span>Client Layer
     </h3>
     <p>The Client Layer contains the main components that interface
         with the user. The following figure details the view onto the
@@ -512,7 +512,7 @@
 
     <p>
         Capture devices or modality recognizers are used to capture
-        mutlimodal user input, such as voice or text input. Additional
+        multimodal user input, such as voice or text input. Additional
         input modalities can be employed that capture input with a
         specific modality recognizers. Additional input may be gathered
         from <a href="#localdataproviders">Local Data Providers</a>
@@ -631,7 +631,7 @@
                 also be used to preselect a known <a href="#provider">IPA
                     Provider</a>. In this case the identifier of that <a
                 href="#provider">IPA Provider</a> is also used as
-                additional metadata augmenting the input</a> This hotword is
+                additional metadata augmenting the input. This hotword is
                 usually not part of the spoken command that is passed
                 for further evaluation.
             </td>
@@ -667,7 +667,7 @@
     <p>
         A registry for all <a href="#localservices">Local Services</a>
         and <a href="#localdataproviders">Local Data Providers</a> that
-        can be accessed by the client
+        can be accessed by the client</p>
     <ul>
         <li>The Local Service Registry maintains a list of <a
             href="#localservices">Local Services</a> and <a
@@ -682,9 +682,8 @@
         </li>
         <li><a href="#localservices">Local Services</a> and <a
             href="#localdataproviders">Local Data Providers</a> may be
-            obtained from a standardized market place.</a>
+            obtained from a standardized market place.
     </ul>
-    </p>
 
     <h4 id="localservices">
         <span class="secno">3.1.3 </span>Local Services
@@ -707,7 +706,7 @@
     </p>
 
     <h3 id="dialoglayer">
-        <span class="secno">3.2 Dialog Layer</span>
+        <span class="secno">3.2 </span>Dialog Layer
     </h3>
     <p>The Dialog Layer contains the main components to drive the
         interaction with the user. The following figure details the
@@ -724,7 +723,7 @@
         <a href="#client">IPA Client</a> communicates directly with <a
             href="#dialogmanager">Dialog Manager</a>. However, this is
         not recommended as it may contradict the principle of
-        separation-of-concerns. It has the following characteristics
+        separation-of-concerns. It has the following characteristics</p>
     <ul>
         <li>The IPA Service receives audio input from the <a
             href="#client">IPA Client</a> and forwards it simultaneously
@@ -739,7 +738,7 @@
                 Selection Service</a>.
         </li>
         <li>In case the metadata augmenting the user input contain
-            a preselection of an <a href="#provider">IPA Provider</a>
+            a pre-selection of an <a href="#provider">IPA Provider</a>
             the input is only forwarded to the <a
             href="#selectionservice">Provider Selection Service</a>.
         </li>
@@ -751,11 +750,9 @@
             interpretation may require incorporation of dedicated
             modality specific components.
         </li>
-        </li>
         <li>Alternatively IPA Service may receive text input from
             the client and forwards that instead to audio input. In this
             case the <a href="#ASR">ASR</a> is omitted.
-        </li>
         </li>
         <li>The IPA Service functions receives audio output from
             the <a href="#tts">TTS</a> and forwards it to the <a
@@ -766,15 +763,12 @@
             and forwards that in addition to audio input to the modality
             renderers.
         </li>
-        </li>
-        <li>Alternatively IPA Service may receive text ouput from
+        <li>Alternatively IPA Service may receive text output from
             the <a href="#nlg">NLG</a> and forwards it <a href="#client">IPA
                 Client</a>. In this case the <a href="#TTS">TTS</a> is
             omitted.
         </li>
-        </li>
     </ul>
-    </p>
 
     <h4 id="asr">
         <span class="secno">3.2.2 </span>ASR
@@ -782,7 +776,7 @@
     <p>The Automated Speech Recognizer (ASR) receives audio streams
         of recorded utterances and generates a recognition hypothesis as
         text strings for the local IPA. Conceptually, ASR is a modality
-        recognizer for speech. It has the following characteristics
+        recognizer for speech. It has the following characteristics</p>
     <ul>
         <li>The ASR receives recorded voice input from the <a
             href="#ipaservice">IPA Service.</a></li>
@@ -801,14 +795,13 @@
             href="#ipaservice">IPA Service</a> to the <a href="#nlu">NLU</a>
         </li>
     </ul>
-    </p>
 
     <h4 id="nlu">
         <span class="secno">3.2.3 </span>NLU
     </h4>
     <p>An Natural Language Understanding (NLU) component that able
         to extract meaning as intents and associated entities from an
-        utterance as text strings.
+        utterance as text strings.</p>
     <dl>
         <dt>Intent</dt>
         <dd>An intent is a group of utterances with similar
@@ -817,7 +810,7 @@
         <dd>An entity captures additional information to an intent.</dd>
     </dl>
 
-    The NLU component has the following characteristics
+    <p>The NLU component has the following characteristics</p>
     <ul>
         <li>The NLU consumes multiple incoming streams, e.g. from
             the <a href="#ASR">ASR</a> and for metadata augmenting the
@@ -846,7 +839,6 @@
         <li>Optionally, the NLU can generate multiple intents with
             their entities along with with a confidence score.</li>
     </ul>
-    </p>
 
     <h4 id="dialogmanager">
         <span class="secno">3.2.4 </span>Dialog Manager
@@ -860,7 +852,7 @@
         Conceptually the dialog manager defines the playground that is
         used by the <a href="#dialog">Dialogs</a> and contributes
         significantly to the user experience. The Dialog Manager has the
-        following characteristics
+        following characteristics</p>
     <ul>
         <li>The overall set of available <a href="#dialog">Dialogs</a>
             defines the behavior and capabilities of the interaction
@@ -893,7 +885,7 @@
             wait until the various inputs arrived and consider only
             those that arrive within that limit.</li>
         <li>The Dialog Manager may update the <a href="#history">History</a>
-            with dialog moves, i.e., determined input and output</a>
+            with dialog moves, i.e., determined input and output.</li>
         <li>The Dialog Manager determines the Dialog following a <a
             href="#dialogstrategy">Dialog Strategy</a> that is best
             suited to serve the current user input and re-establishes
@@ -940,7 +932,6 @@
             wrapping the overall interaction of a user with the IPA.
         </li>
     </ul>
-    </p>
 
     <h5 id="dialog">
         <span class="secno">3.2.4.1 </span>Dialog Strategy
@@ -1109,7 +1100,7 @@
     <p>The natural language generation (NLG) component is
         responsible for preparing the natural language text that
         represents the system’s output. It has the following
-        characteristics
+        characteristics</p>
     <ul>
         <li>The NLG receives the output dialog move from the <a
             href="#dialogmanager">Dialog Manager</a>.
@@ -1127,7 +1118,6 @@
             output directly to the <a href="#ipaservice">IPA Service</a>.
         </li>
     </ul>
-    </p>
 
     <h4 id="tts">
         <span class="secno">3.2.7 </span>TTS
@@ -1135,7 +1125,7 @@
     <p>The Text-to-Speech (TTS) component receives text strings,
         which it converts into audio data. Conceptually, the TTS is a
         modality specific renderer for speech. It has the following
-        characteristics
+        characteristics</p>
     <ul>
         <li>The TTS receives its input from the <a href="#nlg">NLG</a></li>
         <li>Alternatively, the TTS may receive its input from the <a
@@ -1149,7 +1139,6 @@
         <li>In case of a text-based chatbot, this component will
             not be needed.</li>
     </ul>
-    </p>
 
     <h4 id="dialogs">
         <span class="secno">3.2.8 </span>Dialogs
@@ -1237,7 +1226,7 @@
             href="#dialogmanager">Dialog Manager</a>. Dialogs must serve
         different purposes in the sense that they are unique for a
         certain task. E.g., only a single flight reservation dialog may
-        exist at a time. Dialogs have the following characteristics
+        exist at a time. Dialogs have the following characteristics</p>
     <ul>
         <li>Dialogs receive inputs as intents out of their
             supported <a href="#intentsets">Intent Sets</a> along with
@@ -1278,7 +1267,6 @@
             use in case there are multiple engines available.
         </li>
     </ul>
-    </p>
 
     <h5 id="coreintentsets">
         <span class="secno">3.2.8.3 </span>Core Intent Sets
@@ -1298,7 +1286,7 @@
         intent, along with their parameters as entities as it is
         produced by the <a href="#nlu">NLU</a> that can be consumed by a
         corresponding <a href="#dialog">Dialog</a> and have the
-        following characteristics
+        following characteristics</p>
     <ul>
         <li>An Intent Set defines one or more intents with an
             optional number (including none) of entities to fulfill the
@@ -1320,7 +1308,6 @@
         <li>It can be used in one or more <a href="#dialog">Dialogs</a>.
         
     </ul>
-    </p>
 
     <h5 id="dialogx">
         <span class="secno">3.2.8.5 </span>Dialog X
@@ -1359,7 +1346,7 @@
         by the <a href="#dialogmanager">Dialog Manager</a>. One of these
         cases is when the <a href="#dialogstrategy">Dialog
             Strategies</a> does not allow for the dynamic handling of <a
-            href="#dialog">Dialogs</a> as described below.
+            href="#dialog">Dialogs</a> as described below.</p>
     <ul>
         <li><a href="#dialog">Dialogs</a> and their <a
             href="#intentsets">Intent Sets</a> can be added or removed
@@ -1394,11 +1381,10 @@
             href="#dialog">Dialogs</a> have been added or removed.
         </li>
     </ul>
-    </p>
 
     <h3 id="datalayer">
-        <span class="secno">3.3 External Data / Services / IPA
-            Providers Layer</span>
+        <span class="secno">3.3 </span>External Data / Services / IPA
+            Providers Layer
     </h3>
     <img src="external-data-services-ipa-providers-layer.svg"
         style="float: right" width="15%" height="auto" />
@@ -1411,7 +1397,7 @@
     <p>A service that provides access to all known Data Providers,
         External Services and IPA Providers. This service also maps the
         IPA Intent Sets to the Intent Sets in the Dialog layer. It has
-        the following characteristics
+        the following characteristics</p>
     <ul>
         <li>The Provider Selection Service provides an interface to
             <a href="dataproviders">Data Providers</a>, <a
@@ -1494,7 +1480,6 @@
             return audio output to be played by the <a href="#speaker">Speaker</a>
         </li>
     </ul>
-    </p>
 
     <h5 id="providerselectionstrategy">
         <span class="secno">3.3.1.1 </span>Provider Selection Strategy
@@ -1508,7 +1493,7 @@
         use cases. The provider selection strategy may be implemented
         for example as one of the following options or a combination
         thereof to determine a list of <a href="#provider">IPA
-            Providers</a> candidates.
+            Providers</a> candidates.</p>
     <ul>
         <li>All known <a href="#provider">IPA Providers</a> are
             used. This strategy may only apply if there are only a small
@@ -1532,17 +1517,17 @@
             may be required.
         </li>
     </ul>
-    In case the
-    <a href="#provider">IPA Provider</a> does not abstract from
-    determining a relevant list of intents, the same strategy may be
-    applied to determine the n-best intents.
+    <p>
+        In case the <a href="#provider">IPA Provider</a> does not
+        abstract from determining a relevant list of intents, the same
+        strategy may be applied to determine the n-best intents.
     </p>
 
     <h5 id="providerregistry">
         <span class="secno">3.3.1.2 </span>Provider Registry
     </h5>
     <p>A registry for all IPA Providers that can be accessed. It has
-        the following characteristics
+        the following characteristics</p>
     <ul>
         <li>The Provider Registry can be queried for a list of <a
             href="#provider">IPA Providers</a> along with their unique
@@ -1574,7 +1559,6 @@
         <li><a href="#provider">IPA Providers</a> may be obtained
             from a standardized market place.</li>
     </ul>
-    </p>
 
     <h5 id="authentication">
         <span class="secno">3.3.1.3 </span>Accounts/Authentication
@@ -1583,7 +1567,7 @@
         i.e., which are available and credentials to access them.
         Storing of credentials must meet security and trust
         considerations that are expected from such a personalized
-        service. It has the following characteristics
+        service. It has the following characteristics</p>
     <ul>
         <li>It returns an authentication means for a key of an <a
             href="#provider">IPA Providers</a> that is known to the <a
@@ -1592,7 +1576,6 @@
             not require authentication, this is indicated to the caller.
         </li>
     </ul>
-    </p>
 
     <h5 id="serviceregistry">
         <span class="secno">3.3.2 </span>External Service Registry
@@ -1600,7 +1583,7 @@
     <p>
         A registry for all <a href="#externalservices">External
             Services</a> and <a href="#dataproviders">Data Providers</a>
-        that can be accessed by the client
+        that can be accessed by the client</p>
     <ul>
         <li>The External Service Registry maintains a list of <a
             href="#externalservices">External Services</a> and <a
@@ -1615,9 +1598,8 @@
         </li>
         <li><a href="#externalservices">External Services</a> and <a
             href="#dataproviders">Data Providers</a> may be obtained
-            from a standardized market place.</a>
+            from a standardized market place.</li>
     </ul>
-    </p>
 
     <h4 id="dataproviders">
         <span class="secno">3.3.3 </span>Data Providers
@@ -1674,7 +1656,7 @@
     <h5 id="provider">
         <span class="secno">3.3.5.1 </span>IPA Provider X
     </h5>
-    <p>A provider of an IPA service, like
+    <p>A provider of an IPA service, like</p>
     <ul>
         <li>Google Assistant</li>
         <li>Amazon Alexa</li>
@@ -1682,7 +1664,7 @@
         <li>SoundHound</li>
         <li>&#x2026;</li>
     </ul>
-    </p>
+    
     <p>The IPA provider may be part of the IPA implementation as an
         IPA Provider or alternatively a subset of the original
         functionality as described below as part of another IPA
@@ -1704,7 +1686,7 @@
         An NLU component that is able to extract meaning as intents and
         associated entities from an utterance as text strings for <a
             href="#provider">IPA Provider X</a>. It has the following
-        characteristics
+        characteristics</p>
     <ul>
         <li>The Provider NLU may be specialized to handle specific
             domains</li>
@@ -1727,7 +1709,6 @@
             meaning.
         </li>
     </ul>
-    </p>
 
     <h5 id="providerintentsets">
         <span class="secno">3.3.5.3 </span>Provider Intent Set
@@ -1745,9 +1726,11 @@
         architectural buildings blocks. A general overview comprising
         these detailing is shown in the following figure.</p>
 
-    <figure> <img src="IPA-Architecture-1-3.svg"
-        alt="IPA Architecture" style="width: 100%; height: auto;" /> <figcaption>Fig.
-    2 Complete architecture of an IPA</figcaption> </figure>
+    <figure>
+        <img src="IPA-Architecture-1-3.svg"
+            alt="IPA Architecture" style="width: 100%; height: auto;" /> 
+        <figcaption>Fig. 2 Complete architecture of an IPA</figcaption>
+    </figure>
 
     <h2 id="errorhandling">
         <span class="secno">4. </span>Error Handling
@@ -1863,10 +1846,12 @@
     We begin with the case where the user's request can be handled by
     one of the internal Dialogs in the Dialog box. The input side is
     illustrated in the following figure
-    <figure> <img src="architecture-walkthrough-input-1.3.svg"
-        alt="IPA Architecture Walkthrough for the input"
-        style="width: 100%; height: auto;" /> <figcaption>Fig.
-    3 Walkthrough for the output path of an IPA</figcaption> </figure>
+    <figure>
+        <img src="architecture-walkthrough-input-1.3.svg"
+            alt="IPA Architecture Walkthrough for the input"
+            style="width: 100%; height: auto;" /> 
+        <figcaption>Fig. 3 Walkthrough for the output path of an IPA</figcaption>
+    </figure>
     <ol>
         <li>The user asks the IPA client about a travel between the
             EU and the United States. The IPA Cient captures the audio
@@ -1920,14 +1905,18 @@
     <h4 id="provider">
         <span class="secno">5.1.2 </span>Walkthrough for the Output Path
     </h4>
+    
+    <p>
     The output path begins where the local NLU and IPA Providers are
     able to deliver their results. In both paths the best match for the
     intents and entities based on the received data have been
     identified. This path is illustrated in the following figure
-    <figure> <img src="architecture-walkthrough-output-1.3.svg"
-        alt="IPA Architecture Walkthrough for the output"
-        style="width: 100%; height: auto;" /> <figcaption>Fig.
-    4 Walkthrough for the output path of an IPA</figcaption> </figure>
+    <figure>
+        <img src="architecture-walkthrough-output-1.3.svg"
+            alt="IPA Architecture Walkthrough for the output"
+            style="width: 100%; height: auto;" />
+        <figcaption>Fig. 4 Walkthrough for the output path of an IPA</figcaption>
+    </figure></p>
 
     <ol>
         <li>The IPA Providers send their determined intents along
@@ -2009,7 +1998,6 @@
             to the IPA Client to be made audible...</li>
         <li>...in the Speaker.</li>
     </ol>
-    </p>
 
     <h2 id="potential">
         <span class="secno">7. </span>Potential for Standardization
@@ -2017,7 +2005,7 @@
 
     <p>The general architecture of IPAs described in this document
         should be detailed in subsequent documents. Further work must be
-        done to
+        done to</p>
     <ol>
         <li>specify the interfaces among the components</li>
         <li>suggest new standards where they are missing</li>
@@ -2025,8 +2013,8 @@
         <li>refer to existing standards as a starting point to be
             refined for the IPA case</li>
     </ol>
-    Currently, the authors see the following situation at the time of
-    writing
+    <p>Currently, the authors see the following situation at the
+        time of writing</p>
     <table border="1">
         <tr>
             <th>Component</th>
@@ -2118,7 +2106,7 @@
                 <ul>
                     <li><a
                         href="https://www.w3.org/TR/mmi-mc-discovery/">Discovery
-                            & Registration of Multimodal Modality
+                            &amp; Registration of Multimodal Modality
                             Components</a></li>
                 </ul>
             </td>
@@ -2166,7 +2154,7 @@
             <td>none</td>
         </tr>
     </table>
-    </p>
+
     <p>
         The table above is not meant to be exhaustive nor does it claim
         that the identified standards are suited for IPA
@@ -2206,7 +2194,7 @@
     </h2>
 
     <h3 id="acknowledgements">
-        <span class="secno">8.1 Acknowledgements</span>
+        <span class="secno">8.1 Acknowledgments</span>
     </h3>
 
     <p>
@@ -2215,15 +2203,14 @@
             href="https://www.w3.org/community/voiceinteraction/">W3C
             Voice Interaction Community Group</a>. The work of the following
         members has significantly facilitated the development of this
-        document:
+        document:</p>
     <ul>
         <li>James Larson, The Open Voice Network</li>
         <li>Jon Stine, The Open Voice Network</li>
     </ul>
-    </p>
 
     <h3 id="abbreviations">
-        <span class="secno">7.2 Abbreviations</span>
+        <span class="secno">8.2 </span>Abbreviations
     </h3>
 
     <table border="1">
