@@ -1038,7 +1038,7 @@
         the following characteristics
     </p>
     <ul>
-        <li>It receives the decoded input from the <a href="#ASR">ASR</a>.
+        <li>It usually receives the decoded input from the <a href="#ASR">ASR</a>.
         </li>
         <li>It may also receive audio data if the LLM is able to
             handle audio input directly..
@@ -1053,7 +1053,7 @@
             optimize the output by augmenting the prompt for this
             purpose.
         </li>
-        <li>It generates the next dialog move as output and
+        <li>It usually generates the next dialog move as text-based output and
             forwards it to the <a href="#tts">TTS</a>.
         </li>
         <li>It may bypass the <a href="#tts">TTS</a> and send the
@@ -1785,6 +1785,13 @@
         An <a href="#intentsets">Intent Set</a> that might be returned
         by the <a href="#providernlu">Provider NLU</a> to handle the
         capabilities of <a href="#provider">IPA Provider X</a>.
+    </p>
+    
+    <h5 id="providerllm">
+        <span class="secno">3.3.5.3 </span>Provider LLM
+    </h5>
+    <p>
+        An <a href="#llm">LLM</a> that is used by the provider.
     </p>
 
     <h4 id="finalarchitecture">
