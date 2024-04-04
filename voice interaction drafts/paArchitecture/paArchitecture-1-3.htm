@@ -1799,12 +1799,20 @@
     </h4>
     <p>The previous sections showed a more detailed view onto the
         architectural buildings blocks. A general overview comprising
-        these detailing is shown in the following figure.</p>
-
+        these detailing is shown in the following figure for NLU-based
+        systems. </p>
     <figure>
         <img src="IPA-Architecture-1-3.svg"
-            alt="IPA Architecture" style="width: 100%; height: auto;" /> 
-        <figcaption>Fig. 2 Complete architecture of an IPA</figcaption>
+            alt="NLU-based IPA Architecture" style="width: 100%; height: auto;" /> 
+        <figcaption>Fig. 3 Complete architecture of an NLU-based IPA</figcaption>
+    </figure>
+
+    <p>For Generative AI-based systems, the architecture looks as
+        follows</p>
+    <figure>
+        <img src="IPA-Architecture-GenerativeAI.svg"
+            alt="Generative AI IPA Architecture" style="width: 100%; height: auto;" /> 
+        <figcaption>Fig. 4 Complete architecture of a Generative AI IPA</figcaption>
     </figure>
 
     <h2 id="errorhandling">
@@ -1904,16 +1912,16 @@
     <h3 id="detailed-walkthrough">
         <span class="secno">5.1 Detailed Walkthrough</span>
     </h3>
-    <p>This section provides a detailed walkthrough that aligns the
-        steps in the use case interaction with the architecture. It
-        covers only the part from the example above that the user asks
-        for a flight travel with a dedicated airline. This very basic
-        example assumes that this is the first request to IPA and that
-        there is a suitable dialog ready that matches the user's
-        request. It may also vary, e.g., depending on the used Dialog
-        Strategy and other optional items that may actually result in
-        different flows. The walkthrough is split into two parts for the
-        input path and for the output path.
+    <p>This section provides a detailed walkthrough for an NLU-based
+        IP that aligns the steps in the use case interaction with the
+        architecture. It covers only the part from the example above
+        that the user asks for a flight travel with a dedicated airline.
+        This very basic example assumes that this is the first request
+        to IPA and that there is a suitable dialog ready that matches
+        the user's request. It may also vary, e.g., depending on the
+        used Dialog Strategy and other optional items that may actually
+        result in different flows. The walkthrough is split into two
+        parts for the input path and for the output path.
     <h4 id="provider">
         <span class="secno">5.1.1 </span>Walkthrough for the Input Path
     </h4>
@@ -1929,7 +1937,7 @@
     </figure>
     <ol>
         <li>The user asks the IPA client about a travel between the
-            EU and the United States. The IPA Cient captures the audio
+            EU and the United States. The IPA Client captures the audio
             with the help of the microphone.</li>
         <li>Requests are usually augmented by other data. The GPS
             location is one example that could be useful. Therefore the
