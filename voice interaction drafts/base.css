@@ -96,3 +96,19 @@ ol.req {
   list-style: ipareq;
   padding-left: 7em;
 }
+
+
+figcaption {
+  font-weight: bold;
+  padding: 2px;
+  text-align: left;
+}
+
+.figurerow {
+  display: flex;
+}
+
+.figurecolumn {
+  flex: 33.33%;
+  padding: 5px;
+}
