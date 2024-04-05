@@ -30,6 +30,7 @@ set(HEADERS
     include/w3c/voiceinteraction/ipa/ErrorMessage.h
     include/w3c/voiceinteraction/ipa/ExternalClientInput.h
     include/w3c/voiceinteraction/ipa/ExternalClientResponse.h
+    include/w3c/voiceinteraction/ipa/ExternalClientResponseListener.h
     include/w3c/voiceinteraction/ipa/MetaData.h
     include/w3c/voiceinteraction/ipa/ModalityType.h
     include/w3c/voiceinteraction/ipa/MultiModalInput.h

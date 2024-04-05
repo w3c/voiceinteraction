@@ -24,7 +24,12 @@ ProviderSelectionService::ProviderSelectionService(const std::shared_ptr<Provide
 ProviderSelectionService::~ProviderSelectionService() {
 }
 
-const std::list<std::shared_ptr<ExternalClientResponse>> ProviderSelectionService::processInput(
+void ProviderSelectionService::addExternalClientResponseListener(
+    const std::shared_ptr<ExternalClientResponseListener>& listener) {
+    externalClientResponseListeners.push_back(listener);
+}
+
+void ProviderSelectionService::processInput(
     const std::shared_ptr<ClientRequest>& request) {
     std::list<std::shared_ptr<ExternalClientResponse>> responses;
     std::list<std::shared_ptr<ExternalClientResponse>> errorResponses;
@@ -42,9 +47,15 @@ const std::list<std::shared_ptr<ExternalClientResponse>> ProviderSelectionServic
     }
     // In case there is no positive response, return all error responses
     if (responses.empty()) {
-        return errorResponses;
+        responses = errorResponses;
     }
-    return responses;
+
+    // Notify all listeners about the results.
+    for (const std::shared_ptr<ExternalClientResponseListener>& listener : externalClientResponseListeners) {
+        for (const std::shared_ptr<ExternalClientResponse>& response : responses) {
+            listener->processExternalClientResponse(response);
+        }
+    }
 }
 
 } // namespace external

@@ -16,7 +16,7 @@
 #include <list>
 
 #include "w3c/voiceinteraction/ipa/ClientRequest.h"
-#include "w3c/voiceinteraction/ipa/ExternalClientResponse.h"
+#include "w3c/voiceinteraction/ipa/ExternalClientResponseListener.h"
 #include "w3c/voiceinteraction/ipa/external/ipa/ProviderRegistry.h"
 
 using namespace w3c::voiceinteraction::ipa::external::ipa;
@@ -52,11 +52,22 @@ public:
      * @param request incoming request.
      * @return list of responses from the IPA providers
      */
-    const std::list<std::shared_ptr<ExternalClientResponse>> processInput(
-        const std::shared_ptr<ClientRequest>& request);
+    void processInput(const std::shared_ptr<ClientRequest>& request);
+
+    /**
+     * Adds the provided listener to the list of known external client
+     * responses.
+     * @param listener the listener to add
+     */
+    void addExternalClientResponseListener(
+        const std::shared_ptr<ExternalClientResponseListener>& listener);
+
 protected:
     /** The provider registry. */
     std::shared_ptr<ProviderRegistry> providerRegistry;
+
+    /** List of known listeners for externaö client responses. */
+    std::list<std::shared_ptr<ExternalClientResponseListener>> externalClientResponseListeners;
 };
 
 } // namespace external

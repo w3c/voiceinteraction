@@ -56,7 +56,10 @@ int main() {
     std::shared_ptr<ProviderSelectionService> providerSelectionService =
         std::make_shared<ProviderSelectionService>(registry);
 
-    ::reference::dialog::ReferenceIPAService ipaService(providerSelectionService);
+    std::shared_ptr<::reference::dialog::ReferenceIPAService> ipaService =
+        std::make_shared<::reference::dialog::ReferenceIPAService>(providerSelectionService);
+    providerSelectionService->addExternalClientResponseListener(ipaService);
+
 
     // Prepare the request
     std::shared_ptr<w3c::voiceinteraction::ipa::RequestId> requestId =
@@ -71,7 +74,7 @@ int main() {
             nullptr, nullptr);
 
     // Actually make the request
-    std::shared_ptr<ClientResponse> response = ipaService.processInput(request);
+    std::shared_ptr<ClientResponse> response = ipaService->processInput(request);
     if (response == nullptr) {
         LOG4CPLUS_ERROR(LOGGER, "no response received");
         return -1;

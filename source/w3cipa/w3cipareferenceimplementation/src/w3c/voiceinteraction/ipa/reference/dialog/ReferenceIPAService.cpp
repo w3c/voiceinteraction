@@ -10,6 +10,8 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
+#include <thread>
+
 #include <log4cplus/loggingmacros.h>
 
 #include "w3c/voiceinteraction/ipa/reference/UUIDSessionId.h"
@@ -45,15 +47,19 @@ const std::shared_ptr<ClientResponse> ReferenceIPAService::processInput(
                            LOG4CPLUS_TEXT("Created new session identifier: %s"),
                            sessionIdentifier->toString().c_str());
     }
-    std::list<std::shared_ptr<ExternalClientResponse>> responses =
-        providerSelectionService->processInput(request);
-    if (responses.size() == 0) {
-        return nullptr;
-    }
 
-    // TODO For now, only return the first response
-    const std::shared_ptr<ExternalClientResponse>& externalResponse =
-        responses.front();
+    // Asynchronously call the the external IPAs
+    externalResponse = nullptr;
+    std::thread thread([&] {
+        providerSelectionService->processInput(request);
+    });
+    thread.detach();
+
+    std::unique_lock<std::mutex> lck(mtx);
+    cv.wait(lck, [this] {
+        return externalResponse != nullptr;
+    });
+
     std::shared_ptr<ClientResponse> response;
     if (externalResponse->hasError()) {
         // TODO temporarily take the error message as the output
@@ -76,6 +82,14 @@ const std::shared_ptr<ClientResponse> ReferenceIPAService::processInput(
     }
     return response;
 }
+
+void  ReferenceIPAService::processExternalClientResponse(
+    const std::shared_ptr<ExternalClientResponse>& response) {
+    std::unique_lock<std::mutex> lck(mtx);
+    externalResponse = response;
+    cv.notify_one();
+}
+
 
 } // namespace dialog
 } // namespace reference
