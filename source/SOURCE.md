@@ -6,7 +6,7 @@ This project aims at providing a reference implementation for an IPA framework.
 
 You will need
 - A C/C++ compiler supporting at least C++ 17
-- CMake version 3.24
+- CMake version 3.22
 - a local copy of libcurl https://curl.se/download.html so that it can be found
   by FindPackage on Windows systems
 - A C++ IDE of your choice
@@ -26,32 +26,9 @@ The source code is in the folder source/w3cipa
 
 - `w3cipaframework` contains the interfaces as described at
   [Intelligent Personal Assistant Interfaces](https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm).
-- `w3cipareferenceimplementatiopn` contain the actual reference implementation using these interfaces
-
-### License
-
-This code is distributed under the
-[Software and Document license - 2023 version](https://www.w3.org/copyright/software-license-2023/).
-
-While the W3C IPA Framework in the folder `include` is a dependency free
-implementation without any dependency, the reference implementation in folder 
-`source` makes use of 3rd-party software.
-
-- libCURL
-    - <https://curl.se/libcurl/>
-    - MIT/X like license
-- log4cplus
-    - <https://github.com/log4cplus/log4cplus>
-    - Two clause BSD license
-- nlohmann JSON
-    - <https://github.com/nlohmann/json>
-    - MIT license
-- OpenSSL 
-    - <https://www.openssl.org/>
-    - Apache License 2 
-- stduuid 
-    - <https://github.com/mariusbancila/stduuid/>
-    - MIT License
+- `w3cipareferenceimplementation` contains the actual reference implementation of some common components using these interfaces
+- `w3cipachatgptipaprovider` an IPAProvider implementation for ChatGPT
+- `w3cipademo` contains demo using the reference implementation
 
 ### Configuring Keys
 
@@ -84,6 +61,31 @@ cmake ..
 make && make install
 ```
 
+
+## License
+
+This code is distributed under the
+[Software and Document license - 2023 version](https://www.w3.org/copyright/software-license-2023/).
+
+While the W3C IPA Framework in the folder `include` is a dependency free
+implementation without any dependency, the reference implementation in folder 
+`source` makes use of 3rd-party software.
+
+- libCURL
+    - <https://curl.se/libcurl/>
+    - MIT/X like license
+- log4cplus
+    - <https://github.com/log4cplus/log4cplus>
+    - Two clause BSD license
+- nlohmann JSON
+    - <https://github.com/nlohmann/json>
+    - MIT license
+- OpenSSL 
+    - <https://www.openssl.org/>
+    - Apache License 2 
+- stduuid 
+    - <https://github.com/mariusbancila/stduuid/>
+    - MIT License
 
 ## Open Issues
 
