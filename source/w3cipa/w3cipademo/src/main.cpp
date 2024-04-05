@@ -59,16 +59,13 @@ int main() {
     ::reference::dialog::ReferenceIPAService ipaService(providerSelectionService);
 
     // Prepare the request
-    //w3c::voiceinteraction::ipa::SessionId sessionId;
     std::shared_ptr<w3c::voiceinteraction::ipa::RequestId> requestId =
         std::make_shared<::reference::IntegerRequestId>();
-    //w3c::voiceinteraction::ipa::AudioData audioData;
     std::shared_ptr<client::InputModalityComponentListener> listener =
         std::make_shared<::reference::client::TakeFirstInputModalityComponentListener>();
     modalityManager->startInput(listener);
 
     std::shared_ptr<MultiModalInputs> multiModalInputs = listener->getMultiModalInputs();
-    //w3c::voiceinteraction::ipa::MetaData metaData;++++++++++++
     std::shared_ptr<ClientRequest> request =
         std::make_shared<ClientRequest>(nullptr, requestId, multiModalInputs,
             nullptr, nullptr);
