@@ -14,9 +14,11 @@
 #define REFERENCEIPASERVICE_H
 
 #include <memory>
+#include <map>
 
 #include <log4cplus/logger.h>
 
+#include "w3c/voiceinteraction/ipa/CombinedId.h"
 #include "w3c/voiceinteraction/ipa/ExternalClientResponseListener.h"
 #include <w3c/voiceinteraction/ipa/external/ipa/IPAService.h>
 
@@ -46,7 +48,7 @@ private:
     const static log4cplus::Logger LOGGER;
     std::mutex mtx;
     std::condition_variable cv;
-    std::shared_ptr<ExternalClientResponse> externalResponse;
+    std::map<CombinedId, std::shared_ptr<ExternalClientResponse>> externalResponses;
 };
 
 } // namespace dialog

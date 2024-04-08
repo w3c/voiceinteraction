@@ -49,17 +49,21 @@ const std::shared_ptr<ClientResponse> ReferenceIPAService::processInput(
     }
 
     // Asynchronously call the the external IPAs
-    externalResponse = nullptr;
     std::thread thread([&] {
         providerSelectionService->processInput(request);
     });
     thread.detach();
 
+    CombinedId combinedId(request->getSessionId(), request->getRequestId());
     std::unique_lock<std::mutex> lck(mtx);
-    cv.wait(lck, [this] {
-        return externalResponse != nullptr;
+    cv.wait(lck, [&] {
+        return externalResponses.find(combinedId) != externalResponses.end();
     });
 
+    std::map<CombinedId, std::shared_ptr<ExternalClientResponse>>::iterator iterator =
+        externalResponses.find(combinedId);
+    std::shared_ptr<ExternalClientResponse> externalResponse = iterator->second;
+    externalResponses.erase(iterator);
     std::shared_ptr<ClientResponse> response;
     if (externalResponse->hasError()) {
         // TODO temporarily take the error message as the output
@@ -86,7 +90,8 @@ const std::shared_ptr<ClientResponse> ReferenceIPAService::processInput(
 void  ReferenceIPAService::processExternalClientResponse(
     const std::shared_ptr<ExternalClientResponse>& response) {
     std::unique_lock<std::mutex> lck(mtx);
-    externalResponse = response;
+    CombinedId combinedId(response->getSessionId(), response->getRequestId());
+    externalResponses[combinedId] = response;
     cv.notify_one();
 }
 
