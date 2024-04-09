@@ -10,6 +10,10 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
+#include <mutex>
+#include <condition_variable>
+#include <thread>
+
 #include "w3c/voiceinteraction/ipa/external/ProviderSelectionService.h"
 
 namespace w3c {
@@ -32,20 +36,35 @@ void ProviderSelectionService::addExternalClientResponseListener(
 void ProviderSelectionService::processInput(
     const std::shared_ptr<ClientRequest>& request) {
     std::list<std::shared_ptr<ExternalClientResponse>> responses;
+    std::mutex mtx;
+    std::condition_variable cv;
+
     std::list<std::shared_ptr<ExternalClientResponse>> errorResponses;
     std::list<std::shared_ptr<IPAProvider>> providers =
         providerRegistry->getIPAProviders(request);
     for (std::shared_ptr<IPAProvider>& provider : providers) {
-        // TODO check to call the IPA providers asynchronously
-        std::shared_ptr<ExternalClientResponse> response =
-            provider->processInput(request);
-        if (response->hasError()) {
-            errorResponses.push_back(response);
-        } else {
-            responses.push_back(response);
-        }
+        std::thread thread([&] {
+            std::shared_ptr<ExternalClientResponse> response =
+                provider->processInput(request);
+            std::unique_lock<std::mutex> lck(mtx);
+            if (response->hasError()) {
+                errorResponses.push_back(response);
+            } else {
+                responses.push_back(response);
+            }
+            cv.notify_one();
+        });
+        thread.detach();
     }
+
+    // Delay until we have all replies
+    std::unique_lock<std::mutex> lck(mtx);
+    cv.wait(lck, [&] {
+        return responses.size() + errorResponses.size() == providers.size();
+    });
+
     // In case there is no positive response, return all error responses
+    // Otherwise, these will be ignored, taking only the successful ones.
     if (responses.empty()) {
         responses = errorResponses;
     }
