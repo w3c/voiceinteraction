@@ -40,6 +40,12 @@ public:
                const std::shared_ptr<RequestId>& request);
 
     /**
+     * Creates a new object as a copy of the provided object.
+     * @param other the object to copy from
+     */
+    CombinedId(const CombinedId& id);
+
+    /**
      * Destroys this instance.
      */
     virtual ~CombinedId();
@@ -80,6 +86,11 @@ public:
      */
     bool operator==(const CombinedId& other) const;
 
+    /**
+     * @brief operator =
+     * @param other the other combined identifier
+     */
+    CombinedId& operator=(const CombinedId& other);
 private:
     /** The encapuslated session id. */
     std::shared_ptr<SessionId> sessionId;

@@ -25,6 +25,11 @@ CombinedId::CombinedId(const std::shared_ptr<SessionId> &session,
     }
 }
 
+CombinedId::CombinedId(const CombinedId& other)
+    : sessionId(other.sessionId), requestId(other.requestId),
+      combinedId(other.combinedId) {
+}
+
 CombinedId::~CombinedId() {
 }
 
@@ -46,6 +51,13 @@ bool CombinedId::operator<(const CombinedId& other) const {
 
 bool CombinedId::operator==(const CombinedId& other) const {
     return combinedId == other.combinedId;
+}
+
+CombinedId& CombinedId::operator=(const CombinedId& other) {
+    sessionId = other.sessionId;
+    requestId = other.requestId;
+    combinedId = other.combinedId;
+    return *this;
 }
 
 

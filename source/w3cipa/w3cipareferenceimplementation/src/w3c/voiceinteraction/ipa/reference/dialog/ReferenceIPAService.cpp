@@ -54,16 +54,27 @@ const std::shared_ptr<ClientResponse> ReferenceIPAService::processInput(
     });
     thread.detach();
 
+    // Wait for the input
     CombinedId combinedId(request->getSessionId(), request->getRequestId());
+    std::shared_ptr<ExternalClientResponse> externalResponse = nullptr;
     std::unique_lock<std::mutex> lck(mtx);
     cv.wait(lck, [&] {
-        return externalResponses.find(combinedId) != externalResponses.end();
+        std::map<CombinedId, std::shared_ptr<ExternalClientResponse>>::iterator iterator =
+                externalResponses.find(combinedId);
+        if (iterator == externalResponses.end()) {
+            return false;
+        }
+        externalResponse = iterator->second;
+        externalResponses.erase(iterator);
+        return true;
     });
 
-    std::map<CombinedId, std::shared_ptr<ExternalClientResponse>>::iterator iterator =
-        externalResponses.find(combinedId);
-    std::shared_ptr<ExternalClientResponse> externalResponse = iterator->second;
-    externalResponses.erase(iterator);
+    if (externalResponse == nullptr) {
+        LOG4CPLUS_ERROR(LOGGER, LOG4CPLUS_TEXT("No valid response received"));
+        return nullptr;
+    }
+
+    // Create a reply to the client
     std::shared_ptr<ClientResponse> response;
     if (externalResponse->hasError()) {
         // TODO temporarily take the error message as the output
