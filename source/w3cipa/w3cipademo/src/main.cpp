@@ -55,10 +55,10 @@ int main() {
     registry->addIPAProvider(chatGPT);
     std::shared_ptr<ProviderSelectionService> providerSelectionService =
         std::make_shared<ProviderSelectionService>(registry);
-
     std::shared_ptr<::reference::dialog::ReferenceIPAService> ipaService =
         std::make_shared<::reference::dialog::ReferenceIPAService>(providerSelectionService);
     providerSelectionService->addIPADataProcessorListener(ipaService);
+    ipaService->addIPADataProcessorListener(modalityManager);
 
 
     // Prepare the request
@@ -69,21 +69,12 @@ int main() {
     modalityManager->startInput(listener);
 
     std::shared_ptr<MultiModalInputs> multiModalInputs = listener->getMultiModalInputs();
-    std::shared_ptr<ClientRequest> request =
+    std::shared_ptr<IPAData> request =
         std::make_shared<ClientRequest>(nullptr, requestId, multiModalInputs,
             nullptr, nullptr);
 
     // Actually make the request
-    std::shared_ptr<ClientResponse> response = ipaService->processInput(request);
-    if (response == nullptr) {
-        LOG4CPLUS_ERROR(LOGGER, "no response received");
-        return -1;
-    }
-
-    // Determine the output and process it
-    std::shared_ptr<MultiModalOutputs> outputs =
-        response->getMultiModalOutputs();
-    modalityManager->handleOutput(outputs);
+    ipaService->processIPAData(request);
 
     return 0;
 }

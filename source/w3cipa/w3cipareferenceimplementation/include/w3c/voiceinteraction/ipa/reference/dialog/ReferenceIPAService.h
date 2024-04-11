@@ -36,14 +36,17 @@ namespace dialog {
  */
 class ReferenceIPAService : public IPAService, public IPADataProcessor {
 public:
-    ReferenceIPAService(const std::shared_ptr<ProviderSelectionService>& service);
-
-    const std::shared_ptr<ClientResponse> processInput(
-        const std::shared_ptr<ClientRequest>& request);
+    ReferenceIPAService(
+            const std::shared_ptr<ProviderSelectionService>& service);
 
     void processIPAData(std::shared_ptr<IPAData> data);
 
 private:
+    void processIPAData(std::shared_ptr<ClientRequest> request);
+
+    void processIPAData(std::shared_ptr<ExternalClientResponse> request);
+
+
     /** Logger instance. */
     const static log4cplus::Logger LOGGER;
     std::mutex mtx;

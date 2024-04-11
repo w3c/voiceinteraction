@@ -29,7 +29,7 @@ void IPADataProcessor::addIPADataProcessorListener(
     listeners.push_back(listener);
 }
 
-void IPADataProcessor::notifyListeners(std::shared_ptr<IPAData> data) {
+void IPADataProcessor::notifyListeners(const std::shared_ptr<IPAData> &data) {
     for (const std::shared_ptr<IPADataProcessor>& listener : listeners) {
         std::thread thread([&data, &listener]{
             listener->processIPAData(data);

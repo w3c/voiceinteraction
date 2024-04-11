@@ -14,6 +14,8 @@
 
 #include <log4cplus/loggingmacros.h>
 
+#include <w3c/voiceinteraction/ipa/ClientResponse.h>
+
 #include "w3c/voiceinteraction/ipa/reference/UUIDSessionId.h"
 #include "w3c/voiceinteraction/ipa/reference/TextMultiModalOutput.h"
 #include "w3c/voiceinteraction/ipa/reference/dialog/ReferenceIPAService.h"
@@ -34,8 +36,21 @@ ReferenceIPAService::ReferenceIPAService(
     : IPAService(service) {
 }
 
-const std::shared_ptr<ClientResponse> ReferenceIPAService::processInput(
-    const std::shared_ptr<ClientRequest> &request) {
+void  ReferenceIPAService::processIPAData(std::shared_ptr<IPAData> data) {
+    if (std::shared_ptr<ClientRequest> request =
+            std::dynamic_pointer_cast<ClientRequest>(data)) {
+        processIPAData(request);
+    } else if (std::shared_ptr<ExternalClientResponse> response =
+            std::dynamic_pointer_cast<ExternalClientResponse>(data)) {
+        processIPAData(response);
+    } else {
+        LOG4CPLUS_WARN(LOGGER,
+            LOG4CPLUS_TEXT("No valid conversion for the received data"));
+    }
+}
+
+void ReferenceIPAService::processIPAData(
+    std::shared_ptr<ClientRequest> request) {
     // Check if there is already a session identifer and set one if there is
     // none
     const std::shared_ptr<SessionId>& id = request->getSessionId();
@@ -71,7 +86,7 @@ const std::shared_ptr<ClientResponse> ReferenceIPAService::processInput(
 
     if (externalResponse == nullptr) {
         LOG4CPLUS_ERROR(LOGGER, LOG4CPLUS_TEXT("No valid response received"));
-        return nullptr;
+        return;
     }
 
     // Create a reply to the client
@@ -95,20 +110,15 @@ const std::shared_ptr<ClientResponse> ReferenceIPAService::processInput(
             externalResponse->getRequestId(),
             externalResponse->getMultiModalOutputs(), nullptr, nullptr);
     }
-    return response;
+    notifyListeners(response);
 }
 
-void  ReferenceIPAService::processIPAData(std::shared_ptr<IPAData> data) {
-    if (std::shared_ptr<ExternalClientResponse> response =
-            std::dynamic_pointer_cast<ExternalClientResponse>(data)) {
-        std::unique_lock<std::mutex> lck(mtx);
-        CombinedId combinedId(response->getSessionId(), response->getRequestId());
-        externalResponses[combinedId] = response;
-        cv.notify_one();
-    } else {
-        LOG4CPLUS_WARN(LOGGER,
-            LOG4CPLUS_TEXT("No valid conversion for the received data"));
-    }
+void ReferenceIPAService::processIPAData(
+        std::shared_ptr<ExternalClientResponse> response) {
+    std::unique_lock<std::mutex> lck(mtx);
+    CombinedId combinedId(response->getSessionId(), response->getRequestId());
+    externalResponses[combinedId] = response;
+    cv.notify_one();
 }
 
 

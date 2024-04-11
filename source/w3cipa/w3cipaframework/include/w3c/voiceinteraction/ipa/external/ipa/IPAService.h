@@ -15,7 +15,6 @@
 
 #include <memory>
 
-#include "w3c/voiceinteraction/ipa/ClientInput.h"
 #include "w3c/voiceinteraction/ipa/external/ProviderSelectionService.h"
 
 namespace w3c {
@@ -29,7 +28,7 @@ namespace ipa {
  * The IPAService is the base class for the IPA service.
  * @author Dirk Schnelle-Walka
  */
-class IPAService : public ClientInput {
+class IPAService {
 public:
     /**
      * Constructs a new object.

@@ -20,6 +20,7 @@
 #include <stdexcept>
 
 #include "w3c/voiceinteraction/ipa/MultiModalOutputs.h"
+#include "w3c/voiceinteraction/ipa/IPADataProcessor.h"
 #include "ModalityComponent.h"
 #include "InputModalityComponent.h"
 #include "InputModalityComponentListener.h"
@@ -34,8 +35,7 @@ namespace client {
  * A component that manages multiple modalities.
  * @author Dirk Schnelle-Walka
  */
-class ModalityManager
-{
+class ModalityManager : public IPADataProcessor {
 
 public:
     /**
@@ -71,6 +71,8 @@ public:
      * @param listener the listener for inputs.
      */
     void startInput(std::shared_ptr<InputModalityComponentListener>& listener) const;
+
+    void processIPAData(std::shared_ptr<IPAData> data);
 
     /**
      * Handles the provided multimodal output with all known modality handlers.

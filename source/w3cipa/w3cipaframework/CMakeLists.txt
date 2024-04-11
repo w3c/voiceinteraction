@@ -24,7 +24,6 @@ set(HEADERS
     include/w3c/voiceinteraction/ipa/AudioDeliveryType.h
     include/w3c/voiceinteraction/ipa/AudioEncoding.h
     include/w3c/voiceinteraction/ipa/CallResult.h
-    include/w3c/voiceinteraction/ipa/ClientInput.h
     include/w3c/voiceinteraction/ipa/ClientRequest.h
     include/w3c/voiceinteraction/ipa/ClientResponse.h
     include/w3c/voiceinteraction/ipa/CombinedId.h
