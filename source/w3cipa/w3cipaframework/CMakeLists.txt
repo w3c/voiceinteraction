@@ -32,8 +32,8 @@ set(HEADERS
     include/w3c/voiceinteraction/ipa/ErrorMessage.h
     include/w3c/voiceinteraction/ipa/ExternalClientInput.h
     include/w3c/voiceinteraction/ipa/ExternalClientResponse.h
-    include/w3c/voiceinteraction/ipa/ExternalClientResponseListener.h
     include/w3c/voiceinteraction/ipa/IPAData.h
+    include/w3c/voiceinteraction/ipa/IPADataProcessor.h
     include/w3c/voiceinteraction/ipa/MetaData.h
     include/w3c/voiceinteraction/ipa/ModalityType.h
     include/w3c/voiceinteraction/ipa/MultiModalInput.h
@@ -66,6 +66,7 @@ set(SOURCES
     src/w3c/voiceinteraction/ipa/ErrorMessage.cpp
     src/w3c/voiceinteraction/ipa/ExternalClientResponse.cpp
     src/w3c/voiceinteraction/ipa/IPAData.cpp
+    src/w3c/voiceinteraction/ipa/IPADataProcessor.cpp
     src/w3c/voiceinteraction/ipa/MultiModalInput.cpp
     src/w3c/voiceinteraction/ipa/MultiModalInputs.cpp
     src/w3c/voiceinteraction/ipa/MultiModalOutput.cpp

@@ -98,12 +98,17 @@ const std::shared_ptr<ClientResponse> ReferenceIPAService::processInput(
     return response;
 }
 
-void  ReferenceIPAService::processExternalClientResponse(
-    const std::shared_ptr<ExternalClientResponse>& response) {
-    std::unique_lock<std::mutex> lck(mtx);
-    CombinedId combinedId(response->getSessionId(), response->getRequestId());
-    externalResponses[combinedId] = response;
-    cv.notify_one();
+void  ReferenceIPAService::processIPAData(std::shared_ptr<IPAData> data) {
+    if (std::shared_ptr<ExternalClientResponse> response =
+            std::dynamic_pointer_cast<ExternalClientResponse>(data)) {
+        std::unique_lock<std::mutex> lck(mtx);
+        CombinedId combinedId(response->getSessionId(), response->getRequestId());
+        externalResponses[combinedId] = response;
+        cv.notify_one();
+    } else {
+        LOG4CPLUS_WARN(LOGGER,
+            LOG4CPLUS_TEXT("No valid conversion for the received data"));
+    }
 }
 
 

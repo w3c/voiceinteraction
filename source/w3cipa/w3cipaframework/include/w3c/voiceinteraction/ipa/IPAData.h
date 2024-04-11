@@ -22,7 +22,6 @@ namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
 
-
 /**
  * Base class for all data that is sent around through various processing
  * stages.

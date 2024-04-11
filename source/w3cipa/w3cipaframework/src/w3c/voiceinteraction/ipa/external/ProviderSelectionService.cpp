@@ -28,11 +28,6 @@ ProviderSelectionService::ProviderSelectionService(const std::shared_ptr<Provide
 ProviderSelectionService::~ProviderSelectionService() {
 }
 
-void ProviderSelectionService::addExternalClientResponseListener(
-    const std::shared_ptr<ExternalClientResponseListener>& listener) {
-    externalClientResponseListeners.push_back(listener);
-}
-
 void ProviderSelectionService::processInput(
     const std::shared_ptr<ClientRequest>& request) {
     std::list<std::shared_ptr<ExternalClientResponse>> responses;
@@ -70,11 +65,13 @@ void ProviderSelectionService::processInput(
     }
 
     // Notify all listeners about the results.
-    for (const std::shared_ptr<ExternalClientResponseListener>& listener : externalClientResponseListeners) {
-        for (const std::shared_ptr<ExternalClientResponse>& response : responses) {
-            listener->processExternalClientResponse(response);
-        }
+    for (const std::shared_ptr<ExternalClientResponse>& response : responses) {
+        notifyListeners(response);
     }
+}
+
+void ProviderSelectionService::processIPAData(
+        std::shared_ptr<IPAData> data) {
 }
 
 } // namespace external

@@ -58,7 +58,7 @@ int main() {
 
     std::shared_ptr<::reference::dialog::ReferenceIPAService> ipaService =
         std::make_shared<::reference::dialog::ReferenceIPAService>(providerSelectionService);
-    providerSelectionService->addExternalClientResponseListener(ipaService);
+    providerSelectionService->addIPADataProcessorListener(ipaService);
 
 
     // Prepare the request
