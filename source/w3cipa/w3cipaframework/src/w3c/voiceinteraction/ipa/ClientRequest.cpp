@@ -25,7 +25,7 @@ ClientRequest::ClientRequest(const std::shared_ptr<SessionId>& sessionIdentifier
               const std::shared_ptr<MultiModalInputs>& multiModalInputs,
               const std::shared_ptr<AudioData>& audioDataToSend,
               const std::shared_ptr<MetaData> metaDataToSend)
-    : sessionId(sessionIdentifier), requestId(requestIdentifier),
+    : IPAData(sessionIdentifier, requestIdentifier),
         inputs(multiModalInputs), audioData(audioDataToSend),
         metaData(metaDataToSend) {
 }
@@ -35,31 +35,6 @@ ClientRequest::ClientRequest(const std::shared_ptr<SessionId>& sessionIdentifier
  */
 ClientRequest::~ClientRequest() {
 
-}
-
-/**
- * Returns the session id of the session this response belongs to.
- * @return The session id of the session this response belongs to.
- */
-const std::shared_ptr<SessionId> ClientRequest::getSessionId() const {
-    return sessionId;
-}
-
-/**
- * Sets the session identifier.
- * @param sessionIdentifier the new session identifier
- */
-void ClientRequest::setSessionId(
-    const std::shared_ptr<SessionId>& sessionIdentifier) {
-    sessionId = sessionIdentifier;
-}
-
-/**
- * Returns the request id of the request this response belongs to.
- * @return The request id of the request this response belongs to.
- */
-const std::shared_ptr<RequestId>& ClientRequest::getRequestId() const {
-    return requestId;
 }
 
 /**

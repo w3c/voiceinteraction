@@ -1,4 +1,4 @@
-﻿/*
+/*
  * IPA Reference Implementation: https://github.com/w3c/voiceinteraction
  *
  * Copyright (C) 2024 World Wide Web Consortium. All Rights Reserved.
@@ -10,48 +10,32 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
-#if !defined(EXTERNAL_CLIENTINPUT_H)
-#define EXTERNAL_CLIENTINPUT_H
-
-#include <memory>
-
-#include "ClientRequest.h"
-#include "ExternalClientResponse.h"
+#ifndef DIALOGMANAGER_H
+#define DIALOGMANAGER_H
 
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
 
 /**
- * The interface for the external client input.
+ * Base class of a dialog manager.
  * @author Dirk Schnelle-Walka
  */
-class ExternalClientInput {
-
+class DialogManager {
 public:
     /**
-     * Constructs a new object.
+     * Constructs a new object
      */
-    ExternalClientInput() {
-    }
+    DialogManager();
 
     /**
-     * Destroys the object.
+     * Destroys this instance.
      */
-    virtual ~ExternalClientInput() {
-    };
-
-    /**
-     * Processes the input from the client.
-     * @param request the request coming from the client
-     */
-    virtual const std::shared_ptr<ExternalClientResponse> processInput(
-        const std::shared_ptr<ClientRequest>& request) =0;
-
+    virtual ~DialogManager();
 };
 
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c
 
-#endif // !defined(EXTERNAL_CLIENTINPUT_H)
+#endif // DIALOGMANAGER_H

@@ -18,8 +18,7 @@
 #include "CallResult.h"
 #include "ErrorMessage.h"
 #include "MultiModalOutputs.h"
-#include "RequestId.h"
-#include "SessionId.h"
+#include "IPAData.h"
 #include "SemanticInterpretation.h"
 
 namespace w3c {
@@ -30,8 +29,7 @@ namespace ipa {
  * This interface is used to return the results of a request to the client.
  * @author Dirk Schnelle-Walka
  */
-class ExternalClientResponse
-{
+class ExternalClientResponse : public IPAData {
 public:
     /**
      * Constructs a new object with a meaningful result
@@ -60,18 +58,6 @@ public:
      * Destroys the object.
      */
     virtual ~ExternalClientResponse();
-
-    /**
-     * Returns the session id of the session this response belongs to.
-     * @return The session id of the session this response belongs to.
-     */
-    const std::shared_ptr<SessionId> getSessionId() const;
-
-    /**
-     * Returns the request id of the request this response belongs to.
-     * @return The request id of the request this response belongs to.
-     */
-    const std::shared_ptr<RequestId>& getRequestId() const;
 
     /**
      * Returns the multimodal outputs to be returned to the client.
@@ -103,10 +89,6 @@ public:
      */
     const std::shared_ptr<ErrorMessage> getErrorMessage() const;
 private:
-    /** The session id. */
-    std::shared_ptr<SessionId> sessionId;
-    /** The request id. */
-    std::shared_ptr<RequestId> requestId;
     /** The multimodal outputs to be returned to the client. */
     std::shared_ptr<MultiModalOutputs> outputs;
     /** Semantic interpretation of an utterance. */

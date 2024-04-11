@@ -22,21 +22,13 @@ ClientResponse::ClientResponse(const std::shared_ptr<SessionId>& sessionIdentifi
                const std::shared_ptr<MultiModalOutputs>& multiModalOutputs,
                const std::shared_ptr<AudioData>& audioDataToSend,
                const std::shared_ptr<MetaData> metaDataToSend)
-    : sessionId(sessionIdentifier), requestId(requestIdentifier),
+    : IPAData(sessionIdentifier, requestIdentifier),
         outputs(multiModalOutputs), audioData(audioDataToSend),
         metaData(metaDataToSend) {
 }
 
 ClientResponse::~ClientResponse() {
 
-}
-
-const std::shared_ptr<SessionId> ClientResponse::getSessionId() const {
-    return sessionId;
-}
-
-const std::shared_ptr<RequestId>& ClientResponse::getRequestId() const {
-    return requestId;
 }
 
 const std::shared_ptr<AudioData>& ClientResponse::getAudioData() {

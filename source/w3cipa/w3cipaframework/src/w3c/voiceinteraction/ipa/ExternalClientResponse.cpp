@@ -20,7 +20,7 @@ ExternalClientResponse::ExternalClientResponse(const std::shared_ptr<SessionId>&
                const std::shared_ptr<RequestId>& requestIdentifier,
                const std::shared_ptr<MultiModalOutputs>& multiModalOutputs,
                const std::shared_ptr<SemanticInterpretation> semanticInterpretation)
-    : sessionId(sessionIdentifier), requestId(requestIdentifier),
+    : IPAData(sessionIdentifier, requestIdentifier),
     outputs(multiModalOutputs), interpretation(semanticInterpretation),
     error(nullptr) {
 }
@@ -29,20 +29,12 @@ ExternalClientResponse::ExternalClientResponse(
                 const std::shared_ptr<SessionId>& sessionIdentifier,
                 const std::shared_ptr<RequestId>& requestIdentifier,
                 const std::shared_ptr<ErrorMessage>& errorMessage)
-    : sessionId(sessionIdentifier), requestId(requestIdentifier),
+    : IPAData(sessionIdentifier, requestIdentifier),
     outputs(nullptr), interpretation(nullptr),
     error(errorMessage) {
 }
 
 ExternalClientResponse::~ExternalClientResponse() {
-}
-
-const std::shared_ptr<SessionId> ExternalClientResponse::getSessionId() const {
-    return sessionId;
-}
-
-const std::shared_ptr<RequestId>& ExternalClientResponse::getRequestId() const {
-    return requestId;
 }
 
 const std::shared_ptr<MultiModalOutputs> ExternalClientResponse::getMultiModalOutputs() const {

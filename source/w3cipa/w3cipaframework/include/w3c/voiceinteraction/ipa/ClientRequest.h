@@ -17,9 +17,8 @@
 
 #include "AudioData.h"
 #include "MultiModalInputs.h"
-#include "RequestId.h"
-#include "SessionId.h"
 #include "MetaData.h"
+#include "IPAData.h"
 
 namespace w3c {
 namespace voiceinteraction {
@@ -29,8 +28,7 @@ namespace ipa {
  * This interface is used to return the results of a request to the client.
  * @author Dirk Schnelle-Walka
  */
-class ClientRequest
-{
+class ClientRequest : public IPAData {
 
 public:
     /**
@@ -47,24 +45,6 @@ public:
      * Destroys the object.
      */
     virtual ~ClientRequest();
-
-    /**
-     * Returns the session id of the session this response belongs to.
-     * @return The session id of the session this response belongs to.
-     */
-    const std::shared_ptr<SessionId> getSessionId() const;
-
-    /**
-     * Sets the session identifier.
-     * @param sessionIdentifier the new session identifier
-     */
-    void setSessionId(const std::shared_ptr<SessionId>& sessionIdentifier);
-
-    /**
-     * Returns the request id of the request this response belongs to.
-     * @return The request id of the request this response belongs to.
-     */
-    const std::shared_ptr<RequestId>& getRequestId() const;
 
     /**
      * Returns the audio data to be played to the user.
@@ -85,10 +65,6 @@ public:
     const std::shared_ptr<MetaData>& getMetaData();
 
 private:
-    /** The session id. */
-    std::shared_ptr<SessionId> sessionId;
-    /** The request id. */
-    std::shared_ptr<RequestId> requestId;
     /** The audio data. */
     std::shared_ptr<AudioData> audioData;
     /** The multimodal outputs to be returned to the client. */
