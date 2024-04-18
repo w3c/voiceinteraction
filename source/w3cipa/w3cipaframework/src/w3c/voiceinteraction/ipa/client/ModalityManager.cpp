@@ -69,7 +69,8 @@ std::list<std::shared_ptr<ModalityComponent>> ModalityManager::getModalityCompon
     }
 }
 
-void ModalityManager::startInput(std::shared_ptr<InputModalityComponentListener>& listener) const {
+void ModalityManager::startInput(
+        std::shared_ptr<InputModalityComponentListener> listener) const {
     for (std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>>::const_iterator iterator =
         inputComponents.begin(); iterator != inputComponents.end();
          ++iterator) {
@@ -92,7 +93,8 @@ void ModalityManager::processIPAData(std::shared_ptr<IPAData> data) {
     }
 }
 
-void ModalityManager::handleOutput(const std::shared_ptr<MultiModalOutputs>& outputs) const {
+void ModalityManager::handleOutput(
+        const std::shared_ptr<MultiModalOutputs>& outputs) const {
     std::list<ModalityType> outputModalities = outputs->getModalityTypes();
     for (ModalityType& outputModality : outputModalities) {
         std::shared_ptr<MultiModalOutput> output =
@@ -105,6 +107,20 @@ void ModalityManager::handleOutput(const std::shared_ptr<MultiModalOutputs>& out
             outputModality->handleOutput(output);
         }
     }
+}
+
+void ModalityManager::addInputModalityComponentListener(
+        const std::shared_ptr<InputModalityComponentListener>& listener) {
+    inputListeners.push_back(listener);
+}
+
+void ModalityManager::onMultiModalInput(
+        std::shared_ptr<MultiModalInput> input) {
+    notifyListeners(input);
+}
+
+std::shared_ptr<MultiModalInputs> ModalityManager::getMultiModalInputs() {
+    return nullptr;
 }
 
 void ModalityManager::addInputModality(const ModalityType& modality,
@@ -131,6 +147,15 @@ void ModalityManager::addOutputModality(const ModalityType& modality,
     std::list<std::shared_ptr<ModalityComponent>>& components =
         outputComponents.at(modality);
     components.push_back(component);
+}
+
+void ModalityManager::notifyListeners(std::shared_ptr<MultiModalInput> input) {
+    for (const std::shared_ptr<InputModalityComponentListener>& listener : inputListeners) {
+//        std::thread thread([&data, &listener]{
+            listener->onMultiModalInput(input);
+//        });
+//        thread.join();
+    }
 }
 
 } // namespace client

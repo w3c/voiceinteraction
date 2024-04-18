@@ -35,7 +35,8 @@ namespace client {
  * A component that manages multiple modalities.
  * @author Dirk Schnelle-Walka
  */
-class ModalityManager : public IPADataProcessor {
+class ModalityManager : public IPADataProcessor,
+    public InputModalityComponentListener {
 
 public:
     /**
@@ -56,6 +57,7 @@ public:
      */
     void addModalityComponent(
         const std::shared_ptr<ModalityComponent> component);
+
     /**
      * Gets the modality components for the specified modality and IO type.
      * @param modality The modality for which to get the modality component.
@@ -66,11 +68,13 @@ public:
      */
     std::list<std::shared_ptr<ModalityComponent>> getModalityComponents(
         const ModalityType& modality, const IOType& ioType) const;
+
     /**
      * Starts the input for all known modality handlers.
      * @param listener the listener for inputs.
      */
-    void startInput(std::shared_ptr<InputModalityComponentListener>& listener) const;
+    void startInput(
+            std::shared_ptr<InputModalityComponentListener> listener) const;
 
     void processIPAData(std::shared_ptr<IPAData> data);
 
@@ -80,6 +84,21 @@ public:
      */
     void handleOutput(const std::shared_ptr<MultiModalOutputs>& outputs) const;
 
+    /**
+     * Adds the provided listener for multimodal inputs to the list of known
+     * listeners.
+     * @param listener the listener to add.
+     */
+    void addInputModalityComponentListener(
+            const std::shared_ptr<InputModalityComponentListener>& listener);
+
+    void onMultiModalInput(std::shared_ptr<MultiModalInput> input);
+
+    /**
+     * {@inhertitDoc}
+     * @return {@code nullptr}
+     */
+    std::shared_ptr<MultiModalInputs> getMultiModalInputs();
 private:
     /**
      * @brief Adds the provided modality component as an input modality
@@ -96,6 +115,13 @@ private:
      */
     void addOutputModality(const ModalityType& modality,
                            const std::shared_ptr<ModalityComponent>& component);
+
+    /**
+     * Asynchronously notifies all listeners about the processed data.
+     * @param data the processed data
+     */
+    void notifyListeners(std::shared_ptr<MultiModalInput> input);
+
     /**
      * The map of known input modality components.
      */
@@ -104,6 +130,9 @@ private:
      * The map of known output modality components.
      */
     std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>> outputComponents;
+
+    /** Known listeners for multimnodal input. */
+    std::list<std::shared_ptr<InputModalityComponentListener>> inputListeners;
 };
 
 } // namespace client

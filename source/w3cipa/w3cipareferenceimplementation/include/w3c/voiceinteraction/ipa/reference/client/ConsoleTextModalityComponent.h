@@ -34,7 +34,7 @@ public:
 
     const std::list<IOType> getSupportedIOTypes() const;
 
-    void startInput(std::shared_ptr<InputModalityComponentListener>& listener);
+    void startInput(std::shared_ptr<InputModalityComponentListener> listener);
 
     void stopInput();
 
@@ -48,7 +48,7 @@ private:
      * @param listener the listener to inform, once the user entered data
      */
     void captureInputAsynchronously(
-        std::shared_ptr<InputModalityComponentListener>& listener);
+            std::shared_ptr<InputModalityComponentListener> listener);
 
     const static std::string ID;
     /** Logger instance. */

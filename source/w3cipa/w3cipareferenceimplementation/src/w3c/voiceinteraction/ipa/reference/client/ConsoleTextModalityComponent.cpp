@@ -41,15 +41,15 @@ const std::list<IOType> ConsoleTextModalityComponent::getSupportedIOTypes() cons
 }
 
 void ConsoleTextModalityComponent::startInput(
-    std::shared_ptr<InputModalityComponentListener>& listener) {
-    std::thread thread([&] {
+        std::shared_ptr<InputModalityComponentListener> listener) {
+    std::thread thread([this, listener] {
         captureInputAsynchronously(listener);
     });
     thread.detach();
 }
 
 void ConsoleTextModalityComponent::captureInputAsynchronously(
-    std::shared_ptr<InputModalityComponentListener>& listener) {
+    std::shared_ptr<InputModalityComponentListener> listener) {
     std::cout << "User: ";
     std::cout.flush();
     LOG4CPLUS_INFO(LOGGER, LOG4CPLUS_TEXT("Input started"));

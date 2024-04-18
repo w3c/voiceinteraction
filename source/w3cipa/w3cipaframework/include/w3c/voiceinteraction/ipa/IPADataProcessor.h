@@ -61,7 +61,7 @@ protected:
      * Asynchronously notifies all listeners about the processed data.
      * @param data the processed data
      */
-    void notifyListeners(const std::shared_ptr<IPAData>& data);
+    void notifyListeners(std::shared_ptr<IPAData> data);
 
 private:
     /** List of known listeners for processed results. */

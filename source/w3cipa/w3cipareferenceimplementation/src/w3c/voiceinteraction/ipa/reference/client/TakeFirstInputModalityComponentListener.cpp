@@ -10,6 +10,12 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
+#include <iostream>
+#include <log4cplus/loggingmacros.h>
+
+#include <w3c/voiceinteraction/ipa/ClientRequest.h>
+
+#include "w3c/voiceinteraction/ipa/reference/IntegerRequestId.h"
 #include "w3c/voiceinteraction/ipa/reference/client/TakeFirstInputModalityComponentListener.h"
 
 namespace w3c {
@@ -18,11 +24,30 @@ namespace ipa {
 namespace reference {
 namespace client {
 
+const log4cplus::Logger TakeFirstInputModalityComponentListener::LOGGER =
+    log4cplus::Logger::getInstance(LOG4CPLUS_TEXT(
+        "w3c.voiceinteraction.ipa.dialog.TakeFirstInputModalityComponentListener"));
+
 TakeFirstInputModalityComponentListener::TakeFirstInputModalityComponentListener() {
 }
 
+void TakeFirstInputModalityComponentListener::processIPAData(
+        std::shared_ptr<IPAData> data) {
+    LOG4CPLUS_INFO(LOGGER,
+                   LOG4CPLUS_TEXT("waiting for input"));
+    std::shared_ptr<MultiModalInputs> multiModalInputs = getMultiModalInputs();
+    std::shared_ptr<w3c::voiceinteraction::ipa::RequestId> requestId =
+        std::make_shared<IntegerRequestId>();
+    std::shared_ptr<IPAData> request =
+        std::make_shared<ClientRequest>(nullptr, requestId, multiModalInputs,
+            nullptr, nullptr);
+    LOG4CPLUS_INFO(LOGGER,
+                   LOG4CPLUS_TEXT("forwarding first input"));
+    notifyListeners(request);
+}
+
 void TakeFirstInputModalityComponentListener::onMultiModalInput(
-    std::shared_ptr<MultiModalInput>& input) {
+        std::shared_ptr<MultiModalInput> input) {
     std::unique_lock<std::mutex> lck(mtx);
     multiModalInput = input;
     cv.notify_one();

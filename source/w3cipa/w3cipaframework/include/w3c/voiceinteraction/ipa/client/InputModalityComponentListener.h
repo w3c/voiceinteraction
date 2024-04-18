@@ -42,12 +42,12 @@ public:
      * The input modality component received the provided multimodal input.
      * @param input the multimodal input.
      */
-    virtual void onMultiModalInput(std::shared_ptr<MultiModalInput>& input) = 0;
+    virtual void onMultiModalInput(std::shared_ptr<MultiModalInput> input) = 0;
 
     /**
      * Obtains the next input for the IPA. This call is blocking until input
      * is available. It is up to the implementation to decide upon the
-     * coditions when this method returns.
+     * conditions when this method returns.
      * @return next input for the IPA
      */
     virtual std::shared_ptr<MultiModalInputs> getMultiModalInputs() = 0;

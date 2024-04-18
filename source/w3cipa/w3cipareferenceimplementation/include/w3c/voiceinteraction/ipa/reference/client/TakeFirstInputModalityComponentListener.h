@@ -16,6 +16,9 @@
 #include <mutex>
 #include <condition_variable>
 
+#include <log4cplus/logger.h>
+
+#include <w3c/voiceinteraction/ipa/IPADataProcessor.h>
 #include <w3c/voiceinteraction/ipa/client/InputModalityComponentListener.h>
 
 using namespace w3c::voiceinteraction::ipa;
@@ -32,12 +35,15 @@ namespace client {
  * @author Dirk Schnelle-Walka
  */
 class TakeFirstInputModalityComponentListener
-    : public ::client::InputModalityComponentListener {
+    : public ::client::InputModalityComponentListener,
+    public IPADataProcessor {
 
 public:
     TakeFirstInputModalityComponentListener();
 
-    void onMultiModalInput(std::shared_ptr<MultiModalInput>& input);
+    void processIPAData(std::shared_ptr<IPAData> data);
+
+    void onMultiModalInput(std::shared_ptr<MultiModalInput> input);
 
     std::shared_ptr<MultiModalInputs> getMultiModalInputs();
 
@@ -45,6 +51,8 @@ private:
     std::mutex mtx;
     std::condition_variable cv;
     std::shared_ptr<MultiModalInput> multiModalInput;
+    /** Logger instance. */
+    const static log4cplus::Logger LOGGER;
 };
 
 } // namespace client

@@ -43,11 +43,11 @@ public:
 
     /**
      * Starts listening asynchronously for inputs and notify the provided
-     * listner if any input is received from this component.
+     * listener if any input is received from this component.
      * @param listener the lister to notify
      */
     virtual void startInput(
-        std::shared_ptr<InputModalityComponentListener>& listener) = 0;
+        std::shared_ptr<InputModalityComponentListener> listener) = 0;
 
     /**
      * Stops listening for inputs.
