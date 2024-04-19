@@ -41,11 +41,21 @@ int main() {
     LOG4CPLUS_INFO(LOGGER, LOG4CPLUS_TEXT("W3C IPA started"));
 
     // Build up the components
+
+    // Cient Layer
     std::shared_ptr<client::ModalityManager> modalityManager =
         std::make_shared<client::ModalityManager>();
     std::shared_ptr<::reference::client::ConsoleTextModalityComponent> console =
         std::make_shared<::reference::client::ConsoleTextModalityComponent>();
     modalityManager->addModalityComponent(console);
+    std::shared_ptr<::reference::client::TakeFirstInputModalityComponentListener> inputListener =
+        std::make_shared<::reference::client::TakeFirstInputModalityComponentListener>();
+
+    // Dialog Layer
+    std::shared_ptr<::reference::dialog::ReferenceIPAService> ipaService =
+        std::make_shared<::reference::dialog::ReferenceIPAService>();
+
+    // External IPA / Services Layer
     std::shared_ptr<::reference::external::providerselectionservice::ModalityMatchingProviderSelectionStrategy> providerSelectionStrategy =
         std::make_shared<::reference::external::providerselectionservice::ModalityMatchingProviderSelectionStrategy>();
     std::shared_ptr<ProviderRegistry> registry =
@@ -55,20 +65,16 @@ int main() {
     registry->addIPAProvider(chatGPT);
     std::shared_ptr<ProviderSelectionService> providerSelectionService =
         std::make_shared<ProviderSelectionService>(registry);
-    std::shared_ptr<::reference::dialog::ReferenceIPAService> ipaService =
-        std::make_shared<::reference::dialog::ReferenceIPAService>(providerSelectionService);
-    providerSelectionService->addIPADataProcessorListener(ipaService);
-    ipaService->addIPADataProcessorListener(modalityManager);
 
+    // Create a processing chain
+    modalityManager >> inputListener >> ipaService >> providerSelectionService
+            >> ipaService >> modalityManager;
 
-    // Prepare the request
-    std::shared_ptr<::reference::client::TakeFirstInputModalityComponentListener> listener =
-        std::make_shared<::reference::client::TakeFirstInputModalityComponentListener>();
-    listener->addIPADataProcessorListener(ipaService);
-    modalityManager->startInput(listener);
+    // Start capturing input
+    modalityManager->startInput();
 
     // Actually start processing
-    listener->processIPAData(nullptr);
+    inputListener->processIPAData(nullptr);
 
     return 0;
 }

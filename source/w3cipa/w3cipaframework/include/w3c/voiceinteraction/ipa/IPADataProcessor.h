@@ -45,6 +45,11 @@ public:
      *
      * Conceptually, this method can be called multiple times depending on
      * how many other processors this instance has been subsribed to.
+     *
+     * Implementors should take care that they only handle those data that
+     * they can handle. As a result of chaining, inputs may be received from
+     * multiple sources. This method should return immediately, if there is
+     * nothing to do with the received data.
      * @param data the data to process;
      */
     virtual void processIPAData(std::shared_ptr<IPAData> data) = 0;
@@ -56,17 +61,22 @@ public:
     void addIPADataProcessorListener(
             const std::shared_ptr<IPADataProcessor>& listener);
 
+    void operator >>(const std::shared_ptr<IPADataProcessor>& other);
 protected:
     /**
      * Asynchronously notifies all listeners about the processed data.
      * @param data the processed data
      */
-    void notifyListeners(std::shared_ptr<IPAData> data);
+    void notifyListeners(const std::shared_ptr<IPAData>& data);
 
 private:
     /** List of known listeners for processed results. */
     std::list<std::shared_ptr<IPADataProcessor>> listeners;
 };
+
+const std::shared_ptr<IPADataProcessor>& operator>>(
+        const std::shared_ptr<IPADataProcessor>& source,
+        const std::shared_ptr<IPADataProcessor>& destination);
 
 } // namespace ipa
 } // namespace voiceinteraction

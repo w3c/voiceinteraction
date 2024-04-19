@@ -17,6 +17,7 @@
 
 #include <w3c/voiceinteraction/ipa/client/ModalityComponent.h>
 #include <w3c/voiceinteraction/ipa/client/InputModalityComponent.h>
+#include <w3c/voiceinteraction/ipa/client/InputNotificationMediator.h>
 #include <w3c/voiceinteraction/ipa/client/OutputModalityComponent.h>
 
 using namespace w3c::voiceinteraction::ipa::client;
@@ -34,7 +35,7 @@ public:
 
     const std::list<IOType> getSupportedIOTypes() const;
 
-    void startInput(std::shared_ptr<InputModalityComponentListener> listener);
+    void startInput(const std::shared_ptr<InputNotificationMediator>& mediator);
 
     void stopInput();
 
@@ -45,10 +46,9 @@ public:
 private:
     /**
      * Asynchronously started method to capture user input from the console.
-     * @param listener the listener to inform, once the user entered data
+     * @param mediator the mediator to inform, once the user entered data
      */
-    void captureInputAsynchronously(
-            std::shared_ptr<InputModalityComponentListener> listener);
+    void captureInputAsynchronously(std::shared_ptr<InputNotificationMediator> mediator);
 
     const static std::string ID;
     /** Logger instance. */

@@ -40,16 +40,15 @@ const std::list<IOType> ConsoleTextModalityComponent::getSupportedIOTypes() cons
     return types;
 }
 
-void ConsoleTextModalityComponent::startInput(
-        std::shared_ptr<InputModalityComponentListener> listener) {
-    std::thread thread([this, listener] {
-        captureInputAsynchronously(listener);
+void ConsoleTextModalityComponent::startInput(const std::shared_ptr<InputNotificationMediator> &mediator) {
+    std::thread thread([this, mediator] {
+        captureInputAsynchronously(mediator);
     });
     thread.detach();
 }
 
 void ConsoleTextModalityComponent::captureInputAsynchronously(
-    std::shared_ptr<InputModalityComponentListener> listener) {
+    std::shared_ptr<InputNotificationMediator> mediator) {
     std::cout << "User: ";
     std::cout.flush();
     LOG4CPLUS_INFO(LOGGER, LOG4CPLUS_TEXT("Input started"));
@@ -60,7 +59,7 @@ void ConsoleTextModalityComponent::captureInputAsynchronously(
                        input.c_str());
     std::shared_ptr<MultiModalInput> multiModalInput =
         std::make_shared<TextMultiModalInput>(input);
-    listener->onMultiModalInput(multiModalInput);
+    mediator->notifyListeners(multiModalInput);
 }
 
 void ConsoleTextModalityComponent::stopInput() {

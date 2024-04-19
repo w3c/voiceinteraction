@@ -52,9 +52,7 @@ public:
     virtual const std::list<IOType> getSupportedIOTypes() const = 0;
 
 private:
-    /**
-     * The modality of this input.
-     */
+    /** The modality of this input. */
     ModalityType modality;
 };
 

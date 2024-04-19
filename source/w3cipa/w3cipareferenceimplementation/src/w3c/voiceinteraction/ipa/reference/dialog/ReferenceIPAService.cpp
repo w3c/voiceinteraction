@@ -31,16 +31,14 @@ const log4cplus::Logger ReferenceIPAService::LOGGER =
     log4cplus::Logger::getInstance(LOG4CPLUS_TEXT(
         "w3c.voiceinteraction.dialog.ReferenceIPAService"));
 
-ReferenceIPAService::ReferenceIPAService(
-    const std::shared_ptr<ProviderSelectionService> &service)
-    : IPAService(service) {
+ReferenceIPAService::ReferenceIPAService() {
 }
 
 void  ReferenceIPAService::processIPAData(std::shared_ptr<IPAData> data) {
-    if (std::shared_ptr<ClientRequest> request =
+    if (const std::shared_ptr<ClientRequest>& request =
             std::dynamic_pointer_cast<ClientRequest>(data)) {
         processIPAData(request);
-    } else if (std::shared_ptr<ExternalClientResponse> response =
+    } else if (const std::shared_ptr<ExternalClientResponse>& response =
             std::dynamic_pointer_cast<ExternalClientResponse>(data)) {
         processIPAData(response);
     } else {
@@ -50,7 +48,7 @@ void  ReferenceIPAService::processIPAData(std::shared_ptr<IPAData> data) {
 }
 
 void ReferenceIPAService::processIPAData(
-    std::shared_ptr<ClientRequest> request) {
+        const std::shared_ptr<ClientRequest> &request) {
     // Check if there is already a session identifer and set one if there is
     // none
     const std::shared_ptr<SessionId>& id = request->getSessionId();
@@ -63,62 +61,32 @@ void ReferenceIPAService::processIPAData(
                            sessionIdentifier->toString().c_str());
     }
 
-    // Asynchronously call the the external IPAs
-    std::thread thread([&] {
-        providerSelectionService->processInput(request);
-    });
-    thread.detach();
+    notifyListeners(request);
+}
 
-    // Wait for the input
-    CombinedId combinedId(request->getSessionId(), request->getRequestId());
-    std::shared_ptr<ExternalClientResponse> externalResponse = nullptr;
-    std::unique_lock<std::mutex> lck(mtx);
-    cv.wait(lck, [&] {
-        std::map<CombinedId, std::shared_ptr<ExternalClientResponse>>::iterator iterator =
-                externalResponses.find(combinedId);
-        if (iterator == externalResponses.end()) {
-            return false;
-        }
-        externalResponse = iterator->second;
-        externalResponses.erase(iterator);
-        return true;
-    });
-
-    if (externalResponse == nullptr) {
-        LOG4CPLUS_ERROR(LOGGER, LOG4CPLUS_TEXT("No valid response received"));
-        return;
-    }
-
-    // Create a reply to the client
-    std::shared_ptr<ClientResponse> response;
-    if (externalResponse->hasError()) {
+void ReferenceIPAService::processIPAData(
+        const std::shared_ptr<ExternalClientResponse> &response) {
+    std::shared_ptr<ClientResponse> forwardedResponse;
+    if (response->hasError()) {
         // TODO temporarily take the error message as the output
         const std::shared_ptr<ErrorMessage>& error =
-            externalResponse->getErrorMessage();
+            response->getErrorMessage();
         const std::string& message = error->getErrorMessage();
         std::shared_ptr<MultiModalOutput> errorOutput =
             std::make_shared<TextMultiModalOutput>(message);
         std::shared_ptr<MultiModalOutputs> outputs =
             std::make_shared<MultiModalOutputs>();
         outputs->addMultiModalOutput(errorOutput);
-        response =
-            std::make_shared<ClientResponse>(externalResponse->getSessionId(),
-                externalResponse->getRequestId(), outputs, nullptr, nullptr);
+        forwardedResponse =
+            std::make_shared<ClientResponse>(response->getSessionId(),
+                response->getRequestId(), outputs, nullptr, nullptr);
     } else {
-        response =
-            std::make_shared<ClientResponse>(externalResponse->getSessionId(),
-            externalResponse->getRequestId(),
-            externalResponse->getMultiModalOutputs(), nullptr, nullptr);
+        forwardedResponse =
+            std::make_shared<ClientResponse>(response->getSessionId(),
+            response->getRequestId(),
+            response->getMultiModalOutputs(), nullptr, nullptr);
     }
-    notifyListeners(response);
-}
-
-void ReferenceIPAService::processIPAData(
-        std::shared_ptr<ExternalClientResponse> response) {
-    std::unique_lock<std::mutex> lck(mtx);
-    CombinedId combinedId(response->getSessionId(), response->getRequestId());
-    externalResponses[combinedId] = response;
-    cv.notify_one();
+    notifyListeners(forwardedResponse);
 }
 
 

@@ -34,7 +34,7 @@ public:
      * Constructs a new object.
      * @param service The provider selection service.
      */
-    IPAService(const std::shared_ptr<ProviderSelectionService>& service);
+    IPAService();
 
     /**
      * Destroys the object.
@@ -42,10 +42,6 @@ public:
     virtual ~IPAService();
 
 protected:
-    /**
-     * @brief providerSelectionService The provider selection service.
-     */
-    std::shared_ptr<ProviderSelectionService> providerSelectionService;
 };
 
 } // namespace ipa

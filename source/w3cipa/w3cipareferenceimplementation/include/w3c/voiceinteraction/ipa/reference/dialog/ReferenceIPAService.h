@@ -36,22 +36,20 @@ namespace dialog {
  */
 class ReferenceIPAService : public IPAService, public IPADataProcessor {
 public:
-    ReferenceIPAService(
-            const std::shared_ptr<ProviderSelectionService>& service);
+    ReferenceIPAService();
 
     void processIPAData(std::shared_ptr<IPAData> data);
 
 private:
-    void processIPAData(std::shared_ptr<ClientRequest> request);
+    void processIPAData(const std::shared_ptr<ClientRequest>& request);
 
-    void processIPAData(std::shared_ptr<ExternalClientResponse> request);
+    void processIPAData(const std::shared_ptr<ExternalClientResponse>& request);
 
 
     /** Logger instance. */
     const static log4cplus::Logger LOGGER;
     std::mutex mtx;
     std::condition_variable cv;
-    std::map<CombinedId, std::shared_ptr<ExternalClientResponse>> externalResponses;
 };
 
 } // namespace dialog

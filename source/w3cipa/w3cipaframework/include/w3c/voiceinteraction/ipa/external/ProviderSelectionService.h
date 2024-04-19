@@ -52,8 +52,6 @@ public:
      * @param request incoming request.
      * @return list of responses from the IPA providers
      */
-    void processInput(const std::shared_ptr<ClientRequest>& request);
-
     void processIPAData(std::shared_ptr<IPAData> data);
 
 protected:

@@ -18,7 +18,8 @@ namespace voiceinteraction {
 namespace ipa {
 namespace client {
 
-ModalityManager::ModalityManager() {
+ModalityManager::ModalityManager()
+    : inputNotifcation(std::make_shared<InputNotificationMediator>()) {
 }
 
 ModalityManager::~ModalityManager() {
@@ -69,8 +70,7 @@ std::list<std::shared_ptr<ModalityComponent>> ModalityManager::getModalityCompon
     }
 }
 
-void ModalityManager::startInput(
-        std::shared_ptr<InputModalityComponentListener> listener) const {
+void ModalityManager::startInput() const {
     for (std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>>::const_iterator iterator =
         inputComponents.begin(); iterator != inputComponents.end();
          ++iterator) {
@@ -78,7 +78,7 @@ void ModalityManager::startInput(
         for (std::shared_ptr<ModalityComponent>& component : components) {
             std::shared_ptr<client::InputModalityComponent> inputComponent =
                 std::dynamic_pointer_cast<client::InputModalityComponent>(component);
-            inputComponent->startInput(listener);
+            inputComponent->startInput(inputNotifcation);
         }
 
     }
@@ -111,17 +111,14 @@ void ModalityManager::handleOutput(
 
 void ModalityManager::addInputModalityComponentListener(
         const std::shared_ptr<InputModalityComponentListener>& listener) {
-    inputListeners.push_back(listener);
+    inputNotifcation->addInputModalityComponentListener(listener);
 }
 
-void ModalityManager::onMultiModalInput(
-        std::shared_ptr<MultiModalInput> input) {
-    notifyListeners(input);
+void ModalityManager::operator>>(
+        const std::shared_ptr<InputModalityComponentListener>& listener) {
+    addInputModalityComponentListener(listener);
 }
 
-std::shared_ptr<MultiModalInputs> ModalityManager::getMultiModalInputs() {
-    return nullptr;
-}
 
 void ModalityManager::addInputModality(const ModalityType& modality,
                       const std::shared_ptr<ModalityComponent>& component) {
@@ -149,13 +146,11 @@ void ModalityManager::addOutputModality(const ModalityType& modality,
     components.push_back(component);
 }
 
-void ModalityManager::notifyListeners(std::shared_ptr<MultiModalInput> input) {
-    for (const std::shared_ptr<InputModalityComponentListener>& listener : inputListeners) {
-//        std::thread thread([&data, &listener]{
-            listener->onMultiModalInput(input);
-//        });
-//        thread.join();
-    }
+std::shared_ptr<IPADataProcessor> operator >>(
+        const std::shared_ptr<ModalityManager>& manager,
+        const std::shared_ptr<InputModalityComponentListener>& listener) {
+    manager->addInputModalityComponentListener(listener);
+    return std::dynamic_pointer_cast<IPADataProcessor>(listener);
 }
 
 } // namespace client

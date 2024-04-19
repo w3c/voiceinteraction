@@ -28,8 +28,13 @@ ProviderSelectionService::ProviderSelectionService(const std::shared_ptr<Provide
 ProviderSelectionService::~ProviderSelectionService() {
 }
 
-void ProviderSelectionService::processInput(
-    const std::shared_ptr<ClientRequest>& request) {
+void ProviderSelectionService::processIPAData(
+        std::shared_ptr<IPAData> data) {
+    std::shared_ptr<ClientRequest> request =
+            std::dynamic_pointer_cast<ClientRequest>(data);
+    if (request == nullptr) {
+        return;
+    }
     std::list<std::shared_ptr<ExternalClientResponse>> responses;
     std::mutex mtx;
     std::condition_variable cv;
@@ -68,10 +73,6 @@ void ProviderSelectionService::processInput(
     for (const std::shared_ptr<ExternalClientResponse>& response : responses) {
         notifyListeners(response);
     }
-}
-
-void ProviderSelectionService::processIPAData(
-        std::shared_ptr<IPAData> data) {
 }
 
 } // namespace external

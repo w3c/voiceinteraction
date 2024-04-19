@@ -24,6 +24,7 @@
 #include "ModalityComponent.h"
 #include "InputModalityComponent.h"
 #include "InputModalityComponentListener.h"
+#include "InputNotificationMediator.h"
 #include "OutputModalityComponent.h"
 
 namespace w3c {
@@ -35,8 +36,7 @@ namespace client {
  * A component that manages multiple modalities.
  * @author Dirk Schnelle-Walka
  */
-class ModalityManager : public IPADataProcessor,
-    public InputModalityComponentListener {
+class ModalityManager : public IPADataProcessor {
 
 public:
     /**
@@ -71,10 +71,8 @@ public:
 
     /**
      * Starts the input for all known modality handlers.
-     * @param listener the listener for inputs.
      */
-    void startInput(
-            std::shared_ptr<InputModalityComponentListener> listener) const;
+    void startInput() const;
 
     void processIPAData(std::shared_ptr<IPAData> data);
 
@@ -92,13 +90,13 @@ public:
     void addInputModalityComponentListener(
             const std::shared_ptr<InputModalityComponentListener>& listener);
 
-    void onMultiModalInput(std::shared_ptr<MultiModalInput> input);
-
     /**
-     * {@inhertitDoc}
-     * @return {@code nullptr}
+     * Adds the provided listener for multimodal inputs to the list of known
+     * listeners.
+     * @param listener the listener to add.
      */
-    std::shared_ptr<MultiModalInputs> getMultiModalInputs();
+    void operator >>(
+            const std::shared_ptr<InputModalityComponentListener>& listener);
 private:
     /**
      * @brief Adds the provided modality component as an input modality
@@ -116,24 +114,19 @@ private:
     void addOutputModality(const ModalityType& modality,
                            const std::shared_ptr<ModalityComponent>& component);
 
-    /**
-     * Asynchronously notifies all listeners about the processed data.
-     * @param data the processed data
-     */
-    void notifyListeners(std::shared_ptr<MultiModalInput> input);
-
-    /**
-     * The map of known input modality components.
-     */
+    /** The map of known input modality components. */
     std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>> inputComponents;
-    /**
-     * The map of known output modality components.
-     */
+
+    /** The map of known output modality components. */
     std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>> outputComponents;
 
-    /** Known listeners for multimnodal input. */
-    std::list<std::shared_ptr<InputModalityComponentListener>> inputListeners;
+    /** Mediator to forward input events. */
+    std::shared_ptr<InputNotificationMediator> inputNotifcation;
 };
+
+std::shared_ptr<IPADataProcessor> operator>>(
+        const std::shared_ptr<ModalityManager>& manager,
+        const std::shared_ptr<InputModalityComponentListener>& listener);
 
 } // namespace client
 } // namespace ipa

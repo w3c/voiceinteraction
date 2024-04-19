@@ -18,8 +18,7 @@ namespace ipa {
 namespace external {
 namespace ipa {
 
-IPAService::IPAService(const std::shared_ptr<ProviderSelectionService>& service)
-    : providerSelectionService(service) {
+IPAService::IPAService() {
 }
 
 IPAService::~IPAService() {

@@ -15,7 +15,7 @@
 
 #include <memory>
 
-#include "w3c/voiceinteraction/ipa/client/InputModalityComponentListener.h"
+#include "w3c/voiceinteraction/ipa/client/InputNotificationMediator.h"
 
 namespace w3c {
 namespace voiceinteraction {
@@ -43,11 +43,11 @@ public:
 
     /**
      * Starts listening asynchronously for inputs and notify the provided
-     * listener if any input is received from this component.
-     * @param listener the lister to notify
+     * medaitor if any input is received from this component.
+     * @param the mediator to handle input notifications.
      */
     virtual void startInput(
-        std::shared_ptr<InputModalityComponentListener> listener) = 0;
+        const std::shared_ptr<InputNotificationMediator>& mediator) = 0;
 
     /**
      * Stops listening for inputs.
