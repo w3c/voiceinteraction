@@ -124,7 +124,7 @@ std::shared_ptr<IPAProvider> chatGPT =
 registry->addIPAProvider(chatGPT);
 std::shared_ptr<ProviderSelectionService> providerSelectionService =
     std::make_shared<ProviderSelectionService>(registry);
-    ```
+```
 
 #### Create a Processing Chain
 
