@@ -22,6 +22,8 @@ project(w3cipa LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+option(BUILD_DOC "Build documentation" ON)
+
 #
 # Adapt the install path for dependentlibs
 #

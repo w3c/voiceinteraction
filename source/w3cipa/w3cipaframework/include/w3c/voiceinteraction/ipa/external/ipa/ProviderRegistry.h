@@ -27,7 +27,17 @@ namespace ipa {
 
 /**
  * @brief The ProviderRegistry class
- * This class knows all registered IPA providers.
+ * This class knows all registered {@link IPAProvider}s and a
+ * {@link ProviderSelectionStrategy} that will filter this list for
+ * suitable IPAProviders for an actual request.
+ *
+ * A full list of known IPA
+ * providers can be obtained via
+ * {@link #getIPAProviders(const std::shared_ptr<ClientRequest>& request)}.
+ *
+ * New providers can be added via
+ * {@link #addIPAProvider(const std::shared_ptr<IPAProvider>& provider)}.
+ *
  * @author Dirk Schnelle-Walka
  */
 class ProviderRegistry {
@@ -44,13 +54,13 @@ public:
 
     /**
      * Adds the IPA provider to the known IPA providers.
-     * @param provider the provider to add
+     * @param[in] provider the provider to add
      */
     void addIPAProvider(const std::shared_ptr<IPAProvider>& provider);
 
     /**
      * Returns a list of all registered IPA providers.
-     * @param request incoming request
+     * @param[in] request incoming request
      * @return A list of all registered IPA providers.
      */
     const std::list<std::shared_ptr<IPAProvider>> getIPAProviders(

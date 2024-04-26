@@ -38,7 +38,7 @@ class ReferenceIPAService : public IPAService, public IPADataProcessor {
 public:
     ReferenceIPAService();
 
-    void processIPAData(std::shared_ptr<IPAData> data);
+    void processIPAData(std::shared_ptr<IPAData> data) override;
 
 private:
     void processIPAData(const std::shared_ptr<ClientRequest>& request);

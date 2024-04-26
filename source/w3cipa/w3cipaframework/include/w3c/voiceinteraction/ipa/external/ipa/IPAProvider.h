@@ -15,8 +15,9 @@
 
 #include <string>
 
+#include "w3c/voiceinteraction/ipa/ClientRequest.h"
+#include "w3c/voiceinteraction/ipa/ExternalClientResponse.h"
 #include "w3c/voiceinteraction/ipa/ModalityType.h"
-#include "w3c/voiceinteraction/ipa/ExternalClientInput.h"
 
 namespace w3c {
 namespace voiceinteraction {
@@ -26,10 +27,13 @@ namespace ipa {
 
 /**
  * Interface for IPA providers.
+ *
+ * An IPA provider is able to access an external IPA and return the response
+ * to inside this IPA. It is identified by a unique ID.
+ *
  * @author Dirk Schnelle-Walka
  */
-class IPAProvider : public ExternalClientInput
-{
+class IPAProvider {
 
 public:
     /**
@@ -41,6 +45,13 @@ public:
      * Destroys this object.
      */
     virtual ~IPAProvider();
+
+    /**
+     * Processes the input from the client.
+     * @param request the request coming from the client
+     */
+    virtual const std::shared_ptr<ExternalClientResponse> processInput(
+        const std::shared_ptr<ClientRequest>& request) = 0;
 
     /**
      * Returns the IPA provider's ID.

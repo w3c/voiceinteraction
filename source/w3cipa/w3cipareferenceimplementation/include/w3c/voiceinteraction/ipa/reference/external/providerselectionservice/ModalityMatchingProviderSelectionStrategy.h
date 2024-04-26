@@ -24,17 +24,31 @@ namespace reference {
 namespace external {
 namespace providerselectionservice {
 
+/**
+ * A provider selection strategy that will only those {@link IPAProvider}s
+ * that are able to handle the modalities of the incoming request.
+ *
+ * @author Dirk Schnelle-Walka
+ */
 class ModalityMatchingProviderSelectionStrategy
-    : public ::external::ipa::ProviderSelectionStrategy
-{
+    : public ::external::ipa::ProviderSelectionStrategy {
 public:
+    /**
+     * Creates a new object.
+     */
     ModalityMatchingProviderSelectionStrategy();
 
     const std::list<std::shared_ptr<::external::ipa::IPAProvider>> filterIPAProviders(
         const std::list<std::shared_ptr<::external::ipa::IPAProvider>>& providers,
-        const std::shared_ptr<ClientRequest>& request) const;
+        const std::shared_ptr<ClientRequest>& request) const override;
 
 private:
+    /**
+     * Checks if the requested types match those from the supported
+     * @param requestedTypes requested modality types
+     * @param supportedTypes supported modality types
+     * @return
+     */
     bool isModalitySupported(const std::list<ModalityType>& requestedTypes,
                              const std::list<ModalityType>& supportedTypes) const;
 };

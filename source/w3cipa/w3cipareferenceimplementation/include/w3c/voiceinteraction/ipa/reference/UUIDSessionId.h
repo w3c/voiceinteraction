@@ -39,7 +39,7 @@ public:
      */
     void operator=(const UUIDSessionId& other);
 
-    const std::string& toString() const;
+    const std::string& toString() const override;
 
 private:
     /** The UUID. */

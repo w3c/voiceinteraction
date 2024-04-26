@@ -38,13 +38,13 @@ public:
     }
 
     const std::shared_ptr<ExternalClientResponse> processInput(
-        const std::shared_ptr<ClientRequest>& request);
+        const std::shared_ptr<ClientRequest>& request) override;
 
-    const std::string getId() const {
+    const std::string getId() const override {
         return ID;
     }
 
-    const std::list<ModalityType> getSupportedModalityTypes() const;
+    const std::list<ModalityType> getSupportedModalityTypes() const override;
 
 private:
     const static std::string ID;

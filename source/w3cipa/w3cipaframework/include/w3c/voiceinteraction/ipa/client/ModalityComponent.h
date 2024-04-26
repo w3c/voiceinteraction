@@ -24,7 +24,7 @@ namespace ipa {
 namespace client {
 
 /**
- * A component to hand mutlimodal input or output.
+ * A component to hand multimodal input or output.
  * @author Dirk Schnelle-Walka
  */
 class ModalityComponent {

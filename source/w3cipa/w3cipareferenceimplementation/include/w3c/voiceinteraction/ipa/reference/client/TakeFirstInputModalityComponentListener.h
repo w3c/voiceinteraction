@@ -41,11 +41,11 @@ class TakeFirstInputModalityComponentListener
 public:
     TakeFirstInputModalityComponentListener();
 
-    void processIPAData(std::shared_ptr<IPAData> data);
+    void processIPAData(std::shared_ptr<IPAData> data) override;
 
-    void onMultiModalInput(std::shared_ptr<MultiModalInput> input);
+    void onMultiModalInput(std::shared_ptr<MultiModalInput> input) override;
 
-    std::shared_ptr<MultiModalInputs> getMultiModalInputs();
+    std::shared_ptr<MultiModalInputs> getMultiModalInputs() override;
 
 private:
     std::mutex mtx;

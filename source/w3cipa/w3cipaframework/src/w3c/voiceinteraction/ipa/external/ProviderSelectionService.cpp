@@ -30,16 +30,25 @@ ProviderSelectionService::~ProviderSelectionService() {
 
 void ProviderSelectionService::processIPAData(
         std::shared_ptr<IPAData> data) {
+    // Only reply to calls that can be understood
     std::shared_ptr<ClientRequest> request =
             std::dynamic_pointer_cast<ClientRequest>(data);
     if (request == nullptr) {
         return;
     }
-    std::list<std::shared_ptr<ExternalClientResponse>> responses;
+
+    // Mutex and condition var to be able to delay until all replies have
+    // been received
     std::mutex mtx;
     std::condition_variable cv;
 
+    // Valid responses will be caught here
+    std::list<std::shared_ptr<ExternalClientResponse>> responses;
+    // All erroroneous calls will be caught here
     std::list<std::shared_ptr<ExternalClientResponse>> errorResponses;
+
+    // Asynchronously call all providers that the provider registry finds
+    // adequate for this request
     std::list<std::shared_ptr<IPAProvider>> providers =
         providerRegistry->getIPAProviders(request);
     for (std::shared_ptr<IPAProvider>& provider : providers) {

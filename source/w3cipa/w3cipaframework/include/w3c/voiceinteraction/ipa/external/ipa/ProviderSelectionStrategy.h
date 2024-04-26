@@ -43,8 +43,8 @@ public:
 
     /**
      * Returns a list of all applicable IPA providers.
-     * @param providers the original list of IPA providers
-     * @param request the incoming request from the client
+     * @param[in] providers the original list of IPA providers
+     * @param[in] request the incoming request from the client
      * @return A list of all registered IPA providers.
      */
     virtual const std::list<std::shared_ptr<IPAProvider>> filterIPAProviders(

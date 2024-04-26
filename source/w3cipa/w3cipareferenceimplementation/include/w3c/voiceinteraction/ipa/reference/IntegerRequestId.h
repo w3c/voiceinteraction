@@ -26,7 +26,7 @@ class IntegerRequestId : public RequestId {
 public:
     IntegerRequestId();
 
-    const std::string& toString() const;
+    const std::string& toString() const override;
 
 private:
     static long nextId();

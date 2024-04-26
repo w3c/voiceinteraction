@@ -33,13 +33,13 @@ class ConsoleTextModalityComponent : public ModalityComponent,
 public:
     ConsoleTextModalityComponent();
 
-    const std::list<IOType> getSupportedIOTypes() const;
+    const std::list<IOType> getSupportedIOTypes() const override;
 
-    void startInput(const std::shared_ptr<InputNotificationMediator>& mediator);
+    void startInput(const std::shared_ptr<InputNotificationMediator>& mediator) override;
 
-    void stopInput();
+    void stopInput() override;
 
-    void handleOutput(const std::shared_ptr<MultiModalOutput>& output);
+    void handleOutput(const std::shared_ptr<MultiModalOutput>& output) override;
 
     const static ModalityType MODALITY;
 
