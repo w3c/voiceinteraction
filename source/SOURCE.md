@@ -25,13 +25,21 @@ git clone git@github.com:w3c/voiceinteraction.git
 The source code is in the folder source/w3cipa
 
 - `w3cipaframework` contains the interfaces as described at
-  [Intelligent Personal Assistant Interfaces](https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm).
+  [Intelligent Personal Assistant Interfaces](https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm)
+  and [Architecture and Potential for Standardization Version](https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm).
 - `w3cipareferenceimplementation` contains the actual reference implementation of some common components using these interfaces
 - `w3cipachatgptipaprovider` an IPAProvider implementation for ChatGPT
 - `w3cipademo` contains demo using the reference implementation
 
 
 ### Manual Build
+
+#### IDE
+
+Most C++-IDEs support CMake as a build system. In the IDE of your choice open
+file `w3cipa/CMakeLists.txt`.
+
+#### Console
 
 On Windows systems
 
@@ -55,15 +63,22 @@ make && make install
 
 ## Demo Code Walkthrough
 
-The current demo aims at interacting with ChatGPT. As a first step you will need
-to provide the correct developer key to communicate with ChatGPT.
+The current demo aims at interacting with ChatGPT. This Walkthrough will also
+give hints about the used components from
+[Architecture and Potential for Standardization Version](https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm)
+
+![IPA Architecture](https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paArchitecture/IPA-Architecture-1-3.svg)
+
+As a first step you will need to provide the correct developer key to
+communicate with ChatGPT.
 
 ### Configuring Keys
 
 As of now, everything is hard coded, you will need to replace your OpenAI
-developer key in the file w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/chatgptadapter.cpp
+developer key in the file 
+[w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/chatgptadapter.cpp](https://github.com/w3c/voiceinteraction/blob/a8753131e16a01fb0374d7cbf3cb875b0a925053/source/w3cipa/w3cipachatgptipaprovider/src/w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTAdapter.cpp#L71)
 
-Replace `OPENAI-DEVELOPER-KEY` with your actual key
+Replace `OPENAI-DEVELOPER-KEY` with your actual key.
 
 <mark>Take care not to commit while this key is in the source code</mark>
 
