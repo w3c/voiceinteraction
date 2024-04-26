@@ -96,7 +96,12 @@ re-used in the employed processing chain.
 On the client side, we mainly need the correct modality components, text via
 `console` for now, a modality manager `modalityManager` to handle all known 
 modalities, and a component to select which input to forward to the 
-IPA. In this case, we simply select the first one that reaches us via `inputListener`.
+IPA. In this case, we simply select the first one that reaches us via
+`inputListener`.
+
+The `modalityManager` and `inputListener` are part of the `IPA Client`. 
+`ModalityComponent`s are either the `Capture` or `Presentation` components or
+both as in the case of the `console`.
 
 ```
 std::shared_ptr<client::ModalityManager> modalityManager =
@@ -110,11 +115,11 @@ std::shared_ptr<::reference::client::TakeFirstInputModalityComponentListener> in
 
 #### Dialog Layer
 
-So far, we do not have an implementation of a dialog manager. However, the IPA
-service `ipaService` is used to consume incoming calls from the clients
-and provide the corresponding replies. For now, it will also convert
-an error, e.g. ChatGPT cannot be reached to a user reply. Later, this will
-be taken care of by the dialog mangager.
+So far, we do not have an implementation of a `Dialog Manager`. However, the IPA
+service `ipaService` as an implementation of the `IPA Service`is used to consume
+incoming calls from the clients and provide the corresponding replies. 
+For now, it will also convert an error, e.g. ChatGPT cannot be reached to a user
+reply. Later, this will be taken care of by the dialog mangager.
 
 ```
 std::shared_ptr<::reference::dialog::ReferenceIPAService> ipaService =
@@ -125,9 +130,17 @@ std::shared_ptr<::reference::dialog::ReferenceIPAService> ipaService =
 
 Here, we create an instance of an `IPAProvider` to communicate with ChatGPT. 
 This instance `chatGPT` is added to the list of known IPA providers in the
-`registry`. The `providerSelectionStrategy` is used by the `ProviderRegistry`
-to selects thos IPA providers that are suited to handle the current request.
+`registry` as an implementation of a `Provider Registry`. 
+The `providerSelectionStrategy` is used by the `registry`
+to select those IPA providers that are suited to handle the current request.
 In this case, we select all those that have a matching modality, i.e. text.
+
+The `providerSelectionService` as an implementation of the 
+`Provider Selection Service` acts as the main component to be approached
+from components in the `Dialog Layer`. It makes use of the `registry` to 
+obtain a list of `IPA Providers` that are suited to handle an actual 
+request, forwards this request to them and waits until all responses
+have been received.
 
 ```
 std::shared_ptr<::reference::external::providerselectionservice::ModalityMatchingProviderSelectionStrategy> providerSelectionStrategy =
