@@ -165,6 +165,11 @@ modalityManager >> inputListener >> ipaService >> providerSelectionService
         >> ipaService >> modalityManager;
 ```
 
+The following shows which components from the diagram above are available
+and how this chain maps to it.
+
+![Chained IPA Architecture](docs/IPA-Architecture-ChatGPT.svg)
+
 #### Start 
 
 Finally, we need to start capturing input and start processing in the IPA
