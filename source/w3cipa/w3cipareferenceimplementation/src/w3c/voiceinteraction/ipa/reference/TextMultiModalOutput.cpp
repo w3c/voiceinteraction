@@ -10,7 +10,8 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
-#include "w3c/voiceinteraction/ipa/reference/TextModalityType.h"
+#include <w3c/voiceinteraction/ipa/TextModalityType.h>
+
 #include "w3c/voiceinteraction/ipa/reference/TextMultiModalOutput.h"
 
 namespace w3c {

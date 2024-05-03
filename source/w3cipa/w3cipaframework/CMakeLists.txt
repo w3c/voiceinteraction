@@ -41,7 +41,9 @@ set(HEADERS
     include/w3c/voiceinteraction/ipa/RequestId.h
     include/w3c/voiceinteraction/ipa/SemanticInterpretation.h
     include/w3c/voiceinteraction/ipa/SessionId.h
+    include/w3c/voiceinteraction/ipa/TextModalityType.h
     include/w3c/voiceinteraction/ipa/Timestamp.h
+    include/w3c/voiceinteraction/ipa/VoiceModalityType.h
     include/w3c/voiceinteraction/ipa/client/InputModalityComponent.h
     include/w3c/voiceinteraction/ipa/client/InputModalityComponentListener.h
     include/w3c/voiceinteraction/ipa/client/InputNotificationMediator.h
@@ -72,6 +74,8 @@ set(SOURCES
     src/w3c/voiceinteraction/ipa/MultiModalOutputs.cpp
     src/w3c/voiceinteraction/ipa/RequestId.cpp
     src/w3c/voiceinteraction/ipa/SessionId.cpp
+    src/w3c/voiceinteraction/ipa/TextModalityType.cpp
+    src/w3c/voiceinteraction/ipa/VoiceModalityType.cpp
     src/w3c/voiceinteraction/ipa/client/InputModalityComponent.cpp
     src/w3c/voiceinteraction/ipa/client/InputModalityComponentListener.cpp
     src/w3c/voiceinteraction/ipa/client/InputNotificationMediator.cpp

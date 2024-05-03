@@ -10,23 +10,28 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
-#include <w3c/voiceinteraction/ipa/TextModalityType.h>
+#ifndef VOICEMODALITYTYPE_H
+#define VOICEMODALITYTYPE_H
 
-#include "w3c/voiceinteraction/ipa/reference/TextMultiModalInput.h"
+#include <w3c/voiceinteraction/ipa/ModalityType.h>
 
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
-namespace reference {
 
-const ModalityType TextMultiModalInput::MODALITY = TextModalityType();
+/**
+ * The voice modality type.
+ * @author Dirk Schnelle-Walka
+ */
+class VoiceModalityType : public ModalityType
+{
+public:
+    VoiceModalityType();
+    VoiceModalityType(const VoiceModalityType& other);
+};
 
-TextMultiModalInput::TextMultiModalInput(const std::string& input)
-    : MultiModalInput(MODALITY),
-      text(input) {
-}
-
-} // namespace reference
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c
+
+#endif // VOICEMODALITYTYPE_H

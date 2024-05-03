@@ -15,7 +15,8 @@
 
 #include <log4cplus/loggingmacros.h>
 
-#include "w3c/voiceinteraction/ipa/reference/TextModalityType.h"
+#include <w3c/voiceinteraction/ipa/TextModalityType.h>
+
 #include "w3c/voiceinteraction/ipa/reference/TextMultiModalInput.h"
 #include "w3c/voiceinteraction/ipa/reference/TextMultiModalOutput.h"
 #include "w3c/voiceinteraction/ipa/reference/client/ConsoleTextModalityComponent.h"
