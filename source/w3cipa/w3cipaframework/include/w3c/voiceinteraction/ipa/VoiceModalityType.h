@@ -26,7 +26,15 @@ namespace ipa {
 class VoiceModalityType : public ModalityType
 {
 public:
+    /**
+     * Constructs a new object.
+     */
     VoiceModalityType();
+
+    /**
+     * Copy constructor.
+     * @param other the object to copy from
+     */
     VoiceModalityType(const VoiceModalityType& other);
 };
 

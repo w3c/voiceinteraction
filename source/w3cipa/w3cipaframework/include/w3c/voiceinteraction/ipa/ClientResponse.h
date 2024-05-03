@@ -33,7 +33,12 @@ class ClientResponse : public IPAData {
 public:
     /**
      * Constructs a new object.
-     * @param multiModalOutputs The multimodal outputs to be returned to the client.
+     * @param sessionIdentifier the session identifier
+     * @param requestIdentifier the request identifier
+     * @param multiModalOutputs The multimodal outputs to be returned to the
+     *          client.
+     * @param audioDataToSend audio data to send
+     * @param metaDataToSend meta data to send
      */
     ClientResponse(const std::shared_ptr<SessionId>& sessionIdentifier,
                    const std::shared_ptr<RequestId>& requestIdentifier,

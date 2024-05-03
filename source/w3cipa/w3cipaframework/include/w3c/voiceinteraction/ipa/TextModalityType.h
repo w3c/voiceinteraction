@@ -26,7 +26,15 @@ namespace ipa {
 class TextModalityType : public ModalityType
 {
 public:
+    /**
+     * Constructs a new object.
+     */
     TextModalityType();
+
+    /**
+     * Copy constructor.
+     * @param other the object to copy from
+     */
     TextModalityType(const TextModalityType& other);
 };
 

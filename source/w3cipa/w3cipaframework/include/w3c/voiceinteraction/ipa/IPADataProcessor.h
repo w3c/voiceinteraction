@@ -61,6 +61,10 @@ public:
     void addIPADataProcessorListener(
             const std::shared_ptr<IPADataProcessor>& listener);
 
+    /**
+     * Shortcut for {@link addIPADataProcessorListener(const std::shared_ptr<IPADataProcessor>& listener)}.
+     * @param other the listener to add
+     */
     void operator >>(const std::shared_ptr<IPADataProcessor>& other);
 protected:
     /**

@@ -26,7 +26,7 @@ namespace client {
  * A component to hand mutlimodal inputs.
  *
  * Input modality components are also asked to inherit from
- * {@link ModalityComponent} and support {@link IOType::INPUT}.
+ * {@link ModalityComponent} and support {@link IOType#INPUT}.
  * @author Dirk Schnelle-Walka
  */
 class InputModalityComponent {
@@ -44,7 +44,7 @@ public:
     /**
      * Starts listening asynchronously for inputs and notify the provided
      * medaitor if any input is received from this component.
-     * @param the mediator to handle input notifications.
+     * @param mediator the mediator to handle input notifications.
      */
     virtual void startInput(
         const std::shared_ptr<InputNotificationMediator>& mediator) = 0;

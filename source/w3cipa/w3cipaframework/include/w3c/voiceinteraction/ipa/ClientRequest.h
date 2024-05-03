@@ -33,7 +33,11 @@ class ClientRequest : public IPAData {
 public:
     /**
      * Constructs a new object.
+     * @param sessionIdentifier the session identifier
+     * @param requestIdentifier the request identifier
      * @param multiModalInputs The multimodal inputs to be sent to the client.
+     * @param audioDataToSend audio data to send
+     * @param metaDataToSend meta data to send
      */
     ClientRequest(const std::shared_ptr<SessionId>& sessionIdentifier,
                   const std::shared_ptr<RequestId>& requestIdentifier,

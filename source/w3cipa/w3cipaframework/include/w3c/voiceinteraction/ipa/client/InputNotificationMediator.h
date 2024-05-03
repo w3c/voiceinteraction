@@ -23,8 +23,12 @@ namespace voiceinteraction {
 namespace ipa {
 namespace client {
 
-class InputNotificationMediator
-{
+/**
+ * A mediator knowing all listeners for MultiModalInput to arrive.
+ *
+ * @author Dirk Schnelle-Walka
+ */
+class InputNotificationMediator {
 public:
     /**
      * Constructs a new object.

@@ -103,7 +103,7 @@ if (CMAKE_BUILD_TYPE MATCHES "^[Rr]elease")
     find_package(Doxygen)
     if (DOXYGEN_FOUND)
         # set input and output files
-        set(DOXYGEN_IN ${CMAKE_CURRENT_SOURCE_DIR}/../../docs/Doxyfile.in)
+        set(DOXYGEN_IN ${CMAKE_CURRENT_SOURCE_DIR}/../../docs/framework-doxyfile.in)
         set(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
 
         # request to configure the file

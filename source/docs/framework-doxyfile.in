@@ -10,5 +10,8 @@
 # [1] https://www.w3.org/Consortium/Legal/copyright-software
 #
 
+PROJECT_NAME           = "W3C IPA Framework"
 OUTPUT_DIRECTORY       = @CMAKE_CURRENT_BINARY_DIR@/doc_doxygen/
 INPUT                  = @CMAKE_CURRENT_SOURCE_DIR@/src/ @CMAKE_CURRENT_SOURCE_DIR@/include/
+RECURSIVE              = YES
+FILE_PATTERNS          = *.cpp *.h

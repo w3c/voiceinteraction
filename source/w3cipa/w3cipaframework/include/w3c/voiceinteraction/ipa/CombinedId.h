@@ -41,7 +41,7 @@ public:
 
     /**
      * Creates a new object as a copy of the provided object.
-     * @param other the object to copy from
+     * @param id the object to copy from
      */
     CombinedId(const CombinedId& id);
 
