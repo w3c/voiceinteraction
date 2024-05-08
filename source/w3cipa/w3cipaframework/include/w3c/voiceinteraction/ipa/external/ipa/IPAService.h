@@ -13,10 +13,6 @@
 #ifndef IPASERVICE_H
 #define IPASERVICE_H
 
-#include <memory>
-
-#include "w3c/voiceinteraction/ipa/external/ProviderSelectionService.h"
-
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
@@ -24,15 +20,18 @@ namespace external {
 namespace ipa {
 
 /**
- * @brief The IPAService class
  * The IPAService is the base class for the IPA service.
+ *
+ * Usually, this insance is only needed in case multiple clients need to be
+ * handled or the input is forwarded simultaneously to a local IPA and
+ * external IPAs.
+ *
  * @author Dirk Schnelle-Walka
  */
 class IPAService {
 public:
     /**
      * Constructs a new object.
-     * @param service The provider selection service.
      */
     IPAService();
 
@@ -41,7 +40,6 @@ public:
      */
     virtual ~IPAService();
 
-protected:
 };
 
 } // namespace ipa

@@ -25,6 +25,7 @@ namespace ipa {
  * An IPA data processor is able to consume {@link IPAData}, process it
  * and forward the processed result to registered other IPA data processors
  * to eventually further process the data.
+ *
  * @author Dirk Schnelle-Walka
  */
 class IPADataProcessor {
@@ -40,6 +41,12 @@ public:
     virtual ~IPADataProcessor();
 
     /**
+     * Starts processing with {@code nullptr} in
+     * {@link processIPAData(std::shared_ptr<IPAData> data)}.
+     */
+    virtual void processIPAData();
+
+    /**
      * Processes the data and informs all registered listeners afterwards
      * via {@link #notifyListeners}.
      *
@@ -50,7 +57,7 @@ public:
      * they can handle. As a result of chaining, inputs may be received from
      * multiple sources. This method should return immediately, if there is
      * nothing to do with the received data.
-     * @param data the data to process;
+     * @param data the data to process
      */
     virtual void processIPAData(std::shared_ptr<IPAData> data) = 0;
 

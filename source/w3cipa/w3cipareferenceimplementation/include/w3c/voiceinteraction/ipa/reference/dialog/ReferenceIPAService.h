@@ -14,12 +14,12 @@
 #define REFERENCEIPASERVICE_H
 
 #include <memory>
-#include <map>
 
 #include <log4cplus/logger.h>
 
-#include "w3c/voiceinteraction/ipa/CombinedId.h"
-#include "w3c/voiceinteraction/ipa/IPADataProcessor.h"
+#include <w3c/voiceinteraction/ipa/IPADataProcessor.h>
+#include <w3c/voiceinteraction/ipa/ClientRequest.h>
+#include <w3c/voiceinteraction/ipa/ExternalClientResponse.h>
 #include <w3c/voiceinteraction/ipa/external/ipa/IPAService.h>
 
 using namespace w3c::voiceinteraction::ipa::external;
@@ -34,7 +34,7 @@ namespace dialog {
  * @brief A reference implementation of an IPA Service
  * @author Dirk Schnelle-Walka
  */
-class ReferenceIPAService : public IPAService, public IPADataProcessor {
+class ReferenceIPAService : public external::ipa::IPAService, public IPADataProcessor {
 public:
     ReferenceIPAService();
 

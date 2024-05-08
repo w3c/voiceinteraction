@@ -18,8 +18,9 @@
 #include <log4cplus/initializer.h>
 
 #include <w3c/voiceinteraction/ipa/client/ModalityManager.h>
+#include <w3c/voiceinteraction/ipa/external/ipa/ProviderRegistry.h>
 
-#include "w3c/voiceinteraction/ipa/reference/IntegerRequestId.h"
+#include "w3c/voiceinteraction/ipa/external/ProviderSelectionService.h"
 #include "w3c/voiceinteraction/ipa/reference/client/ConsoleTextModalityComponent.h"
 #include "w3c/voiceinteraction/ipa/reference/dialog/ReferenceIPAService.h"
 #include "w3c/voiceinteraction/ipa/reference/client/TakeFirstInputModalityComponentListener.h"
@@ -74,7 +75,7 @@ int main() {
     modalityManager->startInput();
 
     // Actually start processing
-    inputListener->processIPAData(nullptr);
+    inputListener->IPADataProcessor::processIPAData();
 
     return 0;
 }

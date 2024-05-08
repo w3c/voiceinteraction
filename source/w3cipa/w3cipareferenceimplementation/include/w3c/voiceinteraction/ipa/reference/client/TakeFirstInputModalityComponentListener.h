@@ -36,9 +36,12 @@ namespace client {
  */
 class TakeFirstInputModalityComponentListener
     : public ::client::InputModalityComponentListener,
-    public IPADataProcessor {
+      public IPADataProcessor {
 
 public:
+    /**
+     * Constructs a new object.
+     */
     TakeFirstInputModalityComponentListener();
 
     void processIPAData(std::shared_ptr<IPAData> data) override;

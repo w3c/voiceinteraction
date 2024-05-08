@@ -16,10 +16,6 @@ namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
 
-/**
- * Constructs a new object.
- * @param multiModalInputs The multimodal inputs to be sent to the client.
- */
 ClientRequest::ClientRequest(const std::shared_ptr<SessionId>& sessionIdentifier,
               const std::shared_ptr<RequestId>& requestIdentifier,
               const std::shared_ptr<MultiModalInputs>& multiModalInputs,
@@ -30,33 +26,18 @@ ClientRequest::ClientRequest(const std::shared_ptr<SessionId>& sessionIdentifier
         metaData(metaDataToSend) {
 }
 
-/**
- * Destroys the object.
- */
 ClientRequest::~ClientRequest() {
 
 }
 
-/**
- * Returns the audio data to be played to the user.
- * @return The audio data to be played to the user.
- */
 const std::shared_ptr<AudioData>& ClientRequest::getAudioData() {
     return audioData;
 }
 
-/**
- * Returns the multimodal inputs to be sent to the client.
- * qreturn The multimodal inputs to be sent to the client.
- */
 const std::shared_ptr<MultiModalInputs>& ClientRequest::getMultiModalInputs() {
     return inputs;
 }
 
-/**
- * Returns the metadata of the request.
- * @return The metadata of the request.
- */
 const std::shared_ptr<MetaData>& ClientRequest::getMetaData() {
     return metaData;
 }

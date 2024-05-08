@@ -50,7 +50,6 @@ public:
     /**
      * Processes the input and forwards it to the relevant IPA providers.
      * @param data incoming data.
-     * @return list of responses from the IPA providers
      */
     void processIPAData(std::shared_ptr<IPAData> data) override;
 

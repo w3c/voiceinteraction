@@ -24,6 +24,10 @@ IPADataProcessor::IPADataProcessor() {
 IPADataProcessor::~IPADataProcessor() {
 }
 
+void IPADataProcessor::processIPAData() {
+    processIPAData(nullptr);
+}
+
 void IPADataProcessor::addIPADataProcessorListener(
         const std::shared_ptr<IPADataProcessor>& listener) {
     listeners.push_back(listener);
