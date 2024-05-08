@@ -176,7 +176,7 @@ Finally, we need to start capturing input and start processing in the IPA
 
 ```
 modalityManager->startInput();
-inputListener->processIPAData(nullptr);
+inputListener->IPADataProcessor::processIPAData();
 ```
 
 #### Demo Output
