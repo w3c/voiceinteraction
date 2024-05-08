@@ -98,7 +98,7 @@ install(TARGETS ${PROJECT_NAME}
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib)
 
-#if (CMAKE_BUILD_TYPE MATCHES "^[Rr]elease")
+if (CMAKE_BUILD_TYPE MATCHES "^[Rr]elease")
 # check if Doxygen is installed
     find_package(Doxygen)
     if (DOXYGEN_FOUND)
@@ -119,4 +119,4 @@ install(TARGETS ${PROJECT_NAME}
     else (DOXYGEN_FOUND)
       message("Doxygen need to be installed to generate the doxygen documentation")
     endif (DOXYGEN_FOUND)
-#endif()
+endif()
