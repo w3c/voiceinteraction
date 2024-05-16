@@ -20,7 +20,7 @@
 #include "w3c/voiceinteraction/ipa/reference/TextMultiModalInput.h"
 #include "w3c/voiceinteraction/ipa/reference/TextMultiModalOutput.h"
 
-#include "w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTAdapter.h"
+#include "w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTIPAProvider.h"
 #include "w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTMessage.h"
 
 namespace w3c {
@@ -31,8 +31,8 @@ namespace external {
 namespace ipa {
 namespace chatgpt {
 
-const std::string ChatGPTAdapter::ID = std::string("ChatGPT");
-const log4cplus::Logger ChatGPTAdapter::LOGGER =
+const std::string ChatGPTIPAProvider::ID = std::string("ChatGPT");
+const log4cplus::Logger ChatGPTIPAProvider::LOGGER =
     log4cplus::Logger::getInstance(LOG4CPLUS_TEXT(
         "w3c.voiceinteraction.ipa.external.ChatGPT"));
 
@@ -44,15 +44,15 @@ size_t WriteCallback(char* ptr, size_t size, size_t nmemb, void* userdata)
     return num_bytes;
 }
 
-ChatGPTAdapter::ChatGPTAdapter() {
+ChatGPTIPAProvider::ChatGPTIPAProvider() {
 }
 
-const std::list<ModalityType> ChatGPTAdapter::getSupportedModalityTypes() const {
+const std::list<ModalityType> ChatGPTIPAProvider::getSupportedModalityTypes() const {
     std::list<ModalityType> types = { TextModalityType() };
     return types;
 }
 
-const std::shared_ptr<ExternalClientResponse> ChatGPTAdapter::processInput(
+const std::shared_ptr<ExternalClientResponse> ChatGPTIPAProvider::processInput(
     const std::shared_ptr<ClientRequest> &request) {
     const std::string& sessionId = request->getSessionId()->toString();
     const std::string& requestId = request->getRequestId()->toString();

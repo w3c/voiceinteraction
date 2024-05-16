@@ -18,12 +18,12 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(HEADERS
-    include/w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTAdapter.h
+    include/w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTIPAProvider.h
     include/w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTMessage.h
 )
 
 set(SOURCES
-    src/w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTAdapter.cpp
+    src/w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTIPAProvider.cpp
 )
 
 source_group("W3C IPA ChatGPT IPAProvider" FILES ${SOURCES} ${HEADERS})

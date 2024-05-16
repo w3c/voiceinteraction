@@ -31,10 +31,10 @@ namespace chatgpt {
  * @brief An IPA Provider for ChatGPT.
  * @author Dirk Schnelle-Walka
  */
-class ChatGPTAdapter : public IPAProvider {
+class ChatGPTIPAProvider : public IPAProvider {
 public:
-    ChatGPTAdapter();
-    virtual ~ChatGPTAdapter() {
+    ChatGPTIPAProvider();
+    virtual ~ChatGPTIPAProvider() {
     }
 
     const std::shared_ptr<ExternalClientResponse> processInput(

@@ -24,7 +24,7 @@
 #include "w3c/voiceinteraction/ipa/reference/client/ConsoleTextModalityComponent.h"
 #include "w3c/voiceinteraction/ipa/reference/dialog/ReferenceIPAService.h"
 #include "w3c/voiceinteraction/ipa/reference/client/TakeFirstInputModalityComponentListener.h"
-#include "w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTAdapter.h"
+#include "w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTIPAProvider.h"
 #include "w3c/voiceinteraction/ipa/reference/external/providerselectionservice/ModalityMatchingProviderSelectionStrategy.h"
 
 using namespace w3c::voiceinteraction::ipa;
@@ -62,7 +62,7 @@ int main() {
     std::shared_ptr<ProviderRegistry> registry =
         std::make_shared<ProviderRegistry>(providerSelectionStrategy);
     std::shared_ptr<IPAProvider> chatGPT =
-        std::make_shared<::reference::external::ipa::chatgpt::ChatGPTAdapter>();
+        std::make_shared<::reference::external::ipa::chatgpt::ChatGPTIPAProvider>();
     registry->addIPAProvider(chatGPT);
     std::shared_ptr<ProviderSelectionService> providerSelectionService =
         std::make_shared<ProviderSelectionService>(registry);
