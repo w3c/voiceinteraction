@@ -32,8 +32,6 @@ target_link_libraries(${PROJECT_NAME} w3cipachatgptipaprovider)
 target_link_libraries(${PROJECT_NAME} w3cipareferenceimplementation)
 target_link_libraries(${PROJECT_NAME} w3cipaframework)
 
-install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
-
 #
 # Add configuration files
 #
