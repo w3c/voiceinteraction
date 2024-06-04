@@ -21,7 +21,6 @@ set(HEADERS
     include/w3c/voiceinteraction/ipa/reference/client/ConsoleTextModalityComponent.h
     include/w3c/voiceinteraction/ipa/reference/client/TakeFirstInputModalityComponentListener.h
     include/w3c/voiceinteraction/ipa/reference/dialog/ReferenceIPAService.h
-    include/w3c/voiceinteraction/ipa/reference/external/providerselectionservice/ModalityMatchingProviderSelectionStrategy.h
     include/w3c/voiceinteraction/ipa/reference/IntegerRequestId.h
     include/w3c/voiceinteraction/ipa/reference/TextMultiModalInput.h
     include/w3c/voiceinteraction/ipa/reference/TextMultiModalOutput.h
@@ -32,7 +31,6 @@ set(SOURCES
     src/w3c/voiceinteraction/ipa/reference/client/ConsoleTextModalityComponent.cpp
     src/w3c/voiceinteraction/ipa/reference/client/TakeFirstInputModalityComponentListener.cpp
     src/w3c/voiceinteraction/ipa/reference/dialog/ReferenceIPAService.cpp
-    src/w3c/voiceinteraction/ipa/reference/external/providerselectionservice/ModalityMatchingProviderSelectionStrategy.cpp
     src/w3c/voiceinteraction/ipa/reference/IntegerRequestId.cpp
     src/w3c/voiceinteraction/ipa/reference/TextMultiModalInput.cpp
     src/w3c/voiceinteraction/ipa/reference/TextMultiModalOutput.cpp

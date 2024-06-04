@@ -20,14 +20,11 @@ using namespace w3c::voiceinteraction::ipa;
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
-namespace reference {
 namespace external {
-namespace providerselectionservice {
 
 /**
- * A provider selection strategy that will filter only those
- * {@link IPAProvider}s that are able to handle the modalities 
- * of the incoming request.
+ * A provider selection strategy that will only those {@link IPAProvider}s
+ * that are able to handle the modalities of the incoming request.
  *
  * @author Dirk Schnelle-Walka
  */
@@ -54,9 +51,7 @@ private:
                              const std::list<ModalityType>& supportedTypes) const;
 };
 
-} // namespace providerselectionservice
 } // namespace external
-} // namespace reference
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c

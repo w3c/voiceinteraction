@@ -10,14 +10,12 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
-#include "w3c/voiceinteraction/ipa/reference/external/providerselectionservice/ModalityMatchingProviderSelectionStrategy.h"
+#include "w3c/voiceinteraction/ipa/external/ModalityMatchingProviderSelectionStrategy.h"
 
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
-namespace reference {
 namespace external {
-namespace providerselectionservice {
 
 ModalityMatchingProviderSelectionStrategy::ModalityMatchingProviderSelectionStrategy() {
 }
@@ -32,6 +30,7 @@ const std::list<std::shared_ptr<::external::ipa::IPAProvider>> ModalityMatchingP
         request->getMultiModalInputs();
     std::list<ModalityType> requestedTypes = inputs->getInputModalities();
     for (const std::shared_ptr<::external::ipa::IPAProvider>& provider : providers) {
+        // Check if the current provider supports the requested modalities
         std::list<ModalityType> supportedTypes =
             provider->getSupportedModalityTypes();
         if (isModalitySupported(requestedTypes, supportedTypes)) {
@@ -46,6 +45,7 @@ bool ModalityMatchingProviderSelectionStrategy::isModalitySupported(
     const std::list<ModalityType>& requestedTypes,
     const std::list<ModalityType>& supportedTypes) const {
     for (const ModalityType& requestedType : requestedTypes) {
+        // Check if the requested type is supported
         for (const ModalityType& supportedType : supportedTypes) {
             if (requestedType == supportedType) {
                 return true;
@@ -56,9 +56,7 @@ bool ModalityMatchingProviderSelectionStrategy::isModalitySupported(
 }
 
 
-} // namespace providerselectionservice
 } // namespace external
-} // namespace reference
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c

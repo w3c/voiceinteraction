@@ -22,43 +22,46 @@ project(w3cipa LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-option(BUILD_DOC "Build documentation" ON)
+# User Flags
+option(BUILD_W3CIPA_DOC "Build documentation" ON)
+option(BUILD_W3CIPA_DEPENDENCIES "Whether or not to build depending libraries from source" ON)
 
 #
-# Adapt the install path for dependentlibs
+# Adapt the install path for dependent libs
 #
 set(W3CIPA_OPEN_SOURCE_SRC ${CMAKE_CURRENT_SOURCE_DIR}/open-source)
 set(ENV{PKG_CONFIG_PATH}
           "$ENV{PKG_CONFIG_PATH}:${OPEN_SRC_INSTALL_PREFIX}/lib/pkgconfig")
+set(ENV{PATH} "$ENV{PATH}:${W3CIPA_OPEN_SOURCE_SRC}/bin")
 
 #
 # Build dependent libraries
 #
-
-message(STATUS "Begin building dependencies.")
-build_dependency(log4cplus -DBUILD_SHARED_LIBS=${BUILD_SHARED_LIBS})
-build_dependency(nlohmann_json)
-if (NOT WIN32)
-    build_dependency(openssl)
-    build_dependency(curl)
+if (BUILD_W3CIPA_DEPENDENCIES)
+    message(STATUS "Begin building dependencies.")
+    build_dependency(log4cplus -DBUILD_SHARED_LIBS=${BUILD_SHARED_LIBS})
+    build_dependency(nlohmann_json)
+    if (NOT WIN32)
+        build_dependency(openssl)
+        build_dependency(curl)
+    endif()
+    build_dependency(stduuid)
+    message(STATUS "Finished building dependencies.")
 endif()
-build_dependency(stduuid)
-message(STATUS "Finished building dependencies.")
 
 #
 # Find required libraries
 #
 
 find_package(PkgConfig REQUIRED)
-find_package(CURL REQUIRED)
 find_package(Log4cplus REQUIRED)
+find_package(CURL REQUIRED)
 find_package(nlohmann_json REQUIRED)
 find_package(stduuid REQUIRED)
 
 #
 # Add settings to the build envionment
 #
-
 include_directories(${LOG4CPLUS_INCLUDE_DIR})
 set(Log4cplus ${LOG4CPLUS_LIBRARIES})
 set(REQUIRED_LIBS ${REQUIRED_LIBS} ${Log4cplus})
