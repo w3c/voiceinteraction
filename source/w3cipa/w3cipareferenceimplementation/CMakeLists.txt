@@ -21,6 +21,7 @@ set(HEADERS
     include/w3c/voiceinteraction/ipa/reference/client/ConsoleTextModalityComponent.h
     include/w3c/voiceinteraction/ipa/reference/client/TakeFirstInputModalityComponentListener.h
     include/w3c/voiceinteraction/ipa/reference/dialog/ReferenceIPAService.h
+    include/w3c/voiceinteraction/ipa/reference/dialog/ReferenceDialogManager.h
     include/w3c/voiceinteraction/ipa/reference/IntegerRequestId.h
     include/w3c/voiceinteraction/ipa/reference/TextMultiModalInput.h
     include/w3c/voiceinteraction/ipa/reference/TextMultiModalOutput.h
@@ -31,6 +32,7 @@ set(SOURCES
     src/w3c/voiceinteraction/ipa/reference/client/ConsoleTextModalityComponent.cpp
     src/w3c/voiceinteraction/ipa/reference/client/TakeFirstInputModalityComponentListener.cpp
     src/w3c/voiceinteraction/ipa/reference/dialog/ReferenceIPAService.cpp
+    src/w3c/voiceinteraction/ipa/reference/dialog/ReferenceDialogManager.cpp
     src/w3c/voiceinteraction/ipa/reference/IntegerRequestId.cpp
     src/w3c/voiceinteraction/ipa/reference/TextMultiModalInput.cpp
     src/w3c/voiceinteraction/ipa/reference/TextMultiModalOutput.cpp
@@ -39,7 +41,7 @@ set(SOURCES
 
 source_group("W3C IPA Reference Implementation" FILES ${SOURCES} ${HEADERS})
 
-add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS} "include/w3c/voiceinteraction/ipa/reference/dialog/ReferenceDialogManager.h")
 target_link_libraries(${PROJECT_NAME} ${REQUIRED_LIBS})
 target_link_libraries(${PROJECT_NAME} w3cipaframework)
 target_include_directories(${PROJECT_NAME} PUBLIC include)

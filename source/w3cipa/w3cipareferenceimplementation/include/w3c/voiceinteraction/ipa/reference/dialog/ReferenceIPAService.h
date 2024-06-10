@@ -19,7 +19,7 @@
 
 #include <w3c/voiceinteraction/ipa/IPADataProcessor.h>
 #include <w3c/voiceinteraction/ipa/ClientRequest.h>
-#include <w3c/voiceinteraction/ipa/ExternalClientResponse.h>
+#include <w3c/voiceinteraction/ipa/ClientResponse.h>
 #include <w3c/voiceinteraction/ipa/external/ipa/IPAService.h>
 
 using namespace w3c::voiceinteraction::ipa::external;
@@ -34,7 +34,7 @@ namespace dialog {
  * @brief A reference implementation of an IPA Service
  * @author Dirk Schnelle-Walka
  */
-class ReferenceIPAService : public external::ipa::IPAService, public IPADataProcessor {
+class ReferenceIPAService : public ::ipa::IPAService, public IPADataProcessor {
 public:
     ReferenceIPAService();
 
@@ -42,9 +42,7 @@ public:
 
 private:
     void processIPAData(const std::shared_ptr<ClientRequest>& request);
-
-    void processIPAData(const std::shared_ptr<ExternalClientResponse>& request);
-
+    void processIPAData(const std::shared_ptr<ClientResponse>& response);
 
     /** Logger instance. */
     const static log4cplus::Logger LOGGER;

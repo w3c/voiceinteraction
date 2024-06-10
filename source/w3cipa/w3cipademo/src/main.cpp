@@ -20,12 +20,12 @@
 #include <w3c/voiceinteraction/ipa/client/ModalityManager.h>
 #include <w3c/voiceinteraction/ipa/external/ipa/ProviderRegistry.h>
 #include <w3c/voiceinteraction/ipa/external/ModalityMatchingProviderSelectionStrategy.h>
-
-#include "w3c/voiceinteraction/ipa/external/ProviderSelectionService.h"
-#include "w3c/voiceinteraction/ipa/reference/client/ConsoleTextModalityComponent.h"
-#include "w3c/voiceinteraction/ipa/reference/client/TakeFirstInputModalityComponentListener.h"
-#include "w3c/voiceinteraction/ipa/reference/dialog/ReferenceIPAService.h"
-#include "w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTIPAProvider.h"
+#include <w3c/voiceinteraction/ipa/external/ProviderSelectionService.h>
+#include <w3c/voiceinteraction/ipa/reference/client/ConsoleTextModalityComponent.h>
+#include <w3c/voiceinteraction/ipa/reference/client/TakeFirstInputModalityComponentListener.h>
+#include <w3c/voiceinteraction/ipa/reference/dialog/ReferenceIPAService.h>
+#include <w3c/voiceinteraction/ipa/reference/dialog/ReferenceDialogManager.h>
+#include <w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTIPAProvider.h>
 
 using namespace w3c::voiceinteraction::ipa;
 
@@ -55,6 +55,8 @@ int main() {
     // Dialog Layer
     std::shared_ptr<::reference::dialog::ReferenceIPAService> ipaService =
         std::make_shared<::reference::dialog::ReferenceIPAService>();
+    std::shared_ptr<::reference::dialog::ReferenceIPADialogManager> ipaDialogManager =
+        std::make_shared<::reference::dialog::ReferenceIPADialogManager>();
 
     // External IPA / Services Layer
     std::shared_ptr<::external::ModalityMatchingProviderSelectionStrategy> providerSelectionStrategy =
@@ -69,7 +71,7 @@ int main() {
 
     // Create a processing chain
     modalityManager >> inputListener >> ipaService >> providerSelectionService
-            >> ipaService >> modalityManager;
+            >> ipaDialogManager >> ipaService >> modalityManager;
 
     // Start capturing input
     modalityManager->startInput();

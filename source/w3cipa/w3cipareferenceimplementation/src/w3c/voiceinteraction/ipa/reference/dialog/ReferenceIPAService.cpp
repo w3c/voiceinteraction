@@ -36,10 +36,10 @@ ReferenceIPAService::ReferenceIPAService() {
 
 void  ReferenceIPAService::processIPAData(std::shared_ptr<IPAData> data) {
     if (const std::shared_ptr<ClientRequest>& request =
-            std::dynamic_pointer_cast<ClientRequest>(data)) {
+        std::dynamic_pointer_cast<ClientRequest>(data)) {
         processIPAData(request);
-    } else if (const std::shared_ptr<ExternalClientResponse>& response =
-            std::dynamic_pointer_cast<ExternalClientResponse>(data)) {
+    } else if (const std::shared_ptr<ClientResponse>& response =
+        std::dynamic_pointer_cast<ClientResponse>(data)) {
         processIPAData(response);
     } else {
         LOG4CPLUS_WARN(LOGGER,
@@ -65,30 +65,9 @@ void ReferenceIPAService::processIPAData(
 }
 
 void ReferenceIPAService::processIPAData(
-        const std::shared_ptr<ExternalClientResponse> &response) {
-    std::shared_ptr<ClientResponse> forwardedResponse;
-    if (response->hasError()) {
-        // TODO temporarily take the error message as the output
-        const std::shared_ptr<ErrorMessage>& error =
-            response->getErrorMessage();
-        const std::string& message = error->getErrorMessage();
-        std::shared_ptr<MultiModalOutput> errorOutput =
-            std::make_shared<TextMultiModalOutput>(message);
-        std::shared_ptr<MultiModalOutputs> outputs =
-            std::make_shared<MultiModalOutputs>();
-        outputs->addMultiModalOutput(errorOutput);
-        forwardedResponse =
-            std::make_shared<ClientResponse>(response->getSessionId(),
-                response->getRequestId(), outputs, nullptr, nullptr);
-    } else {
-        forwardedResponse =
-            std::make_shared<ClientResponse>(response->getSessionId(),
-            response->getRequestId(),
-            response->getMultiModalOutputs(), nullptr, nullptr);
-    }
-    notifyListeners(forwardedResponse);
+    const std::shared_ptr<ClientResponse>& response) {
+    notifyListeners(response);
 }
-
 
 } // namespace dialog
 } // namespace reference

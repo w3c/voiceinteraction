@@ -4,6 +4,8 @@ source/w3cipa/open-source/**
 *.bkp
 **/*.bkp
 
-/source/w3cipa/out/build/x64-Debug
+/source/w3cipa/out
 /vcpkg_installed
 /source/w3cipa/CMakeSettings.json
+/.vs
+/source/w3cipa/.vs
