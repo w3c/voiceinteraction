@@ -66,8 +66,8 @@ int main() {
     std::shared_ptr<IPAProvider> chatGPT =
         std::make_shared<::reference::external::ipa::chatgpt::ChatGPTIPAProvider>();
     registry->addIPAProvider(chatGPT);
-    std::shared_ptr<ProviderSelectionService> providerSelectionService =
-        std::make_shared<ProviderSelectionService>(registry);
+    std::shared_ptr<external::ProviderSelectionService> providerSelectionService =
+        std::make_shared<external::ProviderSelectionService>(registry);
 
     // Create a processing chain
     modalityManager >> inputListener >> ipaService >> providerSelectionService

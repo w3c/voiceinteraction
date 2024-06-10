@@ -10,13 +10,12 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
-#include "w3c/voiceinteraction/ipa/external/ipa/IPAService.h"
+#include "w3c/voiceinteraction/ipa/dialog/IPAService.h"
 
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
-namespace external {
-namespace ipa {
+namespace dialog {
 
 IPAService::IPAService() {
 }
@@ -24,8 +23,7 @@ IPAService::IPAService() {
 IPAService::~IPAService() {
 }
 
-} // namespace ipa
-} // namespace external
+} // namespace dialog
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c

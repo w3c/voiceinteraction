@@ -16,8 +16,7 @@
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
-namespace external {
-namespace ipa {
+namespace dialog {
 
 /**
  * The IPAService is the base class for the IPA service.
@@ -42,8 +41,7 @@ public:
 
 };
 
-} // namespace ipa
-} // namespace external
+} // namespace dialog
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c

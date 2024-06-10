@@ -20,9 +20,8 @@
 #include <w3c/voiceinteraction/ipa/IPADataProcessor.h>
 #include <w3c/voiceinteraction/ipa/ClientRequest.h>
 #include <w3c/voiceinteraction/ipa/ClientResponse.h>
-#include <w3c/voiceinteraction/ipa/external/ipa/IPAService.h>
+#include <w3c/voiceinteraction/ipa/dialog/IPAService.h>
 
-using namespace w3c::voiceinteraction::ipa::external;
 
 namespace w3c {
 namespace voiceinteraction {
@@ -34,7 +33,7 @@ namespace dialog {
  * @brief A reference implementation of an IPA Service
  * @author Dirk Schnelle-Walka
  */
-class ReferenceIPAService : public ::ipa::IPAService, public IPADataProcessor {
+class ReferenceIPAService : public ipa::dialog::IPAService, public IPADataProcessor {
 public:
     ReferenceIPAService();
 
