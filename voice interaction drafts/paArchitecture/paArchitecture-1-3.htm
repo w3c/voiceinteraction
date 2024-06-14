@@ -23,7 +23,7 @@
         <dl>
             <dt>Latest version</dt>
             <dd>
-                Last modified: June 13, 2024 <a
+                Last modified: June 14, 2024 <a
                     href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm</a>
                 (GitHub repository)
             </dd>
@@ -1143,6 +1143,9 @@
         <li>The Prompt Adaptation may receive audio input directly if it is
             capable of handling that.
         </li>
+        <li>The Prompt Adaptation may check the validity of inputs,
+            e.g. check for inappropriate language.
+        </li>
         <li>The Prompt Adaptation optionally augments the received
             user input with additional information that is useful for
             the <a href="#llm">LLM</a> to provide better responses.
@@ -1201,6 +1204,30 @@
                 Graphs</a> to optimize the output, e.g. to make the output
             more accurate and reliable..
     
+    </ul>
+
+    <h5 id="llm-post-processing">
+        <span class="secno">3.2.5.3 </span>LLM Post-processing
+    </h5>
+    <p>After the output of the LLM is received additional
+        post-processing steps may be applied to make the output more
+        accurate and reliable. Examples include validity checks or error
+        handling. This optional component has the following
+        characteristics</p>
+
+    <ul>
+        <li>The LLM Post-processing component receives the output
+            from the <a href="#llm">LLM</a>.
+        </li>
+        <li>The LLM Post-processing component may check the
+            validity of the output, e.g. check for potentially wrong
+            answers or combine outputs from external <a href="#provider">IPA
+                Providers</a>.
+        </li>
+        <li>In case of, e.g., bad output, the LLM Post-processing
+            component may decide to rerun the <a href="#llm">LLM</a> for a
+            certain number of times until good output is produced.
+        </li>
     </ul>
 
     <h4 id="context">
