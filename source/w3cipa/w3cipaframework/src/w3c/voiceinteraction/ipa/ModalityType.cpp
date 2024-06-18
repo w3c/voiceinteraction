@@ -44,7 +44,6 @@ bool ModalityType::operator==(const ModalityType& other) const {
     return modalityType == other.getModalityType();
 }
 
-
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c
