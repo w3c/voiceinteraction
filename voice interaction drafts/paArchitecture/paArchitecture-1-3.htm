@@ -23,7 +23,7 @@
         <dl>
             <dt>Latest version</dt>
             <dd>
-                Last modified: June 14, 2024 <a
+                Last modified: July 18, 2024 <a
                     href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm</a>
                 (GitHub repository)
             </dd>
@@ -1182,7 +1182,7 @@
             href="#promptadaptation">Prompt Adaptation</a>.
         </li>
         <li>It may also receive audio data if the LLM is able to
-            handle audio input directly.. It may
+            handle audio input directly. It may
             receive additional multimodal input from the <a
             href="#ipaservice">IPA Service</a>.
         </li>
@@ -1202,7 +1202,7 @@
                 Services</a>.
         <li>It may make use of <a href="#knowledge-graph">Knowledge
                 Graphs</a> to optimize the output, e.g. to make the output
-            more accurate and reliable..
+            more accurate and reliable.
     
     </ul>
 
@@ -1963,17 +1963,19 @@
         to receive an error message or a list thereof instead of the
         actually expected data. Errors should only be forwarded in case
         there are no valid continuations that have a chance to provide a
-        response to the IPA user.</p>
+        response to the IPA user. Subsequent components may be able to
+        handle the error accordingly or to convert them into a
+        reply to the user.</p>
 
     <p>In case multiple errors are received the component should try
         (in the following order) to</p>
     <ol>
         <li>check if there is a possible continuation to handle the
-            error with a meaningful reply to the user</li>
+            error with a meaningful reply to the user.</li>
         <li>identify the most severe error and optionally forward
-            this error along with a list of less severe errors</li>
+            this error along with a list of less severe errors.</li>
         <li>derive a new higher-level error from the received
-            errors and forward this higher-level error</li>
+            errors and forward this higher-level error.</li>
     </ol>
     <p>In case errors could be handled it is recommended to log the
         errors for debugging.</p>
@@ -1982,10 +1984,13 @@
     <ul>
         <li>an error code that could be transformed into a IPA
             response matching the language and conversation</li>
-        <li>a human-readable error message for logging and
-            debugging</li>
         <li>an id of the component that has produced or handled the
             error</li>
+    </ul>
+    <p>It can optionally contain</p>
+    <ul>
+        <li>a human-readable error message for logging and
+            debugging</li>
     </ul>
 
     <h2 id="walkthrough">
