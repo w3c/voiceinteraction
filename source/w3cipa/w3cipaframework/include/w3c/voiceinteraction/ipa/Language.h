@@ -39,7 +39,13 @@ public:
      * @param primary the primary tag
      * @param sub the sub tag
      */
-    Language(const std::string& primary, const std::string& sub);
+    Language(const std::string& primary, const std::string& sub = "");
+
+    /**
+     * Copy constructor.
+     * @param other the object to copy
+     */ 
+    Language(const Language& other) = default;
 
     /**
      * Destroys the object.

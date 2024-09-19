@@ -38,9 +38,10 @@ void TakeFirstInputModalityComponentListener::processIPAData(
     std::shared_ptr<MultiModalInputs> multiModalInputs = getMultiModalInputs();
     std::shared_ptr<w3c::voiceinteraction::ipa::RequestId> requestId =
         std::make_shared<IntegerRequestId>();
+    std::shared_ptr<MetaData> metaData = std::make_shared<MetaData>();
     std::shared_ptr<IPAData> request =
         std::make_shared<ClientRequest>(nullptr, requestId, multiModalInputs,
-            nullptr, nullptr);
+            nullptr, metaData);
     LOG4CPLUS_INFO(LOGGER,
                    LOG4CPLUS_TEXT("forwarding first input"));
     notifyListeners(request);

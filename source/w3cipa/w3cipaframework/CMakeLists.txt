@@ -33,6 +33,7 @@ set(HEADERS
     include/w3c/voiceinteraction/ipa/IPAData.h
     include/w3c/voiceinteraction/ipa/IPADataProcessor.h
     include/w3c/voiceinteraction/ipa/Language.h
+    include/w3c/voiceinteraction/ipa/LanguageDependent.h
     include/w3c/voiceinteraction/ipa/MetaData.h
     include/w3c/voiceinteraction/ipa/ModalityType.h
     include/w3c/voiceinteraction/ipa/MultiModalInput.h
@@ -58,7 +59,7 @@ set(HEADERS
     include/w3c/voiceinteraction/ipa/external/ipa/IPAProvider.h
     include/w3c/voiceinteraction/ipa/external/ipa/ProviderRegistry.h
     include/w3c/voiceinteraction/ipa/external/ipa/ProviderSelectionStrategy.h
-)
+ )
 
 set(SOURCES
     src/w3c/voiceinteraction/ipa/ClientRequest.cpp
@@ -71,6 +72,7 @@ set(SOURCES
     src/w3c/voiceinteraction/ipa/IPAData.cpp
     src/w3c/voiceinteraction/ipa/IPADataProcessor.cpp
     src/w3c/voiceinteraction/ipa/Language.cpp
+    src/w3c/voiceinteraction/ipa/Metadata.cpp
     src/w3c/voiceinteraction/ipa/MultiModalInput.cpp
     src/w3c/voiceinteraction/ipa/MultiModalInputs.cpp
     src/w3c/voiceinteraction/ipa/MultiModalOutput.cpp
@@ -78,6 +80,7 @@ set(SOURCES
     src/w3c/voiceinteraction/ipa/RequestId.cpp
     src/w3c/voiceinteraction/ipa/SessionId.cpp
     src/w3c/voiceinteraction/ipa/TextModalityType.cpp
+    src/w3c/voiceinteraction/ipa/Timestamp.cpp
     src/w3c/voiceinteraction/ipa/VoiceModalityType.cpp
     src/w3c/voiceinteraction/ipa/client/InputModalityComponent.cpp
     src/w3c/voiceinteraction/ipa/client/InputModalityComponentListener.cpp

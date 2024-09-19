@@ -13,6 +13,9 @@
 #if !defined(TIMESTAMP_H)
 #define TIMESTAMP_H
 
+#include <string>
+#include <ctime>
+
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
@@ -21,23 +24,36 @@ namespace ipa {
  * A timestamp is a point in time.
  * @author Dirk Schnelle-Walka
  */
-class Timestamp
-{
+class Timestamp {
 
 public:
     /**
      * Constructs a new object.
      */
-    Timestamp() {
-    }
+    Timestamp();
+
+    /**
+     * Copy constructor.
+     * @param other the object to copy
+     */
+    Timestamp(const Timestamp&) = default;
 
     /**
      * Destroys the object.
      */
-    virtual ~Timestamp() {
+    virtual ~Timestamp();
 
-    }
+    /**
+     * Returns a string representation in ISO 8601 format of the timestamp.
+     * @return the string representation
+     */
+    const std::string & toString() const;
 
+private:
+    /** The timestamp. */
+    std::time_t timestamp;
+    /** The string representation of the timestamp. */
+    std::string iso8601;
 };
 
 } // namespace ipa

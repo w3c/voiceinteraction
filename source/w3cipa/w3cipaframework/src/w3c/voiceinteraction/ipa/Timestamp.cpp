@@ -1,4 +1,4 @@
-﻿/*
+/*
  * IPA Reference Implementation: https://github.com/w3c/voiceinteraction
  *
  * Copyright (C) 2024 World Wide Web Consortium. All Rights Reserved.
@@ -10,23 +10,26 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
-#include <w3c/voiceinteraction/ipa/TextModalityType.h>
-
-#include "w3c/voiceinteraction/ipa/reference/TextMultiModalInput.h"
+#include "w3c/voiceinteraction/ipa/Timestamp.h"
 
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
-namespace reference {
 
-const ModalityType TextMultiModalInput::MODALITY = TextModalityType();
-
-TextMultiModalInput::TextMultiModalInput(const std::string& input, const Language& lang)
-    : MultiModalInput(MODALITY),
-      text(input), language(lang) {
+Timestamp::Timestamp() {
+    time(&timestamp);
+    char buf[sizeof "2024-09-19T16:51:09Z"];
+    strftime(buf, sizeof buf, "%FT%TZ", gmtime(&timestamp));
+    iso8601 = buf;
 }
 
-} // namespace reference
+Timestamp::~Timestamp() {
+}
+
+const std::string& Timestamp::toString() const {
+    return iso8601;
+}
+
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c

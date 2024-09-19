@@ -15,6 +15,7 @@
 
 #include <string>
 
+#include <w3c/voiceinteraction/ipa/LanguageDependent.h>
 #include <w3c/voiceinteraction/ipa/MultiModalInput.h>
 
 namespace w3c {
@@ -26,17 +27,34 @@ namespace reference {
  * @brief A multimodal output for text.
  * @author Dirk Schnelle-Walka
  */
-class TextMultiModalInput : public MultiModalInput {
+class TextMultiModalInput 
+    : public MultiModalInput, public LanguageDependent {
 public:
-    TextMultiModalInput(const std::string& input);
+    /**
+     * Constructs a new object.
+     * @param input the text
+     * @param lang the language of the text
+     */
+    TextMultiModalInput(const std::string& input, const Language& lang);
 
+    /**
+     * Returns the text.
+     * @return the text
+     */
     const std::string& getTextInput() const {
         return text;
     }
 
+    const Language& getLanguage() const override {
+        return language;
+    }
+
     const static ModalityType MODALITY;
 private:
+    /** The text. */ 
     std::string text;
+    /** The language of the text. */
+    Language language;
 };
 
 } // namespace reference

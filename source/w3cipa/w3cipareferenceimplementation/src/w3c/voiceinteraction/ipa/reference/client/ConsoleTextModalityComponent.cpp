@@ -58,8 +58,10 @@ void ConsoleTextModalityComponent::captureInputAsynchronously(
     LOG4CPLUS_INFO_FMT(LOGGER,
                        LOG4CPLUS_TEXT("User entered: %s"),
                        input.c_str());
+    // TODO: get language from user or configuration
+    Language language("en");
     std::shared_ptr<MultiModalInput> multiModalInput =
-        std::make_shared<TextMultiModalInput>(input);
+        std::make_shared<TextMultiModalInput>(input, language);
     mediator->notifyListeners(multiModalInput);
 }
 

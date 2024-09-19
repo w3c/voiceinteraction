@@ -14,6 +14,7 @@
 #define META_DATA_H
 
 #include "Timestamp.h"
+#include "Language.h"
 
 namespace w3c {
 namespace voiceinteraction {
@@ -29,19 +30,34 @@ public:
     /**
      * Constucts a new object.
      */
-    MetaData() {
-    }
+    MetaData();
 
     /**
      * Destroys the object.
      */
-    virtual ~MetaData() {
-    }
+    virtual ~MetaData();
+
+    /**
+     * Sets the language of the request.
+     * @param lang the language
+     */
+    void setLanguage(const Language& lang);
+
+    /**
+     * Returns the language of the request.
+     */
+    const Language& getLanguage() const;
 
     /**
      * Returns the timestamp of the request.
      */
-    virtual const Timestamp& getTimestamp() =0;
+    const Timestamp& getTimestamp() const;
+
+private:
+    /** The language of the request. */
+    Language language;
+    /** The timestamp of the request. */
+    Timestamp timestamp;
 };
 
 } // namespace ipa
