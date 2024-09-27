@@ -57,7 +57,21 @@ public:
      * @return the string representation
      */
     std::string toString() const;
-private:
+
+    static const Language DE;
+    static const Language EN;
+    static const Language ES;
+    static const Language FR;
+    static const Language IT;
+    static const Language JA;
+    static const Language KO;
+    static const Language NL;
+    static const Language PL;
+    static const Language PT;
+    static const Language RU;
+    static const Language ZH;
+    
+   private:
     /** The primary tag. */
     std::string primaryTag;
     /** The sub tag */

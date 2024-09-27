@@ -17,6 +17,20 @@ namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
 
+const Language Language::DE = Language::Language("de");
+const Language Language::EN = Language::Language("en");
+const Language Language::ES = Language::Language("es");
+const Language Language::FR = Language::Language("fr");
+const Language Language::IT = Language::Language("it");
+const Language Language::JA = Language::Language("ja");
+const Language Language::KO = Language::Language("ko");
+const Language Language::NL = Language::Language("nl");
+const Language Language::PL = Language::Language("pl");
+const Language Language::PT = Language::Language("pt");
+const Language Language::RU = Language::Language("ru");
+const Language Language::ZH = Language::Language("zh");
+
+
 Language::Language(const std::string& primary, const std::string& sub)
     : primaryTag(primary), subTag(sub) {
 }
