@@ -55,8 +55,8 @@ set(HEADERS
     include/w3c/voiceinteraction/ipa/client/OutputModalityComponent.h
     include/w3c/voiceinteraction/ipa/dialog/IPAService.h
     include/w3c/voiceinteraction/ipa/external/ProviderSelectionService.h
-    include/w3c/voiceinteraction/ipa/external/ModalityMatchingProviderSelectionStrategy.h
     include/w3c/voiceinteraction/ipa/external/ipa/IPAProvider.h
+    include/w3c/voiceinteraction/ipa/external/ipa/ModalityMatchingProviderSelectionStrategy.h
     include/w3c/voiceinteraction/ipa/external/ipa/ProviderRegistry.h
     include/w3c/voiceinteraction/ipa/external/ipa/ProviderSelectionStrategy.h
  )
@@ -90,8 +90,8 @@ set(SOURCES
     src/w3c/voiceinteraction/ipa/client/OutputModalityComponent.cpp
     src/w3c/voiceinteraction/ipa/dialog/IPAService.cpp
     src/w3c/voiceinteraction/ipa/external/ProviderSelectionService.cpp
-    src/w3c/voiceinteraction/ipa/external/ModalityMatchingProviderSelectionStrategy.cpp
     src/w3c/voiceinteraction/ipa/external/ipa/IPAProvider.cpp
+    src/w3c/voiceinteraction/ipa/external/ipa/ModalityMatchingProviderSelectionStrategy.cpp
     src/w3c/voiceinteraction/ipa/external/ipa/ProviderRegistry.cpp
     src/w3c/voiceinteraction/ipa/external/ipa/ProviderSelectionStrategy.cpp
 )

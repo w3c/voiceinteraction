@@ -18,8 +18,8 @@
 #include <log4cplus/loggingmacros.h>
 
 #include <w3c/voiceinteraction/ipa/client/ModalityManager.h>
+#include <w3c/voiceinteraction/ipa/external/ipa/ModalityMatchingProviderSelectionStrategy.h>
 #include <w3c/voiceinteraction/ipa/external/ipa/ProviderRegistry.h>
-#include <w3c/voiceinteraction/ipa/external/ModalityMatchingProviderSelectionStrategy.h>
 #include <w3c/voiceinteraction/ipa/external/ProviderSelectionService.h>
 #include <w3c/voiceinteraction/ipa/reference/client/ConsoleTextModalityComponent.h>
 #include <w3c/voiceinteraction/ipa/reference/client/TakeFirstInputModalityComponentListener.h>
@@ -59,8 +59,8 @@ int main() {
         std::make_shared<::reference::dialog::ReferenceIPADialogManager>();
 
     // External IPA / Services Layer
-    std::shared_ptr<::external::ModalityMatchingProviderSelectionStrategy> providerSelectionStrategy =
-        std::make_shared<::external::ModalityMatchingProviderSelectionStrategy>();
+    std::shared_ptr<::external::ipa::ModalityMatchingProviderSelectionStrategy> providerSelectionStrategy =
+        std::make_shared<::external::ipa::ModalityMatchingProviderSelectionStrategy>();
     std::shared_ptr<ProviderRegistry> registry =
         std::make_shared<ProviderRegistry>(providerSelectionStrategy);
     std::shared_ptr<IPAProvider> chatGPT =

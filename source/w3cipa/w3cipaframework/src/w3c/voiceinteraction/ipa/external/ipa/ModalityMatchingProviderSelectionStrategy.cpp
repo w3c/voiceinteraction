@@ -10,12 +10,13 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
-#include "w3c/voiceinteraction/ipa/external/ModalityMatchingProviderSelectionStrategy.h"
+#include "w3c/voiceinteraction/ipa/external/ipa/ModalityMatchingProviderSelectionStrategy.h"
 
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
 namespace external {
+namespace ipa {
 
 ModalityMatchingProviderSelectionStrategy::ModalityMatchingProviderSelectionStrategy() {
 }
@@ -55,8 +56,8 @@ bool ModalityMatchingProviderSelectionStrategy::isModalitySupported(
     return false;
 }
 
-
-} // namespace external
+}  // namespace ipa
+}  // namespace external
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c

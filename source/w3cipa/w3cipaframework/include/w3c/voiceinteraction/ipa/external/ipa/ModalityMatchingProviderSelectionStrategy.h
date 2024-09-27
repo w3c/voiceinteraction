@@ -21,6 +21,7 @@ namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
 namespace external {
+namespace ipa {
 
 /**
  * A provider selection strategy that will only those {@link IPAProvider}s
@@ -51,7 +52,8 @@ private:
                              const std::list<ModalityType>& supportedTypes) const;
 };
 
-} // namespace external
+}  // namespace ipa
+}  // namespace external
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c
