@@ -47,6 +47,10 @@ std::string Language::toString() const {
     return out;
 }
 
+bool Language::operator==(const Language& other) const {
+    return primaryTag == other.primaryTag && subTag == other.subTag;
+}
+
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c

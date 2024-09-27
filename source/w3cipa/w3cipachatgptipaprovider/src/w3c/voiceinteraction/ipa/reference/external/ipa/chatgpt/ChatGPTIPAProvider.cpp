@@ -45,11 +45,27 @@ size_t WriteCallback(char* ptr, size_t size, size_t nmemb, void* userdata)
 }
 
 ChatGPTIPAProvider::ChatGPTIPAProvider() {
+    supportedLanguages = { 
+      Language::DE, 
+      Language::EN, 
+      Language::ES, 
+      Language::FR, 
+      Language::IT, 
+      Language::JA,
+      Language::NL,
+      Language::PL,
+      Language::PT,
+      Language::RU,
+      Language::ZH };
 }
 
 const std::list<ModalityType> ChatGPTIPAProvider::getSupportedModalityTypes() const {
     std::list<ModalityType> types = { TextModalityType() };
     return types;
+}
+
+const std::list<Language>& ChatGPTIPAProvider::getSupportedLanguages() const {
+    return supportedLanguages;
 }
 
 const std::shared_ptr<ExternalClientResponse> ChatGPTIPAProvider::processInput(

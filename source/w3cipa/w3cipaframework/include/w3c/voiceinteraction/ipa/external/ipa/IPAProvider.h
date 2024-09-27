@@ -14,10 +14,12 @@
 #define IPAPROVIDER_H
 
 #include <string>
+#include <list>
 
 #include "w3c/voiceinteraction/ipa/ClientRequest.h"
 #include "w3c/voiceinteraction/ipa/ExternalClientResponse.h"
 #include "w3c/voiceinteraction/ipa/ModalityType.h"
+#include "w3c/voiceinteraction/ipa/Language.h"
 
 namespace w3c {
 namespace voiceinteraction {
@@ -45,6 +47,19 @@ public:
      * Destroys this object.
      */
     virtual ~IPAProvider();
+
+    /**
+     * Retrieves a list of languages that are supported by this IPA provider.
+     * @return the supported languages of this IPA provider.
+     */
+    virtual const std::list<Language>& getSupportedLanguages() const = 0;
+
+    /**
+     * Retrieves a list modality type that are supported as input by this IPA
+     *      provider.
+     * @return the supported input modality types of this modality component.
+     */
+    virtual const std::list<ModalityType> getSupportedModalityTypes() const = 0;
 
     /**
      * Processes the input from the client.
@@ -75,13 +90,6 @@ public:
      *          {@code getId() == other.getId()}.
      */
     bool operator==(const IPAProvider& other) const;
-
-    /**
-     * Retrieves a list modality type that are supported as input by this IPA
-     *      provider.
-     * @return the supported input modality types of this modality component.
-     */
-    virtual const std::list<ModalityType> getSupportedModalityTypes() const = 0;
 };
 
 } // namespace ipa

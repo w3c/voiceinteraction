@@ -48,7 +48,6 @@ struct ChatGPTJSONRequest {
     int top_p;
     int frequency_penalty;
     int presence_penalty;
-
 };
 
 void to_json(nlohmann::json& j, const ChatGPTJSONRequest& request) {

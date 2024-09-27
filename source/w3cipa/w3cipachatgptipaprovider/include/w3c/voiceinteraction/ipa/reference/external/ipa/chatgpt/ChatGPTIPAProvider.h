@@ -46,7 +46,13 @@ public:
 
     const std::list<ModalityType> getSupportedModalityTypes() const override;
 
-private:
+    const std::list<Language>& getSupportedLanguages() const override;
+
+   private:
+    /** Languages supported by this provider. */
+    std::list<Language> supportedLanguages;
+
+    /** Id of this IP provider. */
     const static std::string ID;
     /** Logger instance. */
     const static log4cplus::Logger LOGGER;

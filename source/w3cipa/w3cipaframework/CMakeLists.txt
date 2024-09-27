@@ -59,7 +59,7 @@ set(HEADERS
     include/w3c/voiceinteraction/ipa/external/ipa/ModalityMatchingProviderSelectionStrategy.h
     include/w3c/voiceinteraction/ipa/external/ipa/ProviderRegistry.h
     include/w3c/voiceinteraction/ipa/external/ipa/ProviderSelectionStrategy.h
- )
+    include/w3c/voiceinteraction/ipa/external/ipa/ProviderSelectionStrategyList.h)
 
 set(SOURCES
     src/w3c/voiceinteraction/ipa/ClientRequest.cpp
@@ -94,7 +94,7 @@ set(SOURCES
     src/w3c/voiceinteraction/ipa/external/ipa/ModalityMatchingProviderSelectionStrategy.cpp
     src/w3c/voiceinteraction/ipa/external/ipa/ProviderRegistry.cpp
     src/w3c/voiceinteraction/ipa/external/ipa/ProviderSelectionStrategy.cpp
-)
+    src/w3c/voiceinteraction/ipa/external/ipa/ProviderSelectionStrategyList.cpp)
 
 source_group("W3C IPA Framework" FILES ${SOURCES} ${HEADERS})
 

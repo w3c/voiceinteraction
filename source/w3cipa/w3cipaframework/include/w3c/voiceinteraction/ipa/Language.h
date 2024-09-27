@@ -58,6 +58,12 @@ public:
      */
     std::string toString() const;
 
+    /**
+     * Checks if this lnaguage is equal to another one.
+     * @param other the other language to compare
+     */
+    bool operator==(const Language & other) const;
+
     static const Language DE;
     static const Language EN;
     static const Language ES;
