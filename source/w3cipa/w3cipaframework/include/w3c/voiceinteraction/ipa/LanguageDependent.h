@@ -25,6 +25,7 @@ namespace ipa {
  * @author Dirk Schnelle-Walka
  */
 class LanguageDependent {
+public:
     /**
         * Returns the claimed language of the data.
         * @return the language

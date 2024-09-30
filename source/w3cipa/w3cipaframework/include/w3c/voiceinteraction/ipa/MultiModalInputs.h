@@ -19,6 +19,7 @@
 
 #include "ModalityType.h"
 #include "MultiModalInput.h"
+#include "Language.h"
 
 namespace w3c {
 namespace voiceinteraction {
@@ -63,6 +64,12 @@ public:
      * @return list of all modality types
      */
     std::list<ModalityType> getInputModalities() const;
+
+    /**
+     * Retrieves all languages supported by the input.
+     * @return list of all supported languages
+     */
+    std::list<Language> getInputLanguages() const;
 
 private:
     /**

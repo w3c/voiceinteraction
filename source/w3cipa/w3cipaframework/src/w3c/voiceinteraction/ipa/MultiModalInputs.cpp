@@ -10,6 +10,7 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
+#include "w3c/voiceinteraction/ipa/LanguageDependent.h"
 #include "w3c/voiceinteraction/ipa/MultiModalInputs.h"
 
 namespace w3c {
@@ -50,6 +51,25 @@ std::list<ModalityType> MultiModalInputs::getInputModalities() const {
         types.push_back(iterator->first);
     }
     return types;
+}
+
+/**
+ * Retrieves all modality types provided in this input.
+ * @return list of all modality types
+ */
+std::list<Language> MultiModalInputs::getInputLanguages() const {
+  std::list<Language> languages;
+  for (std::map<ModalityType, std::shared_ptr<MultiModalInput>>::const_iterator
+       iterator = inputs.begin();
+       iterator != inputs.end(); ++iterator) {
+    std::shared_ptr<LanguageDependent> languageDependentInput =
+        std::dynamic_pointer_cast<LanguageDependent>(iterator->second);
+    if (languageDependentInput != nullptr) {
+      const Language& language = languageDependentInput->getLanguage();
+      languages.push_back(language);
+    }
+  }
+  return languages;
 }
 
 } // namespace ipa
