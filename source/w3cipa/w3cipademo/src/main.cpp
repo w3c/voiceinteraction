@@ -18,7 +18,9 @@
 #include <log4cplus/loggingmacros.h>
 
 #include <w3c/voiceinteraction/ipa/client/ModalityManager.h>
+#include <w3c/voiceinteraction/ipa/external/ipa/LanguageMatchingProviderSelectionStrategy.h>
 #include <w3c/voiceinteraction/ipa/external/ipa/ModalityMatchingProviderSelectionStrategy.h>
+#include <w3c/voiceinteraction/ipa/external/ipa/ProviderSelectionStrategyList.h>
 #include <w3c/voiceinteraction/ipa/external/ipa/ProviderRegistry.h>
 #include <w3c/voiceinteraction/ipa/external/ProviderSelectionService.h>
 #include <w3c/voiceinteraction/ipa/reference/client/ConsoleTextModalityComponent.h>
@@ -59,8 +61,17 @@ int main() {
         std::make_shared<::reference::dialog::ReferenceIPADialogManager>();
 
     // External IPA / Services Layer
-    std::shared_ptr<::external::ipa::ModalityMatchingProviderSelectionStrategy> providerSelectionStrategy =
+    std::shared_ptr<::external::ipa::ProviderSelectionStrategyList>
+        providerSelectionStrategy =
+            std::make_shared<::external::ipa::ProviderSelectionStrategyList>();
+    std::shared_ptr<::external::ipa::LanguageMatchingProviderSelectionStrategy>
+        languageProviderSelectionStrategy = std::make_shared<
+            ::external::ipa::LanguageMatchingProviderSelectionStrategy>();
+    providerSelectionStrategy->addStrategy(languageProviderSelectionStrategy);
+    std::shared_ptr<::external::ipa::ModalityMatchingProviderSelectionStrategy>
+        modalityProviderSelectionStrategy =
         std::make_shared<::external::ipa::ModalityMatchingProviderSelectionStrategy>();
+    providerSelectionStrategy->addStrategy(modalityProviderSelectionStrategy);
     std::shared_ptr<ProviderRegistry> registry =
         std::make_shared<ProviderRegistry>(providerSelectionStrategy);
     std::shared_ptr<IPAProvider> chatGPT =

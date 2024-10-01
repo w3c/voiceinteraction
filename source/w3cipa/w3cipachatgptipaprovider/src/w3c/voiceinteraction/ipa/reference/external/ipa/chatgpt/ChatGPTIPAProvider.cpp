@@ -85,7 +85,8 @@ const std::shared_ptr<ExternalClientResponse> ChatGPTIPAProvider::processInput(
     struct curl_slist *headers = NULL;
     headers = curl_slist_append(headers,
                                 "Authorization: Bearer OPENAI-DEVELOPER-KEY");
-    headers = curl_slist_append(headers, "Content-Type: application/json");
+                                headers = curl_slist_append(
+                                    headers, "Content-Type: application/json");
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 
     // TODO Remove this disabling of SSL verification
