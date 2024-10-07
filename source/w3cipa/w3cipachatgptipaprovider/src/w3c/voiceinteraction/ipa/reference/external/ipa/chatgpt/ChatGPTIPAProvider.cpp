@@ -124,8 +124,9 @@ const std::shared_ptr<ExternalClientResponse> ChatGPTIPAProvider::processInput(
     nlohmann::json data = req;
     std::string dataString = data.dump(2, ' ');
     LOG4CPLUS_INFO_FMT(LOGGER,
-                       LOG4CPLUS_TEXT("%s %s sending request to ChatGPT: %s"),
+                       LOG4CPLUS_TEXT("%s %s sending request in %s to ChatGPT: %s"),
                        sessionId.c_str(), requestId.c_str(),
+                       textInput->getLanguage().toString().c_str(),
                        dataString.c_str());
     curl_easy_setopt(curl, CURLOPT_POSTFIELDS, dataString.c_str());
 
