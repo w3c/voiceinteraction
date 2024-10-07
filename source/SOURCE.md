@@ -115,15 +115,15 @@ std::shared_ptr<::reference::client::TakeFirstInputModalityComponentListener> in
 
 #### Dialog Layer
 
-So far, we do not have an implementation of a `Dialog Manager`. However, the IPA
-service `ipaService` as an implementation of the `IPA Service`is used to consume
-incoming calls from the clients and provide the corresponding replies. 
-For now, it will also convert an error, e.g. ChatGPT cannot be reached to a user
-reply. Later, this will be taken care of by the dialog mangager.
+Here, we create the `Dialog Manager` and the `ipaService` as an implementation of the `IPA Service`.
+The dialog manager mainly separates good calls from erroneous ones and forwards
+the reply accordingly.
 
 ```
 std::shared_ptr<::reference::dialog::ReferenceIPAService> ipaService =
     std::make_shared<::reference::dialog::ReferenceIPAService>();
+std::shared_ptr<::reference::dialog::ReferenceIPADialogManager> ipaDialogManager =
+    std::make_shared<::reference::dialog::ReferenceIPADialogManager>();
 ```
 
 #### External IPA / Services Layer
@@ -133,7 +133,8 @@ This instance `chatGPT` is added to the list of known IPA providers in the
 `registry` as an implementation of a `Provider Registry`. 
 The `providerSelectionStrategy` is used by the `registry`
 to select those IPA providers that are suited to handle the current request.
-In this case, we select all those that have a matching modality, i.e. text.
+In this case, we select all those that have a matching modality, i.e. text and
+the correct language. A chained filter is used to select the best provider.
 
 The `providerSelectionService` as an implementation of the 
 `Provider Selection Service` acts as the main component to be approached
@@ -143,15 +144,26 @@ request, forwards this request to them and waits until all responses
 have been received.
 
 ```
-std::shared_ptr<::reference::external::providerselectionservice::ModalityMatchingProviderSelectionStrategy> providerSelectionStrategy =
-    std::make_shared<::reference::external::providerselectionservice::ModalityMatchingProviderSelectionStrategy>();
+// Create a chained filter for selecting the best provider
+std::shared_ptr<::external::ipa::ProviderSelectionStrategyList>
+    providerSelectionStrategy =
+        std::make_shared<::external::ipa::ProviderSelectionStrategyList>();
+std::shared_ptr<::external::ipa::LanguageMatchingProviderSelectionStrategy>
+    languageProviderSelectionStrategy = std::make_shared<
+        ::external::ipa::LanguageMatchingProviderSelectionStrategy>();
+providerSelectionStrategy->addStrategy(languageProviderSelectionStrategy);
+std::shared_ptr<::external::ipa::ModalityMatchingProviderSelectionStrategy>
+    modalityProviderSelectionStrategy =
+    std::make_shared<::external::ipa::ModalityMatchingProviderSelectionStrategy>();
+providerSelectionStrategy->addStrategy(modalityProviderSelectionStrategy);
+// create main components in the external layer
 std::shared_ptr<ProviderRegistry> registry =
     std::make_shared<ProviderRegistry>(providerSelectionStrategy);
 std::shared_ptr<IPAProvider> chatGPT =
-    std::make_shared<::reference::external::ipa::chatgpt::ChatGPTAdapter>();
+    std::make_shared<::reference::external::ipa::chatgpt::ChatGPTIPAProvider>();
 registry->addIPAProvider(chatGPT);
-std::shared_ptr<ProviderSelectionService> providerSelectionService =
-    std::make_shared<ProviderSelectionService>(registry);
+std::shared_ptr<external::ProviderSelectionService> providerSelectionService =
+    std::make_shared<external::ProviderSelectionService>(registry);
 ```
 
 #### Create a Processing Chain
@@ -162,7 +174,7 @@ we then tie those needed components together.
 
 ```
 modalityManager >> inputListener >> ipaService >> providerSelectionService
-        >> ipaService >> modalityManager;
+        >> ipaDialogManager >> ipaService >> modalityManager;
 ```
 
 The following shows which components from the diagram above are available
