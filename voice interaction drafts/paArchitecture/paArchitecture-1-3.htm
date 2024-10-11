@@ -23,7 +23,7 @@
         <dl>
             <dt>Latest version</dt>
             <dd>
-                Last modified: July 18, 2024 <a
+                Last modified: October 11, 2024 <a
                     href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm</a>
                 (GitHub repository)
             </dd>
@@ -768,14 +768,14 @@
     <div class="figurerow">
         <div class="figurecolumn">
             <figure>
-                <img src="dialog-layer-NLU.svg" height="auto" />
-                <figcaption>Fig 2 a) NLU-based Dialog Layer</figcaption>
+                <img src="dialog-layer-GenerativeAI.svg" height="auto" />
+                <figcaption>Fig 2 b) Generative AI-based Dialog Layer</figcaption>
             </figure>
         </div>
         <div class="figurecolumn">
             <figure>
-                <img src="dialog-layer-GenerativeAI.svg" height="auto" />
-                <figcaption>Fig 2 b) Generative AI-based Dialog Layer</figcaption>
+                <img src="dialog-layer-NLU.svg" height="auto" />
+                <figcaption>Fig 2 a) NLU-based Dialog Layer</figcaption>
             </figure>
         </div>
     </div>
@@ -1154,7 +1154,7 @@
         <li>An LLM usually does not maintain conversational state
             and may make use of the <a href="history">history</a> to
             optimize the output by augmenting the prompt for this
-            purpose.
+            purpose. This may be available once, so this may be omitted.
         </li>
         <li>The Prompt Adaptation may receive additional input from
             remote IPAs via the <a href="#selectionservice">Provider
@@ -1187,6 +1187,9 @@
             receive additional multimodal input from the <a
             href="#ipaservice">IPA Service</a>.
         </li>
+        <li>It may make use of <a href="#dialog">dialogs</a> to
+            determine the next dialog move especially in the case of errors
+            where the LLM itself has internal errors.</li>
         <li>It usually generates the next dialog move as text-based output and
             forwards it to the <a href="#tts">TTS</a>.
         </li>
