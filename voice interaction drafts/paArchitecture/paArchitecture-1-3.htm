@@ -1652,10 +1652,9 @@
             <a href="#provider">IPA Providers</a>.
         </li>
         <li>The Provider Selection Services uses the <a
-            href="#providerregistry">Provider Registry</a> to map the <a
-            href="#providerintentsets">Provider Intent Sets</a> to the <a
-            href="#intentsets">Intent Sets</a> known by the <a
-            href="#dialogregistry">Dialog Registry</a>. The mapping must
+                href="#providerregistry">Provider Registry</a> to map the Provider
+            Intent Sets to the <a href="#intentsets">Intent Sets</a> known by the <a
+                href="#dialogregistry">Dialog Registry</a>. The mapping must
             be configured when <a href="#provider">IPA Providers</a> are
             added.
         </li>
@@ -1877,62 +1876,6 @@
         functionality as described below as part of another IPA
         implementation.</p>
 
-    <h5 id="providerasr">
-        <span class="secno">3.3.5.2 </span>Provider ASR
-    </h5>
-    <p>
-        An ASR component receives audio streams of recorded utterances
-        and generates a recognition hypothesis as text strings as an
-        input for the <a href="#providernlu">Provider NLU</a>.
-    </p>
-
-    <h5 id="providernlu">
-        <span class="secno">3.3.5.2 </span>Provider NLU
-    </h5>
-    <p>
-        An NLU component that is able to extract meaning as intents and
-        associated entities from an utterance as text strings for <a
-            href="#provider">IPA Provider X</a>. It has the following
-        characteristics</p>
-    <ul>
-        <li>The Provider NLU may be specialized to handle specific
-            domains</li>
-        <li>Optionally, the Provider NLU can generate multiple
-            intents with their entities along with with a confidence
-            score.</li>
-        <li>The Provider NLU may make use of own <a
-            href="#providerintentsets">Provider Intenet Sets</a>
-            indpendent of the <a href="#coreintentsets">Core Intent
-                Sets</a> which are then mapped in the <a
-            href="#selectionservice">Provider Selection Service</a> so
-            that they can be consumed by the <a href="#dialogmanager">Dialog
-                Manager</a></li>
-        <li>The Provider NLU may make use of the <a
-            href="#dataprovider">Data Provider</a> to access local or
-            internal data or access external services.
-        </li>
-        <li>The Provider NLU may make use of the <a
-            href="#knowledgegraph">Knowledge Graph</a> to derive
-            meaning.
-        </li>
-    </ul>
-
-    <h5 id="providerintentsets">
-        <span class="secno">3.3.5.3 </span>Provider Intent Set
-    </h5>
-    <p>
-        An <a href="#intentsets">Intent Set</a> that might be returned
-        by the <a href="#providernlu">Provider NLU</a> to handle the
-        capabilities of <a href="#provider">IPA Provider X</a>.
-    </p>
-    
-    <h5 id="providerllm">
-        <span class="secno">3.3.5.3 </span>Provider LLM
-    </h5>
-    <p>
-        An <a href="#llm">LLM</a> that is used by the provider.
-    </p>
-
     <h4 id="finalarchitecture">
         <span class="secno">3.6 </span>Resulting Architecture
     </h4>
@@ -2048,10 +1991,10 @@
         designated conference hotel or special rates.</p>
 
     <h3 id="detailed-walkthrough">
-        <span class="secno">5.1 Detailed Walkthrough</span>
+        <span class="secno">5.1 Detailed Walkthrough for Traditional NLU Systems</span>
     </h3>
     <p>This section provides a detailed walkthrough for an NLU-based
-        IP that aligns the steps in the use case interaction with the
+        IPA that aligns the steps in the use case interaction with the
         architecture. It covers only the part from the example above
         that the user asks for a flight travel with a dedicated airline.
         This very basic example assumes that this is the first request
