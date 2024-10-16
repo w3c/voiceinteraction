@@ -23,7 +23,7 @@
         <dl>
             <dt>Latest version</dt>
             <dd>
-                Last modified: April 03, 2024 <a
+                Last modified: October 15, 2024 <a
                     href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a>
                 (GitHub repository)<br /> <a
                     href="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">HTML
@@ -319,6 +319,22 @@
     <p>According to these components they are assigned to the
         packages shown below.</p>
     <img src="IPA-Package-Hierarchy.svg" alt="IPA Package Hierarchy"
+        style="width: 50%; height: auto;" />
+
+    <h2 id="component-chaining">
+        <span class="secno">3.3 </span>Component Chaining
+    </h2>
+
+    <p>
+        The most flexible way to combine the components is to chain
+        them. This means that the output of one component is the input
+        of the next component. Therefore, we introduced the concept of
+        an <b>IPADataProcessor</b> that may receive <b>IPAData</b> from
+        incoming <b>IPADataProcessors</b> and forwards <b>IPAData</b>
+        to outgoing <b>IPADataProcessor</b>. This is shown in the
+        following figure for the major components.
+    </p>
+    <img src="IPADataProcessors.svg" alt="IPA Data Processors"
         style="width: 50%; height: auto;" />
 
     <h1 id="highlevelinterfaces">
