@@ -331,12 +331,20 @@
         of the next component. Therefore, we introduced the concept of
         an <b>IPADataProcessor</b> that may receive <b>IPAData</b> from
         incoming <b>IPADataProcessors</b> and forwards <b>IPAData</b>
-        to outgoing <b>IPADataProcessor</b>. This is shown in the
-        following figure for the major components.
+        to outgoing <b>IPADataProcessor</b>. The classes for the major components are shown in the
+        following figure.
     </p>
     <img src="IPADataProcessors.svg" alt="IPA Data Processors"
         style="width: 50%; height: auto;" />
 
+    <p>Actual implementations may link them together as needed. An example is
+        shown in the following figure. For example, The IPADatProcessor Client
+        forwards the IPAData MultimodalInputs to the next IPADataProcessor
+        IPAService.</p>
+    <img src="IPAData-Processing-Chain.svg" alt="IPA Data Processing Chain"
+        style="width: 50%; height: auto;" />
+    
+    <h2 id="clientlayer">
     <h1 id="highlevelinterfaces">
         <span class="secno">4. </span>High Level Interfaces
     </h1>
