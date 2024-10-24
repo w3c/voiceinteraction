@@ -1220,7 +1220,13 @@
         <li>It may make use of <a href="#knowledge-graph">Knowledge
                 Graphs</a> to optimize the output, e.g. to make the output
             more accurate and reliable.
-    
+        <li>It may make use of components in the 
+            <a href="#datalayer">External Data/Services/IPA Providers</a> layer,
+            like <a href="#provider">IPA Provider</a> and 
+            <a href="#externalservices">External Services</a> or 
+            <a href="localserverices">Local Services</a> in the form of 
+            agentic applications.
+        </li>    
     </ul>
 
     <h5 id="llm-post-processing">
@@ -1616,8 +1622,9 @@
         style="float: right" width="auto" height="auto" />
     <p>A service that provides access to all known Data Providers,
         External Services and IPA Providers. This service also maps the
-        IPA Intent Sets to the Intent Sets in the Dialog layer. It has
-        the following characteristics</p>
+        IPA Intent Sets to the Intent Sets in the Dialog layer for 
+        Traditional NLU systems. For Generative AI systems it serves to enable
+        agentic applications. It has the following characteristics</p>
     <ul>
         <li>The Provider Selection Service provides an interface to
             <a href="dataproviders">Data Providers</a>, <a
