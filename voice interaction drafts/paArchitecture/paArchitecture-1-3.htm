@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML+RDFa 1.1//EN' 'http://www.w3.org/MarkUp/DTD/xhtml-rdfa-2.dtd'>
 <html dir="ltr" about="" property="dcterms:language" content="en"
+    version="XHTML+RDFa 1.1"
     xmlns="http://www.w3.org/1999/xhtml"
     prefix='bibo: http://purl.org/ontology/bibo/' typeof="bibo:Document">
 <head>
@@ -23,7 +24,7 @@
         <dl>
             <dt>Latest version</dt>
             <dd>
-                Last modified: October 24, 2024 <a
+                Last modified: October 26, 2024 <a
                     href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm</a>
                 (GitHub repository)
             </dd>
@@ -1062,7 +1063,7 @@
         </li>
     </ul>
 
-    <h6 id="dialog">
+    <h6 id="dialogstrategy">
         <span class="secno">3.2.4.2.1 </span>Dialog Strategy
     </h6>
     <p>A Dialog Strategy is a conceptualization of a dialog for an
@@ -1444,15 +1445,21 @@
         <span class="secno">3.2.8.2 </span>Dialog
     </h5>
     <p>
-        A Dialog is able to handle functionality that can be added to
+        In <a href="#traditional-nlu-layer">Traditional NLU</a> systems, a Dialog is
+        able to handle functionality that can be added to
         the capabilities of the <a href="#dialogmanager">Dialog
             Manager</a> through its associated Intent Sets. Dialogs are
         logical entities within the overall description of the
-        interaction with the user, executed by the <a
-            href="#dialogmanager">Dialog Manager</a>. Dialogs must serve
-        different purposes in the sense that they are unique for a
-        certain task. E.g., only a single flight reservation dialog may
-        exist at a time. Dialogs have the following characteristics</p>
+        interaction with the user, executed by the <a href="#dialogmanager">Dialog
+            Manager</a>. In <a href="#generative-ai-layer">Generative AI</a>" systems
+        dialogs are more of the nature of templates to pre-scribe a response to the
+        user.
+        They may also go beyond that to also meet requirements for agentic applications.
+        </p>
+        <p>Dialogs must serve
+            different purposes in the sense that they are unique for a
+            certain task. E.g., only a single flight reservation dialog may
+            exist at a time. Dialogs have the following characteristics</p>
     <ul>
         <li>Dialogs receive inputs as intents out of their
             supported <a href="#intentsets">Intent Sets</a> along with
@@ -1510,8 +1517,14 @@
     <p>
         Intent Sets define actions, identified by the name of the
         intent, along with their parameters as entities as it is
-        produced by the <a href="#nlu">NLU</a> that can be consumed by a
-        corresponding <a href="#dialog">Dialog</a> and have the
+        produced by the <a href="#nlu">NLU</a> in <a
+            href="#traditional-nlu-layer">Traditional NLU</a> systems that can be
+        consumed by a
+        corresponding <a href="#dialog">Dialog</a>. In <a
+            href="#generative-ai-layer">Generative AI</a>" systems
+        they can be perceived as an identification of a dialog along with parameters
+        that are filled into a template.
+        They have the
         following characteristics</p>
     <ul>
         <li>An Intent Set defines one or more intents with an
@@ -2097,13 +2110,13 @@
     The output path begins where the local NLU and IPA Providers are
     able to deliver their results. In both paths the best match for the
     intents and entities based on the received data have been
-    identified. This path is illustrated in the following figure
+    identified. This path is illustrated in the following figure</p>
     <figure>
         <img src="architecture-walkthrough-output-1.3.svg"
             alt="IPA Architecture Walkthrough for the output"
             style="width: 100%; height: auto;" />
         <figcaption>Fig. 4 Walkthrough for the output path of an IPA</figcaption>
-    </figure></p>
+    </figure>
 
     <ol>
         <li>The IPA Providers send their determined intents along
