@@ -295,13 +295,6 @@
         <li>Conforms with health data privacy laws.</li>
     </ul>
 
-    <p>Interoperability:</p>
-
-    <ul>
-        <li>How to Discover it (Where is it? Who produces it?)</li>
-        <li>How to Interact with it (What format is it, etc.)</li>
-    </ul>
-
     <h4>
         <span class="secno">2.1.3 </span>In-Vehicle Chatbot
     </h4>
@@ -1795,8 +1788,21 @@
     <h5 id="providerregistry">
         <span class="secno">3.3.1.2 </span>Provider Registry
     </h5>
-    <p>A registry for all IPA Providers that can be accessed. It has
-        the following characteristics</p>
+    <p>A registry for all IPA Providers that can be accessed. There are
+        several options how the provider registry gets to know which 
+        <a href="#provider">IPA Providers</a> are available, for example</p>
+     <ul>
+        <li>Initial population from a configuration file or similar</li>
+        <li>Addition via an API call</li>
+        <li>Querying a standardized market place</li>
+        <li>Service Discovery</li>
+     </ul> 
+    <p>Not all of them must be supported. The latter two can make use of
+        standardized descriptions of the <a href="#provider">IPA Providers</a>
+        like the <a
+            href="https://github.com/open-voice-interoperability/docs/blob/main/specifications/AssistantManifest/0.9.0/AssistantManifestSpec.md">Assistant
+            Manifest</a> from OVON.</p>
+    <p>Besides that, it It has the following characteristics</p>
     <ul>
         <li>The Provider Registry can be queried for a list of <a
             href="#provider">IPA Providers</a> along with their unique
@@ -1812,12 +1818,14 @@
         <li>The Provider Registry can return an <a href="#provider">IPA
                 Providers</a> for a current identifier.
         </li>
-        <li>The Provider Registry knows the <a href="#intentsets">Intent
+        <li>In traditional NLU systems, the Provider Registry knows the <a
+                href="#intentsets">Intent
                 Sets</a> of a specific <a href="#provider">IPA Providers</a>
             from the addition of that <a href="#provider">IPA
                 Providers</a>.
         </li>
-        <li>Each Intent from the <a href="#intentsets">Intent
+        <li>In traditional NLU systems, each Intent from the <a
+                href="#intentsets">Intent
                 Sets</a> of a specific <a href="#provider">IPA Providers</a>
             must also specify the mapping to the <a href="#intentsets">Intent
                 Sets</a> known by the <a href="#dialogregistry">Dialog
@@ -1825,8 +1833,6 @@
         <li>Each <a href="#provider">IPA Providers</a> may have an
             associated session identifier to resume an existing session.
         </li>
-        <li><a href="#provider">IPA Providers</a> may be obtained
-            from a standardized market place.</li>
     </ul>
 
     <h5 id="authentication">
