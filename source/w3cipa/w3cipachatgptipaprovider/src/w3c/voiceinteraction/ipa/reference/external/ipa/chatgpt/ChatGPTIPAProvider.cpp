@@ -13,7 +13,7 @@
 #include <curl/curl.h>
 #include <nlohmann/json.hpp>
 #include <log4cplus/loggingmacros.h>
-
+#include <fstream>
 
 #include <w3c/voiceinteraction/ipa/TextModalityType.h>
 
@@ -21,6 +21,7 @@
 #include "w3c/voiceinteraction/ipa/reference/TextMultiModalOutput.h"
 
 #include "w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTIPAProvider.h"
+#include "w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTConfiguration.h"
 #include "w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTMessage.h"
 
 namespace w3c {
@@ -59,6 +60,20 @@ ChatGPTIPAProvider::ChatGPTIPAProvider() {
       Language::ZH };
 }
 
+void ChatGPTIPAProvider::initialize() {
+  std::string configFile = "config";
+  configFile += std::filesystem::path::preferred_separator;
+  configFile += "ChatGPTIPAProvider.json";
+  std::ifstream file(configFile);
+  nlohmann::json json = nlohmann::json::parse(file);
+  ChatGPTConfiguration configuration = json;
+  endpoint = configuration.endpoint;
+  key = configuration.key;
+  systemMessage = configuration.systemMessage;
+  LOG4CPLUS_INFO_FMT(LOGGER,
+                     LOG4CPLUS_TEXT("ChatGPT IPA provider initialized"));
+}
+
 const std::list<ModalityType> ChatGPTIPAProvider::getSupportedModalityTypes() const {
     std::list<ModalityType> types = { TextModalityType() };
     return types;
@@ -83,8 +98,10 @@ const std::shared_ptr<ExternalClientResponse> ChatGPTIPAProvider::processInput(
     }
     // Set the header and API key
     struct curl_slist *headers = NULL;
+    std::string authorization = "Authorization: Bearer ";
+    authorization += key;
     headers = curl_slist_append(headers,
-                                "Authorization: Bearer OPENAI-DEVELOPER-KEY");
+                                authorization.c_str());
                                 headers = curl_slist_append(
                                     headers, "Content-Type: application/json");
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
@@ -94,8 +111,7 @@ const std::shared_ptr<ExternalClientResponse> ChatGPTIPAProvider::processInput(
     curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
 
     // Set the URL to the OpenAI API endpoint
-    std::string apiUrl = "https://api.openai.com/v1/chat/completions";
-    curl_easy_setopt(curl, CURLOPT_URL, apiUrl.c_str());
+    curl_easy_setopt(curl, CURLOPT_URL, endpoint.c_str());
 
     // Set the callback function for libcurl
     std::string response;
@@ -105,8 +121,7 @@ const std::shared_ptr<ExternalClientResponse> ChatGPTIPAProvider::processInput(
     // Set the payload
     ChatGPTJSONRequest req;
     req.model = std::string("gpt-3.5-turbo");
-    ChatGPTMessage systemMessage {"system",
-                                "You are a standards maniac."};
+    ChatGPTMessage actualSystemMessage {"system", systemMessage.c_str()};
     std::shared_ptr<MultiModalInputs> multiModalInputs =
         request->getMultiModalInputs();
     std::shared_ptr<MultiModalInput> input =
@@ -115,7 +130,7 @@ const std::shared_ptr<ExternalClientResponse> ChatGPTIPAProvider::processInput(
         std::dynamic_pointer_cast<TextMultiModalInput>(input);
     const std::string& text = textInput->getTextInput();
     ChatGPTMessage userMessage { "user", text };
-    req.messages = std::vector({ systemMessage, userMessage });
+    req.messages = std::vector({actualSystemMessage, userMessage});
     req.temperature = 1;
     req.top_p = 1;
     req.max_tokens = 256;

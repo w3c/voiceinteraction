@@ -18,6 +18,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(HEADERS
+    include/w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTConfiguration.h
     include/w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTIPAProvider.h
     include/w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTMessage.h
 )
@@ -39,4 +40,10 @@ install(TARGETS ${PROJECT_NAME}
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib)
 
+#
+# Add configuration files
+#
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/ChatGPTIPAProvider.json
+    ${PROJECT_CONFIG_DIR}/ChatGPTIPAProvider.json COPYONLY)
 
+    

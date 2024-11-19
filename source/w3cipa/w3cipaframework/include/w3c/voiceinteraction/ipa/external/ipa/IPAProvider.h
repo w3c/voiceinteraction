@@ -49,6 +49,11 @@ public:
     virtual ~IPAProvider();
 
     /**
+     * Initializes the IPA provider.
+     */
+    virtual void initialize() = 0;
+
+    /**
      * Retrieves a list of languages that are supported by this IPA provider.
      * @return the supported languages of this IPA provider.
      */
