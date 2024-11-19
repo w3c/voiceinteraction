@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML+RDFa 1.1//EN' 'http://www.w3.org/MarkUp/DTD/xhtml-rdfa-2.dtd'>
 <html dir="ltr" about="" property="dcterms:language" content="en"
+    version="XHTML+RDFa 1.1"
     xmlns="http://www.w3.org/1999/xhtml"
     prefix='bibo: http://purl.org/ontology/bibo/' typeof="bibo:Document">
 <head>
@@ -23,7 +24,7 @@
         <dl>
             <dt>Latest version</dt>
             <dd>
-                Last modified: July 18, 2024 <a
+                Last modified: November 14, 2024 <a
                     href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm</a>
                 (GitHub repository)
             </dd>
@@ -122,8 +123,8 @@
     <h2 id="introduction">
         <span class="secno">1. </span>Introduction
     </h2>
-    <p>Intelligent Personal Assistants (IPAs) are now available in
-        our daily lives through our smart phones. Apple’s Siri, Google
+    <p>Intelligent Personal Assistants (IPAs) are now widely available in
+        our daily lives and can be accessed in many ways. Apple’s Siri, Google
         Assistant, Microsoft’s Cortana, Samsung’s Bixby and many more
         are helping us with various tasks, like shopping, playing music,
         setting a schedule, sending messages, and offering answers to
@@ -131,7 +132,18 @@
         smart speakers like Amazon’s Alexa or Google Home which are
         available without the need to pick up explicit devices for these
         sorts of tasks or even control household appliances in our
-        homes. As of today, there is no interoperability among the
+        homes.
+    </p>
+    <p>Besides Intelligent Personal Assistants, also other names are used, 
+        like conversational agents, chatbots, virtual assistants, or digital
+        assistants. While the interpretation of these terms may vary, we will
+        use the term Intelligent Personal Assistant (IPA) in this document.
+        The term <em>personal</em> in this name refers to a potential ability
+        of the assistant to learn about the user and adaptation. It neither
+        implies that the assistant must have this capability nor that the
+        interaction is personal in the sense that no data is shared.
+    </p>
+    <p>As of today, there is no interoperability among the
         available IPA providers. Especially for exchanging learned user
         behaviors this is unlikely to happen at all.</p>
     <p>Furthermore, in addition to these general-purpose assistants,
@@ -146,7 +158,13 @@
         assistants. Without this kind of interoperability, enterprise
         developers will need to re-implement their intelligent
         assistants for each major generic platform.</p>
-
+    <p>
+        The recent increase in the availability of Large Language Models (LLMs)
+        has greatly improved the natural language processing capabilities of
+        IPAs. These technical improvements can be accomodated by variations of
+        the architecture, as described in sections 3.2.4 and 3.2.5 and shown in
+        figures 2a, 2b and 3.
+    </p>
     <p>This document is a first step in our strategy for IPA
         standardization. It describes a general architecture of IPAs and
         explores the potential areas for standardization. It focuses on
@@ -285,12 +303,25 @@
         <li>Conforms with health data privacy laws.</li>
     </ul>
 
-    <p>Interoperability:</p>
-
-    <ul>
-        <li>How to Discover it (Where is it? Who produces it?)</li>
-        <li>How to Interact with it (What format is it, etc.)</li>
-    </ul>
+    <h4>
+        <span class="secno">2.1.3 </span>In-Vehicle Chatbot
+    </h4>
+    
+    <p>
+        A user is driving a car and sees a sign of a histroical site near the
+        road. She becomes curious and wants to know more about the site. She
+        then activates the in-vehicle chatbot and asks about the site. The
+        chatbot then provides her with information about the site. One aspect of
+        the answer attracts the special attention of the user and she wants to
+        dig deeper. She then asks the chatbot to provide her with
+        some more details. As she continues asking questions she is able to
+        spend her driving time to actively learn.
+    </p>
+    <p>
+        Currently available generative AI models are ideal candidates for this
+        use case. They can provide the user with a corresponding conversation
+        thanks to the useage of LLMs.
+    </p>
 
     <h3>
         <span class="secno">2.2 </span>Roles and Responsibilities
@@ -497,6 +528,12 @@
         layers as needed. This view only reflects a view that the
         Community Group regard as ideal and to show the intended
         separation of concerns.</p>
+    <p>There are also no assumptions about the location of the layers and
+        associated components. They may be on a single device,
+        distributed across different devices or even in the cloud. With regard 
+        to privacy, it is recommended not to send any data to the cloud. If 
+        necessary, it should be only sent to trusted entities and encrypted.
+    </p>
 
 
     <h3 id="clientlayer">
@@ -779,6 +816,13 @@
             </figure>
         </div>
     </div>
+    <p>Both, Traditional NLU and Generative AI aim at similar goals.
+        Traditional NLU systems try to understand the
+        user's intent and associated data by parsing her input converted to
+        text. Subsequent actions derived from that require processing in other
+        dedicated components. Generative AI systems generate new data based on
+        larger text models.
+    </p>
     
     <h4 id="ipaservice">
         <span class="secno">3.2.1 </span>IPA Service
@@ -1049,7 +1093,7 @@
         </li>
     </ul>
 
-    <h6 id="dialog">
+    <h6 id="dialogstrategy">
         <span class="secno">3.2.4.2.1 </span>Dialog Strategy
     </h6>
     <p>A Dialog Strategy is a conceptualization of a dialog for an
@@ -1154,7 +1198,7 @@
         <li>An LLM usually does not maintain conversational state
             and may make use of the <a href="history">history</a> to
             optimize the output by augmenting the prompt for this
-            purpose.
+            purpose. This may be available once, so this may be omitted.
         </li>
         <li>The Prompt Adaptation may receive additional input from
             remote IPAs via the <a href="#selectionservice">Provider
@@ -1187,6 +1231,9 @@
             receive additional multimodal input from the <a
             href="#ipaservice">IPA Service</a>.
         </li>
+        <li>It may make use of <a href="#dialog">dialogs</a> to
+            determine the next dialog move especially in the case of errors
+            where the LLM itself has internal errors.</li>
         <li>It usually generates the next dialog move as text-based output and
             forwards it to the <a href="#tts">TTS</a>.
         </li>
@@ -1204,7 +1251,13 @@
         <li>It may make use of <a href="#knowledge-graph">Knowledge
                 Graphs</a> to optimize the output, e.g. to make the output
             more accurate and reliable.
-    
+        <li>It may make use of components in the 
+            <a href="#datalayer">External Data/Services/IPA Providers</a> layer,
+            like <a href="#provider">IPA Provider</a> and 
+            <a href="#externalservices">External Services</a> or 
+            <a href="localserverices">Local Services</a> in the form of 
+            agentic applications.
+        </li>    
     </ul>
 
     <h5 id="llm-post-processing">
@@ -1422,12 +1475,19 @@
         <span class="secno">3.2.8.2 </span>Dialog
     </h5>
     <p>
-        A Dialog is able to handle functionality that can be added to
+        In <a href="#traditional-nlu-layer">Traditional NLU</a> systems, a Dialog is
+        able to handle functionality that can be added to
         the capabilities of the <a href="#dialogmanager">Dialog
             Manager</a> through its associated Intent Sets. Dialogs are
         logical entities within the overall description of the
-        interaction with the user, executed by the <a
-            href="#dialogmanager">Dialog Manager</a>. Dialogs must serve
+        interaction with the user, executed by the <a href="#dialogmanager">Dialog
+            Manager</a>. In <a href="#generative-ai-layer">Generative AI</a>"
+        systems
+        dialogs are more of the nature of templates to pre-scribe a response to the
+        user.
+        They may also go beyond that to also meet requirements for agentic
+        applications. </p>
+    <p>Dialogs must serve
         different purposes in the sense that they are unique for a
         certain task. E.g., only a single flight reservation dialog may
         exist at a time. Dialogs have the following characteristics</p>
@@ -1488,8 +1548,14 @@
     <p>
         Intent Sets define actions, identified by the name of the
         intent, along with their parameters as entities as it is
-        produced by the <a href="#nlu">NLU</a> that can be consumed by a
-        corresponding <a href="#dialog">Dialog</a> and have the
+        produced by the <a href="#nlu">NLU</a> in <a
+            href="#traditional-nlu-layer">Traditional NLU</a> systems that can be
+        consumed by a
+        corresponding <a href="#dialog">Dialog</a>. In <a
+            href="#generative-ai-layer">Generative AI</a>" systems
+        they can be perceived as an identification of a dialog along with parameters
+        that are filled into a template.
+        They have the
         following characteristics</p>
     <ul>
         <li>An Intent Set defines one or more intents with an
@@ -1600,8 +1666,9 @@
         style="float: right" width="auto" height="auto" />
     <p>A service that provides access to all known Data Providers,
         External Services and IPA Providers. This service also maps the
-        IPA Intent Sets to the Intent Sets in the Dialog layer. It has
-        the following characteristics</p>
+        IPA Intent Sets to the Intent Sets in the Dialog layer for 
+        Traditional NLU systems. For Generative AI systems it serves to enable
+        agentic applications. It has the following characteristics</p>
     <ul>
         <li>The Provider Selection Service provides an interface to
             <a href="dataproviders">Data Providers</a>, <a
@@ -1649,10 +1716,9 @@
             <a href="#provider">IPA Providers</a>.
         </li>
         <li>The Provider Selection Services uses the <a
-            href="#providerregistry">Provider Registry</a> to map the <a
-            href="#providerintentsets">Provider Intent Sets</a> to the <a
-            href="#intentsets">Intent Sets</a> known by the <a
-            href="#dialogregistry">Dialog Registry</a>. The mapping must
+                href="#providerregistry">Provider Registry</a> to map the Provider
+            Intent Sets to the <a href="#intentsets">Intent Sets</a> known by the <a
+                href="#dialogregistry">Dialog Registry</a>. The mapping must
             be configured when <a href="#provider">IPA Providers</a> are
             added.
         </li>
@@ -1730,8 +1796,21 @@
     <h5 id="providerregistry">
         <span class="secno">3.3.1.2 </span>Provider Registry
     </h5>
-    <p>A registry for all IPA Providers that can be accessed. It has
-        the following characteristics</p>
+    <p>A registry for all IPA Providers that can be accessed. There are
+        several options how the provider registry gets to know which 
+        <a href="#provider">IPA Providers</a> are available, for example</p>
+     <ul>
+        <li>Initial population from a configuration file or similar</li>
+        <li>Addition via an API call</li>
+        <li>Querying a standardized market place</li>
+        <li>Service Discovery</li>
+     </ul> 
+    <p>Not all of them must be supported. The latter two can make use of
+        standardized descriptions of the <a href="#provider">IPA Providers</a>
+        like the <a
+            href="https://github.com/open-voice-interoperability/docs/blob/main/specifications/AssistantManifest/0.9.0/AssistantManifestSpec.md">Assistant
+            Manifest</a> from OVON.</p>
+    <p>Besides that, it It has the following characteristics</p>
     <ul>
         <li>The Provider Registry can be queried for a list of <a
             href="#provider">IPA Providers</a> along with their unique
@@ -1747,12 +1826,14 @@
         <li>The Provider Registry can return an <a href="#provider">IPA
                 Providers</a> for a current identifier.
         </li>
-        <li>The Provider Registry knows the <a href="#intentsets">Intent
+        <li>In traditional NLU systems, the Provider Registry knows the <a
+                href="#intentsets">Intent
                 Sets</a> of a specific <a href="#provider">IPA Providers</a>
             from the addition of that <a href="#provider">IPA
                 Providers</a>.
         </li>
-        <li>Each Intent from the <a href="#intentsets">Intent
+        <li>In traditional NLU systems, each Intent from the <a
+                href="#intentsets">Intent
                 Sets</a> of a specific <a href="#provider">IPA Providers</a>
             must also specify the mapping to the <a href="#intentsets">Intent
                 Sets</a> known by the <a href="#dialogregistry">Dialog
@@ -1760,8 +1841,6 @@
         <li>Each <a href="#provider">IPA Providers</a> may have an
             associated session identifier to resume an existing session.
         </li>
-        <li><a href="#provider">IPA Providers</a> may be obtained
-            from a standardized market place.</li>
     </ul>
 
     <h5 id="authentication">
@@ -1853,7 +1932,8 @@
         Actually, this can be perceived as the Matryoshka (or Russian
         Doll) principle<sup><a href="#fn1" id="ref1">1</a></sup>. Each
         IPA may be perfectly used as is but can also be approached by
-        other IPAs.
+        other IPAs. Nested IPAs may be both, traditional NLU-based or
+        Gererative AI based IPAs.
     </p>
     <!--img src="IPA-Architecture-RussianDoll.svg" style="width: 100%; height: auto;" /-->
 
@@ -1873,62 +1953,6 @@
         IPA Provider or alternatively a subset of the original
         functionality as described below as part of another IPA
         implementation.</p>
-
-    <h5 id="providerasr">
-        <span class="secno">3.3.5.2 </span>Provider ASR
-    </h5>
-    <p>
-        An ASR component receives audio streams of recorded utterances
-        and generates a recognition hypothesis as text strings as an
-        input for the <a href="#providernlu">Provider NLU</a>.
-    </p>
-
-    <h5 id="providernlu">
-        <span class="secno">3.3.5.2 </span>Provider NLU
-    </h5>
-    <p>
-        An NLU component that is able to extract meaning as intents and
-        associated entities from an utterance as text strings for <a
-            href="#provider">IPA Provider X</a>. It has the following
-        characteristics</p>
-    <ul>
-        <li>The Provider NLU may be specialized to handle specific
-            domains</li>
-        <li>Optionally, the Provider NLU can generate multiple
-            intents with their entities along with with a confidence
-            score.</li>
-        <li>The Provider NLU may make use of own <a
-            href="#providerintentsets">Provider Intenet Sets</a>
-            indpendent of the <a href="#coreintentsets">Core Intent
-                Sets</a> which are then mapped in the <a
-            href="#selectionservice">Provider Selection Service</a> so
-            that they can be consumed by the <a href="#dialogmanager">Dialog
-                Manager</a></li>
-        <li>The Provider NLU may make use of the <a
-            href="#dataprovider">Data Provider</a> to access local or
-            internal data or access external services.
-        </li>
-        <li>The Provider NLU may make use of the <a
-            href="#knowledgegraph">Knowledge Graph</a> to derive
-            meaning.
-        </li>
-    </ul>
-
-    <h5 id="providerintentsets">
-        <span class="secno">3.3.5.3 </span>Provider Intent Set
-    </h5>
-    <p>
-        An <a href="#intentsets">Intent Set</a> that might be returned
-        by the <a href="#providernlu">Provider NLU</a> to handle the
-        capabilities of <a href="#provider">IPA Provider X</a>.
-    </p>
-    
-    <h5 id="providerllm">
-        <span class="secno">3.3.5.3 </span>Provider LLM
-    </h5>
-    <p>
-        An <a href="#llm">LLM</a> that is used by the provider.
-    </p>
 
     <h4 id="finalarchitecture">
         <span class="secno">3.6 </span>Resulting Architecture
@@ -2045,10 +2069,10 @@
         designated conference hotel or special rates.</p>
 
     <h3 id="detailed-walkthrough">
-        <span class="secno">5.1 Detailed Walkthrough</span>
+        <span class="secno">5.1 Detailed Walkthrough for Traditional NLU Systems</span>
     </h3>
     <p>This section provides a detailed walkthrough for an NLU-based
-        IP that aligns the steps in the use case interaction with the
+        IPA that aligns the steps in the use case interaction with the
         architecture. It covers only the part from the example above
         that the user asks for a flight travel with a dedicated airline.
         This very basic example assumes that this is the first request
@@ -2060,10 +2084,12 @@
     <h4 id="provider">
         <span class="secno">5.1.1 </span>Walkthrough for the Input Path
     </h4>
-
-    We begin with the case where the user's request can be handled by
+    
+    <p>We begin with the case where the user's request can be handled by
     one of the internal Dialogs in the Dialog box. The input side is
-    illustrated in the following figure
+    illustrated in the following figure. For the sake of completeness the 
+    complete architecture is shown although the Generative AI component is not
+    used. Therefore, this part is shown in a lighter color. </p>
     <figure>
         <img src="architecture-walkthrough-input-1.3.svg"
             alt="IPA Architecture Walkthrough for the input"
@@ -2128,13 +2154,13 @@
     The output path begins where the local NLU and IPA Providers are
     able to deliver their results. In both paths the best match for the
     intents and entities based on the received data have been
-    identified. This path is illustrated in the following figure
+    identified. This path is illustrated in the following figure</p>
     <figure>
         <img src="architecture-walkthrough-output-1.3.svg"
             alt="IPA Architecture Walkthrough for the output"
             style="width: 100%; height: auto;" />
         <figcaption>Fig. 4 Walkthrough for the output path of an IPA</figcaption>
-    </figure></p>
+    </figure>
 
     <ol>
         <li>The IPA Providers send their determined intents along

@@ -23,7 +23,7 @@
         <dl>
             <dt>Latest version</dt>
             <dd>
-                Last modified: April 03, 2024 <a
+                Last modified: October 17, 2024 <a
                     href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a>
                 (GitHub repository)<br /> <a
                     href="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">HTML
@@ -291,8 +291,11 @@
         </tr>
     </table>
     <p>These main use cases are shown in the following figure</p>
-    <img src="Main-IPA-Use-Cases.svg" alt="Main IPA Use Cases"
+    <figure>
+        <img src="Main-IPA-Use-Cases.svg" alt="Main IPA Use Cases"
         style="width: 40%; height: auto;" />
+        <figcaption>Fig. 1 Main IPA Use Cases</figcaption>
+    </figure>
 
     <p>Not all components may be needed for actual implementations,
         some may be omitted completely. Especially, LLM-based
@@ -313,14 +316,62 @@
         shifted to other layers as needed. This view only reflects a
         view that the Community Group regard as ideal and to show the
         intended separation of concerns.</p>
-    <img src="IPA-Major-Components.svg" alt="IPA Major Components"
-        style="width: 50%; height: auto;" />
+    <figure>
+        <img src="IPA-Major-Components.svg" alt="IPA Major Components"
+            style="width: 50%; height: auto;" />
+        <figcaption>Fig. 2 IPA Major Components</figcaption>
+    </figure>
 
     <p>According to these components they are assigned to the
         packages shown below.</p>
-    <img src="IPA-Package-Hierarchy.svg" alt="IPA Package Hierarchy"
-        style="width: 50%; height: auto;" />
+    <figure>
+        <img src="IPA-Package-Hierarchy.svg" alt="IPA Package Hierarchy"
+            style="width: 30%; height: auto;" />
+        <figcaption>Fig. 3 IPA Package Hierarchy</figcaption>
+    </figure>
 
+    <h2 id="component-chaining">
+        <span class="secno">3.3 </span>Component Chaining
+    </h2>
+
+    <p>
+        The most flexible way to combine the components is to chain
+        them. This means that the output of one component is the input
+        of the next component. Therefore, we introduced the concept of
+        an <b>IPADataProcessor</b> that may receive <b>IPAData</b> from
+        incoming <b>IPADataProcessors</b> and forwards <b>IPAData</b> to
+        outgoing <b>IPADataProcessor</b>. The classes for the major
+        components are shown in the figure 4 a.
+    </p>
+    <div class="figurerow">
+        <div class="figurecolumn">
+            <figure>
+                <img src="IPADataProcessors.svg" alt="IPA Data Processors"
+                    style="width: 70%; height: auto;" />
+                <figcaption>Fig 4 a) IPA Data Processor Examples</figcaption>
+            </figure>
+        </div>
+        <div class="figurecolumn">
+            <figure>
+                <img src="IPAData-Processing-Chain.svg" alt="IPA Data Processing Chain"
+                    style="width: 70%; height: auto;" />
+                <figcaption>Fig 4 b) Example IPADatat Processing Chain</figcaption>
+            </figure>
+        </div>
+    </div>
+    <p>Actual implementations may link them together as needed. An
+        example is shown in figure 4 b. In this example
+        four IPADataProcessors are shown: Client, IPAService,
+        ProviderSelectionService, and DialogManager. In the actual
+        chain, IPAService and Client appear twice, once in the beginning
+        and once in the end of the chain. This chain is then used to
+        hand IPAData, generated in the beginning of the chain towards
+        the end. For example, The IPADatProcessor Client generates the
+        IPAData MultimodalInputs. In this example it is expected to
+        contain only data for the single modality text. This is
+        forwarded to the next IPADataProcessor IPAService for further
+        processing.</p>
+    
     <h1 id="highlevelinterfaces">
         <span class="secno">4. </span>High Level Interfaces
     </h1>
@@ -348,9 +399,12 @@
 
     <p>A typical flow for the high level interfaces is shown in the
         following figure.</p>
-    <img src="Major-Components-Interaction.svg"
-        alt="IPA Major Components Interaction"
-        style="width: 100%; height: auto;" />
+    <figure>
+        <img src="Major-Components-Interaction.svg"
+            alt="IPA Major Components Interaction"
+            style="width: 50%; height: auto;" />
+        <figcaption>Fig. 5 IPA Major Component Interaction</figcaption>
+    </figure>
     <p>This sequence supports the major use cases stated
         <a href="#main-use-cases">above</a>.</p>
 
