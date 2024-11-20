@@ -74,9 +74,9 @@ communicate with ChatGPT.
 
 ### Configuring Keys
 
-As of now, everything is hard coded, you will need to replace your OpenAI
+In order to get started, you will need to replace your OpenAI
 developer key in the file 
-[w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/chatgptadapter.cpp](https://github.com/w3c/voiceinteraction/blob/a8753131e16a01fb0374d7cbf3cb875b0a925053/source/w3cipa/w3cipachatgptipaprovider/src/w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTAdapter.cpp#L71)
+[voiceinteraction/source/w3cipa/w3cipachatgptipaprovider/ChatGPTIPAProvider.json](https://github.com/w3c/voiceinteraction/blob/5bb7fd5311f8c0da24dd9a40a4fd94145c178cb1/source/w3cipa/w3cipachatgptipaprovider/ChatGPTIPAProvider.json#L3)
 
 Replace `OPENAI-DEVELOPER-KEY` with your actual key.
 
