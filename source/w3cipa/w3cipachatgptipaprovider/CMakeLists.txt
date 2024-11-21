@@ -39,6 +39,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC include)
 install(TARGETS ${PROJECT_NAME}
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib)
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/ChatGPTIPAProvider.json DESTINATION config)
 
 #
 # Add configuration files

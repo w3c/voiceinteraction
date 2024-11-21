@@ -75,6 +75,12 @@ include_directories(${NLOHMANN_JSON_INCLUDE_DIR})
 include_directories(${STDUUID_INCLUDE_DIR})
 
 #
+# Prepare configuration folder
+#
+set(PROJECT_CONFIG_DIR ${CMAKE_CURRENT_BINARY_DIR}/w3cipademo/config)
+file(MAKE_DIRECTORY ${PROJECT_CONFIG_DIR})
+
+#
 # W3C IPA Framework and Reference Implementation
 #
 
