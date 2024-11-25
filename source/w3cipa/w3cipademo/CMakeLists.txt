@@ -34,14 +34,13 @@ target_link_libraries(${PROJECT_NAME} w3cipaframework)
 
 install(TARGETS ${PROJECT_NAME} DESTINATION .)
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/log4cplus.properties DESTINATION config)
-install(FILES ${REQUIRED_LIBS} DESTINATION lib)
+install(DIRECTORY ${W3CIPA_OPEN_SOURCE_SRC}/bin/ DESTINATION lib)
 
 #
 # Add configuration files
 #
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/log4cplus.properties
     ${PROJECT_CONFIG_DIR}/log4cplus.properties COPYONLY)
-
 
 
 

@@ -41,7 +41,9 @@ if (BUILD_W3CIPA_DEPENDENCIES)
     message(STATUS "Begin building dependencies.")
     build_dependency(log4cplus -DBUILD_SHARED_LIBS=${BUILD_SHARED_LIBS})
     build_dependency(nlohmann_json)
-    if (NOT WIN32)
+    if (WIN32)
+        file(COPY ${CURL_SHARED_LIBRARY} DESTINATION ${W3CIPA_OPEN_SOURCE_SRC}/bin)
+    else()
         build_dependency(openssl)
         build_dependency(curl)
     endif()
@@ -69,6 +71,9 @@ set(REQUIRED_LIBS ${REQUIRED_LIBS} ${Log4cplus})
 include_directories(${nlohmann_json_SOURCE_DIR}/include)
 include_directories(${CURL_INCLUDE_DIR})
 set(REQUIRED_LIBS ${REQUIRED_LIBS} ${CURL_LIBRARIES})
+
+message(STATUS ${CURL_LIBRARIES})
+
 
 include_directories(${NLOHMANN_JSON_INCLUDE_DIR})
 
