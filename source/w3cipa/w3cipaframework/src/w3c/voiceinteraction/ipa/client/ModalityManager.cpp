@@ -10,7 +10,7 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
-#include "w3c/voiceinteraction/ipa/ClientResponse.h"
+#include "w3c/voiceinteraction/ipa/IPAResponse.h"
 #include "w3c/voiceinteraction/ipa/client/ModalityManager.h"
 
 namespace w3c {
@@ -85,8 +85,8 @@ void ModalityManager::startInput() const {
 }
 
 void ModalityManager::processIPAData(std::shared_ptr<IPAData> data) {
-    if (std::shared_ptr<ClientResponse> response =
-            std::dynamic_pointer_cast<ClientResponse>(data)) {
+    if (std::shared_ptr<IPAResponse> response =
+            std::dynamic_pointer_cast<IPAResponse>(data)) {
         std::shared_ptr<MultiModalOutputs> outputs =
             response->getMultiModalOutputs();
         handleOutput(outputs);

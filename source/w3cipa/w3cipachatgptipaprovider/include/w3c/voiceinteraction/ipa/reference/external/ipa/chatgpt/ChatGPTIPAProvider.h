@@ -37,10 +37,8 @@ public:
     virtual ~ChatGPTIPAProvider() {
     }
 
-    void initialize() override;
-
-    const std::shared_ptr<ExternalClientResponse> processInput(
-        const std::shared_ptr<ClientRequest>& request) override;
+    const std::shared_ptr<ExternalIPAResponse> processInput(
+        const std::shared_ptr<IPARequest>& request) override;
 
     const std::string getId() const override {
         return ID;
@@ -50,15 +48,10 @@ public:
 
     const std::list<Language>& getSupportedLanguages() const override;
 
-private:
+   private:
     /** Languages supported by this provider. */
     std::list<Language> supportedLanguages;
-    /** The ChatGPT endpoint */
-    std::string endpoint;
-    /** The ChatGPT API key */
-    std::string key;
-    /** The default system message. */
-    std::string systemMessage;
+
     /** Id of this IP provider. */
     const static std::string ID;
     /** Logger instance. */

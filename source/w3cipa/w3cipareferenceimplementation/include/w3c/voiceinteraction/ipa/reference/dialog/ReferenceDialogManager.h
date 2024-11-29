@@ -18,7 +18,7 @@
 #include <log4cplus/logger.h>
 
 #include <w3c/voiceinteraction/ipa/IPADataProcessor.h>
-#include <w3c/voiceinteraction/ipa/ExternalClientResponse.h>
+#include <w3c/voiceinteraction/ipa/ExternalIPAResponse.h>
 
 namespace w3c {
 namespace voiceinteraction {
@@ -48,7 +48,7 @@ private:
     std::shared_ptr<MultiModalOutputs> createOutputFromError(
         const std::shared_ptr<ErrorMessage>& error);
 
-    void processIPAData(const std::shared_ptr<ExternalClientResponse>& request);
+    void processIPAData(const std::shared_ptr<ExternalIPAResponse>& request);
 
     /** Logger instance. */
     const static log4cplus::Logger LOGGER;

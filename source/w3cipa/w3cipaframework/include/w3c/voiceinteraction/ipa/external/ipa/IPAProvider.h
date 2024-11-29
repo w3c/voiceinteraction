@@ -16,8 +16,8 @@
 #include <string>
 #include <list>
 
-#include "w3c/voiceinteraction/ipa/ClientRequest.h"
-#include "w3c/voiceinteraction/ipa/ExternalClientResponse.h"
+#include "w3c/voiceinteraction/ipa/IPARequest.h"
+#include "w3c/voiceinteraction/ipa/ExternalIPAResponse.h"
 #include "w3c/voiceinteraction/ipa/ModalityType.h"
 #include "w3c/voiceinteraction/ipa/Language.h"
 
@@ -49,11 +49,6 @@ public:
     virtual ~IPAProvider();
 
     /**
-     * Initializes the IPA provider.
-     */
-    virtual void initialize() = 0;
-
-    /**
      * Retrieves a list of languages that are supported by this IPA provider.
      * @return the supported languages of this IPA provider.
      */
@@ -70,8 +65,8 @@ public:
      * Processes the input from the client.
      * @param request the request coming from the client
      */
-    virtual const std::shared_ptr<ExternalClientResponse> processInput(
-        const std::shared_ptr<ClientRequest>& request) = 0;
+    virtual const std::shared_ptr<ExternalIPAResponse> processInput(
+        const std::shared_ptr<IPARequest>& request) = 0;
 
     /**
      * Returns the IPA provider's ID.

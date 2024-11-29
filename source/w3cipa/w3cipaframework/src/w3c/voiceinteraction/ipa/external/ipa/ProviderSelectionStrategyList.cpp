@@ -32,7 +32,7 @@ void ProviderSelectionStrategyList::addStrategy(
 const std::list<std::shared_ptr<IPAProvider>>
 ProviderSelectionStrategyList::filterIPAProviders(
     const std::list<std::shared_ptr<IPAProvider>>& providers,
-    const std::shared_ptr<ClientRequest>& request) const {
+    const std::shared_ptr<IPARequest>& request) const {
     std::list<std::shared_ptr<IPAProvider>> filteredProviders = providers;
     for (const std::shared_ptr<ProviderSelectionStrategy>& strategy :
          strategies) {

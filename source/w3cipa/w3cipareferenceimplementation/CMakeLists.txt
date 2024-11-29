@@ -16,6 +16,7 @@ project(w3cipareferenceimplementation LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 set(HEADERS
     include/w3c/voiceinteraction/ipa/reference/client/ConsoleTextModalityComponent.h
@@ -41,11 +42,9 @@ set(SOURCES
 
 source_group("W3C IPA Reference Implementation" FILES ${SOURCES} ${HEADERS})
 
-add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS} "include/w3c/voiceinteraction/ipa/reference/dialog/ReferenceDialogManager.h")
+add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 target_link_libraries(${PROJECT_NAME} ${REQUIRED_LIBS})
 target_link_libraries(${PROJECT_NAME} w3cipaframework)
 target_include_directories(${PROJECT_NAME} PUBLIC include)
 
-install(TARGETS ${PROJECT_NAME}
-    LIBRARY DESTINATION lib
-    ARCHIVE DESTINATION lib)
+install(TARGETS ${PROJECT_NAME} LIBRARY DESTINATION lib)

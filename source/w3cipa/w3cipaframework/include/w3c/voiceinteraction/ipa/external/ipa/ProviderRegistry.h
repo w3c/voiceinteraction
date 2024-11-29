@@ -53,7 +53,7 @@ public:
     virtual ~ProviderRegistry();
 
     /**
-     * Adds the IPA provider to the known IPA providers and initializes it.
+     * Adds the IPA provider to the known IPA providers.
      * @param[in] provider the provider to add
      */
     void addIPAProvider(const std::shared_ptr<IPAProvider>& provider);
@@ -64,7 +64,7 @@ public:
      * @return A list of all registered IPA providers.
      */
     const std::list<std::shared_ptr<IPAProvider>> getIPAProviders(
-        const std::shared_ptr<ClientRequest>& request);
+        const std::shared_ptr<IPARequest>& request);
 
 private:
     /** The strategy to determine the suitable IPA providers. */

@@ -61,6 +61,7 @@ int main() {
         std::make_shared<::reference::dialog::ReferenceIPADialogManager>();
 
     // External IPA / Services Layer
+
     // Create a chained filter for selecting the best provider
     std::shared_ptr<::external::ipa::ProviderSelectionStrategyList>
         providerSelectionStrategy =
@@ -73,6 +74,7 @@ int main() {
         modalityProviderSelectionStrategy =
         std::make_shared<::external::ipa::ModalityMatchingProviderSelectionStrategy>();
     providerSelectionStrategy->addStrategy(modalityProviderSelectionStrategy);
+
     // create main components in the external layer
     std::shared_ptr<ProviderRegistry> registry =
         std::make_shared<ProviderRegistry>(providerSelectionStrategy);

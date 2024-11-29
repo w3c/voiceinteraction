@@ -13,7 +13,7 @@
 #include <curl/curl.h>
 #include <nlohmann/json.hpp>
 #include <log4cplus/loggingmacros.h>
-#include <fstream>
+
 
 #include <w3c/voiceinteraction/ipa/TextModalityType.h>
 
@@ -21,7 +21,6 @@
 #include "w3c/voiceinteraction/ipa/reference/TextMultiModalOutput.h"
 
 #include "w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTIPAProvider.h"
-#include "w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTConfiguration.h"
 #include "w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTMessage.h"
 
 namespace w3c {
@@ -60,20 +59,6 @@ ChatGPTIPAProvider::ChatGPTIPAProvider() {
       Language::ZH };
 }
 
-void ChatGPTIPAProvider::initialize() {
-  std::string configFile = "config";
-  configFile += std::filesystem::path::preferred_separator;
-  configFile += "ChatGPTIPAProvider.json";
-  std::ifstream file(configFile);
-  nlohmann::json json = nlohmann::json::parse(file);
-  ChatGPTConfiguration configuration = json;
-  endpoint = configuration.endpoint;
-  key = configuration.key;
-  systemMessage = configuration.systemMessage;
-  LOG4CPLUS_INFO_FMT(LOGGER,
-                     LOG4CPLUS_TEXT("ChatGPT IPA provider initialized"));
-}
-
 const std::list<ModalityType> ChatGPTIPAProvider::getSupportedModalityTypes() const {
     std::list<ModalityType> types = { TextModalityType() };
     return types;
@@ -83,8 +68,8 @@ const std::list<Language>& ChatGPTIPAProvider::getSupportedLanguages() const {
     return supportedLanguages;
 }
 
-const std::shared_ptr<ExternalClientResponse> ChatGPTIPAProvider::processInput(
-    const std::shared_ptr<ClientRequest> &request) {
+const std::shared_ptr<ExternalIPAResponse> ChatGPTIPAProvider::processInput(
+    const std::shared_ptr<IPARequest> &request) {
     const std::string& sessionId = request->getSessionId()->toString();
     const std::string& requestId = request->getRequestId()->toString();
 
@@ -98,10 +83,8 @@ const std::shared_ptr<ExternalClientResponse> ChatGPTIPAProvider::processInput(
     }
     // Set the header and API key
     struct curl_slist *headers = NULL;
-    std::string authorization = "Authorization: Bearer ";
-    authorization += key;
     headers = curl_slist_append(headers,
-                                authorization.c_str());
+                                "Authorization: Bearer OPENAI-DEVELOPER-KEY");
                                 headers = curl_slist_append(
                                     headers, "Content-Type: application/json");
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
@@ -111,7 +94,8 @@ const std::shared_ptr<ExternalClientResponse> ChatGPTIPAProvider::processInput(
     curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
 
     // Set the URL to the OpenAI API endpoint
-    curl_easy_setopt(curl, CURLOPT_URL, endpoint.c_str());
+    std::string apiUrl = "https://api.openai.com/v1/chat/completions";
+    curl_easy_setopt(curl, CURLOPT_URL, apiUrl.c_str());
 
     // Set the callback function for libcurl
     std::string response;
@@ -121,7 +105,8 @@ const std::shared_ptr<ExternalClientResponse> ChatGPTIPAProvider::processInput(
     // Set the payload
     ChatGPTJSONRequest req;
     req.model = std::string("gpt-3.5-turbo");
-    ChatGPTMessage actualSystemMessage {"system", systemMessage.c_str()};
+    ChatGPTMessage systemMessage {"system",
+                                "You are a standards maniac."};
     std::shared_ptr<MultiModalInputs> multiModalInputs =
         request->getMultiModalInputs();
     std::shared_ptr<MultiModalInput> input =
@@ -130,7 +115,7 @@ const std::shared_ptr<ExternalClientResponse> ChatGPTIPAProvider::processInput(
         std::dynamic_pointer_cast<TextMultiModalInput>(input);
     const std::string& text = textInput->getTextInput();
     ChatGPTMessage userMessage { "user", text };
-    req.messages = std::vector({actualSystemMessage, userMessage});
+    req.messages = std::vector({ systemMessage, userMessage });
     req.temperature = 1;
     req.top_p = 1;
     req.max_tokens = 256;
@@ -156,8 +141,8 @@ const std::shared_ptr<ExternalClientResponse> ChatGPTIPAProvider::processInput(
                            curlError.c_str());
         std::shared_ptr<ErrorMessage> error =
             std::make_shared<ErrorMessage>(res, curlError, ID);
-        std::shared_ptr<ExternalClientResponse> out =
-            std::make_shared<ExternalClientResponse>(request->getSessionId(),
+        std::shared_ptr<ExternalIPAResponse> out =
+            std::make_shared<ExternalIPAResponse>(request->getSessionId(),
                 request->getRequestId(), error);
         return out;
     }
@@ -173,8 +158,8 @@ const std::shared_ptr<ExternalClientResponse> ChatGPTIPAProvider::processInput(
                            curlError.c_str());
         std::shared_ptr<ErrorMessage> error =
             std::make_shared<ErrorMessage>(res, curlError, ID);
-        std::shared_ptr<ExternalClientResponse> out =
-            std::make_shared<ExternalClientResponse>(request->getSessionId(),
+        std::shared_ptr<ExternalIPAResponse> out =
+            std::make_shared<ExternalIPAResponse>(request->getSessionId(),
                                                      request->getRequestId(), error);
         return out;
     }
@@ -192,8 +177,8 @@ const std::shared_ptr<ExternalClientResponse> ChatGPTIPAProvider::processInput(
         std::shared_ptr<ErrorMessage> error =
             std::make_shared<ErrorMessage>(res, errorMessage.str(), ID);
 
-        std::shared_ptr<ExternalClientResponse> out =
-            std::make_shared<ExternalClientResponse>(request->getSessionId(),
+        std::shared_ptr<ExternalIPAResponse> out =
+            std::make_shared<ExternalIPAResponse>(request->getSessionId(),
                                                      request->getRequestId(), error);
 
         return out;
@@ -216,8 +201,8 @@ const std::shared_ptr<ExternalClientResponse> ChatGPTIPAProvider::processInput(
     std::shared_ptr<MultiModalOutputs> outputs =
         std::make_shared<MultiModalOutputs>();
     outputs->addMultiModalOutput(output);
-    std::shared_ptr<ExternalClientResponse> out =
-        std::make_shared<ExternalClientResponse>(request->getSessionId(),
+    std::shared_ptr<ExternalIPAResponse> out =
+        std::make_shared<ExternalIPAResponse>(request->getSessionId(),
             request->getRequestId(), outputs, nullptr);
 
     return out;

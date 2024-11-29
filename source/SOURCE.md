@@ -47,7 +47,7 @@ On Windows systems
 cd source/w3cipa
 mkdir build
 cd build
-cmake .. -DCURL_INCLUDE_DIR=<Your path to the CURL include directory> -DCURL_LIBRARY=<Your path to the CURL library directory>
+cmake .. -DCURL_INCLUDE_DIR=<Your path to the CURL include directory> -DCURL_LIBRARY=<Your path to the CURL library> -DCURL_SHARED_LIBRARY=<Your path to the CURL shared library>
 make && make install
 ```
 

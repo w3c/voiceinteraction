@@ -10,13 +10,13 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
-#include "w3c/voiceinteraction/ipa/ExternalClientResponse.h"
+#include "w3c/voiceinteraction/ipa/ExternalIPAResponse.h"
 
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
 
-ExternalClientResponse::ExternalClientResponse(const std::shared_ptr<SessionId>& sessionIdentifier,
+ExternalIPAResponse::ExternalIPAResponse(const std::shared_ptr<SessionId>& sessionIdentifier,
                const std::shared_ptr<RequestId>& requestIdentifier,
                const std::shared_ptr<MultiModalOutputs>& multiModalOutputs,
                const std::shared_ptr<SemanticInterpretation> semanticInterpretation)
@@ -25,7 +25,7 @@ ExternalClientResponse::ExternalClientResponse(const std::shared_ptr<SessionId>&
     error(nullptr) {
 }
 
-ExternalClientResponse::ExternalClientResponse(
+ExternalIPAResponse::ExternalIPAResponse(
                 const std::shared_ptr<SessionId>& sessionIdentifier,
                 const std::shared_ptr<RequestId>& requestIdentifier,
                 const std::shared_ptr<ErrorMessage>& errorMessage)
@@ -34,18 +34,18 @@ ExternalClientResponse::ExternalClientResponse(
     error(errorMessage) {
 }
 
-ExternalClientResponse::~ExternalClientResponse() {
+ExternalIPAResponse::~ExternalIPAResponse() {
 }
 
-const std::shared_ptr<MultiModalOutputs> ExternalClientResponse::getMultiModalOutputs() const {
+const std::shared_ptr<MultiModalOutputs> ExternalIPAResponse::getMultiModalOutputs() const {
     return outputs;
 }
 
-const std::shared_ptr<SemanticInterpretation> ExternalClientResponse::getSemanticInterpretation() const {
+const std::shared_ptr<SemanticInterpretation> ExternalIPAResponse::getSemanticInterpretation() const {
     return interpretation;
 }
 
-CallResult ExternalClientResponse::getCallResult() const {
+CallResult ExternalIPAResponse::getCallResult() const {
     if (error == nullptr) {
         return CallResult::SUCCESS;
     } else {
@@ -53,11 +53,11 @@ CallResult ExternalClientResponse::getCallResult() const {
     }
 }
 
-bool ExternalClientResponse::hasError() const {
+bool ExternalIPAResponse::hasError() const {
     return error != nullptr;
 }
 
-const std::shared_ptr<ErrorMessage> ExternalClientResponse:: getErrorMessage() const {
+const std::shared_ptr<ErrorMessage> ExternalIPAResponse:: getErrorMessage() const {
     return error;
 }
 

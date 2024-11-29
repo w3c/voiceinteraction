@@ -14,24 +14,25 @@ cmake_minimum_required(VERSION 3.22)
 
 project(w3cipaframework LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 include_directories(include)
 
 set(HEADERS
-    include/w3c/voiceinteraction/ipa/AudioData.h
+    include/w3c/voiceinteraction/ipa/AudioData.h 
     include/w3c/voiceinteraction/ipa/AudioDeliveryType.h
     include/w3c/voiceinteraction/ipa/AudioEncoding.h
     include/w3c/voiceinteraction/ipa/CallResult.h
-    include/w3c/voiceinteraction/ipa/ClientRequest.h
-    include/w3c/voiceinteraction/ipa/ClientResponse.h
     include/w3c/voiceinteraction/ipa/CombinedId.h
     include/w3c/voiceinteraction/ipa/DialogManager.h
     include/w3c/voiceinteraction/ipa/ErrorMessage.h
-    include/w3c/voiceinteraction/ipa/ExternalClientResponse.h
+    include/w3c/voiceinteraction/ipa/ExternalIPAResponse.h
     include/w3c/voiceinteraction/ipa/IPAData.h
     include/w3c/voiceinteraction/ipa/IPADataProcessor.h
+    include/w3c/voiceinteraction/ipa/IPARequest.h
+    include/w3c/voiceinteraction/ipa/IPAResponse.h
     include/w3c/voiceinteraction/ipa/Language.h
     include/w3c/voiceinteraction/ipa/LanguageDependent.h
     include/w3c/voiceinteraction/ipa/MetaData.h
@@ -63,15 +64,15 @@ set(HEADERS
     include/w3c/voiceinteraction/ipa/external/ipa/ProviderSelectionStrategyList.h)
 
 set(SOURCES
-    src/w3c/voiceinteraction/ipa/ClientRequest.cpp
-    src/w3c/voiceinteraction/ipa/ClientResponse.cpp
     src/w3c/voiceinteraction/ipa/CombinedId.cpp
     src/w3c/voiceinteraction/ipa/DialogManager.cpp
     src/w3c/voiceinteraction/ipa/ModalityType.cpp
     src/w3c/voiceinteraction/ipa/ErrorMessage.cpp
-    src/w3c/voiceinteraction/ipa/ExternalClientResponse.cpp
+    src/w3c/voiceinteraction/ipa/ExternalIPAResponse.cpp
     src/w3c/voiceinteraction/ipa/IPAData.cpp
     src/w3c/voiceinteraction/ipa/IPADataProcessor.cpp
+    src/w3c/voiceinteraction/ipa/IPARequest.cpp
+    src/w3c/voiceinteraction/ipa/IPAResponse.cpp
     src/w3c/voiceinteraction/ipa/Language.cpp
     src/w3c/voiceinteraction/ipa/Metadata.cpp
     src/w3c/voiceinteraction/ipa/MultiModalInput.cpp
@@ -102,10 +103,6 @@ source_group("W3C IPA Framework" FILES ${SOURCES} ${HEADERS})
 
 add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 target_include_directories(${PROJECT_NAME} PUBLIC include)
-
-install(TARGETS ${PROJECT_NAME}
-    LIBRARY DESTINATION lib
-    ARCHIVE DESTINATION lib)
 
 if (CMAKE_BUILD_TYPE MATCHES "^[Rr]elease")
 # check if Doxygen is installed

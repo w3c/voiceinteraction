@@ -54,7 +54,7 @@ public:
      */
     const std::list<std::shared_ptr<IPAProvider>> filterIPAProviders(
         const std::list<std::shared_ptr<IPAProvider>>& providers,
-        const std::shared_ptr<ClientRequest>& request) const;
+        const std::shared_ptr<IPARequest>& request) const;
 
 private:
     /** Known provider selection strategies. */

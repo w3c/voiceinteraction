@@ -39,7 +39,7 @@ public:
 
     const std::list<std::shared_ptr<::external::ipa::IPAProvider>> filterIPAProviders(
         const std::list<std::shared_ptr<::external::ipa::IPAProvider>>& providers,
-        const std::shared_ptr<ClientRequest>& request) const override;
+        const std::shared_ptr<IPARequest>& request) const override;
 
 private:
     /**

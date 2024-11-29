@@ -18,8 +18,8 @@
 #include <log4cplus/logger.h>
 
 #include <w3c/voiceinteraction/ipa/IPADataProcessor.h>
-#include <w3c/voiceinteraction/ipa/ClientRequest.h>
-#include <w3c/voiceinteraction/ipa/ClientResponse.h>
+#include <w3c/voiceinteraction/ipa/IPARequest.h>
+#include <w3c/voiceinteraction/ipa/IPAResponse.h>
 #include <w3c/voiceinteraction/ipa/dialog/IPAService.h>
 
 
@@ -40,8 +40,8 @@ public:
     void processIPAData(std::shared_ptr<IPAData> data) override;
 
 private:
-    void processIPAData(const std::shared_ptr<ClientRequest>& request);
-    void processIPAData(const std::shared_ptr<ClientResponse>& response);
+    void processIPAData(const std::shared_ptr<IPARequest>& request);
+    void processIPAData(const std::shared_ptr<IPAResponse>& response);
 
     /** Logger instance. */
     const static log4cplus::Logger LOGGER;

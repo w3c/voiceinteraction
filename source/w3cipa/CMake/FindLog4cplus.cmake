@@ -43,14 +43,11 @@ find_path(LOG4CPLUS_INCLUDE_DIR
   HINTS
     ${PC_LOG4CPLUS_INCLUDE_DIR}
     ${PC_LOG4CPLUS_INCLUDE_DIRS}
-    ${OPEN_SRC_INSTALL_PREFIX}/include
-
 )
 
 find_library(LOG4CPLUS_LIBRARY
   NAMES
     log4cplus
-    log4cplusd
   PATHS
     /usr/local
     /usr
@@ -65,8 +62,6 @@ find_library(LOG4CPLUS_LIBRARY
   HINTS
     ${PC_LOG4CPLUS_LIBDIR}
     ${PC_LOG4CPLUS_LIBRARY_DIRS}
-    ${OPEN_SRC_INSTALL_PREFIX}/lib
-    ${OPEN_SRC_INSTALL_PREFIX}/bin
 )
 
 if(LOG4CPLUS_LIBRARY)

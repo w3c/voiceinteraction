@@ -15,7 +15,7 @@
 
 #include <list>
 
-#include "w3c/voiceinteraction/ipa/ClientRequest.h"
+#include "w3c/voiceinteraction/ipa/IPARequest.h"
 #include "w3c/voiceinteraction/ipa/IPADataProcessor.h"
 #include "w3c/voiceinteraction/ipa/external/ipa/ProviderRegistry.h"
 

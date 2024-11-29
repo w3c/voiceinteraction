@@ -14,7 +14,7 @@
 
 #include <log4cplus/loggingmacros.h>
 
-#include <w3c/voiceinteraction/ipa/ClientResponse.h>
+#include <w3c/voiceinteraction/ipa/IPAResponse.h>
 
 #include "w3c/voiceinteraction/ipa/reference/UUIDSessionId.h"
 #include "w3c/voiceinteraction/ipa/reference/TextMultiModalOutput.h"
@@ -35,11 +35,11 @@ ReferenceIPAService::ReferenceIPAService() {
 }
 
 void  ReferenceIPAService::processIPAData(std::shared_ptr<IPAData> data) {
-    if (const std::shared_ptr<ClientRequest>& request =
-        std::dynamic_pointer_cast<ClientRequest>(data)) {
+    if (const std::shared_ptr<IPARequest>& request =
+        std::dynamic_pointer_cast<IPARequest>(data)) {
         processIPAData(request);
-    } else if (const std::shared_ptr<ClientResponse>& response =
-        std::dynamic_pointer_cast<ClientResponse>(data)) {
+    } else if (const std::shared_ptr<IPAResponse>& response =
+        std::dynamic_pointer_cast<IPAResponse>(data)) {
         processIPAData(response);
     } else {
         LOG4CPLUS_WARN(LOGGER,
@@ -48,7 +48,7 @@ void  ReferenceIPAService::processIPAData(std::shared_ptr<IPAData> data) {
 }
 
 void ReferenceIPAService::processIPAData(
-        const std::shared_ptr<ClientRequest> &request) {
+        const std::shared_ptr<IPARequest> &request) {
     // Check if there is already a session identifer and set one if there is
     // none
     const std::shared_ptr<SessionId>& id = request->getSessionId();
@@ -65,7 +65,7 @@ void ReferenceIPAService::processIPAData(
 }
 
 void ReferenceIPAService::processIPAData(
-    const std::shared_ptr<ClientResponse>& response) {
+    const std::shared_ptr<IPAResponse>& response) {
     notifyListeners(response);
 }
 

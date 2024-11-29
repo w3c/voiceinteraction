@@ -10,38 +10,40 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
-#include "w3c/voiceinteraction/ipa/ClientRequest.h"
+
+#include "w3c/voiceinteraction/ipa/IPAResponse.h"
 
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
 
-ClientRequest::ClientRequest(const std::shared_ptr<SessionId>& sessionIdentifier,
-              const std::shared_ptr<RequestId>& requestIdentifier,
-              const std::shared_ptr<MultiModalInputs>& multiModalInputs,
-              const std::shared_ptr<AudioData>& audioDataToSend,
-              const std::shared_ptr<MetaData> metaDataToSend)
+IPAResponse::IPAResponse(const std::shared_ptr<SessionId>& sessionIdentifier,
+               const std::shared_ptr<RequestId>& requestIdentifier,
+               const std::shared_ptr<MultiModalOutputs>& multiModalOutputs,
+               const std::shared_ptr<AudioData>& audioDataToSend,
+               const std::shared_ptr<MetaData> metaDataToSend)
     : IPAData(sessionIdentifier, requestIdentifier),
-        inputs(multiModalInputs), audioData(audioDataToSend),
+        outputs(multiModalOutputs), audioData(audioDataToSend),
         metaData(metaDataToSend) {
 }
 
-ClientRequest::~ClientRequest() {
+IPAResponse::~IPAResponse() {
 
 }
 
-const std::shared_ptr<AudioData>& ClientRequest::getAudioData() {
+const std::shared_ptr<AudioData>& IPAResponse::getAudioData() {
     return audioData;
 }
 
-const std::shared_ptr<MultiModalInputs>& ClientRequest::getMultiModalInputs() {
-    return inputs;
+const std::shared_ptr<MultiModalOutputs> IPAResponse::getMultiModalOutputs() {
+    return outputs;
 }
 
-const std::shared_ptr<MetaData>& ClientRequest::getMetaData() {
+const std::shared_ptr<MetaData>& IPAResponse::getMetaData() {
     return metaData;
 }
 
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c
+

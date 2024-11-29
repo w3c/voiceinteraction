@@ -23,7 +23,7 @@ ModalityMatchingProviderSelectionStrategy::ModalityMatchingProviderSelectionStra
 
 const std::list<std::shared_ptr<::external::ipa::IPAProvider>> ModalityMatchingProviderSelectionStrategy::filterIPAProviders(
     const std::list<std::shared_ptr<::external::ipa::IPAProvider>>& providers,
-    const std::shared_ptr<ClientRequest>& request) const {
+    const std::shared_ptr<IPARequest>& request) const {
     std::list<std::shared_ptr<::external::ipa::IPAProvider>> filteredProviders;
 
     // Check which known provider supports the provided modalities

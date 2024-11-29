@@ -16,7 +16,7 @@
 #include <memory>
 #include <list>
 
-#include "w3c/voiceinteraction/ipa/ClientRequest.h"
+#include "w3c/voiceinteraction/ipa/IPARequest.h"
 #include "IPAProvider.h"
 
 namespace w3c {
@@ -49,7 +49,7 @@ public:
      */
     virtual const std::list<std::shared_ptr<IPAProvider>> filterIPAProviders(
         const std::list<std::shared_ptr<IPAProvider>>& providers,
-        const std::shared_ptr<ClientRequest>& request) const = 0;
+        const std::shared_ptr<IPARequest>& request) const = 0;
 };
 
 } // namespace ipa

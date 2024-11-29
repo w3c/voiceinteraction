@@ -13,7 +13,7 @@
 #include <iostream>
 #include <log4cplus/loggingmacros.h>
 
-#include <w3c/voiceinteraction/ipa/ClientRequest.h>
+#include <w3c/voiceinteraction/ipa/IPARequest.h>
 
 #include "w3c/voiceinteraction/ipa/reference/IntegerRequestId.h"
 #include "w3c/voiceinteraction/ipa/reference/client/TakeFirstInputModalityComponentListener.h"
@@ -40,7 +40,7 @@ void TakeFirstInputModalityComponentListener::processIPAData(
         std::make_shared<IntegerRequestId>();
     std::shared_ptr<MetaData> metaData = std::make_shared<MetaData>();
     std::shared_ptr<IPAData> request =
-        std::make_shared<ClientRequest>(nullptr, requestId, multiModalInputs,
+        std::make_shared<IPARequest>(nullptr, requestId, multiModalInputs,
             nullptr, metaData);
     LOG4CPLUS_INFO(LOGGER,
                    LOG4CPLUS_TEXT("forwarding first input"));

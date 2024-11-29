@@ -10,8 +10,8 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
-#if !defined(EXTERNAL_CLIENT_RESPONSE_H)
-#define EXTERNAL_CLIENT_RESPONSE_H
+#if !defined(EXTERNAL_IPA_RESPONSE_H)
+#define EXTERNAL_IPA_RESPONSE_H
 
 #include <memory>
 
@@ -26,10 +26,10 @@ namespace voiceinteraction {
 namespace ipa {
 
 /**
- * This interface is used to return the results of a request to the client.
+ * This interface is used to return the results of a request of an IPA.
  * @author Dirk Schnelle-Walka
  */
-class ExternalClientResponse : public IPAData {
+class ExternalIPAResponse : public IPAData {
 public:
     /**
      * Constructs a new object with a meaningful result
@@ -39,7 +39,7 @@ public:
      *          client.
      * @param semanticInterpretation semantic interpretation of an utterance
      */
-    ExternalClientResponse(const std::shared_ptr<SessionId>& sessionIdentifier,
+    ExternalIPAResponse(const std::shared_ptr<SessionId>& sessionIdentifier,
                    const std::shared_ptr<RequestId>& requestIdentifier,
                    const std::shared_ptr<MultiModalOutputs>& multiModalOutputs,
                    const std::shared_ptr<SemanticInterpretation> semanticInterpretation);
@@ -50,14 +50,14 @@ public:
      * @param requestIdentifier identifier of the request
      * @param errorMessage the error to be returned
      */
-    ExternalClientResponse(const std::shared_ptr<SessionId>& sessionIdentifier,
+    ExternalIPAResponse(const std::shared_ptr<SessionId>& sessionIdentifier,
                            const std::shared_ptr<RequestId>& requestIdentifier,
                            const std::shared_ptr<ErrorMessage>& errorMessage);
 
     /**
      * Destroys the object.
      */
-    virtual ~ExternalClientResponse();
+    virtual ~ExternalIPAResponse();
 
     /**
      * Returns the multimodal outputs to be returned to the client.
@@ -101,4 +101,4 @@ private:
 } // namespace voiceinteraction
 } // namespace w3c
 
-#endif // !defined(EXTERNAL_CLIENT_RESPONSE_H)
+#endif // !defined(EXTERNAL_IPA_RESPONSE_H)

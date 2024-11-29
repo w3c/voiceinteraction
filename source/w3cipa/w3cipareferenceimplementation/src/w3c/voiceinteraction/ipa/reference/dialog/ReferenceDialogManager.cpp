@@ -12,7 +12,7 @@
 
 #include <log4cplus/loggingmacros.h>
 
-#include <w3c/voiceinteraction/ipa/ClientResponse.h>
+#include <w3c/voiceinteraction/ipa/IPAResponse.h>
 
 #include "w3c/voiceinteraction/ipa/reference/dialog/ReferenceDialogManager.h"
 #include "w3c/voiceinteraction/ipa/reference/TextMultiModalOutput.h"
@@ -32,8 +32,8 @@ ReferenceIPADialogManager::ReferenceIPADialogManager() {
 }
 
 void ReferenceIPADialogManager::processIPAData(std::shared_ptr<IPAData> data) {
-    if (const std::shared_ptr<ExternalClientResponse>& response =
-        std::dynamic_pointer_cast<ExternalClientResponse>(data)) {
+    if (const std::shared_ptr<ExternalIPAResponse>& response =
+        std::dynamic_pointer_cast<ExternalIPAResponse>(data)) {
         processIPAData(response);
     } else {
         LOG4CPLUS_WARN(LOGGER,
@@ -55,19 +55,19 @@ std::shared_ptr<MultiModalOutputs> ReferenceIPADialogManager::createOutputFromEr
 }
 
 void ReferenceIPADialogManager::processIPAData(
-    const std::shared_ptr<ExternalClientResponse>& response) {
-    std::shared_ptr<ClientResponse> forwardedResponse;
+    const std::shared_ptr<ExternalIPAResponse>& response) {
+    std::shared_ptr<IPAResponse> forwardedResponse;
     if (response->hasError()) {
         const std::shared_ptr<ErrorMessage>& error =
             response->getErrorMessage();
         std::shared_ptr<MultiModalOutputs> outputs =
             createOutputFromError(error);
         forwardedResponse =
-            std::make_shared<ClientResponse>(response->getSessionId(),
+            std::make_shared<IPAResponse>(response->getSessionId(),
                 response->getRequestId(), outputs, nullptr, nullptr);
     } else {
         forwardedResponse =
-            std::make_shared<ClientResponse>(response->getSessionId(),
+            std::make_shared<IPAResponse>(response->getSessionId(),
                 response->getRequestId(),
                 response->getMultiModalOutputs(), nullptr, nullptr);
     }

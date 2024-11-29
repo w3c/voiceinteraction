@@ -10,8 +10,8 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
-#if !defined(CLIENT_RESPONSE_H)
-#define CLIENT_RESPONSE_H
+#if !defined(IPA_RESPONSE_H)
+#define IPA_RESPONSE_H
 
 #include <memory>
 
@@ -25,10 +25,10 @@ namespace voiceinteraction {
 namespace ipa {
 
 /**
- * This interface is used to return the results of a request to the client.
+ * This interface is used to return the results of a request to an IPA.
  * @author Dirk Schnelle-Walka
  */
-class ClientResponse : public IPAData {
+class IPAResponse : public IPAData {
 
 public:
     /**
@@ -40,7 +40,7 @@ public:
      * @param audioDataToSend audio data to send
      * @param metaDataToSend meta data to send
      */
-    ClientResponse(const std::shared_ptr<SessionId>& sessionIdentifier,
+    IPAResponse(const std::shared_ptr<SessionId>& sessionIdentifier,
                    const std::shared_ptr<RequestId>& requestIdentifier,
                    const std::shared_ptr<MultiModalOutputs>& multiModalOutputs,
                    const std::shared_ptr<AudioData>& audioDataToSend,
@@ -49,7 +49,7 @@ public:
     /**
      * Destroys the object.
      */
-    virtual ~ClientResponse();
+    virtual ~IPAResponse();
 
     /**
      * Returns the audio data to be played to the user.
@@ -82,4 +82,4 @@ private:
 } // namespace voiceinteraction
 } // namespace w3c
 
-#endif // !defined(CLIENT_RESPONSE_H)
+#endif // !defined(IPA_RESPONSE_H)

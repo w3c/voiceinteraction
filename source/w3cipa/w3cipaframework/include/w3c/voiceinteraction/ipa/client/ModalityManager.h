@@ -74,7 +74,7 @@ public:
      */
     void startInput() const;
 
-    void processIPAData(std::shared_ptr<IPAData> data);
+    void processIPAData(std::shared_ptr<IPAData> data) override;
 
     /**
      * Handles the provided multimodal output with all known modality handlers.

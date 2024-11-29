@@ -26,12 +26,11 @@ ProviderRegistry::~ProviderRegistry() {
 }
 
 void ProviderRegistry::addIPAProvider(const std::shared_ptr<IPAProvider>& provider) {
-  providers.push_back(provider);
-  provider->initialize();
+    providers.push_back(provider);
 }
 
 const std::list<std::shared_ptr<IPAProvider>> ProviderRegistry::getIPAProviders(
-    const std::shared_ptr<ClientRequest>& request) {
+    const std::shared_ptr<IPARequest>& request) {
     return providerSelectionStrategy->filterIPAProviders(providers,
                                                          request);
 }

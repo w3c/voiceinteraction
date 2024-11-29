@@ -9,3 +9,4 @@ source/w3cipa/open-source/**
 /source/w3cipa/CMakeSettings.json
 /.vs
 /source/w3cipa/.vs
+/source/w3cipa/.editorconfig
