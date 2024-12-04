@@ -23,7 +23,7 @@
         <dl>
             <dt>Latest version</dt>
             <dd>
-                Last modified: October 17, 2024 <a
+                Last modified: December 2, 2024 <a
                     href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a>
                 (GitHub repository)<br /> <a
                     href="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">HTML
@@ -167,7 +167,7 @@
     </p>
 
     <p>
-        Interfaces are described with the help of <a
+        Interfaces and data structures are described with the help of <a
             href="https://www.omg.org/spec/UML/">UML diagrams</a>. We
         expect the reader to be familiar with that notation, although
         most concepts are easy to understand and do not require in-depth
@@ -373,7 +373,7 @@
         processing.</p>
     
     <h1 id="highlevelinterfaces">
-        <span class="secno">4. </span>High Level Interfaces
+        <span class="secno">4. </span>High Level Data Structures and Interfaces
     </h1>
 
     <p>
@@ -408,15 +408,14 @@
     <p>This sequence supports the major use cases stated
         <a href="#main-use-cases">above</a>.</p>
 
-    <h2 id="if-clientinput">
-        <span class="secno">4.1 </span>Interface Client Input
+    <h2 id="iparequest">
+        <span class="secno">4.1 </span>IPARequest
     </h2>
     <p>
-        This interface describes the data that is sent from the <a
+        This data structure describes the data that is sent from the <a
             href="#ipaclient">IPA Client</a> to the <a
-            href="#ipaservice">IPA Service</a>. The following table
-        details the data that should be considered for this interface in
-        the method <b>processInput</b>
+            href="#ipaservice">IPA Service</a> and reused inside the
+        IPA. The following table details the corresponding data elements.
     </p>
 
     <table>
@@ -462,13 +461,18 @@
 
     <p>
         The <b>session id</b> can be created by the <a
-            href="#ipaservice">IPA Service</a>. In case a session id is
-        provided, it must be used for subsequent calls.
+            href="#ipaservice">IPA Service</a>. It may not be known to
+        the client for the first request. In this case, this field is
+        simply left empty. The <a href="#ipaservice">IPA Service</a> may
+        maintain a <b>session id</b>, e.g., to serve multiple clients
+        and allow them to be distinguished. In these cases a session id
+        is provided, that must be used for subsequent calls of the <a
+            href="#ipaclient">IPA Client</a>.
     </p>
 
     <p>
         The <a href="#ipaclient">IPA Client</a> maintains <b>request
-            id</b> for each request that is being sent via this interface.
+            id</b> for each request that is being sent.
         These ids must be unique within a session.
     </p>
 
@@ -517,18 +521,15 @@
         timestamp and location.
     </p>
 
-    <p>
-        The <a href="#ipaservice">IPA Service</a> may maintain a <b>session
-            id</b>, e.g., to serve multiple clients and allow them to be
-        distinguished.
-    </p>
+    <h2 id="iparesponse">
+        <span class="secno">4.2 </span>IPAResponse
+    </h2>
 
     <p>
-        As a return value this interface describes the data that is sent
-        from the <a href="#ipaservice">IPA Service</a> to the <a
+        As a return value this data structure describes the data that is
+        sent from the <a href="#ipaservice">IPA Service</a> to the <a
             href="#ipaclient">IPA Client</a>. The following table
-        details the data that should be considered for this interface in
-        the <b>ClientResponse</b>.
+        details the corresponding data elements.
     </p>
 
     <table>
@@ -572,147 +573,16 @@
         the <a href="#if-servicecall">Interface Service Call.</a>
     </p>
 
-    <p>The following sections will provide examples using the JSON
-        format to illustrate the interfaces. JSON is only chosen as it
-        is easy to understand and read. This specification does not make
-        any assumptions about the underlying programming languages or
-        data format. They are just meant to be an illustration of how
-        responses may be generated with the provided data. It is not
-        required that implementations follow exactly the described
-        behavior.</p>
 
-    <h3 id="if-clientinput-weather-example">
-        <span class="secno">4.1.2 </span>Example Weather Information for
-        Interface Client Input
-    </h3>
 
-    <p>
-        The following request to <b>processInput</b> sends endpointed
-        audio data with the user's current location to query for
-        tomorrow's weather with the utterance <em>What will the
-            weather be like tomorrow"</em>.</p>
-    <pre>
-{
-	"sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
-	"requestId": "42",
-	"audio": {
-		"type": "Endpointed",
-		"data": "ZmhhcGh2cGF3aGZwYWhuZ...zI0MDc4NDY1NiB5dGhvaGF3",
-		"encoding": "PCM-16BIT"
-	}
-	"multimodal": {
-		"location": {
-			"latitude": 52.51846213843821,
-			"longitude": 13.37872252544883338.897957
-		}
-		...
-	},
-	"meta": {
-		"timestamp": "2022-12-01T18:45:00.000Z"
-		...
-	}
-}</pre>
-
-    <p>In this example endpointed audio data is transfered as a
-        value. There are other ways to send the audio data to the IPA,
-        e.g., as a reference. This way is chosen as it is easier to
-        illustrate the usage.</p>
-
-    <p>
-        In return the the IPA may send back the following response <em>Tomorrow
-            there will be snow showers in Berlin with temperatures
-            between 0 and -1 degrees</em> via <b>ClientResponse</b> to the
-        Client.</p>
-    <pre>
-{
-	"sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
-	"requestId": "42",
-	"audio": {
-		"type": "Endpointed",
-		"data": "Uvrs4hcGh2cGF3aGZwYWhuZ...vI0MDc4DGY1NiB5dGhvaRD2",
-		"encoding": "PCM-16BIT"
-	}
-	"multimodal": {
-		"text": "Tomorrow there will be snow showers in Berlin with temperatures between 0 and -1 degrees."
-		...
-	},
-	"meta": {
-		...
-	}
-}</pre>
-
-    <h3 id="if-clientinput-flight-example">
-        <span class="secno">4.1.3 </span>Example Flight Reservation for
-        Interface Client Input
-    </h3>
-
-    <p>
-        The following request to <b>processInput</b> sends endpointed
-        audio data with the user's current location to book a flight
-        with the utterance <em>I want to fly to San Francisco</em>.</p>
-    <pre>
-{
-	"sessionId": "0c27895c-644d-11ed-81ce-0242ac120002",
-	"requestId": "15",
-	"audio": {
-		"type": "Endpointed",
-		"data": "ZmhhcGh2cGF3aGZwYWhuZ...zI0MDc4NDY1NiB5dGhvaGF3",
-		"encoding": "PCM-16BIT"
-	}
-	"multimodal": {
-		"location": {
-			"latitude": 52.51846213843821,
-			"longitude": 13.37872252544883338.897957
-		}
-		...
-	},
-	"meta": {
-		"timestamp": "2022-11-14T19:50:00.000Z"
-		...
-	}
-}</pre>
-
-    <p>
-        In return the the IPA may send back the following response <em>When
-            do you want to fly from Berlin to San Francisco?</em> via <b>ClientResponse</b>
-        to the Client</p>
-    <pre>
-{
-	"sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
-	"requestId": "42",
-	"audio": {
-		"type": "Endpointed",
-		"data": "Uvrs4hcGh2cGF3aGZwYWhuZ...vI0MDc4DGY1NiB5dGhvaRD2",
-		"encoding": "PCM-16BIT"
-	}
-	"multimodal": {
-		"text": "When do you want to fly from Berlin to San Francisco?"
-		...
-	},
-	"meta": {
-		...
-	}
-}</pre>
-
-    <h2 id="if-externalclientinput">
-        <span class="secno">4.2 </span>External Client Input
+    <h2 id="externaliparesponse">
+        <span class="secno">4.3 </span>ExternalIPAResponse
     </h2>
     <p>
-        This interface describes the data that is sent from t the <a
+        This data structure describes the data that is returned In
+        traditional NLU systems this is sent from the <a
             href="#providerselectionservice">Provider Selection
-            Service</a>. The input is a copy of the data that is sent from
-        the <a href="#ipaclient">IPA Client</a> to the <a
-            href="#ipaservice">IPA Service</a> in <a
-            href="#if-clientinput">Interface Client Input</a>. This
-        interface mainly differs in the return value. The following
-        table details the data that should be considered for this
-        interface in the method <b>processInput.</b>
-    </p>
-
-    <p>
-        As a return value this interface describes the data that is sent
-        from the <a href="#providerselectionservice">Provider
-            Selection Service</a> and the <a href="#nlu">NLU</a> and <a
+            Service</a> and the <a href="#nlu">NLU</a> and <a
             href="#dialogmanagement">Dialog Management</a>. The
         following table details the data that should be considered for
         this interface in the method <b>ExternalClientResponse.</b>
@@ -864,137 +734,9 @@
         </tr>
     </table>
 
-    <h3 id="if-externalclientinput-example-weather">
-        <span class="secno">4.2.1 </span>Example Weather Information for
-        Interface External Client Input
-    </h3>
-
-    <p>
-        The following request to <b>processInput</b> is a copy of <a
-            href="#if-clientinput-weather-example">Example Weather
-            Information for Interface Client Input</a>.
-    </p>
-
-    <p>
-        In return the the external IPA may send back the following
-        response via <b>ExternalClientResponse</b> to the Dialog.
-    </p>
-    <pre>
-{
-    "sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
-    "requestId": "42",
-    "callResult": "success",
-    "interpretation": [
-        {
-            "intent": "check-weather",
-            "intentConfidence": 0.9,
-            "entities": [
-                {
-                    "location": "Berlin",
-                    "entityConfidence": 1.0
-                },
-                {
-                    "date": "2022-12-02",
-                    "entityConfidence": 0.94
-                },
-            ]
-        },
-        ...	
-    ]
-}</pre>
-
-    <p>
-        The external speech recognizer converts the obtained audio into
-        text like <em>How will be the weather tomorrow</em>. The NLU
-        then extracts the following from that decoded utterance, other
-        multimodal input and metadata.
-    </p>
-    <ul>
-        <li>intent: check-weather from, e.g., utterance part <em>How
-                will the weather&hellip;</em></li>
-        <li>entity: date from utterance part <em>&hellip;tomorrow&hellip;</em></li>
-        <li>entity: location, e.g., from the multimodal input of
-            location</li>
-    </ul>
-    <p>This is illustrated in the following figure.</p>
-    <img src="processInputWeather.svg"
-        alt="Processing Input of the check weather example"
-        style="width: 40%; height: auto;" />
-
-    <h3 id="if-externalclientinputexample-flight">
-        <span class="secno">4.2.2 </span> Example Flight Reservation for
-        Interface External Client Input
-    </h3>
-
-    <p>
-        The following request to <b>processInput</b> is a copy of <a
-            href="#if-clientinput-flight-example">Example Flight
-            Reservation for Interface Client Input</a>.
-    </p>
-
-    <p>
-        In return the the IPA may send back the following response <em>When
-            do you want to fly from Berlin to San Francisco?</em> via <b>ClientResponse</b>
-        to the Client. In this case, empty entities, like <em>date</em>
-        indicate that there are still slots to be filled and no service
-        call can be made right now.</p>
-    <pre>
-{
-    "sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
-    "requestId": "42",
-    "callResult": "success",
-    "interpretation": [
-        {
-            "intent": "book-flight",
-            "intentConfidence": 0.87,
-            "entities": [
-                {
-                    "origin": "Berlin",
-                    "entityConfidence": 1.0
-                },
-                {
-                    "destination": "San Francisco",   
-                    "entityConfidence": 0.827
-                },
-                {
-                    "date": "",   
-                },
-                ...
-            ]
-        },
-        ...	
-    ]
-}</pre>
-
-    <p>
-        The external speech recognizer converts the obtained audio into
-        text like <em>I want to fly to San Francisco</em>. The NLU then
-        extracts the following from that decoded utterance, other
-        multimodal input and metadata.</p>
-    <ul>
-        <li>intent: book-fligh from, e.g., utterance part <em>I
-                want to fly&hellip;</em></li>
-        <li>entity: location from utterance part <em>&hellip;San
-                Francisco&hellip;</em></li>
-        <li>entity: location, e.g., from the multimodal input of
-            location</li>
-    </ul>
-    <p>
-        This is illustrated in the following figure. <img
-            src="processFlightReservation.svg"
-            alt="Processing Input of the flight reservation example"
-            style="width: 40%; height: auto;" />
-    </p>
-    <p>
-        Further steps will be needed to convert both location entities
-        to <em>origin</em> and <em>destination</em> in the actual reply.
-        This may be either done by the flight reservation IPA directly
-        or by calling external services beforehand to determine the
-        nearest airports from these locations.
-    </p>
 
     <h2 id="if-servicecall">
-        <span class="secno">4.3 </span>External Service Call
+        <span class="secno">4.4 </span>External Service Call
     </h2>
     <p>
         This interface describes the data that is sent from the <a
@@ -1092,72 +834,10 @@
     <p>This call is optional depending on the result of the next
         dialog step if an external service should be called or not.</p>
 
-    <h3 id="if-externalclientinput-example-weather">
-        <span class="secno">4.3.1 </span>Example Weather Information for
-        Interface Service Call
-    </h3>
 
-    <p>
-        The following request to <b>callService</b> may be made to call
-        the weather information service. Although calling the weather
-        service is not a direct functionality of the IPA, it may help to
-        understand how the entered data may be processed to obtain a
-        spoken reply to the user's input.
-    </p>
-
-    <pre>
-{
-    "sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
-    "requestId": "42",
-    "services": [
-        {
-            "serviceId": "weather-service",
-            "parameters": [
-                {
-                    "location": "Berlin",
-                    "date": "2022-12-02"
-                }
-            ]
-        },
-        ...	
-    ]
-}</pre>
-
-    <p>
-        In return the the external service may send back the following
-        response via <b>ExternalClientResponse</b> to the Dialog
-    </p>
-
-    <pre>
-{
-    "sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
-    "requestId": "42",
-    "callResult": "success",
-    "services": [
-        {
-            "serviceId": "weather-information",
-            "callResult": "success",
-            "callResultDetails": [
-                {
-                    "location": "Berlin",
-                    "date": "2022-12-02",
-                    "forecast": "snow showers",
-                    "minTemperature": -1,
-                    "maxTemperature": 0,
-                    ...
-                }
-            ]
-        },
-        ...	
-    ]
-}</pre>
-    <p>
-        This information is the used to actually create a reply to the
-        user as described in <a href="#if-clientinput-weather-example">ExternalClientResponse</a>
-        to the Client.
-    </p>
-
-    <h2 id=errorhandling><span class="secno">4.4.</span>Error Handling</h2>
+    <h2 id=errorhandling>
+        <span class="secno">4.5.</span>Error Handling
+    </h2>
     <p>Errors may occur anywhere in the processing chain of the IPA.
         The following gives an overview of how they are suggested to be
         handled.</p>
@@ -1199,6 +879,264 @@
             <td>yes</td>
         </tr>
     </table>
+
+    <h2 id=errorhandling>
+        <span class="secno">4.6.</span>Examples
+    </h2>
+
+    <p>The following sections will provide examples using the JSON
+        format to illustrate the usage of above mentioned data
+        structures and interfaces. JSON is only chosen as it is easy to
+        understand and read. This specification does not make any
+        assumptions about the underlying programming languages or data
+        format. They are just meant to be an illustration of how
+        responses may be generated with the provided data. It is not
+        required that implementations follow exactly the described
+        behavior. It is also not required that JSON is used at all.</p>
+
+    <h3 id="high-level-weather-example">
+        <span class="secno">4.6.1 </span>Example Weather Information for
+        the High Level Interfaces and Data Structures
+    </h3>
+
+    <p>
+        The following request of an <b>IPARequest</b> sends endpointed
+        audio data with the user's current location to query for
+        tomorrow's weather with the utterance <em>What will the
+            weather be like tomorrow"</em>.
+    </p>
+    <pre>
+{
+    "sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
+    "requestId": "42",
+    "audio": {
+        "type": "Endpointed",
+        "data": "ZmhhcGh2cGF3aGZwYWhuZ...zI0MDc4NDY1NiB5dGhvaGF3",
+        "encoding": "PCM-16BIT"
+    }
+    "multimodal": {
+        "location": {
+            "latitude": 52.51846213843821,
+            "longitude": 13.37872252544883338.897957
+        }
+        ...
+    },
+    "meta": {
+        "timestamp": "2022-12-01T18:45:00.000Z"
+        ...
+    }
+}</pre>
+
+    <p>In this example endpointed audio data is transfered as a
+        value. There are other ways to send the audio data to the IPA,
+        e.g., as a reference. This way is chosen as it is easier to
+        illustrate the usage.</p>
+
+    <p>
+        In return an external IPA may send back the following <b>ExternalIPAResponse</b>
+        to the Dialog.
+    </p>
+    <pre>
+{
+    "sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
+    "requestId": "42",
+    "callResult": "success",
+    "interpretation": [
+        {
+            "intent": "check-weather",
+            "intentConfidence": 0.9,
+            "entities": [
+                {
+                    "location": "Berlin",
+                    "entityConfidence": 1.0
+                },
+                {
+                    "date": "2022-12-02",
+                    "entityConfidence": 0.94
+                },
+            ]
+        },
+        ... 
+    ]
+}</pre>
+
+    <p>
+        The external speech recognizer converts the obtained audio into
+        text like <em>How will be the weather tomorrow</em>. The NLU
+        then extracts the following from that decoded utterance, other
+        multimodal input and metadata.
+    </p>
+    <ul>
+        <li>intent: check-weather from, e.g., utterance part <em>How
+                will the weather&hellip;</em></li>
+        <li>entity: date from utterance part <em>&hellip;tomorrow&hellip;</em></li>
+        <li>entity: location, e.g., from the multimodal input of
+            location</li>
+    </ul>
+    <p>This is illustrated in the following figure.</p>
+    <img src="processInputWeather.svg"
+        alt="Processing Input of the check weather example"
+        style="width: 40%; height: auto;" />
+
+
+    <p>
+        The following request to <b>callService</b> may be made to call
+        the weather information service to actually obain the requested
+        information. Although calling the weather service is not a
+        direct functionality of the IPA, it may help to understand how
+        the entered data may be processed to obtain a spoken reply to
+        the user's input.
+    </p>
+
+    <pre>
+{
+    "sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
+    "requestId": "42",
+    "services": [
+        {
+            "serviceId": "weather-service",
+            "parameters": [
+                {
+                    "location": "Berlin",
+                    "date": "2022-12-02"
+                }
+            ]
+        },
+        ... 
+    ]
+}</pre>
+
+    <p>
+        In return the the external service may send back the following
+        response <b>ExternalIPAResponse</b> to the Dialog
+    </p>
+
+    <pre>
+{
+    "sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
+    "requestId": "42",
+    "callResult": "success",
+    "services": [
+        {
+            "serviceId": "weather-information",
+            "callResult": "success",
+            "callResultDetails": [
+                {
+                    "location": "Berlin",
+                    "date": "2022-12-02",
+                    "forecast": "snow showers",
+                    "minTemperature": -1,
+                    "maxTemperature": 0,
+                    ...
+                }
+            ]
+        },
+        ... 
+    ]
+}</pre>
+
+    <p>
+        In return the IPA may send back the following response <em>Tomorrow
+            there will be snow showers in Berlin with temperatures
+            between 0 and -1 degrees</em> via an <b>IPAResponse</b> to the
+        Client.</p>
+    <pre>
+{
+    "sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
+    "requestId": "42",
+    "audio": {
+        "type": "Endpointed",
+        "data": "Uvrs4hcGh2cGF3aGZwYWhuZ...vI0MDc4DGY1NiB5dGhvaRD2",
+        "encoding": "PCM-16BIT"
+    }
+    "multimodal": {
+        "text": "Tomorrow there will be snow showers in Berlin with temperatures between 0 and -1 degrees."
+        ...
+    },
+    "meta": {
+        ...
+    }
+}</pre>
+
+    <h3 id="high-level-flight-example">
+        <span class="secno">4.6.2 </span>Example Flight Reservation for
+        the High Level Interfaces and Data Structures
+    </h3>
+
+    <p>
+        The following <b>IPARequest</b> sends endpointed
+        audio data with the user's current location to book a flight
+        with the utterance <em>I want to fly to San Francisco</em>.</p>
+    <pre>
+{
+    "sessionId": "0c27895c-644d-11ed-81ce-0242ac120002",
+    "requestId": "15",
+    "audio": {
+        "type": "Endpointed",
+        "data": "ZmhhcGh2cGF3aGZwYWhuZ...zI0MDc4NDY1NiB5dGhvaGF3",
+        "encoding": "PCM-16BIT"
+    }
+    "multimodal": {
+        "location": {
+            "latitude": 52.51846213843821,
+            "longitude": 13.37872252544883338.897957
+        }
+        ...
+    },
+    "meta": {
+        "timestamp": "2022-11-14T19:50:00.000Z"
+        ...
+    }
+}</pre>
+
+    <p>
+        The external speech recognizer converts the obtained audio into
+        text like <em>I want to fly to San Francisco</em>. The NLU then
+        extracts the following from that decoded utterance, other
+        multimodal input and metadata.</p>
+    <ul>
+        <li>intent: book-fligh from, e.g., utterance part <em>I
+                want to fly&hellip;</em></li>
+        <li>entity: location from utterance part <em>&hellip;San
+                Francisco&hellip;</em></li>
+        <li>entity: location, e.g., from the multimodal input of
+            location</li>
+    </ul>
+    <p>
+        This is illustrated in the following figure. <img
+            src="processFlightReservation.svg"
+            alt="Processing Input of the flight reservation example"
+            style="width: 40%; height: auto;" />
+    </p>
+    <p>
+        Further steps will be needed to convert both location entities
+        to <em>origin</em> and <em>destination</em> in the actual reply.
+        This may be either done by the flight reservation IPA directly
+        or by calling external services beforehand to determine the
+        nearest airports from these locations.
+    </p>
+
+    <p>
+        In return the the IPA may send back the following response <em>When
+            do you want to fly from Berlin to San Francisco?</em> via <b>IPAResponse</b>
+        to the Client</p>
+    <pre>
+{
+    "sessionId": "0d770c02-2a13-11ed-a261-0242ac120002",
+    "requestId": "42",
+    "audio": {
+        "type": "Endpointed",
+        "data": "Uvrs4hcGh2cGF3aGZwYWhuZ...vI0MDc4DGY1NiB5dGhvaRD2",
+        "encoding": "PCM-16BIT"
+    }
+    "multimodal": {
+        "text": "When do you want to fly from Berlin to San Francisco?"
+        ...
+    },
+    "meta": {
+        ...
+    }
+}</pre>
 
     <h1 id="lowlevelinterfaces">
         <span class="secno">5. </span>Low Level Interfaces
