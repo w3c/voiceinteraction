@@ -48,3 +48,5 @@ target_link_libraries(${PROJECT_NAME} w3cipaframework)
 target_include_directories(${PROJECT_NAME} PUBLIC include)
 
 install(TARGETS ${PROJECT_NAME} LIBRARY DESTINATION lib)
+install(DIRECTORY doc/ DESTINATION doc)
+
