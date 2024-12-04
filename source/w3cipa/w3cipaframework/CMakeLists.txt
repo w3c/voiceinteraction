@@ -102,9 +102,14 @@ set(SOURCES
 source_group("W3C IPA Framework" FILES ${SOURCES} ${HEADERS})
 
 add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+target_sources(${PROJECT_NAME} PRIVATE ${SOURCES} 
+    PUBLIC FILE_SET HEADERS 
+    BASE_DIRS ${PROJECT_SOURCE_DIR}/include 
+    FILES ${HEADERS})
 target_include_directories(${PROJECT_NAME} PUBLIC include)
 
 install(TARGETS ${PROJECT_NAME} LIBRARY DESTINATION lib)
+install(TARGETS ${PROJECT_NAME} FILE_SET HEADERS)
 install(DIRECTORY doc/ DESTINATION doc)
 
 if (CMAKE_BUILD_TYPE MATCHES "^[Rr]elease")
