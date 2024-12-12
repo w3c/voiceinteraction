@@ -23,8 +23,9 @@ endif()
 include(ExternalProject)
 
 set(CMAKE_ARGS
-        -DCMAKE_INSTALL_PREFIX=${OPEN_SRC_INSTALL_PREFIX}
+        -DCMAKE_INSTALL_PREFIX=${W3CIPA_OPEN_SOURCE_SRC}
         -DBUILD_CURL_EXE=0
+        -DBUILD_STATIC_LIBS=1
         -DHTTP_ONLY=1
         -DCMAKE_BUILD_TYPE=Release)
 

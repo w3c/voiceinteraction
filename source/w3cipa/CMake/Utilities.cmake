@@ -10,12 +10,12 @@
 # [1] https://www.w3.org/Consortium/Legal/copyright-software
 #
 
-if(NOT OPEN_SRC_INSTALL_PREFIX OR OPEN_SRC_INSTALL_PREFIX STREQUAL "")
-  set(OPEN_SRC_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/open-source" CACHE PATH "Libraries will be downloaded and built in this directory.")
+if(NOT W3CIPA_OPEN_SOURCE_SRC OR W3CIPA_OPEN_SOURCE_SRC STREQUAL "")
+  set(W3CIPA_OPEN_SOURCE_SRC "${CMAKE_CURRENT_SOURCE_DIR}/open-source" CACHE PATH "Libraries will be downloaded and built in this directory.")
 else()
-  set(OPEN_SRC_INSTALL_PREFIX ${OPEN_SRC_INSTALL_PREFIX} CACHE PATH "Libraries will be downloaded and built in this directory.")
+  set(W3CIPA_OPEN_SOURCE_SRC ${W3CIPA_OPEN_SOURCE_SRC} CACHE PATH "Libraries will be downloaded and built in this directory.")
 endif()
-message(STATUS "Libraries will be downloaded and built in ${OPEN_SRC_INSTALL_PREFIX}")
+message(STATUS "Libraries will be downloaded and built in ${W3CIPA_OPEN_SOURCE_SRC}")
 
 # only fetch target repo for add_subdirectory later
 function(fetch_repo lib_name)
@@ -72,7 +72,7 @@ function(build_dependency lib_name)
     find_program(
       target_found
       NAMES ${lib_name}
-      PATHS ${OPEN_SRC_INSTALL_PREFIX}/bin
+      PATHS ${W3CIPA_OPEN_SOURCE_SRC}/bin
       NO_DEFAULT_PATH)
   else()
     set(lib_file_name ${lib_name})
@@ -92,13 +92,13 @@ function(build_dependency lib_name)
 
         find_path(header_found
             NAMES ${header_file_name}
-            PATHS ${OPEN_SRC_INSTALL_PREFIX}/include
+            PATHS ${W3CIPA_OPEN_SOURCE_SRC}/include
             NO_DEFAULT_PATH)
     else()
         find_library(
           target_found
           NAMES ${lib_file_name}
-          PATHS ${OPEN_SRC_INSTALL_PREFIX}/lib
+          PATHS ${W3CIPA_OPEN_SOURCE_SRC}/lib
           NO_DEFAULT_PATH)
     endif()
   endif()
@@ -120,7 +120,7 @@ function(build_dependency lib_name)
     ${W3CIPA_OPEN_SOURCE_SRC}/lib${lib_name}/CMakeLists.txt COPYONLY)
   execute_process(
     COMMAND ${CMAKE_COMMAND} ${build_args}
-            -DOPEN_SRC_INSTALL_PREFIX=${OPEN_SRC_INSTALL_PREFIX} -G
+            -DW3CIPA_OPEN_SOURCE_SRC=${W3CIPA_OPEN_SOURCE_SRC} -G
             ${CMAKE_GENERATOR} .
     RESULT_VARIABLE result
     WORKING_DIRECTORY ${W3CIPA_OPEN_SOURCE_SRC}/lib${lib_name})

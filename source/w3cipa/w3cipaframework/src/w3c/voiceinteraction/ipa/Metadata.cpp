@@ -11,7 +11,7 @@
  */
 
 
-#include "w3c/voiceinteraction/ipa/Metadata.h"
+#include "w3c/voiceinteraction/ipa/MetaData.h"
 
 namespace w3c {
 namespace voiceinteraction {

@@ -31,7 +31,7 @@ option(BUILD_W3CIPA_DEPENDENCIES "Whether or not to build depending libraries fr
 #
 set(W3CIPA_OPEN_SOURCE_SRC ${CMAKE_CURRENT_SOURCE_DIR}/open-source)
 set(ENV{PKG_CONFIG_PATH}
-          "$ENV{PKG_CONFIG_PATH}:${OPEN_SRC_INSTALL_PREFIX}/lib/pkgconfig")
+          "$ENV{PKG_CONFIG_PATH}:${W3CIPA_OPEN_SOURCE_SRC}/lib/pkgconfig")
 set(ENV{PATH} "$ENV{PATH}:${W3CIPA_OPEN_SOURCE_SRC}/bin")
 
 #
@@ -57,7 +57,7 @@ endif()
 
 find_package(PkgConfig REQUIRED)
 find_package(Log4cplus REQUIRED)
-find_package(CURL REQUIRED)
+find_package(CURL REQUIRED PATHS ${W3CIPA_OPEN_SOURCE_SRC})
 find_package(nlohmann_json REQUIRED)
 find_package(stduuid REQUIRED)
 
