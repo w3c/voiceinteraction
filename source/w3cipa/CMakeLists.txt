@@ -56,7 +56,7 @@ endif()
 #
 
 find_package(PkgConfig REQUIRED)
-find_package(Log4cplus CONFIG REQUIRED ${W3CIPA_OPEN_SOURCE_SRC})
+find_package(Log4cplus REQUIRED ${W3CIPA_OPEN_SOURCE_SRC})
 if (WIN32)
     find_package(CURL MODULE REQUIRED)
 else()
@@ -70,20 +70,10 @@ find_package(stduuid REQUIRED PATHS ${W3CIPA_OPEN_SOURCE_SRC})
 #
 include_directories(${LOG4CPLUS_INCLUDE_DIR})
 set(Log4cplus ${LOG4CPLUS_LIBRARIES})
-#set(REQUIRED_LIBS ${REQUIRED_LIBS} ${Log4cplus})
 set(REQUIRED_LIBS ${REQUIRED_LIBS} ${Log4cplus})
 
-include_directories(${nlohmann_json_SOURCE_DIR}/include)
-include_directories(${CURL_INCLUDE_DIR})
-if (WIN32)
-    set(REQUIRED_LIBS ${REQUIRED_LIBS} ${CURL_LIBRARIES})
-else()
-    set(REQUIRED_LIBS ${REQUIRED_LIBS} CURL::libcurl)
-endif()
+set(REQUIRED_LIBS ${REQUIRED_LIBS} CURL::libcurl)
 set(REQUIRED_LIBS ${REQUIRED_LIBS} nlohmann_json::nlohmann_json)
-
-
-#include_directories(${NLOHMANN_JSON_INCLUDE_DIR})
 
 include_directories(${STDUUID_INCLUDE_DIR})
 

@@ -10,3 +10,5 @@ source/w3cipa/open-source/**
 /.vs
 /source/w3cipa/.vs
 /source/w3cipa/.editorconfig
+/source/w3cipa/vcpkg_installed
+/source/w3cipa/vcpkg-configuration.json
