@@ -22,7 +22,7 @@ find_path(STDUUID_INCLUDE_DIR
     /opt/local/include
     /opt/csw/include
     /opt/include
-    ${OPEN_SRC_INSTALL_PREFIX}/include
+    /include
 )
 
 if(STDUUID_INCLUDE_DIR)
