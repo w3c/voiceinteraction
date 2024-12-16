@@ -36,6 +36,7 @@ target_sources(${PROJECT_NAME} PRIVATE ${SOURCES}
     PUBLIC FILE_SET HEADERS 
     BASE_DIRS ${PROJECT_SOURCE_DIR}/include 
     FILES ${HEADERS})
+
 target_link_libraries(${PROJECT_NAME} ${REQUIRED_LIBS})
 target_link_libraries(${PROJECT_NAME} w3cipareferenceimplementation)
 target_link_libraries(${PROJECT_NAME} w3cipaframework)

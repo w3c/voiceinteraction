@@ -32,10 +32,13 @@ target_link_libraries(${PROJECT_NAME} w3cipachatgptipaprovider)
 target_link_libraries(${PROJECT_NAME} w3cipareferenceimplementation)
 target_link_libraries(${PROJECT_NAME} w3cipaframework)
 
-install(TARGETS ${PROJECT_NAME} DESTINATION .)
+install(
+  TARGETS ${PROJECT_NAME} 
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION bin
+  )
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/log4cplus.properties DESTINATION config)
 install(DIRECTORY ${W3CIPA_OPEN_SOURCE_SRC}/bin/ DESTINATION bin)
-install(FILES ${REQUIRED_LIBS} DESTINATION lib)
 
 #
 # Add configuration files
