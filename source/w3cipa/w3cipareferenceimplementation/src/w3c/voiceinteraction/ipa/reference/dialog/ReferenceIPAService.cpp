@@ -17,7 +17,7 @@
 #include <w3c/voiceinteraction/ipa/IPAResponse.h>
 
 #include "w3c/voiceinteraction/ipa/reference/UUIDSessionId.h"
-#include "w3c/voiceinteraction/ipa/reference/TextMultiModalOutput.h"
+#include "w3c/voiceinteraction/ipa/reference/TextMultiModalData.h"
 #include "w3c/voiceinteraction/ipa/reference/dialog/ReferenceIPAService.h"
 
 

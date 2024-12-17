@@ -87,18 +87,18 @@ void ModalityManager::startInput() const {
 void ModalityManager::processIPAData(std::shared_ptr<IPAData> data) {
     if (std::shared_ptr<IPAResponse> response =
             std::dynamic_pointer_cast<IPAResponse>(data)) {
-        std::shared_ptr<MultiModalOutputs> outputs =
+        std::shared_ptr<MultiModalDataCollection> outputs =
             response->getMultiModalOutputs();
         handleOutput(outputs);
     }
 }
 
 void ModalityManager::handleOutput(
-        const std::shared_ptr<MultiModalOutputs>& outputs) const {
+        const std::shared_ptr<MultiModalDataCollection>& outputs) const {
     std::list<ModalityType> outputModalities = outputs->getModalityTypes();
     for (ModalityType& outputModality : outputModalities) {
-        std::shared_ptr<MultiModalOutput> output =
-            outputs->getMultiModalOutput(outputModality);
+        std::shared_ptr<MultiModalData> output =
+            outputs->getMultiModalData(outputModality);
         std::list<std::shared_ptr<client::ModalityComponent>> outputComponents =
             getModalityComponents(outputModality, client::IOType::OUTPUT);
         for (std::shared_ptr<client::ModalityComponent>& outputComponent : outputComponents) {

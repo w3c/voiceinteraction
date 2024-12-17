@@ -15,7 +15,7 @@
 #include <w3c/voiceinteraction/ipa/IPAResponse.h>
 
 #include "w3c/voiceinteraction/ipa/reference/dialog/ReferenceDialogManager.h"
-#include "w3c/voiceinteraction/ipa/reference/TextMultiModalOutput.h"
+#include "w3c/voiceinteraction/ipa/reference/TextMultiModalData.h"
 
 namespace w3c {
 namespace voiceinteraction {
@@ -42,15 +42,15 @@ void ReferenceIPADialogManager::processIPAData(std::shared_ptr<IPAData> data) {
 
 }
 
-std::shared_ptr<MultiModalOutputs> ReferenceIPADialogManager::createOutputFromError(
-    // TODO temporarily take the error message as the output
+std::shared_ptr<MultiModalDataCollection> ReferenceIPADialogManager::createOutputFromError(
     const std::shared_ptr<ErrorMessage>& error) {
+    // TODO temporarily take the error message as the output
     const std::string& message = error->getErrorMessage();
-    std::shared_ptr<MultiModalOutput> errorOutput =
-        std::make_shared<TextMultiModalOutput>(message);
-    std::shared_ptr<MultiModalOutputs> outputs =
-        std::make_shared<MultiModalOutputs>();
-    outputs->addMultiModalOutput(errorOutput);
+    std::shared_ptr<MultiModalData> errorOutput =
+        std::make_shared<TextMultiModalInput>(message);
+    std::shared_ptr<MultiModalDataCollection> outputs =
+        std::make_shared<MultiModalDataCollection>();
+    outputs->addMultiModalData(errorOutput);
     return outputs;
 }
 
@@ -60,7 +60,7 @@ void ReferenceIPADialogManager::processIPAData(
     if (response->hasError()) {
         const std::shared_ptr<ErrorMessage>& error =
             response->getErrorMessage();
-        std::shared_ptr<MultiModalOutputs> outputs =
+        std::shared_ptr<MultiModalDataCollection> outputs =
             createOutputFromError(error);
         forwardedResponse =
             std::make_shared<IPAResponse>(response->getSessionId(),

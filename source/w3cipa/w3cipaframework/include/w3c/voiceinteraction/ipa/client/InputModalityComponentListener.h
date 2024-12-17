@@ -15,7 +15,7 @@
 
 #include <memory>
 
-#include "w3c/voiceinteraction/ipa/MultiModalInputs.h"
+#include "w3c/voiceinteraction/ipa/MultiModalDataCollection.h"
 
 namespace w3c {
 namespace voiceinteraction {
@@ -42,7 +42,7 @@ public:
      * The input modality component received the provided multimodal input.
      * @param input the multimodal input.
      */
-    virtual void onMultiModalInput(std::shared_ptr<MultiModalInput> input) = 0;
+    virtual void onMultiModalInput(std::shared_ptr<MultiModalData> input) = 0;
 
     /**
      * Obtains the next input for the IPA. This call is blocking until input
@@ -50,7 +50,7 @@ public:
      * conditions when this method returns.
      * @return next input for the IPA
      */
-    virtual std::shared_ptr<MultiModalInputs> getMultiModalInputs() = 0;
+    virtual std::shared_ptr<MultiModalDataCollection> getMultiModalInputs() = 0;
 };
 
 } // namespace client

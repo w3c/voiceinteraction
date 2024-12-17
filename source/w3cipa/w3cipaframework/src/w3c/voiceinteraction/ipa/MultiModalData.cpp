@@ -10,20 +10,20 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
-#include "w3c/voiceinteraction/ipa/MultiModalInput.h"
+#include "w3c/voiceinteraction/ipa/MultiModalData.h"
 
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
 
-MultiModalInput::MultiModalInput(const ModalityType modality)
+MultiModalData::MultiModalData(const ModalityType modality)
     : modality(modality) {
 }
 
-MultiModalInput::~MultiModalInput() {
+MultiModalData::~MultiModalData() {
 }
 
-const ModalityType& MultiModalInput::getModality() const {
+const ModalityType& MultiModalData::getModality() const {
     return modality;
 
 }

@@ -17,8 +17,7 @@
 
 #include <w3c/voiceinteraction/ipa/TextModalityType.h>
 
-#include "w3c/voiceinteraction/ipa/reference/TextMultiModalInput.h"
-#include "w3c/voiceinteraction/ipa/reference/TextMultiModalOutput.h"
+#include "w3c/voiceinteraction/ipa/reference/TextMultiModalData.h"
 #include "w3c/voiceinteraction/ipa/reference/client/ConsoleTextModalityComponent.h"
 
 namespace w3c {
@@ -60,7 +59,7 @@ void ConsoleTextModalityComponent::captureInputAsynchronously(
                        input.c_str());
     // TODO: get language from user or configuration
     Language language("en");
-    std::shared_ptr<MultiModalInput> multiModalInput =
+    std::shared_ptr<MultiModalData> multiModalInput =
         std::make_shared<TextMultiModalInput>(input, language);
     mediator->notifyListeners(multiModalInput);
 }
@@ -70,10 +69,10 @@ void ConsoleTextModalityComponent::stopInput() {
 }
 
 void ConsoleTextModalityComponent::handleOutput(
-    const std::shared_ptr<MultiModalOutput>& output) {
-    std::shared_ptr<TextMultiModalOutput> textOutput =
-        std::dynamic_pointer_cast<TextMultiModalOutput>(output);
-    const std::string& text = textOutput->getTextOutput();
+    const std::shared_ptr<MultiModalData>& output) {
+    std::shared_ptr<TextMultiModalInput> textOutput =
+        std::dynamic_pointer_cast<TextMultiModalInput>(output);
+    const std::string& text = textOutput->getText();
     std::cout << "System: " << text.c_str() << std::endl;
     LOG4CPLUS_INFO_FMT(LOGGER,
                        LOG4CPLUS_TEXT("Received response from ChatGPT: %s"),

@@ -10,38 +10,23 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
-#ifndef TEXTMULTMODALOUTPUT_H
-#define TEXTMULTMODALOUTPUT_H
+#include <w3c/voiceinteraction/ipa/TextModalityType.h>
 
-#include <string>
-
-#include <w3c/voiceinteraction/ipa/MultiModalOutput.h>
+#include "w3c/voiceinteraction/ipa/reference/TextMultiModalData.h"
 
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
 namespace reference {
 
-/**
- * @brief Multimodal output for text.
- * @author Dirk Schnelle-Walka
- */
-class TextMultiModalOutput : public MultiModalOutput {
-public:
-    TextMultiModalOutput(const std::string& output);
+const ModalityType TextMultiModalInput::MODALITY = TextModalityType();
 
-    const std::string& getTextOutput() const {
-        return text;
-    }
-
-    const static ModalityType MODALITY;
-private:
-    std::string text;
-};
+TextMultiModalInput::TextMultiModalInput(const std::string& input, const Language& lang)
+    : MultiModalData(MODALITY),
+      text(input), language(lang) {
+}
 
 } // namespace reference
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c
-
-#endif // TEXTMULTMODALOUTPUT_H

@@ -16,7 +16,7 @@
 #include <memory>
 
 #include "AudioData.h"
-#include "MultiModalOutputs.h"
+#include "MultiModalDataCollection.h"
 #include "MetaData.h"
 #include "IPAData.h"
 
@@ -35,14 +35,14 @@ public:
      * Constructs a new object.
      * @param sessionIdentifier the session identifier
      * @param requestIdentifier the request identifier
-     * @param multiModalOutputs The multimodal outputs to be returned to the
+     * @param multiModalData The multimodal data elements to be returned to the
      *          client.
      * @param audioDataToSend audio data to send
      * @param metaDataToSend meta data to send
      */
     IPAResponse(const std::shared_ptr<SessionId>& sessionIdentifier,
                    const std::shared_ptr<RequestId>& requestIdentifier,
-                   const std::shared_ptr<MultiModalOutputs>& multiModalOutputs,
+                   const std::shared_ptr<MultiModalDataCollection>& multiModalData,
                    const std::shared_ptr<AudioData>& audioDataToSend,
                    const std::shared_ptr<MetaData> metaDataToSend);
 
@@ -61,7 +61,7 @@ public:
      * Returns the multimodal outputs to be returned to the client.
      * qreturn The multimodal outputs to be returned to the client.
      */
-    virtual const std::shared_ptr<MultiModalOutputs> getMultiModalOutputs();
+    virtual const std::shared_ptr<MultiModalDataCollection> getMultiModalOutputs();
 
     /**
      * Returns the metadata of the request.
@@ -73,7 +73,7 @@ private:
     /** The audio data. */
     std::shared_ptr<AudioData> audioData;
     /** The multimodal outputs to be returned to the client. */
-    std::shared_ptr<MultiModalOutputs> outputs;
+    std::shared_ptr<MultiModalDataCollection> outputs;
     /** The metadata. */
     std::shared_ptr<MetaData> metaData;
 };

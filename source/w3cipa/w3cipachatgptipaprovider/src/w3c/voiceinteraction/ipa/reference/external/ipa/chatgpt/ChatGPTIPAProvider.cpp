@@ -17,8 +17,7 @@
 
 #include <w3c/voiceinteraction/ipa/TextModalityType.h>
 
-#include "w3c/voiceinteraction/ipa/reference/TextMultiModalInput.h"
-#include "w3c/voiceinteraction/ipa/reference/TextMultiModalOutput.h"
+#include "w3c/voiceinteraction/ipa/reference/TextMultiModalData.h"
 
 #include "w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTIPAProvider.h"
 #include "w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTMessage.h"
@@ -107,13 +106,13 @@ const std::shared_ptr<ExternalIPAResponse> ChatGPTIPAProvider::processInput(
     req.model = std::string("gpt-3.5-turbo");
     ChatGPTMessage systemMessage {"system",
                                 "You are a standards maniac."};
-    std::shared_ptr<MultiModalInputs> multiModalInputs =
+    std::shared_ptr<MultiModalDataCollection> multiModalInputs =
         request->getMultiModalInputs();
-    std::shared_ptr<MultiModalInput> input =
-        multiModalInputs->getMultiModalInput(TextMultiModalInput::MODALITY);
+    std::shared_ptr<MultiModalData> input =
+        multiModalInputs->getMultiModalData(TextMultiModalInput::MODALITY);
     std::shared_ptr<TextMultiModalInput> textInput =
         std::dynamic_pointer_cast<TextMultiModalInput>(input);
-    const std::string& text = textInput->getTextInput();
+    const std::string& text = textInput->getText();
     ChatGPTMessage userMessage { "user", text };
     req.messages = std::vector({ systemMessage, userMessage });
     req.temperature = 1;
@@ -196,11 +195,11 @@ const std::shared_ptr<ExternalIPAResponse> ChatGPTIPAProvider::processInput(
     nlohmann::json responseData = nlohmann::json::parse(response);
     ChatGPTJSONResponse parsedResponse = responseData;
     std::string textOutput = parsedResponse.choices[0].message.content;
-    std::shared_ptr<MultiModalOutput> output =
-        std::make_shared<TextMultiModalOutput>(textOutput);
-    std::shared_ptr<MultiModalOutputs> outputs =
-        std::make_shared<MultiModalOutputs>();
-    outputs->addMultiModalOutput(output);
+    std::shared_ptr<MultiModalData> output =
+        std::make_shared<TextMultiModalInput>(textOutput);
+    std::shared_ptr<MultiModalDataCollection> outputs =
+        std::make_shared<MultiModalDataCollection>();
+    outputs->addMultiModalData(output);
     std::shared_ptr<ExternalIPAResponse> out =
         std::make_shared<ExternalIPAResponse>(request->getSessionId(),
             request->getRequestId(), outputs, nullptr);

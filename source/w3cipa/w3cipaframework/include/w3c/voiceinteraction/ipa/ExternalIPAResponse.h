@@ -17,7 +17,7 @@
 
 #include "CallResult.h"
 #include "ErrorMessage.h"
-#include "MultiModalOutputs.h"
+#include "MultiModalDataCollection.h"
 #include "IPAData.h"
 #include "SemanticInterpretation.h"
 
@@ -41,7 +41,7 @@ public:
      */
     ExternalIPAResponse(const std::shared_ptr<SessionId>& sessionIdentifier,
                    const std::shared_ptr<RequestId>& requestIdentifier,
-                   const std::shared_ptr<MultiModalOutputs>& multiModalOutputs,
+                   const std::shared_ptr<MultiModalDataCollection>& multiModalOutputs,
                    const std::shared_ptr<SemanticInterpretation> semanticInterpretation);
 
     /**
@@ -63,7 +63,7 @@ public:
      * Returns the multimodal outputs to be returned to the client.
      * @return The multimodal outputs to be returned to the client.
      */
-    const std::shared_ptr<MultiModalOutputs> getMultiModalOutputs() const;
+    const std::shared_ptr<MultiModalDataCollection> getMultiModalOutputs() const;
 
     /**
      * Returns the multimodal outputs to be returned to the client.
@@ -90,7 +90,7 @@ public:
     const std::shared_ptr<ErrorMessage> getErrorMessage() const;
 private:
     /** The multimodal outputs to be returned to the client. */
-    std::shared_ptr<MultiModalOutputs> outputs;
+    std::shared_ptr<MultiModalDataCollection> outputs;
     /** Semantic interpretation of an utterance. */
     std::shared_ptr<SemanticInterpretation> interpretation;
     /** Optionalla a caught error. */

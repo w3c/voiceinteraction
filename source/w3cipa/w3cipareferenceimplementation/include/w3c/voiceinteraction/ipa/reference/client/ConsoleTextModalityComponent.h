@@ -39,7 +39,7 @@ public:
 
     void stopInput() override;
 
-    void handleOutput(const std::shared_ptr<MultiModalOutput>& output) override;
+    void handleOutput(const std::shared_ptr<MultiModalData>& output) override;
 
     const static ModalityType MODALITY;
 

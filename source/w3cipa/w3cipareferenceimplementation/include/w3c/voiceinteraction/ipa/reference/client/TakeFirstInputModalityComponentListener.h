@@ -46,14 +46,14 @@ public:
 
     void processIPAData(std::shared_ptr<IPAData> data) override;
 
-    void onMultiModalInput(std::shared_ptr<MultiModalInput> input) override;
+    void onMultiModalInput(std::shared_ptr<MultiModalData> input) override;
 
-    std::shared_ptr<MultiModalInputs> getMultiModalInputs() override;
+    std::shared_ptr<MultiModalDataCollection> getMultiModalInputs() override;
 
 private:
     std::mutex mtx;
     std::condition_variable cv;
-    std::shared_ptr<MultiModalInput> multiModalInput;
+    std::shared_ptr<MultiModalData> multiModalInput;
     /** Logger instance. */
     const static log4cplus::Logger LOGGER;
 };

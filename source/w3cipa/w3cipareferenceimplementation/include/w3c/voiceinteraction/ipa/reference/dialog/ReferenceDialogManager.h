@@ -45,7 +45,7 @@ private:
      * @param error the error message
      * @return the multimodal output
      */
-    std::shared_ptr<MultiModalOutputs> createOutputFromError(
+    std::shared_ptr<MultiModalDataCollection> createOutputFromError(
         const std::shared_ptr<ErrorMessage>& error);
 
     void processIPAData(const std::shared_ptr<ExternalIPAResponse>& request);

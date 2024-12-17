@@ -19,7 +19,7 @@
 #include <sstream>
 #include <stdexcept>
 
-#include "w3c/voiceinteraction/ipa/MultiModalOutputs.h"
+#include "w3c/voiceinteraction/ipa/MultiModalDataCollection.h"
 #include "w3c/voiceinteraction/ipa/IPADataProcessor.h"
 #include "ModalityComponent.h"
 #include "InputModalityComponent.h"
@@ -80,7 +80,7 @@ public:
      * Handles the provided multimodal output with all known modality handlers.
      * @param outputs the outputs to process
      */
-    void handleOutput(const std::shared_ptr<MultiModalOutputs>& outputs) const;
+    void handleOutput(const std::shared_ptr<MultiModalDataCollection>& outputs) const;
 
     /**
      * Adds the provided listener for multimodal inputs to the list of known

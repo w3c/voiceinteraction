@@ -28,7 +28,7 @@ void InputNotificationMediator::addInputModalityComponentListener(
 }
 
 void InputNotificationMediator::notifyListeners(
-        std::shared_ptr<MultiModalInput> input) {
+        std::shared_ptr<MultiModalData> input) {
     for (const std::shared_ptr<InputModalityComponentListener>& listener : inputListeners) {
 //        std::thread thread([&data, &listener]{
             listener->onMultiModalInput(input);

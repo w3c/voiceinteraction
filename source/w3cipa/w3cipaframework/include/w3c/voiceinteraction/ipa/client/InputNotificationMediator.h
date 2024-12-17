@@ -52,7 +52,7 @@ public:
      * Notifies all listeners about the received multiomodal input.
      * @param input the input
      */
-    void notifyListeners(std::shared_ptr<MultiModalInput> input);
+    void notifyListeners(std::shared_ptr<MultiModalData> input);
 
 private:
     /** Known listeners for multimnodal input. */

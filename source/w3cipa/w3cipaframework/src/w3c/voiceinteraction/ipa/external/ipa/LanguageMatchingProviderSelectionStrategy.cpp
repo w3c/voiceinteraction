@@ -28,7 +28,7 @@ const std::list<std::shared_ptr<::external::ipa::IPAProvider>>
     std::list<std::shared_ptr<::external::ipa::IPAProvider>> filteredProviders;
 
     // Check which known provider supports the provided modalities
-    const std::shared_ptr<MultiModalInputs> inputs =
+    const std::shared_ptr<MultiModalDataCollection> inputs =
         request->getMultiModalInputs();
     std::list<Language> requestedLangauges = inputs->getInputLanguages();
     for (const std::shared_ptr<::external::ipa::IPAProvider>& provider : providers) {

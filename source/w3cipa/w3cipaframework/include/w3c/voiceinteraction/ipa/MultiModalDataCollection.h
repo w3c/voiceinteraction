@@ -10,15 +10,15 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
-#if !defined(MULTIMODALINPUTS_H)
-#define MULTIMODALINPUTS_H
+#if !defined(MULTIMODALDATACOLLECTION_H)
+#define MULTIMODALDATACOLLECTION_H
 
 #include <memory>
 #include <map>
 #include <list>
 
 #include "ModalityType.h"
-#include "MultiModalInput.h"
+#include "MultiModalData.h"
 #include "Language.h"
 
 namespace w3c {
@@ -30,56 +30,61 @@ namespace ipa {
  * allows for only on input per modality.
  * @author Dirk Schnelle-Walka
  */
-class MultiModalInputs
-{
+class MultiModalDataCollection {
 
 public:
     /**
      * Constructs an empty set of multimodal inputs.
      */
-    MultiModalInputs();
+    MultiModalDataCollection();
 
     /**
      * Destroys the set of multimodal inputs.
      */
-    virtual ~MultiModalInputs();
+    virtual ~MultiModalDataCollection();
 
     /**
      * Adds a multimodal input to the set. An existing entry for the
      * provided modality will be overwritten.
      * @param input The multimodal input to add.
      */
-    void addMultiModalInput(const std::shared_ptr<MultiModalInput>& input);
+    void addMultiModalData(const std::shared_ptr<MultiModalData>& input);
 
     /**
-     * Returns the multimodal input for the given modality.
+     * Returns the multimodal data elements for the given modality.
      * @param modality The modality to return.
-     * @return The multimodal input for the given modality, {@code nullptr} if
+     * @return The multimodal data for the given modality, {@code nullptr} if
      *  the modality could not be found.
      */
-    std::shared_ptr<MultiModalInput> getMultiModalInput(const ModalityType& modality) const;
+    std::shared_ptr<MultiModalData> getMultiModalData(const ModalityType& modality) const;
 
     /**
-     * Retrieves all modality types provided in this input.
+     * Retrieves all modality types provided in this multimodal data collection.
      * @return list of all modality types
      */
-    std::list<ModalityType> getInputModalities() const;
+    std::list<ModalityType> getMultiModalData() const;
 
     /**
-     * Retrieves all languages supported by the input.
+     * Retrieves all languages supported by this multimodal data collection.
      * @return list of all supported languages
      */
     std::list<Language> getInputLanguages() const;
 
-private:
     /**
-     * The map of known multimodal inputs.
+     * Retrieves all modality types provided.
+     * @return list of all modality types
      */
-    std::map<ModalityType, std::shared_ptr<MultiModalInput>> inputs;
+    std::list<ModalityType> getModalityTypes() const;
+
+   private:
+    /**
+     * The map of known multimodal data elements.
+     */
+    std::map<ModalityType, std::shared_ptr<MultiModalData>> multiModalData;
 };
 
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c
 
-#endif // !defined(MULTIMODALINPUTS_H)
+#endif // !defined(MULTIMODALDATACOLLECTION_H)

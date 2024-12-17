@@ -15,7 +15,7 @@
 
 #include <memory>
 
-#include "w3c/voiceinteraction/ipa/MultiModalOutput.h"
+#include "w3c/voiceinteraction/ipa/MultiModalData.h"
 
 namespace w3c {
 namespace voiceinteraction {
@@ -47,7 +47,7 @@ public:
      * @param output the obtained output.
      */
     virtual void handleOutput(
-            const std::shared_ptr<MultiModalOutput>& output) = 0;
+            const std::shared_ptr<MultiModalData>& output) = 0;
 };
 
 } // namespace client

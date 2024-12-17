@@ -16,7 +16,7 @@
 #include <memory>
 
 #include "AudioData.h"
-#include "MultiModalInputs.h"
+#include "MultiModalDataCollection.h"
 #include "MetaData.h"
 #include "IPAData.h"
 
@@ -41,7 +41,7 @@ public:
      */
     IPARequest(const std::shared_ptr<SessionId>& sessionIdentifier,
                   const std::shared_ptr<RequestId>& requestIdentifier,
-                  const std::shared_ptr<MultiModalInputs>& multiModalInputs,
+                  const std::shared_ptr<MultiModalDataCollection>& multiModalInputs,
                   const std::shared_ptr<AudioData>& audioDataToSend,
                   const std::shared_ptr<MetaData> metaDataToSend);
 
@@ -60,7 +60,7 @@ public:
      * Returns the multimodal inputs to be sent to the client.
      * qreturn The multimodal inputs to be sent to the client.
      */
-    const std::shared_ptr<MultiModalInputs>& getMultiModalInputs();
+    const std::shared_ptr<MultiModalDataCollection>& getMultiModalInputs();
 
     /**
      * Returns the metadata of the request.
@@ -72,7 +72,7 @@ private:
     /** The audio data. */
     std::shared_ptr<AudioData> audioData;
     /** The multimodal outputs to be returned to the client. */
-    std::shared_ptr<MultiModalInputs> inputs;
+    std::shared_ptr<MultiModalDataCollection> inputs;
     /** The metadata. */
     std::shared_ptr<MetaData> metaData;
 };

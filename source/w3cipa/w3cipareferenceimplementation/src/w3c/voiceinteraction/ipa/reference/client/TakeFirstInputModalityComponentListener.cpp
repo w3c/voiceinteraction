@@ -35,7 +35,7 @@ void TakeFirstInputModalityComponentListener::processIPAData(
         std::shared_ptr<IPAData> data) {
     LOG4CPLUS_INFO(LOGGER,
                    LOG4CPLUS_TEXT("waiting for input"));
-    std::shared_ptr<MultiModalInputs> multiModalInputs = getMultiModalInputs();
+    std::shared_ptr<MultiModalDataCollection> multiModalInputs = getMultiModalInputs();
     std::shared_ptr<w3c::voiceinteraction::ipa::RequestId> requestId =
         std::make_shared<IntegerRequestId>();
     std::shared_ptr<MetaData> metaData = std::make_shared<MetaData>();
@@ -48,21 +48,21 @@ void TakeFirstInputModalityComponentListener::processIPAData(
 }
 
 void TakeFirstInputModalityComponentListener::onMultiModalInput(
-        std::shared_ptr<MultiModalInput> input) {
+        std::shared_ptr<MultiModalData> input) {
     std::unique_lock<std::mutex> lck(mtx);
     multiModalInput = input;
     cv.notify_one();
 }
 
-std::shared_ptr<MultiModalInputs> TakeFirstInputModalityComponentListener::getMultiModalInputs() {
+std::shared_ptr<MultiModalDataCollection> TakeFirstInputModalityComponentListener::getMultiModalInputs() {
     std::unique_lock<std::mutex> lck(mtx);
     cv.wait(lck, [this] {
         return multiModalInput != nullptr;
     });
 
-    std::shared_ptr<MultiModalInputs> multiModalInputs =
-        std::make_shared<MultiModalInputs>();
-    multiModalInputs->addMultiModalInput(multiModalInput);
+    std::shared_ptr<MultiModalDataCollection> multiModalInputs =
+        std::make_shared<MultiModalDataCollection>();
+    multiModalInputs->addMultiModalData(multiModalInput);
     return multiModalInputs;
 }
 

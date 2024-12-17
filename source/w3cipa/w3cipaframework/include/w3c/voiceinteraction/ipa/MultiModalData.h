@@ -10,8 +10,8 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
-#if !defined(MULTI_MODAL_OUTPUT_H)
-#define MULTI_MODAL_OUTPUT_H
+#if !defined(MULTI_MODAL_DATA_H)
+#define MULTI_MODAL_DATA_H
 
 #include "ModalityType.h"
 
@@ -20,23 +20,22 @@ namespace voiceinteraction {
 namespace ipa {
 
 /**
- * This interface is used to represent the output of a modality.
+ * This interface is used to represent input or output from a modality.
  * @author Dirk Schnelle-Walka
  */
-class MultiModalOutput
-{
+class MultiModalData {
 
 public:
     /**
      * Constructs a new object.
      * @param modality The modality of this input.
      */
-    MultiModalOutput(const ModalityType& modality);
+    MultiModalData(const ModalityType modality);
 
     /**
      * Destroys the object.
      */
-    virtual ~MultiModalOutput();
+    virtual ~MultiModalData();
 
     /**
      * Retrieves a string identifying the modality of this input.
@@ -54,4 +53,4 @@ private:
 } // namespace voiceinteraction
 } // namespace w3c
 
-#endif // !defined(MULTI_MODAL_OUTPUT_H)
+#endif // !defined(MULTI_MODAL_DATA_H)

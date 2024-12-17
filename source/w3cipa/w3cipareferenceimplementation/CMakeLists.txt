@@ -24,8 +24,7 @@ set(HEADERS
     include/w3c/voiceinteraction/ipa/reference/dialog/ReferenceIPAService.h
     include/w3c/voiceinteraction/ipa/reference/dialog/ReferenceDialogManager.h
     include/w3c/voiceinteraction/ipa/reference/IntegerRequestId.h
-    include/w3c/voiceinteraction/ipa/reference/TextMultiModalInput.h
-    include/w3c/voiceinteraction/ipa/reference/TextMultiModalOutput.h
+    include/w3c/voiceinteraction/ipa/reference/TextMultiModalData.h
     include/w3c/voiceinteraction/ipa/reference/UUIDSessionId.h
 )
 
@@ -35,8 +34,7 @@ set(SOURCES
     src/w3c/voiceinteraction/ipa/reference/dialog/ReferenceIPAService.cpp
     src/w3c/voiceinteraction/ipa/reference/dialog/ReferenceDialogManager.cpp
     src/w3c/voiceinteraction/ipa/reference/IntegerRequestId.cpp
-    src/w3c/voiceinteraction/ipa/reference/TextMultiModalInput.cpp
-    src/w3c/voiceinteraction/ipa/reference/TextMultiModalOutput.cpp
+    src/w3c/voiceinteraction/ipa/reference/TextMultiModalData.cpp
     src/w3c/voiceinteraction/ipa/reference/UUIDSessionId.cpp
 )
 

@@ -19,11 +19,11 @@ namespace ipa {
 
 IPAResponse::IPAResponse(const std::shared_ptr<SessionId>& sessionIdentifier,
                const std::shared_ptr<RequestId>& requestIdentifier,
-               const std::shared_ptr<MultiModalOutputs>& multiModalOutputs,
+               const std::shared_ptr<MultiModalDataCollection>& multiModalData,
                const std::shared_ptr<AudioData>& audioDataToSend,
                const std::shared_ptr<MetaData> metaDataToSend)
     : IPAData(sessionIdentifier, requestIdentifier),
-        outputs(multiModalOutputs), audioData(audioDataToSend),
+        outputs(multiModalData), audioData(audioDataToSend),
         metaData(metaDataToSend) {
 }
 
@@ -35,7 +35,7 @@ const std::shared_ptr<AudioData>& IPAResponse::getAudioData() {
     return audioData;
 }
 
-const std::shared_ptr<MultiModalOutputs> IPAResponse::getMultiModalOutputs() {
+const std::shared_ptr<MultiModalDataCollection> IPAResponse::getMultiModalOutputs() {
     return outputs;
 }
 

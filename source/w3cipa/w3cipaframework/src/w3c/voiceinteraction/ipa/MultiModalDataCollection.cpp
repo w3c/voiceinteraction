@@ -11,29 +11,27 @@
  */
 
 #include "w3c/voiceinteraction/ipa/LanguageDependent.h"
-#include "w3c/voiceinteraction/ipa/MultiModalInputs.h"
+#include "w3c/voiceinteraction/ipa/MultiModalDataCollection.h"
 
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
 
-MultiModalInputs::MultiModalInputs() {
-}
+MultiModalDataCollection::MultiModalDataCollection() {}
 
-MultiModalInputs::~MultiModalInputs() {
-}
+MultiModalDataCollection::~MultiModalDataCollection() {}
 
-void MultiModalInputs::addMultiModalInput(
-    const std::shared_ptr<MultiModalInput>& input) {
+void MultiModalDataCollection::addMultiModalData(
+    const std::shared_ptr<MultiModalData>& input) {
     const ModalityType& modality = input->getModality();
-    inputs[modality] = input;
+    multiModalData[modality] = input;
 }
 
-std::shared_ptr<MultiModalInput> MultiModalInputs::getMultiModalInput(
+std::shared_ptr<MultiModalData> MultiModalDataCollection::getMultiModalData(
     const ModalityType& modality) const {
-    std::map<ModalityType, std::shared_ptr<MultiModalInput>>::const_iterator iterator =
-        inputs.find(modality);
-    if (iterator == inputs.end()) {
+    std::map<ModalityType, std::shared_ptr<MultiModalData>>::const_iterator iterator =
+        multiModalData.find(modality);
+    if (iterator == multiModalData.end()) {
         return nullptr;
     }
     return iterator->second;
@@ -43,11 +41,11 @@ std::shared_ptr<MultiModalInput> MultiModalInputs::getMultiModalInput(
  * Retrieves all modality types provided in this input.
  * @return list of all modality types
  */
-std::list<ModalityType> MultiModalInputs::getInputModalities() const {
+std::list<ModalityType> MultiModalDataCollection::getMultiModalData() const {
     std::list<ModalityType> types;
     for (std::map<ModalityType,
-         std::shared_ptr<MultiModalInput>>::const_iterator iterator = inputs.begin();
-         iterator != inputs.end(); ++iterator) {
+         std::shared_ptr<MultiModalData>>::const_iterator iterator = multiModalData.begin();
+         iterator != multiModalData.end(); ++iterator) {
         types.push_back(iterator->first);
     }
     return types;
@@ -57,11 +55,11 @@ std::list<ModalityType> MultiModalInputs::getInputModalities() const {
  * Retrieves all modality types provided in this input.
  * @return list of all modality types
  */
-std::list<Language> MultiModalInputs::getInputLanguages() const {
+std::list<Language> MultiModalDataCollection::getInputLanguages() const {
   std::list<Language> languages;
-  for (std::map<ModalityType, std::shared_ptr<MultiModalInput>>::const_iterator
-       iterator = inputs.begin();
-       iterator != inputs.end(); ++iterator) {
+  for (std::map<ModalityType, std::shared_ptr<MultiModalData>>::const_iterator
+       iterator = multiModalData.begin();
+       iterator != multiModalData.end(); ++iterator) {
     std::shared_ptr<LanguageDependent> languageDependentInput =
         std::dynamic_pointer_cast<LanguageDependent>(iterator->second);
     if (languageDependentInput != nullptr) {
@@ -72,6 +70,16 @@ std::list<Language> MultiModalInputs::getInputLanguages() const {
   return languages;
 }
 
+std::list<ModalityType> MultiModalDataCollection::getModalityTypes() const {
+  std::list<ModalityType> types;
+  for (std::map<ModalityType, std::shared_ptr<MultiModalData>>::const_iterator
+           iterator = multiModalData.begin();
+       iterator != multiModalData.end(); ++iterator) {
+    const ModalityType type = iterator->first;
+    types.push_back(type);
+  }
+  return types;
+}
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c
