@@ -64,17 +64,29 @@ public:
      */
     bool operator==(const Language & other) const;
 
+    /** Language German */
     static const Language DE;
+    /** Language English */
     static const Language EN;
+    /** Language Spanish */
     static const Language ES;
+    /** Language French */
     static const Language FR;
+    /** Language Italian */
     static const Language IT;
+    /** Language Japanese  */
     static const Language JA;
+    /** Language Korean */
     static const Language KO;
+    /** Language Dutch */
     static const Language NL;
+    /** Language Polish */
     static const Language PL;
+    /** Language Portuguese */
     static const Language PT;
+    /** Language Russian */
     static const Language RU;
+    /** Language Chinese */
     static const Language ZH;
     
    private:

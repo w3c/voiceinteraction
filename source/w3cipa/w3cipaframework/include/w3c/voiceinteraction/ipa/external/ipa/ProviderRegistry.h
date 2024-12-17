@@ -33,7 +33,7 @@ namespace ipa {
  *
  * A full list of known IPA
  * providers can be obtained via
- * {@link #getIPAProviders(const std::shared_ptr<ClientRequest>& request)}.
+ * {@link #getIPAProviders(const std::shared_ptr<IPARequest>& request)}.
  *
  * New providers can be added via
  * {@link #addIPAProvider(const std::shared_ptr<IPAProvider>& provider)}.

@@ -20,7 +20,9 @@ namespace voiceinteraction {
 namespace ipa {
 
 /**
- * A modality type.
+ * @brief A modality type.
+ * 
+ * Modality types are used to distinguish the different modalities.
  * @author Dirk Schnelle-Walka
  */
 class ModalityType {

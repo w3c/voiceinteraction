@@ -23,7 +23,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # User Flags
-option(BUILD_W3CIPA_DOC "Build documentation" ON)
+option(BUILD_W3CIPA_DOC "Build documentation" OFF)
 option(BUILD_W3CIPA_DEPENDENCIES "Whether or not to build depending libraries from source" ON)
 
 #
@@ -75,6 +75,15 @@ set(REQUIRED_LIBS ${REQUIRED_LIBS} CURL::libcurl)
 set(REQUIRED_LIBS ${REQUIRED_LIBS} nlohmann_json::nlohmann_json)
 
 include_directories(${STDUUID_INCLUDE_DIR})
+
+if (BUILD_W3CIPA_DOC)
+# check if Doxygen is installed
+    find_package(Doxygen)
+    if (!DOXYGEN_FOUND)
+      message("Doxygen need to be installed to generate the doxygen documentation")
+      set(BUILD_W3CIPA_DOC OFF)
+    endif()
+endif()
 
 #
 # Prepare configuration folder

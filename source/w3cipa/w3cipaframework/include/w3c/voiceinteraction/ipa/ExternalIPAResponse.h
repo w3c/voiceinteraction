@@ -32,16 +32,16 @@ namespace ipa {
 class ExternalIPAResponse : public IPAData {
 public:
     /**
-     * Constructs a new object with a meaningful result
+     * Constructs a new object with a meaningful result.
      * @param sessionIdentifier identifier of the session
      * @param requestIdentifier identifier of the request
-     * @param multiModalOutputs The multimodal outputs to be returned to the
+     * @param multiModalData The multimodal outputs to be returned to the
      *          client.
      * @param semanticInterpretation semantic interpretation of an utterance
      */
     ExternalIPAResponse(const std::shared_ptr<SessionId>& sessionIdentifier,
                    const std::shared_ptr<RequestId>& requestIdentifier,
-                   const std::shared_ptr<MultiModalDataCollection>& multiModalOutputs,
+                   const std::shared_ptr<MultiModalDataCollection>& multiModalData,
                    const std::shared_ptr<SemanticInterpretation> semanticInterpretation);
 
     /**

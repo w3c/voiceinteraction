@@ -18,10 +18,10 @@ namespace ipa {
 
 ExternalIPAResponse::ExternalIPAResponse(const std::shared_ptr<SessionId>& sessionIdentifier,
                const std::shared_ptr<RequestId>& requestIdentifier,
-               const std::shared_ptr<MultiModalDataCollection>& multiModalOutputs,
+               const std::shared_ptr<MultiModalDataCollection>& multiModalData,
                const std::shared_ptr<SemanticInterpretation> semanticInterpretation)
     : IPAData(sessionIdentifier, requestIdentifier),
-    outputs(multiModalOutputs), interpretation(semanticInterpretation),
+    outputs(multiModalData), interpretation(semanticInterpretation),
     error(nullptr) {
 }
 

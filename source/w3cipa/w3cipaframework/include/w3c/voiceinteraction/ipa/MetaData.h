@@ -21,7 +21,7 @@ namespace voiceinteraction {
 namespace ipa {
 
 /**
- * Interfacce for meta data of a {@link ClientRequest}.
+ * Interfacce for meta data of a {@link IPARequest}.
  * @author Dirk Schnelle-Walka
  */
 class MetaData {

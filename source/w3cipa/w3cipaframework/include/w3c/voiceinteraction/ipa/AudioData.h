@@ -21,11 +21,11 @@ namespace voiceinteraction {
 namespace ipa {
 
 /**
- * Base class for all audio data types.
+ * Base class for all audio data types. It defines how audio data is delivered
+ * and how it can be accessed.
  * @author Dirk Schnelle-Walka
  */
-class AudioData
-{
+class AudioData {
 
 public:
     /**

@@ -18,7 +18,12 @@ namespace voiceinteraction {
 namespace ipa {
 
 /**
- * Type of audio delivery.
+ * Type of audio delivery. This may be either
+ * <ol>
+ * <li>Endpointed: The audio is delivered in a single chunk.</li>
+ * <li>Streaming: The audio is delivered in a stream.</li>
+ * </ol>.
+ * Streaming would requre the receiving party to be able to endpoint.
  * @author Dirk Schnelle-Walka
  */
 enum AudioDeliveryType

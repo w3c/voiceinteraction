@@ -36,7 +36,7 @@ public:
      * Copy constructor.
      * @param other the object to copy
      */
-    Timestamp(const Timestamp&) = default;
+    Timestamp(const Timestamp& other) = default;
 
     /**
      * Destroys the object.

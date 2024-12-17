@@ -21,6 +21,8 @@ namespace ipa {
 
 /**
  * This interface is used to represent input or output from a modality.
+ * The different modality types are distinguished via
+ * {@link ModalityType}.
  * @author Dirk Schnelle-Walka
  */
 class MultiModalData {

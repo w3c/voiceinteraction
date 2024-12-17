@@ -21,8 +21,7 @@ namespace ipa {
  * The AudioEncoding interface represents the encoding of an audio stream.
  * @author Dirk Schnelle-Walka
  */
-class AudioEncoding
-{
+class AudioEncoding {
 public:
     /**
      * Constructs a new object.
@@ -35,7 +34,6 @@ public:
      */
     virtual ~AudioEncoding() {
     }
-
 };
 
 } // namespace ipa
