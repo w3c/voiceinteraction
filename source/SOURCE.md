@@ -5,10 +5,8 @@ This project aims at providing a reference implementation for an IPA framework.
 ## Prerequisites
 
 You will need
-- A C/C++ compiler supporting at least C++ 17
+- A C/C++ compiler supporting at least C++ 22
 - CMake version 3.22
-- a local copy of libcurl https://curl.se/download.html so that it can be found
-  by FindPackage on Windows systems
 - A C++ IDE of your choice
 - An OpenAI developer key
 
@@ -41,17 +39,9 @@ file `w3cipa/CMakeLists.txt`.
 
 #### Console
 
-On Windows systems
-
-```
-cd source/w3cipa
-mkdir build
-cd build
-cmake .. -DCURL_INCLUDE_DIR=<Your path to the CURL include directory> -DCURL_LIBRARY=<Your path to the CURL library> -DCURL_SHARED_LIBRARY=<Your path to the CURL shared library>
-make && make install
-```
-
-On Linux based systems or any other
+On Windows systems you will also need to install [vcpkg](https://learn.microsoft.com/en-us/vcpkg/get_started/overview) installed.
+Unfortuanately, it is quite a hazzle to get the dependency on CURL compiled in the Windows environment 
+and this seems to be the easiest way to get it done.
 
 ```
 cd source/w3cipa
