@@ -29,6 +29,14 @@ The source code is in the folder source/w3cipa
 - `w3cipachatgptipaprovider` an IPAProvider implementation for ChatGPT
 - `w3cipademo` contains demo using the reference implementation
 
+### Configuration Options
+
+The following options can be set in the CMake configuration
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| BUILD_W3CIPA_DOC | Build documentation | OFF |
+| BUILD_W3CIPA_DEPENDENCIES | Build depending libraries from source | ON |
 
 ### Manual Build
 
