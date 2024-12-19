@@ -11,6 +11,7 @@
  */
 
 #include <fstream>
+#include <filesystem>
 
 #include <curl/curl.h>
 #include <nlohmann/json.hpp>
@@ -65,6 +66,14 @@ void ChatGPTIPAProvider::initialize() {
     std::string configFile = "config";
     configFile += std::filesystem::path::preferred_separator;
     configFile += "ChatGPTIPAProvider.json";
+    if (!std::filesystem::exists(configFile)) {
+      LOG4CPLUS_ERROR_FMT(
+          LOGGER,
+          LOG4CPLUS_TEXT(
+              "ChatGPT IPA provider configuration file %s not found"),
+          configFile.c_str());
+      return;
+    }
     std::ifstream file(configFile);
     nlohmann::json json = nlohmann::json::parse(file);
     ChatGPTConfiguration configuration = json;
