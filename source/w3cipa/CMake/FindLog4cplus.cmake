@@ -36,6 +36,8 @@ find_path(LOG4CPLUS_INCLUDE_DIR
     /opt/local/include
     /opt/csw/include
     /opt/include
+    /include
+    /{<CONFIG>_OUTPUT_NAME}/include
     $ENV{LOG4CPLUS_DIR}/include
     $ENV{LOG4CPLUS_ROOT}/include
     ${LOG4CPLUS_DIR}/include
@@ -48,6 +50,7 @@ find_path(LOG4CPLUS_INCLUDE_DIR
 find_library(LOG4CPLUS_LIBRARY
   NAMES
     log4cplus
+    log4cplusD
   PATHS
     /usr/local
     /usr
@@ -55,6 +58,8 @@ find_library(LOG4CPLUS_LIBRARY
     /opt/local
     /opt/csw
     /opt
+    /lib
+    ${W3CIPA_OPEN_SOURCE_SRC}/lib
     $ENV{LOG4CPLUS_DIR}/lib
     $ENV{LOG4CPLUS_ROOT}/lib
     ${LOG4CPLUS_DIR}/lib

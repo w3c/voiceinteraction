@@ -26,6 +26,7 @@ ProviderRegistry::~ProviderRegistry() {
 }
 
 void ProviderRegistry::addIPAProvider(const std::shared_ptr<IPAProvider>& provider) {
+    provider->initialize();
     providers.push_back(provider);
 }
 

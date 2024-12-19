@@ -117,7 +117,7 @@ if (BUILD_W3CIPA_DOC)
         COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
         COMMENT "Generating API documentation with Doxygen"
-        VERBATIM )
+        VERBATIM)
 endif()
 
 install(TARGETS ${PROJECT_NAME} LIBRARY DESTINATION lib)

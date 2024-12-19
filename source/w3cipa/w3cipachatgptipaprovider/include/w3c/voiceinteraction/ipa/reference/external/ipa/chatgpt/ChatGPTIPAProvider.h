@@ -34,8 +34,11 @@ namespace chatgpt {
 class ChatGPTIPAProvider : public IPAProvider {
 public:
     ChatGPTIPAProvider();
+
     virtual ~ChatGPTIPAProvider() {
     }
+
+    void initialize() override;
 
     const std::shared_ptr<ExternalIPAResponse> processInput(
         const std::shared_ptr<IPARequest>& request) override;
@@ -51,7 +54,12 @@ public:
    private:
     /** Languages supported by this provider. */
     std::list<Language> supportedLanguages;
-
+    /** The ChatGPT endpoint */
+    std::string endpoint;
+    /** The ChatGPT API key */
+    std::string key;
+    /** The default system message. */
+    std::string systemMessage;
     /** Id of this IP provider. */
     const static std::string ID;
     /** Logger instance. */

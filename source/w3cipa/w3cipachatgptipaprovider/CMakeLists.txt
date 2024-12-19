@@ -19,6 +19,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 set(HEADERS
+    include/w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTConfiguration.h
     include/w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTIPAProvider.h
     include/w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTMessage.h
 )

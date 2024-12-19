@@ -54,7 +54,7 @@ endif()
 #
 
 find_package(PkgConfig REQUIRED)
-find_package(Log4cplus REQUIRED ${W3CIPA_OPEN_SOURCE_SRC})
+find_package(Log4cplus MODULE REQUIRED)
 # On Windows we are relying on VCPKG to download CURL.
 if (WIN32)
     find_package(CURL MODULE REQUIRED)
@@ -68,11 +68,12 @@ find_package(stduuid REQUIRED PATHS ${W3CIPA_OPEN_SOURCE_SRC})
 # Add settings to the build envionment
 #
 include_directories(${LOG4CPLUS_INCLUDE_DIR})
-set(Log4cplus ${LOG4CPLUS_LIBRARIES})
-set(REQUIRED_LIBS ${REQUIRED_LIBS} ${Log4cplus})
+set(REQUIRED_LIBS ${REQUIRED_LIBS} ${LOG4CPLUS_LIBRARY})
 
 set(REQUIRED_LIBS ${REQUIRED_LIBS} CURL::libcurl)
 set(REQUIRED_LIBS ${REQUIRED_LIBS} nlohmann_json::nlohmann_json)
+
+message(STATUS "REQUIRED_LIBS: ${REQUIRED_LIBS}")
 
 include_directories(${STDUUID_INCLUDE_DIR})
 
