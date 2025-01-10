@@ -63,17 +63,18 @@ ChatGPTIPAProvider::ChatGPTIPAProvider() {
 }
 
 void ChatGPTIPAProvider::initialize() {
-    std::string configFile = "config";
-    configFile += std::filesystem::path::preferred_separator;
-    configFile += "ChatGPTIPAProvider.json";
-    if (!std::filesystem::exists(configFile)) {
+    std::filesystem::path configFile{"config/ChatGPTIPAProvider.json"};
+  // Check if the configuration file exists
+    std::error_code ec;
+    if (!std::filesystem::exists(configFile, ec)) {
       LOG4CPLUS_ERROR_FMT(
           LOGGER,
           LOG4CPLUS_TEXT(
-              "ChatGPT IPA provider configuration file %s not found"),
-          configFile.c_str());
+              "ChatGPT IPA provider configuration file %s not found. %s (%d)"),
+          configFile.c_str(), ec.message().c_str(), ec.value());
       return;
     }
+    // Parse the configuration file and initialize this provider
     std::ifstream file(configFile);
     nlohmann::json json = nlohmann::json::parse(file);
     ChatGPTConfiguration configuration = json;

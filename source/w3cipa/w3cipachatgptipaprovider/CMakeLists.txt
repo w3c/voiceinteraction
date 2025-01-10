@@ -43,6 +43,15 @@ target_link_libraries(${PROJECT_NAME} w3cipareferenceimplementation)
 target_link_libraries(${PROJECT_NAME} w3cipaframework)
 target_include_directories(${PROJECT_NAME} PUBLIC include)
 
+#
+# Add configuration files
+#
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/ChatGPTIPAProvider.json
+    ${PROJECT_CONFIG_DIR}/ChatGPTIPAProvider.json COPYONLY)
+
+#
+# Installation
+#
 install(TARGETS ${PROJECT_NAME} LIBRARY DESTINATION lib)
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/ChatGPTIPAProvider.json DESTINATION config)
 install(TARGETS ${PROJECT_NAME} FILE_SET HEADERS)
