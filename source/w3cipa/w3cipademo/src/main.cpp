@@ -20,13 +20,13 @@
 #include <w3c/voiceinteraction/ipa/client/ModalityManager.h>
 #include <w3c/voiceinteraction/ipa/external/ipa/LanguageMatchingProviderSelectionStrategy.h>
 #include <w3c/voiceinteraction/ipa/external/ipa/ModalityMatchingProviderSelectionStrategy.h>
-#include <w3c/voiceinteraction/ipa/external/ipa/ProviderSelectionStrategyList.h>
 #include <w3c/voiceinteraction/ipa/external/ipa/ProviderRegistry.h>
+#include <w3c/voiceinteraction/ipa/external/ipa/ProviderSelectionStrategyList.h>
 #include <w3c/voiceinteraction/ipa/external/ProviderSelectionService.h>
 #include <w3c/voiceinteraction/ipa/reference/client/ConsoleTextModalityComponent.h>
 #include <w3c/voiceinteraction/ipa/reference/client/TakeFirstInputModalityComponentListener.h>
-#include <w3c/voiceinteraction/ipa/reference/dialog/ReferenceIPAService.h>
 #include <w3c/voiceinteraction/ipa/reference/dialog/ReferenceDialogManager.h>
+#include <w3c/voiceinteraction/ipa/reference/dialog/ReferenceIPAService.h>
 #include <w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTIPAProvider.h>
 
 using namespace w3c::voiceinteraction::ipa;

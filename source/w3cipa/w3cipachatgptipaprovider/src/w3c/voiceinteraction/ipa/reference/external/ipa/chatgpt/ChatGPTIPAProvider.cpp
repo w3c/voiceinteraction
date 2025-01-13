@@ -10,20 +10,18 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
-#include <fstream>
 #include <filesystem>
 
 #include <curl/curl.h>
-#include <nlohmann/json.hpp>
 #include <log4cplus/loggingmacros.h>
-
+#include <nlohmann/json.hpp>
 
 #include <w3c/voiceinteraction/ipa/TextModalityType.h>
 
 #include "w3c/voiceinteraction/ipa/reference/TextMultiModalData.h"
 
-#include "w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTIPAProvider.h"
 #include "w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTConfiguration.h"
+#include "w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTIPAProvider.h"
 #include "w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTMessage.h"
 
 namespace w3c {
@@ -63,7 +61,9 @@ ChatGPTIPAProvider::ChatGPTIPAProvider() {
 }
 
 void ChatGPTIPAProvider::initialize() {
+  // Load the configuration from the file
     std::filesystem::path configFile("config/ChatGPTIPAProvider.json");
+
     // Check if the configuration file exists
     std::error_code ec;
     if (!std::filesystem::exists(configFile, ec)) {
@@ -74,6 +74,7 @@ void ChatGPTIPAProvider::initialize() {
           configFile.c_str(), ec.message().c_str(), ec.value());
       return;
     }
+
     // Parse the configuration file and initialize this provider
     std::ifstream file(configFile);
     nlohmann::json json = nlohmann::json::parse(file);
@@ -174,8 +175,8 @@ const std::shared_ptr<ExternalIPAResponse> ChatGPTIPAProvider::processInput(
         return out;
     }
 
-    long http_code = 0;
-    res = curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
+    long httpCode = 0;
+    res = curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &httpCode);
     if (res != CURLE_OK){
         std::string curlError(curl_easy_strerror(res));
         curl_easy_cleanup(curl);
@@ -192,15 +193,15 @@ const std::shared_ptr<ExternalIPAResponse> ChatGPTIPAProvider::processInput(
     }
 
     curl_easy_cleanup(curl);
-    if (http_code != 200) {
+    if (httpCode != 200) {
         LOG4CPLUS_WARN_FMT(LOGGER,
                            LOG4CPLUS_TEXT("%s %s failed with HTTP error code: %ld"),
-                           sessionId.c_str(), requestId.c_str(), http_code);
+                           sessionId.c_str(), requestId.c_str(), httpCode);
         LOG4CPLUS_WARN_FMT(LOGGER, LOG4CPLUS_TEXT("%s %s response: %s"),
                            sessionId.c_str(), requestId.c_str(),
                            response.c_str());
         std::stringstream errorMessage;
-        errorMessage << "ChatGPT failed with HTTP error code " << http_code;
+        errorMessage << "ChatGPT failed with HTTP error code " << httpCode;
         std::shared_ptr<ErrorMessage> error =
             std::make_shared<ErrorMessage>(res, errorMessage.str(), ID);
 
