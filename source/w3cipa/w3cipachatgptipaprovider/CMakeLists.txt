@@ -1,16 +1,4 @@
-﻿#
-# IPA Reference Implementation: https://github.com/w3c/voiceinteraction
-#
-# Copyright (C) 2024 World Wide Web Consortium. All Rights Reserved.
-#
-# This work is distributed under the W3C Software and Document License [1]
-# in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
-# the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-#
-# [1] https://www.w3.org/Consortium/Legal/copyright-software
-#
-
-cmake_minimum_required(VERSION 3.22)
+﻿cmake_minimum_required(VERSION 3.22)
 
 project(w3cipachatgptipaprovider LANGUAGES CXX)
 
@@ -43,18 +31,24 @@ target_link_libraries(${PROJECT_NAME} w3cipareferenceimplementation)
 target_link_libraries(${PROJECT_NAME} w3cipaframework)
 target_include_directories(${PROJECT_NAME} PUBLIC include)
 
-#
+# Download cacert.pem if it doesn't exist
+set(CACERT_URL "https://curl.se/ca/cacert.pem")
+set(CACERT_FILE "${CMAKE_CURRENT_SOURCE_DIR}/cacert.pem")
+
+if(NOT EXISTS ${CACERT_FILE})
+    message(STATUS "Downloading cacert.pem from ${CACERT_URL}")
+    file(DOWNLOAD ${CACERT_URL} ${CACERT_FILE} SHOW_PROGRESS)
+endif()
+
 # Add configuration files
-#
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/ChatGPTIPAProvider.json
     ${PROJECT_CONFIG_DIR}/ChatGPTIPAProvider.json COPYONLY)
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cacert.pem
+configure_file(${CACERT_FILE}
     ${PROJECT_CONFIG_DIR}/cacert.pem COPYONLY)
 
-#
 # Installation
-#
 install(TARGETS ${PROJECT_NAME} LIBRARY DESTINATION lib)
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/ChatGPTIPAProvider.json DESTINATION config)
+install(FILES ${CACERT_FILE} DESTINATION config)
 install(TARGETS ${PROJECT_NAME} FILE_SET HEADERS)
 install(DIRECTORY doc/ DESTINATION doc)

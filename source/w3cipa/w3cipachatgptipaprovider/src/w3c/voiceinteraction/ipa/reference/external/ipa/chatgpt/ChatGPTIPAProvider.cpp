@@ -11,6 +11,7 @@
  */
 
 #include <filesystem>
+#include <fstream>
 
 #include <curl/curl.h>
 #include <log4cplus/loggingmacros.h>
