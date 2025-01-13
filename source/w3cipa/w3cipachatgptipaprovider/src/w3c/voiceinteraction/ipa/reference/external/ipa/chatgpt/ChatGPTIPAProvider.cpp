@@ -63,8 +63,8 @@ ChatGPTIPAProvider::ChatGPTIPAProvider() {
 }
 
 void ChatGPTIPAProvider::initialize() {
-    std::filesystem::path configFile{"config/ChatGPTIPAProvider.json"};
-  // Check if the configuration file exists
+    std::filesystem::path configFile("config/ChatGPTIPAProvider.json");
+    // Check if the configuration file exists
     std::error_code ec;
     if (!std::filesystem::exists(configFile, ec)) {
       LOG4CPLUS_ERROR_FMT(
@@ -79,6 +79,7 @@ void ChatGPTIPAProvider::initialize() {
     nlohmann::json json = nlohmann::json::parse(file);
     ChatGPTConfiguration configuration = json;
     endpoint = configuration.endpoint;
+    model = configuration.model;
     key = configuration.key;
     systemMessage = configuration.systemMessage;
     LOG4CPLUS_INFO_FMT(LOGGER,
@@ -116,10 +117,10 @@ const std::shared_ptr<ExternalIPAResponse> ChatGPTIPAProvider::processInput(
                                     headers, "Content-Type: application/json");
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 
-    // TODO Remove this disabling of SSL verification
-    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
-    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
-//    curl_easy_setopt(curl, CURLOPT_CAINFO, "config/cacert.pem");
+    // Set the SSL options
+    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 1L);
+    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 1L);
+    curl_easy_setopt(curl, CURLOPT_CAINFO, "config/cacert.pem");
 
     // Set the URL to the OpenAI API endpoint
     curl_easy_setopt(curl, CURLOPT_URL, endpoint.c_str());
@@ -131,7 +132,7 @@ const std::shared_ptr<ExternalIPAResponse> ChatGPTIPAProvider::processInput(
 
     // Set the payload
     ChatGPTJSONRequest req;
-    req.model = std::string("gpt-4o-mini");
+    req.model = model;
     ChatGPTMessage actualSystemMessage{"system", systemMessage.c_str()};
     std::shared_ptr<MultiModalDataCollection> multiModalInputs =
         request->getMultiModalInputs();

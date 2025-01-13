@@ -12,3 +12,4 @@ source/w3cipa/open-source/**
 /source/w3cipa/.editorconfig
 /source/w3cipa/vcpkg_installed
 /source/w3cipa/vcpkg-configuration.json
+/source/w3cipa/w3cipachatgptipaprovider/cacert.pem

@@ -18,6 +18,10 @@ You will need
 git clone git@github.com:w3c/voiceinteraction.git
 ```
 
+### Download certificates
+
+Download cacert.pem from [curl.haxx.se](https://curl.haxx.se/docs/caextract.html) and place it in the folder `source/w3cipa/w3cipachatgptipaprovider`.
+
 ### Project Structure
 
 The source code is in the folder source/w3cipa

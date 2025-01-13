@@ -48,6 +48,8 @@ target_include_directories(${PROJECT_NAME} PUBLIC include)
 #
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/ChatGPTIPAProvider.json
     ${PROJECT_CONFIG_DIR}/ChatGPTIPAProvider.json COPYONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cacert.pem
+    ${PROJECT_CONFIG_DIR}/cacert.pem COPYONLY)
 
 #
 # Installation

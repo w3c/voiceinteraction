@@ -60,6 +60,8 @@ public:
     std::string key;
     /** The default system message. */
     std::string systemMessage;
+    /** The ChatGPT model to use. */
+    std::string model;
     /** Id of this IP provider. */
     const static std::string ID;
     /** Logger instance. */

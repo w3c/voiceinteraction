@@ -25,12 +25,14 @@ namespace chatgpt {
 
 struct ChatGPTConfiguration {
   std::string endpoint;
+  std::string model;
   std::string key;
   std::string systemMessage;
 };
 
 void from_json(const nlohmann::json& j, ChatGPTConfiguration& config) {
   j.at("endpoint").get_to(config.endpoint);
+  j.at("model").get_to(config.model);
   j.at("key").get_to(config.key);
   j.at("systemMessage").get_to(config.systemMessage);
 }
