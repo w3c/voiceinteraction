@@ -24,7 +24,7 @@
         <dl>
             <dt>Latest version</dt>
             <dd>
-                Last modified: January 16, 2025 <a
+                Last modified: January 17, 2025 <a
                     href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm</a>
                 (GitHub repository)
             </dd>
@@ -1968,7 +1968,7 @@
     
     <p>While the data may be needed by the contacted entity to actually work,
         it is important to ensure that the data is not misused. Generally,
-        the following levels of data sharing may be useful for differentiation
+        the following options of data sharing may be useful for differentiation.
     </p>
     <dl>
         <dt>No data is shared</dt>
@@ -1977,12 +1977,14 @@
             provides information.</dd>
         <dt>Anonymized or pseudonymized data is shared </dt>
         <dd>Data is shared but only in an anoymous way that does not allow
-            tracking back to the origniator, e.g., using a TOR (The Onion 
+            tracking back to the originator, e.g., using a TOR (The Onion 
             Routing) network.</dd>
         <dt>Encrypted data is shared</dt>
         <dd>Data is shared with an entity that you trust to use them but data is
             encrypted to prevent misuse at least during transmission, e.g. via
-            a secured channel..
+            a secured channel. Fully Homomorphic Encryption (FHE) keeps the data
+            encrypted during computation and secures the results even in
+            untrusted environments.
             This may be used in Enterprise Assistants like an assistant for 
             your bank, school, neighborhood association, &#x2026;
         </dd>
@@ -1993,9 +1995,11 @@
     </dl>
 
     <p>
-        Generally, users should be made aware if data is shared. This may be
-        done, e.g., by a privacy policy that is presented to the user or via
-        confirmation dialogs before actually doing something.
+        Some of these options, like \emph{encrypted data is shared}, may be used
+        in addition to other options. Generally, users should be made aware if
+        data is shared. 
+        This may be done, e.g., by a privacy policy that is presented to the
+        user or via confirmation dialogs before actually doing something.
     </p>
     <p>The best strategy to ensure privacy and security however is not to share
         any data at all.
