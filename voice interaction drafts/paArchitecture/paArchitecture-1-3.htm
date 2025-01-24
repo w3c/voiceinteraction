@@ -24,7 +24,7 @@
         <dl>
             <dt>Latest version</dt>
             <dd>
-                Last modified: November 14, 2024 <a
+                Last modified: January 17, 2025 <a
                     href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm</a>
                 (GitHub repository)
             </dd>
@@ -308,7 +308,7 @@
     </h4>
     
     <p>
-        A user is driving a car and sees a sign of a histroical site near the
+        A user is driving a car and sees a sign of a historical site near the
         road. She becomes curious and wants to know more about the site. She
         then activates the in-vehicle chatbot and asks about the site. The
         chatbot then provides her with information about the site. One aspect of
@@ -1910,7 +1910,7 @@
         of the system; for example, triggered from a third-party web
         service.</p>
 
-    <h5 id="dataprovider">
+    <h5 id="externalservicex">
         <span class="secno">3.3.4.1 </span>External Service X
     </h5>
     <p>A specific External Service, which provides output of the
@@ -1954,8 +1954,62 @@
         functionality as described below as part of another IPA
         implementation.</p>
 
+    <h4 id="securityprivacy">
+        <span class="secno">3.3.6 </span>Security and Privacy
+    </h4>
+        
+    <p>Security and privacy are essential for the operation of the
+        IPA. Private data is potentially being sent but not limited to when</p>
+    <ul>
+        <li>interacting with <a href="#ipaproviders">External IPA Providers</a></li>
+        <li>executing <a href="#externalservices">External Services</a></li>
+        <li>obtaining data from <a href="#dataproviders">Data Providers</a></li>
+    </ul>
+    
+    <p>While the data may be needed by the contacted entity to actually work,
+        it is important to ensure that the data is not misused. Generally,
+        the following options of data sharing may be useful for differentiation.
+    </p>
+    <dl>
+        <dt>No data is shared</dt>
+        <dd>All data is handled locally like in an embedded assistant or no data
+            is needed to actually work, e.g. a public assistant that only
+            provides information.</dd>
+        <dt>Anonymized or pseudonymized data is shared </dt>
+        <dd>Data is shared but only in an anoymous way that does not allow
+            tracking back to the originator, e.g., using a 
+            <a href="https://www.onion-router.net/">TOR (The Onion Routing)</a>
+            network.</dd>
+        <dt>Encrypted data is shared</dt>
+        <dd>Data is shared with an entity that you trust to use them but data is
+            encrypted to prevent misuse at least during transmission, e.g. via
+            a secured channel.
+            <a href="https://homomorphicencryption.org/">Fully Homomorphic Encryption (FHE)</a>
+            keeps the data encrypted during computation and secures the results
+            even in untrusted environments.
+            This may be used in Enterprise Assistants like an assistant for 
+            your bank, school, neighborhood association, &#x2026;
+        </dd>
+        <dt>Data is shared for collective intelligence</dt>
+        <dd>Shared data is used to learn, understand and adapt to the user
+            by using the data of the user crowd. 
+        </dd>
+    </dl>
+
+    <p>
+        Some of these options, like <em>encrypted data is shared</em>, 
+        may be used
+        in addition to other options. Generally, users should be made aware if
+        data is shared. 
+        This may be done, e.g., by a privacy policy that is presented to the
+        user or via confirmation dialogs before actually doing something.
+    </p>
+    <p>The best strategy to ensure privacy and security however is not to share
+        any data at all.
+    </p>
+        
     <h4 id="finalarchitecture">
-        <span class="secno">3.6 </span>Resulting Architecture
+        <span class="secno">3.4 </span>Resulting Architecture
     </h4>
     <p>The previous sections showed a more detailed view onto the
         architectural buildings blocks. A general overview comprising
@@ -2244,7 +2298,7 @@
     </ol>
 
     <h2 id="potential">
-        <span class="secno">7. </span>Potential for Standardization
+        <span class="secno">6. </span>Potential for Standardization
     </h2>
 
     <p>The general architecture of IPAs described in this document
