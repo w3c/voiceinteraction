@@ -10,11 +10,12 @@ set(HEADERS
     include/w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTConfiguration.h
     include/w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTIPAProvider.h
     include/w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTMessage.h
-)
+    include/w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/HTTPClient.h 
+    include/w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/HTTPException.h)
 
 set(SOURCES
     src/w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTIPAProvider.cpp
-)
+    src/w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/HTTPClient.cpp)
 
 source_group("W3C IPA ChatGPT IPAProvider" FILES ${SOURCES} ${HEADERS})
 

@@ -13,7 +13,6 @@
 #include <filesystem>
 #include <fstream>
 
-#include <curl/curl.h>
 #include <log4cplus/loggingmacros.h>
 #include <nlohmann/json.hpp>
 
@@ -24,6 +23,8 @@
 #include "w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTConfiguration.h"
 #include "w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTIPAProvider.h"
 #include "w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTMessage.h"
+#include "w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/HTTPException.h"
+#include "w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/HTTPClient.h"
 
 namespace w3c {
 namespace voiceinteraction {
@@ -37,14 +38,6 @@ const std::string ChatGPTIPAProvider::ID = std::string("ChatGPT");
 const log4cplus::Logger ChatGPTIPAProvider::LOGGER =
     log4cplus::Logger::getInstance(LOG4CPLUS_TEXT(
         "w3c.voiceinteraction.ipa.external.ChatGPT"));
-
-size_t WriteCallback(char* ptr, size_t size, size_t nmemb, void* userdata)
-{
-    size_t num_bytes = size * nmemb;
-    std::string* response = static_cast<std::string*>(userdata);
-    response->append(ptr, num_bytes);
-    return num_bytes;
-}
 
 ChatGPTIPAProvider::ChatGPTIPAProvider() {
     supportedLanguages = { 
@@ -102,35 +95,11 @@ const std::shared_ptr<ExternalIPAResponse> ChatGPTIPAProvider::processInput(
     const std::string& sessionId = request->getSessionId()->toString();
     const std::string& requestId = request->getRequestId()->toString();
 
-    CURL* curl = curl_easy_init();
-    if(curl == nullptr) {
-        LOG4CPLUS_WARN_FMT(LOGGER,
-                           LOG4CPLUS_TEXT("%s %s failed to initialize CURL"),
-                           sessionId.c_str(), requestId.c_str());
-
-        return nullptr;
-    }
-    // Set the header and API key
-    struct curl_slist *headers = NULL;
+    std::list<std::string> headers;
     std::string authorization = "Authorization: Bearer ";
     authorization += key;
-    headers = curl_slist_append(headers, authorization.c_str());
-                                headers = curl_slist_append(
-                                    headers, "Content-Type: application/json");
-    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
-
-    // Set the SSL options
-    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 1L);
-    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 1L);
-    curl_easy_setopt(curl, CURLOPT_CAINFO, "config/cacert.pem");
-
-    // Set the URL to the OpenAI API endpoint
-    curl_easy_setopt(curl, CURLOPT_URL, endpoint.c_str());
-
-    // Set the callback function for libcurl
-    std::string response;
-    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
-    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+    headers.push_back(authorization);
+    headers.push_back("Content-Type: application/json");
 
     // Set the payload
     ChatGPTJSONRequest req;
@@ -157,73 +126,23 @@ const std::shared_ptr<ExternalIPAResponse> ChatGPTIPAProvider::processInput(
                        sessionId.c_str(), requestId.c_str(),
                        textInput->getLanguage().toString().c_str(),
                        dataString.c_str());
-    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, dataString.c_str());
-
-    CURLcode res = curl_easy_perform(curl);
-    headers = nullptr;
-    if (res != CURLE_OK) {
-        std::string curlError(curl_easy_strerror(res));
-        curl_easy_cleanup(curl);
-        LOG4CPLUS_WARN_FMT(LOGGER,
-                           LOG4CPLUS_TEXT("%s %s failed to get HTTP response code: %s"),
-                           sessionId.c_str(), requestId.c_str(),
-                           curlError.c_str());
+    nlohmann::json response;
+    try {
+      response = HTTPClient::post(endpoint, data, headers);
+    } catch (HTTPException e) {
+        LOG4CPLUS_WARN_FMT(
+            LOGGER, LOG4CPLUS_TEXT("%s %s failed to get HTTP response code: %s"),
+            sessionId.c_str(), requestId.c_str(), e.what());
         std::shared_ptr<ErrorMessage> error =
-            std::make_shared<ErrorMessage>(res, curlError, ID);
+            std::make_shared<ErrorMessage>(e.getCode(), e.what(), ID);
         std::shared_ptr<ExternalIPAResponse> out =
             std::make_shared<ExternalIPAResponse>(request->getSessionId(),
-                request->getRequestId(), error);
+                                                request->getRequestId(), error);
         return out;
     }
-
-    long httpCode = 0;
-    res = curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &httpCode);
-    if (res != CURLE_OK){
-        std::string curlError(curl_easy_strerror(res));
-        curl_easy_cleanup(curl);
-        LOG4CPLUS_WARN_FMT(LOGGER,
-                           LOG4CPLUS_TEXT("%s %s failed to get HTTP response code: %s"),
-                           sessionId.c_str(), requestId.c_str(),
-                           curlError.c_str());
-        std::shared_ptr<ErrorMessage> error =
-            std::make_shared<ErrorMessage>(res, curlError, ID);
-        std::shared_ptr<ExternalIPAResponse> out =
-            std::make_shared<ExternalIPAResponse>(request->getSessionId(),
-                                                     request->getRequestId(), error);
-        return out;
-    }
-
-    curl_easy_cleanup(curl);
-    if (httpCode != 200) {
-        LOG4CPLUS_WARN_FMT(LOGGER,
-                           LOG4CPLUS_TEXT("%s %s failed with HTTP error code: %ld"),
-                           sessionId.c_str(), requestId.c_str(), httpCode);
-        LOG4CPLUS_WARN_FMT(LOGGER, LOG4CPLUS_TEXT("%s %s response: %s"),
-                           sessionId.c_str(), requestId.c_str(),
-                           response.c_str());
-        std::stringstream errorMessage;
-        errorMessage << "ChatGPT failed with HTTP error code " << httpCode;
-        std::shared_ptr<ErrorMessage> error =
-            std::make_shared<ErrorMessage>(res, errorMessage.str(), ID);
-
-        std::shared_ptr<ExternalIPAResponse> out =
-            std::make_shared<ExternalIPAResponse>(request->getSessionId(),
-                                                     request->getRequestId(), error);
-
-        return out;
-    }
-
-    // Trim whitespaces
-    response.erase(response.find_last_not_of(" \n\r\t") + 1);
-    response.erase(0, response.find_first_not_of(" \n\r\t"));
-
-    LOG4CPLUS_INFO_FMT(LOGGER,
-                       LOG4CPLUS_TEXT("%s %s received response from ChatGPT: %s"),
-                       sessionId.c_str(), requestId.c_str(), response.c_str());
 
     // Parse the response as JSON
-    nlohmann::json responseData = nlohmann::json::parse(response);
-    ChatGPTJSONResponse parsedResponse = responseData;
+    ChatGPTJSONResponse parsedResponse = response;
     std::string textOutput = parsedResponse.choices[0].message.content;
     std::shared_ptr<MultiModalData> output =
         std::make_shared<TextMultiModalInput>(textOutput);
