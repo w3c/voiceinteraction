@@ -213,21 +213,13 @@ While the W3C IPA Framework in the folder `include` is a dependency free
 implementation without any dependency, the reference implementation in folder 
 `source` makes use of 3rd-party software.
 
-- libCURL
-    - <https://curl.se/libcurl/>
-    - MIT/X like license
-- log4cplus
-    - <https://github.com/log4cplus/log4cplus>
-    - Two clause BSD license
-- nlohmann JSON
-    - <https://github.com/nlohmann/json>
-    - MIT license
-- OpenSSL 
-    - <https://www.openssl.org/>
-    - Apache License 2 
-- stduuid 
-    - <https://github.com/mariusbancila/stduuid/>
-    - MIT License
+| Component | License | URL |
+|-----------|---------|-----|
+| libCURL | MIT/X like license | <https://curl.se/libcurl/> |
+| log4cplus | Two clause BSD license | <https://github.com/log4cplus/log4cplus> |
+| nlohmann JSON | MIT license | <https://github.com/nlohmann/json> |
+| OpenSSL | Apache License 2 | <https://www.openssl.org/> |
+| stduuid | MIT License | <https://github.com/mariusbancila/stduuid/> |
 
 ## Open Issues
 
