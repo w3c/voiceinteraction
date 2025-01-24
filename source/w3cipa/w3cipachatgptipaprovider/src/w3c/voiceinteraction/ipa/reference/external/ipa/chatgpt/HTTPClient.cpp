@@ -50,8 +50,8 @@ nlohmann::json HTTPClient::post(const std::string& endpoint,
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, curlHeaders);
 
     // Set the SSL options
-    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
-    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
+    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 1L);
+    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 1L);
     curl_easy_setopt(curl, CURLOPT_CAINFO, "config/cacert.pem");
 
     // Set the URL to the OpenAI API endpoint

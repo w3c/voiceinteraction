@@ -120,12 +120,10 @@ const std::shared_ptr<ExternalIPAResponse> ChatGPTIPAProvider::processInput(
     req.presence_penalty = 0;
     req.frequency_penalty = 0;
     nlohmann::json data = req;
-    std::string dataString = data.dump(2, ' ');
     LOG4CPLUS_INFO_FMT(LOGGER,
-                       LOG4CPLUS_TEXT("%s %s sending request in %s to ChatGPT: %s"),
+                       LOG4CPLUS_TEXT("%s %s sending request in %s to ChatGPT"),
                        sessionId.c_str(), requestId.c_str(),
-                       textInput->getLanguage().toString().c_str(),
-                       dataString.c_str());
+                       textInput->getLanguage().toString().c_str());
     nlohmann::json response;
     try {
       response = HTTPClient::post(endpoint, data, headers);
