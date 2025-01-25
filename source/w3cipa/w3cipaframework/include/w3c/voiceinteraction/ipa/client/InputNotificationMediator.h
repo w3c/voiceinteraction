@@ -24,40 +24,55 @@ namespace ipa {
 namespace client {
 
 /**
- * A mediator knowing all listeners for MultiModalInput to arrive.
- *
+ * @brief A mediator for managing listeners of multimodal input events.
+ * 
+ * This class maintains a list of listeners that are notified when new
+ * multimodal inputs are received. It provides methods to add listeners
+ * and to notify all registered listeners of new inputs.
+ * 
+ * @note This class is part of the IPA Reference Implementation.
+ * 
+ * @see InputModalityComponentListener
+ * @see MultiModalData
+ * 
  * @author Dirk Schnelle-Walka
  */
 class InputNotificationMediator {
 public:
     /**
-     * Constructs a new object.
+     * @brief Constructs a new InputNotificationMediator object.
      */
     InputNotificationMediator();
 
     /**
-     * Destroys this object.
+     * @brief Destroys the InputNotificationMediator object.
      */
     ~InputNotificationMediator();
 
     /**
-     * Adds the provided listener for multimodal inputs to the list of known
-     * listeners.
-     * @param listener the listener to add.
+     * @brief Adds a listener for multimodal inputs.
+     * 
+     * This method adds the provided listener to the list of known listeners
+     * that will be notified of new multimodal inputs.
+     * 
+     * @param listener The listener to add.
      */
     void addInputModalityComponentListener(
             const std::shared_ptr<InputModalityComponentListener>& listener);
 
     /**
-     * Notifies all listeners about the received multiomodal input.
-     * @param input the input
+     * @brief Notifies all registered listeners of a new multimodal input.
+     * 
+     * This method notifies all listeners that have been added via the
+     * addInputModalityComponentListener method about the received multimodal input.
+     * 
+     * @param input The multimodal input to notify listeners about.
      */
     void notifyListeners(std::shared_ptr<MultiModalData> input);
 
 private:
-    /** Known listeners for multimnodal input. */
+    /** List of registered listeners for multimodal inputs. */
     std::list<std::shared_ptr<InputModalityComponentListener>> inputListeners;
-
 };
 
 } // namespace client

@@ -30,21 +30,39 @@ namespace client {
  *
  * @author Dirk Schnelle-Walka
  */
+/**
+ * A component to handle multimodal outputs.
+ *
+ * Output modality components are also required to inherit from
+ * {@link ModalityComponent} and support {@link IOType::OUTPUT}.
+ *
+ * @brief This class handles the output modality in a multimodal interaction system.
+ * 
+ * @details The OutputModalityComponent class is responsible for processing and managing
+ * multimodal outputs. It serves as an interface for handling different types of output
+ * modalities in a voice interaction system.
+ *
+ * @note Implementations of this class must provide the handleOutput method to process
+ * the obtained multimodal output.
+ *
+ * @author Dirk Schnelle-Walka
+ */
 class OutputModalityComponent {
 public:
     /**
-     * Creates a object.
+     * @brief Constructs an OutputModalityComponent object.
      */
     OutputModalityComponent();
 
     /**
-     * @brief Destroys this object
+     * @brief Destroys this object.
      */
     virtual ~OutputModalityComponent();
 
     /**
-     * Handles the obtained mutlitmodal output.
-     * @param output the obtained output.
+     * @brief Handles the obtained multimodal output.
+     * 
+     * @param output The obtained output.
      */
     virtual void handleOutput(
             const std::shared_ptr<MultiModalData>& output) = 0;

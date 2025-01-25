@@ -19,23 +19,26 @@ namespace ipa {
 namespace dialog {
 
 /**
- * The IPAService is the base class for the IPA service.
+ * @class IPAService
+ * @brief The IPAService is the base class for the IPA service.
  *
- * Usually, this insance is only needed in case multiple clients need to be
- * handled or the input is forwarded simultaneously to a local IPA and
- * external IPAs.
+ * The IPAService class is responsible for managing multiple clients and 
+ * forwarding input simultaneously to both local and external IPAs.
+ * This class is typically instantiated when there is a need to handle 
+ * multiple clients or to forward input to various IPAs.
  *
+ * @note This class is part of the W3C Voice Interaction framework.
  * @author Dirk Schnelle-Walka
  */
 class IPAService {
 public:
     /**
-     * Constructs a new object.
+     * @brief Constructs a new IPAService object.
      */
     IPAService();
 
     /**
-     * Destroys the object.
+     * @brief Destroys the IPAService object.
      */
     virtual ~IPAService();
 

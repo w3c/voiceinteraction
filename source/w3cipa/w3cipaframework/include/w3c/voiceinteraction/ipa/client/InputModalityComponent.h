@@ -23,34 +23,46 @@ namespace ipa {
 namespace client {
 
 /**
- * A component to hand mutlimodal inputs.
+ * @brief A component to handle multimodal inputs.
  *
- * Input modality components are also asked to inherit from
+ * Input modality components are also required to inherit from
  * {@link ModalityComponent} and support {@link IOType#INPUT}.
+ * 
+ * This class provides an interface for starting and stopping the listening
+ * for inputs and notifying a mediator when inputs are received.
+ * 
+ * @note This is an abstract class and should be inherited by specific input
+ * modality implementations.
+ * 
+ * @see ModalityComponent
+ * @see IOType
+ * @see InputNotificationMediator
+ * 
  * @author Dirk Schnelle-Walka
  */
 class InputModalityComponent {
 public:
     /**
-     * Creates a object.
+     * @brief Constructs an InputModalityComponent object.
      */
     InputModalityComponent();
 
     /**
-     * @brief Destroy this object.
+     * @brief Destroys the InputModalityComponent object.
      */
     virtual ~InputModalityComponent();
 
     /**
-     * Starts listening asynchronously for inputs and notify the provided
-     * medaitor if any input is received from this component.
-     * @param mediator the mediator to handle input notifications.
+     * @brief Starts listening asynchronously for inputs and notifies the provided
+     * mediator if any input is received from this component.
+     * 
+     * @param mediator The mediator to handle input notifications.
      */
     virtual void startInput(
         const std::shared_ptr<InputNotificationMediator>& mediator) = 0;
 
     /**
-     * Stops listening for inputs.
+     * @brief Stops listening for inputs.
      */
     virtual void stopInput() = 0;
 };

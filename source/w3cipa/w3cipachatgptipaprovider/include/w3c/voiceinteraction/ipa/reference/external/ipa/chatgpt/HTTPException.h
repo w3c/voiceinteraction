@@ -25,40 +25,43 @@ namespace ipa {
 namespace chatgpt {
 
 /**
- * An error in an HTTP request has been detected.
+ * @class HTTPException
+ * @brief An exception class for HTTP errors.
+ *
+ * This class represents an error that occurs during an HTTP request.
+ * It contains an HTTP status code and a detailed error message.
+ *
  * @author Dirk Schnelle-Walka
  */
 class HTTPException : public std::exception {
 public:
     /**
-     * Constructs a new object.
-     * @param code error code
-     * @param detailed error message
+     * @brief Constructs a new HTTPException object.
+     * @param code The HTTP status code.
+     * @param message The detailed error message.
      */
-    HTTPException(int code, const std::string& message) 
-        : code(code), message(message) {
+    HTTPException(int code, const std::string& message)
+     : code(code), message(message) {
     }
 
     /**
      * {@inheritDoc}
      */
-    const char* what() const noexcept override {
-        return message.c_str();
+    const char* what() const noexcept override { 
+        return message.c_str(); 
     }
 
     /**
-     * Retrieves the HTTP status code.
-     * @return the code
+     * @brief Retrieves the HTTP status code.
+     * @return The HTTP status code.
      */
-    const int getCode() const {
+    const int getCode() const { 
         return code; 
     }
 
- private:
-    /** The HTTP status code. */
-    int code;
-    /** The detail error message. */
-    std::string message;
+private:
+    int code; /**< The HTTP status code. */
+    std::string message; /**< The detailed error message. */
 };
 
 }  // namespace chatgpt

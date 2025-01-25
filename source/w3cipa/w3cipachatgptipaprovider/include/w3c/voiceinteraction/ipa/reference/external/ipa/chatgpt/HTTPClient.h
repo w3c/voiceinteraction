@@ -27,18 +27,26 @@ namespace ipa {
 namespace chatgpt {
 
 /**
- * A simple HTTP client for sending POST requests.
+ * @class HTTPClient
+ * @brief A simple HTTP client for sending POST requests.
+ * 
+ * This class provides a method to send JSON objects to a specified endpoint using HTTP POST requests.
+ * 
  * @author Dirk Schnelle-Walka
  */
 class HTTPClient {
 public:
     /** 
-     * Posts a JSON object to an endpoint.
-     * @param endpoint the URL to post to
-     * @param data the JSON object to post
-     * @param headers the headers to send
-     * @return the response as JSON
-     * @throws HTTPException if the request fails
+     * @brief Posts a JSON object to an endpoint.
+     * 
+     * This method sends a JSON object to the specified endpoint using an HTTP POST request.
+     * It also allows for custom headers to be included in the request.
+     * 
+     * @param endpoint The URL to post to.
+     * @param data The JSON object to post.
+     * @param headers The headers to send.
+     * @return The response as a JSON object.
+     * @throws HTTPException if the request fails.
      */
     static nlohmann::json post(const std::string& endpoint,
                             const nlohmann::json& data,

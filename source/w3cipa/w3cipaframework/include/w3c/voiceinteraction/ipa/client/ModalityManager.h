@@ -33,12 +33,27 @@ namespace ipa {
 namespace client {
 
 /**
- * A component that manages multiple modalities.
+ * @brief A component that manages multiple modalities.
+ *
+ * The ModalityManager class is responsible for managing multiple modality
+ * components, handling input and output modalities, and processing IPA data. It
+ * provides methods to add modality components, retrieve modality components
+ * based on modality type and IO type, start input for all known modality
+ * handlers, process IPA data, handle multimodal output, and manage listeners
+ * for multimodal inputs.
+ *
+ * @note This class is part of the IPA Reference Implementation.
+ *
+ * @see ModalityComponent
+ * @see InputModalityComponentListener
+ * @see InputNotificationMediator
+ * @see MultiModalDataCollection
+ * @see IPADataProcessor
+ *
  * @author Dirk Schnelle-Walka
  */
 class ModalityManager : public IPADataProcessor {
-
-public:
+ public:
     /**
      * Constructs a new object.
      */

@@ -19,7 +19,10 @@ namespace ipa {
 namespace client {
 
 /**
- * Type of input or output of a {@link ModalityComponent}.
+ * @brief Enum representing the type of input or output of a {@link ModalityComponent}.
+ * 
+ * This enum is used to specify whether a component is an input device or an output device.
+ * 
  * @author Dirk Schnelle-Walka
  */
 enum IOType
@@ -29,7 +32,7 @@ enum IOType
      */
     INPUT = 0,
     /**
-     * Teh component is an output device.
+     * The component is an output device.
      */
     OUTPUT = 1
 };

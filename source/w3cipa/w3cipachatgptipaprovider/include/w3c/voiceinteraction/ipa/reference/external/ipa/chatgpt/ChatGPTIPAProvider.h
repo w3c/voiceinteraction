@@ -29,6 +29,14 @@ namespace chatgpt {
 
 /**
  * @brief An IPA Provider for ChatGPT.
+ * 
+ * This class implements an IPA provider that interacts with the ChatGPT API.
+ * It provides methods to initialize the provider, process input requests, 
+ * and retrieve supported modalities and languages.
+ * 
+ * @details The provider uses the ChatGPT API to process input requests and 
+ * return responses. It supports multiple languages and modalities.
+ * 
  * @author Dirk Schnelle-Walka
  */
 class ChatGPTIPAProvider : public IPAProvider {

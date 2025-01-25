@@ -23,32 +23,50 @@ namespace ipa {
 namespace client {
 
 /**
- * A listener for multimodal input events
+ * @brief A listener for multimodal input events.
+ * 
+ * This class provides an interface for handling multimodal input events.
+ * Implementations of this class should define the behavior for processing
+ * multimodal inputs and retrieving the next set of inputs.
+ * 
+ * @note This is an abstract class and cannot be instantiated directly.
+ * 
+ * @see MultiModalData
+ * @see MultiModalDataCollection
+ * 
  * @author Dirk Schnelle-Walka
  */
 class InputModalityComponentListener {
 public:
     /**
-     * Creates a object.
+     * @brief Constructs an InputModalityComponentListener object.
      */
     InputModalityComponentListener();
 
     /**
-     * @brief Destroy this object.
+     * @brief Destroys the InputModalityComponentListener object.
      */
     virtual ~InputModalityComponentListener();
 
     /**
-     * The input modality component received the provided multimodal input.
-     * @param input the multimodal input.
+     * @brief Handles the provided multimodal input.
+     * 
+     * This method is called when the input modality component receives
+     * a new multimodal input. Implementations should define the behavior
+     * for processing the input.
+     * 
+     * @param input The multimodal input to be processed.
      */
     virtual void onMultiModalInput(std::shared_ptr<MultiModalData> input) = 0;
 
     /**
-     * Obtains the next input for the IPA. This call is blocking until input
-     * is available. It is up to the implementation to decide upon the
-     * conditions when this method returns.
-     * @return next input for the IPA
+     * @brief Retrieves the next set of multimodal inputs.
+     * 
+     * This method blocks until the next set of multimodal inputs is available.
+     * The conditions for returning from this method are determined by the
+     * implementation.
+     * 
+     * @return A shared pointer to the next set of multimodal inputs.
      */
     virtual std::shared_ptr<MultiModalDataCollection> getMultiModalInputs() = 0;
 };
