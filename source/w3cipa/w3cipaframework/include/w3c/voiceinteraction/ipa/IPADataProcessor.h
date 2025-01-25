@@ -14,7 +14,7 @@
 #define IPADATAPROCESSOR_H
 
 #include <list>
-
+#include <memory>
 #include "IPAData.h"
 
 namespace w3c {
@@ -22,61 +22,72 @@ namespace voiceinteraction {
 namespace ipa {
 
 /**
- * An IPA data processor is able to consume {@link IPAData}, process it
+ * @brief An IPA data processor that consumes, processes, and forwards IPAData.
+ * 
+ * An IPA data processor is able to consume {@link IPAData}, process it,
  * and forward the processed result to registered other IPA data processors
  * to eventually further process the data.
- *
+ * 
+ * An example for such a processing chain is shown in the following diagram:<br>
+ * <img src="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/IPAData-Processing-Chain.svg" alt="IPA Data Processor Chain">
+ * 
+ * @note Implementors should ensure that they only handle data they can process.
+ *       Due to chaining, inputs may be received from multiple sources.
+ *       This method should return immediately if there is nothing to do with the received data.
+ * 
+ * @see IPAData
+ * 
  * @author Dirk Schnelle-Walka
  */
 class IPADataProcessor {
 public:
     /**
-     * Creates a new instance.
+     * @brief Constructs a new IPADataProcessor instance.
      */
     IPADataProcessor();
 
     /**
-     * Destroys this instance.
+     * @brief Destroys the IPADataProcessor instance.
      */
     virtual ~IPADataProcessor();
 
     /**
-     * Starts processing with {@code nullptr} in
-     * {@link processIPAData(std::shared_ptr<IPAData> data)}.
+     * @brief Starts processing with a null data pointer.
+     * 
+     * This method calls {@link processIPAData(std::shared_ptr<IPAData> data)} with a null pointer.
      */
     virtual void processIPAData();
 
     /**
-     * Processes the data and informs all registered listeners afterwards
-     * via {@link #notifyListeners}.
-     *
+     * @brief Processes the given data and notifies all registered listeners.
+     * 
      * Conceptually, this method can be called multiple times depending on
-     * how many other processors this instance has been subsribed to.
-     *
-     * Implementors should take care that they only handle those data that
-     * they can handle. As a result of chaining, inputs may be received from
-     * multiple sources. This method should return immediately, if there is
-     * nothing to do with the received data.
-     * @param data the data to process
+     * how many other processors this instance has been subscribed to.
+     * @param data The data to process.
      */
     virtual void processIPAData(std::shared_ptr<IPAData> data) = 0;
 
     /**
-     * Adds the given listener to the list of known listeners.
-     * @param listener the listener to add
+     * @brief Adds the given listener to the list of known listeners.
+     * 
+     * @param listener The listener to add.
      */
-    void addIPADataProcessorListener(
-            const std::shared_ptr<IPADataProcessor>& listener);
+    void addIPADataProcessorListener(const std::shared_ptr<IPADataProcessor>& listener);
 
     /**
-     * Shortcut for {@link addIPADataProcessorListener(const std::shared_ptr<IPADataProcessor>& listener)}.
-     * @param other the listener to add
+     * @brief Adds the given listener to the list of known listeners.
+     * 
+     * This is a shortcut for {@link addIPADataProcessorListener(const std::shared_ptr<IPADataProcessor>& listener)}.
+     * 
+     * @param other The listener to add.
      */
-    void operator >>(const std::shared_ptr<IPADataProcessor>& other);
+    void operator>>(const std::shared_ptr<IPADataProcessor>& other);
+
 protected:
     /**
-     * Asynchronously notifies all listeners about the processed data.
-     * @param data the processed data
+     * @brief Asynchronously notifies all listeners about the processed data.
+     * 
+     * @param data The processed data.
      */
     void notifyListeners(const std::shared_ptr<IPAData>& data);
 
@@ -85,6 +96,13 @@ private:
     std::list<std::shared_ptr<IPADataProcessor>> listeners;
 };
 
+/**
+ * @brief Adds the destination processor as a listener to the source processor.
+ * 
+ * @param source The source processor.
+ * @param destination The destination processor.
+ * @return The destination processor.
+ */
 const std::shared_ptr<IPADataProcessor>& operator>>(
         const std::shared_ptr<IPADataProcessor>& source,
         const std::shared_ptr<IPADataProcessor>& destination);

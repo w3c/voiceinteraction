@@ -23,45 +23,60 @@ namespace voiceinteraction {
 namespace ipa {
 
 /**
- * Base class for all data that is sent around through various processing
- * stages.
+ * @brief Base class for all data that is sent around through various processing stages.
+ * 
+ * This class serves as a base for all data types that are transmitted through different stages of
+   processing within the voice interaction framework. It
+ * contains a {@link SessionId} and an optional a {@link requestId} to allow for a separationg
+ * different requests.
+ * 
+ * @note This class is intended to be subclassed to provide specific data implementations.
+ * 
+ * @see SessionId
+ * @see RequestId
+ * 
  * @author Dirk Schnelle-Walka
  */
 class IPAData {
 public:
     /**
-     * Constructs a new object.
-     * @param sessionIdentifier the session identifier
-     * @param requestIdentifier the request identifier, maybe {@code nullptr}
+     * @brief Constructs a new IPAData object with a session identifier and an optional request identifier.
+     * 
+     * @param sessionIdentifier The session identifier.
+     * @param requestIdentifier The request identifier, may be {@code nullptr}.
      */
     IPAData(const std::shared_ptr<SessionId>& sessionIdentifier,
             const std::shared_ptr<RequestId>& requestIdentifier);
 
     /**
-     * Constructs a new object.
-     * @param sessionIdentifier the session identifier
+     * @brief Constructs a new IPAData object with a session identifier.
+     * 
+     * @param sessionIdentifier The session identifier.
      */
     IPAData(const std::shared_ptr<SessionId>& sessionIdentifier);
 
     /**
-     * Destroy this instance.
+     * @brief Destroys the IPAData object.
      */
     virtual ~IPAData();
 
     /**
-     * Returns the session id of the session this response belongs to.
+     * @brief Returns the session id of the session this response belongs to.
+     * 
      * @return The session id of the session this response belongs to.
      */
     const std::shared_ptr<SessionId>& getSessionId() const;
 
     /**
-     * Sets the session identifier.
-     * @param sessionIdentifier the new session identifier
+     * @brief Sets the session identifier.
+     * 
+     * @param sessionIdentifier The new session identifier.
      */
     void setSessionId(const std::shared_ptr<SessionId>& sessionIdentifier);
 
     /**
-     * Returns the request id of the request this response belongs to.
+     * @brief Returns the request id of the request this response belongs to.
+     * 
      * @return The request id of the request this response belongs to.
      */
     const std::shared_ptr<RequestId>& getRequestId() const;
