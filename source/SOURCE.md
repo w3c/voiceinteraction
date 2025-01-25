@@ -10,6 +10,9 @@ You will need
 - A C++ IDE of your choice
 - An OpenAI developer key
 
+In case you also want to create the API documentation, you will need to have 
+[doxygen](https://www.doxygen.nl/) installed.
+
 ## Building
 
 ### Clone the repository

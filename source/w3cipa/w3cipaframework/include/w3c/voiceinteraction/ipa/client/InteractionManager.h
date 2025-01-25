@@ -10,8 +10,8 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
-#if !defined(MODALITYMANAGER_H)
-#define MODALITYMANAGER_H
+#if !defined(INTERACTION_MANAGER_H)
+#define INTERACTION_MANAGER_H
 
 #include <memory>
 #include <map>
@@ -35,7 +35,7 @@ namespace client {
 /**
  * @brief A component that manages multiple modalities.
  *
- * The ModalityManager class is responsible for managing multiple modality
+ * The InteractionManager class is responsible for managing multiple modality
  * components, handling input and output modalities, and processing IPA data. It
  * provides methods to add modality components, retrieve modality components
  * based on modality type and IO type, start input for all known modality
@@ -52,17 +52,17 @@ namespace client {
  *
  * @author Dirk Schnelle-Walka
  */
-class ModalityManager : public IPADataProcessor {
+class InteractionManager : public IPADataProcessor {
  public:
     /**
      * Constructs a new object.
      */
-    ModalityManager();
+    InteractionManager();
 
     /**
      * Destroys the object.
      */
-    virtual ~ModalityManager();
+    virtual ~InteractionManager();
 
     /**
      * Adds a modality component to the set of modality components.
@@ -89,6 +89,9 @@ class ModalityManager : public IPADataProcessor {
      */
     void startInput() const;
 
+    /**
+     * {@inheritDoc}
+     */
     void processIPAData(std::shared_ptr<IPAData> data) override;
 
     /**
@@ -140,7 +143,7 @@ private:
 };
 
 std::shared_ptr<IPADataProcessor> operator>>(
-        const std::shared_ptr<ModalityManager>& manager,
+        const std::shared_ptr<InteractionManager>& manager,
         const std::shared_ptr<InputModalityComponentListener>& listener);
 
 } // namespace client
@@ -148,4 +151,4 @@ std::shared_ptr<IPADataProcessor> operator>>(
 } // namespace voiceinteraction
 } // namespace w3c
 
-#endif // !defined(MODALITYMANAGER_H)
+#endif // !defined(INTERACTION_MANAGER_H)

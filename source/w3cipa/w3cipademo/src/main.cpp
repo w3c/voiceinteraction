@@ -17,7 +17,7 @@
 #include <log4cplus/logger.h>
 #include <log4cplus/loggingmacros.h>
 
-#include <w3c/voiceinteraction/ipa/client/ModalityManager.h>
+#include <w3c/voiceinteraction/ipa/client/InteractionManager.h>
 #include <w3c/voiceinteraction/ipa/external/ipa/LanguageMatchingProviderSelectionStrategy.h>
 #include <w3c/voiceinteraction/ipa/external/ipa/ModalityMatchingProviderSelectionStrategy.h>
 #include <w3c/voiceinteraction/ipa/external/ipa/ProviderRegistry.h>
@@ -46,8 +46,8 @@ int main() {
     // Build up the components
 
     // Cient Layer
-    std::shared_ptr<client::ModalityManager> modalityManager =
-        std::make_shared<client::ModalityManager>();
+    std::shared_ptr<client::InteractionManager> modalityManager =
+        std::make_shared<client::InteractionManager>();
     std::shared_ptr<::reference::client::ConsoleTextModalityComponent> console =
         std::make_shared<::reference::client::ConsoleTextModalityComponent>();
     modalityManager->addModalityComponent(console);

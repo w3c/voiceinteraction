@@ -11,21 +11,21 @@
  */
 
 #include "w3c/voiceinteraction/ipa/IPAResponse.h"
-#include "w3c/voiceinteraction/ipa/client/ModalityManager.h"
+#include "w3c/voiceinteraction/ipa/client/InteractionManager.h"
 
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
 namespace client {
 
-ModalityManager::ModalityManager()
+InteractionManager::InteractionManager()
     : inputNotifcation(std::make_shared<InputNotificationMediator>()) {
 }
 
-ModalityManager::~ModalityManager() {
+InteractionManager::~InteractionManager() {
 }
 
-void ModalityManager::addModalityComponent(
+void InteractionManager::addModalityComponent(
         const std::shared_ptr<ModalityComponent> component) {
     const ModalityType& modality = component->getModality();
     const std::list<IOType>& types = component->getSupportedIOTypes();
@@ -46,7 +46,7 @@ void ModalityManager::addModalityComponent(
     }
 }
 
-std::list<std::shared_ptr<ModalityComponent>> ModalityManager::getModalityComponents(
+std::list<std::shared_ptr<ModalityComponent>> InteractionManager::getModalityComponents(
         const ModalityType& modality, const IOType& ioType) const {
     if (ioType == IOType::INPUT) {
         std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>>::const_iterator iterator =
@@ -70,7 +70,7 @@ std::list<std::shared_ptr<ModalityComponent>> ModalityManager::getModalityCompon
     }
 }
 
-void ModalityManager::startInput() const {
+void InteractionManager::startInput() const {
     for (std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>>::const_iterator iterator =
         inputComponents.begin(); iterator != inputComponents.end();
          ++iterator) {
@@ -84,7 +84,7 @@ void ModalityManager::startInput() const {
     }
 }
 
-void ModalityManager::processIPAData(std::shared_ptr<IPAData> data) {
+void InteractionManager::processIPAData(std::shared_ptr<IPAData> data) {
     if (std::shared_ptr<IPAResponse> response =
             std::dynamic_pointer_cast<IPAResponse>(data)) {
         std::shared_ptr<MultiModalDataCollection> outputs =
@@ -93,9 +93,12 @@ void ModalityManager::processIPAData(std::shared_ptr<IPAData> data) {
     }
 }
 
-void ModalityManager::handleOutput(
+void InteractionManager::handleOutput(
         const std::shared_ptr<MultiModalDataCollection>& outputs) const {
+    // Obtain all output modalities for the current type
     std::list<ModalityType> outputModalities = outputs->getModalityTypes();
+
+    // Forwards the output to all output modality components of the current type
     for (ModalityType& outputModality : outputModalities) {
         std::shared_ptr<MultiModalData> output =
             outputs->getMultiModalData(outputModality);
@@ -109,18 +112,18 @@ void ModalityManager::handleOutput(
     }
 }
 
-void ModalityManager::addInputModalityComponentListener(
+void InteractionManager::addInputModalityComponentListener(
         const std::shared_ptr<InputModalityComponentListener>& listener) {
     inputNotifcation->addInputModalityComponentListener(listener);
 }
 
-void ModalityManager::operator>>(
+void InteractionManager::operator>>(
         const std::shared_ptr<InputModalityComponentListener>& listener) {
     addInputModalityComponentListener(listener);
 }
 
 
-void ModalityManager::addInputModality(const ModalityType& modality,
+void InteractionManager::addInputModality(const ModalityType& modality,
                       const std::shared_ptr<ModalityComponent>& component) {
     std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>>::iterator iterator =
         inputComponents.find(modality);
@@ -133,7 +136,7 @@ void ModalityManager::addInputModality(const ModalityType& modality,
     components.push_back(component);
 }
 
-void ModalityManager::addOutputModality(const ModalityType& modality,
+void InteractionManager::addOutputModality(const ModalityType& modality,
                        const std::shared_ptr<ModalityComponent>& component) {
     std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>>::iterator iterator =
         outputComponents.find(modality);
@@ -147,7 +150,7 @@ void ModalityManager::addOutputModality(const ModalityType& modality,
 }
 
 std::shared_ptr<IPADataProcessor> operator >>(
-        const std::shared_ptr<ModalityManager>& manager,
+        const std::shared_ptr<InteractionManager>& manager,
         const std::shared_ptr<InputModalityComponentListener>& listener) {
     manager->addInputModalityComponentListener(listener);
     return std::dynamic_pointer_cast<IPADataProcessor>(listener);

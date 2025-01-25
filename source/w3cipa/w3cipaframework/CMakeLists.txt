@@ -50,7 +50,7 @@ set(HEADERS
     include/w3c/voiceinteraction/ipa/client/InputNotificationMediator.h
     include/w3c/voiceinteraction/ipa/client/IOType.h
     include/w3c/voiceinteraction/ipa/client/ModalityComponent.h
-    include/w3c/voiceinteraction/ipa/client/ModalityManager.h
+    include/w3c/voiceinteraction/ipa/client/InteractionManager.h
     include/w3c/voiceinteraction/ipa/client/OutputModalityComponent.h
     include/w3c/voiceinteraction/ipa/dialog/IPAService.h
     include/w3c/voiceinteraction/ipa/external/ProviderSelectionService.h
@@ -84,7 +84,7 @@ set(SOURCES
     src/w3c/voiceinteraction/ipa/client/InputModalityComponentListener.cpp
     src/w3c/voiceinteraction/ipa/client/InputNotificationMediator.cpp
     src/w3c/voiceinteraction/ipa/client/ModalityComponent.cpp
-    src/w3c/voiceinteraction/ipa/client/ModalityManager.cpp
+    src/w3c/voiceinteraction/ipa/client/InteractionManager.cpp
     src/w3c/voiceinteraction/ipa/client/OutputModalityComponent.cpp
     src/w3c/voiceinteraction/ipa/dialog/IPAService.cpp
     src/w3c/voiceinteraction/ipa/external/ProviderSelectionService.cpp
