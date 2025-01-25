@@ -19,9 +19,10 @@ namespace voiceinteraction {
 namespace ipa {
 namespace reference {
 
-const ModalityType TextMultiModalInput::MODALITY = TextModalityType();
+const ModalityType TextMultiModalData::MODALITY =
+    TextModalityType::getInstance();
 
-TextMultiModalInput::TextMultiModalInput(const std::string& input, const Language& lang)
+TextMultiModalData::TextMultiModalData(const std::string& input, const Language& lang)
     : MultiModalData(MODALITY),
       text(input), language(lang) {
 }

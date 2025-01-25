@@ -24,6 +24,11 @@ TextModalityType::TextModalityType(const TextModalityType& other)
     : ModalityType(other) {
 }
 
+TextModalityType TextModalityType::getInstance() {
+    static TextModalityType instance;
+    return instance;
+}
+
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c

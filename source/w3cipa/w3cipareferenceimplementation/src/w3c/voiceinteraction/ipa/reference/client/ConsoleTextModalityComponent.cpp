@@ -60,7 +60,7 @@ void ConsoleTextModalityComponent::captureInputAsynchronously(
     // TODO: get language from user or configuration
     Language language("en");
     std::shared_ptr<MultiModalData> multiModalInput =
-        std::make_shared<TextMultiModalInput>(input, language);
+        std::make_shared<TextMultiModalData>(input, language);
     mediator->notifyListeners(multiModalInput);
 }
 
@@ -70,8 +70,8 @@ void ConsoleTextModalityComponent::stopInput() {
 
 void ConsoleTextModalityComponent::handleOutput(
     const std::shared_ptr<MultiModalData>& output) {
-    std::shared_ptr<TextMultiModalInput> textOutput =
-        std::dynamic_pointer_cast<TextMultiModalInput>(output);
+    std::shared_ptr<TextMultiModalData> textOutput =
+        std::dynamic_pointer_cast<TextMultiModalData>(output);
     const std::string& text = textOutput->getText();
     std::cout << "System: " << text.c_str() << std::endl;
     LOG4CPLUS_INFO_FMT(LOGGER,

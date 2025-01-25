@@ -15,12 +15,14 @@
 
 #include <string>
 
+#include <w3cipaframework_export.h>
+
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
 
 /**
- * This class implements a RFC 1766 language tag.
+ * @brief This class implements a RFC 1766 language tag.
  *
  * A language describes a language and consists of a primary tag
  * and a subtags. Usually, the primary tag conforms to an ISO 639
@@ -89,7 +91,7 @@ public:
     /** Language Chinese */
     static const Language ZH;
     
-   private:
+private:
     /** The primary tag. */
     std::string primaryTag;
     /** The sub tag */

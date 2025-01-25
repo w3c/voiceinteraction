@@ -47,7 +47,7 @@ std::shared_ptr<MultiModalDataCollection> ReferenceIPADialogManager::createOutpu
     // TODO temporarily take the error message as the output
     const std::string& message = error->getErrorMessage();
     std::shared_ptr<MultiModalData> errorOutput =
-        std::make_shared<TextMultiModalInput>(message);
+        std::make_shared<TextMultiModalData>(message);
     std::shared_ptr<MultiModalDataCollection> outputs =
         std::make_shared<MultiModalDataCollection>();
     outputs->addMultiModalData(errorOutput);

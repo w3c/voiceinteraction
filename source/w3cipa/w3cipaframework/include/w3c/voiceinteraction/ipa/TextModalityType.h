@@ -15,6 +15,8 @@
 
 #include <w3c/voiceinteraction/ipa/ModalityType.h>
 
+#include <w3cipaframework_export.h>
+
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
@@ -23,9 +25,8 @@ namespace ipa {
  * The text modality type.
  * @author Dirk Schnelle-Walka
  */
-class TextModalityType : public ModalityType
-{
-public:
+class TextModalityType : public ModalityType {
+ public:
     /**
      * Constructs a new object.
      */
@@ -36,6 +37,12 @@ public:
      * @param other the object to copy from
      */
     TextModalityType(const TextModalityType& other);
+
+    /**
+     * Retrieves an instance of this modality type.
+     * @return an instance
+     */
+    static TextModalityType getInstance();
 };
 
 } // namespace ipa

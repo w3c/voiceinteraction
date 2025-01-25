@@ -15,6 +15,8 @@
 
 #include <string>
 
+#include <w3cipaframework_export.h>
+
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {

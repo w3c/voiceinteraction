@@ -108,9 +108,9 @@ const std::shared_ptr<ExternalIPAResponse> ChatGPTIPAProvider::processInput(
     std::shared_ptr<MultiModalDataCollection> multiModalInputs =
         request->getMultiModalInputs();
     std::shared_ptr<MultiModalData> input =
-        multiModalInputs->getMultiModalData(TextMultiModalInput::MODALITY);
-    std::shared_ptr<TextMultiModalInput> textInput =
-        std::dynamic_pointer_cast<TextMultiModalInput>(input);
+        multiModalInputs->getMultiModalData(TextMultiModalData::MODALITY);
+    std::shared_ptr<TextMultiModalData> textInput =
+        std::dynamic_pointer_cast<TextMultiModalData>(input);
     const std::string& text = textInput->getText();
     ChatGPTMessage userMessage { "user", text };
     req.messages = std::vector({actualSystemMessage, userMessage});
@@ -143,7 +143,7 @@ const std::shared_ptr<ExternalIPAResponse> ChatGPTIPAProvider::processInput(
     ChatGPTJSONResponse parsedResponse = response;
     std::string textOutput = parsedResponse.choices[0].message.content;
     std::shared_ptr<MultiModalData> output =
-        std::make_shared<TextMultiModalInput>(textOutput);
+        std::make_shared<TextMultiModalData>(textOutput);
     std::shared_ptr<MultiModalDataCollection> outputs =
         std::make_shared<MultiModalDataCollection>();
     outputs->addMultiModalData(output);

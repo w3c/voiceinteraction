@@ -16,7 +16,7 @@ namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
 
-MultiModalData::MultiModalData(const ModalityType modality)
+MultiModalData::MultiModalData(const ModalityType& modality)
     : modality(modality) {
 }
 

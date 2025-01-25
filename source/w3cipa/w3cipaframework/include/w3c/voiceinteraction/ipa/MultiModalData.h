@@ -32,7 +32,7 @@ public:
      * Constructs a new object.
      * @param modality The modality of this input.
      */
-    MultiModalData(const ModalityType modality);
+    MultiModalData(const ModalityType& modality);
 
     /**
      * Destroys the object.

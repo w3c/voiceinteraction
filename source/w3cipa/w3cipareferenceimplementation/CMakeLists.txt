@@ -40,7 +40,10 @@ set(SOURCES
 
 source_group("W3C IPA Reference Implementation" FILES ${SOURCES} ${HEADERS})
 
-add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+add_library(${PROJECT_NAME} ${W3CIPA_BUILD_SHARED_LIBS} ${SOURCES} ${HEADERS})
+include(GenerateExportHeader)
+generate_export_header(${PROJECT_NAME})
+target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_BINARY_DIR}")
 target_sources(${PROJECT_NAME} PRIVATE ${SOURCES} 
     PUBLIC FILE_SET HEADERS 
     BASE_DIRS ${PROJECT_SOURCE_DIR}/include 

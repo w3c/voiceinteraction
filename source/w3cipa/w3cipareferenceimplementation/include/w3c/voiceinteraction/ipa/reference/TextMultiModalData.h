@@ -15,6 +15,8 @@
 
 #include <string>
 
+#include <w3cipaframework_export.h>
+
 #include <w3c/voiceinteraction/ipa/LanguageDependent.h>
 #include <w3c/voiceinteraction/ipa/MultiModalData.h>
 
@@ -27,7 +29,7 @@ namespace reference {
  * @brief A multimodal output for text.
  * @author Dirk Schnelle-Walka
  */
-class TextMultiModalInput 
+class TextMultiModalData 
     : public MultiModalData, public LanguageDependent {
 public:
     /**
@@ -35,7 +37,7 @@ public:
      * @param input the text
      * @param lang the language of the text, defaults to EN
      */
-    TextMultiModalInput(const std::string& input, const Language& lang = Language::EN);
+    TextMultiModalData(const std::string& input, const Language& lang = Language::EN);
 
     /**
      * Returns the text.
@@ -49,6 +51,7 @@ public:
         return language;
     }
 
+    /** The modality type for text. */
     const static ModalityType MODALITY;
 private:
     /** The text. */ 

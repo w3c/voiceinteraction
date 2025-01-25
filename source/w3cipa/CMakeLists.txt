@@ -25,6 +25,18 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # User Flags
 option(BUILD_W3CIPA_DOC "Build documentation" OFF)
 option(BUILD_W3CIPA_DEPENDENCIES "Whether or not to build depending libraries from source" ON)
+option(BUILD_W3CIPA_SHARED "Wether or not to build shared libraries" OFF)
+
+#
+# Set internally shared or static
+#
+if (BUILD_W3CIPA_SHARED)
+    set(W3CIPA_BUILD_SHARED_LIBS SHARED)
+    message(STATUS "Building shared libraries")
+else()
+    set(W3CIPA_BUILD_SHARED_LIBS STATIC)
+    message(STATUS "Building static libraries")
+endif()
 
 #
 # Adapt the install path for dependent libs
