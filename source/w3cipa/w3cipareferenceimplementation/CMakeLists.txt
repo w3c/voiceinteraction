@@ -54,5 +54,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC include)
 
 install(TARGETS ${PROJECT_NAME} LIBRARY DESTINATION lib)
 install(TARGETS ${PROJECT_NAME} FILE_SET HEADERS)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/w3cipareferenceimplementation_export.h
+    DESTINATION include)
 install(DIRECTORY doc/ DESTINATION doc)
 

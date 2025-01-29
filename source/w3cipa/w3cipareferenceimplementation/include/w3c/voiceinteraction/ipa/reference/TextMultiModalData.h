@@ -15,7 +15,7 @@
 
 #include <string>
 
-#include <w3cipaframework_export.h>
+#include <w3cipareferenceimplementation_export.h>
 
 #include <w3c/voiceinteraction/ipa/LanguageDependent.h>
 #include <w3c/voiceinteraction/ipa/MultiModalData.h>
@@ -52,8 +52,9 @@ public:
     }
 
     /** The modality type for text. */
-    const static ModalityType MODALITY;
-private:
+    W3CIPAREFERENCEIMPLEMENTATION_EXPORT const static ModalityType MODALITY;
+
+   private:
     /** The text. */ 
     std::string text;
     /** The language of the text. */

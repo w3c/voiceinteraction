@@ -32,10 +32,10 @@ option(BUILD_W3CIPA_SHARED "Wether or not to build shared libraries" OFF)
 #
 if (BUILD_W3CIPA_SHARED)
     set(W3CIPA_BUILD_SHARED_LIBS SHARED)
-    message(STATUS "Building shared libraries")
+    message(STATUS "Building W3CIPA shared libraries")
 else()
     set(W3CIPA_BUILD_SHARED_LIBS STATIC)
-    message(STATUS "Building static libraries")
+    message(STATUS "Building W3CIPA static libraries")
 endif()
 
 #
