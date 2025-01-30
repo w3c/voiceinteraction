@@ -24,7 +24,7 @@
         <dl>
             <dt>Latest version</dt>
             <dd>
-                Last modified: January 17, 2025 <a
+                Last modified: January 30, 2025 <a
                     href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm</a>
                 (GitHub repository)
             </dd>
@@ -1846,9 +1846,10 @@
     <h5 id="authentication">
         <span class="secno">3.3.1.3 </span>Accounts/Authentication
     </h5>
-    <p>A registry that knows how to access the known IPA Providers,
-        i.e., which are available and credentials to access them.
-        Storing of credentials must meet security and trust
+    <p>A registry that knows how to access the known IPA Providers, 
+        External Services or Data Providers
+        i.e., which are available and credentials to access them at a general
+        level. Storing of credentials must meet security and trust
         considerations that are expected from such a personalized
         service. It has the following characteristics</p>
     <ul>
@@ -1857,6 +1858,16 @@
             href="#providerregistry">Provider Registry</a></li>
         <li>In case an <a href="#provider">IPA Provider</a> does
             not require authentication, this is indicated to the caller.
+        </li>
+        <li>It returns an authentication means for a key of an <a
+            href="#externalservices">External Service</a> or <a 
+            href="#dataproviders">Data Provider</a> that is known to the 
+            <a href="#serviceregistry">External Service Registry</a></li>
+        <li>In case an <a href="#provider">IPA Provider</a>, 
+            <a href="#externalservices">External Service</a> or <a 
+            href="#dataproviders">Data Provider</a> offers services that
+            are dependent on the current user this is indicated to the caller
+            to provide their user-dependent credentials.
         </li>
     </ul>
 
@@ -1898,7 +1909,8 @@
     </h5>
     <p>
         A data provider to get data to be used in the <a href="#dialog">Dialog</a>,
-        e.g. as a result of a query.
+        e.g. as a result of a query. The provided information may be user-specific
+        , e.g., depending on the subscription of the actual user.
     </p>
 
     <h4 id="externalservices">
@@ -1908,7 +1920,8 @@
         width="auto" height="auto" />
     <p>External Services provide access to trigger actions outside
         of the system; for example, triggered from a third-party web
-        service.</p>
+        service. The provided level of service may be user-specific, e.g., 
+        depending on the subscription of the actual user.</p>
 
     <h5 id="externalservicex">
         <span class="secno">3.3.4.1 </span>External Service X
@@ -1937,6 +1950,10 @@
     </p>
     <!--img src="IPA-Architecture-RussianDoll.svg" style="width: 100%; height: auto;" /-->
 
+    <p>
+        The usage of the IPA may be user-specific, e.g.,
+        depending on the subscription of the actual user.
+    </p>
     <h5 id="provider">
         <span class="secno">3.3.5.1 </span>IPA Provider X
     </h5>
