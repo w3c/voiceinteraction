@@ -20,7 +20,12 @@ namespace voiceinteraction {
 namespace ipa {
 
 /**
- * @brief A basic error message.
+ * @brief Represents a basic error message in the IPA framework.
+ * 
+ * This class encapsulates an error code, a descriptive error message, and the 
+ * identifier of the component that caused or handled the error. It provides 
+ * methods to retrieve these details.
+ * 
  * @author Dirk Schnelle-Walka
  */
 class ErrorMessage {

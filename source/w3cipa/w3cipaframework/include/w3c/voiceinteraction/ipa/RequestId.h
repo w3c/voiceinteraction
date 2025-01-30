@@ -20,8 +20,21 @@ namespace voiceinteraction {
 namespace ipa {
 
 /**
- * The request id is used to identify a request within a session. It can used to
- * match a request with a response.
+ * @brief Represents a unique request identifier within a session.
+ * 
+ * The request id is used to uniquely identify a request within a session. It
+ * can be used to
+ * match a request with its corresponding response.
+ * 
+ * This class provides methods to create, compare, and represent request identifiers.
+ * @details The RequestId class is designed to be used in scenarios where requests need to be
+ * uniquely identified and matched with their corresponding responses. It supports comparison
+ * operations to facilitate its use in standard containers like std::map.
+ * 
+ * @note This class is abstract and must be derived to provide a concrete implementation of
+ * the toString() method.
+ * 
+ * @see std::map
  * @author Dirk Schnelle-Walka
  */
 class RequestId

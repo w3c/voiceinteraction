@@ -25,11 +25,25 @@ namespace voiceinteraction {
 namespace ipa {
 
 /**
- * This interface is used to capture all paramaters of a request to the IPA
+ * @brief This interface is used to capture all parameters of a request to the
+ * IPA.
+ *
+ * The IPARequest class encapsulates all the basic data for a request to the
+ * IPA, including session and request identifiers, multimodal inputs, audio
+ * data, and metadata.
+ *
+ * @note This class is intended to be used as part of the IPA framework.
+ *
+ * @see IPAData
+ * @see SessionId
+ * @see RequestId
+ * @see MultiModalDataCollection
+ * @see AudioData
+ * @see MetaData
+ *
  * @author Dirk Schnelle-Walka
  */
 class IPARequest : public IPAData {
-
 public:
     /**
      * Constructs a new object.

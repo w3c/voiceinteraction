@@ -25,9 +25,23 @@ namespace voiceinteraction {
 namespace ipa {
 
 /**
- * This interface is used to return the results of a request to an IPA.
+ * @brief This interface is used to return the results of a request to an IPA.
+ * 
+ * The IPAResponse class encapsulates the response data for a request made to an IPA.
+ * It includes audio data, multimodal data, and metadata associated with the request.
+ * 
+ * @see IPAData
+ * @see AudioData
+ * @see MultiModalDataCollection
+ * @see MetaData
+ * 
+ * @note This class is intended to be used as part of the voice interaction framework.
+ * 
  * @author Dirk Schnelle-Walka
  */
+class IPAResponse : public IPAData {
+    // Class implementation
+};
 class IPAResponse : public IPAData {
 
 public:
