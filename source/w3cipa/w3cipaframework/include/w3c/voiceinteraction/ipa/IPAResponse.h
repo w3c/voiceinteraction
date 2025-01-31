@@ -40,9 +40,6 @@ namespace ipa {
  * @author Dirk Schnelle-Walka
  */
 class IPAResponse : public IPAData {
-    // Class implementation
-};
-class IPAResponse : public IPAData {
 
 public:
     /**
