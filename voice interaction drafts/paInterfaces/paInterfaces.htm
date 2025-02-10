@@ -23,7 +23,7 @@
         <dl>
             <dt>Latest version</dt>
             <dd>
-                Last modified: February 5, 2025 <a
+                Last modified: February 10, 2025 <a
                     href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a>
                 (GitHub repository)<br /> <a
                     href="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">HTML
@@ -36,7 +36,7 @@
             </dd>
         </dl>
         <p class="copyright">
-            Copyright © 2022-2024 the Contributors to the Voice
+            Copyright © 2022-2025 the Contributors to the Voice
             Interaction Community Group, published by the <a
                 href="http://www.w3.org/community/voiceinteraction/">Voice
                 Interaction Community Group</a> under the <a
@@ -328,8 +328,9 @@
         <dd>The Client Layer contains the main components that
             interface with the user.</dd>
         <dt>Dialog</dt>
-        <dd>The Dialog Layer contains the main components that
-            drive user interaction.</dd>
+        <dd>The Dialog Layer contains the main components to drive the
+            interaction with the user. The dialog layer may either be
+            traditionally NLU-based or based on Generative AI.</dd>
         <dt>External Data / Services / IPA Providers</dt>
         <dd>The Data Layer contains the main components that
             provide external data, services, or access to other IPAs.</dd>
@@ -1165,6 +1166,39 @@
 
     <img src="Client-Component.svg" alt="Client Component"
         style="width: 50%; height: auto;" />
+
+    <p>These main components of the client layer can be described as follows</p>
+    <dl>
+        <dt>IPA Client</dt>
+        <dd>Main component to control all interaction wit the user
+            and the local environment.</dd>
+        <dt>Local Services</dt>
+        <dd>Local services can be used to execute local actions in
+            the user's local environment.</dd>
+        <dt>Local Data Providers</dt>
+        <dd>Local Data Providers capture input that is accessible
+            in the user's local environment. They can be used to provide
+            additional input to the IPA Client or to provide additional
+            information that is needed to execute services.</dd>
+        <dt>Presentation</dt>
+        <dd>Presentation devices or modality synthesizers are used
+            to provide system output to the user. Additional output
+            modalities can be employed that render their output with a
+            specific modality synthesizer. It is not always required
+            that a verbal auditory output is made as a reply to a user.
+            The user can also become aware of the output as a
+            consequence of an observable action as a result of a Local
+            Service within the Client Layer or an External Services call
+            from the External Data / Services / IPA Providers Layer. In
+            these cases an additional nonverbal auditory output may be
+            considered.</dd>
+        <dt>Capture</dt>
+        <dd>Capture devices or modality recognizers are used to
+            capture multimodal user input, such as voice or text input.
+            Additional input modalities can be employed that capture
+            input with a specific modality recognizers. Additional input
+            may be gathered from Local Data Providers.</dd>
+    </dl>
 
     <h3 id="ipaclient">
         <span class="secno">5.1.1 </span>IPA Client
