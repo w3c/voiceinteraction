@@ -45,13 +45,13 @@ set(HEADERS
     include/w3c/voiceinteraction/ipa/TextModalityType.h
     include/w3c/voiceinteraction/ipa/Timestamp.h
     include/w3c/voiceinteraction/ipa/VoiceModalityType.h
-    include/w3c/voiceinteraction/ipa/client/InputModalityComponent.h
-    include/w3c/voiceinteraction/ipa/client/InputModalityComponentListener.h
+    include/w3c/voiceinteraction/ipa/client/CaptureModalityComponent.h
+    include/w3c/voiceinteraction/ipa/client/CaptureModalityComponentListener.h
     include/w3c/voiceinteraction/ipa/client/InputNotificationMediator.h
-    include/w3c/voiceinteraction/ipa/client/IOType.h
+    include/w3c/voiceinteraction/ipa/client/InteractionType.h
     include/w3c/voiceinteraction/ipa/client/ModalityComponent.h
     include/w3c/voiceinteraction/ipa/client/InteractionManager.h
-    include/w3c/voiceinteraction/ipa/client/OutputModalityComponent.h
+    include/w3c/voiceinteraction/ipa/client/PresentationModalityComponent.h
     include/w3c/voiceinteraction/ipa/dialog/IPAService.h
     include/w3c/voiceinteraction/ipa/external/ProviderSelectionService.h
     include/w3c/voiceinteraction/ipa/external/ipa/IPAProvider.h
@@ -80,12 +80,12 @@ set(SOURCES
     src/w3c/voiceinteraction/ipa/TextModalityType.cpp
     src/w3c/voiceinteraction/ipa/Timestamp.cpp
     src/w3c/voiceinteraction/ipa/VoiceModalityType.cpp
-    src/w3c/voiceinteraction/ipa/client/InputModalityComponent.cpp
-    src/w3c/voiceinteraction/ipa/client/InputModalityComponentListener.cpp
+    src/w3c/voiceinteraction/ipa/client/CaptureModalityComponent.cpp
+    src/w3c/voiceinteraction/ipa/client/CaptureModalityComponentListener.cpp
     src/w3c/voiceinteraction/ipa/client/InputNotificationMediator.cpp
     src/w3c/voiceinteraction/ipa/client/ModalityComponent.cpp
     src/w3c/voiceinteraction/ipa/client/InteractionManager.cpp
-    src/w3c/voiceinteraction/ipa/client/OutputModalityComponent.cpp
+    src/w3c/voiceinteraction/ipa/client/PresentationModalityComponent.cpp
     src/w3c/voiceinteraction/ipa/dialog/IPAService.cpp
     src/w3c/voiceinteraction/ipa/external/ProviderSelectionService.cpp
     src/w3c/voiceinteraction/ipa/external/ipa/IPAProvider.cpp

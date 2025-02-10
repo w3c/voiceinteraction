@@ -10,24 +10,36 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
-#include "w3c/voiceinteraction/ipa/client/InputModalityComponentListener.h"
+#if !defined(INTERACTION_TYPE_H)
+#define INTERACTION_TYPE_H
 
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
 namespace client {
 
-InputModalityComponentListener::InputModalityComponentListener() {
-}
-
 /**
- * @brief Destroy this object.
+ * @brief Enum representing the type of input or output of a {@link ModalityComponent}.
+ * 
+ * This enum is used to specify whether a component is an capture device or a presentation device or both.
+ * 
+ * @author Dirk Schnelle-Walka
  */
-InputModalityComponentListener::~InputModalityComponentListener() {
-}
+enum InteractionType
+{
+    /**
+     * The component is an input device.
+     */
+    CAPTURE = 0,
+    /**
+     * The component is an output device.
+     */
+    PRESENTATION = 1
+};
 
 } // namespace client
 } // namespace ipa
 } // namespace voiceinteraction
 } // namespace w3c
 
+#endif // !defined(INTERACTION_TYPE_H)

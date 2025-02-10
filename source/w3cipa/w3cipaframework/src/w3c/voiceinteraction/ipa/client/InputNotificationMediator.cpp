@@ -22,14 +22,23 @@ InputNotificationMediator::InputNotificationMediator() {
 
 InputNotificationMediator::~InputNotificationMediator() {}
 
+void InputNotificationMediator::onMultiModalInput(
+    std::shared_ptr<MultiModalData> input) {
+    notifyListeners(input);
+}
+
+std::shared_ptr<MultiModalDataCollection> InputNotificationMediator::getMultiModalInputs() {
+    return nullptr;
+}
+
 void InputNotificationMediator::addInputModalityComponentListener(
-        const std::shared_ptr<InputModalityComponentListener>& listener) {
+        const std::shared_ptr<CaptureModalityComponentListener>& listener) {
     inputListeners.push_back(listener);
 }
 
 void InputNotificationMediator::notifyListeners(
         std::shared_ptr<MultiModalData> input) {
-    for (const std::shared_ptr<InputModalityComponentListener>& listener : inputListeners) {
+    for (const std::shared_ptr<CaptureModalityComponentListener>& listener : inputListeners) {
 //        std::thread thread([&data, &listener]{
             listener->onMultiModalInput(input);
 //        });

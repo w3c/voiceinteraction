@@ -35,20 +35,20 @@ ConsoleTextModalityComponent::ConsoleTextModalityComponent()
     : ModalityComponent(MODALITY) {
 }
 
-const std::list<IOType> ConsoleTextModalityComponent::getSupportedIOTypes() const {
-    std::list<IOType> types = {IOType::INPUT, IOType::OUTPUT };
+const std::list<InteractionType> ConsoleTextModalityComponent::getSupportedIOTypes() const {
+    std::list<InteractionType> types = {InteractionType::CAPTURE, InteractionType::PRESENTATION };
     return types;
 }
 
-void ConsoleTextModalityComponent::startInput(const std::shared_ptr<InputNotificationMediator> &mediator) {
-    std::thread thread([this, mediator] {
-        captureInputAsynchronously(mediator);
+void ConsoleTextModalityComponent::startCapture(const std::shared_ptr<CaptureModalityComponentListener> &listener) {
+    std::thread thread([this, listener] {
+        captureInputAsynchronously(listener);
     });
     thread.detach();
 }
 
 void ConsoleTextModalityComponent::captureInputAsynchronously(
-    std::shared_ptr<InputNotificationMediator> mediator) {
+    std::shared_ptr<CaptureModalityComponentListener> mediator) {
     std::cout << "User: ";
     std::cout.flush();
     LOG4CPLUS_INFO(LOGGER, LOG4CPLUS_TEXT("Input started"));
@@ -61,10 +61,10 @@ void ConsoleTextModalityComponent::captureInputAsynchronously(
     Language language("en");
     std::shared_ptr<MultiModalData> multiModalInput =
         std::make_shared<TextMultiModalData>(input, language);
-    mediator->notifyListeners(multiModalInput);
+    mediator->onMultiModalInput(multiModalInput);
 }
 
-void ConsoleTextModalityComponent::stopInput() {
+void ConsoleTextModalityComponent::stopCapture() {
     LOG4CPLUS_INFO(LOGGER, LOG4CPLUS_TEXT("Input started"));
 }
 
