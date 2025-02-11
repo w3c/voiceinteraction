@@ -10,12 +10,12 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
-#ifndef INPUTMODALITYCOMPONENT_H
-#define INPUTMODALITYCOMPONENT_H
+#ifndef CAPTURE_MODALITYCOMPONENT_H
+#define CAPTURE_MODALITYCOMPONENT_H
 
 #include <memory>
 
-#include "w3c/voiceinteraction/ipa/client/InputNotificationMediator.h"
+#include "w3c/voiceinteraction/ipa/client/CaptureModalityComponentListener.h"
 
 namespace w3c {
 namespace voiceinteraction {
@@ -23,10 +23,10 @@ namespace ipa {
 namespace client {
 
 /**
- * @brief A component to handle multimodal inputs.
+ * @brief A component to capture multimodal inputs.
  *
- * Input modality components are also required to inherit from
- * {@link ModalityComponent} and support {@link IOType#INPUT}.
+ * Capture modality components are also required to inherit from
+ * {@link ModalityComponent} and support {@link InteractionType#CAPTURE}.
  * 
  * This class provides an interface for starting and stopping the listening
  * for inputs and notifying a mediator when inputs are received.
@@ -35,36 +35,36 @@ namespace client {
  * modality implementations.
  * 
  * @see ModalityComponent
- * @see IOType
+ * @see InteractionType
  * @see InputNotificationMediator
  * 
  * @author Dirk Schnelle-Walka
  */
-class InputModalityComponent {
+class CaptureModalityComponent {
 public:
     /**
      * @brief Constructs an InputModalityComponent object.
      */
-    InputModalityComponent();
+    CaptureModalityComponent();
 
     /**
      * @brief Destroys the InputModalityComponent object.
      */
-    virtual ~InputModalityComponent();
+    virtual ~CaptureModalityComponent();
 
     /**
-     * @brief Starts listening asynchronously for inputs and notifies the provided
-     * mediator if any input is received from this component.
+     * @brief Starts capturing asynchronously for inputs and notifies the provided
+     * listner if any input is received from this component.
      * 
-     * @param mediator The mediator to handle input notifications.
+     * @param listener The listener to handle input notifications.
      */
-    virtual void startInput(
-        const std::shared_ptr<InputNotificationMediator>& mediator) = 0;
+    virtual void startCapture(
+        const std::shared_ptr<CaptureModalityComponentListener>& listener) = 0;
 
     /**
      * @brief Stops listening for inputs.
      */
-    virtual void stopInput() = 0;
+    virtual void stopCapture() = 0;
 };
 
 } // namespace client
@@ -72,4 +72,4 @@ public:
 } // namespace voiceinteraction
 } // namespace w3c
 
-#endif // INPUTMODALITYCOMPONENT_H
+#endif // CAPTURE_MODALITYCOMPONENT_H

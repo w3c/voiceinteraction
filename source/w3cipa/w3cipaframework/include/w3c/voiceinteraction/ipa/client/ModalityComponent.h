@@ -16,7 +16,7 @@
 #include <list>
 
 #include "w3c/voiceinteraction/ipa/ModalityType.h"
-#include "w3c/voiceinteraction/ipa/client/IOType.h"
+#include "w3c/voiceinteraction/ipa/client/InteractionType.h"
 
 namespace w3c {
 namespace voiceinteraction {
@@ -50,7 +50,7 @@ public:
      * Retrieves a list IO type that are supported by this modality component.
      * @return the supported IO types of this modality component.
      */
-    virtual const std::list<IOType> getSupportedIOTypes() const = 0;
+    virtual const std::list<InteractionType> getSupportedIOTypes() const = 0;
 
 private:
     /** The modality of this input. */

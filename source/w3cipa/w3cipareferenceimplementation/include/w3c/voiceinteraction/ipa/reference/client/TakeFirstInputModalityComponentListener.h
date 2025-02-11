@@ -19,7 +19,7 @@
 #include <log4cplus/logger.h>
 
 #include <w3c/voiceinteraction/ipa/IPADataProcessor.h>
-#include <w3c/voiceinteraction/ipa/client/InputModalityComponentListener.h>
+#include <w3c/voiceinteraction/ipa/client/CaptureModalityComponentListener.h>
 
 using namespace w3c::voiceinteraction::ipa;
 
@@ -35,7 +35,7 @@ namespace client {
  * @author Dirk Schnelle-Walka
  */
 class TakeFirstInputModalityComponentListener
-    : public ::client::InputModalityComponentListener,
+    : public ::client::CaptureModalityComponentListener,
       public IPADataProcessor {
 
 public:

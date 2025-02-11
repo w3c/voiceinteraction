@@ -10,8 +10,8 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
-#ifndef OUTPUTMODALITYCOMPONENT_H
-#define OUTPUTMODALITYCOMPONENT_H
+#ifndef PRESENTATION_MODALITYCOMPONENT_H
+#define PRESENTATION_MODALITYCOMPONENT_H
 
 #include <memory>
 
@@ -23,7 +23,7 @@ namespace ipa {
 namespace client {
 
 /**
- * A compponent to hand mutlimodal outputs.
+ * A component to hand mutlimodal outputs and present it to the user.
  *
  * Output modality components are also asked to inherit from
  * {@link ModalityComponent} and support {@link IOType::OUTPUT}.
@@ -34,7 +34,7 @@ namespace client {
  * A component to handle multimodal outputs.
  *
  * Output modality components are also required to inherit from
- * {@link ModalityComponent} and support {@link IOType::OUTPUT}.
+ * {@link ModalityComponent} and support {@link InteractionType#PRESENTATION}.
  *
  * @brief This class handles the output modality in a multimodal interaction system.
  * 
@@ -47,17 +47,17 @@ namespace client {
  *
  * @author Dirk Schnelle-Walka
  */
-class OutputModalityComponent {
+class PresentationModalityComponent {
 public:
     /**
      * @brief Constructs an OutputModalityComponent object.
      */
-    OutputModalityComponent();
+    PresentationModalityComponent();
 
     /**
      * @brief Destroys this object.
      */
-    virtual ~OutputModalityComponent();
+    virtual ~PresentationModalityComponent();
 
     /**
      * @brief Handles the obtained multimodal output.
@@ -73,4 +73,4 @@ public:
 } // namespace voiceinteraction
 } // namespace w3c
 
-#endif // OUTPUTMODALITYCOMPONENT_H
+#endif // PRESENTATION_MODALITYCOMPONENT_H

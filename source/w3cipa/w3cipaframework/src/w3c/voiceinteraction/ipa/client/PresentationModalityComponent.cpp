@@ -10,17 +10,17 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
-#include "w3c/voiceinteraction/ipa/client/OutputModalityComponent.h"
+#include "w3c/voiceinteraction/ipa/client/PresentationModalityComponent.h"
 
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
 namespace client {
 
-OutputModalityComponent::OutputModalityComponent() {
+PresentationModalityComponent::PresentationModalityComponent() {
 }
 
-OutputModalityComponent::~OutputModalityComponent() {
+PresentationModalityComponent::~PresentationModalityComponent() {
 }
 
 } // namespace client

@@ -16,9 +16,9 @@
 #include <log4cplus/logger.h>
 
 #include <w3c/voiceinteraction/ipa/client/ModalityComponent.h>
-#include <w3c/voiceinteraction/ipa/client/InputModalityComponent.h>
+#include <w3c/voiceinteraction/ipa/client/CaptureModalityComponent.h>
 #include <w3c/voiceinteraction/ipa/client/InputNotificationMediator.h>
-#include <w3c/voiceinteraction/ipa/client/OutputModalityComponent.h>
+#include <w3c/voiceinteraction/ipa/client/PresentationModalityComponent.h>
 
 using namespace w3c::voiceinteraction::ipa::client;
 
@@ -29,15 +29,15 @@ namespace reference {
 namespace client {
 
 class ConsoleTextModalityComponent : public ModalityComponent,
-    public InputModalityComponent, public OutputModalityComponent {
+    public CaptureModalityComponent, public PresentationModalityComponent {
 public:
     ConsoleTextModalityComponent();
 
-    const std::list<IOType> getSupportedIOTypes() const override;
+    const std::list<InteractionType> getSupportedIOTypes() const override;
 
-    void startInput(const std::shared_ptr<InputNotificationMediator>& mediator) override;
+    void startCapture(const std::shared_ptr<CaptureModalityComponentListener>& mediator) override;
 
-    void stopInput() override;
+    void stopCapture() override;
 
     void handleOutput(const std::shared_ptr<MultiModalData>& output) override;
 
@@ -48,7 +48,8 @@ private:
      * Asynchronously started method to capture user input from the console.
      * @param mediator the mediator to inform, once the user entered data
      */
-    void captureInputAsynchronously(std::shared_ptr<InputNotificationMediator> mediator);
+ void captureInputAsynchronously(
+     std::shared_ptr<CaptureModalityComponentListener> mediator);
 
     const static std::string ID;
     /** Logger instance. */

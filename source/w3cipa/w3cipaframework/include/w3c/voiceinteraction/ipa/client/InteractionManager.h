@@ -22,10 +22,10 @@
 #include "w3c/voiceinteraction/ipa/MultiModalDataCollection.h"
 #include "w3c/voiceinteraction/ipa/IPADataProcessor.h"
 #include "ModalityComponent.h"
-#include "InputModalityComponent.h"
-#include "InputModalityComponentListener.h"
+#include "CaptureModalityComponent.h"
+#include "CaptureModalityComponentListener.h"
 #include "InputNotificationMediator.h"
-#include "OutputModalityComponent.h"
+#include "PresentationModalityComponent.h"
 
 namespace w3c {
 namespace voiceinteraction {
@@ -82,7 +82,7 @@ class InteractionManager : public IPADataProcessor {
      * @throws std::invalid_argument if the type is not supported
      */
     std::list<std::shared_ptr<ModalityComponent>> getModalityComponents(
-        const ModalityType& modality, const IOType& ioType) const;
+        const ModalityType& modality, const InteractionType& ioType) const;
 
     /**
      * Starts the input for all known modality handlers.
@@ -106,7 +106,7 @@ class InteractionManager : public IPADataProcessor {
      * @param listener the listener to add.
      */
     void addInputModalityComponentListener(
-            const std::shared_ptr<InputModalityComponentListener>& listener);
+            const std::shared_ptr<CaptureModalityComponentListener>& listener);
 
     /**
      * Adds the provided listener for multimodal inputs to the list of known
@@ -114,7 +114,7 @@ class InteractionManager : public IPADataProcessor {
      * @param listener the listener to add.
      */
     void operator >>(
-            const std::shared_ptr<InputModalityComponentListener>& listener);
+            const std::shared_ptr<CaptureModalityComponentListener>& listener);
 private:
     /**
      * @brief Adds the provided modality component as an input modality
@@ -144,7 +144,7 @@ private:
 
 std::shared_ptr<IPADataProcessor> operator>>(
         const std::shared_ptr<InteractionManager>& manager,
-        const std::shared_ptr<InputModalityComponentListener>& listener);
+        const std::shared_ptr<CaptureModalityComponentListener>& listener);
 
 } // namespace client
 } // namespace ipa

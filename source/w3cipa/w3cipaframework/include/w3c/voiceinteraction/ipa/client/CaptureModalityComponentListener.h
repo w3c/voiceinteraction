@@ -36,17 +36,17 @@ namespace client {
  * 
  * @author Dirk Schnelle-Walka
  */
-class InputModalityComponentListener {
+class CaptureModalityComponentListener  {
 public:
     /**
      * @brief Constructs an InputModalityComponentListener object.
      */
-    InputModalityComponentListener();
+    CaptureModalityComponentListener();
 
     /**
      * @brief Destroys the InputModalityComponentListener object.
      */
-    virtual ~InputModalityComponentListener();
+    virtual ~CaptureModalityComponentListener();
 
     /**
      * @brief Handles the provided multimodal input.

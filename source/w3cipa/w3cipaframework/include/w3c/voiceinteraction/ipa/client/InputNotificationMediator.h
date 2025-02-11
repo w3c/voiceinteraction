@@ -16,7 +16,7 @@
 #include <list>
 #include <memory>
 
-#include "InputModalityComponentListener.h"
+#include "CaptureModalityComponentListener.h"
 
 namespace w3c {
 namespace voiceinteraction {
@@ -37,7 +37,7 @@ namespace client {
  * 
  * @author Dirk Schnelle-Walka
  */
-class InputNotificationMediator {
+class InputNotificationMediator : public CaptureModalityComponentListener {
 public:
     /**
      * @brief Constructs a new InputNotificationMediator object.
@@ -58,8 +58,20 @@ public:
      * @param listener The listener to add.
      */
     void addInputModalityComponentListener(
-            const std::shared_ptr<InputModalityComponentListener>& listener);
+            const std::shared_ptr<CaptureModalityComponentListener>& listener);
 
+    /**
+     * {@inheritDoc} 
+     */
+    virtual void onMultiModalInput(std::shared_ptr<MultiModalData> input) override;
+
+    /**
+     * {@inheritDoc}
+     * @ return Always {@code nullptr}.
+     */
+    virtual std::shared_ptr<MultiModalDataCollection> getMultiModalInputs() override;
+
+private:
     /**
      * @brief Notifies all registered listeners of a new multimodal input.
      * 
@@ -70,9 +82,8 @@ public:
      */
     void notifyListeners(std::shared_ptr<MultiModalData> input);
 
-private:
     /** List of registered listeners for multimodal inputs. */
-    std::list<std::shared_ptr<InputModalityComponentListener>> inputListeners;
+    std::list<std::shared_ptr<CaptureModalityComponentListener>> inputListeners;
 };
 
 } // namespace client

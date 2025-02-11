@@ -28,13 +28,13 @@ InteractionManager::~InteractionManager() {
 void InteractionManager::addModalityComponent(
         const std::shared_ptr<ModalityComponent> component) {
     const ModalityType& modality = component->getModality();
-    const std::list<IOType>& types = component->getSupportedIOTypes();
-    for (IOType type : types) {
+    const std::list<InteractionType>& types = component->getSupportedIOTypes();
+    for (InteractionType type : types) {
         switch (type) {
-        case IOType::INPUT:
+        case InteractionType::CAPTURE:
             addInputModality(modality, component);
             break;
-        case IOType::OUTPUT:
+        case InteractionType::PRESENTATION:
             addOutputModality(modality, component);
             break;
         default:
@@ -47,15 +47,15 @@ void InteractionManager::addModalityComponent(
 }
 
 std::list<std::shared_ptr<ModalityComponent>> InteractionManager::getModalityComponents(
-        const ModalityType& modality, const IOType& ioType) const {
-    if (ioType == IOType::INPUT) {
+        const ModalityType& modality, const InteractionType& ioType) const {
+    if (ioType == InteractionType::CAPTURE) {
         std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>>::const_iterator iterator =
             inputComponents.find(modality);
         if (iterator == inputComponents.end()) {
             return std::list<std::shared_ptr<ModalityComponent>>();
         }
         return iterator->second;
-    } else if (ioType == IOType::OUTPUT){
+    } else if (ioType == InteractionType::PRESENTATION){
         std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>>::const_iterator iterator =
             outputComponents.find(modality);
         if (iterator == outputComponents.end()) {
@@ -76,9 +76,9 @@ void InteractionManager::startInput() const {
          ++iterator) {
         std::list<std::shared_ptr<ModalityComponent>> components = iterator->second;
         for (std::shared_ptr<ModalityComponent>& component : components) {
-            std::shared_ptr<client::InputModalityComponent> inputComponent =
-                std::dynamic_pointer_cast<client::InputModalityComponent>(component);
-            inputComponent->startInput(inputNotifcation);
+            std::shared_ptr<client::CaptureModalityComponent> inputComponent =
+                std::dynamic_pointer_cast<client::CaptureModalityComponent>(component);
+            inputComponent->startCapture(inputNotifcation);
         }
 
     }
@@ -103,22 +103,22 @@ void InteractionManager::handleOutput(
         std::shared_ptr<MultiModalData> output =
             outputs->getMultiModalData(outputModality);
         std::list<std::shared_ptr<client::ModalityComponent>> outputComponents =
-            getModalityComponents(outputModality, client::IOType::OUTPUT);
+            getModalityComponents(outputModality, client::InteractionType::PRESENTATION);
         for (std::shared_ptr<client::ModalityComponent>& outputComponent : outputComponents) {
-            std::shared_ptr<client::OutputModalityComponent> outputModality =
-                std::dynamic_pointer_cast<client::OutputModalityComponent>(outputComponent);
+            std::shared_ptr<client::PresentationModalityComponent> outputModality =
+                std::dynamic_pointer_cast<client::PresentationModalityComponent>(outputComponent);
             outputModality->handleOutput(output);
         }
     }
 }
 
 void InteractionManager::addInputModalityComponentListener(
-        const std::shared_ptr<InputModalityComponentListener>& listener) {
+        const std::shared_ptr<CaptureModalityComponentListener>& listener) {
     inputNotifcation->addInputModalityComponentListener(listener);
 }
 
 void InteractionManager::operator>>(
-        const std::shared_ptr<InputModalityComponentListener>& listener) {
+        const std::shared_ptr<CaptureModalityComponentListener>& listener) {
     addInputModalityComponentListener(listener);
 }
 
@@ -151,7 +151,7 @@ void InteractionManager::addOutputModality(const ModalityType& modality,
 
 std::shared_ptr<IPADataProcessor> operator >>(
         const std::shared_ptr<InteractionManager>& manager,
-        const std::shared_ptr<InputModalityComponentListener>& listener) {
+        const std::shared_ptr<CaptureModalityComponentListener>& listener) {
     manager->addInputModalityComponentListener(listener);
     return std::dynamic_pointer_cast<IPADataProcessor>(listener);
 }
