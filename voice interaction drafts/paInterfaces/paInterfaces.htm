@@ -23,7 +23,7 @@
         <dl>
             <dt>Latest version</dt>
             <dd>
-                Last modified: February 10, 2025 <a
+                Last modified: February 11, 2025 <a
                     href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a>
                 (GitHub repository)<br /> <a
                     href="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">HTML
@@ -1208,20 +1208,29 @@
     <img src="IPA-Client.svg" alt="IPA Client"
         style="width: 50%; height: auto;" />
 
-    <h4 id="modalitymanager">
-        <span class="secno">5.1.1.1 </span>Modality Manager
-    </h4>
+    <p>The main components of the IPA Client can be described as
+        follows. Not all of them are required and may be tailored to the
+        actual use case.</p>
+    <dl>
+        <dt>Interaction Manager</dt>
+        <dd>The Interaction Manager enables access to the
+            modalities that are supported by the IPA Client. Major
+            modalities are voice and text in case of chatbots.</dd>
+        <dt>Text Modality Component</dt>
+        <dd>Enables interaction with the user via text, e.g. in a chatbot.</dd>
+        <dt>Voice Modality Component</dt>
+        <dd>Enables interaction with the user via voice.</dd>
+        <dt>Locale Service Modality Component</dt>
+        <dd>Enables interaction by executing a local service, e.g.
+            turning on a light and receive data from the Local Data
+            Providers, e.g. state of the heater.</dd>
+        <dt>Locale Service Registry</dt>
+        <dd>Registry that knows all Local Services and Local Data Providers.</dd>
+    </dl>
 
-    <p>The modality manager enables access to the modalities that
-        are supported by the IPA Client. Major modalities are voice and
-        text in case of chatbots. The following interfaces are supported</p>
-    <ul>
-        <li>Client Interaction</li>
-        <li>Handle-xxx-Modality</li>
-    </ul>
 
     <h4 id="clientactivtionstrategy">
-        <span class="secno">5.1.1.2 </span>Client Activation Strategy
+        <span class="secno">5.1.1.1 </span>Client Activation Strategy
     </h4>
     <p>
         The Client Activation Strategy defines how the client gets
