@@ -13,3 +13,5 @@ source/w3cipa/open-source/**
 /source/w3cipa/vcpkg_installed
 /source/w3cipa/vcpkg-configuration.json
 /source/w3cipa/w3cipachatgptipaprovider/cacert.pem
+/source/w3cipa/build
+/source/w3cipa/CMakeUserPresets.json

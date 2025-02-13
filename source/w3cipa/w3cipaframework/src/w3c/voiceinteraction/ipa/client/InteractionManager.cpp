@@ -28,18 +28,18 @@ InteractionManager::~InteractionManager() {
 void InteractionManager::addModalityComponent(
         const std::shared_ptr<ModalityComponent> component) {
     const ModalityType& modality = component->getModality();
-    const std::list<InteractionType>& types = component->getSupportedIOTypes();
+    const std::list<InteractionType>& types = component->getSupportedInteractionTypes();
     for (InteractionType type : types) {
         switch (type) {
         case InteractionType::CAPTURE:
-            addInputModality(modality, component);
+            addCaptureModality(modality, component);
             break;
         case InteractionType::PRESENTATION:
-            addOutputModality(modality, component);
+            addPresentationModality(modality, component);
             break;
         default:
             std::stringstream ss;
-            ss << "Unsupported IO type " << type;
+            ss << "Unsupported interaction type " << type;
             std::string error = ss.str();
             throw new std::invalid_argument(error.c_str());
         }
@@ -50,15 +50,15 @@ std::list<std::shared_ptr<ModalityComponent>> InteractionManager::getModalityCom
         const ModalityType& modality, const InteractionType& ioType) const {
     if (ioType == InteractionType::CAPTURE) {
         std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>>::const_iterator iterator =
-            inputComponents.find(modality);
-        if (iterator == inputComponents.end()) {
+            captureComponents.find(modality);
+        if (iterator == captureComponents.end()) {
             return std::list<std::shared_ptr<ModalityComponent>>();
         }
         return iterator->second;
     } else if (ioType == InteractionType::PRESENTATION){
         std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>>::const_iterator iterator =
-            outputComponents.find(modality);
-        if (iterator == outputComponents.end()) {
+            presentationComponents.find(modality);
+        if (iterator == presentationComponents.end()) {
             return std::list<std::shared_ptr<ModalityComponent>>();
         }
         return iterator->second;
@@ -70,9 +70,9 @@ std::list<std::shared_ptr<ModalityComponent>> InteractionManager::getModalityCom
     }
 }
 
-void InteractionManager::startInput() const {
+void InteractionManager::startCapture() const {
     for (std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>>::const_iterator iterator =
-        inputComponents.begin(); iterator != inputComponents.end();
+        captureComponents.begin(); iterator != captureComponents.end();
          ++iterator) {
         std::list<std::shared_ptr<ModalityComponent>> components = iterator->second;
         for (std::shared_ptr<ModalityComponent>& component : components) {
@@ -89,11 +89,11 @@ void InteractionManager::processIPAData(std::shared_ptr<IPAData> data) {
             std::dynamic_pointer_cast<IPAResponse>(data)) {
         std::shared_ptr<MultiModalDataCollection> outputs =
             response->getMultiModalOutputs();
-        handleOutput(outputs);
+        present(outputs);
     }
 }
 
-void InteractionManager::handleOutput(
+void InteractionManager::present(
         const std::shared_ptr<MultiModalDataCollection>& outputs) const {
     // Obtain all output modalities for the current type
     std::list<ModalityType> outputModalities = outputs->getModalityTypes();
@@ -107,7 +107,7 @@ void InteractionManager::handleOutput(
         for (std::shared_ptr<client::ModalityComponent>& outputComponent : outputComponents) {
             std::shared_ptr<client::PresentationModalityComponent> outputModality =
                 std::dynamic_pointer_cast<client::PresentationModalityComponent>(outputComponent);
-            outputModality->handleOutput(output);
+            outputModality->present(output);
         }
     }
 }
@@ -122,31 +122,45 @@ void InteractionManager::operator>>(
     addInputModalityComponentListener(listener);
 }
 
-
-void InteractionManager::addInputModality(const ModalityType& modality,
+void InteractionManager::addCaptureModality(const ModalityType& modality,
                       const std::shared_ptr<ModalityComponent>& component) {
     std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>>::iterator iterator =
-        inputComponents.find(modality);
-    if (iterator == inputComponents.end()) {
+        captureComponents.find(modality);
+    if (iterator == captureComponents.end()) {
         std::list<std::shared_ptr<ModalityComponent>> emptyList;
-        inputComponents[modality] = emptyList;
+        captureComponents[modality] = emptyList;
     }
     std::list<std::shared_ptr<ModalityComponent>>& components =
-        inputComponents.at(modality);
+        captureComponents.at(modality);
     components.push_back(component);
 }
 
-void InteractionManager::addOutputModality(const ModalityType& modality,
+void InteractionManager::addPresentationModality(const ModalityType& modality,
                        const std::shared_ptr<ModalityComponent>& component) {
     std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>>::iterator iterator =
-        outputComponents.find(modality);
-    if (iterator == outputComponents.end()) {
+        presentationComponents.find(modality);
+    if (iterator == presentationComponents.end()) {
         std::list<std::shared_ptr<ModalityComponent>> emptyList;
-        outputComponents[modality] = emptyList;
+        presentationComponents[modality] = emptyList;
     }
     std::list<std::shared_ptr<ModalityComponent>>& components =
-        outputComponents.at(modality);
+        presentationComponents.at(modality);
     components.push_back(component);
+}
+
+void InteractionManager::stopCapturing() const {
+  for (std::map<ModalityType,
+                std::list<std::shared_ptr<ModalityComponent>>>::const_iterator
+           iterator = captureComponents.begin();
+       iterator != captureComponents.end(); ++iterator) {
+    std::list<std::shared_ptr<ModalityComponent>> components = iterator->second;
+    for (std::shared_ptr<ModalityComponent>& component : components) {
+      std::shared_ptr<client::CaptureModalityComponent> inputComponent =
+          std::dynamic_pointer_cast<client::CaptureModalityComponent>(
+              component);
+      inputComponent->stopCapture();
+    }
+  }
 }
 
 std::shared_ptr<IPADataProcessor> operator >>(

@@ -85,9 +85,9 @@ class InteractionManager : public IPADataProcessor {
         const ModalityType& modality, const InteractionType& ioType) const;
 
     /**
-     * Starts the input for all known modality handlers.
+     * Starts capturing input for all known modality handlers.
      */
-    void startInput() const;
+    void startCapture() const;
 
     /**
      * {@inheritDoc}
@@ -98,7 +98,7 @@ class InteractionManager : public IPADataProcessor {
      * Handles the provided multimodal output with all known modality handlers.
      * @param outputs the outputs to process
      */
-    void handleOutput(const std::shared_ptr<MultiModalDataCollection>& outputs) const;
+    void present(const std::shared_ptr<MultiModalDataCollection>& outputs) const;
 
     /**
      * Adds the provided listener for multimodal inputs to the list of known
@@ -121,7 +121,7 @@ private:
      * @param modality The modality for which to get the modality component.
      * @param component the component to add
      */
-    void addInputModality(const ModalityType& modality,
+    void addCaptureModality(const ModalityType& modality,
                           const std::shared_ptr<ModalityComponent>& component);
 
     /**
@@ -129,14 +129,19 @@ private:
      * @param modality The modality for which to get the modality component.
      * @param component the component to add
      */
-    void addOutputModality(const ModalityType& modality,
+    void addPresentationModality(const ModalityType& modality,
                            const std::shared_ptr<ModalityComponent>& component);
 
-    /** The map of known input modality components. */
-    std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>> inputComponents;
+    /**
+     * @brief Stops capturing for all known modality components.
+     */
+    void stopCapturing() const;
 
-    /** The map of known output modality components. */
-    std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>> outputComponents;
+    /** The map of known capture modality components. */
+    std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>> captureComponents;
+
+    /** The map of known presentation modality components. */
+    std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>> presentationComponents;
 
     /** Mediator to forward input events. */
     std::shared_ptr<InputNotificationMediator> inputNotifcation;

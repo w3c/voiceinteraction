@@ -47,10 +47,10 @@ public:
     const ModalityType& getModality() const;
 
     /**
-     * Retrieves a list IO type that are supported by this modality component.
-     * @return the supported IO types of this modality component.
+     * Retrieves a list interation type that are supported by this modality component.
+     * @return the supported interaction types of this modality component.
      */
-    virtual const std::list<InteractionType> getSupportedIOTypes() const = 0;
+    virtual const std::list<InteractionType> getSupportedInteractionTypes() const = 0;
 
 private:
     /** The modality of this input. */

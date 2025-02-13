@@ -35,7 +35,7 @@ ConsoleTextModalityComponent::ConsoleTextModalityComponent()
     : ModalityComponent(MODALITY) {
 }
 
-const std::list<InteractionType> ConsoleTextModalityComponent::getSupportedIOTypes() const {
+const std::list<InteractionType> ConsoleTextModalityComponent::getSupportedInteractionTypes() const {
     std::list<InteractionType> types = {InteractionType::CAPTURE, InteractionType::PRESENTATION };
     return types;
 }
@@ -65,10 +65,10 @@ void ConsoleTextModalityComponent::captureInputAsynchronously(
 }
 
 void ConsoleTextModalityComponent::stopCapture() {
-    LOG4CPLUS_INFO(LOGGER, LOG4CPLUS_TEXT("Input started"));
+    LOG4CPLUS_INFO(LOGGER, LOG4CPLUS_TEXT("Input stoppd"));
 }
 
-void ConsoleTextModalityComponent::handleOutput(
+void ConsoleTextModalityComponent::present(
     const std::shared_ptr<MultiModalData>& output) {
     std::shared_ptr<TextMultiModalData> textOutput =
         std::dynamic_pointer_cast<TextMultiModalData>(output);

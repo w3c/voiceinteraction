@@ -46,11 +46,11 @@ int main() {
     // Build up the components
 
     // Cient Layer
-    std::shared_ptr<client::InteractionManager> modalityManager =
+    std::shared_ptr<client::InteractionManager> interactionManager =
         std::make_shared<client::InteractionManager>();
     std::shared_ptr<::reference::client::ConsoleTextModalityComponent> console =
         std::make_shared<::reference::client::ConsoleTextModalityComponent>();
-    modalityManager->addModalityComponent(console);
+    interactionManager->addModalityComponent(console);
     std::shared_ptr<::reference::client::TakeFirstInputModalityComponentListener> inputListener =
         std::make_shared<::reference::client::TakeFirstInputModalityComponentListener>();
 
@@ -85,11 +85,11 @@ int main() {
         std::make_shared<external::ProviderSelectionService>(registry);
 
     // Create a processing chain
-    modalityManager >> inputListener >> ipaService >> providerSelectionService
-            >> ipaDialogManager >> ipaService >> modalityManager;
+    interactionManager >> inputListener >> ipaService >> providerSelectionService
+            >> ipaDialogManager >> ipaService >> interactionManager;
 
     // Start capturing input
-    modalityManager->startInput();
+    interactionManager->startCapture();
 
     // Actually start processing
     inputListener->IPADataProcessor::processIPAData();

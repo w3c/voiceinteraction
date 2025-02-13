@@ -60,11 +60,11 @@ public:
     virtual ~PresentationModalityComponent();
 
     /**
-     * @brief Handles the obtained multimodal output.
+     * @brief Handles the obtained multimodal output for presentation.
      * 
      * @param output The obtained output.
      */
-    virtual void handleOutput(
+    virtual void present(
             const std::shared_ptr<MultiModalData>& output) = 0;
 };
 
