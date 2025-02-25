@@ -13,13 +13,9 @@
 #ifndef TAKEFIRSTINPUTMODALITYCOMPONENTLISTENER_H
 #define TAKEFIRSTINPUTMODALITYCOMPONENTLISTENER_H
 
-#include <mutex>
-#include <condition_variable>
-
 #include <log4cplus/logger.h>
 
-#include <w3c/voiceinteraction/ipa/IPADataProcessor.h>
-#include <w3c/voiceinteraction/ipa/client/CaptureModalityComponentListener.h>
+#include <w3c/voiceinteraction/ipa/client/MulitModalCaptureSynchronisationStrategy.h>
 
 using namespace w3c::voiceinteraction::ipa;
 
@@ -34,26 +30,19 @@ namespace client {
  * first received input as the input to the IPA.
  * @author Dirk Schnelle-Walka
  */
-class TakeFirstInputModalityComponentListener
-    : public ::client::CaptureModalityComponentListener,
-      public IPADataProcessor {
+class TakeFirstMulitModalCaptureSynchronisationStrategy
+    : public ::client::MulitModalCaptureSynchronisationStrategy {
 
 public:
     /**
      * Constructs a new object.
      */
-    TakeFirstInputModalityComponentListener();
-
-    void processIPAData(std::shared_ptr<IPAData> data) override;
+ TakeFirstMulitModalCaptureSynchronisationStrategy(
+     const std::shared_ptr<::client::InteractionManager>& im);
 
     void onMultiModalInput(std::shared_ptr<MultiModalData> input) override;
 
-    std::shared_ptr<MultiModalDataCollection> getMultiModalInputs() override;
-
 private:
-    std::mutex mtx;
-    std::condition_variable cv;
-    std::shared_ptr<MultiModalData> multiModalInput;
     /** Logger instance. */
     const static log4cplus::Logger LOGGER;
 };

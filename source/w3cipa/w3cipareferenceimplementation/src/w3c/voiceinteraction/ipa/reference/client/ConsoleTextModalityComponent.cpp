@@ -48,7 +48,7 @@ void ConsoleTextModalityComponent::startCapture(const std::shared_ptr<CaptureMod
 }
 
 void ConsoleTextModalityComponent::captureInputAsynchronously(
-    std::shared_ptr<CaptureModalityComponentListener> mediator) {
+    std::shared_ptr<CaptureModalityComponentListener> listener) {
     std::cout << "User: ";
     std::cout.flush();
     LOG4CPLUS_INFO(LOGGER, LOG4CPLUS_TEXT("Input started"));
@@ -61,7 +61,7 @@ void ConsoleTextModalityComponent::captureInputAsynchronously(
     Language language("en");
     std::shared_ptr<MultiModalData> multiModalInput =
         std::make_shared<TextMultiModalData>(input, language);
-    mediator->onMultiModalInput(multiModalInput);
+    listener->onMultiModalInput(multiModalInput);
 }
 
 void ConsoleTextModalityComponent::stopCapture() {

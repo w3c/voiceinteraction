@@ -92,8 +92,14 @@ const std::list<Language>& ChatGPTIPAProvider::getSupportedLanguages() const {
 
 const std::shared_ptr<ExternalIPAResponse> ChatGPTIPAProvider::processInput(
     const std::shared_ptr<IPARequest> &request) {
-    const std::string& sessionId = request->getSessionId()->toString();
-    const std::string& requestId = request->getRequestId()->toString();
+  std::string sessionId;
+  if (request->getSessionId() != nullptr) {
+    sessionId = request->getSessionId()->toString();
+  }
+  std::string requestId;
+  if (request->getRequestId() != nullptr) {
+    requestId = request->getRequestId()->toString();
+  }
 
     std::list<std::string> headers;
     std::string authorization = "Authorization: Bearer ";

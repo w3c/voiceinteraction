@@ -10,6 +10,7 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
+#include "w3c/voiceinteraction/ipa/IPARequest.h"
 #include "w3c/voiceinteraction/ipa/IPAResponse.h"
 #include "w3c/voiceinteraction/ipa/client/InteractionManager.h"
 
@@ -18,8 +19,8 @@ namespace voiceinteraction {
 namespace ipa {
 namespace client {
 
-InteractionManager::InteractionManager()
-    : inputNotifcation(std::make_shared<InputNotificationMediator>()) {
+InteractionManager::InteractionManager() 
+    : ready(false) {
 }
 
 InteractionManager::~InteractionManager() {
@@ -70,6 +71,14 @@ std::list<std::shared_ptr<ModalityComponent>> InteractionManager::getModalityCom
     }
 }
 
+void InteractionManager::start() {
+  startCapture();
+  std::unique_lock<std::mutex> lock(mtx);
+  cv.wait(lock, [this] { 
+      return ready; 
+  });
+}
+
 void InteractionManager::startCapture() const {
     for (std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>>::const_iterator iterator =
         captureComponents.begin(); iterator != captureComponents.end();
@@ -78,48 +87,76 @@ void InteractionManager::startCapture() const {
         for (std::shared_ptr<ModalityComponent>& component : components) {
             std::shared_ptr<client::CaptureModalityComponent> inputComponent =
                 std::dynamic_pointer_cast<client::CaptureModalityComponent>(component);
-            inputComponent->startCapture(inputNotifcation);
+            inputComponent->startCapture(synchronisationStrategy);
         }
-
     }
+}
+
+void InteractionManager::stopCapture() const {
+  for (std::map<ModalityType,
+                std::list<std::shared_ptr<ModalityComponent>>>::const_iterator
+           iterator = captureComponents.begin();
+       iterator != captureComponents.end(); ++iterator) {
+    std::list<std::shared_ptr<ModalityComponent>> components = iterator->second;
+    for (std::shared_ptr<ModalityComponent>& component : components) {
+      std::shared_ptr<client::CaptureModalityComponent> inputComponent =
+          std::dynamic_pointer_cast<client::CaptureModalityComponent>(
+              component);
+      inputComponent->stopCapture();
+    }
+  }
 }
 
 void InteractionManager::processIPAData(std::shared_ptr<IPAData> data) {
-    if (std::shared_ptr<IPAResponse> response =
-            std::dynamic_pointer_cast<IPAResponse>(data)) {
-        std::shared_ptr<MultiModalDataCollection> outputs =
-            response->getMultiModalOutputs();
-        present(outputs);
-    }
+  if (std::shared_ptr<IPAResponse> response =
+          std::dynamic_pointer_cast<IPAResponse>(data)) {
+    std::shared_ptr<MultiModalDataCollection> outputs =
+        response->getMultiModalOutputs();
+    present(outputs);
+  }
 }
 
 void InteractionManager::present(
-        const std::shared_ptr<MultiModalDataCollection>& outputs) const {
+        const std::shared_ptr<MultiModalDataCollection>& outputs) {
     // Obtain all output modalities for the current type
     std::list<ModalityType> outputModalities = outputs->getModalityTypes();
 
     // Forwards the output to all output modality components of the current type
     for (ModalityType& outputModality : outputModalities) {
-        std::shared_ptr<MultiModalData> output =
-            outputs->getMultiModalData(outputModality);
-        std::list<std::shared_ptr<client::ModalityComponent>> outputComponents =
-            getModalityComponents(outputModality, client::InteractionType::PRESENTATION);
-        for (std::shared_ptr<client::ModalityComponent>& outputComponent : outputComponents) {
-            std::shared_ptr<client::PresentationModalityComponent> outputModality =
-                std::dynamic_pointer_cast<client::PresentationModalityComponent>(outputComponent);
-            outputModality->present(output);
-        }
+      std::shared_ptr<MultiModalData> output =
+          outputs->getMultiModalData(outputModality);
+      std::list<std::shared_ptr<client::ModalityComponent>> outputComponents =
+          getModalityComponents(outputModality,
+                                client::InteractionType::PRESENTATION);
+      for (std::shared_ptr<client::ModalityComponent>& outputComponent :
+           outputComponents) {
+        std::shared_ptr<client::PresentationModalityComponent> outputModality =
+            std::dynamic_pointer_cast<client::PresentationModalityComponent>(
+                outputComponent);
+        outputModality->present(output);
+      }
     }
+
+  std::unique_lock<std::mutex> lock(mtx);
+  ready = true;
+  cv.notify_all();
 }
 
-void InteractionManager::addInputModalityComponentListener(
-        const std::shared_ptr<CaptureModalityComponentListener>& listener) {
-    inputNotifcation->addInputModalityComponentListener(listener);
+void InteractionManager::onMultimodalInput(
+    std::shared_ptr<MultiModalDataCollection>& data) {
+  // Stop capturing input
+  stopCapture();
+
+  // Forward the request to the next element in the processing chain
+  // TODO add the RequestID and SessionID
+  std::shared_ptr<IPARequest> request =
+      std::make_shared<IPARequest>(nullptr, nullptr, data, nullptr, nullptr);
+  notifyListeners(request);
 }
 
-void InteractionManager::operator>>(
+void InteractionManager::setMultimodalCaptureSynchronisationStrategy(
         const std::shared_ptr<CaptureModalityComponentListener>& listener) {
-    addInputModalityComponentListener(listener);
+    synchronisationStrategy = listener;
 }
 
 void InteractionManager::addCaptureModality(const ModalityType& modality,
@@ -146,28 +183,6 @@ void InteractionManager::addPresentationModality(const ModalityType& modality,
     std::list<std::shared_ptr<ModalityComponent>>& components =
         presentationComponents.at(modality);
     components.push_back(component);
-}
-
-void InteractionManager::stopCapturing() const {
-  for (std::map<ModalityType,
-                std::list<std::shared_ptr<ModalityComponent>>>::const_iterator
-           iterator = captureComponents.begin();
-       iterator != captureComponents.end(); ++iterator) {
-    std::list<std::shared_ptr<ModalityComponent>> components = iterator->second;
-    for (std::shared_ptr<ModalityComponent>& component : components) {
-      std::shared_ptr<client::CaptureModalityComponent> inputComponent =
-          std::dynamic_pointer_cast<client::CaptureModalityComponent>(
-              component);
-      inputComponent->stopCapture();
-    }
-  }
-}
-
-std::shared_ptr<IPADataProcessor> operator >>(
-        const std::shared_ptr<InteractionManager>& manager,
-        const std::shared_ptr<CaptureModalityComponentListener>& listener) {
-    manager->addInputModalityComponentListener(listener);
-    return std::dynamic_pointer_cast<IPADataProcessor>(listener);
 }
 
 } // namespace client

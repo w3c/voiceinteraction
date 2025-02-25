@@ -17,7 +17,7 @@
 
 #include <w3c/voiceinteraction/ipa/client/ModalityComponent.h>
 #include <w3c/voiceinteraction/ipa/client/CaptureModalityComponent.h>
-#include <w3c/voiceinteraction/ipa/client/InputNotificationMediator.h>
+#include <w3c/voiceinteraction/ipa/client/MulitModalCaptureSynchronisationStrategy.h>
 #include <w3c/voiceinteraction/ipa/client/PresentationModalityComponent.h>
 
 using namespace w3c::voiceinteraction::ipa::client;
@@ -35,7 +35,7 @@ public:
 
     const std::list<InteractionType> getSupportedInteractionTypes() const override;
 
-    void startCapture(const std::shared_ptr<CaptureModalityComponentListener>& mediator) override;
+    void startCapture(const std::shared_ptr<CaptureModalityComponentListener>& listener) override;
 
     void stopCapture() override;
 
@@ -46,7 +46,7 @@ public:
 private:
     /**
      * Asynchronously started method to capture user input from the console.
-     * @param mediator the mediator to inform, once the user entered data
+     * @param listener the listener to inform, once the user entered data
      */
  void captureInputAsynchronously(
      std::shared_ptr<CaptureModalityComponentListener> mediator);

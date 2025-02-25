@@ -24,7 +24,7 @@
 #include <w3c/voiceinteraction/ipa/external/ipa/ProviderSelectionStrategyList.h>
 #include <w3c/voiceinteraction/ipa/external/ProviderSelectionService.h>
 #include <w3c/voiceinteraction/ipa/reference/client/ConsoleTextModalityComponent.h>
-#include <w3c/voiceinteraction/ipa/reference/client/TakeFirstInputModalityComponentListener.h>
+#include <w3c/voiceinteraction/ipa/reference/client/TakeFirstMulitModalCaptureSynchronisationStrategy.h>
 #include <w3c/voiceinteraction/ipa/reference/dialog/ReferenceDialogManager.h>
 #include <w3c/voiceinteraction/ipa/reference/dialog/ReferenceIPAService.h>
 #include <w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTIPAProvider.h>
@@ -51,8 +51,10 @@ int main() {
     std::shared_ptr<::reference::client::ConsoleTextModalityComponent> console =
         std::make_shared<::reference::client::ConsoleTextModalityComponent>();
     interactionManager->addModalityComponent(console);
-    std::shared_ptr<::reference::client::TakeFirstInputModalityComponentListener> inputListener =
-        std::make_shared<::reference::client::TakeFirstInputModalityComponentListener>();
+    std::shared_ptr<::reference::client::TakeFirstMulitModalCaptureSynchronisationStrategy> synchronisationStrategy =
+        std::make_shared<::reference::client::TakeFirstMulitModalCaptureSynchronisationStrategy>(interactionManager);
+    interactionManager->setMultimodalCaptureSynchronisationStrategy(
+        synchronisationStrategy);
 
     // Dialog Layer
     std::shared_ptr<::reference::dialog::ReferenceIPAService> ipaService =
@@ -85,14 +87,11 @@ int main() {
         std::make_shared<external::ProviderSelectionService>(registry);
 
     // Create a processing chain
-    interactionManager >> inputListener >> ipaService >> providerSelectionService
+    interactionManager >> ipaService >> providerSelectionService
             >> ipaDialogManager >> ipaService >> interactionManager;
 
     // Start capturing input
-    interactionManager->startCapture();
-
-    // Actually start processing
-    inputListener->IPADataProcessor::processIPAData();
+    interactionManager->start();
 
     return 0;
 }

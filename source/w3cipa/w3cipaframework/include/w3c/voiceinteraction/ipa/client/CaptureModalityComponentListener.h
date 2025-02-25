@@ -58,17 +58,6 @@ public:
      * @param input The multimodal input to be processed.
      */
     virtual void onMultiModalInput(std::shared_ptr<MultiModalData> input) = 0;
-
-    /**
-     * @brief Retrieves the next set of multimodal inputs.
-     * 
-     * This method blocks until the next set of multimodal inputs is available.
-     * The conditions for returning from this method are determined by the
-     * implementation.
-     * 
-     * @return A shared pointer to the next set of multimodal inputs.
-     */
-    virtual std::shared_ptr<MultiModalDataCollection> getMultiModalInputs() = 0;
 };
 
 } // namespace client
