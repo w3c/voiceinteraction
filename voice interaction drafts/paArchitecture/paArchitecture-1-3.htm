@@ -1858,17 +1858,18 @@
             href="#provider">IPA Providers</a> that is known to the <a
             href="#providerregistry">Provider Registry</a></li>
         <li>In case an <a href="#provider">IPA Provider</a> does
-            not require authentication, this is indicated to the caller.
+            not require authentication, this should be indicated to the user.
         </li>
         <li>It returns an authentication means for a key of an <a
             href="#externalservices">External Service</a> or <a 
             href="#dataproviders">Data Provider</a> that is known to the 
             <a href="#serviceregistry">External Service Registry</a></li>
-        <li>In case an <a href="#provider">IPA Provider</a>, 
-            <a href="#externalservices">External Service</a> or <a 
-            href="#dataproviders">Data Provider</a> offers services that
-            are dependent on the current user this is indicated to the caller
-            to provide their user-dependent credentials.
+        <li>In case an <a href="#provider">IPA Provider</a>,
+            <a href="#externalservices">External Service</a> or <a
+                href="#dataproviders">Data Provider</a> offers services that
+            are dependent on the current user, possible options, among others, are to
+            obtain this from the <a href="#context">context</a> or indicated to the user
+            to provide their user-dependent credentials in a follow-up dialog step.
         </li>
     </ul>
 
