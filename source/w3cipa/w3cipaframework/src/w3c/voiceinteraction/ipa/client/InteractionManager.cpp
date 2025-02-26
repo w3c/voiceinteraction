@@ -20,7 +20,7 @@ namespace ipa {
 namespace client {
 
 InteractionManager::InteractionManager() 
-    : ready(false) {
+    : shouldExit(false) {
 }
 
 InteractionManager::~InteractionManager() {
@@ -73,10 +73,11 @@ std::list<std::shared_ptr<ModalityComponent>> InteractionManager::getModalityCom
 
 void InteractionManager::start() {
   startCapture();
+}
+
+void InteractionManager::waitExit() {
   std::unique_lock<std::mutex> lock(mtx);
-  cv.wait(lock, [this] { 
-      return ready; 
-  });
+  cv.wait(lock, [this] { return shouldExit; });
 }
 
 void InteractionManager::startCapture() const {
@@ -138,7 +139,7 @@ void InteractionManager::present(
     }
 
   std::unique_lock<std::mutex> lock(mtx);
-  ready = true;
+  shouldExit = true;
   cv.notify_all();
 }
 

@@ -92,6 +92,6 @@ int main() {
 
     // Start capturing input
     interactionManager->start();
-
+    interactionManager->waitExit();
     return 0;
 }

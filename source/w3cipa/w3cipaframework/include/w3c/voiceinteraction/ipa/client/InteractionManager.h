@@ -91,6 +91,12 @@ class InteractionManager : public IPADataProcessor {
     void start();
 
     /**
+     * Waits until one of the components signals the interaction manager to
+     * exit.
+     */
+    void waitExit();
+
+    /**
      * Starts capturing input for all known modality components.
      */
     void startCapture() const;
@@ -153,7 +159,7 @@ private:
 
     std::mutex mtx;
     std::condition_variable cv;
-    bool ready;
+    bool shouldExit;
 };
 
 } // namespace client
