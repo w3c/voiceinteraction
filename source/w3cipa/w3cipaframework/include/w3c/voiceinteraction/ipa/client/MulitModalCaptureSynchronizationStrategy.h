@@ -38,19 +38,19 @@ namespace client {
  * 
  * @author Dirk Schnelle-Walka
  */
-class MulitModalCaptureSynchronisationStrategy : public CaptureModalityComponentListener {
+class MulitModalCaptureSynchronizationStrategy : public CaptureModalityComponentListener {
 public:
     /**
-     * @brief Constructs a new MulitModalCaptureSynchronisationStrategy object.
+     * @brief Constructs a new MulitModalCaptureSynchronizationStrategy object.
      */
-    MulitModalCaptureSynchronisationStrategy(
+    MulitModalCaptureSynchronizationStrategy(
      const std::shared_ptr<InteractionManager>&
          im);
 
     /**
-     * @brief Destroys the MulitModalCaptureSynchronisationStrategy object.
+     * @brief Destroys the MulitModalCaptureSynchronizationStrategy object.
      */
-    virtual ~MulitModalCaptureSynchronisationStrategy();
+    virtual ~MulitModalCaptureSynchronizationStrategy();
 
 protected:
     /**

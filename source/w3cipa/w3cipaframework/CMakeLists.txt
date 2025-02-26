@@ -50,7 +50,7 @@ set(HEADERS
     include/w3c/voiceinteraction/ipa/client/InteractionManager.h
     include/w3c/voiceinteraction/ipa/client/InteractionType.h
     include/w3c/voiceinteraction/ipa/client/ModalityComponent.h
-    include/w3c/voiceinteraction/ipa/client/MulitModalCaptureSynchronisationStrategy.h
+    include/w3c/voiceinteraction/ipa/client/MulitModalCaptureSynchronizationStrategy.h
     include/w3c/voiceinteraction/ipa/client/PresentationModalityComponent.h
     include/w3c/voiceinteraction/ipa/dialog/IPAService.h
     include/w3c/voiceinteraction/ipa/external/ProviderSelectionService.h
@@ -84,7 +84,7 @@ set(SOURCES
     src/w3c/voiceinteraction/ipa/client/CaptureModalityComponentListener.cpp
     src/w3c/voiceinteraction/ipa/client/InteractionManager.cpp
     src/w3c/voiceinteraction/ipa/client/ModalityComponent.cpp
-    src/w3c/voiceinteraction/ipa/client/MulitModalCaptureSynchronisationStrategy.cpp
+    src/w3c/voiceinteraction/ipa/client/MulitModalCaptureSynchronizationStrategy.cpp
     src/w3c/voiceinteraction/ipa/client/PresentationModalityComponent.cpp
     src/w3c/voiceinteraction/ipa/dialog/IPAService.cpp
     src/w3c/voiceinteraction/ipa/external/ProviderSelectionService.cpp

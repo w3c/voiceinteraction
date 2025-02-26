@@ -10,23 +10,23 @@
  * [1] https://www.w3.org/Consortium/Legal/copyright-software
  */
 
-#include "w3c/voiceinteraction/ipa/client/MulitModalCaptureSynchronisationStrategy.h"
+#include "w3c/voiceinteraction/ipa/client/MulitModalCaptureSynchronizationStrategy.h"
 
 namespace w3c {
 namespace voiceinteraction {
 namespace ipa {
 namespace client {
 
-MulitModalCaptureSynchronisationStrategy::
-    MulitModalCaptureSynchronisationStrategy(
+MulitModalCaptureSynchronizationStrategy::
+    MulitModalCaptureSynchronizationStrategy(
         const std::shared_ptr<InteractionManager>&
             im)
     : interactionManager(im) {
 }
 
-MulitModalCaptureSynchronisationStrategy::~MulitModalCaptureSynchronisationStrategy() {}
+MulitModalCaptureSynchronizationStrategy::~MulitModalCaptureSynchronizationStrategy() {}
 
-void MulitModalCaptureSynchronisationStrategy::notifyInteractionManager(std::shared_ptr<MultiModalDataCollection>& data) {
+void MulitModalCaptureSynchronizationStrategy::notifyInteractionManager(std::shared_ptr<MultiModalDataCollection>& data) {
   interactionManager->onMultimodalInput(data);
 }
 

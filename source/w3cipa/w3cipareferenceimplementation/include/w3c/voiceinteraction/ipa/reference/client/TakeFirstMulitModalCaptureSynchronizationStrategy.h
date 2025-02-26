@@ -15,7 +15,7 @@
 
 #include <log4cplus/logger.h>
 
-#include <w3c/voiceinteraction/ipa/client/MulitModalCaptureSynchronisationStrategy.h>
+#include <w3c/voiceinteraction/ipa/client/MulitModalCaptureSynchronizationStrategy.h>
 
 using namespace w3c::voiceinteraction::ipa;
 
@@ -30,14 +30,14 @@ namespace client {
  * first received input as the input to the IPA.
  * @author Dirk Schnelle-Walka
  */
-class TakeFirstMulitModalCaptureSynchronisationStrategy
-    : public ::client::MulitModalCaptureSynchronisationStrategy {
+class TakeFirstMulitModalCaptureSynchronizationStrategy
+    : public ::client::MulitModalCaptureSynchronizationStrategy {
 
 public:
     /**
      * Constructs a new object.
      */
- TakeFirstMulitModalCaptureSynchronisationStrategy(
+ TakeFirstMulitModalCaptureSynchronizationStrategy(
      const std::shared_ptr<::client::InteractionManager>& im);
 
     void onMultiModalInput(std::shared_ptr<MultiModalData> input) override;

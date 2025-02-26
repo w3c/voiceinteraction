@@ -12,7 +12,7 @@
 
 #include <log4cplus/loggingmacros.h>
 
-#include "w3c/voiceinteraction/ipa/reference/client/TakeFirstMulitModalCaptureSynchronisationStrategy.h"
+#include "w3c/voiceinteraction/ipa/reference/client/TakeFirstMulitModalCaptureSynchronizationStrategy.h"
 
 namespace w3c {
 namespace voiceinteraction {
@@ -20,16 +20,16 @@ namespace ipa {
 namespace reference {
 namespace client {
 
-const log4cplus::Logger TakeFirstMulitModalCaptureSynchronisationStrategy::LOGGER =
+const log4cplus::Logger TakeFirstMulitModalCaptureSynchronizationStrategy::LOGGER =
     log4cplus::Logger::getInstance(LOG4CPLUS_TEXT(
         "w3c.voiceinteraction.ipa.dialog.TakeFirstInputModalityComponentListener"));
 
-TakeFirstMulitModalCaptureSynchronisationStrategy::
-    TakeFirstMulitModalCaptureSynchronisationStrategy(
+TakeFirstMulitModalCaptureSynchronizationStrategy::
+    TakeFirstMulitModalCaptureSynchronizationStrategy(
         const std::shared_ptr<::client::InteractionManager>& im) 
-    : ::client::MulitModalCaptureSynchronisationStrategy(im) {}
+    : ::client::MulitModalCaptureSynchronizationStrategy(im) {}
 
-void TakeFirstMulitModalCaptureSynchronisationStrategy::onMultiModalInput(
+void TakeFirstMulitModalCaptureSynchronizationStrategy::onMultiModalInput(
         std::shared_ptr<MultiModalData> input) {
   std::shared_ptr<MultiModalDataCollection> multiModalInputs =
       std::make_shared<MultiModalDataCollection>();

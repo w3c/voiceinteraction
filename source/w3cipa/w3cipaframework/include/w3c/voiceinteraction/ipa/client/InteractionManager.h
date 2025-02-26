@@ -47,7 +47,7 @@ namespace client {
  *
  * @see ModalityComponent
  * @see CaptureModalityComponentListener
- * @see MulitModalCaptureSynchronisationStrategy
+ * @see MulitModalCaptureSynchronizationStrategy
  * @see MultiModalDataCollection
  * @see IPADataProcessor
  *
@@ -128,7 +128,7 @@ class InteractionManager : public IPADataProcessor {
      * called when creating the strategy.
      * @param listener the synchronisation strategy to set.
      */
-    void setMultimodalCaptureSynchronisationStrategy(
+    void setMultimodalCaptureSynchronizationStrategy(
             const std::shared_ptr<CaptureModalityComponentListener>& strategy);
 
 private:

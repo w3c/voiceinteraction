@@ -24,7 +24,7 @@
 #include <w3c/voiceinteraction/ipa/external/ipa/ProviderSelectionStrategyList.h>
 #include <w3c/voiceinteraction/ipa/external/ProviderSelectionService.h>
 #include <w3c/voiceinteraction/ipa/reference/client/ConsoleTextModalityComponent.h>
-#include <w3c/voiceinteraction/ipa/reference/client/TakeFirstMulitModalCaptureSynchronisationStrategy.h>
+#include <w3c/voiceinteraction/ipa/reference/client/TakeFirstMulitModalCaptureSynchronizationStrategy.h>
 #include <w3c/voiceinteraction/ipa/reference/dialog/ReferenceDialogManager.h>
 #include <w3c/voiceinteraction/ipa/reference/dialog/ReferenceIPAService.h>
 #include <w3c/voiceinteraction/ipa/reference/external/ipa/chatgpt/ChatGPTIPAProvider.h>
@@ -51,10 +51,10 @@ int main() {
     std::shared_ptr<::reference::client::ConsoleTextModalityComponent> console =
         std::make_shared<::reference::client::ConsoleTextModalityComponent>();
     interactionManager->addModalityComponent(console);
-    std::shared_ptr<::reference::client::TakeFirstMulitModalCaptureSynchronisationStrategy> synchronisationStrategy =
-        std::make_shared<::reference::client::TakeFirstMulitModalCaptureSynchronisationStrategy>(interactionManager);
-    interactionManager->setMultimodalCaptureSynchronisationStrategy(
-        synchronisationStrategy);
+    std::shared_ptr<::reference::client::TakeFirstMulitModalCaptureSynchronizationStrategy> synchronizationStrategy =
+        std::make_shared<::reference::client::TakeFirstMulitModalCaptureSynchronizationStrategy>(interactionManager);
+    interactionManager->setMultimodalCaptureSynchronizationStrategy(
+        synchronizationStrategy);
 
     // Dialog Layer
     std::shared_ptr<::reference::dialog::ReferenceIPAService> ipaService =

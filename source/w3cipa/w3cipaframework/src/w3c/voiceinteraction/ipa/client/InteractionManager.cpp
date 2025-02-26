@@ -155,7 +155,7 @@ void InteractionManager::onMultimodalInput(
   notifyListeners(request);
 }
 
-void InteractionManager::setMultimodalCaptureSynchronisationStrategy(
+void InteractionManager::setMultimodalCaptureSynchronizationStrategy(
         const std::shared_ptr<CaptureModalityComponentListener>& listener) {
     synchronisationStrategy = listener;
 }

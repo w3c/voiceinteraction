@@ -17,7 +17,7 @@
 
 #include <w3c/voiceinteraction/ipa/client/ModalityComponent.h>
 #include <w3c/voiceinteraction/ipa/client/CaptureModalityComponent.h>
-#include <w3c/voiceinteraction/ipa/client/MulitModalCaptureSynchronisationStrategy.h>
+#include <w3c/voiceinteraction/ipa/client/MulitModalCaptureSynchronizationStrategy.h>
 #include <w3c/voiceinteraction/ipa/client/PresentationModalityComponent.h>
 
 using namespace w3c::voiceinteraction::ipa::client;
