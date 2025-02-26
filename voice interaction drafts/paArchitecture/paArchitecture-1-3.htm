@@ -24,7 +24,7 @@
         <dl>
             <dt>Latest version</dt>
             <dd>
-                Last modified: February 5, 2025 <a
+                Last modified: February 27, 2025 <a
                     href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm</a>
                 (GitHub repository)
             </dd>
@@ -671,6 +671,11 @@
             href="#clientactivationstrategy">Client Activation
                 Strategy</a>.
         </li>
+        <li>Concurrent or alternate inputs from <a href="#capture">capture modality
+                components</a> are synchronized via a <a
+                href="#capturesynchronizationstrategy">Capture Synchronization
+                Strategy</a>
+        </li>
         <li>As an extension IPA Clients may also capture input via
             text and output text.</li>
         <li>As an extension IPA Clients may also capture input from
@@ -691,7 +696,7 @@
         </li>
     </ul>
 
-    <h5 id="clientactivtionstrategy">
+    <h5 id="clientactivationstrategy">
         <span class="secno">3.1.3.1 </span>Client Activation Strategy
     </h5>
     <p>
@@ -749,6 +754,41 @@
         detection of hotwords should ideally happen locally. With regard
         to nested usage of IPAs that may feature their own hotwords, the
         detection of hotwords might be required to be extensible.</p>
+
+    <h5 id="capturesynchronizationstrategy">
+        <span class="secno">3.1.3.1 </span>Capture Synchronization Strategy
+    </h5>
+    <p>
+        Inputs from the available <a href="#capture">capture modality components</a>
+        may arrive concurrently or in an alternate fashion. The Capture
+        Synchronization
+        Strategy is responsible for synchronizing these inputs for further
+        processing.
+        Some examples of this strategy are described in the table below.
+    </p>
+
+    <table border="1">
+        <tr>
+            <th>Capture Synchronization Strategy</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Take First</td>
+            <td>Only use the input that arrives first and disregard the rest. This strategy
+                is useful to apply when there is only one modality component or
+                inputs are expected only from one component, i.e. alternating.</td>
+        </tr>
+        <tr>
+            <td>Concurrent</td>
+            <td>Wait for a configurable time span starting from the first input 
+                until when inputs are perceived to be
+                concurrent and merge all inputs into one.</td>
+        </tr>
+        <tr>
+            <td>...</td>
+            <td>...</td>
+        </tr>
+    </table>
 
     <h5 id="localserviceregistry">
         <span class="secno">3.1.3.2 </span>Local Service Registry
