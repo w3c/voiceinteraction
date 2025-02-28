@@ -162,6 +162,16 @@ private:
     bool shouldExit;
 };
 
+/**
+ * Adds the modality component to the interaction manager.
+ * Shortcut to {@link InteractionManager::addModalityComponent}.
+ * @param mc The modality component to add.
+ * @param im The interaction manager to add the modality component to.
+ */
+const std::shared_ptr<InteractionManager>& operator>> (
+    const std::shared_ptr<ModalityComponent>& mc,
+    const std::shared_ptr<InteractionManager>& im);
+
 } // namespace client
 } // namespace ipa
 } // namespace voiceinteraction

@@ -48,13 +48,12 @@ int main() {
     // Cient Layer
     std::shared_ptr<client::InteractionManager> interactionManager =
         std::make_shared<client::InteractionManager>();
-    std::shared_ptr<::reference::client::ConsoleTextModalityComponent> console =
-        std::make_shared<::reference::client::ConsoleTextModalityComponent>();
-    interactionManager->addModalityComponent(console);
     std::shared_ptr<::reference::client::TakeFirstMulitModalCaptureSynchronizationStrategy> synchronizationStrategy =
         std::make_shared<::reference::client::TakeFirstMulitModalCaptureSynchronizationStrategy>(interactionManager);
     interactionManager->setMultimodalCaptureSynchronizationStrategy(
         synchronizationStrategy);
+    std::shared_ptr<::reference::client::ConsoleTextModalityComponent> console =
+        std::make_shared<::reference::client::ConsoleTextModalityComponent>();
 
     // Dialog Layer
     std::shared_ptr<::reference::dialog::ReferenceIPAService> ipaService =
@@ -87,7 +86,7 @@ int main() {
         std::make_shared<external::ProviderSelectionService>(registry);
 
     // Create a processing chain
-    interactionManager >> ipaService >> providerSelectionService
+    console >> interactionManager >> ipaService >> providerSelectionService
             >> ipaDialogManager >> ipaService >> interactionManager;
 
     // Start capturing input

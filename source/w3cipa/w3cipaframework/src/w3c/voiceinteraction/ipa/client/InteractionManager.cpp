@@ -186,6 +186,13 @@ void InteractionManager::addPresentationModality(const ModalityType& modality,
     components.push_back(component);
 }
 
+const std::shared_ptr<InteractionManager>& operator>>(
+    const std::shared_ptr<ModalityComponent>& mc,
+    const std::shared_ptr<InteractionManager>& im) {
+  im->addModalityComponent(mc);
+  return im;
+}
+
 } // namespace client
 } // namespace ipa
 } // namespace voiceinteraction

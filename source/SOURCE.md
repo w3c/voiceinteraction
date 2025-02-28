@@ -97,21 +97,22 @@ re-used in the employed processing chain.
 On the client side, we mainly need the correct modality components, text via
 `console` for now, a modality manager `modalityManager` to handle all known 
 modalities, and a component to select which input to forward to the 
-IPA. In this case, we simply select the first one that reaches us via
-`inputListener`.
+IPA. In this case, we simply select the first one that reaches us via the
+`synchronizationStrategy`.
 
-The `modalityManager` and `inputListener` are part of the `IPA Client`. 
+The `modalityManager` is an `IPA Client`. 
 `ModalityComponent`s are either the `Capture` or `Presentation` components or
 both as in the case of the `console`.
 
 ```
-std::shared_ptr<client::ModalityManager> modalityManager =
-    std::make_shared<client::ModalityManager>();
-std::shared_ptr<::reference::client::ConsoleTextModalityComponent> console =
-    std::make_shared<::reference::client::ConsoleTextModalityComponent>();
-modalityManager->addModalityComponent(console);
-std::shared_ptr<::reference::client::TakeFirstInputModalityComponentListener> inputListener =
-    std::make_shared<::reference::client::TakeFirstInputModalityComponentListener>();
+    std::shared_ptr<client::InteractionManager> interactionManager =
+        std::make_shared<client::InteractionManager>();
+    std::shared_ptr<::reference::client::TakeFirstMulitModalCaptureSynchronizationStrategy> synchronizationStrategy =
+        std::make_shared<::reference::client::TakeFirstMulitModalCaptureSynchronizationStrategy>(interactionManager);
+    interactionManager->setMultimodalCaptureSynchronizationStrategy(
+        synchronizationStrategy);
+    std::shared_ptr<::reference::client::ConsoleTextModalityComponent> console =
+        std::make_shared<::reference::client::ConsoleTextModalityComponent>();
 ```
 
 #### Dialog Layer
@@ -174,8 +175,8 @@ Following
 we then tie those needed components together.
 
 ```
-modalityManager >> inputListener >> ipaService >> providerSelectionService
-        >> ipaDialogManager >> ipaService >> modalityManager;
+console >> interactionManager >> ipaService >> providerSelectionService
+        >> ipaDialogManager >> ipaService >> interactionManager;
 ```
 
 The following shows which components from the diagram above are available
@@ -185,11 +186,12 @@ and how this chain maps to it.
 
 #### Start 
 
-Finally, we need to start capturing input and start processing in the IPA
+Finally, we need to start capturing input and start processing in the IPA.
+Therefore, we start the `interactionManager` and wait until the user exits.
 
 ```
-modalityManager->startInput();
-inputListener->IPADataProcessor::processIPAData();
+interactionManager->start();
+interactionManager->waitExit();
 ```
 
 #### Demo Output
