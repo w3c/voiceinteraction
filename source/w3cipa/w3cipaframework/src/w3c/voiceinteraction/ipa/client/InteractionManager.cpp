@@ -155,7 +155,7 @@ void InteractionManager::onMultimodalInput(
   notifyListeners(request);
 }
 
-void InteractionManager::setMultimodalCaptureSynchronisationStrategy(
+void InteractionManager::setMultimodalCaptureSynchronizationStrategy(
         const std::shared_ptr<CaptureModalityComponentListener>& listener) {
     synchronisationStrategy = listener;
 }
@@ -184,6 +184,13 @@ void InteractionManager::addPresentationModality(const ModalityType& modality,
     std::list<std::shared_ptr<ModalityComponent>>& components =
         presentationComponents.at(modality);
     components.push_back(component);
+}
+
+const std::shared_ptr<InteractionManager>& operator>>(
+    const std::shared_ptr<ModalityComponent>& mc,
+    const std::shared_ptr<InteractionManager>& im) {
+  im->addModalityComponent(mc);
+  return im;
 }
 
 } // namespace client

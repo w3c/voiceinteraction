@@ -36,7 +36,7 @@ namespace client {
  * 
  * @see ModalityComponent
  * @see InteractionType
- * @see MulitModalCaptureSynchronisationStrategy
+ * @see MulitModalCaptureSynchronizationStrategy
  * 
  * @author Dirk Schnelle-Walka
  */

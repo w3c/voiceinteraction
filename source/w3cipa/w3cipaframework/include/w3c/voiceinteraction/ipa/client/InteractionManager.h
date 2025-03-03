@@ -47,7 +47,7 @@ namespace client {
  *
  * @see ModalityComponent
  * @see CaptureModalityComponentListener
- * @see MulitModalCaptureSynchronisationStrategy
+ * @see MulitModalCaptureSynchronizationStrategy
  * @see MultiModalDataCollection
  * @see IPADataProcessor
  *
@@ -128,7 +128,7 @@ class InteractionManager : public IPADataProcessor {
      * called when creating the strategy.
      * @param listener the synchronisation strategy to set.
      */
-    void setMultimodalCaptureSynchronisationStrategy(
+    void setMultimodalCaptureSynchronizationStrategy(
             const std::shared_ptr<CaptureModalityComponentListener>& strategy);
 
 private:
@@ -161,6 +161,16 @@ private:
     std::condition_variable cv;
     bool shouldExit;
 };
+
+/**
+ * Adds the modality component to the interaction manager.
+ * Shortcut to {@link InteractionManager::addModalityComponent}.
+ * @param mc The modality component to add.
+ * @param im The interaction manager to add the modality component to.
+ */
+const std::shared_ptr<InteractionManager>& operator>> (
+    const std::shared_ptr<ModalityComponent>& mc,
+    const std::shared_ptr<InteractionManager>& im);
 
 } // namespace client
 } // namespace ipa
