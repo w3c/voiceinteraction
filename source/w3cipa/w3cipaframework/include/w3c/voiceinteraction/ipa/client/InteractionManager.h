@@ -74,16 +74,36 @@ class InteractionManager : public IPADataProcessor {
     void addModalityComponent(
         const std::shared_ptr<ModalityComponent> component);
 
-    /**
-     * Gets the modality components for the specified modality and IO type.
-     * @param modality The modality for which to get the modality component.
-     * @param interactionType The interaction type for which to get the modality component.
-     * @return The known modality components for the specified modality and
-     *          type. An empty list is returned, if no modality was found.
-     * @throws std::invalid_argument if the type is not supported
+   /**
+     * @brief Retrieves the capture modality components for the specified
+     * modality.
+     *
+     * This method returns a list of capture modality components that match the
+     * specified modality type.
+     *
+     * @param modality The modality type for which to retrieve the capture
+     * modality components.
+     * @return A list of shared pointers to the capture modality components for
+     * the specified modality.
      */
-    std::list<std::shared_ptr<ModalityComponent>> getModalityComponents(
-        const ModalityType& modality, const InteractionType& interactionType) const;
+    std::list<std::shared_ptr<CaptureModalityComponent>>
+        getCaptureModalityComponents(
+                    const ModalityType& modality) const;
+
+   /**
+     * @brief Retrieves the presentation modality components for the specified
+     * modality.
+     *
+     * This method returns a list of presentation modality components that match the
+     * specified modality type.
+     *
+     * @param modality The modality type for which to retrieve the capture
+     * modality components.
+     * @return A list of shared pointers to the capture modality components for
+     * the specified modality.
+     */
+    std::list<std::shared_ptr<PresentationModalityComponent>>
+        getPresentationModalityComponents(const ModalityType& modality) const;
 
     /**
      * Starts the interaction manager.
@@ -149,10 +169,10 @@ private:
                            const std::shared_ptr<ModalityComponent>& component);
 
     /** The map of known capture modality components. */
-    std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>> captureComponents;
+    std::map<ModalityType, std::list<std::shared_ptr<CaptureModalityComponent>>> captureComponents;
 
     /** The map of known presentation modality components. */
-    std::map<ModalityType, std::list<std::shared_ptr<ModalityComponent>>> presentationComponents;
+    std::map<ModalityType, std::list<std::shared_ptr<PresentationModalityComponent>>> presentationComponents;
 
     /** Synchronisation strategy for multimodal inputs. */
     std::shared_ptr<CaptureModalityComponentListener> synchronisationStrategy;
