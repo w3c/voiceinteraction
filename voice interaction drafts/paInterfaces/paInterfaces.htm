@@ -23,7 +23,7 @@
         <dl>
             <dt>Latest version</dt>
             <dd>
-                Last modified: March 3, 2025 <a
+                Last modified: March 6, 2025 <a
                     href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm</a>
                 (GitHub repository)<br /> <a
                     href="https://w3c.github.io/voiceinteraction/voice%20interaction%20drafts/paInterfaces/paInterfaces.htm">HTML
@@ -1156,8 +1156,6 @@
         <span class="secno">5. </span>Low Level Interfaces
     </h1>
 
-    <p>This section is still under preparation.</p>
-
     <h2 id="client">
         <span class="secno">5.1. </span>Client Layer
     </h2>
@@ -1203,7 +1201,7 @@
     <h3 id="ipaclient">
         <span class="secno">5.1.1 </span>IPA Client
     </h3>
-    <p>Clients enable the user to access the IPA via voice. The
+    <p>Clients enable the user to access the IPA, e.g., via voice. The
         following diagram provides some more insight.</p>
     <img src="IPA-Client.svg" alt="IPA Client"
         style="width: 50%; height: auto;" />
@@ -1227,16 +1225,46 @@
         alt="IPA Client Major Interaction"
         style="width: 50%; height: auto;" />
 
+    <h3 id="ipaclient-capture-presentation">
+        <span class="secno">5.1.2 </span>IPA Client, Capture and Presentation Modality Components
+    </h3>
+    <p>Capture and Presentation Modality Components are the direct
+        interfaces to the user. They are controlled by the IPA Client
+        and exchange data for input and output with it.</p>
+    <img src="IPA-Client-with-Capture-and-Presentation.svg" alt="IPA Client with Capture and Presentation"
+        style="width: 40%; height: auto;" />
+    <p>The main components in this diagram can be described as
+        follows. Not all of them are required and may be tailored to the
+        actual use case.</p>
+    <dl>
+        <dt>IPA Client</dt>
+        <dd>The main process on the client side to control capture
+            and presentation components.</dd>
+        <dt>Capture</dt>
+        <dd>Capture devices or modality recognizers are used to
+            capture multimodal user input, such as voice or text input.
+            Additional input modalities can be employed that capture
+            input with a specific modality recognizers.</dd>
+        <dt>Presentation</dt>
+        <dd>Presentation devices or modality synthesizers are used
+            to provide system output to the user. Additional output
+            modalities can be employed that render their output with a
+            specific modality synthesizer.</dd>
+    </dl>
+
     <h4 id="clientactivtionstrategy">
-        <span class="secno">5.1.1.1 </span>Client Activation Strategy
+        <span class="secno">5.1.2.1 </span>Client Activation Strategy
     </h4>
     <p>
         The Client Activation Strategy defines how the client gets
         activated to be ready to receive spoken commands as input. In
         turn the <a href="#microphone">Microphone</a> is opened for
-        recording. Client Activation Strategies are not exclusive but
-        may be used concurrently. The most common activation strategies
-        are described in the table below.
+        recording. While the <a href="#ipaclient">IPA Client</a> is
+        usually responsible to control the lifecycle of the modality
+        components, the Client Activation Strategy is a trigger to the
+        Interaction Manager to start. Client Activation Strategies are
+        not exclusive but may be used concurrently. The most common
+        activation strategies are described in the table below.
     </p>
     <table border="1">
         <tr>
