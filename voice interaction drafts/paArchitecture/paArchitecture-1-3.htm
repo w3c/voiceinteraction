@@ -5,11 +5,12 @@
     xmlns="http://www.w3.org/1999/xhtml"
     prefix='bibo: http://purl.org/ontology/bibo/' typeof="bibo:Document">
 <head>
-<title>Intelligent Personal Assistant Architecture</title>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-<link href="../cg-draft.css" rel="stylesheet" type="text/css">
+    <title>Intelligent Personal Assistant Architecture</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link href="../cg-draft.css" rel="stylesheet" type="text/css">
+    <script src="../html-table-of-contents.js" type="text/javascript"></script>
 </head>
-<body>
+<body onload="htmlTableOfContents();">
     <div class="head">
         <p>
             <a href="http://www.w3.org/"> <img width="72"
@@ -24,7 +25,7 @@
         <dl>
             <dt>Latest version</dt>
             <dd>
-                Last modified: February 27, 2025 <a
+                Last modified: March 7, 2025 <a
                     href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm</a>
                 (GitHub repository)
             </dd>
@@ -41,7 +42,7 @@
         </dl>
 
         <p class="copyright">
-            Copyright &copy; 2019-2024 the Contributors to the Voice
+            Copyright &copy; 2019-2025 the Contributors to the Voice
             Interaction Community Group, published by the <a
                 href="http://www.w3.org/community/voiceinteraction/">Voice
                 Interaction Community Group</a> under the <a
@@ -98,31 +99,12 @@
     </p>
 
     <h2 class="introductory">Table of Contents</h2>
-    <ol>
-        <li><a href="#introduction">Introduction</a></li>
-        <li><a href="#problemStatement">Problem Statement</a></li>
-        <li><a href="#architecture">Architecture</a>
-            <ol>
-                <li><a href="#clientlayer">Client Layer</a>
-                <li><a href="#dialoglayer">Dialog Layer</a></li>
-                <li><a href="#datalayer">External Data /
-                        Services / IPA Providers Layer</a></li>
-            </ol></li>
-        <li><a href="#errorhandling">Error Handling</a></li>
-        <li><a href="#walkthrough">Use Case Walk Through</a></li>
-        <li><a href="#potential">Potential for Standardization</a></li>
-        <li><a href="#footnotes">Footnotes</a>
-        <li><a href="#potential">Appendix</a>
-            <ol>
-                <li><a href="#acknowledgements">Acknowledgments</a></li>
-                <li><a href="#abbreviations">Abbreviations</a></li>
-            </ol></li>
-    </ol>
+    <div id="toc"></div>
 
     <!-- OddPage -->
-    <h2 id="introduction">
+    <h1 id="introduction">
         <span class="secno">1. </span>Introduction
-    </h2>
+    </h1>
     <p>Intelligent Personal Assistants (IPAs) are now widely available in
         our daily lives and can be accessed in many ways. Apple’s Siri, Google
         Assistant, Microsoft’s Cortana, Samsung’s Bixby and many more
@@ -190,9 +172,9 @@
         light, while other modalities may be used as input-only, like
         touch.</p>
 
-    <h2 id="problemStatement">
+    <h1 id="problemStatement">
         <span class="secno">2. </span>Problem Statement
-    </h2>
+    </h1>
 
     <p>Currently, users are mainly using the IPA Provider that is
         shipped with a certain piece of hardware. Thus, selection of a
@@ -223,14 +205,14 @@
     <p>In order to explore the potential for standardization, a
         typical usage scenario is described in the following section.</p>
 
-    <h3 id="usecases">
+    <h2 id="usecases">
         <span class="secno">2.1 Use Cases</span>
-    </h3>
+    </h2>
     <p>This section describes potential usages of IPAs.</p>
 
-    <h4>
+    <h3>
         <span class="secno">2.1.1 </span>Travel Planning
-    </h4>
+    </h3>
     <p>A user would like to plan a trip to an international
         conference and she needs visa information and airline
         reservations. She will give the intelligent personal assistant
@@ -254,9 +236,9 @@
         could require interaction with the hotel or the conference's
         IPA's.</p>
 
-    <h4>
+    <h3>
         <span class="secno">2.1.2 </span>Emergency Events
-    </h4>
+    </h3>
     <p>User encounters emergency situations that requires them to
         use their hands while administering medical care, driving or
         operating machinery. Manual interactions on control panels,
@@ -303,9 +285,9 @@
         <li>Conforms with health data privacy laws.</li>
     </ul>
 
-    <h4>
+    <h3>
         <span class="secno">2.1.3 </span>In-Vehicle Chatbot
-    </h4>
+    </h3>
     
     <p>
         A user is driving a car and sees a sign of a historical site near the
@@ -323,9 +305,9 @@
         thanks to the useage of LLMs.
     </p>
 
-    <h3>
+    <h2>
         <span class="secno">2.2 </span>Roles and Responsibilities
-    </h3>
+    </h2>
 
     <p>The following roles and responsibilities following the RACI
         (responsible, accountable, consulted, informed) are identified</p>
@@ -446,9 +428,9 @@
         <dd>Uses the IPA</dd>
     </dl>
 
-    <h2 id="architecture">
+    <h1 id="architecture">
         <span class="secno">3. </span>Architecture
-    </h2>
+    </h1>
 
     <p>
         In order to cope with such <a href="#usecases">use cases</a> as
@@ -536,18 +518,18 @@
     </p>
 
 
-    <h3 id="clientlayer">
+    <h2 id="clientlayer">
         <span class="secno">3.1 </span>Client Layer
-    </h3>
+    </h2>
     <img src="client-layer-1.3.svg" style="float: right" width="10%"
         height="auto" />
     <p>The Client Layer contains the main components that interface
         with the user. The following figure details the view onto the
         Client Layer shown in Figure 1.</p>
 
-    <h4 id="capture">
+    <h3 id="capture">
         <span class="secno">3.1.1 </span>Capture
-    </h4>
+    </h3>
 
     <p>
         Capture devices or modality recognizers are used to capture
@@ -579,21 +561,21 @@
         </tr>
     </table>
         
-    <h5 id="microphone">
+    <h4 id="microphone">
         <span class="secno">3.1.1.1 </span>Microphone
-    </h5>
+    </h4>
     <p>The microphone is used to capture the voice input of a user
         as a primary input modality with the modality type voice.</p>
 
-    <h5 id="keyboard">
+    <h4 id="keyboard">
         <span class="secno">3.1.1.2 </span>Keyboard
-    </h5>
+    </h4>
     <p>The keyboard may be optionally used to capture the text input
         if the IPA accepts this text input modality.</p>
 
-    <h4 id="capture">
+    <h3 id="capture">
         <span class="secno">3.1.2 </span>Presentation
-    </h4>
+    </h3>
     <p>
         Presentation devices or modality synthesizers are used to
         provide system output to the user. Additional output modalities
@@ -635,9 +617,9 @@
         </tr>
     </table>
 
-    <h5 id="speaker">
+    <h4 id="speaker">
         <span class="secno">3.1.2.1 </span>Speaker
-    </h5>
+    </h4>
     <p>The loudspeaker is used to output replies as verbal auditory
         output in the shape of spoken utterances as a primary output
         modality. Utterances may be accompanied by nonverbal auditory
@@ -650,15 +632,15 @@
     <p>Verbal auditory output is in the modality type voice while nonverbal
         auditory output is in the modality type audio.</p> 
 
-    <h5 id="speaker">
+    <h4 id="speaker">
         <span class="secno">3.1.2.2 </span>Display
-    </h5>
+    </h4>
     <p>The display may be optionally used to present text output if
         the IPA supports this output modality.</p>
 
-    <h4 id="client">
+    <h3 id="client">
         <span class="secno">3.1.3 </span>IPA Client
-    </h4>
+    </h3>
     <p>Clients enable the user to access the IPA via voice with the
         following characteristics.</p>
     <ul>
@@ -696,9 +678,9 @@
         </li>
     </ul>
 
-    <h5 id="clientactivationstrategy">
+    <h4 id="clientactivationstrategy">
         <span class="secno">3.1.3.1 </span>Client Activation Strategy
-    </h5>
+    </h4>
     <p>
         The Client Activation Strategy defines how the client gets
         activated to be ready to receive spoken commands as input. In
@@ -755,9 +737,9 @@
         to nested usage of IPAs that may feature their own hotwords, the
         detection of hotwords might be required to be extensible.</p>
 
-    <h5 id="capturesynchronizationstrategy">
+    <h4 id="capturesynchronizationstrategy">
         <span class="secno">3.1.3.1 </span>Capture Synchronization Strategy
-    </h5>
+    </h4>
     <p>
         Inputs from the available <a href="#capture">capture modality components</a>
         may arrive concurrently or in an alternate fashion. The Capture
@@ -790,9 +772,9 @@
         </tr>
     </table>
 
-    <h5 id="localserviceregistry">
+    <h4 id="localserviceregistry">
         <span class="secno">3.1.3.2 </span>Local Service Registry
-    </h5>
+    </h4>
     <p>
         A registry for all <a href="#localservices">Local Services</a>
         and <a href="#localdataproviders">Local Data Providers</a> that
@@ -814,17 +796,17 @@
             obtained from a standardized market place.
     </ul>
 
-    <h4 id="localservices">
+    <h3 id="localservices">
         <span class="secno">3.1.3 </span>Local Services
-    </h4>
+    </h3>
     <p>Local services can be used to execute local actions in the
         user's local environment. Examples include turning on the light
         or starting an application, for instance a navigation system in
         a car.</p>
 
-    <h4 id="localdataproviders">
+    <h3 id="localdataproviders">
         <span class="secno">3.1.4 </span>Local Data Providers
-    </h4>
+    </h3>
     <p>
         Local Data Providers capture input that is accessible in the
         user's local environment. They can be used to provide additional
@@ -834,9 +816,9 @@
         on or turned off.
     </p>
 
-    <h3 id="dialoglayer">
+    <h2 id="dialoglayer">
         <span class="secno">3.2 </span>Dialog Layer
-    </h3>
+    </h2>
     <p>The Dialog Layer contains the main components to drive the
         interaction with the user. The following figure details the
         high-level view of the Dialog Layer shown in Figure 1. The
@@ -864,9 +846,9 @@
         larger text models.
     </p>
     
-    <h4 id="ipaservice">
+    <h3 id="ipaservice">
         <span class="secno">3.2.1 </span>IPA Service
-    </h4>
+    </h3>
     <p>
         The general IPA Service API mediates between the user and the
         overall IPA system. The service layer may be omitted in case the
@@ -920,9 +902,9 @@
         </li>
     </ul>
 
-    <h4 id="session">
+    <h3 id="session">
         <span class="secno">3.2.2 </span>Session
-    </h4>
+    </h3>
     <p>
         Dialog execution can be governed by sessions, e.g. to free
         resources of e.g., <a href="#ASR>">ASR</a>, <a href="#nlu">NLU</a>a>
@@ -961,9 +943,9 @@
         multiple requests.</p>
 
 
-    <h4 id="asr">
+    <h3 id="asr">
         <span class="secno">3.2.3 </span>ASR
-    </h4>
+    </h3>
     <p>The Automated Speech Recognizer (ASR) receives audio streams
         of recorded utterances and generates a recognition hypothesis as
         text strings for the local IPA. Conceptually, ASR is a modality
@@ -987,15 +969,15 @@
         </li>
     </ul>
 
-    <h4 id="traditional-nlu-layer">
+    <h3 id="traditional-nlu-layer">
         <span class="secno">3.2.4 </span>Traditional NLU-based Systems
-    </h4>
+    </h3>
     <p>This section describes the components that are specific for
         traditional NLU-based systems</p>
 
-    <h5 id="nlu">
+    <h4 id="nlu">
         <span class="secno">3.2.4.1 </span>NLU
-    </h5>
+    </h4>
     <p>An Natural Language Understanding (NLU) component that able
         to extract meaning as intents and associated entities from an
         utterance as text strings.</p>
@@ -1039,9 +1021,9 @@
             their entities along with with a confidence score.</li>
     </ul>
 
-    <h5 id="dialogmanager">
+    <h4 id="dialogmanager">
         <span class="secno">3.2.4.2 </span>Dialog Manager
-    </h5>
+    </h4>
     <p>
         The Dialog Manager is a component that receives semantic
         information determined from user input, updates the <a
@@ -1133,9 +1115,9 @@
         </li>
     </ul>
 
-    <h6 id="dialogstrategy">
+    <h5 id="dialogstrategy">
         <span class="secno">3.2.4.2.1 </span>Dialog Strategy
-    </h6>
+    </h5>
     <p>A Dialog Strategy is a conceptualization of a dialog for an
         operationalization in a computer system. It defines the
         representation of the dialog's state and respective operations
@@ -1203,15 +1185,15 @@
         </li>
     </ul>
 
-    <h4 id="generative-ai-layer">
+    <h3 id="generative-ai-layer">
         <span class="secno">3.2.5 </span>Generative AI-based Systems
-    </h4>
+    </h3>
     
     <p>This section describes the components that are specific for
         generative AI-based systems</p>
-    <h5 id="promptadaptation">
+    <h4 id="promptadaptation">
         <span class="secno">3.2.5.1 </span>Prompt Adaptation
-    </h5>
+    </h4>
     <p>
         Prompt adaptation is the process of adjusting the output of
         the IPA to the user's needs. This may include adjusting the
@@ -1251,9 +1233,9 @@
         </li>
     </ul>
 
-    <h5 id="llm">
+    <h4 id="llm">
         <span class="secno">3.2.5.2 </span>LLM
-    </h5>
+    </h4>
     <p>
         LLMs stands for Large Language Models. These models can
         conceptually be perceived as a special type of a
@@ -1300,9 +1282,9 @@
         </li>    
     </ul>
 
-    <h5 id="llm-post-processing">
+    <h4 id="llm-post-processing">
         <span class="secno">3.2.5.3 </span>LLM Post-processing
-    </h5>
+    </h4>
     <p>After the output of the LLM is received additional
         post-processing steps may be applied to make the output more
         accurate and reliable. Examples include validity checks or error
@@ -1324,9 +1306,9 @@
         </li>
     </ul>
 
-    <h4 id="context">
+    <h3 id="context">
         <span class="secno">3.2.6 </span>Context
-    </h4>
+    </h3>
     <img src="context-component.svg" style="float: right" width="auto"
         height="auto" />
     <p>
@@ -1381,9 +1363,9 @@
         </li>
     </ul>
 
-    <h5 id="history">
+    <h4 id="history">
         <span class="secno">3.2.6.1 </span>History
-    </h5>
+    </h4>
     <p>
         The Dialog History mainly stores the past dialog events per
         user. Dialog events include users’ transcriptions, semantic
@@ -1398,9 +1380,9 @@
         context to the prompt.
     </p>
 
-    <h5 id="knowledge-graph">
+    <h4 id="knowledge-graph">
         <span class="secno">3.2.6.2 </span>Knowledge Graph
-    </h5>
+    </h4>
     <p>
         The system uses a knowledge graph, e.g., to reason about
         entities and intents. This may be received from the detected
@@ -1416,9 +1398,9 @@
         context to the prompt.
     </p>
 
-    <h4 id="tts">
+    <h3 id="tts">
         <span class="secno">3.2.7 </span>TTS
-    </h4>
+    </h3>
     <p>The Text-to-Speech (TTS) component receives text strings,
         which it converts into audio data. Conceptually, the TTS is a
         modality specific renderer for speech. It has the following
@@ -1437,9 +1419,9 @@
             not be needed.</li>
     </ul>
 
-    <h4 id="dialogs">
+    <h3 id="dialogs">
         <span class="secno">3.2.8 </span>Dialogs
-    </h4>
+    </h3>
     <img src="dialogs-component.svg" style="float: right" width="auto"
         height="auto" />
     <p>Dialogs support interaction with the user. They include Core
@@ -1447,9 +1429,9 @@
         interactions, as well as more specialized dialogs which support
         additional functionality.</p>
 
-    <h5 id="coredialog">
+    <h4 id="coredialog">
         <span class="secno">3.2.8.1 </span>Core Dialog
-    </h5>
+    </h4>
     <p>
         The Core Dialog are logical entities that are able to handle
         basic functionality via <a href="coreintesets">Core Intent
@@ -1511,9 +1493,9 @@
         as described in the following section that is always available.
     </p>
 
-    <h5 id="dialog">
+    <h4 id="dialog">
         <span class="secno">3.2.8.2 </span>Dialog
-    </h5>
+    </h4>
     <p>
         In <a href="#traditional-nlu-layer">Traditional NLU</a> systems, a Dialog is
         able to handle functionality that can be added to
@@ -1572,9 +1554,9 @@
         </li>
     </ul>
 
-    <h5 id="coreintentsets">
+    <h4 id="coreintentsets">
         <span class="secno">3.2.8.3 </span>Core Intent Sets
-    </h5>
+    </h4>
     <p>
         A Core Intent Set usually identifies tasks to be executed and
         defines the capabilities of the <a href="#coredialog">Core
@@ -1582,9 +1564,9 @@
         that are always available.
     </p>
 
-    <h5 id="intentsets">
+    <h4 id="intentsets">
         <span class="secno">3.2.8.4 </span>Intent Sets
-    </h5>
+    </h4>
     <p>
         Intent Sets define actions, identified by the name of the
         intent, along with their parameters as entities as it is
@@ -1619,9 +1601,9 @@
         
     </ul>
 
-    <h5 id="dialogx">
+    <h4 id="dialogx">
         <span class="secno">3.2.8.5 </span>Dialog X
-    </h5>
+    </h4>
     <p>
         The Dialog X's are able to handle functionality that can be
         added to the capabilities of the Dialog Manager through their
@@ -1634,18 +1616,18 @@
         characteristics as a <a href="#dialog">Dialog</a>.
     </p>
 
-    <h5 id="intentsetsx">
+    <h4 id="intentsetsx">
         <span class="secno">3.2.8.6 </span>Intent Set X
-    </h5>
+    </h4>
     <p>
         An Intent Set X is a special <a href="#intentsets">Intent
             Set</a> that identifies tasks that can be executed within the
         associated <a href="#dialogx">Dialog X</a>.
     </p>
 
-    <h5 id="dialogregistry">
+    <h4 id="dialogregistry">
         <span class="secno">3.2.8.7 </span>Dialog Registry
-    </h5>
+    </h4>
     <p>
         The Dialog Registry manages all available Dialogs with their
         associated Intent Sets with respect to the current <a
@@ -1692,17 +1674,18 @@
         </li>
     </ul>
 
-    <h3 id="datalayer">
+    <h2 id="datalayer">
         <span class="secno">3.3 </span>External Data / Services / IPA
             Providers Layer
-    </h3>
+    </h2>
     <img src="external-data-services-ipa-providers-layer.svg"
         style="float: right" width="15%" height="auto" />
     <p>The Data Layer contains the main components thatprovide external data, 
         services, or access to other IPAs.</p>
-    <h4 id="selectionservice">
+        
+    <h3 id="selectionservice">
         <span class="secno">3.3.1 </span>Provider Selection Service
-    </h4>
+    </h3>
     <img src="provider-selection-service-component-1.3.svg"
         style="float: right" width="auto" height="auto" />
     <p>A service that provides access to all known Data Providers,
@@ -1792,9 +1775,9 @@
         </li>
     </ul>
 
-    <h5 id="providerselectionstrategy">
+    <h4 id="providerselectionstrategy">
         <span class="secno">3.3.1.1 </span>Provider Selection Strategy
-    </h5>
+    </h4>
     <p>
         The Provider Selection Strategy aims at determining those <a
             href="#provider">IPA Providers</a> that are most likely
@@ -1834,9 +1817,9 @@
         strategy may be applied to determine the n-best intents.
     </p>
 
-    <h5 id="providerregistry">
+    <h4 id="providerregistry">
         <span class="secno">3.3.1.2 </span>Provider Registry
-    </h5>
+    </h4>
     <p>A registry for all IPA Providers that can be accessed. There are
         several options how the provider registry gets to know which 
         <a href="#provider">IPA Providers</a> are available, for example</p>
@@ -1884,9 +1867,9 @@
         </li>
     </ul>
 
-    <h5 id="authentication">
+    <h4 id="authentication">
         <span class="secno">3.3.1.3 </span>Accounts/Authentication
-    </h5>
+    </h4>
     <p>A registry that knows how to access the known IPA Providers, 
         External Services or Data Providers
         i.e., which are available and credentials to access them at a general
@@ -1913,9 +1896,9 @@
         </li>
     </ul>
 
-    <h5 id="serviceregistry">
+    <h3 id="serviceregistry">
         <span class="secno">3.3.2 </span>External Service Registry
-    </h5>
+    </h3>
     <p>
         A registry for all <a href="#externalservices">External
             Services</a> and <a href="#dataproviders">Data Providers</a>
@@ -1937,44 +1920,44 @@
             from a standardized market place.</li>
     </ul>
 
-    <h4 id="dataproviders">
+    <h3 id="dataproviders">
         <span class="secno">3.3.3 </span>Data Providers
-    </h4>
+    </h3>
     <img src="dataproviders-component.svg" style="float: right"
         width="auto" height="auto" />
     <p>Data Providers obtain data from various external sources for
         use in the interaction, for example, data obtained from a
         third-party web service.</p>
 
-    <h5 id="dataprovider">
+    <h4 id="dataprovider">
         <span class="secno">3.3.3.1 </span>Data Provider X
-    </h5>
+    </h4>
     <p>
         A data provider to get data to be used in the <a href="#dialog">Dialog</a>,
         e.g. as a result of a query. The provided information may be user-specific
         , e.g., depending on the subscription of the actual user.
     </p>
 
-    <h4 id="externalservices">
+    <h3 id="externalservices">
         <span class="secno">3.3.4 </span>External Services
-    </h4>
+    </h3>
     <img src="externalservices-component.svg" style="float: right"
         width="auto" height="auto" />
     <p>External Services provide access to trigger actions outside
         of the system; for example, triggered from a third-party web
         service.</p>
 
-    <h5 id="externalservicex">
+    <h4 id="externalservicex">
         <span class="secno">3.3.4.1 </span>External Service X
-    </h5>
+    </h4>
     <p>A specific External Service, which provides output of the
         system, e.g. through an application can use multiple External
         Services. The provided level of service may be user-specific, e.g., 
         depending on the subscription of the actual user.</p>
 
-    <h4 id="ipaproviders">
+    <h3 id="ipaproviders">
         <span class="secno">3.3.5 </span>IPA Providers
-    </h4>
+    </h3>
     <img src="ipaproviders-component-1-3.svg" style="float: right"
         width="auto" height="auto" />
     <p>IPA providers provide IPA's that can interact with users in
@@ -1992,9 +1975,9 @@
     </p>
     <!--img src="IPA-Architecture-RussianDoll.svg" style="width: 100%; height: auto;" /-->
 
-    <h5 id="provider">
+    <h4 id="provider">
         <span class="secno">3.3.5.1 </span>IPA Provider X
-    </h5>
+    </h4>
     <p>A provider of an IPA service, like</p>
     <ul>
         <li>Google Assistant</li>
@@ -2013,9 +1996,9 @@
         depending on the subscription of the actual user.
     </p>
 
-    <h4 id="securityprivacy">
+    <h3 id="securityprivacy">
         <span class="secno">3.3.6 </span>Security and Privacy
-    </h4>
+    </h3>
         
     <p>Security and privacy are essential for the operation of the
         IPA. Private data is potentially being sent but not limited to when</p>
@@ -2067,9 +2050,9 @@
         any data at all.
     </p>
         
-    <h4 id="finalarchitecture">
+    <h3 id="finalarchitecture">
         <span class="secno">3.4 </span>Resulting Architecture
-    </h4>
+    </h3>
     <p>The previous sections showed a more detailed view onto the
         architectural buildings blocks. A general overview comprising
         these detailing is shown in the following figure. Note, that
@@ -2082,9 +2065,9 @@
         <figcaption>Fig. 3 Complete architecture of an IPA</figcaption>
     </figure>
 
-    <h2 id="errorhandling">
+    <h1 id="errorhandling">
         <span class="secno">4. </span>Error Handling
-    </h2>
+    </h1>
 
     <p>Errors may occur anywhere in the processing chain of the IPA.
         The following gives an overview of how they are suggested to be
@@ -2131,9 +2114,9 @@
             debugging</li>
     </ul>
 
-    <h2 id="walkthrough">
+    <h1 id="walkthrough">
         <span class="secno">5. </span>Use Case Walk Through
-    </h2>
+    </h1>
     <p>This section needs to be updated to match the changes as
         introduced above.</p>
 
@@ -2181,9 +2164,9 @@
         interacting with the conference's IPA to find out about a
         designated conference hotel or special rates.</p>
 
-    <h3 id="detailed-walkthrough">
+    <h2 id="detailed-walkthrough">
         <span class="secno">5.1 Detailed Walkthrough for Traditional NLU Systems</span>
-    </h3>
+    </h2>
     <p>This section provides a detailed walkthrough for an NLU-based
         IPA that aligns the steps in the use case interaction with the
         architecture. It covers only the part from the example above
@@ -2194,9 +2177,9 @@
         used Dialog Strategy and other optional items that may actually
         result in different flows. The walkthrough is split into two
         parts for the input path and for the output path.
-    <h4 id="provider">
+    <h3 id="provider">
         <span class="secno">5.1.1 </span>Walkthrough for the Input Path
-    </h4>
+    </h3>
     
     <p>We begin with the case where the user's request can be handled by
     one of the internal Dialogs in the Dialog box. The input side is
@@ -2259,9 +2242,9 @@
             Providers in parallel to determine meaning which completes
             the remote input path.</li>
     </ol>
-    <h4 id="provider">
+    <h3 id="provider">
         <span class="secno">5.1.2 </span>Walkthrough for the Output Path
-    </h4>
+    </h3>
     
     <p>
     The output path begins where the local NLU and IPA Providers are
@@ -2356,9 +2339,9 @@
         <li>...in the Speaker.</li>
     </ol>
 
-    <h2 id="potential">
+    <h1 id="potential">
         <span class="secno">6. </span>Potential for Standardization
-    </h2>
+    </h1>
 
     <p>The general architecture of IPAs described in this document
         should be detailed in subsequent documents. Further work must be
@@ -2529,9 +2512,9 @@
         make use of any upcoming standard to enhance their deployments
         as a marketplace of intelligent services.</p>
 
-    <h2 id="footnotes">
+    <h1 id="footnotes">
         <span class="secno">7. </span> Footnotes
-    </h2>
+    </h1>
 
     <sup id="fn1">1. The Russian Doll principle is a recursion
         technique that is used in computer science, mathematics, logic,
@@ -2546,13 +2529,13 @@
         href="#ref1" title="Jump back to footnote 1 in the text.">↩</a>
     </sup>
 
-    <h2 id="appendix">
+    <h1 id="appendix">
         <span class="secno">8. </span>Appendix
-    </h2>
+    </h1>
 
-    <h3 id="acknowledgements">
+    <h2 id="acknowledgements">
         <span class="secno">8.1 Acknowledgments</span>
-    </h3>
+    </h2>
 
     <p>
         This version of the document was written with the participation
@@ -2566,9 +2549,9 @@
         <li>Jon Stine, The Open Voice Network</li>
     </ul>
 
-    <h3 id="abbreviations">
+    <h2 id="abbreviations">
         <span class="secno">8.2 </span>Abbreviations
-    </h3>
+    </h2>
 
     <table border="1">
         <tr>
