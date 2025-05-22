@@ -25,7 +25,7 @@
         <dl>
             <dt>Latest version</dt>
             <dd>
-                Last modified: May 16, 2025 <a
+                Last modified: May 22, 2025 <a
                     href="https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm">https://github.com/w3c/voiceinteraction/blob/master/voice%20interaction%20drafts/paArchitecture/paArchitecture-1-3.htm</a>
                 (GitHub repository)
             </dd>
@@ -2013,8 +2013,30 @@
         depending on the subscription of the actual user.
     </p>
 
+    <h3 id="usersettings">
+      <span class="secno">3.3.6 </span>User Settings
+    </h3>
+
+	<p>The need for user settings in an intelligent personal assistant stems directly from the
+	  fact that a truly "personal" assistant must be configurable to the unique individual.
+	  Without specific, user-defined settings, an IPA would be a generic tool, severely
+	  limiting its utility and effectiveness. There are, however, some use cases where this
+	  is wanted.</p>
+
+	<p>The user's language when interacting with an IPA is one example of such a setting.
+	  The actual language can come into play at various occasions.</p>
+	<ol>
+	  <li>Language determined from the spoke or written utterance itself</li>
+	  <li>Language setting provided with a user request</li>
+	  <li>Language stored in the IPA as a user preference</li>
+	  <li>System default language</li>
+	</ol>
+	<p>The settings will overruled in that order, meaning that if the language cannot be
+	determined by one option, it will fall back to the next.</p>
+
+    
     <h3 id="securityprivacy">
-        <span class="secno">3.3.6 </span>Security and Privacy
+        <span class="secno">3.3.7 </span>Security and Privacy
     </h3>
         
     <p>Security and privacy are essential for the operation of the
