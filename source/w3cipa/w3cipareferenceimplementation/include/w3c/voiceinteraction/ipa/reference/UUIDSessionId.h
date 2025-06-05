@@ -13,6 +13,9 @@
 #ifndef UUIDSESSIONID_H
 #define UUIDSESSIONID_H
 
+#ifdef _WIN32
+#include <Windows.h>
+#endif
 #include <uuid.h>
 
 #include <w3c/voiceinteraction/ipa/SessionId.h>

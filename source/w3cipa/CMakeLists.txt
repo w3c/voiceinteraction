@@ -17,6 +17,11 @@ include(FindPkgConfig)
 include(FetchContent)
 include(Utilities)
 
+# This line enables vcpkg toolchain integration
+if(DEFINED ENV{VCPKG_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
+    set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
+endif()
+
 project(w3cipa LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -51,13 +56,13 @@ set(ENV{PATH} "$ENV{PATH}:${W3CIPA_OPEN_SOURCE_SRC}/bin")
 #
 if (BUILD_W3CIPA_DEPENDENCIES)
     message(STATUS "Begin building dependencies.")
-    build_dependency(log4cplus -DBUILD_SHARED_LIBS=${BUILD_SHARED_LIBS})
-    build_dependency(nlohmann_json)
     if (!WIN32)
+        build_dependency(log4cplus -DBUILD_SHARED_LIBS=${BUILD_SHARED_LIBS})
+        build_dependency(nlohmann_json)
         build_dependency(openssl)
         build_dependency(curl)
+        build_dependency(stduuid)
     endif()
-    build_dependency(stduuid)
     message(STATUS "Finished building dependencies.")
 endif()
 
@@ -66,28 +71,32 @@ endif()
 #
 
 find_package(PkgConfig REQUIRED)
-find_package(Log4cplus MODULE REQUIRED)
+#find_package(Log4cplus MODULE REQUIRED)
 # On Windows we are relying on VCPKG to download CURL.
 if (WIN32)
     find_package(CURL MODULE REQUIRED)
+    find_package(nlohmann_json CONFIG REQUIRED)
+    find_package(log4cplus CONFIG REQUIRED)
+    find_package(stduuid CONFIG REQUIRED)
 else()
     find_package(CURL CONFIG REQUIRED PATHS ${W3CIPA_OPEN_SOURCE_SRC})
+    find_package(nlohmann_json CONFIG REQUIRED PATHS ${W3CIPA_OPEN_SOURCE_SRC})
+    find_package(stduuid REQUIRED PATHS ${W3CIPA_OPEN_SOURCE_SRC})
 endif()
-find_package(nlohmann_json CONFIG REQUIRED PATHS ${W3CIPA_OPEN_SOURCE_SRC})
-find_package(stduuid REQUIRED PATHS ${W3CIPA_OPEN_SOURCE_SRC})
 
 #
 # Add settings to the build envionment
 #
-include_directories(${LOG4CPLUS_INCLUDE_DIR})
-set(REQUIRED_LIBS ${REQUIRED_LIBS} ${LOG4CPLUS_LIBRARY})
-
+#include_directories(${LOG4CPLUS_INCLUDE_DIR})
+#set(REQUIRED_LIBS ${REQUIRED_LIBS} ${LOG4CPLUS_LIBRARY})
+set(REQUIRED_LIBS ${REQUIRED_LIBS} log4cplus::log4cplus)
 set(REQUIRED_LIBS ${REQUIRED_LIBS} CURL::libcurl)
 set(REQUIRED_LIBS ${REQUIRED_LIBS} nlohmann_json::nlohmann_json)
+set(REQUIRED_LIBS ${REQUIRED_LIBS} stduuid)
 
 message(STATUS "REQUIRED_LIBS: ${REQUIRED_LIBS}")
 
-include_directories(${STDUUID_INCLUDE_DIR})
+#include_directories(${STDUUID_INCLUDE_DIR})
 
 if (BUILD_W3CIPA_DOC)
 # check if Doxygen is installed

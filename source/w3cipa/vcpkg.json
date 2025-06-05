@@ -1,5 +1,8 @@
 {
   "dependencies": [
-    "curl"
+    "curl",
+    "log4cplus",
+    "nlohmann-json",
+    "stduuid"
   ]
 }
